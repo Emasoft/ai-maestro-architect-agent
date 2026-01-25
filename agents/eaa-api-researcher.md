@@ -1,11 +1,11 @@
 ---
-name: arch-api-researcher
+name: eaa-api-researcher
 model: opus
 description: Researches API documentation and integration patterns
 type: local-helper
 auto_skills:
-  - arch-session-memory
-  - arch-planning-patterns
+  - eaa-session-memory
+  - eaa-planning-patterns
 memory_requirements: medium
 triggers:
   - Task requires researching external API documentation

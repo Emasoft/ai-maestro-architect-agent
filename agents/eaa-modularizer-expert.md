@@ -1,11 +1,11 @@
 ---
-name: arch-modularizer-expert
+name: eaa-modularizer-expert
 model: opus
 description: Decomposes monolithic code into modular, reusable components
 type: local-helper
 auto_skills:
-  - arch-session-memory
-  - arch-modularizer-expert
+  - eaa-session-memory
+  - eaa-modularizer-expert
 memory_requirements: high
 triggers:
   - modularize

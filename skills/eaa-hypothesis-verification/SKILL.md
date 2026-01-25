@@ -1,5 +1,5 @@
 ---
-name: arch-hypothesis-verification
+name: eaa-hypothesis-verification
 description: Verify claims through controlled Docker experimentation using the TBV (To Be Verified) principle.
 agent: test-engineer
 context: fork

@@ -1,5 +1,5 @@
 ---
-name: arch-main
+name: eaa-main
 description: Main Architect agent - design documents, requirements, architecture decisions
 tools:
   - Task

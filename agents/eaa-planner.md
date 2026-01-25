@@ -1,12 +1,12 @@
 ---
-name: arch-planner
+name: eaa-planner
 model: sonnet
 description: Creates implementation plans from requirements with step-by-step breakdown
 type: planner
 auto_skills:
-  - arch-session-memory
-  - arch-planning-patterns
-  - arch-orchestration-patterns
+  - eaa-session-memory
+  - eaa-planning-patterns
+  - eaa-orchestration-patterns
 memory_requirements: high
 ---
 
@@ -89,7 +89,7 @@ Before Step 1 (Gather Requirements), add Step 0:
 
 ## RULE 15: No Implementation by Orchestrator (ABSOLUTE)
 
-**Reference**: See [orchestrator-no-implementation.md](../skills/arch-orchestration-patterns/references/orchestrator-no-implementation.md)
+**Reference**: See [orchestrator-no-implementation.md](../skills/eaa-orchestration-patterns/references/orchestrator-no-implementation.md)
 
 **Summary for Planner:**
 

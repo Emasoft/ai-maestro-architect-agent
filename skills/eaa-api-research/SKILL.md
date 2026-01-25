@@ -1,5 +1,5 @@
 ---
-name: arch-api-researcher
+name: eaa-api-researcher
 description: Comprehensive API research and documentation skill for investigating external APIs, libraries, and services. Creates standardized documentation including overview, authentication, endpoints, and integration guides.
 license: Apache-2.0
 compatibility: Requires web access for documentation lookup. Works with REST APIs, GraphQL APIs, Python libraries, npm packages, and cloud service APIs.

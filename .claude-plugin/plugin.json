@@ -15,11 +15,11 @@
     "claude-code": ">=1.0.0"
   },
   "agents": [
-    "./agents/arch-main.md",
-    "./agents/arch-documentation-writer.md",
-    "./agents/arch-api-researcher.md",
-    "./agents/arch-modularizer-expert.md",
-    "./agents/arch-planner.md"
+    "./agents/eaa-main.md",
+    "./agents/eaa-documentation-writer.md",
+    "./agents/eaa-api-researcher.md",
+    "./agents/eaa-modularizer-expert.md",
+    "./agents/eaa-planner.md"
   ],
   "skills": "./skills/"
 }

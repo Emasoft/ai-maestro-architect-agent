@@ -4,12 +4,12 @@
   "hooks": {
     "UserPromptSubmit": [
       {
-        "_id": "arch-skill-activation",
+        "_id": "eaa-skill-activation",
         "_description": "Activate relevant design and planning skills based on user prompt",
         "hooks": [
           {
             "type": "command",
-            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/scripts/arch_skill_activation.py"
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/scripts/eaa_skill_activation.py"
           }
         ]
       }

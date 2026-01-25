@@ -1,8 +1,8 @@
 ---
-name: arch-modify-requirement
+name: eaa-modify-requirement
 description: "Modify an existing requirement or module specification during Plan Phase"
 argument-hint: "<TYPE> <ID> [--name NAME] [--criteria TEXT] [--status STATUS] [--priority LEVEL]"
-allowed-tools: ["Bash(python3 ${CLAUDE_PLUGIN_ROOT}/scripts/arch_modify_requirement.py:*)"]
+allowed-tools: ["Bash(python3 ${CLAUDE_PLUGIN_ROOT}/scripts/eaa_modify_requirement.py:*)"]
 ---
 
 # Modify Requirement Command
@@ -12,7 +12,7 @@ Change the specifications of an existing requirement section or module during Pl
 ## Usage
 
 ```!
-python3 "${CLAUDE_PLUGIN_ROOT}/scripts/arch_modify_requirement.py" modify $ARGUMENTS
+python3 "${CLAUDE_PLUGIN_ROOT}/scripts/eaa_modify_requirement.py" modify $ARGUMENTS
 ```
 
 ## Arguments

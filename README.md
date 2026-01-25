@@ -1,10 +1,12 @@
-# Architect Agent (arch-)
+# Architect Agent (eaa-)
 
 **Version**: 1.0.0
 
 ## Overview
 
 The Architect Agent handles **design documents, requirements analysis, and architecture decisions**. It creates specifications that the Orchestrator uses to coordinate implementation work.
+
+**Prefix**: `eaa-` = Emasoft Architect Agent
 
 ## Core Responsibilities
 
@@ -20,38 +22,38 @@ The Architect Agent handles **design documents, requirements analysis, and archi
 
 | Agent | Description |
 |-------|-------------|
-| `arch-main.md` | Main architect agent |
-| `arch-documentation-writer.md` | Creates technical documentation |
-| `arch-api-researcher.md` | Researches APIs and integrations |
-| `arch-modularizer-expert.md` | Breaks work into modules |
-| `arch-planner.md` | Creates implementation plans |
+| `eaa-main.md` | Main architect agent |
+| `eaa-documentation-writer.md` | Creates technical documentation |
+| `eaa-api-researcher.md` | Researches APIs and integrations |
+| `eaa-modularizer-expert.md` | Breaks work into modules |
+| `eaa-planner.md` | Creates implementation plans |
 
 ### Commands
 
 | Command | Description |
 |---------|-------------|
-| `arch-start-planning` | Start planning phase |
-| `arch-add-requirement` | Add new requirement |
-| `arch-modify-requirement` | Modify existing requirement |
-| `arch-remove-requirement` | Remove requirement |
+| `eaa-start-planning` | Start planning phase |
+| `eaa-add-requirement` | Add new requirement |
+| `eaa-modify-requirement` | Modify existing requirement |
+| `eaa-remove-requirement` | Remove requirement |
 
 ### Skills
 
 | Skill | Description |
 |-------|-------------|
-| `arch-design-lifecycle` | Design document management |
-| `arch-requirements-analysis` | Requirements patterns |
-| `arch-documentation-writing` | Documentation skills |
-| `arch-api-research` | API research patterns |
-| `arch-planning-patterns` | Planning methodology |
-| `arch-hypothesis-verification` | Test assumptions |
-| `arch-shared` | Shared utilities |
+| `eaa-design-lifecycle` | Design document management |
+| `eaa-requirements-analysis` | Requirements patterns |
+| `eaa-documentation-writing` | Documentation skills |
+| `eaa-api-research` | API research patterns |
+| `eaa-planning-patterns` | Planning methodology |
+| `eaa-hypothesis-verification` | Test assumptions |
+| `eaa-shared` | Shared utilities |
 
 ### Hooks
 
 | Hook | Event | Description |
 |------|-------|-------------|
-| `arch-skill-activation` | UserPromptSubmit | Activate relevant design skills |
+| `eaa-skill-activation` | UserPromptSubmit | Activate relevant design skills |
 
 ## Workflow
 
@@ -79,5 +81,5 @@ claude --plugin-dir ./OUTPUT_SKILLS/architect-agent
 
 ```bash
 cd OUTPUT_SKILLS/architect-agent
-uv run python scripts/arch_validate_plugin.py --verbose
+uv run python scripts/eaa_validate_plugin.py --verbose
 ```

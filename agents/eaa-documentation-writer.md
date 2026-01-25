@@ -1,10 +1,10 @@
 ---
-name: arch-documentation-writer
+name: eaa-documentation-writer
 model: opus
 description: Writes and maintains project documentation
 type: local-helper
 auto_skills:
-  - arch-session-memory
+  - eaa-session-memory
 memory_requirements: low
 triggers:
   - Code needs documentation
