@@ -1,0 +1,25 @@
+{
+  "name": "architect-agent",
+  "version": "1.0.0",
+  "description": "Design documents, requirements analysis, architecture decisions - creates specifications for orchestrator",
+  "author": {
+    "name": "Emasoft",
+    "email": "713559+Emasoft@users.noreply.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Emasoft/architect-agent"
+  },
+  "license": "MIT",
+  "engines": {
+    "claude-code": ">=1.0.0"
+  },
+  "agents": [
+    "./agents/arch-main.md",
+    "./agents/arch-documentation-writer.md",
+    "./agents/arch-api-researcher.md",
+    "./agents/arch-modularizer-expert.md",
+    "./agents/arch-planner.md"
+  ],
+  "skills": "./skills/"
+}
