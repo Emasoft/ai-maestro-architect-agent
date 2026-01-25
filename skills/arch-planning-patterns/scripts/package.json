@@ -1,0 +1,6 @@
+{
+  "name": "planning-patterns-scripts",
+  "type": "module",
+  "private": true,
+  "description": "Scripts for planning-patterns skill"
+}
