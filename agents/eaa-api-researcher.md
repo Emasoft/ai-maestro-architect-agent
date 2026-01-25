@@ -106,7 +106,7 @@ Documentation: docs_dev/api/[api-name]-research.md
 
 ## Research Procedure
 
-For the complete step-by-step research workflow, see: [research-procedure.md](../skills/api-researcher/references/research-procedure.md)
+For the complete step-by-step research workflow, see: [research-procedure.md](../skills/eaa-api-research/references/research-procedure.md)
 - 1. Step 1: Understand Requirements
 - 2. Step 2: Gather Information
 - 3. Step 3: Document Findings
@@ -125,7 +125,7 @@ For the complete step-by-step research workflow, see: [research-procedure.md](..
 
 ## Output Formats
 
-For all documentation templates, see: [output-templates.md](../skills/api-researcher/references/output-templates.md)
+For all documentation templates, see: [output-templates.md](../skills/eaa-api-research/references/output-templates.md)
 - 1. API Overview Document Template
 - 2. Authentication Guide Template
 - 3. Endpoints Reference Template
@@ -146,7 +146,7 @@ For all documentation templates, see: [output-templates.md](../skills/api-resear
 
 ## Tools Available
 
-For detailed tool usage, see: [tools-reference.md](../skills/api-researcher/references/tools-reference.md)
+For detailed tool usage, see: [tools-reference.md](../skills/eaa-api-research/references/tools-reference.md)
 - 1. Read Tool - for local files
 - 2. WebFetch Tool - for online documentation
 - 3. WebSearch Tool - for finding resources
@@ -167,7 +167,7 @@ For detailed tool usage, see: [tools-reference.md](../skills/api-researcher/refe
 
 ## Orchestrator Integration
 
-For complete orchestrator patterns, see: [collaboration-patterns.md](../skills/api-researcher/references/collaboration-patterns.md)
+For complete orchestrator patterns, see: [collaboration-patterns.md](../skills/eaa-api-research/references/collaboration-patterns.md)
 - 1. Integration with Orchestrator
 - 2. Handling Blockers
 - 3. Handoff Protocol
@@ -198,7 +198,7 @@ For complete orchestrator patterns, see: [collaboration-patterns.md](../skills/a
 
 ## Research Scenarios
 
-For common research patterns, see: [research-scenarios.md](../skills/api-researcher/references/research-scenarios.md)
+For common research patterns, see: [research-scenarios.md](../skills/eaa-api-research/references/research-scenarios.md)
 - 1. Scenario 1: Research REST API
 - 2. Scenario 2: Research Python Library
 - 3. Scenario 3: Research Cloud Service API
