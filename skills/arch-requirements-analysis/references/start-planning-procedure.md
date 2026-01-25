@@ -66,7 +66,7 @@ If a Plan Phase already exists, you must either:
 
 **Script location:**
 ```
-${CLAUDE_PLUGIN_ROOT}/scripts/atlas_start_planning.py
+${CLAUDE_PLUGIN_ROOT}/scripts/arch_start_planning.py
 ```
 
 ---

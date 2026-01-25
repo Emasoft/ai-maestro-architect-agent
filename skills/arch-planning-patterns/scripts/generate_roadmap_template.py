@@ -2,7 +2,7 @@
 """
 Generate a roadmap template with phases and milestones.
 
-ATLAS-ORCHESTRATOR: NO TIME ESTIMATIONS - Focus on what needs to be done, not when.
+ARCHITECT-AGENT: NO TIME ESTIMATIONS - Focus on what needs to be done, not when.
 
 Usage:
     python generate-roadmap-template.py --phases 4 --output roadmap.md

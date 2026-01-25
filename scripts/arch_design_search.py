@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-atlas_design_search.py - Filesystem-based design document search (Manus principle).
+arch_design_search.py - Filesystem-based design document search (Manus principle).
 
 This script searches design documents using the filesystem as the database,
 following the Manus principle: "Use the filesystem as the DB and filenames as indexes."
@@ -23,9 +23,9 @@ Directory Structure as Index:
     └── exports/    <- sanitized exports for GitHub
 
 Usage:
-    python atlas_design_search.py --uuid PROJ-SPEC-20250108-a7b3f2e1
-    python atlas_design_search.py --type SPEC --status draft
-    python atlas_design_search.py --text "JWT token" --output json
+    python arch_design_search.py --uuid PROJ-SPEC-20250108-a7b3f2e1
+    python arch_design_search.py --type SPEC --status draft
+    python arch_design_search.py --text "JWT token" --output json
 
 Dependencies: Python 3.8+ (uses pathlib only)
 """
@@ -37,7 +37,7 @@ import sys
 from pathlib import Path
 from typing import Optional
 
-from atlas_design_search_parser import (
+from arch_design_search_parser import (
     DesignConfig,
     DocumentMetadata,
     extract_metadata,
@@ -263,9 +263,9 @@ Search Speed (fastest to slowest):
   4. --text       : Full file content search (slowest)
 
 Examples:
-  python atlas_design_search.py --uuid PROJ-SPEC-20250108-a7b3f2e1
-  python atlas_design_search.py --type SPEC --status draft
-  python atlas_design_search.py --text "JWT token" --output json
+  python arch_design_search.py --uuid PROJ-SPEC-20250108-a7b3f2e1
+  python arch_design_search.py --type SPEC --status draft
+  python arch_design_search.py --text "JWT token" --output json
         """,
     )
 

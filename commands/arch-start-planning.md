@@ -1,8 +1,8 @@
 ---
-name: ao-start-planning
+name: arch-start-planning
 description: "Enter Plan Phase Mode - begin requirements gathering and planning before implementation"
 argument-hint: "[GOAL_DESCRIPTION]"
-allowed-tools: ["Bash(python3 ${CLAUDE_PLUGIN_ROOT}/scripts/atlas_start_planning.py:*)"]
+allowed-tools: ["Bash(python3 ${CLAUDE_PLUGIN_ROOT}/scripts/arch_start_planning.py:*)"]
 ---
 
 # Start Planning Command
@@ -12,7 +12,7 @@ Enter Plan Phase Mode to create comprehensive requirements and design specificat
 ## Usage
 
 ```!
-python3 "${CLAUDE_PLUGIN_ROOT}/scripts/atlas_start_planning.py" $ARGUMENTS
+python3 "${CLAUDE_PLUGIN_ROOT}/scripts/arch_start_planning.py" $ARGUMENTS
 ```
 
 ## What This Command Does

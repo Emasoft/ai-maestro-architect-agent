@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 """
-atlas_design_version.py - Design document version management.
+arch_design_version.py - Design document version management.
 
 Creates new versions of existing design documents.
-Uses atlas_design_search.py to find documents and atlas_design_uuid.py for UUID generation.
+Uses arch_design_search.py to find documents and arch_design_uuid.py for UUID generation.
 
 Usage:
     # Create new version of a document
-    python atlas_design_version.py --uuid PROJ-SPEC-20250108-a7b3f2e1
+    python arch_design_version.py --uuid PROJ-SPEC-20250108-a7b3f2e1
 
     # Create version with reason
-    python atlas_design_version.py --uuid PROJ-SPEC-... --reason "Major API changes"
+    python arch_design_version.py --uuid PROJ-SPEC-... --reason "Major API changes"
 
     # List all versions of a document
-    python atlas_design_version.py --list PROJ-SPEC-20250108-a7b3f2e1
+    python arch_design_version.py --list PROJ-SPEC-20250108-a7b3f2e1
 
-Dependencies: Python 3.8+, atlas_design_search.py, atlas_design_uuid.py (same directory)
+Dependencies: Python 3.8+, arch_design_search.py, arch_design_uuid.py (same directory)
 """
 
 import argparse
@@ -28,8 +28,8 @@ from typing import Any
 
 
 def run_search_script(args: list[str], project_root: Path) -> str:
-    """Run atlas_design_search.py with given arguments."""
-    script_path = Path(__file__).parent / "atlas_design_search.py"
+    """Run arch_design_search.py with given arguments."""
+    script_path = Path(__file__).parent / "arch_design_search.py"
     cmd = ["python3", str(script_path)] + args + ["--project-root", str(project_root)]
     result = subprocess.run(cmd, capture_output=True, text=True)
     return result.stdout.strip()
@@ -248,13 +248,13 @@ def main() -> int:
         epilog="""
 Examples:
   # Create new version
-  python atlas_design_version.py --uuid PROJ-SPEC-20250108-a7b3f2e1
+  python arch_design_version.py --uuid PROJ-SPEC-20250108-a7b3f2e1
 
   # Create with reason
-  python atlas_design_version.py --uuid PROJ-SPEC-... --reason "API update"
+  python arch_design_version.py --uuid PROJ-SPEC-... --reason "API update"
 
   # List all versions
-  python atlas_design_version.py --list PROJ-SPEC-20250108-a7b3f2e1
+  python arch_design_version.py --list PROJ-SPEC-20250108-a7b3f2e1
         """,
     )
 

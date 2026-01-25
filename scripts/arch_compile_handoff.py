@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-atlas_compile_handoff.py - Compile template to handoff document for implementer.
+arch_compile_handoff.py - Compile template to handoff document for implementer.
 
 Takes a module specification and compiles it with the handoff template,
 filling in all placeholders with module-specific data.
@@ -10,14 +10,14 @@ NO external dependencies - Python 3.8+ stdlib only.
 
 Usage:
     # Compile handoff for module assignment
-    python3 atlas_compile_handoff.py auth-core implementer-1 --platform web
+    python3 arch_compile_handoff.py auth-core implementer-1 --platform web
 
     # With custom template
-    python3 atlas_compile_handoff.py auth-core implementer-1 --platform web \
+    python3 arch_compile_handoff.py auth-core implementer-1 --platform web \
         --template custom-handoff-template.md
 
     # Preview without saving
-    python3 atlas_compile_handoff.py auth-core implementer-1 --platform web --preview
+    python3 arch_compile_handoff.py auth-core implementer-1 --platform web --preview
 
 Exit codes:
     0 - Success
@@ -299,7 +299,7 @@ def main() -> int:
 
     # Get project root
     project_root = Path(os.environ.get("CLAUDE_PROJECT_ROOT", os.getcwd()))
-    atlas_root = project_root / args.root
+    arch_root = project_root / args.root
 
     log("INFO", f"Compiling handoff for module: {args.module_id}")
     log("INFO", f"Agent: {args.agent_id}")
@@ -325,7 +325,7 @@ def main() -> int:
             template_path = Path(args.template)
         else:
             template_path = (
-                atlas_root
+                arch_root
                 / "designs"
                 / args.platform
                 / "templates"
@@ -336,7 +336,7 @@ def main() -> int:
 
         # Load spec content if exists
         spec_path = (
-            atlas_root / "designs" / args.platform / "specs" / f"{args.module_id}.md"
+            arch_root / "designs" / args.platform / "specs" / f"{args.module_id}.md"
         )
         _, spec_content = load_spec(spec_path)
 

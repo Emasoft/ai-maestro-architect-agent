@@ -1,6 +1,6 @@
 # Agent Interactions
 
-How the Documentation Writer Agent interacts with other agents in the ATLAS system.
+How the Documentation Writer Agent interacts with other agents in the Architect Agent system.
 
 ---
 

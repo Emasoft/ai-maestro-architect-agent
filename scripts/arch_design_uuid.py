@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-atlas_design_uuid.py - Cross-platform UUID generator for Atlas design documents.
+arch_design_uuid.py - Cross-platform UUID generator for Architect Agent design documents.
 
 This script generates globally unique UUIDs for design documents and can:
 1. Generate new UUIDs for document types (SPEC, PLAN, ADR)
@@ -17,20 +17,20 @@ UUID Format: {PREFIX}-{TYPE}-{YYYYMMDD}-{UUID8}[_v{VERSION}]
 
 Usage:
     # Generate new UUID
-    python atlas_design_uuid.py --type SPEC
-    python atlas_design_uuid.py --type PLAN --prefix AUTH
+    python arch_design_uuid.py --type SPEC
+    python arch_design_uuid.py --type PLAN --prefix AUTH
 
     # Generate versioned UUID
-    python atlas_design_uuid.py --version PROJ-SPEC-20250108-a7b3f2e1
+    python arch_design_uuid.py --version PROJ-SPEC-20250108-a7b3f2e1
 
     # Add frontmatter to file
-    python atlas_design_uuid.py --file docs/design/specs/auth-service.md --type SPEC
+    python arch_design_uuid.py --file docs/design/specs/auth-service.md --type SPEC
 
     # Batch add frontmatter to directory
-    python atlas_design_uuid.py --dir docs/design/specs --type SPEC
+    python arch_design_uuid.py --dir docs/design/specs --type SPEC
 
     # List all UUIDs in design root
-    python atlas_design_uuid.py --list
+    python arch_design_uuid.py --list
 
 Dependencies: Python 3.8+ (uses pathlib, uuid, dataclasses)
 """
@@ -228,7 +228,7 @@ def create_frontmatter(
     title: str,
     doc_type: str,
     status: str = "draft",
-    author: str = "Atlas Orchestrator",
+    author: str = "Architect Agent",
     tags: Optional[list[str]] = None,
     related_issues: Optional[list[str]] = None,
     related_docs: Optional[list[str]] = None,
@@ -365,19 +365,19 @@ def main() -> int:
         epilog="""
 Examples:
   # Generate new UUID
-  python atlas_design_uuid.py --type SPEC
+  python arch_design_uuid.py --type SPEC
 
   # Generate versioned UUID
-  python atlas_design_uuid.py --version PROJ-SPEC-20250108-a7b3f2e1
+  python arch_design_uuid.py --version PROJ-SPEC-20250108-a7b3f2e1
 
   # Add frontmatter to file
-  python atlas_design_uuid.py --file docs/design/specs/auth.md --type SPEC
+  python arch_design_uuid.py --file docs/design/specs/auth.md --type SPEC
 
   # Batch process directory
-  python atlas_design_uuid.py --dir docs/design/specs --type SPEC
+  python arch_design_uuid.py --dir docs/design/specs --type SPEC
 
   # List all UUIDs
-  python atlas_design_uuid.py --list
+  python arch_design_uuid.py --list
         """,
     )
 

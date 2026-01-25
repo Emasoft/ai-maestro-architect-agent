@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-atlas_design_transition.py - Transition from dual-git to single-git design management.
+arch_design_transition.py - Transition from dual-git to single-git design management.
 
 This script migrates design documents from private (.design/) to public (docs/design/).
 UUIDs are preserved, ensuring all GitHub issue references remain valid.
@@ -11,7 +11,7 @@ NO external dependencies - Python 3.8+ stdlib only.
 Uses subprocess for git commands.
 
 Usage:
-    python3 atlas_design_transition.py [options]
+    python3 arch_design_transition.py [options]
 
 Options:
     --force         Skip confirmation prompt

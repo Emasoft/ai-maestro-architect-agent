@@ -1,8 +1,8 @@
 ---
-name: ao-remove-requirement
+name: arch-remove-requirement
 description: "Remove a pending requirement or module from the plan (only if not started)"
 argument-hint: "<TYPE> <ID> [--force]"
-allowed-tools: ["Bash(python3 ${CLAUDE_PLUGIN_ROOT}/scripts/atlas_modify_requirement.py:*)"]
+allowed-tools: ["Bash(python3 ${CLAUDE_PLUGIN_ROOT}/scripts/arch_modify_requirement.py:*)"]
 ---
 
 # Remove Requirement Command
@@ -12,7 +12,7 @@ Remove a requirement section or module from the current plan. Only items with `p
 ## Usage
 
 ```!
-python3 "${CLAUDE_PLUGIN_ROOT}/scripts/atlas_modify_requirement.py" remove $ARGUMENTS
+python3 "${CLAUDE_PLUGIN_ROOT}/scripts/arch_modify_requirement.py" remove $ARGUMENTS
 ```
 
 ## Arguments

@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-Atlas Start Planning Script
+Architect Start Planning Script
 
 Initializes Plan Phase Mode by creating the plan state file and setting up
 requirements tracking. This is the entry point for the Two-Phase workflow.
 
 Usage:
-    python3 atlas_start_planning.py "Goal description here"
-    python3 atlas_start_planning.py --goal "Build user authentication"
+    python3 arch_start_planning.py "Goal description here"
+    python3 arch_start_planning.py --goal "Build user authentication"
 """
 
 import argparse

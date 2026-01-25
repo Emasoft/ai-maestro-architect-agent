@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-Atlas Modify Requirement Script
+Architect Modify Requirement Script
 
 Handles add, modify, and remove operations for requirements and modules
 during Plan Phase. Supports dynamic flexibility in the planning process.
 
 Usage:
-    python3 atlas_modify_requirement.py add requirement "Security Requirements"
-    python3 atlas_modify_requirement.py add module "auth-core" --criteria "Support JWT"
-    python3 atlas_modify_requirement.py modify module auth-core --priority critical
-    python3 atlas_modify_requirement.py remove module legacy-api
+    python3 arch_modify_requirement.py add requirement "Security Requirements"
+    python3 arch_modify_requirement.py add module "auth-core" --criteria "Support JWT"
+    python3 arch_modify_requirement.py modify module auth-core --priority critical
+    python3 arch_modify_requirement.py remove module legacy-api
 """
 
 import argparse

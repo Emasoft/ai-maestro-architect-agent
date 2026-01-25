@@ -1,6 +1,6 @@
 # Planning Commands Skill
 
-This skill documents all planning phase commands for the Atlas Orchestrator plugin.
+This skill documents all planning phase commands for the Architect Agent plugin.
 
 ## Overview
 
@@ -73,6 +73,6 @@ python3 scripts/reset_plan_phase.py --confirm
 
 ## Related
 
-- Main plugin: `atlas-orchestrator`
-- Parent scripts: `${CLAUDE_PLUGIN_ROOT}/scripts/atlas_*.py`
+- Main plugin: `architect-agent`
+- Parent scripts: `${CLAUDE_PLUGIN_ROOT}/scripts/arch_*.py`
 - Next phase: Use `orchestration-commands` skill after plan approval

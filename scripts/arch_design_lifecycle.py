@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-atlas_design_lifecycle.py - Design document lifecycle management.
+arch_design_lifecycle.py - Design document lifecycle management.
 
 Handles status transitions and archiving of design documents.
-Uses atlas_design_search.py to find documents.
+Uses arch_design_search.py to find documents.
 
 Lifecycle States:
     draft -> review -> approved -> implemented -> deprecated
@@ -11,18 +11,18 @@ Lifecycle States:
 
 Usage:
     # Update status
-    python atlas_design_lifecycle.py status --uuid PROJ-SPEC-... --status approved
+    python arch_design_lifecycle.py status --uuid PROJ-SPEC-... --status approved
 
     # Archive a document
-    python atlas_design_lifecycle.py archive --uuid PROJ-SPEC-... --reason "Obsolete"
+    python arch_design_lifecycle.py archive --uuid PROJ-SPEC-... --reason "Obsolete"
 
     # Supersede with new document
-    python atlas_design_lifecycle.py supersede --uuid OLD-UUID --by NEW-UUID
+    python arch_design_lifecycle.py supersede --uuid OLD-UUID --by NEW-UUID
 
     # Show document history
-    python atlas_design_lifecycle.py history --uuid PROJ-SPEC-...
+    python arch_design_lifecycle.py history --uuid PROJ-SPEC-...
 
-Dependencies: Python 3.8+, atlas_design_search.py (same directory)
+Dependencies: Python 3.8+, arch_design_search.py (same directory)
 """
 
 import argparse
@@ -49,8 +49,8 @@ VALID_TRANSITIONS = {
 
 
 def run_search_script(args: list[str], project_root: Path) -> str:
-    """Run atlas_design_search.py with given arguments."""
-    script_path = Path(__file__).parent / "atlas_design_search.py"
+    """Run arch_design_search.py with given arguments."""
+    script_path = Path(__file__).parent / "arch_design_search.py"
     cmd = ["python3", str(script_path)] + args + ["--project-root", str(project_root)]
     result = subprocess.run(cmd, capture_output=True, text=True)
     return result.stdout.strip()
@@ -324,16 +324,16 @@ Lifecycle States:
 
 Examples:
   # Update status
-  python atlas_design_lifecycle.py status --uuid PROJ-SPEC-... --status approved
+  python arch_design_lifecycle.py status --uuid PROJ-SPEC-... --status approved
 
   # Archive
-  python atlas_design_lifecycle.py archive --uuid PROJ-SPEC-... --reason "Obsolete"
+  python arch_design_lifecycle.py archive --uuid PROJ-SPEC-... --reason "Obsolete"
 
   # Supersede
-  python atlas_design_lifecycle.py supersede --uuid OLD-UUID --by NEW-UUID
+  python arch_design_lifecycle.py supersede --uuid OLD-UUID --by NEW-UUID
 
   # Show history
-  python atlas_design_lifecycle.py history --uuid PROJ-SPEC-...
+  python arch_design_lifecycle.py history --uuid PROJ-SPEC-...
         """,
     )
 

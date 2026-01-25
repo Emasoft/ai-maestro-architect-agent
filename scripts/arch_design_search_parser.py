@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-atlas_design_search_parser.py - Parsing and metadata extraction for design documents.
+arch_design_search_parser.py - Parsing and metadata extraction for design documents.
 
-This module provides the core parsing functionality for Atlas design documents:
+This module provides the core parsing functionality for Architect Agent design documents:
 - Configuration loading from patterns.md
 - YAML frontmatter parsing (without external dependencies)
 - Metadata extraction from design document files
 
-Used by atlas_design_search.py for filesystem-based document search.
+Used by arch_design_search.py for filesystem-based document search.
 
 Dependencies: Python 3.8+ (uses pathlib only)
 """

@@ -69,7 +69,7 @@ All exit criteria should show checkmarks before approval.
 
 **Script command:**
 ```bash
-python3 "${CLAUDE_PLUGIN_ROOT}/scripts/atlas_approve_plan.py" $ARGUMENTS
+python3 "${CLAUDE_PLUGIN_ROOT}/scripts/arch_approve_plan.py" $ARGUMENTS
 ```
 
 ---

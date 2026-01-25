@@ -1,8 +1,8 @@
 ---
-name: ao-add-requirement
+name: arch-add-requirement
 description: "Add a new requirement or module to the plan during Plan Phase"
 argument-hint: "<TYPE> <NAME> [--criteria TEXT] [--priority LEVEL]"
-allowed-tools: ["Bash(python3 ${CLAUDE_PLUGIN_ROOT}/scripts/atlas_modify_requirement.py:*)"]
+allowed-tools: ["Bash(python3 ${CLAUDE_PLUGIN_ROOT}/scripts/arch_modify_requirement.py:*)"]
 ---
 
 # Add Requirement Command
@@ -12,7 +12,7 @@ Add a new requirement section or module to the current plan during Plan Phase.
 ## Usage
 
 ```!
-python3 "${CLAUDE_PLUGIN_ROOT}/scripts/atlas_modify_requirement.py" add $ARGUMENTS
+python3 "${CLAUDE_PLUGIN_ROOT}/scripts/arch_modify_requirement.py" add $ARGUMENTS
 ```
 
 ## Arguments

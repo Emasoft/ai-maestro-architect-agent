@@ -1,5 +1,5 @@
 ---
-name: ao-documentation-writer
+name: arch-documentation-writer
 description: Technical documentation creation skill for writing module specifications, API contracts, architecture decision records (ADRs), and feature specifications. Follows the 6 C's quality framework.
 license: Apache-2.0
 compatibility: Works with any codebase. Outputs to standardized documentation directories (/docs/module-specs/, /docs/api-contracts/, /docs/adrs/).

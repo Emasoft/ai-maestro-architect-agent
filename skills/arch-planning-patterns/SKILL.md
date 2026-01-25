@@ -1,5 +1,5 @@
 ---
-name: ao-planning-patterns
+name: arch-planning-patterns
 description: Teaches orchestrators to create comprehensive planning documents through four sequential phases - architecture design, risk identification, roadmap creation, and implementation planning. Enables strategic system design, obstacle identification, execution sequencing, and actionable task breakdown for projects from conception to execution.
 license: Apache-2.0
 compatibility: Cross-platform compatible. Requires Python 3.8+ for utility scripts. Works with all project types and toolchains. Supports atomic file operations with UTF-8 encoding using pathlib for universal path handling.

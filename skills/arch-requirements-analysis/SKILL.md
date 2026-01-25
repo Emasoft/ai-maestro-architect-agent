@@ -1,6 +1,6 @@
 ---
-name: ao-planning-commands
-description: "Documents all planning phase commands for ATLAS. Covers starting planning, tracking progress, managing requirements and modules, and plan approval. The planning phase creates complete specifications before any implementation begins."
+name: arch-planning-commands
+description: "Documents all planning phase commands for Architect Agent. Covers starting planning, tracking progress, managing requirements and modules, and plan approval. The planning phase creates complete specifications before any implementation begins."
 license: Apache-2.0
 compatibility: "Requires Python 3.8+, PyYAML, GitHub CLI for issue creation. Cross-platform compatible."
 metadata:
@@ -14,7 +14,7 @@ context: fork
 
 ## Description
 
-This skill documents all planning phase commands for the Atlas Orchestrator plugin. The planning phase is the first stage of the Two-Phase workflow where requirements are gathered, modules are defined, and the implementation plan is created before any code is written.
+This skill documents all planning phase commands for the Architect Agent plugin. The planning phase is the first stage of the Two-Phase workflow where requirements are gathered, modules are defined, and the implementation plan is created before any code is written.
 
 ## When to Use This Skill
 

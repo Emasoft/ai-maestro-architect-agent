@@ -1,32 +1,32 @@
 #!/usr/bin/env python3
 """
-atlas_design_export.py - Export design documents for GitHub.
+arch_design_export.py - Export design documents for GitHub.
 
 Optionally sanitizes documents by removing internal references and Atlas-specific metadata.
-Uses atlas_design_search.py to find documents.
+Uses arch_design_search.py to find documents.
 
 Sanitization (when enabled with --sanitize) removes:
 - Internal file references (keeps external URLs)
-- Atlas-specific HTML comments (<!-- ATLAS:... -->, <!-- INTERNAL:... -->)
+- Architect-specific HTML comments (<!-- ARCHITECT:... -->, <!-- INTERNAL:... -->)
 - Private sections marked for internal use
 
 Usage:
     # Export single document (no sanitization by default)
-    python atlas_design_export.py --uuid PROJ-SPEC-20250108-a7b3f2e1
+    python arch_design_export.py --uuid PROJ-SPEC-20250108-a7b3f2e1
 
     # Export to specific directory
-    python atlas_design_export.py --uuid PROJ-SPEC-... --output-dir exports/
+    python arch_design_export.py --uuid PROJ-SPEC-... --output-dir exports/
 
     # Export with sanitization (removes internal markers)
-    python atlas_design_export.py --uuid PROJ-SPEC-... --sanitize
+    python arch_design_export.py --uuid PROJ-SPEC-... --sanitize
 
     # Export all documents of a type
-    python atlas_design_export.py --type SPEC --output-dir exports/
+    python arch_design_export.py --type SPEC --output-dir exports/
 
     # Generate GitHub issue body from spec
-    python atlas_design_export.py --uuid PROJ-SPEC-... --format issue
+    python arch_design_export.py --uuid PROJ-SPEC-... --format issue
 
-Dependencies: Python 3.8+, atlas_design_search.py (same directory)
+Dependencies: Python 3.8+, arch_design_search.py (same directory)
 """
 
 import argparse
@@ -37,8 +37,8 @@ from pathlib import Path
 
 
 def run_search_script(args: list[str], project_root: Path) -> str:
-    """Run atlas_design_search.py with given arguments."""
-    script_path = Path(__file__).parent / "atlas_design_search.py"
+    """Run arch_design_search.py with given arguments."""
+    script_path = Path(__file__).parent / "arch_design_search.py"
     cmd = ["python3", str(script_path)] + args + ["--project-root", str(project_root)]
     result = subprocess.run(cmd, capture_output=True, text=True)
     return result.stdout.strip()
@@ -78,8 +78,8 @@ def find_documents_by_type(doc_type: str, project_root: Path) -> list[Path]:
 
 def sanitize_content(content: str) -> str:
     """Remove internal markers and references from content."""
-    # Remove Atlas-internal HTML comments
-    content = re.sub(r"<!-- ATLAS:.*?-->", "", content, flags=re.DOTALL)
+    # Remove Architect-internal HTML comments
+    content = re.sub(r"<!-- ARCHITECT:.*?-->", "", content, flags=re.DOTALL)
     content = re.sub(r"<!-- INTERNAL:.*?-->", "", content, flags=re.DOTALL)
     content = re.sub(r"<!-- PRIVATE:.*?-->", "", content, flags=re.DOTALL)
 
@@ -218,19 +218,19 @@ def main() -> int:
         epilog="""
 Examples:
   # Export single document (preserves internal markers)
-  python atlas_design_export.py --uuid PROJ-SPEC-20250108-a7b3f2e1
+  python arch_design_export.py --uuid PROJ-SPEC-20250108-a7b3f2e1
 
   # Export to specific directory
-  python atlas_design_export.py --uuid PROJ-SPEC-... --output-dir exports/
+  python arch_design_export.py --uuid PROJ-SPEC-... --output-dir exports/
 
   # Export as GitHub issue body
-  python atlas_design_export.py --uuid PROJ-SPEC-... --format issue
+  python arch_design_export.py --uuid PROJ-SPEC-... --format issue
 
   # Export all specs
-  python atlas_design_export.py --type SPEC --output-dir exports/
+  python arch_design_export.py --type SPEC --output-dir exports/
 
   # Export with sanitization (removes internal markers)
-  python atlas_design_export.py --uuid PROJ-SPEC-... --sanitize
+  python arch_design_export.py --uuid PROJ-SPEC-... --sanitize
         """,
     )
 

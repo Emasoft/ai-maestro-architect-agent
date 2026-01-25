@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-atlas_design_validate.py - Validate design document frontmatter.
+arch_design_validate.py - Validate design document frontmatter.
 
 Checks that documents have required UUID and metadata fields.
 Validates UUID format, status values, and date formats.
@@ -19,16 +19,16 @@ Recommended Fields:
 
 Usage:
     # Validate single file
-    python atlas_design_validate.py --file docs/design/specs/auth.md
+    python arch_design_validate.py --file docs/design/specs/auth.md
 
     # Validate directory
-    python atlas_design_validate.py --dir docs/design/specs
+    python arch_design_validate.py --dir docs/design/specs
 
     # Validate all design docs
-    python atlas_design_validate.py --all
+    python arch_design_validate.py --all
 
     # Strict mode (warnings become errors)
-    python atlas_design_validate.py --all --strict
+    python arch_design_validate.py --all --strict
 
 Dependencies: Python 3.8+
 """
@@ -295,16 +295,16 @@ Required Fields:
 
 Examples:
   # Validate single file
-  python atlas_design_validate.py --file docs/design/specs/auth.md
+  python arch_design_validate.py --file docs/design/specs/auth.md
 
   # Validate directory
-  python atlas_design_validate.py --dir docs/design/specs
+  python arch_design_validate.py --dir docs/design/specs
 
   # Validate all design docs
-  python atlas_design_validate.py --all
+  python arch_design_validate.py --all
 
   # Strict mode
-  python atlas_design_validate.py --all --strict
+  python arch_design_validate.py --all --strict
         """,
     )
 

@@ -1,10 +1,10 @@
 ---
-name: ao-documentation-writer
+name: arch-documentation-writer
 model: opus
 description: Writes and maintains project documentation
 type: local-helper
 auto_skills:
-  - session-memory
+  - arch-session-memory
 memory_requirements: low
 triggers:
   - Code needs documentation

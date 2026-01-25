@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-atlas_design_handoff.py - Export design documents to GitHub issue attachments.
+arch_design_handoff.py - Export design documents to GitHub issue attachments.
 
 This script exports a design document to a GitHub issue attachment.
 Works identically in both single-git and dual-git modes.
@@ -8,7 +8,7 @@ Works identically in both single-git and dual-git modes.
 NO external dependencies - Python 3.8+ stdlib only.
 
 Usage:
-    atlas_design_handoff.py <uuid_or_file> <issue_number> [options]
+    arch_design_handoff.py <uuid_or_file> <issue_number> [options]
 
 Arguments:
     uuid_or_file    Document UUID (e.g., PROJ-SPEC-20250108-0001) or file path
@@ -20,9 +20,9 @@ Options:
     -h, --help      Show this help
 
 Examples:
-    atlas_design_handoff.py PROJ-SPEC-20250108-0001 234
-    atlas_design_handoff.py PROJ-SPEC-20250108-0001 234 --sanitize
-    atlas_design_handoff.py docs/design/specs/auth.md 234 --sanitize
+    arch_design_handoff.py PROJ-SPEC-20250108-0001 234
+    arch_design_handoff.py PROJ-SPEC-20250108-0001 234 --sanitize
+    arch_design_handoff.py docs/design/specs/auth.md 234 --sanitize
 
 The script:
 1. Finds the document by UUID or path
@@ -209,7 +209,7 @@ def attach_to_issue(file_path: Path, issue: str, mode: str, dry_run: bool) -> No
 **Title**: {title}
 **Type**: {doc_type}
 **Status**: {status}
-**Attached by**: Atlas Orchestrator
+**Attached by**: Architect Agent
 **Date**: {datetime.now().strftime("%Y-%m-%d")}
 **Mode**: {mode}
 
@@ -223,7 +223,7 @@ def attach_to_issue(file_path: Path, issue: str, mode: str, dry_run: bool) -> No
 </details>
 
 ---
-*Exported via atlas_design_handoff.py*"""
+*Exported via arch_design_handoff.py*"""
 
     if dry_run:
         print()
@@ -409,9 +409,9 @@ def main() -> int:
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  atlas_design_handoff.py PROJ-SPEC-20250108-0001 234
-  atlas_design_handoff.py PROJ-SPEC-20250108-0001 234 --sanitize
-  atlas_design_handoff.py docs/design/specs/auth.md 234 --sanitize
+  arch_design_handoff.py PROJ-SPEC-20250108-0001 234
+  arch_design_handoff.py PROJ-SPEC-20250108-0001 234 --sanitize
+  arch_design_handoff.py docs/design/specs/auth.md 234 --sanitize
         """,
     )
     parser.add_argument(
