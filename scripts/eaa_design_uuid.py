@@ -52,7 +52,7 @@ class DesignConfig:
     mode: str = "single-git"
     design_root: Path = field(default_factory=lambda: Path("docs/design"))
     uuid_prefix: str = "PROJ"
-    memory_root: Path = field(default_factory=lambda: Path(".claude/architect"))
+    memory_root: Path = field(default_factory=lambda: Path("design/memory"))
 
     @classmethod
     def load(cls, project_root: Optional[Path] = None) -> "DesignConfig":
@@ -61,7 +61,7 @@ class DesignConfig:
             project_root = Path.cwd()
 
         config = cls()
-        patterns_file = project_root / ".claude" / "atlas" / "patterns.md"
+        patterns_file = project_root / "design" / "memory" / "patterns.md"
 
         if not patterns_file.exists():
             # Try alternative location for dual-git mode

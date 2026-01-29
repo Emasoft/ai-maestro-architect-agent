@@ -44,7 +44,7 @@ def detect_config(patterns_file: Path) -> dict[str, str]:
     """Detect current Atlas configuration from patterns.md.
 
     Args:
-        patterns_file: Path to .claude/architect/patterns.md
+        patterns_file: Path to design/memory/patterns.md
 
     Returns:
         Dictionary containing design_root, mode, and memory_root
@@ -213,7 +213,7 @@ def commit_transition(
 - MOVED: .design/templates/* -> docs/design/templates/
 
 ### Configuration
-- UPDATED: .claude/architect/patterns.md
+- UPDATED: design/memory/patterns.md
   - mode: dual-git -> single-git
   - design_root: .design/ -> docs/design/
 
@@ -243,7 +243,7 @@ Memory files may need to be moved separately if stored in .design/memory/.
             ["git", "add", "docs/design/"], check=False, stderr=subprocess.DEVNULL
         )
         subprocess.run(
-            ["git", "add", ".claude/architect/patterns.md"],
+            ["git", "add", "design/memory/patterns.md"],
             check=False,
             stderr=subprocess.DEVNULL,
         )
@@ -284,7 +284,7 @@ def main() -> int:
     args = parser.parse_args()
 
     # Detect current configuration
-    patterns_file = Path(".claude/architect/patterns.md")
+    patterns_file = Path("design/memory/patterns.md")
     config = detect_config(patterns_file)
 
     print("=== Design Document Transition: Private -> Public ===")
@@ -391,7 +391,7 @@ def main() -> int:
         print()
         print("NOTE: Memory files in .design/memory/ were NOT copied.")
         print("If using memory in design git, update memory_root in patterns.md:")
-        print("  memory_root: .claude/architect/")
+        print("  memory_root: design/memory/")
 
     print()
     print("=== Transition Complete ===")

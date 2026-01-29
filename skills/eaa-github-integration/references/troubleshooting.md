@@ -129,7 +129,7 @@ ERROR: Document not found with UUID: PROJ-SPEC-20250129-a1b2c3d4
 
 2. Check the design root path:
    ```bash
-   cat .claude/architect/patterns.md | grep design_root
+   cat design/memory/patterns.md | grep design_root
    ```
 
 3. Search for partial UUID:

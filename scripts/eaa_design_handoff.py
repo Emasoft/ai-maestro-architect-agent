@@ -54,7 +54,7 @@ def detect_config() -> Tuple[str, str, str]:
     Returns:
         Tuple of (design_root, mode, exports_dir)
     """
-    patterns_file = Path(".claude/architect/patterns.md")
+    patterns_file = Path("design/memory/patterns.md")
     design_root = ""
     mode = ""
 
