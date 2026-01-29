@@ -38,7 +38,7 @@ def parse_frontmatter(file_path: Path) -> tuple[dict, str]:
         return {}, content
 
     yaml_content = content[3:end_index].strip()
-    body = content[end_index + 3:].strip()
+    body = content[end_index + 3 :].strip()
 
     try:
         data = yaml.safe_load(yaml_content) or {}
@@ -50,7 +50,9 @@ def parse_frontmatter(file_path: Path) -> tuple[dict, str]:
 def write_state_file(data: dict, body: str) -> bool:
     """Write the state file with updated frontmatter."""
     try:
-        yaml_content = yaml.dump(data, default_flow_style=False, allow_unicode=True, sort_keys=False)
+        yaml_content = yaml.dump(
+            data, default_flow_style=False, allow_unicode=True, sort_keys=False
+        )
         content = f"---\n{yaml_content}---\n\n{body}"
         PLAN_STATE_FILE.write_text(content, encoding="utf-8")
         return True
@@ -77,10 +79,7 @@ def add_requirement(data: dict, name: str) -> bool:
             print(f"ERROR: Requirement section '{name}' already exists")
             return False
 
-    sections.append({
-        "name": name,
-        "status": "pending"
-    })
+    sections.append({"name": name, "status": "pending"})
     data["requirements_sections"] = sections
     print(f"✓ Added requirement section: {name}")
     return True
@@ -102,7 +101,7 @@ def add_module(data: dict, name: str, criteria: str | None, priority: str) -> bo
         "name": name,
         "status": "planned",
         "priority": priority,
-        "github_issue": None
+        "github_issue": None,
     }
 
     if criteria:
@@ -139,7 +138,7 @@ def modify_module(
     new_name: str | None,
     new_criteria: str | None,
     new_status: str | None,
-    new_priority: str | None
+    new_priority: str | None,
 ) -> bool:
     """Modify an existing module."""
     modules = data.get("modules", [])
@@ -225,42 +224,27 @@ def main() -> int:
         description="Add, modify, or remove requirements and modules"
     )
     parser.add_argument(
-        "action",
-        choices=["add", "modify", "remove"],
-        help="Action to perform"
+        "action", choices=["add", "modify", "remove"], help="Action to perform"
     )
+    parser.add_argument("type", choices=["requirement", "module"], help="Type of item")
+    parser.add_argument("name", help="Name or ID of the item")
+    parser.add_argument("--criteria", "-c", help="Acceptance criteria (for modules)")
     parser.add_argument(
-        "type",
-        choices=["requirement", "module"],
-        help="Type of item"
-    )
-    parser.add_argument(
-        "name",
-        help="Name or ID of the item"
-    )
-    parser.add_argument(
-        "--criteria", "-c",
-        help="Acceptance criteria (for modules)"
-    )
-    parser.add_argument(
-        "--status", "-s",
+        "--status",
+        "-s",
         choices=["pending", "in_progress", "complete", "planned"],
-        help="New status"
+        help="New status",
     )
     parser.add_argument(
-        "--priority", "-p",
+        "--priority",
+        "-p",
         choices=["critical", "high", "medium", "low"],
         default="medium",
-        help="Priority level (for modules)"
+        help="Priority level (for modules)",
     )
+    parser.add_argument("--new-name", "-n", help="New name (for modify)")
     parser.add_argument(
-        "--new-name", "-n",
-        help="New name (for modify)"
-    )
-    parser.add_argument(
-        "--force", "-f",
-        action="store_true",
-        help="Force the operation"
+        "--force", "-f", action="store_true", help="Force the operation"
     )
 
     args = parser.parse_args()
@@ -289,8 +273,12 @@ def main() -> int:
             success = modify_requirement(data, args.name, args.status)
         else:  # module
             success = modify_module(
-                data, args.name,
-                args.new_name, args.criteria, args.status, args.priority
+                data,
+                args.name,
+                args.new_name,
+                args.criteria,
+                args.status,
+                args.priority,
             )
 
     elif args.action == "remove":

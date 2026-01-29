@@ -214,10 +214,16 @@ def compile_handoff(
         "{{MODULE_SPEC_CONTENT}}": spec_content or "See linked specification file",
         "{{PLATFORM}}": platform,
         "{{CONFIG_FILES}}": f"See .architect/config/{platform}/",
-        "{{SPEC_PATH}}": f".architect/designs/{platform}/specs/{module.get('id', 'unknown')}.md",
-        "{{RDD_PATH}}": f".architect/designs/{platform}/rdd/{module.get('id', 'unknown')}-rdd.md",
+        "{{SPEC_PATH}}": (
+            f".architect/designs/{platform}/specs/{module.get('id', 'unknown')}.md"
+        ),
+        "{{RDD_PATH}}": (
+            f".architect/designs/{platform}/rdd/{module.get('id', 'unknown')}-rdd.md"
+        ),
         "{{ARCH_PATH}}": ".architect/designs/shared/ARCHITECTURE.md",
-        "{{SUCCESS_METRICS}}": "All acceptance criteria met, tests passing, code reviewed",
+        "{{SUCCESS_METRICS}}": (
+            "All acceptance criteria met, tests passing, code reviewed"
+        ),
         "{{REQUIREMENTS_LIST}}": module.get("requirements", "See specification"),
         "{{DEPENDENCIES}}": ", ".join(module.get("dependencies", [])) or "None",
         "{{TECHNICAL_DESIGN}}": "See specification",

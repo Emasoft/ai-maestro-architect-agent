@@ -60,16 +60,21 @@ def check_draft_design_docs(project_root: Path) -> list[str]:
             try:
                 content = doc.read_text(encoding="utf-8")
                 # Check for draft indicators in frontmatter or content
-                if any(indicator in content.lower() for indicator in [
-                    "status: draft",
-                    "state: draft",
-                    "[draft]",
-                    "## draft",
-                    "wip:",
-                    "status: wip",
-                    "in_progress",
-                ]):
-                    blockers.append(f"Draft design doc: {doc.relative_to(project_root)}")
+                if any(
+                    indicator in content.lower()
+                    for indicator in [
+                        "status: draft",
+                        "state: draft",
+                        "[draft]",
+                        "## draft",
+                        "wip:",
+                        "status: wip",
+                        "in_progress",
+                    ]
+                ):
+                    blockers.append(
+                        f"Draft design doc: {doc.relative_to(project_root)}"
+                    )
             except (OSError, UnicodeDecodeError):
                 continue
 
@@ -130,10 +135,16 @@ def check_orphan_requirements(project_root: Path) -> list[str]:
             content = req_file.read_text(encoding="utf-8")
             # Look for requirement IDs like REQ-001, R001, etc.
             import re
-            req_ids = re.findall(r"(?:REQ|R|REQUIREMENT)-?\d{1,4}", content, re.IGNORECASE)
+
+            req_ids = re.findall(
+                r"(?:REQ|R|REQUIREMENT)-?\d{1,4}", content, re.IGNORECASE
+            )
             for req_id in req_ids:
                 normalized = req_id.lower().replace("-", "")
-                if normalized not in design_files and f"design-{normalized}" not in design_files:
+                if (
+                    normalized not in design_files
+                    and f"design-{normalized}" not in design_files
+                ):
                     # Only report if there's no design doc reference in the same file
                     if f"design for {req_id}" not in content.lower():
                         blockers.append(f"Requirement without design: {req_id}")
@@ -151,7 +162,17 @@ def check_github_issues() -> list[str]:
     # Check if gh CLI is available
     try:
         result = subprocess.run(
-            ["gh", "issue", "list", "--assignee", "@me", "--state", "open", "--json", "number,title,labels"],
+            [
+                "gh",
+                "issue",
+                "list",
+                "--assignee",
+                "@me",
+                "--state",
+                "open",
+                "--json",
+                "number,title,labels",
+            ],
             capture_output=True,
             text=True,
             timeout=10,
@@ -159,10 +180,15 @@ def check_github_issues() -> list[str]:
         if result.returncode == 0 and result.stdout.strip():
             issues = json.loads(result.stdout)
             for issue in issues[:5]:  # Limit to 5
-                labels = [l.get("name", "") for l in issue.get("labels", [])]
+                labels = [lbl.get("name", "") for lbl in issue.get("labels", [])]
                 # Check if issue is architecture/design related
-                if any(label in ["architecture", "design", "planning", "architect"] for label in labels):
-                    blockers.append(f"Open issue #{issue['number']}: {issue['title'][:50]}")
+                if any(
+                    label in ["architecture", "design", "planning", "architect"]
+                    for label in labels
+                ):
+                    blockers.append(
+                        f"Open issue #{issue['number']}: {issue['title'][:50]}"
+                    )
     except (subprocess.TimeoutExpired, FileNotFoundError, json.JSONDecodeError):
         pass  # gh CLI not available or timed out - skip this check
 
@@ -198,12 +224,13 @@ def main() -> None:
         "decision": "block",
         "reason": f"Incomplete design work: {len(all_blockers)} items",
         "continue": True,
-        "systemMessage": "Cannot exit - complete the following design work first:\n" + "\n".join(f"- {b}" for b in all_blockers[:10]),
+        "systemMessage": "Cannot exit - complete the following design work first:\n"
+        + "\n".join(f"- {b}" for b in all_blockers[:10]),
         "hookSpecificOutput": {
             "hookEventName": "Stop",
             "blockers": all_blockers[:10],
             "blockerCount": len(all_blockers),
-        }
+        },
     }
 
     print(json.dumps(output))

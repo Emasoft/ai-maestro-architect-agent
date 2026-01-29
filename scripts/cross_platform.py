@@ -16,10 +16,7 @@ def atomic_write_json(path: Path, data: Any, indent: int = 2) -> None:
 
     # Write to temp file first, then move atomically
     with tempfile.NamedTemporaryFile(
-        mode='w',
-        dir=path.parent,
-        suffix='.tmp',
-        delete=False
+        mode="w", dir=path.parent, suffix=".tmp", delete=False
     ) as tmp:
         json.dump(data, tmp, indent=indent)
         tmp_path = Path(tmp.name)
@@ -33,10 +30,7 @@ def atomic_write_text(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
 
     with tempfile.NamedTemporaryFile(
-        mode='w',
-        dir=path.parent,
-        suffix='.tmp',
-        delete=False
+        mode="w", dir=path.parent, suffix=".tmp", delete=False
     ) as tmp:
         tmp.write(content)
         tmp_path = Path(tmp.name)
@@ -46,10 +40,5 @@ def atomic_write_text(path: Path, content: str) -> None:
 
 def run_command(cmd: list[str], cwd: Path | None = None) -> tuple[int, str, str]:
     """Run a command and return (exit_code, stdout, stderr)."""
-    result = subprocess.run(
-        cmd,
-        cwd=cwd,
-        capture_output=True,
-        text=True
-    )
+    result = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True)
     return result.returncode, result.stdout, result.stderr

@@ -2,8 +2,8 @@
 """
 arch_design_export.py - Export design documents for GitHub.
 
-Optionally sanitizes documents by removing internal references and Atlas-specific metadata.
-Uses arch_design_search.py to find documents.
+Optionally sanitizes documents by removing internal references
+and Atlas-specific metadata. Uses arch_design_search.py to find documents.
 
 Sanitization (when enabled with --sanitize) removes:
 - Internal file references (keeps external URLs)
@@ -85,18 +85,11 @@ def sanitize_content(content: str) -> str:
 
     # Remove internal file references (keep external URLs)
     # [text](relative/path.md) -> text
-    content = re.sub(
-        r"\[([^\]]+)\]\((?!https?://|#)[^)]+\.md\)",
-        r"\1",
-        content
-    )
+    content = re.sub(r"\[([^\]]+)\]\((?!https?://|#)[^)]+\.md\)", r"\1", content)
 
-    # Remove internal sections marked with <!-- INTERNAL_START --> ... <!-- INTERNAL_END -->
+    # Remove internal sections marked with INTERNAL_START/INTERNAL_END comments
     content = re.sub(
-        r"<!-- INTERNAL_START -->.*?<!-- INTERNAL_END -->",
-        "",
-        content,
-        flags=re.DOTALL
+        r"<!-- INTERNAL_START -->.*?<!-- INTERNAL_END -->", "", content, flags=re.DOTALL
     )
 
     # Clean up multiple blank lines
@@ -235,12 +228,25 @@ Examples:
     )
 
     parser.add_argument("--uuid", "-u", help="UUID of document to export")
-    parser.add_argument("--type", "-t", choices=["SPEC", "PLAN", "ADR", "spec", "plan", "adr"],
-                        help="Export all documents of type")
+    parser.add_argument(
+        "--type",
+        "-t",
+        choices=["SPEC", "PLAN", "ADR", "spec", "plan", "adr"],
+        help="Export all documents of type",
+    )
     parser.add_argument("--output-dir", "-o", type=Path, help="Output directory")
-    parser.add_argument("--sanitize", action="store_true", help="Remove internal references and Atlas markers")
-    parser.add_argument("--format", "-f", choices=["markdown", "issue"], default="markdown",
-                        help="Output format (default: markdown)")
+    parser.add_argument(
+        "--sanitize",
+        action="store_true",
+        help="Remove internal references and Atlas markers",
+    )
+    parser.add_argument(
+        "--format",
+        "-f",
+        choices=["markdown", "issue"],
+        default="markdown",
+        help="Output format (default: markdown)",
+    )
     parser.add_argument("--project-root", type=Path, default=Path.cwd())
 
     args = parser.parse_args()

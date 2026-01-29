@@ -5,9 +5,9 @@ eaa_send_message.py - AI Maestro message sending wrapper.
 Sends messages to other agents via the AI Maestro API.
 
 Usage:
-    python eaa_send_message.py --to <agent> --subject <subject> --message <message>
-    python eaa_send_message.py --to <agent> --subject <subject> --message <message> --priority high
-    python eaa_send_message.py --to <agent> --subject <subject> --type request --message <message>
+    python eaa_send_message.py --to <agent> --subject <s> --message <m>
+    python eaa_send_message.py --to <agent> -s <subject> -m <msg> --priority high
+    python eaa_send_message.py --to <agent> -s <subject> --type request -m <msg>
 
 Environment:
     AIMAESTRO_API - API base URL (default: http://localhost:23000)
@@ -82,7 +82,7 @@ def send_message(
         "content": {
             "type": msg_type,
             "message": message,
-        }
+        },
     }
 
     data = json.dumps(payload).encode("utf-8")
@@ -108,9 +108,7 @@ def send_message(
 
 def main() -> None:
     """Main entry point."""
-    parser = argparse.ArgumentParser(
-        description="Send message via AI Maestro API"
-    )
+    parser = argparse.ArgumentParser(description="Send message via AI Maestro API")
     parser.add_argument(
         "--to",
         required=True,

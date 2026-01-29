@@ -3,7 +3,7 @@
 arch_design_version.py - Design document version management.
 
 Creates new versions of existing design documents.
-Uses arch_design_search.py to find documents and arch_design_uuid.py for UUID generation.
+Uses arch_design_search.py to find documents and arch_design_uuid.py for UUIDs.
 
 Usage:
     # Create new version of a document

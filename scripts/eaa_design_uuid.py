@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-arch_design_uuid.py - Cross-platform UUID generator for Architect Agent design documents.
+arch_design_uuid.py - UUID generator for Architect Agent design documents.
 
 This script generates globally unique UUIDs for design documents and can:
 1. Generate new UUIDs for document types (SPEC, PLAN, ADR)

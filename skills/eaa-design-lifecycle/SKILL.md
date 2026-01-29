@@ -1,4 +1,5 @@
 ---
+name: eaa-design-lifecycle
 description: Design document lifecycle management for architect agents
 context: fork
 agent: eaa-planner

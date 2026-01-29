@@ -1,5 +1,5 @@
 ---
-name: eaa-planning-commands
+name: eaa-requirements-analysis
 description: "Documents all planning phase commands for Architect Agent. Covers starting planning, tracking progress, managing requirements and modules, and plan approval. The planning phase creates complete specifications before any implementation begins."
 license: Apache-2.0
 compatibility: "Requires Python 3.8+, PyYAML, GitHub CLI for issue creation. Cross-platform compatible."

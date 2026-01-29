@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-arch_design_search_parser.py - Parsing and metadata extraction for design documents.
+arch_design_search_parser.py - Parsing and metadata extraction for design docs.
 
-This module provides the core parsing functionality for Architect Agent design documents:
+This module provides parsing functionality for Architect Agent design documents:
 - Configuration loading from patterns.md
 - YAML frontmatter parsing (without external dependencies)
 - Metadata extraction from design document files

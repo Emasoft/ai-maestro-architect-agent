@@ -36,7 +36,10 @@ def create_plan_state_file(goal: str) -> bool:
     # Check if already in plan phase
     if PLAN_STATE_FILE.exists():
         print(f"ERROR: Plan Phase already active. State file exists: {PLAN_STATE_FILE}")
-        print("Use /planning-status to view current plan, or delete the state file to start fresh.")
+        print(
+            "Use /planning-status to view current plan, "
+            "or delete the state file to start fresh."
+        )
         return False
 
     # Create the state file with YAML frontmatter
@@ -120,14 +123,10 @@ def main() -> int:
         description="Initialize Plan Phase Mode for orchestrator workflow"
     )
     parser.add_argument(
-        "goal",
-        nargs="?",
-        help="The goal/objective for this planning session"
+        "goal", nargs="?", help="The goal/objective for this planning session"
     )
     parser.add_argument(
-        "--goal", "-g",
-        dest="goal_flag",
-        help="Alternative way to specify the goal"
+        "--goal", "-g", dest="goal_flag", help="Alternative way to specify the goal"
     )
 
     args = parser.parse_args()
@@ -137,7 +136,7 @@ def main() -> int:
 
     if not goal:
         print("ERROR: Goal is required")
-        print("Usage: /start-planning \"Your goal description here\"")
+        print('Usage: /start-planning "Your goal description here"')
         return 1
 
     # Clean up goal string (remove surrounding quotes if present)

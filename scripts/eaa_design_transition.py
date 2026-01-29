@@ -65,7 +65,9 @@ def detect_config(patterns_file: Path) -> dict[str, str]:
         content = patterns_file.read_text(encoding="utf-8")
         for line in content.splitlines():
             if line.startswith("design_root:"):
-                config["design_root"] = line.split(":", 1)[1].strip().strip('"').rstrip("/")
+                config["design_root"] = (
+                    line.split(":", 1)[1].strip().strip('"').rstrip("/")
+                )
             elif line.startswith("mode:"):
                 config["mode"] = line.split(":", 1)[1].strip().strip('"')
             elif line.startswith("memory_root:"):
@@ -175,13 +177,20 @@ def rebuild_search_index(dry_run: bool) -> None:
     for script in search_scripts:
         if script.exists() and script.stat().st_mode & 0o111:  # Check executable
             try:
-                subprocess.run([str(script), "--rebuild-index"], env={"DESIGN_ROOT": "docs/design"}, stderr=subprocess.DEVNULL, check=False)
+                subprocess.run(
+                    [str(script), "--rebuild-index"],
+                    env={"DESIGN_ROOT": "docs/design"},
+                    stderr=subprocess.DEVNULL,
+                    check=False,
+                )
                 return
             except (subprocess.SubprocessError, OSError):
                 continue
 
 
-def commit_transition(spec_count: int, plan_count: int, adr_count: int, total: int, dry_run: bool) -> None:
+def commit_transition(
+    spec_count: int, plan_count: int, adr_count: int, total: int, dry_run: bool
+) -> None:
     """Commit design document transition to project git.
 
     Args:
@@ -230,11 +239,22 @@ Memory files may need to be moved separately if stored in .design/memory/.
 
     try:
         # Stage files
-        subprocess.run(["git", "add", "docs/design/"], check=False, stderr=subprocess.DEVNULL)
-        subprocess.run(["git", "add", ".claude/architect/patterns.md"], check=False, stderr=subprocess.DEVNULL)
+        subprocess.run(
+            ["git", "add", "docs/design/"], check=False, stderr=subprocess.DEVNULL
+        )
+        subprocess.run(
+            ["git", "add", ".claude/architect/patterns.md"],
+            check=False,
+            stderr=subprocess.DEVNULL,
+        )
 
         # Commit
-        subprocess.run(["git", "commit", "-m", commit_msg], check=False, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
+        subprocess.run(
+            ["git", "commit", "-m", commit_msg],
+            check=False,
+            stderr=subprocess.DEVNULL,
+            stdout=subprocess.DEVNULL,
+        )
     except (subprocess.SubprocessError, OSError):
         print("  (Git command failed, changes may not be committed)")
 
@@ -245,10 +265,21 @@ def main() -> int:
     Returns:
         Exit code: 0 for success, 1 for error/abort
     """
-    parser = argparse.ArgumentParser(description="Transition design documents from private (.design/) to public (docs/design/)", formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser = argparse.ArgumentParser(
+        description="Transition design docs from .design/ to docs/design/",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
     parser.add_argument("--force", action="store_true", help="Skip confirmation prompt")
-    parser.add_argument("--dry-run", action="store_true", help="Show what would be done without executing")
-    parser.add_argument("--keep-private", action="store_true", help="Don't delete .design/ after transition")
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Show what would be done without executing",
+    )
+    parser.add_argument(
+        "--keep-private",
+        action="store_true",
+        help="Don't delete .design/ after transition",
+    )
 
     args = parser.parse_args()
 
@@ -268,7 +299,10 @@ def main() -> int:
     design_dir = Path(".design")
     if not design_dir.exists():
         print("ERROR: No .design/ directory found.", file=sys.stderr)
-        print("This script is for transitioning from dual-git to single-git.", file=sys.stderr)
+        print(
+            "This script is for transitioning from dual-git to single-git.",
+            file=sys.stderr,
+        )
         print("If already in single-git mode, no transition needed.", file=sys.stderr)
         return 1
 

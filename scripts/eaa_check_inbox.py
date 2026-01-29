@@ -103,7 +103,9 @@ def format_message(msg: dict[str, Any]) -> str:
 
     from_agent = msg.get("from", "unknown")
     subject = msg.get("subject", "(no subject)")
-    timestamp = msg.get("timestamp", msg.get("createdAt", ""))[:19]  # Truncate to datetime
+    timestamp = msg.get("timestamp", msg.get("createdAt", ""))[
+        :19
+    ]  # Truncate to datetime
 
     lines.append(f"{priority_icon} [{timestamp}] From: {from_agent}")
     lines.append(f"   Subject: {subject}")
@@ -125,9 +127,7 @@ def format_message(msg: dict[str, Any]) -> str:
 
 def main() -> None:
     """Main entry point."""
-    parser = argparse.ArgumentParser(
-        description="Check AI Maestro inbox for messages"
-    )
+    parser = argparse.ArgumentParser(description="Check AI Maestro inbox for messages")
     parser.add_argument(
         "--all",
         action="store_true",

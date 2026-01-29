@@ -37,7 +37,7 @@ import sys
 from pathlib import Path
 from typing import Optional
 
-from arch_design_search_parser import (
+from eaa_design_search_parser import (
     DesignConfig,
     DocumentMetadata,
     extract_metadata,
@@ -253,7 +253,7 @@ def format_output(
 def main() -> int:
     """Main entry point."""
     parser = argparse.ArgumentParser(
-        description="Search Atlas design documents (filesystem as DB - Manus principle)",
+        description="Search Atlas design documents (filesystem as DB)",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Search Speed (fastest to slowest):
