@@ -1,15 +1,15 @@
 {
-  "description": "Architect Agent hooks - skill activation for design workflows",
+  "description": "Architect Agent hooks",
   "_note": "Hook data is passed via stdin as JSON. Scripts read from stdin, not env vars.",
   "hooks": {
-    "UserPromptSubmit": [
+    "Stop": [
       {
-        "_id": "eaa-skill-activation",
-        "_description": "Activate relevant design and planning skills based on user prompt",
+        "_id": "eaa-stop-check",
+        "_description": "Blocks exit until all design work is complete",
         "hooks": [
           {
             "type": "command",
-            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/scripts/eaa_skill_activation.py"
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/scripts/eaa_stop_check.py"
           }
         ]
       }

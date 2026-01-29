@@ -41,7 +41,7 @@ class DesignConfig:
             project_root = Path.cwd()
 
         config = cls()
-        patterns_file = project_root / ".claude" / "atlas" / "patterns.md"
+        patterns_file = project_root / ".claude" / "architect" / "patterns.md"
 
         if not patterns_file.exists():
             patterns_file = project_root / ".design" / "memory" / "patterns.md"

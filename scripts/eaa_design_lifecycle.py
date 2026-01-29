@@ -59,7 +59,7 @@ def run_search_script(args: list[str], project_root: Path) -> str:
 def load_config(project_root: Path) -> dict:
     """Load configuration from patterns.md."""
     config = {"design_root": Path("docs/design")}
-    patterns_file = project_root / ".claude" / "atlas" / "patterns.md"
+    patterns_file = project_root / ".claude" / "architect" / "patterns.md"
 
     if not patterns_file.exists():
         patterns_file = project_root / ".design" / "memory" / "patterns.md"

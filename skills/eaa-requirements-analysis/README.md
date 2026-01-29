@@ -74,5 +74,5 @@ python3 scripts/reset_plan_phase.py --confirm
 ## Related
 
 - Main plugin: `architect-agent`
-- Parent scripts: `${CLAUDE_PLUGIN_ROOT}/scripts/arch_*.py`
+- Parent scripts: `${CLAUDE_PLUGIN_ROOT}/scripts/eaa_*.py`
 - Next phase: Use `orchestration-commands` skill after plan approval

@@ -123,14 +123,14 @@ This agent should be invoked when:
 Breaks down application features into independent, testable functional modules.
 
 For detailed methodology, see:
-[functional-modularization.md](../skills/modularizer-expert/references/functional-modularization.md)
+[functional-modularization.md](../skills/eaa-modularizer-expert/references/functional-modularization.md)
 
 ### 2. Domain-Driven Modularization
 
 Organizes modules according to business domains and bounded contexts.
 
 For detailed methodology, see:
-[domain-modularization.md](../skills/modularizer-expert/references/domain-modularization.md)
+[domain-modularization.md](../skills/eaa-modularizer-expert/references/domain-modularization.md)
 
 ### 3. Platform-Based Modularization
 
@@ -139,7 +139,7 @@ For detailed methodology, see:
 Designs cross-platform architectures with shared core libraries and platform-specific modules.
 
 For detailed methodology, see:
-[platform-modularization.md](../skills/modularizer-expert/references/platform-modularization.md)
+[platform-modularization.md](../skills/eaa-modularizer-expert/references/platform-modularization.md)
 
 ---
 
@@ -149,10 +149,10 @@ For comprehensive platform-specific knowledge, see the following references:
 
 | Platform | Reference |
 |----------|-----------|
-| Apple (macOS/iOS) | [platform-toolchains-part1-apple.md](../skills/modularizer-expert/references/platform-toolchains-part1-apple.md) |
-| Cross-Platform | [platform-toolchains-part2-cross-platform.md](../skills/modularizer-expert/references/platform-toolchains-part2-cross-platform.md) |
-| GPU Rendering | [gpu-rendering-systems-index.md](../skills/modularizer-expert/references/gpu-rendering-systems-index.md) |
-| ML/AI Acceleration | [ml-acceleration.md](../skills/modularizer-expert/references/ml-acceleration.md) |
+| Apple (macOS/iOS) | [platform-toolchains-part1-apple.md](../skills/eaa-modularizer-expert/references/platform-toolchains-part1-apple.md) |
+| Cross-Platform | [platform-toolchains-part2-cross-platform.md](../skills/eaa-modularizer-expert/references/platform-toolchains-part2-cross-platform.md) |
+| GPU Rendering | [gpu-rendering-systems-index.md](../skills/eaa-modularizer-expert/references/gpu-rendering-systems-index.md) |
+| ML/AI Acceleration | [ml-acceleration.md](../skills/eaa-modularizer-expert/references/ml-acceleration.md) |
 
 ---
 
@@ -162,10 +162,10 @@ For build system patterns and cross-platform compilation, see:
 
 | Build System | Reference |
 |--------------|-----------|
-| CMake Patterns | [CMAKE-patterns.md](../skills/modularizer-expert/references/CMAKE-patterns.md) |
-| GN + Ninja | [GN-NINJA-patterns.md](../skills/modularizer-expert/references/GN-NINJA-patterns.md) |
-| CI/CD Matrix | [CI-CD-matrix-builds.md](../skills/modularizer-expert/references/CI-CD-matrix-builds.md) |
-| Build Systems | [build-systems.md](../skills/modularizer-expert/references/build-systems.md) |
+| CMake Patterns | [CMAKE-patterns.md](../skills/eaa-modularizer-expert/references/CMAKE-patterns.md) |
+| GN + Ninja | [GN-NINJA-patterns.md](../skills/eaa-modularizer-expert/references/GN-NINJA-patterns.md) |
+| CI/CD Matrix | [CI-CD-matrix-builds.md](../skills/eaa-modularizer-expert/references/CI-CD-matrix-builds.md) |
+| Build Systems | [build-systems.md](../skills/eaa-modularizer-expert/references/build-systems.md) |
 
 ---
 
@@ -173,10 +173,10 @@ For build system patterns and cross-platform compilation, see:
 
 | Language | Reference |
 |----------|-----------|
-| Python | [python-project-patterns.md](../skills/modularizer-expert/references/python-project-patterns.md) |
-| Rust | [rust-project-patterns.md](../skills/modularizer-expert/references/rust-project-patterns.md) |
-| C++ | [cpp-project-patterns.md](../skills/modularizer-expert/references/cpp-project-patterns.md) |
-| Go | [go-project-patterns.md](../skills/modularizer-expert/references/go-project-patterns.md) |
+| Python | [python-project-patterns.md](../skills/eaa-modularizer-expert/references/python-project-patterns.md) |
+| Rust | [rust-project-patterns.md](../skills/eaa-modularizer-expert/references/rust-project-patterns.md) |
+| C++ | [cpp-project-patterns.md](../skills/eaa-modularizer-expert/references/cpp-project-patterns.md) |
+| Go | [go-project-patterns.md](../skills/eaa-modularizer-expert/references/go-project-patterns.md) |
 
 ---
 
@@ -212,7 +212,7 @@ Before designing any cross-platform architecture, the Modularizer Expert MUST:
 ## Module Specification Output Format
 
 For module specification template and examples, see:
-[SKILL.md - Module Specification Template](../skills/modularizer-expert/SKILL.md)
+[SKILL.md - Module Specification Template](../skills/eaa-modularizer-expert/SKILL.md)
 
 **Key elements:**
 - Classification (Type, Platform, Language, Dependencies)

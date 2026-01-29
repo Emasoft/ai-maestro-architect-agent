@@ -44,7 +44,7 @@ def detect_config(patterns_file: Path) -> dict[str, str]:
     """Detect current Atlas configuration from patterns.md.
 
     Args:
-        patterns_file: Path to .claude/atlas/patterns.md
+        patterns_file: Path to .claude/architect/patterns.md
 
     Returns:
         Dictionary containing design_root, mode, and memory_root
@@ -204,7 +204,7 @@ def commit_transition(spec_count: int, plan_count: int, adr_count: int, total: i
 - MOVED: .design/templates/* -> docs/design/templates/
 
 ### Configuration
-- UPDATED: .claude/atlas/patterns.md
+- UPDATED: .claude/architect/patterns.md
   - mode: dual-git -> single-git
   - design_root: .design/ -> docs/design/
 
@@ -231,7 +231,7 @@ Memory files may need to be moved separately if stored in .design/memory/.
     try:
         # Stage files
         subprocess.run(["git", "add", "docs/design/"], check=False, stderr=subprocess.DEVNULL)
-        subprocess.run(["git", "add", ".claude/atlas/patterns.md"], check=False, stderr=subprocess.DEVNULL)
+        subprocess.run(["git", "add", ".claude/architect/patterns.md"], check=False, stderr=subprocess.DEVNULL)
 
         # Commit
         subprocess.run(["git", "commit", "-m", commit_msg], check=False, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
@@ -253,7 +253,7 @@ def main() -> int:
     args = parser.parse_args()
 
     # Detect current configuration
-    patterns_file = Path(".claude/atlas/patterns.md")
+    patterns_file = Path(".claude/architect/patterns.md")
     config = detect_config(patterns_file)
 
     print("=== Design Document Transition: Private -> Public ===")
@@ -328,11 +328,11 @@ def main() -> int:
         print(f"  {subdir}/: {file_count} files")
 
     # Copy UUID counter
-    uuid_counter = design_dir / ".atlas-uuid-counter"
+    uuid_counter = design_dir / ".architect-uuid-counter"
     if uuid_counter.exists():
         print("Copying UUID counter...")
         if not args.dry_run:
-            shutil.copy2(uuid_counter, target / ".atlas-uuid-counter")
+            shutil.copy2(uuid_counter, target / ".architect-uuid-counter")
 
     # Update patterns.md
     print("Updating patterns.md configuration...")
@@ -357,7 +357,7 @@ def main() -> int:
         print()
         print("NOTE: Memory files in .design/memory/ were NOT copied.")
         print("If using memory in design git, update memory_root in patterns.md:")
-        print("  memory_root: .claude/atlas/")
+        print("  memory_root: .claude/architect/")
 
     print()
     print("=== Transition Complete ===")

@@ -73,7 +73,7 @@ Add a new module when:
 
 **Script command:**
 ```bash
-python3 "${CLAUDE_PLUGIN_ROOT}/scripts/arch_modify_requirement.py" add $ARGUMENTS
+python3 "${CLAUDE_PLUGIN_ROOT}/scripts/eaa_modify_requirement.py" add $ARGUMENTS
 ```
 
 **ID normalization:**

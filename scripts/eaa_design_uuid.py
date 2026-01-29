@@ -52,7 +52,7 @@ class DesignConfig:
     mode: str = "single-git"
     design_root: Path = field(default_factory=lambda: Path("docs/design"))
     uuid_prefix: str = "PROJ"
-    memory_root: Path = field(default_factory=lambda: Path(".claude/atlas"))
+    memory_root: Path = field(default_factory=lambda: Path(".claude/architect"))
 
     @classmethod
     def load(cls, project_root: Optional[Path] = None) -> "DesignConfig":

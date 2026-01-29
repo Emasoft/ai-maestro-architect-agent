@@ -247,7 +247,7 @@ def validate_directory(
 def load_config(project_root: Path) -> dict[str, Path]:
     """Load configuration from patterns.md."""
     config: dict[str, Path] = {"design_root": Path("docs/design")}
-    patterns_file = project_root / ".claude" / "atlas" / "patterns.md"
+    patterns_file = project_root / ".claude" / "architect" / "patterns.md"
 
     if not patterns_file.exists():
         patterns_file = project_root / ".design" / "memory" / "patterns.md"

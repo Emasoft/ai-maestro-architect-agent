@@ -133,7 +133,7 @@ If asked to write a spec that differs from USER_REQUIREMENTS.md:
 
 ## Document Templates
 
-For all templates, see: [templates-reference.md](../skills/documentation-writer/references/templates-reference.md)
+For all templates, see: [templates-reference.md](../skills/eaa-documentation-writing/references/templates-reference.md)
 - 1. Module Specification Template
 - 2. API Contract Template
 - 3. Architecture Decision Record (ADR) Template
@@ -152,7 +152,7 @@ For all templates, see: [templates-reference.md](../skills/documentation-writer/
 
 ## Quality Standards
 
-For full quality criteria, see: [quality-standards.md](../skills/documentation-writer/references/quality-standards.md)
+For full quality criteria, see: [quality-standards.md](../skills/eaa-documentation-writing/references/quality-standards.md)
 - 1. Documentation Quality Criteria (6 C's)
 - 2. Feature Specification Example
 
@@ -186,7 +186,7 @@ For full quality criteria, see: [quality-standards.md](../skills/documentation-w
 
 ## Writing Workflow
 
-For step-by-step procedure, see: [writing-workflow.md](../skills/documentation-writer/references/writing-workflow.md)
+For step-by-step procedure, see: [writing-workflow.md](../skills/eaa-documentation-writing/references/writing-workflow.md)
 - 1. Step 1: Receive and Parse Assignment
 - 2. Step 2: Gather Context
 - 3. Step 3: Create Document Structure
@@ -209,7 +209,7 @@ For step-by-step procedure, see: [writing-workflow.md](../skills/documentation-w
 
 ## Operational Guidelines
 
-For document management, see: [operational-guidelines.md](../skills/documentation-writer/references/operational-guidelines.md)
+For document management, see: [operational-guidelines.md](../skills/eaa-documentation-writing/references/operational-guidelines.md)
 - 1. When to Create New Documents
 - 2. When to Update Existing Documents
 - 3. Document Organization
@@ -220,7 +220,7 @@ For document management, see: [operational-guidelines.md](../skills/documentatio
 
 ## Agent Interactions
 
-For coordination with other agents, see: [agent-interactions.md](../skills/documentation-writer/references/agent-interactions.md)
+For coordination with other agents, see: [agent-interactions.md](../skills/eaa-documentation-writing/references/agent-interactions.md)
 - 1. Upstream Agents (Receive Input From)
 - 2. Downstream Agents (Provide Output To)
 - 3. Peer Agents (Bidirectional)

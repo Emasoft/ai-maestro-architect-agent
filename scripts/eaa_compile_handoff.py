@@ -177,7 +177,7 @@ def compile_handoff(
     agent_id: str,
     spec_content: str,
     platform: str,
-    project_root: Path,
+    _project_root: Path,
 ) -> str:
     """Compile handoff from template with module data.
 
@@ -187,7 +187,7 @@ def compile_handoff(
         agent_id: Agent identifier
         spec_content: Module specification content
         platform: Platform name
-        project_root: Project root directory
+        _project_root: Project root directory (reserved for future use)
 
     Returns:
         Compiled handoff content
@@ -213,10 +213,10 @@ def compile_handoff(
         ),
         "{{MODULE_SPEC_CONTENT}}": spec_content or "See linked specification file",
         "{{PLATFORM}}": platform,
-        "{{CONFIG_FILES}}": f"See .atlas/config/{platform}/",
-        "{{SPEC_PATH}}": f".atlas/designs/{platform}/specs/{module.get('id', 'unknown')}.md",
-        "{{RDD_PATH}}": f".atlas/designs/{platform}/rdd/{module.get('id', 'unknown')}-rdd.md",
-        "{{ARCH_PATH}}": ".atlas/designs/shared/ARCHITECTURE.md",
+        "{{CONFIG_FILES}}": f"See .architect/config/{platform}/",
+        "{{SPEC_PATH}}": f".architect/designs/{platform}/specs/{module.get('id', 'unknown')}.md",
+        "{{RDD_PATH}}": f".architect/designs/{platform}/rdd/{module.get('id', 'unknown')}-rdd.md",
+        "{{ARCH_PATH}}": ".architect/designs/shared/ARCHITECTURE.md",
         "{{SUCCESS_METRICS}}": "All acceptance criteria met, tests passing, code reviewed",
         "{{REQUIREMENTS_LIST}}": module.get("requirements", "See specification"),
         "{{DEPENDENCIES}}": ", ".join(module.get("dependencies", [])) or "None",
@@ -251,7 +251,7 @@ def save_handoff(
     Returns:
         Path to saved handoff file
     """
-    handoff_dir = project_root / ".atlas" / "handoffs" / agent_id
+    handoff_dir = project_root / ".architect" / "handoffs" / agent_id
     handoff_dir.mkdir(parents=True, exist_ok=True)
 
     handoff_path = handoff_dir / f"{module_id}-handoff.md"
@@ -291,8 +291,8 @@ def main() -> int:
     )
     parser.add_argument(
         "--root",
-        default=".atlas",
-        help="Design folder root (default: .atlas)",
+        default=".architect",
+        help="Design folder root (default: .architect)",
     )
 
     args = parser.parse_args()
@@ -347,7 +347,7 @@ def main() -> int:
             agent_id=args.agent_id,
             spec_content=spec_content,
             platform=args.platform,
-            project_root=project_root,
+            _project_root=project_root,
         )
 
         if args.preview:
