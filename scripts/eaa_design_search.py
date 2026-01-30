@@ -37,6 +37,11 @@ import sys
 from pathlib import Path
 from typing import Optional
 
+# Add scripts directory to path for imports
+_SCRIPT_DIR = Path(__file__).parent
+if str(_SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(_SCRIPT_DIR))
+
 from eaa_design_search_parser import (
     DesignConfig,
     DocumentMetadata,
