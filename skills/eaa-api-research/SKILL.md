@@ -1,6 +1,6 @@
 ---
 name: eaa-api-researcher
-description: Comprehensive API research and documentation skill for investigating external APIs, libraries, and services. Creates standardized documentation including overview, authentication, endpoints, and integration guides.
+description: Use when investigating external APIs, libraries, and services. Creates standardized documentation including overview, authentication, endpoints, and integration guides.
 license: Apache-2.0
 compatibility: Requires web access for documentation lookup. Works with REST APIs, GraphQL APIs, Python libraries, npm packages, and cloud service APIs.
 metadata:
@@ -16,7 +16,22 @@ context: fork
 
 # API Researcher Skill
 
-Comprehensive API research and documentation skill for the API Researcher Agent.
+## Overview
+
+Comprehensive API research and documentation skill for the API Researcher Agent. This skill provides structured workflows for investigating external APIs, libraries, and services, producing standardized documentation that includes overviews, authentication guides, endpoint references, and integration instructions.
+
+## Prerequisites
+
+- Web access for documentation lookup
+- Write access to documentation output directories
+- Familiarity with REST APIs, GraphQL APIs, Python libraries, npm packages, or cloud service APIs
+
+## Instructions
+
+1. Receive research assignment from orchestrator with library name and scope
+2. Gather information from official documentation sources
+3. Create all five standard document types using templates
+4. Report completion with minimal report format
 
 ---
 
@@ -111,3 +126,58 @@ For interaction with other agents, see [collaboration-patterns.md](references/co
 | Progress | `[PROGRESS] <library> API - Phase: <phase>` |
 | Blocked | `[BLOCKED] <library> API - Issue: <issue>` |
 | Complete | `[DONE] <library> API research complete` |
+
+## Examples
+
+### Example 1: Research a REST API
+
+```
+Orchestrator: Research the Stripe API for payment processing
+Agent: [RESEARCH STARTED] Stripe API - payment processing scope
+
+1. Consult official docs at https://stripe.com/docs/api
+2. Document authentication (API keys, webhooks)
+3. List key endpoints (charges, customers, subscriptions)
+4. Create integration guide with code samples
+
+Output files:
+- stripe-api-overview.md
+- stripe-authentication.md
+- stripe-endpoints.md
+- stripe-integration.md
+- stripe-config-template.md
+
+[DONE] Stripe API research complete
+```
+
+### Example 2: Research a Python Library
+
+```
+Orchestrator: Research the requests library for HTTP calls
+Agent: [RESEARCH STARTED] requests library - HTTP client scope
+
+1. Read PyPI page and official docs
+2. Document installation and basic usage
+3. List key methods (get, post, put, delete)
+4. Create integration examples
+
+[DONE] requests library research complete
+```
+
+## Error Handling
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| Documentation not found | API has no public docs | Report blocker to orchestrator, suggest alternatives |
+| API deprecated | Service is sunset | Document deprecation, find replacement API |
+| Multiple versions | API has breaking changes | Document both versions, recommend latest |
+| Rate limit hit | Too many doc requests | Wait and retry, use cached versions |
+| Authentication unclear | Docs incomplete | Experiment with API, document findings |
+
+## Resources
+
+- [research-procedure.md](references/research-procedure.md) - Step-by-step research workflow
+- [output-templates.md](references/output-templates.md) - All documentation templates
+- [tools-reference.md](references/tools-reference.md) - Available tools and usage
+- [research-scenarios.md](references/research-scenarios.md) - Common research patterns
+- [collaboration-patterns.md](references/collaboration-patterns.md) - Agent interaction patterns

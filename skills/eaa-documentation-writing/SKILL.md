@@ -1,6 +1,6 @@
 ---
 name: eaa-documentation-writer
-description: Technical documentation creation skill for writing module specifications, API contracts, architecture decision records (ADRs), and feature specifications. Follows the 6 C's quality framework.
+description: Use when writing module specifications, API contracts, architecture decision records (ADRs), or feature specifications. Follows the 6 C's quality framework for technical documentation.
 license: Apache-2.0
 compatibility: Works with any codebase. Outputs to standardized documentation directories (/docs/module-specs/, /docs/api-contracts/, /docs/adrs/).
 metadata:
@@ -16,7 +16,25 @@ context: fork
 
 # Documentation Writer Skill
 
-Technical documentation creation skill for the Documentation Writer Agent.
+## Overview
+
+Technical documentation creation skill for the Documentation Writer Agent. This skill provides templates, quality standards, and workflows for producing module specifications, API contracts, architecture decision records (ADRs), and feature specifications.
+
+## Prerequisites
+
+- Access to documentation output directories (`/docs/module-specs/`, `/docs/api-contracts/`, `/docs/adrs/`)
+- Understanding of the 6 C's quality framework
+- Read access to source code for reference
+
+## Instructions
+
+1. Receive and parse documentation assignment
+2. Gather context from existing code and specifications
+3. Create document structure using appropriate template
+4. Write core content following quality standards
+5. Add cross-references to related documents
+6. Perform quality check against 6 C's
+7. Commit and report completion
 
 ---
 
@@ -111,3 +129,53 @@ For agent coordination, see: [agent-interactions.md](references/agent-interactio
 **This skill is for DOCUMENTATION ONLY. NEVER write source code.**
 
 All code examples in documentation are illustrative only.
+
+## Examples
+
+### Example 1: Write Module Specification
+
+```
+Assignment: Document the auth-service module
+
+1. Read existing auth-service code
+2. Use Module Specification template
+3. Document:
+   - Purpose and responsibilities
+   - Public interfaces
+   - Dependencies
+   - Configuration options
+4. Quality check: Complete, Correct, Clear, Consistent, Current, Connected
+5. Output: /docs/module-specs/auth-service.md
+```
+
+### Example 2: Create Architecture Decision Record
+
+```
+Assignment: Document decision to use PostgreSQL
+
+1. Use ADR template
+2. Document:
+   - Context: Database selection needed
+   - Decision: PostgreSQL chosen
+   - Consequences: Pros and cons
+   - Alternatives considered
+3. Output: /docs/adrs/ADR-001-database-selection.md
+```
+
+## Error Handling
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| Missing context | Source code unavailable | Request access from orchestrator |
+| Template not found | Template file missing | Use templates-reference.md |
+| Quality check failed | 6 C's not met | Revise content, recheck each criterion |
+| Cross-reference broken | Linked doc moved/deleted | Update link or remove reference |
+| Duplicate ADR number | Numbering conflict | Check existing ADRs, use next available |
+
+## Resources
+
+- [templates-reference.md](references/templates-reference.md) - All document templates
+- [quality-standards.md](references/quality-standards.md) - Documentation quality criteria
+- [writing-workflow.md](references/writing-workflow.md) - Step-by-step procedure
+- [operational-guidelines.md](references/operational-guidelines.md) - Document management
+- [agent-interactions.md](references/agent-interactions.md) - Agent coordination

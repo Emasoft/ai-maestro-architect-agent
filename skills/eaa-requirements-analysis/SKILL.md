@@ -1,6 +1,6 @@
 ---
 name: eaa-requirements-analysis
-description: "Documents all planning phase commands for Architect Agent. Covers starting planning, tracking progress, managing requirements and modules, and plan approval. The planning phase creates complete specifications before any implementation begins."
+description: "Use when starting planning, tracking progress, managing requirements and modules, or approving plans. Documents all planning phase commands for Architect Agent to create complete specifications before implementation."
 license: Apache-2.0
 compatibility: "Requires Python 3.8+, PyYAML, GitHub CLI for issue creation. Cross-platform compatible."
 metadata:
@@ -12,17 +12,31 @@ context: fork
 
 # Planning Commands Skill
 
-## Description
+## Overview
 
 This skill documents all planning phase commands for the Architect Agent plugin. The planning phase is the first stage of the Two-Phase workflow where requirements are gathered, modules are defined, and the implementation plan is created before any code is written.
 
-## When to Use This Skill
+## Prerequisites
+
+- Python 3.8+ with PyYAML installed
+- GitHub CLI for issue creation
+- Write access to `.claude/` directory for state files
+- Understanding of Two-Phase workflow
+
+## Instructions
 
 Use this skill when you need to:
 - Start a new project with formal requirements gathering
 - Track planning progress and requirements completion
 - Add, modify, or remove requirements and modules during planning
 - Approve a plan and transition to the orchestration phase
+
+**Typical workflow:**
+1. Start planning with `/start-planning "goal"`
+2. Add requirements and modules with `/add-requirement`
+3. Track progress with `/planning-status`
+4. Modify as needed with `/modify-requirement`
+5. Approve plan with `/approve-plan`
 
 ## Commands Overview
 
@@ -235,7 +249,7 @@ The plan phase uses a state file at `.claude/orchestrator-plan-phase.local.md` t
 
 ---
 
-## 8.0 Troubleshooting
+## 8.0 Error Handling
 
 **For troubleshooting issues, see [troubleshooting.md](references/troubleshooting.md):**
 - 5.1 When /start-planning fails
@@ -247,6 +261,14 @@ The plan phase uses a state file at `.claude/orchestrator-plan-phase.local.md` t
 - 5.7 State file corruption recovery
 - 5.8 GitHub Issue creation problems
 - 5.9 Exit blocking issues
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| State file not found | Planning not started | Run `/start-planning` first |
+| Invalid status transition | Wrong status order | Follow: pending → in_progress → complete |
+| Module has GitHub Issue | Cannot remove linked module | Use `--force` flag or close issue first |
+| Approval prerequisites failed | Incomplete requirements | Mark all sections complete first |
+| gh CLI auth failed | Not logged in | Run `gh auth login` |
 
 ---
 
@@ -339,9 +361,58 @@ python3 scripts/reset_plan_phase.py --confirm --no-backup
 
 ---
 
-## 11.0 Related Skills
+## 11.0 Examples
 
-After completing the planning phase:
-- Use **orchestration-commands** skill for implementation phase
-- Use **agent-management** skill for registering and assigning agents
-- Use **module-lifecycle** skill for tracking module progress
+### Example 1: Complete Planning Workflow
+
+```bash
+# Step 1: Start planning
+/start-planning "Build a REST API for user management"
+
+# Step 2: Add modules
+/add-requirement module "user-crud" --criteria "CRUD operations" --priority critical
+/add-requirement module "auth-jwt" --criteria "JWT authentication" --priority high
+
+# Step 3: Create USER_REQUIREMENTS.md manually
+
+# Step 4: Mark sections complete
+/modify-requirement requirement "Functional Requirements" --status complete
+/modify-requirement requirement "Non-Functional Requirements" --status complete
+/modify-requirement requirement "Architecture Design" --status complete
+
+# Step 5: Verify and approve
+/planning-status --verbose
+/approve-plan
+
+# Step 6: Begin orchestration
+/start-orchestration
+```
+
+### Example 2: Modify Existing Module
+
+```bash
+# Check current status
+/planning-status
+
+# Update module criteria
+/modify-requirement module auth-core --criteria "Support JWT and OAuth2" --priority critical
+
+# Verify change
+/planning-status --verbose
+```
+
+## 12.0 Resources
+
+- [start-planning-procedure.md](references/start-planning-procedure.md) - Start planning command details
+- [requirement-management.md](references/requirement-management.md) - Add/modify/remove requirements
+- [plan-approval-transition.md](references/plan-approval-transition.md) - Approval and transition details
+- [state-file-format.md](references/state-file-format.md) - State file schema and lifecycle
+- [troubleshooting.md](references/troubleshooting.md) - Common issues and solutions
+- `scripts/check_plan_prerequisites.py` - Verify prerequisites
+- `scripts/export_plan_summary.py` - Export plan summary
+- `scripts/reset_plan_phase.py` - Reset plan phase
+
+**Related Skills:**
+- orchestration-commands - Implementation phase
+- agent-management - Registering and assigning agents
+- module-lifecycle - Tracking module progress

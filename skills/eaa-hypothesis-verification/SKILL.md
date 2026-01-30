@@ -1,15 +1,34 @@
 ---
 name: eaa-hypothesis-verification
-description: Verify claims through controlled Docker experimentation using the TBV (To Be Verified) principle.
+description: Use when verifying claims through controlled Docker experimentation. Applies the TBV (To Be Verified) principle to test claims from docs, researchers, or developers before relying on them.
 agent: test-engineer
 context: fork
 ---
 
 # Hypothesis Verification Skill
 
+## Overview
+
 Patterns for **personally verifying claims** through controlled Docker experimentation. Use this skill when you need to test whether a claim (from docs, researchers, or developers) is actually true.
 
 **TBV Principle**: Everything is "To Be Verified" until you personally test it. Claims from any source require experimental confirmation before relying on them for decisions.
+
+## Prerequisites
+
+- Docker installed and running
+- Write access to experiment output directories
+- Understanding of the claim to be verified
+- Isolation environment for safe experimentation
+
+## Instructions
+
+1. Identify the claim to be verified (mark as TBV)
+2. Set up Docker container for isolated testing
+3. Design experiment with multiple approaches (Multiplicity Rule: 3+)
+4. Execute experiments and collect measurements
+5. Document findings in experimentation report
+6. Classify result: VERIFIED, UNVERIFIED, or PARTIALLY VERIFIED
+7. Clean up containers and archive prototype if valuable
 
 ---
 
@@ -89,3 +108,57 @@ For experiment documentation and prototype archiving, see [output-templates.md](
 4. **Docker isolation**: ALL experiments in containers
 5. **Documentation**: 50% output is the report
 6. **TBV by default**: Everything unverified until tested
+
+## Examples
+
+### Example 1: Verify API Performance Claim
+
+```
+Claim: "Redis caches API responses 10x faster than in-memory dict"
+Status: TBV
+
+1. Create Docker container with Redis and Python
+2. Implement both approaches:
+   - Approach A: In-memory dict cache
+   - Approach B: Redis cache
+   - Approach C: Redis with connection pooling
+3. Run 1000 iterations, measure latency
+4. Results:
+   - Dict: 0.001ms avg
+   - Redis: 0.15ms avg
+   - Redis pooled: 0.08ms avg
+5. Classification: UNVERIFIED (Redis is slower for simple cases)
+6. Conditions: Redis faster only for distributed scenarios
+```
+
+### Example 2: Verify Library Compatibility
+
+```
+Claim: "Library X works with Python 3.12"
+Status: TBV
+
+1. Docker container with Python 3.12
+2. Install library X
+3. Run test suite
+4. Result: Import error on async module
+5. Classification: UNVERIFIED
+6. Action: Use Python 3.11 or wait for library update
+```
+
+## Error Handling
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| Docker not available | Docker daemon not running | Start Docker Desktop or docker service |
+| Container cleanup failed | Orphaned containers | Run `docker system prune` |
+| Experiment inconclusive | Insufficient test iterations | Increase sample size, reduce variables |
+| Conflicting results | Environment differences | Standardize container configuration |
+| Resource exhaustion | Too many containers | Clean up between experiments |
+
+## Resources
+
+- [docker-experimentation.md](references/docker-experimentation.md) - Container setup and templates
+- [researcher-vs-experimenter.md](references/researcher-vs-experimenter.md) - Role distinction
+- [experiment-scenarios.md](references/experiment-scenarios.md) - When to invoke experimenter
+- [multiplicity-rule.md](references/multiplicity-rule.md) - Evidence-based selection process
+- [output-templates.md](references/output-templates.md) - Report and archive templates

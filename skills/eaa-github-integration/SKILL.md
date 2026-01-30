@@ -1,6 +1,6 @@
 ---
 name: eaa-github-integration
-description: Link design documents to GitHub issues for traceability and status synchronization
+description: Use when linking design documents to GitHub issues for traceability and status synchronization. Creates issues from designs, attaches designs to existing issues, and keeps status synchronized.
 context: fork
 agent: eaa-planner
 user-invocable: true
@@ -13,9 +13,26 @@ triggers:
 
 # GitHub Integration Skill
 
-## Purpose
+## Overview
 
-Link design documents to GitHub issues for complete traceability. Create issues from designs, attach designs to existing issues, and keep status synchronized.
+Link design documents to GitHub issues for complete traceability. Create issues from designs, attach designs to existing issues, and keep status synchronized between design document status and GitHub issue labels.
+
+## Prerequisites
+
+- gh CLI installed and authenticated (`gh auth status` returns success)
+- Current directory within a GitHub repository
+- Design documents with valid UUID in frontmatter
+- Write access to the repository
+
+## Instructions
+
+1. Verify gh CLI is authenticated
+2. Verify design document has UUID in frontmatter
+3. Use appropriate procedure:
+   - PROCEDURE 1: Create issue from design document
+   - PROCEDURE 2: Attach design to existing issue
+   - PROCEDURE 3: Synchronize status to GitHub
+4. Verify results and update design frontmatter
 
 ---
 
@@ -315,8 +332,58 @@ ERROR: gh CLI not authenticated. Run: gh auth login
 
 ---
 
-## Related Skills
+## Examples
 
-- **eaa-design-lifecycle** - Design document state management
-- **eaa-requirements-analysis** - Requirements extraction and tracking
-- **eaa-planning-patterns** - Implementation planning from designs
+### Example 1: Create Issue from Design
+
+```bash
+# Verify prerequisites
+gh auth status
+python scripts/eaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4 --dry-run
+
+# Create the issue
+python scripts/eaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4
+
+# Expected output:
+# CREATED: https://github.com/owner/repo/issues/123
+# UPDATED: docs/design/specs/auth-service.md with issue #123
+```
+
+### Example 2: Full Design-to-Implementation Workflow
+
+```bash
+# Step 1: Create design with UUID
+python scripts/eaa_design_uuid.py --file docs/design/specs/new-feature.md --type SPEC
+
+# Step 2: Create GitHub issue
+python scripts/eaa_github_issue_create.py --uuid PROJ-SPEC-...
+
+# Step 3: Transition to review
+python scripts/eaa_design_transition.py --uuid PROJ-SPEC-... --status review
+python scripts/eaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
+
+# Step 4: Approve design
+python scripts/eaa_design_transition.py --uuid PROJ-SPEC-... --status approved
+python scripts/eaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
+```
+
+## Error Handling
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| gh CLI not found | Not installed | Install via `brew install gh` or equivalent |
+| gh CLI not authenticated | No auth token | Run `gh auth login` |
+| Document has no UUID | Missing frontmatter | Run `eaa_design_uuid.py --file <path>` |
+| Issue already exists | Duplicate creation attempt | Use attach or sync instead |
+| Label creation failed | Missing permissions | Create labels manually or request access |
+
+## Resources
+
+- [troubleshooting.md](references/troubleshooting.md) - Common errors and solutions
+- [status-mapping.md](references/status-mapping.md) - Design status to GitHub label mapping
+- `scripts/eaa_github_issue_create.py` - Create issue from design
+- `scripts/eaa_github_attach_document.py` - Attach design to issue
+- `scripts/eaa_github_sync_status.py` - Sync status to issue
+- eaa-design-lifecycle - Design document state management
+- eaa-requirements-analysis - Requirements extraction and tracking
+- eaa-planning-patterns - Implementation planning from designs

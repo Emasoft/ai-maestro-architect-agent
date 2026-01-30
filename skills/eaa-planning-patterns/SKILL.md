@@ -1,6 +1,6 @@
 ---
 name: eaa-planning-patterns
-description: Teaches orchestrators to create comprehensive planning documents through four sequential phases - architecture design, risk identification, roadmap creation, and implementation planning. Enables strategic system design, obstacle identification, execution sequencing, and actionable task breakdown for projects from conception to execution.
+description: Use when creating comprehensive planning documents through four sequential phases - architecture design, risk identification, roadmap creation, and implementation planning. Enables strategic system design for projects from conception to execution.
 license: Apache-2.0
 compatibility: Cross-platform compatible. Requires Python 3.8+ for utility scripts. Works with all project types and toolchains. Supports atomic file operations with UTF-8 encoding using pathlib for universal path handling.
 metadata:
@@ -11,11 +11,18 @@ context: fork
 
 # Planning Patterns Skill
 
-## Purpose
+## Overview
 
 This skill teaches orchestrators how to create comprehensive planning documents that guide projects from conception to execution. Planning patterns enable you to design system architecture, identify risks, create execution sequences, and break work into actionable tasks.
 
-## When to Use This Skill
+## Prerequisites
+
+- Python 3.8+ for utility scripts
+- Understanding of project scope and stakeholder requirements
+- Write access to planning output directories
+- Familiarity with project management concepts
+
+## Instructions
 
 Use this skill when:
 - Starting a new project and need to plan it properly
@@ -24,6 +31,12 @@ Use this skill when:
 - Building something novel with uncertain risks
 - Leading a team and need to communicate a clear roadmap
 - Running a project that is falling behind and need to replan
+
+**Execute these phases in order:**
+1. Architecture Design - Design the structural blueprint
+2. Risk Identification - Discover and plan for obstacles
+3. Roadmap Creation - Create a sequenced execution plan
+4. Implementation Planning - Break roadmap into actionable tasks
 
 ## What You Will Learn
 
@@ -170,7 +183,7 @@ Before diving into details, understand the four-phase process and how they conne
 
 ---
 
-## Troubleshooting
+## Error Handling
 
 | Problem | Solution |
 |---------|----------|
@@ -181,9 +194,45 @@ Before diving into details, understand the four-phase process and how they conne
 | Plan became irrelevant | Revisit and update plan as conditions change |
 | Task owners overcommitted | Reduce tasks, adjust scope, or add team members |
 
+## Examples
+
+### Example 1: New Project Planning
+
+```
+Project: Build user authentication system
+
+Phase 1 - Architecture:
+- Components: auth-service, user-store, token-manager
+- Data flows: login request → auth-service → user-store → token-manager → JWT
+- Dependencies: auth-service depends on user-store
+
+Phase 2 - Risks:
+- Risk 1: OAuth provider rate limits (HIGH impact, MEDIUM probability)
+- Mitigation: Implement caching, prepare fallback providers
+
+Phase 3 - Roadmap:
+- Milestone 1: Basic login (Week 1-2)
+- Milestone 2: OAuth integration (Week 3-4)
+- Milestone 3: Token refresh (Week 5)
+
+Phase 4 - Tasks:
+- Task 1.1: Create user schema (Owner: Dev A, 2 days)
+- Task 1.2: Implement password hashing (Owner: Dev B, 1 day)
+```
+
+### Example 2: Rapid Planning Under Pressure
+
+```
+1. Quick architecture: Focus on 3 critical components only
+2. Quick risks: Identify top 5 blocking risks
+3. Quick roadmap: Define critical path only
+4. Detailed next phase: Plan immediate tasks
+5. Rough remaining phases: Detail later as needed
+```
+
 ---
 
-## Reference Documents
+## Resources
 
 ### Core Planning References
 

@@ -1,6 +1,6 @@
 ---
 name: eaa-design-lifecycle
-description: Design document lifecycle management for architect agents
+description: Use when creating, reviewing, or archiving design documents. Manages the complete lifecycle of design documents from creation through approval, implementation, and archival.
 context: fork
 agent: eaa-planner
 user-invocable: false
@@ -13,9 +13,22 @@ triggers:
 
 # Design Lifecycle Skill
 
-## Purpose
+## Overview
 
-Manage the complete lifecycle of design documents from creation through approval, implementation, and archival.
+Manage the complete lifecycle of design documents from creation through approval, implementation, and archival. This skill provides state transitions, procedures, and templates for tracking design documents through their entire journey.
+
+## Prerequisites
+
+- Access to design document templates at `templates/design-template.md`
+- Write access to design index at `design/requirements/index.json`
+- Understanding of design states and transitions
+
+## Instructions
+
+1. Create new design documents using PROCEDURE 1
+2. Submit for review when draft is complete using PROCEDURE 2
+3. Track approvals and implementation using PROCEDURES 3-4
+4. Archive completed designs using PROCEDURE 5
 
 ## Design States
 
@@ -77,8 +90,46 @@ Located at: `templates/design-template.md`
 
 `design/requirements/index.json`
 
-## Related Skills
+## Examples
 
-- eaa-requirements-analysis (requirements input)
-- eaa-planning-patterns (planning integration)
-- eaa-documentation-writing (documentation)
+### Example 1: Create and Submit Design for Review
+
+```
+1. Generate UUID: design-auth-20260130-abc123
+2. Create design from template
+3. Set state: DRAFT
+4. Register in design/requirements/index.json
+5. Complete design content
+6. Validate completeness checklist
+7. Update state: REVIEW
+8. Assign reviewers
+```
+
+### Example 2: Approve and Track Implementation
+
+```
+1. Verify all review comments resolved
+2. Update state: APPROVED
+3. Create GitHub Issues for implementation tasks
+4. Notify implementers
+5. Monitor implementation progress
+6. Document any deviations
+```
+
+## Error Handling
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| Invalid state transition | Attempted DRAFT → APPROVED | Must go through REVIEW first |
+| Missing UUID | Design document lacks identifier | Generate UUID before registration |
+| Index conflict | Duplicate design ID | Use unique timestamp-based UUIDs |
+| Review comments unresolved | Attempting approval too early | Resolve all comments first |
+| Missing template | Template file not found | Restore template from backup |
+
+## Resources
+
+- `templates/design-template.md` - Design document template
+- `design/requirements/index.json` - Design index location
+- eaa-requirements-analysis - Requirements input skill
+- eaa-planning-patterns - Planning integration skill
+- eaa-documentation-writing - Documentation skill
