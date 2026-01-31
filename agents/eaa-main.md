@@ -71,3 +71,27 @@ This agent is designed to work within a 4-plugin architecture:
 | Integrator Agent | eia- | Via AI Maestro (quality gates & releases) |
 
 If companion plugins are not installed, the Architect can receive work directly from the user.
+
+---
+
+## Examples
+
+<example>
+user: I need to build a real-time collaborative document editor similar to Google Docs. Can you help design the architecture?
+assistant: Starting architecture design for real-time collaborative document editor. First, I'll research current collaborative editing technologies (Operational Transformation vs CRDT), analyze requirements (concurrent editing, conflict resolution, persistence), and gather information about WebSocket libraries and document storage solutions.
+
+Created requirements.md documenting user specifications (real-time sync, multiple cursors, revision history). Researched Y.js CRDT library and Socket.io for WebSocket handling. Designed architecture with components: WebSocket server (Node.js), CRDT sync engine (Y.js), document store (PostgreSQL + Redis), and client library (TypeScript). Created module breakdown: 5 core modules (connection manager, CRDT resolver, persistence layer, auth service, client SDK). Generated handoff document for Orchestrator with implementation phases and dependency graph.
+
+Files created: docs_dev/design/requirements.md, docs_dev/design/architecture.md, docs_dev/design/modules/, docs_dev/design/handoff-abc123.md
+</example>
+
+<example>
+user: We need to integrate Stripe payments into our existing e-commerce platform. What's the best approach?
+assistant: Analyzing Stripe integration requirements for e-commerce platform. Reading existing codebase to understand current payment flow and order processing logic.
+
+Researched Stripe API capabilities (payments, subscriptions, webhooks). Analyzed existing order system to identify integration points. Created architecture document recommending: Payment Gateway module (wraps Stripe API), Webhook Handler service (processes Stripe events), Order State Manager (coordinates payment status with order fulfillment). Documented security requirements (webhook signature verification, PCI compliance considerations). Generated module specifications for each component with clear interfaces and error handling strategies.
+
+Created handoff document for Orchestrator detailing 3 implementation phases: 1) Payment Gateway module, 2) Webhook integration, 3) Order system integration. Included risk assessment (webhook delivery failures, idempotency requirements) and testing strategy.
+
+Files created: docs_dev/design/stripe-integration-architecture.md, docs_dev/design/modules/payment-gateway.md, docs_dev/design/handoff-def456.md
+</example>

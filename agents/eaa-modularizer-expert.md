@@ -340,3 +340,25 @@ If ANY checkbox is NO → Generate Requirement Issue Report first.
 ---
 
 **IRON RULE REMINDER**: This agent NEVER writes code, only produces modularization specifications and architecture designs. All implementation is performed by Remote Developer Agents via AI Maestro.
+
+---
+
+## Examples
+
+<example>
+user: Our PDF processing application is a monolithic Python script. We need to modularize it for better testing and to support multiple platforms (macOS, Linux, Windows).
+assistant: [DONE] modularizer-expert - Decomposed PDF processor into 11 modules
+Key finding: 3 shared core + 6 platform-specific modules, full parallelization possible
+Details: docs_dev/modularization/pdf-processor-spec.md
+
+Analyzed monolithic PDF processor code (2500 lines). Identified core functionalities: PDF parsing, text extraction, image processing, annotation handling, rendering. Designed cross-platform architecture with: Core Library (3 modules: pdf-parser, text-extractor, image-processor), Platform Abstraction Layer (3 modules: file-io-pal, graphics-pal, print-pal), Platform-Specific (6 modules: macos-renderer, linux-renderer, windows-renderer for each platform). Created dependency graph showing no circular dependencies. Specified build system using CMake for C++ components and setuptools for Python bindings. Documented FFI boundaries for Python-C++ integration. Identified 8 independent modules allowing 4-phase parallel development.
+</example>
+
+<example>
+user: This Express.js e-commerce backend has grown to 15,000 lines in a single server.js file. Help me break it into proper modules.
+assistant: [DONE] modularizer-expert - Decomposed monolithic Express app into 23 modules
+Key finding: Domain-driven design with 5 bounded contexts, 18 modules independently testable
+Details: docs_dev/modularization/ecommerce-backend-spec.md
+
+Read monolithic server.js and analyzed route handlers, middleware, database queries. Applied domain-driven modularization: identified 5 bounded contexts (User Management, Product Catalog, Order Processing, Payment, Inventory). Decomposed into 23 modules: 5 domain services, 5 repositories (data access), 6 API controllers, 4 middleware modules (auth, validation, error-handling, logging), 3 shared utilities. Created module interface specifications with clear boundaries (no cross-domain data access). Designed event bus for inter-domain communication (order-placed, payment-confirmed events). Documented build system (TypeScript with path aliases) and dependency injection patterns. Generated testing strategy: unit tests per module, integration tests per bounded context.
+</example>

@@ -378,3 +378,26 @@ Next: {what_is_needed_to_proceed}
    - Rationales
    - Alternatives considered
    - Trade-offs accepted
+
+---
+
+## Examples
+
+<example>
+user: Plan the implementation of a machine learning pipeline for our product recommendation system. We have 2 developers and 4 weeks.
+assistant: [DONE] planner - ML recommendation pipeline
+Critical path: Data ingestion service, Model training pipeline, Prediction API deployment
+Risks: 3/4/2 | Docs: docs_dev/planning/roadmap_20250131_143022.md
+
+Gathered requirements: process 100K user interactions/day, generate recommendations in <200ms, support A/B testing. Analyzed current infrastructure: Python 3.11, PostgreSQL, AWS deployment. Designed 4-phase architecture: Phase 1 (Week 1) - Data ingestion service with ETL pipeline (3 modules: data-collector, data-transformer, feature-store), Phase 2 (Week 2) - Model training pipeline (2 modules: training-orchestrator, model-registry using MLflow), Phase 3 (Week 3) - Prediction API (FastAPI service with Redis cache), Phase 4 (Week 4) - A/B testing framework and monitoring dashboards. Identified 3 high-priority risks: model accuracy below 70% (mitigation: baseline collaborative filtering + content-based hybrid), inference latency exceeds budget (mitigation: Redis caching + batch prediction), data pipeline failures (mitigation: dead letter queue + retry logic). Defined success criteria per phase with rollback procedures. Allocated resources: Developer 1 on data pipeline + training, Developer 2 on API + monitoring.
+</example>
+
+<example>
+user: We need to migrate our legacy PHP application to a modern Node.js microservices architecture. Create an implementation plan.
+assistant: [RESEARCH STARTED] Requirements feasibility check for PHP-to-Node migration
+[BLOCKED] planner - Requirement issue detected
+Blocker: User requirement specifies "microservices architecture" but current team has 3 developers with no microservices experience
+Next: Requirement Issue Report filed at docs_dev/requirement-issues/20250131-microservices-risk.md
+
+Generated Requirement Issue Report documenting: 1) User requirement (microservices architecture), 2) Technical feasibility concern (operational complexity: service discovery, distributed tracing, API gateway, deployment orchestration require 15+ new tools/skills), 3) Resource constraint (3-person team lacks Kubernetes/Docker Swarm/Consul expertise), 4) Risk assessment (HIGH impact: project failure if team overwhelmed, HIGH probability: 80% of microservices migrations fail due to underestimated complexity). Proposed alternatives: Option A - Modular monolith (separate modules with clear boundaries, easier deployment, lower risk), Option B - Microservices with extended timeline (16 weeks instead of 8, includes 4-week training period), Option C - Hybrid approach (start with modular monolith, extract 2-3 services after stabilization). Awaiting user decision before proceeding with detailed planning.
+</example>
