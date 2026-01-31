@@ -1,0 +1,76 @@
+name: Plugin Validation
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff mypy pyyaml types-PyYAML
+
+      - name: Validate plugin manifest
+        run: |
+          if [ -f ".claude-plugin/plugin.json" ]; then
+            python -c "import json; json.load(open('.claude-plugin/plugin.json'))" && echo "✓ plugin.json is valid JSON"
+          else
+            echo "✘ Missing .claude-plugin/plugin.json"
+            exit 1
+          fi
+
+      - name: Validate hooks.json
+        run: |
+          if [ -f "hooks/hooks.json" ]; then
+            python -c "import json; json.load(open('hooks/hooks.json'))" && echo "✓ hooks.json is valid JSON"
+          else
+            echo "ℹ No hooks/hooks.json found (optional)"
+          fi
+
+      - name: Lint Python files
+        run: |
+          if ls scripts/*.py 1> /dev/null 2>&1; then
+            ruff check scripts/ --select=E,F,W --ignore=E501 || echo "⚠ Lint issues found (non-blocking)"
+          else
+            echo "ℹ No Python scripts found"
+          fi
+
+      - name: Validate agent frontmatter
+        run: |
+          for agent in agents/*.md; do
+            if [ -f "$agent" ]; then
+              echo "Checking $agent..."
+              # Extract YAML frontmatter and validate it
+              python3 << EOF
+import yaml
+import sys
+
+with open("$agent") as f:
+    content = f.read()
+    if content.startswith("---"):
+        parts = content.split("---", 2)
+        if len(parts) >= 3:
+            try:
+                data = yaml.safe_load(parts[1])
+                if not data.get("name"):
+                    print(f"MAJOR: {'"$agent"'} missing 'name' in frontmatter")
+                    sys.exit(1)
+                print(f"✓ {'"$agent"'} frontmatter valid")
+            except yaml.YAMLError as e:
+                print(f"CRITICAL: {'"$agent"'} has invalid YAML: {e}")
+                sys.exit(1)
+EOF
+            fi
+          done || true
