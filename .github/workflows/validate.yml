@@ -49,28 +49,28 @@ jobs:
 
       - name: Validate agent frontmatter
         run: |
-          for agent in agents/*.md; do
-            if [ -f "$agent" ]; then
-              echo "Checking $agent..."
-              # Extract YAML frontmatter and validate it
-              python3 << EOF
-import yaml
-import sys
+          python3 -c '
+          import yaml
+          import sys
+          import glob
 
-with open("$agent") as f:
-    content = f.read()
-    if content.startswith("---"):
-        parts = content.split("---", 2)
-        if len(parts) >= 3:
-            try:
-                data = yaml.safe_load(parts[1])
-                if not data.get("name"):
-                    print(f"MAJOR: {'"$agent"'} missing 'name' in frontmatter")
-                    sys.exit(1)
-                print(f"✓ {'"$agent"'} frontmatter valid")
-            except yaml.YAMLError as e:
-                print(f"CRITICAL: {'"$agent"'} has invalid YAML: {e}")
-                sys.exit(1)
-EOF
-            fi
-          done || true
+          errors = []
+          for agent_path in glob.glob("agents/*.md"):
+              with open(agent_path) as f:
+                  content = f.read()
+              if content.startswith("---"):
+                  parts = content.split("---", 2)
+                  if len(parts) >= 3:
+                      try:
+                          data = yaml.safe_load(parts[1])
+                          if not data.get("name"):
+                              errors.append(f"MAJOR: {agent_path} missing name in frontmatter")
+                          else:
+                              print(f"✓ {agent_path} frontmatter valid")
+                      except yaml.YAMLError as e:
+                          errors.append(f"CRITICAL: {agent_path} has invalid YAML: {e}")
+          if errors:
+              for err in errors:
+                  print(err)
+              sys.exit(1)
+          '
