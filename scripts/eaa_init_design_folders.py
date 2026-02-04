@@ -70,11 +70,17 @@ def main():
     args = parser.parse_args()
 
     if not args.project_root.exists():
-        print(f"✗ ERROR: Project root does not exist: {args.project_root}", file=sys.stderr)
+        print(
+            f"✗ ERROR: Project root does not exist: {args.project_root}",
+            file=sys.stderr,
+        )
         return 1
 
     if not args.project_root.is_dir():
-        print(f"✗ ERROR: Project root is not a directory: {args.project_root}", file=sys.stderr)
+        print(
+            f"✗ ERROR: Project root is not a directory: {args.project_root}",
+            file=sys.stderr,
+        )
         return 1
 
     success = init_design_folders(args.project_root)

@@ -1,6 +1,8 @@
 ---
-name: eaa-shared
-description: Use when accessing shared utilities, templates, and constants used across all Architect Agent skills. Provides common resources for consistent behavior.
+name: eaa-design-communication-patterns
+description: Use when accessing shared utilities, templates, and constants across Architect Agent skills. Trigger with shared template access or common utility imports.
+version: 1.0.0
+compatibility: Requires AI Maestro installed.
 context: fork
 agent: eaa-planner
 user-invocable: false
@@ -18,7 +20,7 @@ This skill provides shared utilities, templates, and constants used across all A
 
 ## Prerequisites
 
-- Access to the eaa-shared skill directory
+- Access to the eaa-design-communication-patterns skill directory
 - Understanding of which resources are available
 - Other eaa-* skills that depend on shared resources
 
@@ -28,6 +30,18 @@ This skill provides shared utilities, templates, and constants used across all A
 2. Import or reference the shared resource in your skill
 3. Follow any usage guidelines specified for each resource type
 4. Do not duplicate shared resources in individual skills
+
+### Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Identify the resource type needed (Template/Script/Constant/Schema)
+- [ ] Check if resource exists in eaa-design-communication-patterns skill directory
+- [ ] Verify eaa-design-communication-patterns is in Python path (if using scripts)
+- [ ] Import or reference the shared resource
+- [ ] Follow usage guidelines for the resource type
+- [ ] Test that the resource works correctly
+- [ ] Do NOT duplicate the resource in your skill
 
 ## Shared Resource Types
 
@@ -84,10 +98,19 @@ if errors:
 | Error | Cause | Solution |
 |-------|-------|----------|
 | Resource not found | Path incorrect | Check resource exists in shared skill |
-| Import failed | Module not in path | Ensure eaa-shared is in Python path |
+| Import failed | Module not in path | Ensure eaa-design-communication-patterns is in Python path |
 | Schema validation error | Document malformed | Fix document according to schema |
 | Template placeholder missing | Incomplete format call | Provide all required placeholders |
-| Version mismatch | Outdated shared resource | Update eaa-shared to latest version |
+| Version mismatch | Outdated shared resource | Update eaa-design-communication-patterns to latest version |
+
+## Output
+
+| Output Type | Format | Description |
+|-------------|--------|-------------|
+| Templates | Markdown/Text | Filled document templates ready for use |
+| Constants | Python variables | Configuration values and enums |
+| Validation Results | Boolean/List | Schema validation pass/fail with error details |
+| Utility Functions | Python callables | Reusable helper functions |
 
 ## Resources
 

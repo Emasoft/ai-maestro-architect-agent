@@ -4,6 +4,24 @@
 
 This section covers version mismatch and registry configuration issues.
 
+## Table of Contents
+
+- [5. Version Mismatch](#5-version-mismatch)
+  - [Problem Description](#problem-description)
+  - [Root Cause](#root-cause)
+  - [Solution](#solution)
+  - [Automated Solution](#automated-solution)
+  - [When This Issue Occurs](#when-this-issue-occurs)
+- [8. Missing registry-url](#8-missing-registry-url)
+  - [Problem Description](#problem-description-1)
+  - [Root Cause](#root-cause-1)
+  - [Solution](#solution-1)
+  - [Complete Example](#complete-example)
+  - [Publishing to Multiple Registries](#publishing-to-multiple-registries)
+  - [Registry URLs](#registry-urls)
+  - [Setting Up NPM_TOKEN Secret](#setting-up-npm_token-secret)
+  - [When This Issue Occurs](#when-this-issue-occurs-1)
+
 ---
 
 ## 5. Version Mismatch

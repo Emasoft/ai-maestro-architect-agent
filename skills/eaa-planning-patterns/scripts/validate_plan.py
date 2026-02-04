@@ -332,13 +332,13 @@ def main() -> None:
     # Output JSON if requested
     if args.output:
         atomic_write_json(
+            args.output,
             {
                 "valid": result.valid,
                 "errors": result.errors,
                 "warnings": result.warnings,
                 "metrics": result.metrics,
             },
-            args.output,
         )
         print(f"\nReport written to: {args.output}")
 

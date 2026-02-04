@@ -1,5 +1,15 @@
 # Proactive Handoff Protocol
 
+## Standard Handoff Format
+
+All handoffs use the EAMA standard format:
+- **Location**: `docs_dev/handoffs/`
+- **Naming**: `handoff-{uuid}-{from}-to-{to}.md`
+- **Delivery**: AI Maestro message with file path
+- **Template**: See `../../shared/handoff_template.md`
+
+---
+
 ## Automatic Handoff Triggers
 
 This agent MUST automatically write a handoff document when:

@@ -4,6 +4,24 @@
 
 ---
 
+## Table of Contents
+
+- [Dynamic Imports](#dynamic-imports)
+  - [What are Dynamic Imports?](#what-are-dynamic-imports)
+  - [Basic Dynamic Import Syntax](#basic-dynamic-import-syntax)
+  - [Simple Dynamic Import Example](#simple-dynamic-import-example)
+  - [Conditional Module Loading](#conditional-module-loading)
+  - [Feature-Based Dynamic Loading](#feature-based-dynamic-loading)
+  - [Dynamic Import with Error Handling](#dynamic-import-with-error-handling)
+  - [Plugin System with Dynamic Imports](#plugin-system-with-dynamic-imports)
+  - [Route-Based Code Splitting (Web App)](#route-based-code-splitting-web-app)
+  - [Locale/Translation Loading](#localetranslation-loading)
+  - [Building with Dynamic Imports](#building-with-dynamic-imports)
+  - [Dynamic Import Best Practices](#dynamic-import-best-practices)
+- [Cross-References](#cross-references)
+
+---
+
 ## Dynamic Imports
 
 ### What are Dynamic Imports?

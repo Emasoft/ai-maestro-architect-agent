@@ -4,6 +4,25 @@ This reference covers all aspects of publishing npm packages from Bun projects. 
 
 ---
 
+## Table of Contents
+
+- [Document Structure](#document-structure)
+  - [[Part 1: Authentication & Setup]](#part-1-authentication--setup)
+  - [[Part 2: Publishing Patterns]](#part-2-publishing-patterns)
+- [Quick Decision Tree](#quick-decision-tree)
+  - [Which Authentication Method?](#which-authentication-method)
+  - [Which Registry?](#which-registry)
+  - [Which Release Type?](#which-release-type)
+- [Common Workflows](#common-workflows)
+  - [Basic Publish Workflow (OIDC)](#basic-publish-workflow-oidc)
+  - [Beta Release Workflow](#beta-release-workflow)
+  - [Monorepo with Changesets](#monorepo-with-changesets)
+- [Essential package.json Fields](#essential-packagejson-fields)
+- [Troubleshooting Quick Reference](#troubleshooting-quick-reference)
+- [Cross-references](#cross-references)
+
+---
+
 ## Document Structure
 
 ### [Part 1: Authentication & Setup](./bun-npm-publishing-part1-authentication-setup.md)
@@ -190,9 +209,9 @@ jobs:
 
 Related documentation:
 
-- **[bun-github-actions-index.md](./bun-github-actions-index.md)** - GitHub Actions CI/CD patterns for Bun projects
-- **[bun-testing-index.md](./bun-testing-index.md)** - Testing strategies before publishing
-- **[bun-build-api-index.md](./bun-build-api-index.md)** - Building distributable packages with Bun
+- **[bun-github-actions.md](./bun-github-actions.md)** - GitHub Actions CI/CD patterns for Bun projects
+- **[bun-testing.md](./bun-testing.md)** - Testing strategies before publishing
+- **[bun-build-api.md](./bun-build-api.md)** - Building distributable packages with Bun
 
 **External Resources:**
 - Official npm docs: https://docs.npmjs.com/cli/v10/commands/npm-publish

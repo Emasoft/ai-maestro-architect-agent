@@ -419,7 +419,7 @@ if __name__ == '__main__':
 
         content = self.generate()
         self.output.parent.mkdir(parents=True, exist_ok=True)
-        atomic_write_text(content, self.output)
+        atomic_write_text(self.output, content)
         self.output.chmod(0o755)  # WHY: Make executable for direct CLI use
 
         if self.output.stat().st_size > 0:

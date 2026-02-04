@@ -6,6 +6,27 @@ This section covers TypeScript declaration generation and CSS bundling issues.
 
 ---
 
+## Table of Contents
+
+- [9. TypeScript Declarations](#9-typescript-declarations)
+  - [Problem Description](#problem-description)
+  - [Root Cause](#root-cause)
+  - [Solution](#solution)
+  - [Advanced: Multiple Entry Points](#advanced-multiple-entry-points)
+  - [Verification](#verification)
+  - [When This Issue Occurs](#when-this-issue-occurs)
+- [10. CSS Bundling](#10-css-bundling)
+  - [Problem Description](#problem-description-1)
+  - [Root Cause](#root-cause-1)
+  - [Solution](#solution-1)
+  - [CSS Modules](#css-modules)
+  - [Multiple CSS Processing Options](#multiple-css-processing-options)
+  - [Extracting CSS to Separate Files](#extracting-css-to-separate-files)
+  - [Complete Example](#complete-example)
+  - [When This Issue Occurs](#when-this-issue-occurs-1)
+
+---
+
 ## 9. TypeScript Declarations
 
 ### Problem Description

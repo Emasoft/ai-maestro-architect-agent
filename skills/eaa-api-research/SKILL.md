@@ -1,16 +1,12 @@
 ---
 name: eaa-api-researcher
-description: Use when investigating external APIs, libraries, and services. Creates standardized documentation including overview, authentication, endpoints, and integration guides.
+description: Use when investigating external APIs, libraries, and services. Creates standardized API documentation with auth and endpoints. Trigger with API research or library investigation requests.
+version: 1.0.0
 license: Apache-2.0
-compatibility: Requires web access for documentation lookup. Works with REST APIs, GraphQL APIs, Python libraries, npm packages, and cloud service APIs.
+compatibility: Requires web access for documentation lookup. Works with REST APIs, GraphQL APIs, Python libraries, npm packages, and cloud service APIs. Requires AI Maestro installed.
 metadata:
   author: Anthropic
-  version: 1.0.0
-  triggers:
-    - User asks to research an API or library
-    - Need to understand authentication for external service
-    - Orchestrator needs API documentation before implementation
-    - Integration with third-party service required
+  triggers: "User asks to research an API or library, Need to understand authentication for external service, Orchestrator needs API documentation before implementation, Integration with third-party service required"
 context: fork
 ---
 
@@ -32,6 +28,31 @@ Comprehensive API research and documentation skill for the API Researcher Agent.
 2. Gather information from official documentation sources
 3. Create all five standard document types using templates
 4. Report completion with minimal report format
+
+### Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Receive research assignment with library name and scope
+- [ ] Acknowledge assignment in format: `[RESEARCH STARTED] <library> API - <scope>`
+- [ ] Consult official documentation sources (in order: official docs, GitHub repo, API explorer)
+- [ ] Verify information: auth method, endpoints, rate limits, error codes
+- [ ] Create API Overview Document
+- [ ] Create Authentication Guide
+- [ ] Create Endpoints Reference
+- [ ] Create Integration Guide
+- [ ] Create Configuration Template
+- [ ] Report completion: `[DONE] <library> API research complete`
+
+## Output
+
+| Output Type | Description |
+|-------------|-------------|
+| API Overview Document | High-level API description with key features and capabilities |
+| Authentication Guide | Auth setup, security requirements, and credential management |
+| Endpoints Reference | Comprehensive endpoint documentation with parameters and examples |
+| Integration Guide | Step-by-step integration instructions with code samples |
+| Configuration Template | Configuration options and environment setup |
 
 ---
 

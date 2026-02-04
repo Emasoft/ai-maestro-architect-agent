@@ -4,6 +4,26 @@
 
 ---
 
+## Table of Contents
+
+- [JSON Imports](#json-imports)
+  - [What are JSON Imports?](#what-are-json-imports)
+  - [Basic JSON Import](#basic-json-import)
+  - [JSON Import with Assert Attribute](#json-import-with-assert-attribute)
+  - [Dynamic JSON Import](#dynamic-json-import)
+  - [Importing Data Files](#importing-data-files)
+  - [Package.json Import](#packagejson-import)
+  - [Translation Files](#translation-files)
+  - [TypeScript with JSON Imports](#typescript-with-json-imports)
+  - [Building with JSON Imports](#building-with-json-imports)
+  - [Environment-Specific JSON Loading](#environment-specific-json-loading)
+  - [JSON Schema Validation](#json-schema-validation)
+  - [Large JSON Files](#large-json-files)
+  - [JSON Import Best Practices](#json-import-best-practices)
+- [Cross-References](#cross-references)
+
+---
+
 ## JSON Imports
 
 ### What are JSON Imports?

@@ -4,6 +4,31 @@
 
 This section covers JSON validation, UMD validation, and version banner issues.
 
+## Table of Contents
+
+- [12. JSON Validation Fails on tsconfig.json](#12-json-validation-fails-on-tsconfigjson)
+  - [Problem Description](#problem-description)
+  - [Root Cause](#root-cause)
+  - [Solution](#solution)
+  - [Complete tsconfig.json Example with Comments](#complete-tsconfigjson-example-with-comments)
+  - [Using json5 or JSONC Parser](#using-json5-or-jsonc-parser)
+  - [Validation Script Example](#validation-script-example)
+  - [Best Practices](#best-practices)
+  - [ESLint Configuration Example](#eslint-configuration-example)
+  - [When This Issue Occurs](#when-this-issue-occurs)
+- [13. UMD Validation Fails After Bun Build](#13-umd-validation-fails-after-bun-build)
+  - [Problem Description](#problem-description-1)
+  - [Root Cause](#root-cause-1)
+  - [Solution](#solution-1)
+  - [Important Note](#important-note)
+- [14. Minified File Has Wrong Version in Banner](#14-minified-file-has-wrong-version-in-banner)
+  - [Problem Description](#problem-description-2)
+  - [Root Cause](#root-cause-2)
+  - [Solution](#solution-2)
+  - [Automated Approach (in release scripts)](#automated-approach-in-release-scripts)
+  - [Prevention](#prevention)
+- [Summary](#summary)
+
 ---
 
 ## 12. JSON Validation Fails on tsconfig.json

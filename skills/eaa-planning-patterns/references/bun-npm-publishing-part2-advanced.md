@@ -473,9 +473,9 @@ jobs:
 Related documentation for Bun publishing workflows:
 
 - **[bun-npm-publishing-part1-setup.md](./bun-npm-publishing-part1-setup.md)** - Setup & Configuration (OIDC, tokens, versioning, registry)
-- **[bun-github-actions-index.md](./bun-github-actions-index.md)** - GitHub Actions CI/CD patterns for Bun projects
-- **[bun-testing-index.md](./bun-testing-index.md)** - Testing strategies before publishing
-- **[bun-build-api-index.md](./bun-build-api-index.md)** - Building distributable packages with Bun
+- **[bun-github-actions.md](./bun-github-actions.md)** - GitHub Actions CI/CD patterns for Bun projects
+- **[bun-testing.md](./bun-testing.md)** - Testing strategies before publishing
+- **[bun-build-api.md](./bun-build-api.md)** - Building distributable packages with Bun
 
 **See also:**
 - Official npm docs: https://docs.npmjs.com/cli/v10/commands/npm-publish

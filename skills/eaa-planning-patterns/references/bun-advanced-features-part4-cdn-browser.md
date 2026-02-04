@@ -4,6 +4,23 @@
 
 ---
 
+## Table of Contents
+
+- [CDN and Browser Usage](#cdn-and-browser-usage)
+  - [What is CDN and Browser Usage?](#what-is-cdn-and-browser-usage)
+  - [Why Target Browsers and CDNs?](#why-target-browsers-and-cdns)
+  - [Creating a Browser-Compatible Bundle](#creating-a-browser-compatible-bundle)
+  - [Creating Multiple Module Formats](#creating-multiple-module-formats)
+  - [ESM for Modern Browsers](#esm-for-modern-browsers)
+  - [CDN-Ready Package Structure](#cdn-ready-package-structure)
+  - [Import Maps for ESM](#import-maps-for-esm)
+  - [Polyfills and Browser Compatibility](#polyfills-and-browser-compatibility)
+  - [Source Maps for Browser Debugging](#source-maps-for-browser-debugging)
+  - [CDN and Browser Best Practices](#cdn-and-browser-best-practices)
+- [Cross-References](#cross-references)
+
+---
+
 ## CDN and Browser Usage
 
 ### What is CDN and Browser Usage?

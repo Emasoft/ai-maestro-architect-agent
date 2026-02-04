@@ -609,7 +609,7 @@ Examples:
 
     # Output report
     if args.output:
-        atomic_write_json(report, args.output)
+        atomic_write_json(args.output, report)
         if args.verbose:
             print(f"Report written to: {args.output}", file=sys.stderr)
     else:

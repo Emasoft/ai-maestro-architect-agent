@@ -1,0 +1,163 @@
+---
+# Documentation Generation Template
+# Copy this to .github/workflows/docs.yml
+
+name: Documentation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'docs/**'
+      - '*.md'
+      - 'Cargo.toml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  # ============================================
+  # Build Documentation
+  # ============================================
+  build:
+    name: Build Docs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # --- Rust Documentation ---
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: rust-docs
+
+      - name: Build Rust docs
+        run: |
+          cargo doc --no-deps --all-features --document-private-items
+          echo '<meta http-equiv="refresh" content="0; url=myapp/index.html">' > target/doc/index.html
+
+      # --- mdBook (if using) ---
+      # - name: Install mdBook
+      #   run: cargo install mdbook mdbook-mermaid
+      #
+      # - name: Build mdBook
+      #   run: |
+      #     cd docs
+      #     mdbook build
+      #     mv book ../target/doc/guide
+
+      # --- Python Documentation (if using) ---
+      # - name: Setup Python
+      #   uses: actions/setup-python@v5
+      #   with:
+      #     python-version: '3.12'
+      #
+      # - name: Build Sphinx docs
+      #   run: |
+      #     pip install sphinx sphinx-rtd-theme
+      #     cd docs
+      #     make html
+      #     mv _build/html ../target/doc/python
+
+      # --- TypeScript Documentation (if using) ---
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: '20'
+      #
+      # - name: Build TypeDoc
+      #   run: |
+      #     pnpm install
+      #     pnpm exec typedoc --out target/doc/typescript src/
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: target/doc
+
+  # ============================================
+  # Deploy to GitHub Pages
+  # ============================================
+  deploy:
+    name: Deploy Docs
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  # ============================================
+  # Check Documentation Coverage
+  # ============================================
+  coverage:
+    name: Doc Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@nightly
+
+      - name: Check doc coverage
+        run: |
+          RUSTDOCFLAGS="-Z unstable-options --check" cargo doc --no-deps 2>&1 | tee doc-check.txt
+
+          # Count missing docs warnings
+          MISSING=$(grep -c "missing documentation" doc-check.txt || true)
+
+          if [[ $MISSING -gt 0 ]]; then
+            echo "::warning::Found $MISSING items without documentation"
+          fi
+
+      - name: Check for broken links
+        run: |
+          cargo doc --no-deps 2>&1 | grep -i "warning.*broken" && exit 1 || true
+
+  # ============================================
+  # Readme Validation
+  # ============================================
+  readme:
+    name: Validate README
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check README exists
+        run: |
+          if [[ ! -f README.md ]]; then
+            echo "::error::README.md not found"
+            exit 1
+          fi
+
+      - name: Check README sections
+        run: |
+          SECTIONS=("Installation" "Usage" "License")
+          for section in "${SECTIONS[@]}"; do
+            if ! grep -qi "## $section\|# $section" README.md; then
+              echo "::warning::README missing '$section' section"
+            fi
+          done
+
+      - name: Check code examples compile
+        run: |
+          # Extract Rust code blocks from README
+          grep -Pzo '(?s)```rust\n\K[^`]+(?=```)' README.md > examples.rs 2>/dev/null || true
+
+          if [[ -s examples.rs ]]; then
+            echo "fn main() {" > test_examples.rs
+            cat examples.rs >> test_examples.rs
+            echo "}" >> test_examples.rs
+            rustc --edition 2021 --emit=metadata test_examples.rs 2>&1 || echo "::warning::README code examples may not compile"
+          fi

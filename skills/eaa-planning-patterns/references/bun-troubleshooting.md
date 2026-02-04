@@ -1,5 +1,31 @@
 # Bun Troubleshooting Guide
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Quick Reference: All Issues](#quick-reference-all-issues)
+- [Guide Structure](#guide-structure)
+  - [Part 1: CI/CD Publishing Issues](#part-1-cicd-publishing-issues)
+  - [Part 2: Version & Registry Issues](#part-2-version--registry-issues)
+  - [Part 3: Permissions & Tests](#part-3-permissions--tests)
+  - [Part 4: Browser Bundling](#part-4-browser-bundling)
+  - [Part 5: TypeScript & CSS](#part-5-typescript--css)
+  - [Part 6: Sourcemaps](#part-6-sourcemaps)
+  - [Part 7: Validation Issues](#part-7-validation-issues)
+- [Issue Categories by Symptom](#issue-categories-by-symptom)
+  - [Authentication & Publishing Errors](#authentication--publishing-errors)
+  - [Build Errors](#build-errors)
+  - [Test Failures](#test-failures)
+  - [CI/CD Failures](#cicd-failures)
+  - [Runtime Errors](#runtime-errors)
+  - [Release Issues](#release-issues)
+- [Common Workflow Patterns](#common-workflow-patterns)
+  - [Minimal Publish Workflow](#minimal-publish-workflow)
+  - [Browser Build Configuration](#browser-build-configuration)
+  - [TypeScript Package Configuration](#typescript-package-configuration)
+- [Additional Resources](#additional-resources)
+- [File Index](#file-index)
+
 ## Overview
 
 This document is an index to the comprehensive Bun troubleshooting guide, covering the 14 most common issues encountered when using Bun for building, testing, and publishing JavaScript and TypeScript packages.

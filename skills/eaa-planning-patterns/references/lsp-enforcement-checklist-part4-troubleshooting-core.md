@@ -2,6 +2,31 @@
 
 Troubleshooting guide for Python, TypeScript, Rust, and Go LSP issues.
 
+---
+
+## Table of Contents
+
+- [General LSP Issues](#general-lsp-issues)
+  - [LSP Server Won't Start](#lsp-server-wont-start)
+  - [LSP Diagnostics Not Appearing](#lsp-diagnostics-not-appearing)
+  - [Performance Issues](#performance-issues)
+- [Python (pyright) Issues](#python-pyright-issues)
+  - ["Cannot find module" errors for installed packages](#cannot-find-module-errors-for-installed-packages)
+  - ["Type is partially unknown" warnings](#type-is-partially-unknown-warnings)
+- [TypeScript Issues](#typescript-issues)
+  - ["Cannot find name" for global types](#cannot-find-name-for-global-types)
+  - ["Property does not exist on type" after adding new field](#property-does-not-exist-on-type-after-adding-new-field)
+- [Rust (rust-analyzer) Issues](#rust-rust-analyzer-issues)
+  - ["Unresolved import" for workspace crates](#unresolved-import-for-workspace-crates)
+  - ["Proc macro not expanded" errors](#proc-macro-not-expanded-errors)
+  - ["Could not resolve macro" for custom derives](#could-not-resolve-macro-for-custom-derives)
+- [Go (gopls) Issues](#go-gopls-issues)
+  - ["Package not found" for local modules](#package-not-found-for-local-modules)
+  - ["Undefined: package name" after adding import](#undefined-package-name-after-adding-import)
+  - ["No required module provides package"](#no-required-module-provides-package)
+
+---
+
 ## General LSP Issues
 
 ### LSP Server Won't Start

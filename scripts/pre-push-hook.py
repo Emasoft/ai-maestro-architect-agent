@@ -112,10 +112,19 @@ def validate_hooks_config(plugin_dir: Path) -> list[tuple[str, str]]:
 
     hooks = data.get("hooks", {})
     valid_events = [
-        "PreToolUse", "PostToolUse", "PostToolUseFailure",
-        "Notification", "Stop", "SubagentStop", "SubagentStart",
-        "UserPromptSubmit", "PermissionRequest",
-        "SessionStart", "SessionEnd", "PreCompact", "Setup"
+        "PreToolUse",
+        "PostToolUse",
+        "PostToolUseFailure",
+        "Notification",
+        "Stop",
+        "SubagentStop",
+        "SubagentStart",
+        "UserPromptSubmit",
+        "PermissionRequest",
+        "SessionStart",
+        "SessionEnd",
+        "PreCompact",
+        "Setup",
     ]
 
     for event_name, event_hooks in hooks.items():
@@ -132,9 +141,16 @@ def validate_hooks_config(plugin_dir: Path) -> list[tuple[str, str]]:
                 if hook.get("type") == "command":
                     cmd = hook.get("command", "")
                     if not cmd:
-                        issues.append(("CRITICAL", f"Empty command in {event_name} hook"))
+                        issues.append(
+                            ("CRITICAL", f"Empty command in {event_name} hook")
+                        )
                     elif "${CLAUDE_PLUGIN_ROOT}" not in cmd and not cmd.startswith("/"):
-                        issues.append(("MAJOR", f"Hook command should use ${{CLAUDE_PLUGIN_ROOT}}: {cmd}"))
+                        issues.append(
+                            (
+                                "MAJOR",
+                                f"Hook command should use ${{CLAUDE_PLUGIN_ROOT}}: {cmd}",
+                            )
+                        )
 
     return issues
 
@@ -152,7 +168,7 @@ def lint_python_scripts(plugin_dir: Path) -> list[tuple[str, str]]:
             ["ruff", "check", str(scripts_dir), "--select=E,F", "--quiet"],
             capture_output=True,
             text=True,
-            timeout=30
+            timeout=30,
         )
         if result.returncode != 0 and result.stdout:
             # Count errors
@@ -171,9 +187,7 @@ def main() -> int:
     """Main pre-push validation."""
     # Get repo root
     result = subprocess.run(
-        ["git", "rev-parse", "--show-toplevel"],
-        capture_output=True,
-        text=True
+        ["git", "rev-parse", "--show-toplevel"], capture_output=True, text=True
     )
     repo_root = Path(result.stdout.strip())
 
@@ -223,7 +237,9 @@ def main() -> int:
             print(f"  {BLUE}ℹ{NC} {msg}")
 
     print()
-    print(f"Summary: {RED}{len(critical)} critical{NC}, {YELLOW}{len(major)} major{NC}, {BLUE}{len(minor)} minor{NC}")
+    print(
+        f"Summary: {RED}{len(critical)} critical{NC}, {YELLOW}{len(major)} major{NC}, {BLUE}{len(minor)} minor{NC}"
+    )
     print()
 
     # Decision

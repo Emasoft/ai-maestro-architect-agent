@@ -1,7 +1,7 @@
 ---
 name: eaa-documentation-writer
 model: opus
-description: Writes and maintains project documentation
+description: Writes and maintains project documentation. Requires AI Maestro installed.
 type: local-helper
 auto_skills:
   - eaa-session-memory

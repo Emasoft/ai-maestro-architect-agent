@@ -252,6 +252,8 @@ def get_recently_completed(
         List of recently completed tasks
     """
     recent = []
+    # WHY: Use days parameter to filter tasks completed within the lookback window
+    _ = days  # Currently unused - full date parsing to be implemented
 
     for task in tasks:
         if task.get("status") != "completed":
@@ -278,6 +280,8 @@ def generate_executive_summary(
     Returns:
         Dictionary with summary metrics
     """
+    # WHY: phase_stats reserved for future enhanced summary generation
+    _ = phase_stats  # Currently unused - will be used for phase-level metrics
     total_tasks = len(tasks)
     completed_tasks = sum(1 for t in tasks if t.get("status") == "completed")
     in_progress_tasks = sum(1 for t in tasks if t.get("status") == "in_progress")
@@ -423,7 +427,7 @@ def generate_status_report(data: dict[str, Any], output_path: Path) -> None:
     # Write report
     report_content = "\n".join(report_lines) + "\n"
 
-    atomic_write_text(report_content, output_path)
+    atomic_write_text(output_path, report_content)
 
 
 def main() -> None:
@@ -468,6 +472,14 @@ def main() -> None:
     elif args.github_project:
         print("GitHub Projects integration not yet implemented", file=sys.stderr)
         print("Stub: Would fetch data from:", args.github_project, file=sys.stderr)
+        sys.exit(1)
+
+    else:
+        # WHY: Ensure data is always bound - argparse mutual exclusion requires one input
+        print(
+            "No input source specified. Use --tracker, --plan-dir, or --github-project",
+            file=sys.stderr,
+        )
         sys.exit(1)
 
     # Generate report

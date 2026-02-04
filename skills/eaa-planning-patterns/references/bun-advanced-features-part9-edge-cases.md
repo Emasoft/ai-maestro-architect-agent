@@ -4,6 +4,17 @@
 
 ---
 
+## Table of Contents
+
+- [Edge Cases](#edge-cases)
+  - [Monorepo / Workspaces](#monorepo--workspaces)
+  - [Dynamic Imports](#dynamic-imports)
+  - [Binary / Native Modules](#binary--native-modules)
+  - [JSON Imports](#json-imports)
+- [Cross-References](#cross-references)
+
+---
+
 ## Edge Cases
 
 ### Monorepo / Workspaces

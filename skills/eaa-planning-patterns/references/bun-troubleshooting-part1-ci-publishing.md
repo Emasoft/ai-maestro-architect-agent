@@ -6,6 +6,22 @@ This section covers issues related to CI/CD publishing workflows.
 
 ---
 
+## Table of Contents
+
+- [1. OIDC Authentication Error](#1-oidc-authentication-error)
+  - [Problem Description](#problem-description)
+  - [Root Cause](#root-cause)
+  - [Solution](#solution)
+  - [When This Issue Occurs](#when-this-issue-occurs)
+- [2. Unpinned Version Issues](#2-unpinned-version-issues)
+  - [Problem Description](#problem-description-1)
+  - [Root Cause](#root-cause-1)
+  - [Solution](#solution-1)
+  - [Best Practices](#best-practices)
+  - [When This Issue Occurs](#when-this-issue-occurs-1)
+
+---
+
 ## 1. OIDC Authentication Error
 
 ### Problem Description

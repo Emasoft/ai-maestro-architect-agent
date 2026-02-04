@@ -4,6 +4,19 @@
 
 This section covers sourcemap configuration and debugging issues.
 
+## Table of Contents
+
+- [11. Sourcemap Issues](#11-sourcemap-issues)
+  - [Problem Description](#problem-description)
+  - [Root Cause](#root-cause)
+  - [Solution](#solution)
+  - [Sourcemap Formats Explained](#sourcemap-formats-explained)
+  - [Complete Example](#complete-example)
+  - [Verifying Sourcemaps](#verifying-sourcemaps)
+  - [Sourcemaps for Node.js](#sourcemaps-for-nodejs)
+  - [Sourcemaps in Production](#sourcemaps-in-production)
+  - [When This Issue Occurs](#when-this-issue-occurs)
+
 ---
 
 ## 11. Sourcemap Issues

@@ -22,7 +22,7 @@ import subprocess
 import sys
 import urllib.request
 import urllib.error
-from typing import Any
+from typing import Any, cast
 
 
 def get_session_name() -> str:
@@ -84,7 +84,7 @@ def check_inbox(
 
     try:
         with urllib.request.urlopen(req, timeout=10) as response:
-            return json.loads(response.read().decode("utf-8"))
+            return cast(dict[str, Any], json.loads(response.read().decode("utf-8")))
     except urllib.error.HTTPError as e:
         error_body = e.read().decode("utf-8") if e.fp else str(e)
         return {"error": f"HTTP {e.code}: {error_body}"}

@@ -33,7 +33,10 @@ from typing import Optional
 def check_gh_cli() -> bool:
     """Check if gh CLI is available and authenticated."""
     if not shutil.which("gh"):
-        print("ERROR: gh CLI not found. Install from https://cli.github.com/", file=sys.stderr)
+        print(
+            "ERROR: gh CLI not found. Install from https://cli.github.com/",
+            file=sys.stderr,
+        )
         return False
 
     result = subprocess.run(
@@ -123,25 +126,29 @@ def find_document_by_uuid(uuid_str: str, design_root: Path) -> Optional[Path]:
 
 def extract_issue_data(frontmatter: dict, body: str, doc_path: Path) -> dict:
     """Extract GitHub issue data from design document."""
-    title = frontmatter.get("title", doc_path.stem.replace("-", " ").replace("_", " ").title())
+    title = frontmatter.get(
+        "title", doc_path.stem.replace("-", " ").replace("_", " ").title()
+    )
     uuid_str = frontmatter.get("uuid", "")
     doc_type = frontmatter.get("type", "design").upper()
     status = frontmatter.get("status", "draft")
 
     description_parts = [
         f"## Design Document: {title}",
-        f"",
+        "",
         f"**UUID**: `{uuid_str}`",
         f"**Type**: {doc_type}",
         f"**Status**: {status}",
         f"**Created**: {frontmatter.get('created', 'Unknown')}",
         f"**Author**: {frontmatter.get('author', 'Unknown')}",
-        f"",
-        f"---",
-        f"",
+        "",
+        "---",
+        "",
     ]
 
-    overview_match = re.search(r"## 1\. Overview\s*\n(.*?)(?=\n## |\Z)", body, re.DOTALL)
+    overview_match = re.search(
+        r"## 1\. Overview\s*\n(.*?)(?=\n## |\Z)", body, re.DOTALL
+    )
     if overview_match:
         overview = overview_match.group(1).strip()
         if len(overview) > 1000:
@@ -151,12 +158,14 @@ def extract_issue_data(frontmatter: dict, body: str, doc_path: Path) -> dict:
         description_parts.append(overview)
         description_parts.append("")
 
-    description_parts.extend([
-        "---",
-        "",
-        f"*This issue is linked to design document `{uuid_str}`*",
-        "*Use `/eaa-sync-status` to synchronize status changes*",
-    ])
+    description_parts.extend(
+        [
+            "---",
+            "",
+            f"*This issue is linked to design document `{uuid_str}`*",
+            "*Use `/eaa-sync-status` to synchronize status changes*",
+        ]
+    )
 
     labels = ["design"]
     if doc_type:
@@ -197,9 +206,13 @@ def create_github_issue(issue_data: dict, dry_run: bool = False) -> Optional[int
         return None
 
     cmd = [
-        "gh", "issue", "create",
-        "--title", issue_data["title"],
-        "--body", issue_data["body"],
+        "gh",
+        "issue",
+        "create",
+        "--title",
+        issue_data["title"],
+        "--body",
+        issue_data["body"],
     ]
 
     for label in issue_data["labels"]:
@@ -257,7 +270,9 @@ def update_document_with_issue(doc_path: Path, issue_number: int) -> bool:
 
         for line in lines[1:end_idx]:
             if line.startswith("related_issues:"):
-                new_frontmatter_lines.append(f"related_issues: {json.dumps(related_issues)}")
+                new_frontmatter_lines.append(
+                    f"related_issues: {json.dumps(related_issues)}"
+                )
                 found_related_issues = True
             elif line.startswith("updated:"):
                 new_frontmatter_lines.append(f"updated: {today}")
@@ -266,7 +281,9 @@ def update_document_with_issue(doc_path: Path, issue_number: int) -> bool:
                 new_frontmatter_lines.append(line)
 
         if not found_related_issues:
-            new_frontmatter_lines.insert(-1, f"related_issues: {json.dumps(related_issues)}")
+            new_frontmatter_lines.insert(
+                -1, f"related_issues: {json.dumps(related_issues)}"
+            )
         if not found_updated:
             new_frontmatter_lines.insert(-1, f"updated: {today}")
 
@@ -344,12 +361,17 @@ Examples:
         return 1
 
     if not frontmatter.get("uuid"):
-        print(f"ERROR: Document has no UUID in frontmatter: {doc_path}", file=sys.stderr)
+        print(
+            f"ERROR: Document has no UUID in frontmatter: {doc_path}", file=sys.stderr
+        )
         return 1
 
     related_issues = frontmatter.get("related_issues", [])
     if isinstance(related_issues, list) and len(related_issues) > 0:
-        print(f"WARNING: Document already linked to issues: {related_issues}", file=sys.stderr)
+        print(
+            f"WARNING: Document already linked to issues: {related_issues}",
+            file=sys.stderr,
+        )
         print("Use --force to create another issue (not implemented)", file=sys.stderr)
 
     issue_data = extract_issue_data(frontmatter, body, doc_path)

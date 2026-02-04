@@ -134,7 +134,9 @@ def update_pyproject_toml(plugin_root: Path, new_version: str) -> tuple[bool, st
             old_version = match.group(2)
             return f"{match.group(1)}{new_version}{match.group(3)}"
 
-        new_content, count = re.subn(pattern, replace_version, content, flags=re.MULTILINE)
+        new_content, count = re.subn(
+            pattern, replace_version, content, flags=re.MULTILINE
+        )
 
         if count == 0:
             return True, "pyproject.toml has no version field (skipped)"
@@ -145,7 +147,9 @@ def update_pyproject_toml(plugin_root: Path, new_version: str) -> tuple[bool, st
         return False, f"Error updating pyproject.toml: {e}"
 
 
-def update_python_version_variables(plugin_root: Path, new_version: str) -> list[tuple[bool, str]]:
+def update_python_version_variables(
+    plugin_root: Path, new_version: str
+) -> list[tuple[bool, str]]:
     """
     Update __version__ variables in Python files.
 
@@ -159,13 +163,25 @@ def update_python_version_variables(plugin_root: Path, new_version: str) -> list
     results: list[tuple[bool, str]] = []
 
     # Directories to exclude from scanning
-    exclude_dirs = {"__pycache__", ".venv", "venv", "env", ".env", "node_modules", ".git", ".mypy_cache", ".ruff_cache"}
+    exclude_dirs = {
+        "__pycache__",
+        ".venv",
+        "venv",
+        "env",
+        ".env",
+        "node_modules",
+        ".git",
+        ".mypy_cache",
+        ".ruff_cache",
+    }
 
     # Search for Python files with __version__ variable
     for py_file in plugin_root.rglob("*.py"):
         # Skip excluded directories and hidden directories
         parts_set = set(py_file.relative_to(plugin_root).parts)
-        if parts_set & exclude_dirs or any(p.startswith(".") for p in py_file.relative_to(plugin_root).parts):
+        if parts_set & exclude_dirs or any(
+            p.startswith(".") for p in py_file.relative_to(plugin_root).parts
+        ):
             continue
 
         try:
@@ -181,7 +197,9 @@ def update_python_version_variables(plugin_root: Path, new_version: str) -> list
                 old_version = match.group(2)
                 return f"{match.group(1)}{new_version}{match.group(3)}"
 
-            new_content, count = re.subn(pattern, replace_version, content, flags=re.MULTILINE)
+            new_content, count = re.subn(
+                pattern, replace_version, content, flags=re.MULTILINE
+            )
 
             if count > 0:
                 py_file.write_text(new_content, encoding="utf-8")
@@ -236,15 +254,30 @@ Examples:
     )
 
     bump_group = parser.add_mutually_exclusive_group(required=True)
-    bump_group.add_argument("--major", action="store_true", help="Bump major version (X.0.0)")
-    bump_group.add_argument("--minor", action="store_true", help="Bump minor version (x.Y.0)")
-    bump_group.add_argument("--patch", action="store_true", help="Bump patch version (x.y.Z)")
-    bump_group.add_argument("--set", metavar="VERSION", help="Set explicit version (format: X.Y.Z)")
-
-    parser.add_argument("--dry-run", action="store_true", help="Show what would be changed without making changes")
+    bump_group.add_argument(
+        "--major", action="store_true", help="Bump major version (X.0.0)"
+    )
+    bump_group.add_argument(
+        "--minor", action="store_true", help="Bump minor version (x.Y.0)"
+    )
+    bump_group.add_argument(
+        "--patch", action="store_true", help="Bump patch version (x.y.Z)"
+    )
+    bump_group.add_argument(
+        "--set", metavar="VERSION", help="Set explicit version (format: X.Y.Z)"
+    )
 
     parser.add_argument(
-        "--plugin-dir", type=Path, default=None, help="Plugin root directory (default: parent of scripts/)"
+        "--dry-run",
+        action="store_true",
+        help="Show what would be changed without making changes",
+    )
+
+    parser.add_argument(
+        "--plugin-dir",
+        type=Path,
+        default=None,
+        help="Plugin root directory (default: parent of scripts/)",
     )
 
     args = parser.parse_args()
@@ -266,14 +299,20 @@ Examples:
     # Determine new version
     if args.set:
         if parse_semver(args.set) is None:
-            print(f"Error: Invalid version format '{args.set}'. Expected X.Y.Z", file=sys.stderr)
+            print(
+                f"Error: Invalid version format '{args.set}'. Expected X.Y.Z",
+                file=sys.stderr,
+            )
             return 1
         new_version = args.set
     else:
         bump_type = "major" if args.major else "minor" if args.minor else "patch"
         new_version = bump_version(current_version, bump_type)
         if new_version is None:
-            print(f"Error: Current version '{current_version}' is not valid semver", file=sys.stderr)
+            print(
+                f"Error: Current version '{current_version}' is not valid semver",
+                file=sys.stderr,
+            )
             return 1
 
     print(f"Bumping version: {current_version} -> {new_version}")
@@ -317,7 +356,9 @@ Examples:
 
         for py_file in plugin_root.rglob("*.py"):
             parts_set = set(py_file.relative_to(plugin_root).parts)
-            if parts_set & exclude_dirs or any(p.startswith(".") for p in py_file.relative_to(plugin_root).parts):
+            if parts_set & exclude_dirs or any(
+                p.startswith(".") for p in py_file.relative_to(plugin_root).parts
+            ):
                 continue
             try:
                 content = py_file.read_text(encoding="utf-8")

@@ -1,12 +1,11 @@
 ---
 name: eaa-planner
 model: sonnet
-description: Creates implementation plans from requirements with step-by-step breakdown
+description: Creates implementation plans from requirements with step-by-step breakdown. Requires AI Maestro installed.
 type: planner
 auto_skills:
   - eaa-session-memory
   - eaa-planning-patterns
-  - eaa-orchestration-patterns
 memory_requirements: high
 ---
 
@@ -89,7 +88,7 @@ Before Step 1 (Gather Requirements), add Step 0:
 
 ## RULE 15: No Implementation by Orchestrator (ABSOLUTE)
 
-**Reference**: See [orchestrator-no-implementation.md](../skills/eaa-orchestration-patterns/references/orchestrator-no-implementation.md)
+<!-- Note: orchestrator-no-implementation rule is defined in emasoft-orchestrator-agent plugin -->
 
 **Summary for Planner:**
 

@@ -2,6 +2,35 @@
 
 Troubleshooting guide for Java, Kotlin, C/C++, C#, PHP, Ruby, and cross-language issues.
 
+---
+
+## Table of Contents
+
+- [Java (jdtls) Issues](#java-jdtls-issues)
+  - ["Cannot resolve symbol" for imported classes](#cannot-resolve-symbol-for-imported-classes)
+  - ["Project build path is incomplete"](#project-build-path-is-incomplete)
+- [Kotlin Issues](#kotlin-issues)
+  - ["Unresolved reference" for standard library](#unresolved-reference-for-standard-library)
+  - ["Type mismatch" with Java interop](#type-mismatch-with-java-interop)
+- [C/C++ (clangd) Issues](#cc-clangd-issues)
+  - ["'file.h' file not found"](#fileh-file-not-found)
+  - ["Unknown argument '-std=c++20'"](#unknown-argument--stdc20)
+- [C# (OmniSharp) Issues](#c-omnisharp-issues)
+  - ["The type or namespace could not be found"](#the-type-or-namespace-could-not-be-found)
+  - ["Nullable warnings everywhere"](#nullable-warnings-everywhere)
+- [PHP (Intelephense) Issues](#php-intelephense-issues)
+  - ["Undefined function/class"](#undefined-functionclass)
+  - ["Method not found" for Laravel facades](#method-not-found-for-laravel-facades)
+- [Ruby (Solargraph) Issues](#ruby-solargraph-issues)
+  - ["Undefined method" for valid code](#undefined-method-for-valid-code)
+  - ["LoadError: cannot load such file"](#loaderror-cannot-load-such-file)
+- [Cross-Language Issues](#cross-language-issues)
+  - ["LSP installed but features not working"](#lsp-installed-but-features-not-working)
+  - ["Multiple LSP errors after git branch switch"](#multiple-lsp-errors-after-git-branch-switch)
+- [Official Documentation](#official-documentation)
+
+---
+
 ## Java (jdtls) Issues
 
 ### "Cannot resolve symbol" for imported classes

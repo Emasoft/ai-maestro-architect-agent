@@ -32,7 +32,7 @@ import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
+from typing import Optional, cast
 
 
 STATUS_LABELS = {
@@ -63,7 +63,10 @@ STATUS_DESCRIPTIONS = {
 def check_gh_cli() -> bool:
     """Check if gh CLI is available and authenticated."""
     if not shutil.which("gh"):
-        print("ERROR: gh CLI not found. Install from https://cli.github.com/", file=sys.stderr)
+        print(
+            "ERROR: gh CLI not found. Install from https://cli.github.com/",
+            file=sys.stderr,
+        )
         return False
 
     result = subprocess.run(
@@ -149,7 +152,7 @@ def find_document_by_uuid(uuid_str: str, design_root: Path) -> Optional[Path]:
 
 def find_all_linked_documents(design_root: Path) -> list[tuple[Path, dict]]:
     """Find all documents with linked GitHub issues."""
-    results = []
+    results: list[tuple[Path, dict]] = []
 
     if not design_root.exists():
         return results
@@ -221,7 +224,9 @@ def sync_status_to_issue(
     """Sync design document status to GitHub issue labels."""
     current_labels = get_issue_labels(issue_number)
     if not current_labels and not dry_run:
-        print(f"WARNING: Could not get labels for issue #{issue_number}", file=sys.stderr)
+        print(
+            f"WARNING: Could not get labels for issue #{issue_number}", file=sys.stderr
+        )
 
     labels_to_add = []
     labels_to_remove = []
@@ -243,27 +248,47 @@ def sync_status_to_issue(
         if labels_to_remove:
             print(f"  Would remove labels: {', '.join(labels_to_remove)}")
         if add_comment:
-            print(f"  Would add status change comment")
+            print("  Would add status change comment")
         return True
 
     if labels_to_add:
         result = subprocess.run(
-            ["gh", "issue", "edit", str(issue_number), "--add-label", ",".join(labels_to_add)],
+            [
+                "gh",
+                "issue",
+                "edit",
+                str(issue_number),
+                "--add-label",
+                ",".join(labels_to_add),
+            ],
             capture_output=True,
             text=True,
         )
         if result.returncode != 0:
-            print(f"ERROR: Failed to add labels to #{issue_number}: {result.stderr}", file=sys.stderr)
+            print(
+                f"ERROR: Failed to add labels to #{issue_number}: {result.stderr}",
+                file=sys.stderr,
+            )
             return False
 
     if labels_to_remove:
         result = subprocess.run(
-            ["gh", "issue", "edit", str(issue_number), "--remove-label", ",".join(labels_to_remove)],
+            [
+                "gh",
+                "issue",
+                "edit",
+                str(issue_number),
+                "--remove-label",
+                ",".join(labels_to_remove),
+            ],
             capture_output=True,
             text=True,
         )
         if result.returncode != 0:
-            print(f"WARNING: Failed to remove labels from #{issue_number}: {result.stderr}", file=sys.stderr)
+            print(
+                f"WARNING: Failed to remove labels from #{issue_number}: {result.stderr}",
+                file=sys.stderr,
+            )
 
     if add_comment:
         status_desc = STATUS_DESCRIPTIONS.get(status, status)
@@ -272,7 +297,7 @@ def sync_status_to_issue(
 **Status**: `{status}`
 **Description**: {status_desc}
 **Design UUID**: `{uuid_str}`
-**Updated**: {datetime.now().strftime('%Y-%m-%d %H:%M')}
+**Updated**: {datetime.now().strftime("%Y-%m-%d %H:%M")}
 
 ---
 *Synchronized from design document*"""
@@ -283,7 +308,10 @@ def sync_status_to_issue(
             text=True,
         )
         if result.returncode != 0:
-            print(f"WARNING: Failed to add comment to #{issue_number}: {result.stderr}", file=sys.stderr)
+            print(
+                f"WARNING: Failed to add comment to #{issue_number}: {result.stderr}",
+                file=sys.stderr,
+            )
 
     print(f"SYNCED: Issue #{issue_number} -> status:{status}")
     return True
@@ -377,24 +405,27 @@ Examples:
 
             print(f"Document: {uuid_str}")
             for issue_num in issue_numbers:
-                if sync_status_to_issue(issue_num, status, uuid_str, args.comment, args.dry_run):
+                if sync_status_to_issue(
+                    issue_num, status, uuid_str, args.comment, args.dry_run
+                ):
                     success_count += 1
 
         print(f"\nSynced {success_count} issue(s)")
         return 0
 
-    doc_path = find_document_by_uuid(args.uuid, design_root)
-    if not doc_path:
+    target_doc_path = find_document_by_uuid(args.uuid, design_root)
+    if not target_doc_path:
         print(f"ERROR: Document not found with UUID: {args.uuid}", file=sys.stderr)
         return 1
 
-    content = doc_path.read_text(encoding="utf-8")
-    frontmatter, _ = extract_frontmatter(content)
+    content = target_doc_path.read_text(encoding="utf-8")
+    frontmatter_raw, _ = extract_frontmatter(content)
 
-    if not frontmatter:
-        print(f"ERROR: Document has no frontmatter: {doc_path}", file=sys.stderr)
+    if not frontmatter_raw:
+        print(f"ERROR: Document has no frontmatter: {target_doc_path}", file=sys.stderr)
         return 1
 
+    frontmatter = cast(dict, frontmatter_raw)
     status = frontmatter.get("status", "draft")
     uuid_str = frontmatter.get("uuid", args.uuid)
 
@@ -403,12 +434,17 @@ Examples:
     else:
         issue_numbers = extract_issue_numbers(frontmatter)
         if not issue_numbers:
-            print(f"ERROR: Document has no linked issues. Use --issue to specify one.", file=sys.stderr)
+            print(
+                "ERROR: Document has no linked issues. Use --issue to specify one.",
+                file=sys.stderr,
+            )
             return 1
 
     success = True
     for issue_num in issue_numbers:
-        if not sync_status_to_issue(issue_num, status, uuid_str, args.comment, args.dry_run):
+        if not sync_status_to_issue(
+            issue_num, status, uuid_str, args.comment, args.dry_run
+        ):
             success = False
 
     return 0 if success else 1

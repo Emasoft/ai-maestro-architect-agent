@@ -98,4 +98,4 @@ Each feature includes practical examples and troubleshooting guidance to help yo
 
 **Previous:** [Part 8 - Data Imports (JSON Imports)](./bun-advanced-features-part8-json-imports.md)
 
-**Index:** [Bun Advanced Features Index](./bun-advanced-features-index.md)
+**Index:** [Bun Advanced Features](./bun-advanced-features.md)

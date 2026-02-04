@@ -2,6 +2,19 @@
 
 After remote agent completes work, orchestrator MUST verify LSP compliance.
 
+## Table of Contents
+
+- [Post-Assignment Verification](#post-assignment-verification)
+  - [1. LSP Diagnostics Check](#1-lsp-diagnostics-check)
+  - [2. Type Safety Verification](#2-type-safety-verification)
+  - [3. Code Navigation Test](#3-code-navigation-test)
+  - [4. Quality Gates](#4-quality-gates)
+- [Orchestrator Enforcement](#orchestrator-enforcement)
+- [Rejection Criteria](#rejection-criteria)
+- [Benefits Tracked](#benefits-tracked)
+
+---
+
 ## Post-Assignment Verification
 
 ### 1. LSP Diagnostics Check

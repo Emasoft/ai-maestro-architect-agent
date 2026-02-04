@@ -38,7 +38,28 @@ def atomic_write_text(path: Path, content: str) -> None:
     shutil.move(str(tmp_path), str(path))
 
 
-def run_command(cmd: list[str], cwd: Path | None = None) -> tuple[int, str, str]:
-    """Run a command and return (exit_code, stdout, stderr)."""
-    result = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True)
-    return result.returncode, result.stdout, result.stderr
+def run_command(
+    cmd: list[str], cwd: Path | None = None, timeout: float | None = None
+) -> tuple[int, str, str]:
+    """Run a command and return (exit_code, stdout, stderr).
+
+    Args:
+        cmd: Command and arguments as a list
+        cwd: Working directory (optional)
+        timeout: Timeout in seconds (optional)
+
+    Returns:
+        Tuple of (exit_code, stdout, stderr)
+
+    Raises:
+        TimeoutError: If command exceeds timeout
+    """
+    try:
+        result = subprocess.run(
+            cmd, cwd=cwd, capture_output=True, text=True, timeout=timeout
+        )
+        return result.returncode, result.stdout, result.stderr
+    except subprocess.TimeoutExpired as e:
+        raise TimeoutError(
+            f"Command timed out after {timeout}s: {' '.join(cmd)}"
+        ) from e

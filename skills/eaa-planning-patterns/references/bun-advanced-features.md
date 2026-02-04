@@ -4,6 +4,22 @@
 
 This guide covers advanced Bun bundler features essential for production-ready applications. Each topic is covered in detail in its own reference document.
 
+## Table of Contents
+
+- [Quick Reference](#quick-reference)
+- [Part 1: Code Splitting and Tree Shaking](#part-1-code-splitting-and-tree-shaking)
+- [Part 2: Build Optimization](#part-2-build-optimization)
+- [Part 3: Standalone Executables](#part-3-standalone-executables)
+- [Part 4: CDN and Browser Usage](#part-4-cdn-and-browser-usage)
+- [Part 5: Monorepo and Workspaces](#part-5-monorepo-and-workspaces)
+- [Part 6: Dynamic Imports](#part-6-dynamic-imports)
+- [Part 7: Binary and Native Modules](#part-7-binary-and-native-modules)
+- [Part 8: JSON Imports](#part-8-json-imports)
+- [Part 9: Edge Cases](#part-9-edge-cases)
+- [Part 10: Troubleshooting](#part-10-troubleshooting)
+- [Common Build Patterns](#common-build-patterns)
+- [See Also](#see-also)
+
 ---
 
 ## Quick Reference

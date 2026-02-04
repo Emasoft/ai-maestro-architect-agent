@@ -366,7 +366,7 @@ class TaskTracker:
         for task in self.tasks:
             writer.writerow(task.to_csv_row())
 
-        atomic_write_text(output.getvalue(), Path(output_path))
+        atomic_write_text(Path(output_path), output.getvalue())
         print(f"CSV task tracker exported: {output_path}")
 
     def export_json(self, output_path: str) -> None:
@@ -391,7 +391,7 @@ class TaskTracker:
             },
         }
 
-        atomic_write_json(data, Path(output_path))
+        atomic_write_json(Path(output_path), data)
         print(f"JSON task tracker exported: {output_path}")
 
     def export(self, output_path: str) -> None:

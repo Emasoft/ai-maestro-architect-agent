@@ -222,7 +222,7 @@ _____________________________________________________________________________
 """
 
     # WHY: atomic_write_text ensures file is written completely or not at all
-    atomic_write_text(content, output_path)
+    atomic_write_text(output_path, content)
 
     # WHY: Post-write verification catches silent failures from filesystem issues
     if not verify_output_file(output_path):

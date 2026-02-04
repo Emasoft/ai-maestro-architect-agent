@@ -1,11 +1,11 @@
 ---
 name: eaa-modularizer-expert
 model: opus
-description: Decomposes monolithic code into modular, reusable components
+description: Decomposes monolithic code into modular, reusable components. Requires AI Maestro installed.
 type: local-helper
 auto_skills:
   - eaa-session-memory
-  - eaa-modularizer-expert
+  - eaa-modularization
 memory_requirements: high
 triggers:
   - modularize
@@ -122,15 +122,13 @@ This agent should be invoked when:
 
 Breaks down application features into independent, testable functional modules.
 
-For detailed methodology, see:
-[functional-modularization.md](../skills/eaa-modularizer-expert/references/functional-modularization.md)
+<!-- TODO: Create skill eaa-modularizer-expert with references/functional-modularization.md -->
 
 ### 2. Domain-Driven Modularization
 
 Organizes modules according to business domains and bounded contexts.
 
-For detailed methodology, see:
-[domain-modularization.md](../skills/eaa-modularizer-expert/references/domain-modularization.md)
+<!-- TODO: Create skill eaa-modularizer-expert with references/domain-modularization.md -->
 
 ### 3. Platform-Based Modularization
 
@@ -138,45 +136,50 @@ For detailed methodology, see:
 
 Designs cross-platform architectures with shared core libraries and platform-specific modules.
 
-For detailed methodology, see:
-[platform-modularization.md](../skills/eaa-modularizer-expert/references/platform-modularization.md)
+<!-- TODO: Create skill eaa-modularizer-expert with references/platform-modularization.md -->
 
 ---
 
 ## Platform Knowledge Base
 
-For comprehensive platform-specific knowledge, see the following references:
+For comprehensive platform-specific knowledge:
 
-| Platform | Reference |
-|----------|-----------|
-| Apple (macOS/iOS) | [platform-toolchains-part1-apple.md](../skills/eaa-modularizer-expert/references/platform-toolchains-part1-apple.md) |
-| Cross-Platform | [platform-toolchains-part2-cross-platform.md](../skills/eaa-modularizer-expert/references/platform-toolchains-part2-cross-platform.md) |
-| GPU Rendering | [gpu-rendering-systems-index.md](../skills/eaa-modularizer-expert/references/gpu-rendering-systems-index.md) |
-| ML/AI Acceleration | [ml-acceleration.md](../skills/eaa-modularizer-expert/references/ml-acceleration.md) |
+| Platform | Topics |
+|----------|--------|
+| Apple (macOS/iOS) | Xcode toolchains, Universal Binaries, Metal API |
+| Cross-Platform | CMake, Meson, cross-compilation toolchains |
+| GPU Rendering | Metal, Vulkan, DirectX, WebGPU |
+| ML/AI Acceleration | CoreML, ONNX Runtime, TensorRT |
+
+<!-- TODO: Create eaa-modularizer-expert skill with platform toolchain references -->
 
 ---
 
 ## Build System Knowledge
 
-For build system patterns and cross-platform compilation, see:
+For build system patterns and cross-platform compilation:
 
-| Build System | Reference |
-|--------------|-----------|
-| CMake Patterns | [CMAKE-patterns.md](../skills/eaa-modularizer-expert/references/CMAKE-patterns.md) |
-| GN + Ninja | [GN-NINJA-patterns.md](../skills/eaa-modularizer-expert/references/GN-NINJA-patterns.md) |
-| CI/CD Matrix | [CI-CD-matrix-builds.md](../skills/eaa-modularizer-expert/references/CI-CD-matrix-builds.md) |
-| Build Systems | [build-systems.md](../skills/eaa-modularizer-expert/references/build-systems.md) |
+| Build System | Purpose |
+|--------------|---------|
+| CMake | Cross-platform meta-build system |
+| GN + Ninja | High-performance builds (Chromium-style) |
+| CI/CD Matrix | Multi-platform CI strategies |
+| Meson | Modern, fast build system |
+
+<!-- TODO: Create eaa-modularizer-expert skill with build system references -->
 
 ---
 
 ## Language-Specific Patterns
 
-| Language | Reference |
-|----------|-----------|
-| Python | [python-project-patterns.md](../skills/eaa-modularizer-expert/references/python-project-patterns.md) |
-| Rust | [rust-project-patterns.md](../skills/eaa-modularizer-expert/references/rust-project-patterns.md) |
-| C++ | [cpp-project-patterns.md](../skills/eaa-modularizer-expert/references/cpp-project-patterns.md) |
-| Go | [go-project-patterns.md](../skills/eaa-modularizer-expert/references/go-project-patterns.md) |
+| Language | Key Topics |
+|----------|------------|
+| Python | uv, pyproject.toml, type checking, testing |
+| Rust | Cargo workspaces, features, cross-compilation |
+| C++ | CMake, Conan/vcpkg, static analysis |
+| Go | Go modules, workspaces, cross-compilation |
+
+<!-- TODO: Create eaa-modularizer-expert skill with language-specific references -->
 
 ---
 
@@ -211,8 +214,7 @@ Before designing any cross-platform architecture, the Modularizer Expert MUST:
 
 ## Module Specification Output Format
 
-For module specification template and examples, see:
-[SKILL.md - Module Specification Template](../skills/eaa-modularizer-expert/SKILL.md)
+<!-- TODO: Create eaa-modularizer-expert skill with SKILL.md containing module specification template -->
 
 **Key elements:**
 - Classification (Type, Platform, Language, Dependencies)
@@ -340,6 +342,81 @@ If ANY checkbox is NO → Generate Requirement Issue Report first.
 ---
 
 **IRON RULE REMINDER**: This agent NEVER writes code, only produces modularization specifications and architecture designs. All implementation is performed by Remote Developer Agents via AI Maestro.
+
+---
+
+## Escalation Protocol
+
+When blocked by circular dependencies, unclear boundaries, or conflicting requirements:
+
+### Step 1: Document the Blocker
+
+Create blocker document at `docs_dev/modularization/blockers/{timestamp}-{issue}.md`:
+
+```markdown
+# Blocker Report: [ISSUE_TITLE]
+
+**Timestamp:** [ISO_TIMESTAMP]
+**Agent:** eaa-modularizer-expert
+**Status:** BLOCKED
+
+## Issue Description
+[Detailed description of what is blocking progress]
+
+## Impact
+- Cannot proceed with: [BLOCKED_TASK]
+- Affects modules: [LIST_OF_MODULES]
+- Estimated delay: [TIME_ESTIMATE]
+
+## Root Cause Analysis
+[Analysis of why this is a blocker]
+
+## Options Considered
+1. **Option A:** [Description] - [Pros/Cons]
+2. **Option B:** [Description] - [Pros/Cons]
+
+## Recommended Resolution
+[Your recommendation if any]
+
+## Questions for Clarification
+1. [Specific question 1]
+2. [Specific question 2]
+```
+
+### Step 2: Send Escalation Message
+
+```bash
+curl -X POST "http://localhost:23000/api/messages" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "from": "eaa-modularizer-expert",
+    "to": "ecos",
+    "subject": "BLOCKED - Modularization Issue",
+    "priority": "urgent",
+    "content": {
+      "type": "blocker",
+      "message": "[BLOCKED] Modularization blocked: [BRIEF_ISSUE]. Impact: [IMPACT]. Blocker doc: docs_dev/modularization/blockers/[TIMESTAMP]-[ISSUE].md. Awaiting clarification."
+    }
+  }'
+```
+
+### Step 3: WAIT for Clarification
+
+**CRITICAL:** Do NOT proceed with assumptions. Do NOT implement workarounds.
+
+- Wait for response from ECOS/Team Orchestrator
+- Do NOT make architectural decisions that deviate from user requirements
+- If no response within 2 hours, send follow-up with `priority: urgent`
+
+### Common Blockers and Escalation Triggers
+
+| Blocker Type | When to Escalate |
+|--------------|------------------|
+| Circular dependencies | Cannot resolve without breaking user-specified boundaries |
+| Unclear boundaries | Multiple valid interpretations, need user decision |
+| Conflicting requirements | Two requirements cannot both be satisfied |
+| Technology constraints | User-specified tech cannot meet requirements |
+| Resource conflicts | Same module claimed by multiple domains |
 
 ---
 

@@ -1,7 +1,7 @@
 {
   "name": "emasoft-architect-agent",
-  "version": "1.0.0",
-  "description": "Design documents, requirements analysis, architecture decisions - creates specifications for orchestrator",
+  "version": "1.1.0",
+  "description": "Design documents, requirements analysis, architecture decisions - creates specifications. Requires AI Maestro for inter-agent messaging.",
   "author": {
     "name": "Emasoft",
     "email": "713559+Emasoft@users.noreply.github.com"
@@ -15,11 +15,12 @@
     "claude-code": ">=1.0.0"
   },
   "agents": [
-    "./agents/eaa-main.md",
+    "./agents/eaa-architect-main-agent.md",
     "./agents/eaa-documentation-writer.md",
     "./agents/eaa-api-researcher.md",
     "./agents/eaa-modularizer-expert.md",
-    "./agents/eaa-planner.md"
+    "./agents/eaa-planner.md",
+    "./agents/eaa-cicd-designer.md"
   ],
   "skills": "./skills/"
 }

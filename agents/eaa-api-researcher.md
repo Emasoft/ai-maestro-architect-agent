@@ -1,7 +1,7 @@
 ---
 name: eaa-api-researcher
 model: opus
-description: Researches API documentation and integration patterns
+description: Researches API documentation and integration patterns. Requires AI Maestro installed.
 type: local-helper
 auto_skills:
   - eaa-session-memory

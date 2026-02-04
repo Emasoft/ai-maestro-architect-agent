@@ -1,1 +1,37 @@
+# Python
 __pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Type checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Linting
+.ruff_cache/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dev folders (NEVER PUBLISH - development artifacts only)
+# Wildcard pattern catches all: docs_dev, scripts_dev, tests_dev, samples_dev,
+# examples_dev, downloads_dev, libs_dev, builds_dev, etc.
+*_dev/
+
+# Rust
+target/
+Cargo.lock

@@ -491,7 +491,7 @@ jobs:
 ## Cross-references
 
 - **[Part 1: Authentication & Setup](./bun-npm-publishing-part1-authentication-setup.md)** - OIDC, tokens, version management, pre-publish validation, registry config
-- **[bun-github-actions-index.md](./bun-github-actions-index.md)** - GitHub Actions CI/CD patterns
-- **[bun-testing-index.md](./bun-testing-index.md)** - Testing strategies before publishing
+- **[bun-github-actions.md](./bun-github-actions.md)** - GitHub Actions CI/CD patterns
+- **[bun-testing.md](./bun-testing.md)** - Testing strategies before publishing
 
 **External:** [npm docs](https://docs.npmjs.com/cli/v10/commands/npm-publish) | [Changesets](https://github.com/changesets/changesets) | [SemVer](https://semver.org/)

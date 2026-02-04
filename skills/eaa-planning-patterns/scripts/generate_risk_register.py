@@ -125,7 +125,7 @@ Total Risks: {count}
 """
 
     output_path = Path(output_file)
-    atomic_write_text(content, output_path)
+    atomic_write_text(output_path, content)
     # WHY: Verify write succeeded before reporting success
     verify(output_path)
 
@@ -147,7 +147,7 @@ def generate_csv_register(num_risks: int, output_file: str) -> None:
     content = "\n".join(lines)
 
     output_path = Path(output_file)
-    atomic_write_text(content, output_path)
+    atomic_write_text(output_path, content)
     # WHY: Verify write succeeded before reporting success
     verify(output_path)
 
@@ -184,7 +184,7 @@ def generate_json_register(num_risks: int, output_file: str) -> None:
         )
 
     output_path = Path(output_file)
-    atomic_write_json(register, output_path)
+    atomic_write_json(output_path, register)
     # WHY: Verify write succeeded before reporting success
     verify(output_path)
 

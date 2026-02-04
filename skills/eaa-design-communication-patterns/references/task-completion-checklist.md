@@ -1,5 +1,25 @@
 # Task Completion Checklist (Architect Agent)
 
+## Table of Contents
+
+- [Before Reporting Task Complete](#before-reporting-task-complete)
+  - [1. Acceptance Criteria Met](#1-acceptance-criteria-met)
+  - [2. Quality Gates Passed](#2-quality-gates-passed)
+  - [3. Architecture Verification](#3-architecture-verification)
+  - [4. Documentation Updated](#4-documentation-updated)
+  - [5. Handoff Prepared](#5-handoff-prepared)
+  - [6. GitHub Updated (if applicable)](#6-github-updated-if-applicable)
+  - [7. Session Memory Updated](#7-session-memory-updated)
+- [Verification Loop](#verification-loop)
+- [Common Traps (Architect-Specific)](#common-traps-architect-specific)
+- [Completion Report Format](#completion-report-format)
+- [Pre-Completion Checklist for Architects](#pre-completion-checklist-for-architects)
+  - [Design Decisions](#design-decisions)
+  - [Component Design](#component-design)
+  - [System Design](#system-design)
+  - [Documentation](#documentation)
+- [When to Escalate vs Complete](#when-to-escalate-vs-complete)
+
 ## Before Reporting Task Complete
 
 STOP and verify ALL of the following:

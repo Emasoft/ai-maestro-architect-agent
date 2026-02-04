@@ -1,6 +1,8 @@
 ---
 name: eaa-github-integration
-description: Use when linking design documents to GitHub issues for traceability and status synchronization. Creates issues from designs, attaches designs to existing issues, and keeps status synchronized.
+description: Use when linking design documents to GitHub issues. Creates issues from designs and syncs status. Trigger with GitHub issue linking or design traceability requests.
+version: 1.0.0
+compatibility: Requires AI Maestro installed.
 context: fork
 agent: eaa-planner
 user-invocable: true
@@ -33,6 +35,27 @@ Link design documents to GitHub issues for complete traceability. Create issues 
    - PROCEDURE 2: Attach design to existing issue
    - PROCEDURE 3: Synchronize status to GitHub
 4. Verify results and update design frontmatter
+
+### Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Verify gh CLI is installed (`gh --version`)
+- [ ] Verify gh CLI is authenticated (`gh auth status`)
+- [ ] Verify current directory is within a GitHub repository
+- [ ] Verify design document has UUID in frontmatter
+- [ ] Choose operation: Create Issue / Attach to Issue / Sync Status
+- [ ] For Create Issue:
+  - [ ] Run dry-run first: `python scripts/eaa_github_issue_create.py --uuid <UUID> --dry-run`
+  - [ ] Create issue: `python scripts/eaa_github_issue_create.py --uuid <UUID>`
+  - [ ] Verify issue created and design frontmatter updated
+- [ ] For Attach to Issue:
+  - [ ] Verify issue exists: `gh issue view <N>`
+  - [ ] Attach design: `python scripts/eaa_github_attach_document.py --uuid <UUID> --issue <N>`
+  - [ ] Verify comment posted and labels updated
+- [ ] For Sync Status:
+  - [ ] Run sync: `python scripts/eaa_github_sync_status.py --uuid <UUID>`
+  - [ ] Verify labels updated to match design status
 
 ---
 
@@ -297,6 +320,68 @@ ERROR: gh CLI not authenticated. Run: gh auth login
 
 ---
 
+## Monitoring GitHub Project Changes
+
+### GitHub Project Kanban Monitoring
+
+During active design work, monitor the GitHub Project board for external changes that may affect your work.
+
+**Poll Interval:** Every 5 minutes during active work sessions
+
+**What to Monitor:**
+- Card movements (status changes)
+- New comments on linked issues
+- Label changes
+- Assignment changes
+- Milestone updates
+
+**Monitoring Command:**
+```bash
+# List all items in the project board
+gh project item-list --owner Emasoft --format json
+
+# Get specific project items with details
+gh project item-list --owner Emasoft --project [PROJECT_NUMBER] --format json | jq '.items[] | {title, status, updatedAt}'
+
+# Check for items updated in last 5 minutes
+gh project item-list --owner Emasoft --format json | jq --arg cutoff "$(date -v-5M -u +%Y-%m-%dT%H:%M:%SZ)" '.items[] | select(.updatedAt > $cutoff)'
+```
+
+**Actions on External Change Detection:**
+
+1. **On card movement detected:**
+   ```bash
+   # Notify EOA about status change
+   curl -X POST "http://localhost:23000/api/messages" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "from": "eaa-architect-main-agent",
+       "to": "ecos",
+       "subject": "GitHub Project Change Detected",
+       "priority": "normal",
+       "content": {
+         "type": "project_sync",
+         "message": "Card [CARD_TITLE] moved from [OLD_STATUS] to [NEW_STATUS]. Updating local design state."
+       }
+     }'
+   ```
+
+2. **Update local design document state** to match GitHub Project status
+
+3. **Log change** in `docs_dev/design/project-sync-log.md`
+
+**Sync Log Format:**
+```markdown
+## [TIMESTAMP]
+- Card: [CARD_TITLE]
+- Change: [OLD_STATUS] -> [NEW_STATUS]
+- Source: GitHub Project external update
+- Action: Updated local design state
+- Notified: EOA via AI Maestro
+```
+
+---
+
 ## Integration with Design Lifecycle
 
 ### Recommended Workflow
@@ -329,6 +414,29 @@ ERROR: gh CLI not authenticated. Run: gh auth login
    python scripts/eaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
    gh issue close <issue-number> --comment "Design implemented"
    ```
+
+---
+
+## Output
+
+Each GitHub integration operation produces specific outputs that confirm successful execution:
+
+| Operation | Output Type | Example | Description |
+|-----------|-------------|---------|-------------|
+| Create Issue from Design | GitHub issue URL + local file update | `CREATED: https://github.com/owner/repo/issues/123`<br>`UPDATED: docs/design/specs/auth-service.md with issue #123` | Creates new GitHub issue and updates design frontmatter with `related_issues` |
+| Attach Design to Issue | Issue comment + label update | `ATTACHED: Design to issue #42`<br>`UPDATED: Labels [design, design:spec, status:draft]` | Adds design content as comment and syncs labels |
+| Sync Status | Label change confirmation | `SYNCED: Issue #42 labels updated`<br>`REMOVED: status:draft`<br>`ADDED: status:approved` | Updates issue labels to match design status |
+| Dry Run | Validation report | `DRY-RUN: Would create issue with title "[SPEC] Auth Service"`<br>`DRY-RUN: Would add labels: design, design:spec, status:draft` | Shows what would happen without making changes |
+| Error | Error message + cause | `ERROR: gh CLI not authenticated. Run: gh auth login` | Describes the problem and recommended fix |
+
+### Output File Modifications
+
+| Modified File | Field Updated | Purpose |
+|---------------|---------------|---------|
+| Design document frontmatter | `related_issues: ["#123"]` | Links design to GitHub issue(s) |
+| Design document frontmatter | `status: approved` | Updated by transition (synced to GitHub) |
+| GitHub issue | Labels: `design`, `design:spec`, `status:*` | Tracks design type and current status |
+| GitHub issue | Comments | Contains design document content snapshots |
 
 ---
 

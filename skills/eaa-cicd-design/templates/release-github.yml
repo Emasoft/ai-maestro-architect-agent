@@ -1,0 +1,260 @@
+---
+# GitHub Release Template
+# Copy this to .github/workflows/release.yml
+# Triggered by pushing a version tag: git tag v1.0.0 && git push --tags
+
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+  packages: write
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  # ============================================
+  # Stage 1: Validate release
+  # ============================================
+  validate:
+    name: Validate Release
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      prerelease: ${{ steps.version.outputs.prerelease }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract version
+        id: version
+        run: |
+          TAG="${GITHUB_REF#refs/tags/v}"
+          echo "version=$TAG" >> $GITHUB_OUTPUT
+
+          if [[ "$TAG" == *"-"* ]]; then
+            echo "prerelease=true" >> $GITHUB_OUTPUT
+          else
+            echo "prerelease=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Verify version matches Cargo.toml
+        run: |
+          CARGO_VERSION=$(grep '^version' Cargo.toml | head -1 | sed 's/.*"\(.*\)".*/\1/')
+          if [[ "$CARGO_VERSION" != "${{ steps.version.outputs.version }}" ]]; then
+            echo "::error::Version mismatch: tag=${{ steps.version.outputs.version }}, Cargo.toml=$CARGO_VERSION"
+            exit 1
+          fi
+
+  # ============================================
+  # Stage 2: Final test before release
+  # ============================================
+  test:
+    name: Test
+    needs: validate
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest, macos-14, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Run tests
+        run: cargo test --all-features --release
+
+  # ============================================
+  # Stage 3: Build release binaries
+  # ============================================
+  build:
+    name: Build ${{ matrix.artifact }}
+    needs: test
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Linux x64
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            artifact: linux-x64
+            ext: ""
+            archive: tar.gz
+
+          # Linux ARM64
+          - os: ubuntu-24.04
+            target: aarch64-unknown-linux-gnu
+            artifact: linux-arm64
+            ext: ""
+            archive: tar.gz
+
+          # macOS ARM64 (Apple Silicon)
+          - os: macos-14
+            target: aarch64-apple-darwin
+            artifact: macos-arm64
+            ext: ""
+            archive: tar.gz
+
+          # macOS x64 (Intel)
+          - os: macos-15
+            target: x86_64-apple-darwin
+            artifact: macos-x64
+            ext: ""
+            archive: tar.gz
+
+          # Windows x64
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            artifact: windows-x64
+            ext: ".exe"
+            archive: zip
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Build release
+        run: cargo build --release --target ${{ matrix.target }}
+
+      - name: Package (Unix)
+        if: matrix.archive == 'tar.gz'
+        run: |
+          mkdir -p dist
+          BIN_NAME=$(grep '^name' Cargo.toml | head -1 | sed 's/.*"\(.*\)".*/\1/')
+          cp "target/${{ matrix.target }}/release/${BIN_NAME}${{ matrix.ext }}" dist/
+          cd dist
+          tar -czvf "${BIN_NAME}-${{ needs.validate.outputs.version }}-${{ matrix.artifact }}.tar.gz" "${BIN_NAME}${{ matrix.ext }}"
+
+      - name: Package (Windows)
+        if: matrix.archive == 'zip'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path dist
+          $cargoToml = Get-Content Cargo.toml -Raw
+          $binName = [regex]::Match($cargoToml, 'name\s*=\s*"([^"]+)"').Groups[1].Value
+          Copy-Item "target/${{ matrix.target }}/release/${binName}${{ matrix.ext }}" dist/
+          Compress-Archive -Path "dist/${binName}${{ matrix.ext }}" -DestinationPath "dist/${binName}-${{ needs.validate.outputs.version }}-${{ matrix.artifact }}.zip"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ matrix.artifact }}
+          path: dist/*.${{ matrix.archive }}
+          retention-days: 1
+
+  # ============================================
+  # Stage 4: Create checksums
+  # ============================================
+  checksums:
+    name: Create Checksums
+    needs: [validate, build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts/
+          pattern: release-*
+          merge-multiple: true
+
+      - name: Create checksums
+        run: |
+          cd artifacts
+          sha256sum * > checksums-${{ needs.validate.outputs.version }}.sha256
+          cat checksums-${{ needs.validate.outputs.version }}.sha256
+
+      - name: Upload checksums
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-checksums
+          path: artifacts/checksums-*.sha256
+
+  # ============================================
+  # Stage 5: Create GitHub Release
+  # ============================================
+  release:
+    name: Create GitHub Release
+    needs: [validate, checksums]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts/
+          pattern: release-*
+          merge-multiple: true
+
+      - name: Generate changelog
+        id: changelog
+        run: |
+          PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+
+          cat > RELEASE_NOTES.md << 'HEREDOC'
+          ## What's Changed
+
+          HEREDOC
+
+          if [[ -n "$PREV_TAG" ]]; then
+            git log --pretty=format:"- %s (%h)" "$PREV_TAG"..HEAD >> RELEASE_NOTES.md
+          else
+            echo "Initial release" >> RELEASE_NOTES.md
+          fi
+
+          cat >> RELEASE_NOTES.md << 'HEREDOC'
+
+          ## Installation
+
+          ### Download Binary
+
+          Download the appropriate binary for your platform from the assets below.
+
+          ### Verify Checksum
+
+          ```bash
+          sha256sum -c checksums-${{ needs.validate.outputs.version }}.sha256
+          ```
+
+          HEREDOC
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: v${{ needs.validate.outputs.version }}
+          body_path: RELEASE_NOTES.md
+          draft: false
+          prerelease: ${{ needs.validate.outputs.prerelease == 'true' }}
+          files: |
+            artifacts/*.tar.gz
+            artifacts/*.zip
+            artifacts/*.sha256
+          generate_release_notes: true
+
+  # ============================================
+  # Stage 6: Publish to registries (stable only)
+  # ============================================
+  publish-crates:
+    name: Publish to crates.io
+    needs: [validate, release]
+    if: needs.validate.outputs.prerelease == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Publish
+        run: cargo publish --token ${{ secrets.CRATES_IO_TOKEN }}
+        continue-on-error: true  # May fail if already published

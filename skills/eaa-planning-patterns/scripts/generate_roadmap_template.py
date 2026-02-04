@@ -211,7 +211,7 @@ See Risk Register for complete list.
     # WHY: atomic_write_text ensures file is written completely or not at all,
     # preventing partial/corrupt files on disk full or interrupt scenarios
     output_path = Path(output_file)
-    atomic_write_text(content, output_path)
+    atomic_write_text(output_path, content)
 
     # WHY: Verification after write ensures the file was actually created and is non-empty
     verify(output_path)

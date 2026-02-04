@@ -4,6 +4,24 @@
 
 ---
 
+## Table of Contents
+
+- [Binary and Native Modules](#binary-and-native-modules)
+  - [What are Binary and Native Modules?](#what-are-binary-and-native-modules)
+  - [How Bun Handles Native Modules](#how-bun-handles-native-modules)
+  - [Using Native Modules with Bun](#using-native-modules-with-bun)
+  - [Common Native Modules](#common-native-modules)
+  - [Building Native Modules with Bun](#building-native-modules-with-bun)
+  - [Creating a Native Addon (Advanced)](#creating-a-native-addon-advanced)
+  - [Bundling Applications with Native Modules](#bundling-applications-with-native-modules)
+  - [Distributing Apps with Native Modules](#distributing-apps-with-native-modules)
+  - [Platform-Specific Native Modules](#platform-specific-native-modules)
+  - [Troubleshooting Native Modules](#troubleshooting-native-modules)
+  - [Native Module Best Practices](#native-module-best-practices)
+- [Cross-References](#cross-references)
+
+---
+
 ## Binary and Native Modules
 
 ### What are Binary and Native Modules?

@@ -1,16 +1,12 @@
 ---
 name: eaa-documentation-writer
-description: Use when writing module specifications, API contracts, architecture decision records (ADRs), or feature specifications. Follows the 6 C's quality framework for technical documentation.
+description: Use when writing module specs, API contracts, ADRs, or feature specs. Follows 6 C's quality framework. Trigger with technical documentation requests for modules or architecture.
+version: 1.0.0
 license: Apache-2.0
-compatibility: Works with any codebase. Outputs to standardized documentation directories (/docs/module-specs/, /docs/api-contracts/, /docs/adrs/).
+compatibility: Works with any codebase. Outputs to standardized documentation directories (/docs/module-specs/, /docs/api-contracts/, /docs/adrs/). Requires AI Maestro installed.
 metadata:
   author: Anthropic
-  version: 1.0.0
-  triggers:
-    - Create technical documentation for a module
-    - Write API contract documentation
-    - Document architecture decisions (ADR)
-    - Create feature specifications
+  triggers: "Create technical documentation for a module, Write API contract documentation, Document architecture decisions (ADR), Create feature specifications"
 context: fork
 ---
 
@@ -35,6 +31,16 @@ Technical documentation creation skill for the Documentation Writer Agent. This 
 5. Add cross-references to related documents
 6. Perform quality check against 6 C's
 7. Commit and report completion
+
+## Output
+
+| Artifact | Location | Format | Contains |
+|----------|----------|--------|----------|
+| Module Specification | `/docs/module-specs/<module-name>.md` | Markdown | Purpose, interfaces, dependencies, configuration |
+| API Contract | `/docs/api-contracts/<api-name>.md` | Markdown | Endpoints, request/response schemas, authentication |
+| Architecture Decision Record | `/docs/adrs/ADR-<NNN>-<title>.md` | Markdown | Context, decision, consequences, alternatives |
+| Feature Specification | `/docs_dev/requirements/<feature-name>.md` | Markdown | User stories, requirements, acceptance criteria |
+| Process Documentation | `/docs/workflows/<process-name>.md` | Markdown | Workflow steps, responsibilities, tooling |
 
 ---
 
@@ -71,12 +77,22 @@ Technical documentation creation skill for the Documentation Writer Agent. This 
 
 ### Quality Checklist
 
-- [ ] Complete - all aspects covered
-- [ ] Correct - technically accurate
-- [ ] Clear - unambiguous language
-- [ ] Consistent - same terminology throughout
-- [ ] Current - reflects latest decisions
-- [ ] Connected - cross-references to related docs
+Copy this checklist and track your progress:
+
+- [ ] Receive and parse documentation assignment
+- [ ] Gather context from existing code and specifications
+- [ ] Create document structure using appropriate template
+- [ ] Write core content following quality standards
+- [ ] Add cross-references to related documents
+- [ ] Perform quality check against 6 C's:
+  - [ ] Complete - all aspects covered
+  - [ ] Correct - technically accurate
+  - [ ] Clear - unambiguous language
+  - [ ] Consistent - same terminology throughout
+  - [ ] Current - reflects latest decisions
+  - [ ] Connected - cross-references to related docs
+- [ ] Commit document to appropriate location
+- [ ] Report completion to orchestrator
 
 ---
 

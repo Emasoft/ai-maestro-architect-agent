@@ -32,7 +32,10 @@ from typing import Optional
 def check_gh_cli() -> bool:
     """Check if gh CLI is available and authenticated."""
     if not shutil.which("gh"):
-        print("ERROR: gh CLI not found. Install from https://cli.github.com/", file=sys.stderr)
+        print(
+            "ERROR: gh CLI not found. Install from https://cli.github.com/",
+            file=sys.stderr,
+        )
         return False
 
     result = subprocess.run(
@@ -171,7 +174,9 @@ def format_document_comment(frontmatter: dict, body: str, header: str) -> str:
 
     body_content = body.strip()
     if len(body_content) > 5000:
-        body_content = body_content[:5000] + "\n\n... *[Content truncated - see full document]*"
+        body_content = (
+            body_content[:5000] + "\n\n... *[Content truncated - see full document]*"
+        )
 
     comment_parts.append("<details>")
     comment_parts.append("<summary>Full Design Document Content</summary>")
@@ -181,12 +186,16 @@ def format_document_comment(frontmatter: dict, body: str, header: str) -> str:
     comment_parts.append("</details>")
     comment_parts.append("")
     comment_parts.append("---")
-    comment_parts.append(f"*Attached from design document `{uuid_str}` on {datetime.now().strftime('%Y-%m-%d %H:%M')}*")
+    comment_parts.append(
+        f"*Attached from design document `{uuid_str}` on {datetime.now().strftime('%Y-%m-%d %H:%M')}*"
+    )
 
     return "\n".join(comment_parts)
 
 
-def add_comment_to_issue(issue_number: int, comment: str, dry_run: bool = False) -> bool:
+def add_comment_to_issue(
+    issue_number: int, comment: str, dry_run: bool = False
+) -> bool:
     """Add comment to GitHub issue."""
     if dry_run:
         print("DRY RUN - Would add comment to issue:")
@@ -208,7 +217,9 @@ def add_comment_to_issue(issue_number: int, comment: str, dry_run: bool = False)
     return True
 
 
-def update_issue_labels(issue_number: int, frontmatter: dict, dry_run: bool = False) -> bool:
+def update_issue_labels(
+    issue_number: int, frontmatter: dict, dry_run: bool = False
+) -> bool:
     """Update issue labels based on design document status."""
     status = frontmatter.get("status", "draft")
     doc_type = frontmatter.get("type", "design").lower()
@@ -255,7 +266,14 @@ def update_issue_labels(issue_number: int, frontmatter: dict, dry_run: bool = Fa
 
     if labels_to_add:
         result = subprocess.run(
-            ["gh", "issue", "edit", str(issue_number), "--add-label", ",".join(labels_to_add)],
+            [
+                "gh",
+                "issue",
+                "edit",
+                str(issue_number),
+                "--add-label",
+                ",".join(labels_to_add),
+            ],
             capture_output=True,
             text=True,
         )
@@ -264,7 +282,14 @@ def update_issue_labels(issue_number: int, frontmatter: dict, dry_run: bool = Fa
 
     if labels_to_remove:
         result = subprocess.run(
-            ["gh", "issue", "edit", str(issue_number), "--remove-label", ",".join(labels_to_remove)],
+            [
+                "gh",
+                "issue",
+                "edit",
+                str(issue_number),
+                "--remove-label",
+                ",".join(labels_to_remove),
+            ],
             capture_output=True,
             text=True,
         )
@@ -312,7 +337,9 @@ def update_document_with_issue(doc_path: Path, issue_number: int) -> bool:
 
             for line in lines[1:end_idx]:
                 if line.startswith("related_issues:"):
-                    new_frontmatter_lines.append(f"related_issues: {json.dumps(related_issues)}")
+                    new_frontmatter_lines.append(
+                        f"related_issues: {json.dumps(related_issues)}"
+                    )
                     found_related_issues = True
                 elif line.startswith("updated:"):
                     new_frontmatter_lines.append(f"updated: {today}")
@@ -321,7 +348,9 @@ def update_document_with_issue(doc_path: Path, issue_number: int) -> bool:
                     new_frontmatter_lines.append(line)
 
             if not found_related_issues:
-                new_frontmatter_lines.insert(-1, f"related_issues: {json.dumps(related_issues)}")
+                new_frontmatter_lines.insert(
+                    -1, f"related_issues: {json.dumps(related_issues)}"
+                )
             if not found_updated:
                 new_frontmatter_lines.insert(-1, f"updated: {today}")
 

@@ -6,6 +6,24 @@ This section covers issues when bundling code for browser environments.
 
 ---
 
+## Table of Contents
+
+- [3. Node.js Modules in Browser](#3-nodejs-modules-in-browser)
+  - [Problem Description](#problem-description)
+  - [Root Cause](#root-cause)
+  - [Solution](#solution)
+  - [Complete Example](#complete-example)
+  - [When This Issue Occurs](#when-this-issue-occurs)
+- [4. Global Name Collision](#4-global-name-collision)
+  - [Problem Description](#problem-description-1)
+  - [Root Cause](#root-cause-1)
+  - [Solution](#solution-1)
+  - [Naming Conventions](#naming-conventions)
+  - [Complete Example](#complete-example-1)
+  - [When This Issue Occurs](#when-this-issue-occurs-1)
+
+---
+
 ## 3. Node.js Modules in Browser
 
 ### Problem Description

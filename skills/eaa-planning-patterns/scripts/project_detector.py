@@ -474,7 +474,7 @@ Examples:
     if args.output:
         # WHY: Write to file if specified
         try:
-            atomic_write_json(result, args.output)
+            atomic_write_json(args.output, result)
             print(f"Analysis written to {args.output}", file=sys.stderr)
         except OSError as e:
             print(f"Error writing to {args.output}: {e}", file=sys.stderr)

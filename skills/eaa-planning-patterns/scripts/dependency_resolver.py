@@ -69,15 +69,18 @@ class DependencyResolver:
         except json.JSONDecodeError:
             # WHY: Fall back to YAML only if JSON fails, requires yaml module
             try:
-                import yaml
+                import yaml as yaml_module
 
-                data = yaml.safe_load(content)
+                data = yaml_module.safe_load(content)
             except ImportError:
                 raise ValueError(
                     "YAML file detected but PyYAML not installed. Use JSON format or install PyYAML."
-                )
-            except yaml.YAMLError as e:
-                raise ValueError(f"Invalid YAML format: {e}")
+                ) from None
+            except Exception as e:
+                # WHY: Catch YAML parsing errors after successful import
+                if "yaml" in type(e).__module__.lower():
+                    raise ValueError(f"Invalid YAML format: {e}") from e
+                raise
 
         # WHY: Validate top-level structure before processing
         if not isinstance(data, dict) or "nodes" not in data:
@@ -370,7 +373,7 @@ Output format (json):
 
         # WHY: Write to file or stdout based on arguments
         if args.output:
-            atomic_write_text(output + "\n", Path(args.output))
+            atomic_write_text(Path(args.output), output + "\n")
             if args.verbose:
                 print(f"Written to {args.output}", file=sys.stderr)
         else:

@@ -4,6 +4,27 @@
 
 ---
 
+## Table of Contents
+
+- [Monorepo and Workspaces](#monorepo-and-workspaces)
+  - [What is a Monorepo?](#what-is-a-monorepo)
+  - [What are Workspaces?](#what-are-workspaces)
+  - [Why Use Monorepos and Workspaces?](#why-use-monorepos-and-workspaces)
+  - [Setting Up a Monorepo with Bun](#setting-up-a-monorepo-with-bun)
+  - [Workspace Package Configuration](#workspace-package-configuration)
+  - [Installing Dependencies in a Workspace](#installing-dependencies-in-a-workspace)
+  - [Workspace Protocol](#workspace-protocol)
+  - [Running Scripts Across Workspaces](#running-scripts-across-workspaces)
+  - [Building a Monorepo Library](#building-a-monorepo-library)
+  - [Build Configuration for Monorepo](#build-configuration-for-monorepo)
+  - [Shared TypeScript Configuration](#shared-typescript-configuration)
+  - [Versioning and Publishing](#versioning-and-publishing)
+  - [Monorepo Build Optimization](#monorepo-build-optimization)
+  - [Monorepo Best Practices](#monorepo-best-practices)
+- [Cross-References](#cross-references)
+
+---
+
 ## Monorepo and Workspaces
 
 ### What is a Monorepo?

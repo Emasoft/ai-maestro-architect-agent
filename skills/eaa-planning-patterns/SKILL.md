@@ -1,11 +1,11 @@
 ---
 name: eaa-planning-patterns
-description: Use when creating comprehensive planning documents through four sequential phases - architecture design, risk identification, roadmap creation, and implementation planning. Enables strategic system design for projects from conception to execution.
+description: "Use when creating architecture plans. Trigger with /plan project or design system requests."
+version: 1.0.0
 license: Apache-2.0
-compatibility: Cross-platform compatible. Requires Python 3.8+ for utility scripts. Works with all project types and toolchains. Supports atomic file operations with UTF-8 encoding using pathlib for universal path handling.
+compatibility: Cross-platform compatible. Requires Python 3.8+ for utility scripts. Works with all project types and toolchains. Supports atomic file operations with UTF-8 encoding using pathlib for universal path handling. Requires AI Maestro installed.
 metadata:
   author: Anthropic
-  version: 1.0.0
 context: fork
 ---
 
@@ -37,6 +37,51 @@ Use this skill when:
 2. Risk Identification - Discover and plan for obstacles
 3. Roadmap Creation - Create a sequenced execution plan
 4. Implementation Planning - Break roadmap into actionable tasks
+
+### Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Read step-by-step-procedures.md for process overview
+- [ ] Complete planning-checklist.md prerequisites
+- [ ] **Phase 1: Architecture Design**
+  - [ ] Identify all system components
+  - [ ] Define component responsibilities
+  - [ ] Map data flows between components
+  - [ ] Identify component dependencies
+  - [ ] Define component interfaces
+  - [ ] Select design patterns
+  - [ ] Create architecture design document
+- [ ] **Phase 2: Risk Identification**
+  - [ ] Discover all possible risks
+  - [ ] Assess impact and probability for each risk
+  - [ ] Plan mitigation strategies
+  - [ ] Create risk register
+  - [ ] Define monitoring plan
+- [ ] **Phase 3: Roadmap Creation**
+  - [ ] Define phases
+  - [ ] Sequence phases by dependencies
+  - [ ] Define milestones and deliverables
+  - [ ] Allocate resources and estimate effort
+  - [ ] Create master roadmap
+- [ ] **Phase 4: Implementation Planning**
+  - [ ] Break milestones into tasks
+  - [ ] Create dependency network
+  - [ ] Assign task owners
+  - [ ] Create responsibility matrix
+  - [ ] Set up tracking mechanism
+- [ ] Have stakeholders review and approve outputs
+
+## Output
+
+This skill produces comprehensive planning documentation across four sequential phases:
+
+| Phase | Output Artifact | Contents |
+|-------|----------------|----------|
+| Architecture Design | Architecture design document | System components, responsibilities, data flows, dependencies, interfaces, design patterns |
+| Risk Identification | Risk register | Prioritized risks, impact/probability assessments, mitigation strategies, monitoring plans |
+| Roadmap Creation | Master roadmap | Phases, execution sequence, milestones, deliverables, resource allocation, effort estimates |
+| Implementation Planning | Task implementation plan | Detailed tasks, ownership assignments, dependency network, success criteria, tracking mechanisms |
 
 ## What You Will Learn
 
@@ -348,6 +393,21 @@ When planning projects with remote agents or multi-language codebases, enable LS
 - Every step must be specific and concrete
 - All four phases are required - do not skip phases
 - Plans change as you execute - revisit and update regularly
+
+---
+
+## Troubleshooting
+
+| Issue | Cause | Solution |
+|-------|-------|----------|
+| Plan not progressing | Dependencies unclear or blocking | Review dependency graph with `tldr arch`, identify critical path blockers, escalate to stakeholders |
+| Roadmap phases out of order | Incorrect dependency sequencing | Use `dependency_resolver.py` to validate dependency order, rebuild phase sequence |
+| Stakeholders reject plan | Misaligned expectations or missing requirements | Review `requirement-immutability.md`, verify Requirement Compliance Table, schedule stakeholder alignment meeting |
+| Tasks too large to estimate | Insufficient decomposition | Apply task splitting: no task >3 days. Break into sub-tasks with clear acceptance criteria |
+| Risk mitigation strategies failing | Risk assessment inaccurate | Update risk register with actual realized risks, adjust impact/probability scores, revise mitigation strategies |
+| Team not following plan | Plan unclear or inaccessible | Create multiple formats (executive summary, visual roadmap, daily checklist), ensure plan visibility |
+| Plan validation script failing | Quality thresholds not met | Run `validate_plan.py` with `--verbose`, address specific violations in order of priority |
+| Architecture becomes obsolete | System evolved differently than planned | Schedule architecture review, update component diagram, revise affected phases |
 
 ---
 

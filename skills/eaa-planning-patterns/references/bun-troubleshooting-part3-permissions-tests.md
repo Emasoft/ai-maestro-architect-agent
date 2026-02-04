@@ -6,6 +6,27 @@ This section covers GitHub permissions and test timeout issues.
 
 ---
 
+## Table of Contents
+
+- [6. GitHub Release Permissions](#6-github-release-permissions)
+  - [Problem Description](#problem-description)
+  - [Root Cause](#root-cause)
+  - [Solution](#solution)
+  - [Complete Example](#complete-example)
+  - [Permission Scope Explanation](#permission-scope-explanation)
+  - [Security Best Practices](#security-best-practices)
+  - [When This Issue Occurs](#when-this-issue-occurs)
+- [7. Test Timeouts](#7-test-timeouts)
+  - [Problem Description](#problem-description-1)
+  - [Root Cause](#root-cause-1)
+  - [Solution](#solution-1)
+  - [Best Practices](#best-practices)
+  - [Alternative: Use Real Services with Appropriate Timeouts](#alternative-use-real-services-with-appropriate-timeouts)
+  - [Complete Example](#complete-example-1)
+  - [When This Issue Occurs](#when-this-issue-occurs-1)
+
+---
+
 ## 6. GitHub Release Permissions
 
 ### Problem Description

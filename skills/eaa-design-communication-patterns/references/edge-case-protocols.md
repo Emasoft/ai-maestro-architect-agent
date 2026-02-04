@@ -180,21 +180,25 @@ Maintain local design document repository:
 
 ---
 
-## 3.0 Remote Agent Timeout
+## 3.0 Remote Agent Unresponsive
 
 ### 3.1 Detection Methods
 
-| Condition | Threshold | Detection |
-|-----------|-----------|-----------|
-| No ACK received | 5 minutes | Subagent did not acknowledge task |
-| No progress update | 20 minutes | No research/documentation progress |
-| Session terminated | Immediate | AI Maestro reports agent offline |
+AI agents collaborate asynchronously and may be hibernated for extended periods. Detection is based on **state**, not elapsed time.
 
-### 3.2 Research Agent Timeout
+| State | Detection | Priority |
+|-------|-----------|----------|
+| No ACK | Subagent has not acknowledged task | Normal |
+| No Progress | Subagent acknowledged but no research/documentation progress | Normal |
+| Stale | Subagent's last update predates significant events | High |
+| Unresponsive | Multiple reminders sent without any response | Urgent |
+| Offline | AI Maestro reports agent session terminated | Immediate |
 
-When `eaa-api-researcher` times out:
+### 3.2 Research Agent Unresponsive
 
-1. **First Reminder (5 min no ACK / 20 min no progress)**:
+When `eaa-api-researcher` is unresponsive:
+
+1. **First Reminder (when state = No ACK or No Progress)**:
    ```bash
    curl -X POST "$AIMAESTRO_API/api/messages" \
      -d '{
@@ -660,7 +664,7 @@ Recovery checkpoint: `.claude/recovery/architect-checkpoint-{timestamp}.json`
 
 ## Related Documents
 
-- [requirements-analysis.md](../eaa-requirements-analysis/SKILL.md) - Requirements patterns
-- [research-procedure.md](../eaa-api-research/references/research-procedure.md) - API research
-- [hypothesis-verification.md](../eaa-hypothesis-verification/README.md) - Testing assumptions
-- [planning-checklist.md](../eaa-planning-patterns/references/planning-checklist.md) - Planning validation
+- **eaa-requirements-analysis** - Requirements patterns
+- **eaa-api-research** (research-procedure.md reference) - API research
+- **eaa-hypothesis-verification** - Testing assumptions
+- **eaa-planning-patterns** (planning-checklist.md reference) - Planning validation

@@ -47,7 +47,7 @@ The Architect Agent handles **design documents, requirements analysis, and archi
 | `eaa-api-research` | API research patterns |
 | `eaa-planning-patterns` | Planning methodology |
 | `eaa-hypothesis-verification` | Test assumptions |
-| `eaa-shared` | Shared utilities |
+| `eaa-design-communication-patterns` | Shared utilities |
 
 ### Hooks
 

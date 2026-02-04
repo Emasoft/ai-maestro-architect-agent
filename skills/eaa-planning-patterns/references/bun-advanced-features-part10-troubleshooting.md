@@ -4,6 +4,24 @@
 
 ---
 
+## Table of Contents
+
+- [Troubleshooting](#troubleshooting)
+  - [Code Splitting Issues](#code-splitting-issues)
+  - [Tree Shaking Issues](#tree-shaking-issues)
+  - [Drop Console/Debugger Issues](#drop-consoledebugger-issues)
+  - [Banner/Footer Issues](#bannerfooter-issues)
+  - [Standalone Executable Issues](#standalone-executable-issues)
+  - [Monorepo/Workspace Issues](#monorepoworkspace-issues)
+  - [Dynamic Import Issues](#dynamic-import-issues)
+  - [Native Module Issues](#native-module-issues)
+  - [JSON Import Issues](#json-import-issues)
+  - [General Build Issues](#general-build-issues)
+- [Summary](#summary)
+- [Cross-References](#cross-references)
+
+---
+
 ## Troubleshooting
 
 ### Code Splitting Issues

@@ -1,11 +1,11 @@
 ---
 name: eaa-requirements-analysis
-description: "Use when starting planning, tracking progress, managing requirements and modules, or approving plans. Documents all planning phase commands for Architect Agent to create complete specifications before implementation."
+description: "Use when managing planning phase: start planning, track progress, manage requirements/modules, or approve plans. Trigger with /start-planning or /planning-status commands."
+version: 1.0.0
 license: Apache-2.0
-compatibility: "Requires Python 3.8+, PyYAML, GitHub CLI for issue creation. Cross-platform compatible."
+compatibility: "Requires Python 3.8+, PyYAML, GitHub CLI for issue creation. Cross-platform compatible. Requires AI Maestro installed."
 metadata:
   author: Anthropic
-  version: 1.0.0
 user-invocable: false
 context: fork
 ---
@@ -37,6 +37,27 @@ Use this skill when you need to:
 3. Track progress with `/planning-status`
 4. Modify as needed with `/modify-requirement`
 5. Approve plan with `/approve-plan`
+
+### Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Start planning: `/start-planning "goal description"`
+- [ ] Verify state file created at `.claude/orchestrator-plan-phase.local.md`
+- [ ] Add requirement sections as needed: `/add-requirement requirement "Name"`
+- [ ] Add modules with criteria: `/add-requirement module "name" --criteria "..." --priority high`
+- [ ] Create USER_REQUIREMENTS.md manually
+- [ ] Track progress: `/planning-status`
+- [ ] Mark requirement sections complete: `/modify-requirement requirement "Name" --status complete`
+- [ ] Verify all prerequisites met:
+  - [ ] USER_REQUIREMENTS.md exists
+  - [ ] All requirement sections marked complete
+  - [ ] All modules have acceptance criteria
+  - [ ] At least one module defined
+- [ ] Verify plan: `/planning-status --verbose`
+- [ ] Approve plan: `/approve-plan`
+- [ ] Verify GitHub Issues created for each module
+- [ ] Begin orchestration: `/start-orchestration`
 
 ## Commands Overview
 
@@ -416,3 +437,63 @@ python3 scripts/reset_plan_phase.py --confirm --no-backup
 - orchestration-commands - Implementation phase
 - agent-management - Registering and assigning agents
 - module-lifecycle - Tracking module progress
+
+---
+
+## Output
+
+Each planning command produces specific output. See detailed command documentation in sections 1.0-6.0.
+
+| Command | Output Type | Details |
+|---------|-------------|---------|
+| `/start-planning` | State file creation + confirmation message | See section 1.0 |
+| `/planning-status` | Formatted status table with progress | See section 2.0 |
+| `/add-requirement` | Confirmation message + updated state | See section 3.0 |
+| `/modify-requirement` | Confirmation message + updated state | See section 4.0 |
+| `/remove-requirement` | Confirmation message + updated state | See section 5.0 |
+| `/approve-plan` | Validation results + GitHub Issues created | See section 6.0 |
+
+---
+
+## Error Handling
+
+Common errors and resolutions. For detailed troubleshooting, see section 8.0 and [troubleshooting.md](references/troubleshooting.md).
+
+| Error | Cause | Resolution |
+|-------|-------|------------|
+| State file not found | Planning not started | Run `/start-planning` first |
+| Invalid status transition | Wrong status order | Follow: pending → in_progress → complete |
+| Module has GitHub Issue | Cannot remove linked module | Use `--force` flag or close issue first |
+| Approval prerequisites failed | Incomplete requirements | Mark all sections complete first |
+| gh CLI auth failed | Not logged in | Run `gh auth login` |
+| State file corrupted | Manual edit or system error | See section 8.0 for recovery |
+| Command syntax error | Invalid arguments | Check command syntax in sections 1.0-6.0 |
+
+---
+
+## Examples
+
+For complete workflow examples, see section 11.0. Key example:
+
+```bash
+# Complete planning workflow
+/start-planning "Build a REST API for user management"
+/add-requirement module "user-crud" --criteria "CRUD operations" --priority critical
+/add-requirement module "auth-jwt" --criteria "JWT authentication" --priority high
+/modify-requirement requirement "Functional Requirements" --status complete
+/planning-status --verbose
+/approve-plan
+```
+
+---
+
+## Resources
+
+- [start-planning-procedure.md](references/start-planning-procedure.md) - Start planning details
+- [requirement-management.md](references/requirement-management.md) - Requirement operations
+- [plan-approval-transition.md](references/plan-approval-transition.md) - Approval process
+- [state-file-format.md](references/state-file-format.md) - State file schema
+- [troubleshooting.md](references/troubleshooting.md) - Common issues
+- `scripts/check_plan_prerequisites.py` - Prerequisites validator
+- `scripts/export_plan_summary.py` - Plan exporter
+- `scripts/reset_plan_phase.py` - Plan reset utility

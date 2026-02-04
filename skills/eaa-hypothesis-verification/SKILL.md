@@ -1,6 +1,8 @@
 ---
 name: eaa-hypothesis-verification
-description: Use when verifying claims through controlled Docker experimentation. Applies the TBV (To Be Verified) principle to test claims from docs, researchers, or developers before relying on them.
+description: Use when verifying claims through Docker experimentation. Applies TBV principle to test claims before relying on them. Trigger with experiment setup or claim verification.
+version: 1.0.0
+compatibility: Requires AI Maestro installed.
 agent: test-engineer
 context: fork
 ---
@@ -29,6 +31,38 @@ Patterns for **personally verifying claims** through controlled Docker experimen
 5. Document findings in experimentation report
 6. Classify result: VERIFIED, UNVERIFIED, or PARTIALLY VERIFIED
 7. Clean up containers and archive prototype if valuable
+
+### Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Identify the claim to be verified
+- [ ] Mark claim as TBV (To Be Verified)
+- [ ] Verify Docker is installed and running
+- [ ] Create experiment directory: `experiments/<claim-name>/`
+- [ ] Set up Docker container for isolated testing
+- [ ] Design at least 3 different approaches (Multiplicity Rule)
+- [ ] Implement Approach A
+- [ ] Implement Approach B
+- [ ] Implement Approach C
+- [ ] Execute experiments and collect measurements
+- [ ] Record raw data in `experiments/<claim-name>/data/`
+- [ ] Create experimentation report: `experiments/<claim-name>/REPORT.md`
+- [ ] Classify result: VERIFIED / UNVERIFIED / PARTIALLY VERIFIED
+- [ ] Document conditions if PARTIALLY VERIFIED
+- [ ] Clean up Docker containers
+- [ ] Archive prototype if valuable: `prototypes/<claim-name>/`
+- [ ] Create README for archived prototype (if applicable)
+
+## Output
+
+| Artifact | Location | Purpose |
+|----------|----------|---------|
+| **Experimentation Report** | `experiments/<claim-name>/REPORT.md` | Documents hypothesis, approaches tested, measurements, and classification |
+| **Status Classification** | Report header | VERIFIED / UNVERIFIED / PARTIALLY VERIFIED / TBV |
+| **Measurement Data** | `experiments/<claim-name>/data/` | Raw metrics, logs, benchmark results |
+| **Prototype Archive** (if valuable) | `prototypes/<claim-name>/` | Working code with README explaining findings |
+| **Docker Cleanup Log** | Terminal output | Confirms containers removed after experiment |
 
 ---
 

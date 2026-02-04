@@ -2,6 +2,22 @@
 
 If LSP verification fails for any language, follow these remediation steps.
 
+## Table of Contents
+
+- [Python (pyright) Remediation](#python-pyright-remediation)
+- [TypeScript (typescript-language-server) Remediation](#typescript-typescript-language-server-remediation)
+- [Rust (rust-analyzer) Remediation](#rust-rust-analyzer-remediation)
+- [Go (gopls) Remediation](#go-gopls-remediation)
+- [Java (jdtls) Remediation](#java-jdtls-remediation)
+- [Kotlin (kotlin-language-server) Remediation](#kotlin-kotlin-language-server-remediation)
+- [C/C++ (clangd) Remediation](#cc-clangd-remediation)
+- [C# (OmniSharp/csharp-ls) Remediation](#c-omnisharpcsharp-ls-remediation)
+- [PHP (Intelephense) Remediation](#php-intelephense-remediation)
+- [Ruby (Solargraph) Remediation](#ruby-solargraph-remediation)
+- [HTML/CSS (Standalone Language Servers) Remediation](#htmlcss-standalone-language-servers-remediation)
+
+---
+
 ## Python (pyright) Remediation
 
 **If binary missing:**

@@ -17,7 +17,7 @@ import json
 import subprocess
 import sys
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 
 def read_hook_input() -> dict[str, Any]:
@@ -25,7 +25,7 @@ def read_hook_input() -> dict[str, Any]:
     try:
         stdin_data = sys.stdin.read()
         if stdin_data.strip():
-            return json.loads(stdin_data)
+            return cast(dict[str, Any], json.loads(stdin_data))
     except json.JSONDecodeError:
         pass
     return {}
