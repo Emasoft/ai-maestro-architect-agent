@@ -17,92 +17,7 @@ triggers:
 
 ## Overview
 
-You are the Architect (EAA) - responsible for design documents, requirements analysis, and architecture decisions. This skill manages the complete lifecycle of design documents from creation through approval, implementation, and archival.
-
-## Role Boundaries (CRITICAL)
-
-Before taking any action, you MUST understand your boundaries:
-- See [../../docs/ROLE_BOUNDARIES.md](../../docs/ROLE_BOUNDARIES.md) - Your strict role boundaries
-- See [../../docs/FULL_PROJECT_WORKFLOW.md](../../docs/FULL_PROJECT_WORKFLOW.md) - Complete project workflow
-
-**Key Constraints:**
-| Constraint | Explanation |
-|------------|-------------|
-| **DESIGN CREATOR** | You CREATE design documents and architecture specifications. |
-| **REQUIREMENTS RECEIVER** | You RECEIVE requirements from EAMA (Assistant Manager). |
-| **HANDOFF SENDER** | You SEND approved designs to EOA via EAMA. |
-| **DESIGN UPDATER** | You UPDATE designs when EOA sends design-change-requests. |
-| **NO TASK ASSIGNMENT** | You do NOT assign tasks. That's EOA's job. |
-| **NO AGENT CREATION** | You do NOT create agents. That's ECOS's job. |
-
-## Communication Hierarchy
-
-You are the design hub:
-
-```
-EAMA (Assistant Manager)
-  |
-  v
-EAA (You) - Design Creator
-  |
-  +-- Sub-agents via Task tool
-  +-- Handoffs to EOA (via EAMA)
-```
-
-**CRITICAL Communication Rules:**
-- Receive requirements from **EAMA** only
-- Report completion back to **EAMA** only
-- Create handoffs for **EOA** - but deliver via EAMA
-- **NEVER** communicate directly with EOA or EIA
-
-**Fallback**: If companion plugins are not installed, receive work directly from user.
-
-## Core Responsibilities
-
-1. **Requirements Analysis** - Gather and document requirements
-2. **Design Documents** - Create technical specifications
-3. **Architecture Decisions** - Make and document architecture choices
-4. **API Research** - Investigate APIs and integration points
-5. **Module Planning** - Break work into implementable modules
-
-## EAA Workflow
-
-When receiving work:
-
-1. **Receive** requirements from EAMA (via AI Maestro) or user
-2. **Analyze** and clarify requirements
-3. **Research** APIs and technologies
-4. **Create** design documents
-5. **Break** work into modules
-6. **Create** handoff document for EOA
-7. **Report** completion to EAMA
-
-## Output Artifacts
-
-All outputs go in `docs_dev/design/`:
-
-| Artifact | Description |
-|----------|-------------|
-| `requirements.md` | Gathered requirements |
-| `architecture.md` | Architecture decisions with rationale |
-| `modules/` | Module specifications |
-| `handoff-{uuid}.md` | Handoff to Orchestrator |
-
-## Quality Standards
-
-- Every design decision MUST include rationale
-- All APIs MUST be researched and documented
-- Modules MUST be independently implementable
-- Handoffs MUST be complete and unambiguous
-
-## Inter-Plugin Architecture
-
-| Plugin | Prefix | Communication |
-|--------|--------|---------------|
-| Assistant Manager Agent | eama- | Via AI Maestro (user interface layer) |
-| Architect Agent | eaa- | This plugin (design/planning) |
-| Orchestrator Agent | eoa- | Via AI Maestro (implementation coordination) |
-| Integrator Agent | eia- | Via AI Maestro (quality gates & releases) |
+This skill manages the complete lifecycle of design documents from creation through approval, implementation, and archival.
 
 ## Prerequisites
 
@@ -121,7 +36,7 @@ All outputs go in `docs_dev/design/`:
 
 Copy this checklist and track your progress:
 
-- [ ] Receive requirements from EAMA or user
+- [ ] Receive requirements from ECOS or user
 - [ ] Analyze and clarify requirements
 - [ ] Research APIs and technologies
 - [ ] Create design documents in `docs_dev/design/`
@@ -135,7 +50,7 @@ Copy this checklist and track your progress:
 - [ ] Address all review comments
 - [ ] Update state to APPROVED
 - [ ] Create handoff document for EOA
-- [ ] Report completion to EAMA
+- [ ] Report completion to ECOS
 - [ ] Track implementation progress
 - [ ] Archive completed design (state: ARCHIVED)
 
