@@ -10,6 +10,9 @@ skills:
   - eaa-design-management
   - eaa-requirements-analysis
   - eaa-label-taxonomy
+  - eaa-github-integration
+  - eaa-design-communication-patterns
+  - eaa-hypothesis-verification
 ---
 
 # Architect Main Agent
