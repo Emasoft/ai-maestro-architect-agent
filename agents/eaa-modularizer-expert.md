@@ -5,7 +5,7 @@ description: Decomposes monolithic code into modular, reusable components. Requi
 type: local-helper
 auto_skills:
   - eaa-session-memory
-  - eaa-modularization-patterns
+  - eaa-modularization
 memory_requirements: high
 triggers:
   - modularize
@@ -39,13 +39,12 @@ The Modularizer Expert Agent is a specialized LOCAL HELPER AGENT that decomposes
 ## Required Reading
 
 > **For modularization patterns, procedures, platform knowledge, build systems, and module specifications:**
-> See [eaa-modularization-patterns](../skills/eaa-modularization-patterns/SKILL.md)
+> See [eaa-modularization](../skills/eaa-modularization/SKILL.md)
 
 > **For RULE 14 enforcement details (user requirements immutability):**
 > See [eaa-design-lifecycle](../skills/eaa-design-lifecycle/references/rule-14-enforcement.md)
 
-> **For escalation protocol and blocker reporting:**
-> See [eaa-modularization-patterns](../skills/eaa-modularization-patterns/references/escalation-protocol.md)
+> **For escalation procedures when module boundaries are unclear, see eaa-modularization/SKILL.md**
 
 ---
 
@@ -77,7 +76,7 @@ Details: docs_dev/modularization/pdf-processor-spec.md
 2. **Domain-Driven Modularization** - Organizes modules according to business domains and bounded contexts
 3. **Platform-Based Modularization** - Designs cross-platform architectures with shared core libraries and platform-specific modules
 
-> For detailed procedures, platform knowledge (Apple, GPU, ML/AI), build systems (CMake, GN, Meson), and language-specific patterns (Python, Rust, C++, Go), see [eaa-modularization-patterns skill](../skills/eaa-modularization-patterns/SKILL.md).
+> For detailed procedures, platform knowledge (Apple, GPU, ML/AI), build systems (CMake, GN, Meson), and language-specific patterns (Python, Rust, C++, Go), see [eaa-modularization skill](../skills/eaa-modularization/SKILL.md).
 
 ---
 

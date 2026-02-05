@@ -96,7 +96,7 @@ curl -X POST "http://localhost:23000/api/messages" \
 ```
 
 > For complete message templates (acknowledgment, clarification, completion, blocker, handoff), see **eaa-design-communication-patterns/references/ai-maestro-message-templates.md**
-> For ACK timeout handling, see **eaa-design-communication-patterns/references/ack-protocol.md**
+> For ACK timeout handling and response decisions, see **eaa-design-communication-patterns/references/message-response-decision-tree.md**
 
 ## Example 1: Design Request Acknowledgment
 
@@ -156,5 +156,5 @@ When all design artifacts ready:
 - Modules must be independently implementable with clear acceptance criteria
 - Handoffs must be complete and unambiguous (no [TBD] markers)
 
-> For handoff validation checklist, see **eaa-design-lifecycle/references/handoff-validation.md**
+> For handoff document structure and validation, see **eaa-design-lifecycle/references/handoff-format.md**
 > For hypothesis verification before handoff, see **eaa-hypothesis-verification/SKILL.md**

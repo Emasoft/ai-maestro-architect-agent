@@ -84,7 +84,7 @@ Documentation: docs_dev/api/[api-name]-*.md (5 files)
 
 ## RULE 14: User Requirements Are Immutable
 
-> For complete RULE 14 enforcement procedures, see [eaa-design-lifecycle/references/rule-14-enforcement.md](../../eaa-design-lifecycle/references/rule-14-enforcement.md)
+> For complete RULE 14 enforcement procedures, see [eaa-design-lifecycle/references/rule-14-enforcement.md](../skills/eaa-design-lifecycle/references/rule-14-enforcement.md)
 
 **Quick Rule:**
 - If user specifies "use library X", research library X
