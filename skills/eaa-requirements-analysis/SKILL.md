@@ -5,7 +5,7 @@ version: 1.0.0
 license: Apache-2.0
 compatibility: "Requires Python 3.8+, PyYAML, GitHub CLI for issue creation. Cross-platform compatible. Requires AI Maestro installed."
 metadata:
-  author: Anthropic
+  author: Emasoft
 user-invocable: false
 context: fork
 ---
@@ -471,21 +471,6 @@ The script is located at `../../scripts/eaa_requirement_analysis.py` relative to
 - orchestration-commands - Implementation phase
 - agent-management - Registering and assigning agents
 - module-lifecycle - Tracking module progress
-
----
-
-## Output
-
-Each planning command produces specific output. See detailed command documentation in sections 1.0-6.0.
-
-| Command | Output Type | Details |
-|---------|-------------|---------|
-| `/start-planning` | State file creation + confirmation message | See section 1.0 |
-| `/planning-status` | Formatted status table with progress | See section 2.0 |
-| `/add-requirement` | Confirmation message + updated state | See section 3.0 |
-| `/modify-requirement` | Confirmation message + updated state | See section 4.0 |
-| `/remove-requirement` | Confirmation message + updated state | See section 5.0 |
-| `/approve-plan` | Validation results + GitHub Issues created | See section 6.0 |
 
 ---
 

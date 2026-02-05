@@ -5,7 +5,7 @@ version: 1.0.0
 license: Apache-2.0
 compatibility: Requires web access for documentation lookup. Works with REST APIs, GraphQL APIs, Python libraries, npm packages, and cloud service APIs. Requires AI Maestro installed.
 metadata:
-  author: Anthropic
+  author: Emasoft
   triggers: "User asks to research an API or library, Need to understand authentication for external service, Orchestrator needs API documentation before implementation, Integration with third-party service required"
 context: fork
 ---

@@ -22,11 +22,12 @@ The Architect Agent handles **design documents, requirements analysis, and archi
 
 | Agent | Description |
 |-------|-------------|
-| `eaa-main.md` | Main architect agent |
+| `eaa-architect-main-agent.md` | Main architect agent |
 | `eaa-documentation-writer.md` | Creates technical documentation |
 | `eaa-api-researcher.md` | Researches APIs and integrations |
 | `eaa-modularizer-expert.md` | Breaks work into modules |
 | `eaa-planner.md` | Creates implementation plans |
+| `eaa-cicd-designer.md` | Designs CI/CD pipelines and workflows |
 
 ### Commands
 
@@ -48,6 +49,12 @@ The Architect Agent handles **design documents, requirements analysis, and archi
 | `eaa-planning-patterns` | Planning methodology |
 | `eaa-hypothesis-verification` | Test assumptions |
 | `eaa-design-communication-patterns` | Shared utilities |
+| `eaa-cicd-design` | CI/CD pipeline design patterns |
+| `eaa-design-management` | Design document management tools |
+| `eaa-github-integration` | GitHub integration patterns |
+| `eaa-label-taxonomy` | Label and tagging patterns |
+| `eaa-modularization` | Module decomposition patterns |
+| `eaa-session-memory` | Session context persistence |
 
 ### Hooks
 

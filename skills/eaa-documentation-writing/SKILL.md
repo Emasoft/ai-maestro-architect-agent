@@ -5,7 +5,7 @@ version: 1.0.0
 license: Apache-2.0
 compatibility: Works with any codebase. Outputs to standardized documentation directories (/docs/module-specs/, /docs/api-contracts/, /docs/adrs/). Requires AI Maestro installed.
 metadata:
-  author: Anthropic
+  author: Emasoft
   triggers: "Create technical documentation for a module, Write API contract documentation, Document architecture decisions (ADR), Create feature specifications"
 context: fork
 ---

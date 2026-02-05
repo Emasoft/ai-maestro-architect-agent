@@ -5,7 +5,7 @@ version: 1.0.0
 license: Apache-2.0
 compatibility: Cross-platform compatible. Requires Python 3.8+ for utility scripts. Works with all project types and toolchains. Supports atomic file operations with UTF-8 encoding using pathlib for universal path handling. Requires AI Maestro installed.
 metadata:
-  author: Anthropic
+  author: Emasoft
 context: fork
 ---
 

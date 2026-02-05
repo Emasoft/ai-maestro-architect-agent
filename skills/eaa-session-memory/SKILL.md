@@ -5,7 +5,7 @@ version: 1.0.0
 license: Apache-2.0
 compatibility: "Cross-platform. Requires write access to design output directories. Requires AI Maestro installed."
 metadata:
-  author: Anthropic
+  author: Emasoft
 context: fork
 agent: eaa-main
 user-invocable: false

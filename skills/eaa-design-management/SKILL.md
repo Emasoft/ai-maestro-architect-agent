@@ -5,7 +5,7 @@ version: 1.0.0
 license: Apache-2.0
 compatibility: Requires Python 3.10 or higher. Requires AI Maestro installed.
 metadata:
-  author: Anthropic
+  author: Emasoft
 agent: eaa-main
 context: fork
 ---
