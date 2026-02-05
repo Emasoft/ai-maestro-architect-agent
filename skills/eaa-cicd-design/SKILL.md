@@ -5,7 +5,7 @@ version: 1.0.0
 license: Apache-2.0
 compatibility: Requires GitHub Actions, GitHub CLI (gh), and understanding of CI/CD concepts. Supports macOS, Windows, Linux, iOS, Android build automation. Requires AI Maestro installed.
 metadata:
-  author: Anthropic
+  author: Emasoft
 context: fork
 agent: eaa-main
 ---
@@ -319,6 +319,10 @@ jobs:
 - [secret-management.md](references/secret-management.md) - Secret hierarchy and usage
 - [tdd-enforcement.md](references/tdd-enforcement.md) - Test coverage requirements
 - [release-automation.md](references/release-automation.md) - Release pipeline stages
+- [devops-debugging.md](references/devops-debugging.md) - DevOps debugging techniques and troubleshooting strategies
+- [gh-cli-scripts.md](references/gh-cli-scripts.md) - GitHub CLI script recipes for automation tasks
+- [platform-test-protocols.md](references/platform-test-protocols.md) - Platform-specific test execution protocols and matrix configurations
+- [github-actions-templates.md](references/github-actions-templates.md) - Ready-to-use GitHub Actions workflow templates
 - `templates/ci-multi-platform.yml` - Multi-platform CI template
 - `templates/release-github.yml` - GitHub release template
 - `templates/security-scan.yml` - Security scanning template

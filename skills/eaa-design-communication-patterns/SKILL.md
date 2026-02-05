@@ -119,6 +119,11 @@ Detailed reference documentation for communication patterns:
 | Reference | Description |
 |-----------|-------------|
 | [ai-maestro-message-templates.md](references/ai-maestro-message-templates.md) | AI Maestro inter-agent message templates and examples |
+| [message-response-decision-tree.md](references/message-response-decision-tree.md) | Decision tree for handling and routing AI Maestro messages by priority and type |
+| [design-document-protocol.md](references/design-document-protocol.md) | Standards for creating, validating, and searching design documents in the design/ folder |
+| [proactive-handoff-protocol.md](references/proactive-handoff-protocol.md) | Automatic handoff triggers and inter-agent work transfer procedures |
+| [task-completion-checklist.md](references/task-completion-checklist.md) | Pre-completion verification checklist before reporting a task as done |
+| [edge-case-protocols.md](references/edge-case-protocols.md) | Standardized protocols for handling failure scenarios and edge cases |
 
 ## Resources
 
