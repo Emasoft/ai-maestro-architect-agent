@@ -341,6 +341,14 @@ Session state updated with handoff reference.
 Ready for context clear.
 ```
 
+## References
+
+Detailed reference documentation for session memory operations:
+
+| Reference | Description |
+|-----------|-------------|
+| [record-keeping-formats.md](references/record-keeping-formats.md) | Session record-keeping formats and file structure specifications |
+
 ## Resources
 
 | Resource | Location |

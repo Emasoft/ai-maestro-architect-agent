@@ -265,6 +265,19 @@ The following scripts automate design lifecycle operations:
 
 All scripts are located at `../../scripts/` relative to this skill.
 
+## References
+
+Detailed reference documentation for design lifecycle operations:
+
+| Reference | Description |
+|-----------|-------------|
+| [rule-14-enforcement.md](references/rule-14-enforcement.md) | RULE 14: User Requirements Are Immutable - enforcement guidelines |
+| [judgment-guidelines.md](references/judgment-guidelines.md) | Architecture judgment guidelines for design decisions |
+| [success-criteria.md](references/success-criteria.md) | Design success criteria and validation checklist |
+| [workflow-checklists.md](references/workflow-checklists.md) | Design workflow checklists for each lifecycle phase |
+| [adr-templates.md](references/adr-templates.md) | Architecture Decision Record templates and examples |
+| [handoff-format.md](references/handoff-format.md) | Design handoff format specification |
+
 ## Resources
 
 - `templates/design-template.md` - Design document template

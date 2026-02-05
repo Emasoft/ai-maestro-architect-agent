@@ -112,6 +112,14 @@ if errors:
 | Validation Results | Boolean/List | Schema validation pass/fail with error details |
 | Utility Functions | Python callables | Reusable helper functions |
 
+## References
+
+Detailed reference documentation for communication patterns:
+
+| Reference | Description |
+|-----------|-------------|
+| [ai-maestro-message-templates.md](references/ai-maestro-message-templates.md) | AI Maestro inter-agent message templates and examples |
+
 ## Resources
 
 - `templates/` - Reusable document templates
