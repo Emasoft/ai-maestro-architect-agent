@@ -489,45 +489,15 @@ Each planning command produces specific output. See detailed command documentati
 
 ---
 
-## Error Handling
+## Output
 
-Common errors and resolutions. For detailed troubleshooting, see section 8.0 and [troubleshooting.md](references/troubleshooting.md).
+Each planning command produces specific output. See detailed command documentation in sections 1.0-6.0.
 
-| Error | Cause | Resolution |
-|-------|-------|------------|
-| State file not found | Planning not started | Run `/start-planning` first |
-| Invalid status transition | Wrong status order | Follow: pending → in_progress → complete |
-| Module has GitHub Issue | Cannot remove linked module | Use `--force` flag or close issue first |
-| Approval prerequisites failed | Incomplete requirements | Mark all sections complete first |
-| gh CLI auth failed | Not logged in | Run `gh auth login` |
-| State file corrupted | Manual edit or system error | See section 8.0 for recovery |
-| Command syntax error | Invalid arguments | Check command syntax in sections 1.0-6.0 |
-
----
-
-## Examples
-
-For complete workflow examples, see section 11.0. Key example:
-
-```bash
-# Complete planning workflow
-/start-planning "Build a REST API for user management"
-/add-requirement module "user-crud" --criteria "CRUD operations" --priority critical
-/add-requirement module "auth-jwt" --criteria "JWT authentication" --priority high
-/modify-requirement requirement "Functional Requirements" --status complete
-/planning-status --verbose
-/approve-plan
-```
-
----
-
-## Resources
-
-- [start-planning-procedure.md](references/start-planning-procedure.md) - Start planning details
-- [requirement-management.md](references/requirement-management.md) - Requirement operations
-- [plan-approval-transition.md](references/plan-approval-transition.md) - Approval process
-- [state-file-format.md](references/state-file-format.md) - State file schema
-- [troubleshooting.md](references/troubleshooting.md) - Common issues
-- `scripts/check_plan_prerequisites.py` - Prerequisites validator
-- `scripts/export_plan_summary.py` - Plan exporter
-- `scripts/reset_plan_phase.py` - Plan reset utility
+| Command | Output Type | Details |
+|---------|-------------|---------|
+| `/start-planning` | State file creation + confirmation message | See section 1.0 |
+| `/planning-status` | Formatted status table with progress | See section 2.0 |
+| `/add-requirement` | Confirmation message + updated state | See section 3.0 |
+| `/modify-requirement` | Confirmation message + updated state | See section 4.0 |
+| `/remove-requirement` | Confirmation message + updated state | See section 5.0 |
+| `/approve-plan` | Validation results + GitHub Issues created | See section 6.0 |

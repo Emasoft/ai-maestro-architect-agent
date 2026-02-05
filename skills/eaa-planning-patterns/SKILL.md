@@ -327,48 +327,6 @@ For handling user requirements, see [requirement-immutability.md](./references/r
 
 ---
 
-## Bun Support for JavaScript/TypeScript
-
-When planning JavaScript or TypeScript projects, consider Bun as the primary bundler and runtime.
-
-| Your Need | Reference |
-|-----------|-----------|
-| Getting Bun running | [bun-installation.md](./references/bun-installation.md) |
-| Building JavaScript bundles | [bun-build-api.md](./references/bun-build-api.md) |
-| Running tests | [bun-testing.md](./references/bun-testing.md) |
-| Setting up CI/CD | [bun-github-actions.md](./references/bun-github-actions.md) |
-| Publishing to npm | [bun-npm-publishing.md](./references/bun-npm-publishing.md) |
-| Configuring package.json | [bun-package-json.md](./references/bun-package-json.md) |
-| Optimizing bundles | [bun-advanced-features.md](./references/bun-advanced-features.md) |
-| Solving build problems | [bun-troubleshooting.md](./references/bun-troubleshooting.md) |
-| Migrating from npm/webpack | [bun-migration-checklist.md](./references/bun-migration-checklist.md) |
-
-**Key Bun Considerations**:
-1. Pin Bun versions in CI - Use `bun-version: '1.1.42'`, not `latest`
-2. Use npm for publishing - `bun publish` does NOT support OIDC
-3. Mark Node.js modules external - For browser builds, use `external: ["fs", "path"]`
-
----
-
-## LSP Server Integration
-
-When planning projects with remote agents or multi-language codebases, enable LSP support.
-
-| Your Need | Reference |
-|-----------|-----------|
-| Understanding LSP benefits | [lsp-servers-overview.md](./references/lsp-servers-overview.md) |
-| Setting up language servers | [lsp-installation-guide.md](./references/lsp-installation-guide.md) |
-| Configuring LSP for project | [lsp-plugin-template.md](./references/lsp-plugin-template.md) |
-| Validating LSP is working | [lsp-enforcement-checklist.md](./references/lsp-enforcement-checklist.md) |
-| Managing LSP for remote agents | [orchestrator-lsp-management.md](./references/orchestrator-lsp-management.md) |
-
-**Key LSP Considerations**:
-1. Install language servers before project start
-2. Use dedicated .lsp.json for configuration
-3. Validate LSP health before handoff
-
----
-
 ## Additional Resources
 
 | Resource | Location |
