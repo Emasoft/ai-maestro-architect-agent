@@ -360,7 +360,7 @@ def list_all_uuids(design_root: Path) -> list[tuple[str, Path]]:
 def main() -> int:
     """Main entry point."""
     parser = argparse.ArgumentParser(
-        description="Generate UUIDs for Atlas design documents",
+        description="Generate UUIDs for EAA design documents",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:

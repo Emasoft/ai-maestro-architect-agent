@@ -3,7 +3,7 @@
 arch_design_export.py - Export design documents for GitHub.
 
 Optionally sanitizes documents by removing internal references
-and Atlas-specific metadata. Uses arch_design_search.py to find documents.
+and design-specific metadata. Uses arch_design_search.py to find documents.
 
 Sanitization (when enabled with --sanitize) removes:
 - Internal file references (keeps external URLs)
@@ -118,7 +118,7 @@ def format_for_issue(content: str, uuid_str: str) -> str:
 {body.strip()}
 
 ---
-*Exported from Atlas design documents*
+*Exported from EAA design documents*
 """
 
     return issue_body
@@ -238,7 +238,7 @@ Examples:
     parser.add_argument(
         "--sanitize",
         action="store_true",
-        help="Remove internal references and Atlas markers",
+        help="Remove internal references and design markers",
     )
     parser.add_argument(
         "--format",

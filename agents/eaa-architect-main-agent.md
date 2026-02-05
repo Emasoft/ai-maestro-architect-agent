@@ -8,6 +8,7 @@ skills:
   - eaa-modularization
   - eaa-cicd-design
   - eaa-design-management
+  - eaa-requirements-analysis
   - eaa-label-taxonomy
 ---
 

@@ -332,6 +332,24 @@ Files created:
 | Review comments unresolved | Attempting approval too early | Resolve all comments first |
 | Missing template | Template file not found | Restore template from backup |
 
+## Scripts
+
+The following scripts automate design lifecycle operations:
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `eaa_design_lifecycle.py` | Manage design document state transitions | `python scripts/eaa_design_lifecycle.py --uuid <UUID> --transition <STATE>` |
+| `eaa_design_transition.py` | Validate and execute state transitions | `python scripts/eaa_design_transition.py --from <STATE> --to <STATE>` |
+| `eaa_design_uuid.py` | Generate GUUIDs for new design documents | `python scripts/eaa_design_uuid.py --type <DOC_TYPE>` |
+| `eaa_design_version.py` | Track document versions | `python scripts/eaa_design_version.py --uuid <UUID> --bump` |
+| `eaa_design_export.py` | Export design documents to various formats | `python scripts/eaa_design_export.py --uuid <UUID> --format <FORMAT>` |
+| `eaa_design_handoff.py` | Generate handoff documents for EOA | `python scripts/eaa_design_handoff.py --design <UUID> --target eoa` |
+| `eaa_init_design_folders.py` | Initialize design folder structure | `python scripts/eaa_init_design_folders.py --project-root <PATH>` |
+
+### Script Locations
+
+All scripts are located at `../../scripts/` relative to this skill.
+
 ## Resources
 
 - `templates/design-template.md` - Design document template

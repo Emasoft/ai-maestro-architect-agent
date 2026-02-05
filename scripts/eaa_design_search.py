@@ -258,7 +258,7 @@ def format_output(
 def main() -> int:
     """Main entry point."""
     parser = argparse.ArgumentParser(
-        description="Search Atlas design documents (filesystem as DB)",
+        description="Search EAA design documents (filesystem as DB)",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Search Speed (fastest to slowest):

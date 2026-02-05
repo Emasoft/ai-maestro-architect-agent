@@ -41,7 +41,7 @@ from pathlib import Path
 
 
 def detect_config(patterns_file: Path) -> dict[str, str]:
-    """Detect current Atlas configuration from patterns.md.
+    """Detect current design configuration from patterns.md.
 
     Args:
         patterns_file: Path to design/memory/patterns.md
@@ -160,7 +160,7 @@ def update_patterns_file(patterns_file: Path, dry_run: bool) -> None:
 
 
 def rebuild_search_index(dry_run: bool) -> None:
-    """Rebuild Atlas search index for new location.
+    """Rebuild design search index for new location.
 
     Args:
         dry_run: If True, only report what would be done
@@ -170,8 +170,8 @@ def rebuild_search_index(dry_run: bool) -> None:
 
     # Try to find and execute search script
     search_scripts = [
-        Path("scripts/atlas-design-search.sh"),
-        Path("atlas-design-search.sh"),
+        Path("scripts/eaa-design-search.sh"),
+        Path("eaa-design-search.sh"),
     ]
 
     for script in search_scripts:

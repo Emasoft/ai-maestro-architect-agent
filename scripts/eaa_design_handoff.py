@@ -49,7 +49,7 @@ from typing import Tuple
 
 
 def detect_config() -> Tuple[str, str, str]:
-    """Detect Atlas configuration from patterns.md or auto-detect.
+    """Detect design configuration from patterns.md or auto-detect.
 
     Returns:
         Tuple of (design_root, mode, exports_dir)

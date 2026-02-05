@@ -422,6 +422,40 @@ python3 scripts/reset_plan_phase.py --confirm --no-backup
 /planning-status --verbose
 ```
 
+## Requirement Analysis Scripts
+
+The following scripts automate RULE 14 (User Requirements Are Immutable) enforcement:
+
+### eaa_requirement_analysis.py
+
+Manages requirement tracking documents and validates implementations against requirements.
+
+| Command | Purpose | Usage |
+|---------|---------|-------|
+| `init` | Initialize requirements tracking structure | `python scripts/eaa_requirement_analysis.py init --project-root <PATH> --project-name "<NAME>"` |
+| `parse` | Parse requirements from user text | `python scripts/eaa_requirement_analysis.py parse --input "<TEXT_OR_FILE>"` |
+| `report` | Generate requirement issue report | `python scripts/eaa_requirement_analysis.py report --project-root <PATH> --requirement-id REQ-001 --requirement-text "<TEXT>" --issue-type Feasibility --description "<ISSUE>"` |
+| `validate` | Validate implementation against requirements | `python scripts/eaa_requirement_analysis.py validate --project-root <PATH> --implementation <IMPL_PATH>` |
+
+### When to Use
+
+- **init**: At project start to create `docs_dev/requirements/` folder structure
+- **parse**: When receiving user requirements to extract and categorize them
+- **report**: When identifying potential issues with requirements before implementation
+- **validate**: After implementation to verify compliance with user requirements
+
+### RULE 14 Enforcement
+
+This script enforces RULE 14: User Requirements Are Immutable. When issues arise:
+1. Generate a Requirement Issue Report
+2. Present alternatives to the user
+3. Wait for explicit user decision
+4. Only modify requirements after user approval
+
+### Script Location
+
+The script is located at `../../scripts/eaa_requirement_analysis.py` relative to this skill.
+
 ## 12.0 Resources
 
 - [start-planning-procedure.md](references/start-planning-procedure.md) - Start planning command details
