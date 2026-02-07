@@ -6,6 +6,8 @@ compatibility: Requires AI Maestro installed.
 context: fork
 agent: eaa-planner
 user-invocable: false
+workflow-instruction: "Step 8"
+procedure: "proc-submit-design"
 triggers:
   - when needing shared templates
   - when accessing common utilities

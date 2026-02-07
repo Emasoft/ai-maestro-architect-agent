@@ -87,13 +87,7 @@ All outputs in `docs_dev/design/`:
 
 ## AI Maestro Communication
 
-Send messages to ECOS:
-
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{"from": "eaa-architect-main-agent", "to": "ecos", "subject": "...", "content": {...}}'
-```
+Send messages to ECOS using the `agent-messaging` skill with the appropriate Recipient, Subject, Priority, and Content fields. Always verify delivery by checking the `agent-messaging` skill send confirmation.
 
 > For complete message templates (acknowledgment, clarification, completion, blocker, handoff), see **eaa-design-communication-patterns/references/ai-maestro-message-templates.md**
 > For ACK timeout handling and response decisions, see **eaa-design-communication-patterns/references/message-response-decision-tree.md**

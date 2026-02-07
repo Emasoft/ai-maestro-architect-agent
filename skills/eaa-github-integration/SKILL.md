@@ -6,6 +6,8 @@ compatibility: Requires AI Maestro installed.
 context: fork
 agent: eaa-planner
 user-invocable: true
+workflow-instruction: "Step 8"
+procedure: "proc-submit-design"
 triggers:
   - when creating GitHub issues from design documents
   - when attaching design documents to existing issues
@@ -350,21 +352,12 @@ gh project item-list --owner Emasoft --format json | jq --arg cutoff "$(date -v-
 **Actions on External Change Detection:**
 
 1. **On card movement detected:**
-   ```bash
-   # Notify EOA about status change
-   curl -X POST "http://localhost:23000/api/messages" \
-     -H "Content-Type: application/json" \
-     -d '{
-       "from": "eaa-architect-main-agent",
-       "to": "ecos",
-       "subject": "GitHub Project Change Detected",
-       "priority": "normal",
-       "content": {
-         "type": "project_sync",
-         "message": "Card [CARD_TITLE] moved from [OLD_STATUS] to [NEW_STATUS]. Updating local design state."
-       }
-     }'
-   ```
+   Notify EOA about the status change. Send a message using the `agent-messaging` skill with:
+   - **Recipient**: `ecos`
+   - **Subject**: `GitHub Project Change Detected`
+   - **Priority**: `normal`
+   - **Content**: `{"type": "project_sync", "message": "Card [CARD_TITLE] moved from [OLD_STATUS] to [NEW_STATUS]. Updating local design state."}`
+   - **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 2. **Update local design document state** to match GitHub Project status
 

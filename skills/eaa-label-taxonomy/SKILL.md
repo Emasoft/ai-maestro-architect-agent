@@ -3,6 +3,8 @@ name: eaa-label-taxonomy
 description: GitHub label taxonomy reference for the Architect Agent. Use when designing architecture, identifying components, or recommending labels. Trigger with architecture label requests.
 version: 1.0.0
 compatibility: Requires AI Maestro installed.
+workflow-instruction: "support"
+procedure: "support-skill"
 ---
 
 # EAA Label Taxonomy

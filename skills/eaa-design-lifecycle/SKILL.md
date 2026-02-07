@@ -6,6 +6,8 @@ compatibility: Requires AI Maestro installed.
 context: fork
 agent: eaa-main
 user-invocable: false
+workflow-instruction: "Steps 7, 8, 9, 15"
+procedure: "proc-create-design, proc-submit-design, proc-approve-design, proc-handle-feedback"
 triggers:
   - when creating design documents
   - when reviewing design status

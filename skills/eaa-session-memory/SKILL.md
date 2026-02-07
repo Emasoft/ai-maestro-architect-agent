@@ -9,6 +9,8 @@ metadata:
 context: fork
 agent: eaa-main
 user-invocable: false
+workflow-instruction: "Steps 15, support"
+procedure: "proc-handle-feedback, support-skill"
 triggers:
   - when design session starts
   - when architecture decision is made

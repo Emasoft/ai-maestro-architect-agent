@@ -29,16 +29,15 @@ eaa-<project>-<descriptive>
 
 ### Spawning Command (executed by ECOS)
 
-```bash
-SESSION_NAME="eaa-<project>-architect"
+ECOS spawns EAA agents using the `ai-maestro-agents-management` skill. The skill handles agent creation with the appropriate parameters:
 
-aimaestro-agent.sh create $SESSION_NAME \
-  --dir ~/agents/$SESSION_NAME \
-  --task "Design architecture for <project>" \
-  -- --dangerously-skip-permissions --chrome --add-dir /tmp \
-  --plugin-dir ~/agents/$SESSION_NAME/.claude/plugins/emasoft-architect-agent \
-  --agent eaa-architect-main-agent
-```
+- **Session Name**: `eaa-<project>-architect`
+- **Working Directory**: `~/agents/$SESSION_NAME`
+- **Task**: `Design architecture for <project>`
+- **Plugin**: `emasoft-architect-agent`
+- **Agent**: `eaa-architect-main-agent`
+
+Refer to the `ai-maestro-agents-management` skill for the exact creation procedure.
 
 ### Spawning Parameters Explained
 
@@ -132,21 +131,12 @@ EAA **CANNOT** access:
 
 EAA communicates with other roles **ONLY via AI Maestro messaging**:
 
-```bash
-# EAA reports to ECOS
-curl -X POST "$AIMAESTRO_API/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "eaa-project-architect",
-    "to": "orchestrator-master",
-    "subject": "[DONE] Architecture Design",
-    "priority": "high",
-    "content": {
-      "type": "report",
-      "message": "[DONE] /path/to/design-doc.md"
-    }
-  }'
-```
+To report to ECOS, send a message using the `agent-messaging` skill with:
+- **Recipient**: `orchestrator-master`
+- **Subject**: `[DONE] Architecture Design`
+- **Priority**: `high`
+- **Content**: `{"type": "report", "message": "[DONE] /path/to/design-doc.md"}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ---
 
@@ -220,54 +210,30 @@ EAA communicates with ECOS via AI Maestro messages.
 
 #### Task Completion Report
 
-```bash
-curl -X POST "$AIMAESTRO_API/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "eaa-project-architect",
-    "to": "orchestrator-master",
-    "subject": "[DONE] Architecture Design",
-    "priority": "high",
-    "content": {
-      "type": "report",
-      "message": "[DONE] /absolute/path/to/output.md"
-    }
-  }'
-```
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: `orchestrator-master`
+- **Subject**: `[DONE] Architecture Design`
+- **Priority**: `high`
+- **Content**: `{"type": "report", "message": "[DONE] /absolute/path/to/output.md"}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 #### Blocking Issue Report
 
-```bash
-curl -X POST "$AIMAESTRO_API/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "eaa-project-architect",
-    "to": "orchestrator-master",
-    "subject": "[BLOCKED] Missing Requirements",
-    "priority": "urgent",
-    "content": {
-      "type": "blocker",
-      "message": "[BLOCKED] Cannot design API without requirements. Need: <details>"
-    }
-  }'
-```
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: `orchestrator-master`
+- **Subject**: `[BLOCKED] Missing Requirements`
+- **Priority**: `urgent`
+- **Content**: `{"type": "blocker", "message": "[BLOCKED] Cannot design API without requirements. Need: <details>"}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 #### Question/Clarification Request
 
-```bash
-curl -X POST "$AIMAESTRO_API/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "eaa-project-architect",
-    "to": "orchestrator-master",
-    "subject": "[QUESTION] Database Choice",
-    "priority": "normal",
-    "content": {
-      "type": "question",
-      "message": "[QUESTION] Should we use PostgreSQL or MongoDB for <use-case>?"
-    }
-  }'
-```
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: `orchestrator-master`
+- **Subject**: `[QUESTION] Database Choice`
+- **Priority**: `normal`
+- **Content**: `{"type": "question", "message": "[QUESTION] Should we use PostgreSQL or MongoDB for <use-case>?"}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ### Response Format Rules
 
@@ -381,29 +347,12 @@ I have completed the architecture design. The document is located at /path/to/fi
 
 ### Handoff Message Format
 
-```bash
-curl -X POST "$AIMAESTRO_API/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "'$SESSION_NAME'",
-    "to": "orchestrator-master",
-    "subject": "[DONE] Architecture Design Complete",
-    "priority": "high",
-    "content": {
-      "type": "handoff",
-      "message": "[DONE] /home/user/agents/'$SESSION_NAME'/deliverables/PDR-svgbbox.md",
-      "metadata": {
-        "task": "Design architecture for svgbbox",
-        "deliverables": [
-          "/home/user/agents/'$SESSION_NAME'/deliverables/PDR-svgbbox.md",
-          "/home/user/agents/'$SESSION_NAME'/diagrams/architecture.mmd"
-        ],
-        "status": "complete",
-        "blockers": "none"
-      }
-    }
-  }'
-```
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: `orchestrator-master`
+- **Subject**: `[DONE] Architecture Design Complete`
+- **Priority**: `high`
+- **Content**: `{"type": "handoff", "message": "[DONE] /home/user/agents/$SESSION_NAME/deliverables/PDR-svgbbox.md", "metadata": {"task": "Design architecture for svgbbox", "deliverables": ["/home/user/agents/$SESSION_NAME/deliverables/PDR-svgbbox.md", "/home/user/agents/$SESSION_NAME/diagrams/architecture.mmd"], "status": "complete", "blockers": "none"}}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ### What Happens After Handoff
 

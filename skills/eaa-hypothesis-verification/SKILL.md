@@ -5,6 +5,8 @@ version: 1.0.0
 compatibility: Requires AI Maestro installed.
 agent: test-engineer
 context: fork
+workflow-instruction: "Step 7"
+procedure: "proc-create-design"
 ---
 
 # Hypothesis Verification Skill

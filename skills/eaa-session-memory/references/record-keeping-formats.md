@@ -334,20 +334,12 @@ echo "Handoff validation passed"
 **When:** ECOS assigns you a design task
 
 **Format:**
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "eaa-architect-main-agent",
-    "to": "ecos",
-    "subject": "Design Request Acknowledged",
-    "priority": "normal",
-    "content": {
-      "type": "acknowledgment",
-      "message": "Design request received for [PROJECT_NAME]. Starting requirements analysis. ETA: [ESTIMATED_COMPLETION_TIME]."
-    }
-  }'
-```
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: `ecos`
+- **Subject**: `Design Request Acknowledged`
+- **Priority**: `normal`
+- **Content**: `{"type": "acknowledgment", "message": "Design request received for [PROJECT_NAME]. Starting requirements analysis. ETA: [ESTIMATED_COMPLETION_TIME]."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 **Example:**
 ```json
@@ -368,20 +360,12 @@ curl -X POST "http://localhost:23000/api/messages" \
 **When:** User requirements are ambiguous or conflicting
 
 **Format:**
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "eaa-architect-main-agent",
-    "to": "ecos",
-    "subject": "Clarification Needed - [PROJECT_NAME]",
-    "priority": "high",
-    "content": {
-      "type": "clarification_request",
-      "message": "BLOCKING: Requirement ambiguity detected. Question: [SPECIFIC_QUESTION]. Context: [USER_REQUIREMENT_QUOTE]. Cannot proceed until clarified. Details: docs_dev/design/clarifications/[TIMESTAMP]-[ISSUE].md"
-    }
-  }'
-```
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: `ecos`
+- **Subject**: `Clarification Needed - [PROJECT_NAME]`
+- **Priority**: `high`
+- **Content**: `{"type": "clarification_request", "message": "BLOCKING: Requirement ambiguity detected. Question: [SPECIFIC_QUESTION]. Context: [USER_REQUIREMENT_QUOTE]. Cannot proceed until clarified. Details: docs_dev/design/clarifications/[TIMESTAMP]-[ISSUE].md"}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 **Example:**
 ```json
@@ -402,20 +386,12 @@ curl -X POST "http://localhost:23000/api/messages" \
 **When:** All design artifacts ready, handoff prepared
 
 **Format:**
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "eaa-architect-main-agent",
-    "to": "ecos",
-    "subject": "Design Complete - [PROJECT_NAME]",
-    "priority": "normal",
-    "content": {
-      "type": "design_complete",
-      "message": "[DONE] Design for [PROJECT_NAME] complete. Architecture: [BRIEF_SUMMARY]. Modules: [MODULE_COUNT]. Risks: [HIGH_COUNT]/[MEDIUM_COUNT]/[LOW_COUNT]. Handoff doc: docs_dev/design/handoff-[UUID].md. Ready for EOA assignment."
-    }
-  }'
-```
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: `ecos`
+- **Subject**: `Design Complete - [PROJECT_NAME]`
+- **Priority**: `normal`
+- **Content**: `{"type": "design_complete", "message": "[DONE] Design for [PROJECT_NAME] complete. Architecture: [BRIEF_SUMMARY]. Modules: [MODULE_COUNT]. Risks: [HIGH_COUNT]/[MEDIUM_COUNT]/[LOW_COUNT]. Handoff doc: docs_dev/design/handoff-[UUID].md. Ready for EOA assignment."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 **Example:**
 ```json
@@ -436,20 +412,12 @@ curl -X POST "http://localhost:23000/api/messages" \
 **When:** Design artifacts ready for implementation
 
 **Format:**
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "eaa-architect-main-agent",
-    "to": "ecos",
-    "subject": "Handoff Ready - [PROJECT_NAME]",
-    "priority": "normal",
-    "content": {
-      "type": "handoff",
-      "message": "Design handoff ready for [PROJECT_NAME]. Implementation sequence: [PHASE_1] → [PHASE_2] → [PHASE_3]. Critical path: [TOP_3_ITEMS]. All artifacts in docs_dev/design/. Handoff doc: handoff-[UUID].md. Awaiting EOA assignment from ECOS."
-    }
-  }'
-```
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: `ecos`
+- **Subject**: `Handoff Ready - [PROJECT_NAME]`
+- **Priority**: `normal`
+- **Content**: `{"type": "handoff", "message": "Design handoff ready for [PROJECT_NAME]. Implementation sequence: [PHASE_1] -> [PHASE_2] -> [PHASE_3]. Critical path: [TOP_3_ITEMS]. All artifacts in docs_dev/design/. Handoff doc: handoff-[UUID].md. Awaiting EOA assignment from ECOS."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 **Example:**
 ```json
@@ -470,20 +438,12 @@ curl -X POST "http://localhost:23000/api/messages" \
 **When:** Cannot proceed due to missing information, infeasible requirement, or external dependency
 
 **Format:**
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "eaa-architect-main-agent",
-    "to": "ecos",
-    "subject": "BLOCKED - [PROJECT_NAME]",
-    "priority": "urgent",
-    "content": {
-      "type": "blocker",
-      "message": "[BLOCKED] Design for [PROJECT_NAME]. Blocker: [SPECIFIC_ISSUE]. Impact: [IMPACT_DESCRIPTION]. Next: [WHAT_IS_NEEDED]. Details: docs_dev/design/blockers/[TIMESTAMP]-[ISSUE].md. Awaiting user decision."
-    }
-  }'
-```
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: `ecos`
+- **Subject**: `BLOCKED - [PROJECT_NAME]`
+- **Priority**: `urgent`
+- **Content**: `{"type": "blocker", "message": "[BLOCKED] Design for [PROJECT_NAME]. Blocker: [SPECIFIC_ISSUE]. Impact: [IMPACT_DESCRIPTION]. Next: [WHAT_IS_NEEDED]. Details: docs_dev/design/blockers/[TIMESTAMP]-[ISSUE].md. Awaiting user decision."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 **Example:**
 ```json
@@ -509,41 +469,23 @@ curl -X POST "http://localhost:23000/api/messages" \
 4. **Do NOT proceed** with dependent operations until ACK received
 
 **ACK Verification:**
-```bash
-curl -s "http://localhost:23000/api/messages?agent=eaa-architect-main-agent&action=list&status=unread" | jq '.messages[] | select(.subject | contains("ACK"))'
-```
+Check your inbox using the `agent-messaging` skill. Filter for messages with subjects containing "ACK".
 
 **Retry Format:**
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "eaa-architect-main-agent",
-    "to": "[ORIGINAL_TARGET]",
-    "subject": "[RETRY] [ORIGINAL_SUBJECT]",
-    "priority": "high",
-    "content": {
-      "type": "retry",
-      "message": "[ORIGINAL_MESSAGE] (Retry: No ACK received within 30s)"
-    }
-  }'
-```
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: `[ORIGINAL_TARGET]`
+- **Subject**: `[RETRY] [ORIGINAL_SUBJECT]`
+- **Priority**: `high`
+- **Content**: `{"type": "retry", "message": "[ORIGINAL_MESSAGE] (Retry: No ACK received within 30s)"}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 **Escalation Format:**
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "eaa-architect-main-agent",
-    "to": "ecos",
-    "subject": "ACK Timeout Escalation",
-    "priority": "urgent",
-    "content": {
-      "type": "escalation",
-      "message": "ACK timeout from [TARGET]. Original message: [SUBJECT]. Sent: [TIMESTAMP]. Retry sent: [RETRY_TIMESTAMP]. Blocking operation: [BLOCKED_OPERATION]."
-    }
-  }'
-```
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: `ecos`
+- **Subject**: `ACK Timeout Escalation`
+- **Priority**: `urgent`
+- **Content**: `{"type": "escalation", "message": "ACK timeout from [TARGET]. Original message: [SUBJECT]. Sent: [TIMESTAMP]. Retry sent: [RETRY_TIMESTAMP]. Blocking operation: [BLOCKED_OPERATION]."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ---
 

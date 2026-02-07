@@ -8,6 +8,8 @@ metadata:
   author: Emasoft
   triggers: "Create technical documentation for a module, Write API contract documentation, Document architecture decisions (ADR), Create feature specifications"
 context: fork
+workflow-instruction: "Step 7"
+procedure: "proc-create-design"
 ---
 
 # Documentation Writer Skill

@@ -8,6 +8,8 @@ metadata:
   author: Emasoft
 context: fork
 agent: eaa-main
+workflow-instruction: "Step 7"
+procedure: "proc-create-design"
 ---
 
 # DevOps Expert Skill

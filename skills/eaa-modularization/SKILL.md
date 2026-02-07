@@ -7,6 +7,8 @@ compatibility: Requires AI Maestro installed.
 context: fork
 agent: eaa-main
 user-invocable: false
+workflow-instruction: "Steps 7, 10"
+procedure: "proc-create-design, proc-decompose-design"
 triggers:
   - when decomposing a system into modules
   - when identifying module boundaries

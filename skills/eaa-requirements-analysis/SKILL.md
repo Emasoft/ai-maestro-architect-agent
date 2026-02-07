@@ -8,6 +8,8 @@ metadata:
   author: Emasoft
 user-invocable: false
 context: fork
+workflow-instruction: "Step 6"
+procedure: "proc-route-requirements"
 ---
 
 # Planning Commands Skill

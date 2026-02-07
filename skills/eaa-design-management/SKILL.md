@@ -8,6 +8,8 @@ metadata:
   author: Emasoft
 agent: eaa-main
 context: fork
+workflow-instruction: "Step 7"
+procedure: "proc-create-design"
 ---
 
 # Design Document Management

@@ -41,11 +41,11 @@ This document defines standardized protocols for handling edge cases and failure
 
 The Architect uses AI Maestro to receive requirements from Assistant Manager and deliver designs. Detect unavailability through:
 
-| Check | Command | Failure Indicator |
-|-------|---------|-------------------|
-| API Health | `curl -s "$AIMAESTRO_API/health"` | HTTP 503/504 or timeout |
-| Connection Test | `curl -m 10 "$AIMAESTRO_API/api/messages?agent=$SESSION_NAME&action=unread-count"` | Connection timeout after 10 seconds |
-| Agent Registry | `curl -s "$AIMAESTRO_API/api/agents"` | Registry unreachable |
+| Check | Method | Failure Indicator |
+|-------|--------|-------------------|
+| API Health | Check AI Maestro service health via the `agent-messaging` skill | Service unavailable or timeout |
+| Connection Test | Attempt to check inbox via the `agent-messaging` skill | Connection timeout |
+| Agent Registry | Query agent registry via the `agent-messaging` skill | Registry unreachable |
 
 ### 1.2 Response Workflow
 
@@ -199,15 +199,12 @@ AI agents collaborate asynchronously and may be hibernated for extended periods.
 When `eaa-api-researcher` is unresponsive:
 
 1. **First Reminder (when state = No ACK or No Progress)**:
-   ```bash
-   curl -X POST "$AIMAESTRO_API/api/messages" \
-     -d '{
-       "to": "eaa-api-researcher",
-       "subject": "Research Check: ${API_NAME}",
-       "priority": "high",
-       "content": {"type": "status_request", "message": "Please provide status update for ${API_NAME} research."}
-     }'
-   ```
+   Send a message using the `agent-messaging` skill with:
+   - **Recipient**: `eaa-api-researcher`
+   - **Subject**: `Research Check: ${API_NAME}`
+   - **Priority**: `high`
+   - **Content**: `{"type": "status_request", "message": "Please provide status update for ${API_NAME} research."}`
+   - **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 2. **Wait 5 minutes**
 

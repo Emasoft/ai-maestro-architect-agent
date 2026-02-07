@@ -1,6 +1,6 @@
 # AI Maestro Message Templates for EAA
 
-This document provides all curl command templates and message format examples for the Emasoft Architect Agent (EAA) to communicate via AI Maestro.
+This document provides all message templates and format examples for the Emasoft Architect Agent (EAA) to communicate via AI Maestro using the `agent-messaging` skill.
 
 ## Contents
 
@@ -19,47 +19,18 @@ This document provides all curl command templates and message format examples fo
 
 **Use Case:** ECOS assigns you a design task via AI Maestro. You must acknowledge receipt and provide an ETA.
 
-**curl Command Template:**
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "eaa-architect-main-agent",
-    "to": "ecos",
-    "subject": "Design Request Acknowledged",
-    "priority": "normal",
-    "content": {
-      "type": "acknowledgment",
-      "message": "Design request received for [PROJECT_NAME]. Starting requirements analysis. ETA: [ESTIMATED_COMPLETION_TIME]."
-    }
-  }'
-```
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: `ecos`
+- **Subject**: `Design Request Acknowledged`
+- **Priority**: `normal`
+- **Content**: `{"type": "acknowledgment", "message": "Design request received for [PROJECT_NAME]. Starting requirements analysis. ETA: [ESTIMATED_COMPLETION_TIME]."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
-**Message Format (JSON):**
+**Example Content:**
 ```json
 {
-  "from": "eaa-architect-main-agent",
-  "to": "ecos",
-  "subject": "Design Request Acknowledged",
-  "priority": "normal",
-  "content": {
-    "type": "acknowledgment",
-    "message": "Design request received for [PROJECT_NAME]. Starting requirements analysis. ETA: [ESTIMATED_COMPLETION_TIME]."
-  }
-}
-```
-
-**Example Message:**
-```json
-{
-  "from": "eaa-architect-main-agent",
-  "to": "ecos",
-  "subject": "Design Request Acknowledged",
-  "priority": "normal",
-  "content": {
-    "type": "acknowledgment",
-    "message": "Design request received for E-Commerce Product Catalog. Starting requirements analysis. ETA: 2 hours."
-  }
+  "type": "acknowledgment",
+  "message": "Design request received for E-Commerce Product Catalog. Starting requirements analysis. ETA: 2 hours."
 }
 ```
 
@@ -69,47 +40,18 @@ curl -X POST "http://localhost:23000/api/messages" \
 
 **Use Case:** User requirements are ambiguous, conflicting, or unclear. You cannot proceed until clarification is received.
 
-**curl Command Template:**
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "eaa-architect-main-agent",
-    "to": "ecos",
-    "subject": "Clarification Needed - [PROJECT_NAME]",
-    "priority": "high",
-    "content": {
-      "type": "clarification_request",
-      "message": "BLOCKING: Requirement ambiguity detected. Question: [SPECIFIC_QUESTION]. Context: [USER_REQUIREMENT_QUOTE]. Cannot proceed until clarified. Details: docs_dev/design/clarifications/[TIMESTAMP]-[ISSUE].md"
-    }
-  }'
-```
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: `ecos`
+- **Subject**: `Clarification Needed - [PROJECT_NAME]`
+- **Priority**: `high`
+- **Content**: `{"type": "clarification_request", "message": "BLOCKING: Requirement ambiguity detected. Question: [SPECIFIC_QUESTION]. Context: [USER_REQUIREMENT_QUOTE]. Cannot proceed until clarified. Details: docs_dev/design/clarifications/[TIMESTAMP]-[ISSUE].md"}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
-**Message Format (JSON):**
+**Example Content:**
 ```json
 {
-  "from": "eaa-architect-main-agent",
-  "to": "ecos",
-  "subject": "Clarification Needed - [PROJECT_NAME]",
-  "priority": "high",
-  "content": {
-    "type": "clarification_request",
-    "message": "BLOCKING: Requirement ambiguity detected. Question: [SPECIFIC_QUESTION]. Context: [USER_REQUIREMENT_QUOTE]. Cannot proceed until clarified. Details: docs_dev/design/clarifications/[TIMESTAMP]-[ISSUE].md"
-  }
-}
-```
-
-**Example Message:**
-```json
-{
-  "from": "eaa-architect-main-agent",
-  "to": "ecos",
-  "subject": "Clarification Needed - Payment Gateway Integration",
-  "priority": "high",
-  "content": {
-    "type": "clarification_request",
-    "message": "BLOCKING: Requirement ambiguity detected. Question: Should payment processing be synchronous or asynchronous? Context: User said 'fast payment processing' but also 'reliable with retries'. Synchronous = fast but no retries. Asynchronous = reliable retries but slower user feedback. Cannot proceed until clarified. Details: docs_dev/design/clarifications/20260204-payment-flow.md"
-  }
+  "type": "clarification_request",
+  "message": "BLOCKING: Requirement ambiguity detected. Question: Should payment processing be synchronous or asynchronous? Context: User said 'fast payment processing' but also 'reliable with retries'. Synchronous = fast but no retries. Asynchronous = reliable retries but slower user feedback. Cannot proceed until clarified. Details: docs_dev/design/clarifications/20260204-payment-flow.md"
 }
 ```
 
@@ -119,47 +61,18 @@ curl -X POST "http://localhost:23000/api/messages" \
 
 **Use Case:** All design artifacts are complete, and handoff document is prepared. You are ready for ECOS to assign the work to EOA.
 
-**curl Command Template:**
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "eaa-architect-main-agent",
-    "to": "ecos",
-    "subject": "Design Complete - [PROJECT_NAME]",
-    "priority": "normal",
-    "content": {
-      "type": "design_complete",
-      "message": "[DONE] Design for [PROJECT_NAME] complete. Architecture: [BRIEF_SUMMARY]. Modules: [MODULE_COUNT]. Risks: [HIGH_COUNT]/[MEDIUM_COUNT]/[LOW_COUNT]. Handoff doc: docs_dev/design/handoff-[UUID].md. Ready for EOA assignment."
-    }
-  }'
-```
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: `ecos`
+- **Subject**: `Design Complete - [PROJECT_NAME]`
+- **Priority**: `normal`
+- **Content**: `{"type": "design_complete", "message": "[DONE] Design for [PROJECT_NAME] complete. Architecture: [BRIEF_SUMMARY]. Modules: [MODULE_COUNT]. Risks: [HIGH_COUNT]/[MEDIUM_COUNT]/[LOW_COUNT]. Handoff doc: docs_dev/design/handoff-[UUID].md. Ready for EOA assignment."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
-**Message Format (JSON):**
+**Example Content:**
 ```json
 {
-  "from": "eaa-architect-main-agent",
-  "to": "ecos",
-  "subject": "Design Complete - [PROJECT_NAME]",
-  "priority": "normal",
-  "content": {
-    "type": "design_complete",
-    "message": "[DONE] Design for [PROJECT_NAME] complete. Architecture: [BRIEF_SUMMARY]. Modules: [MODULE_COUNT]. Risks: [HIGH_COUNT]/[MEDIUM_COUNT]/[LOW_COUNT]. Handoff doc: docs_dev/design/handoff-[UUID].md. Ready for EOA assignment."
-  }
-}
-```
-
-**Example Message:**
-```json
-{
-  "from": "eaa-architect-main-agent",
-  "to": "ecos",
-  "subject": "Design Complete - E-Commerce Product Catalog",
-  "priority": "normal",
-  "content": {
-    "type": "design_complete",
-    "message": "[DONE] Design for E-Commerce Product Catalog complete. Architecture: REST API + PostgreSQL + Redis cache + React frontend. Modules: 5 (product-service, inventory-service, search-service, cart-service, frontend). Risks: 1/3/2. Handoff doc: docs_dev/design/handoff-a7f8b2d4.md. Ready for EOA assignment."
-  }
+  "type": "design_complete",
+  "message": "[DONE] Design for E-Commerce Product Catalog complete. Architecture: REST API + PostgreSQL + Redis cache + React frontend. Modules: 5 (product-service, inventory-service, search-service, cart-service, frontend). Risks: 1/3/2. Handoff doc: docs_dev/design/handoff-a7f8b2d4.md. Ready for EOA assignment."
 }
 ```
 
@@ -169,47 +82,18 @@ curl -X POST "http://localhost:23000/api/messages" \
 
 **Use Case:** Design artifacts are complete and packaged in a handoff document. You are notifying ECOS that the handoff is ready for EOA assignment.
 
-**curl Command Template:**
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "eaa-architect-main-agent",
-    "to": "ecos",
-    "subject": "Handoff Ready - [PROJECT_NAME]",
-    "priority": "normal",
-    "content": {
-      "type": "handoff",
-      "message": "Design handoff ready for [PROJECT_NAME]. Implementation sequence: [PHASE_1] → [PHASE_2] → [PHASE_3]. Critical path: [TOP_3_ITEMS]. All artifacts in docs_dev/design/. Handoff doc: handoff-[UUID].md. Awaiting EOA assignment from ECOS."
-    }
-  }'
-```
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: `ecos`
+- **Subject**: `Handoff Ready - [PROJECT_NAME]`
+- **Priority**: `normal`
+- **Content**: `{"type": "handoff", "message": "Design handoff ready for [PROJECT_NAME]. Implementation sequence: [PHASE_1] -> [PHASE_2] -> [PHASE_3]. Critical path: [TOP_3_ITEMS]. All artifacts in docs_dev/design/. Handoff doc: handoff-[UUID].md. Awaiting EOA assignment from ECOS."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
-**Message Format (JSON):**
+**Example Content:**
 ```json
 {
-  "from": "eaa-architect-main-agent",
-  "to": "ecos",
-  "subject": "Handoff Ready - [PROJECT_NAME]",
-  "priority": "normal",
-  "content": {
-    "type": "handoff",
-    "message": "Design handoff ready for [PROJECT_NAME]. Implementation sequence: [PHASE_1] → [PHASE_2] → [PHASE_3]. Critical path: [TOP_3_ITEMS]. All artifacts in docs_dev/design/. Handoff doc: handoff-[UUID].md. Awaiting EOA assignment from ECOS."
-  }
-}
-```
-
-**Example Message:**
-```json
-{
-  "from": "eaa-architect-main-agent",
-  "to": "ecos",
-  "subject": "Handoff Ready - Payment Gateway Integration",
-  "priority": "normal",
-  "content": {
-    "type": "handoff",
-    "message": "Design handoff ready for Payment Gateway Integration. Implementation sequence: Phase 1 (Database schema + Payment model) → Phase 2 (Stripe API integration) → Phase 3 (Webhook handlers + retry logic) → Phase 4 (Frontend payment form). Critical path: Stripe API credentials, webhook endpoint setup, PCI compliance review. All artifacts in docs_dev/design/. Handoff doc: handoff-c3e9f1a8.md. Awaiting EOA assignment from ECOS."
-  }
+  "type": "handoff",
+  "message": "Design handoff ready for Payment Gateway Integration. Implementation sequence: Phase 1 (Database schema + Payment model) -> Phase 2 (Stripe API integration) -> Phase 3 (Webhook handlers + retry logic) -> Phase 4 (Frontend payment form). Critical path: Stripe API credentials, webhook endpoint setup, PCI compliance review. All artifacts in docs_dev/design/. Handoff doc: handoff-c3e9f1a8.md. Awaiting EOA assignment from ECOS."
 }
 ```
 
@@ -219,47 +103,18 @@ curl -X POST "http://localhost:23000/api/messages" \
 
 **Use Case:** You cannot proceed due to missing information, infeasible requirement, or external dependency. You must escalate to ECOS for user decision.
 
-**curl Command Template:**
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "eaa-architect-main-agent",
-    "to": "ecos",
-    "subject": "BLOCKED - [PROJECT_NAME]",
-    "priority": "urgent",
-    "content": {
-      "type": "blocker",
-      "message": "[BLOCKED] Design for [PROJECT_NAME]. Blocker: [SPECIFIC_ISSUE]. Impact: [IMPACT_DESCRIPTION]. Next: [WHAT_IS_NEEDED]. Details: docs_dev/design/blockers/[TIMESTAMP]-[ISSUE].md. Awaiting user decision."
-    }
-  }'
-```
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: `ecos`
+- **Subject**: `BLOCKED - [PROJECT_NAME]`
+- **Priority**: `urgent`
+- **Content**: `{"type": "blocker", "message": "[BLOCKED] Design for [PROJECT_NAME]. Blocker: [SPECIFIC_ISSUE]. Impact: [IMPACT_DESCRIPTION]. Next: [WHAT_IS_NEEDED]. Details: docs_dev/design/blockers/[TIMESTAMP]-[ISSUE].md. Awaiting user decision."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
-**Message Format (JSON):**
+**Example Content:**
 ```json
 {
-  "from": "eaa-architect-main-agent",
-  "to": "ecos",
-  "subject": "BLOCKED - [PROJECT_NAME]",
-  "priority": "urgent",
-  "content": {
-    "type": "blocker",
-    "message": "[BLOCKED] Design for [PROJECT_NAME]. Blocker: [SPECIFIC_ISSUE]. Impact: [IMPACT_DESCRIPTION]. Next: [WHAT_IS_NEEDED]. Details: docs_dev/design/blockers/[TIMESTAMP]-[ISSUE].md. Awaiting user decision."
-  }
-}
-```
-
-**Example Message:**
-```json
-{
-  "from": "eaa-architect-main-agent",
-  "to": "ecos",
-  "subject": "BLOCKED - Real-Time Analytics Dashboard",
-  "priority": "urgent",
-  "content": {
-    "type": "blocker",
-    "message": "[BLOCKED] Design for Real-Time Analytics Dashboard. Blocker: User requires <100ms query latency for 1M+ records, but available database (PostgreSQL) cannot meet this requirement without significant infrastructure changes (distributed architecture, caching layer, query optimization). Impact: Cannot design system without clarifying performance vs. cost trade-off. Next: User must choose: (A) Relax latency requirement to <1s, (B) Increase budget for distributed architecture (Elasticsearch + Redis), or (C) Reduce dataset size via data retention policy. Details: docs_dev/design/blockers/20260204-latency-requirement.md. Awaiting user decision."
-  }
+  "type": "blocker",
+  "message": "[BLOCKED] Design for Real-Time Analytics Dashboard. Blocker: User requires <100ms query latency for 1M+ records, but available database (PostgreSQL) cannot meet this requirement without significant infrastructure changes (distributed architecture, caching layer, query optimization). Impact: Cannot design system without clarifying performance vs. cost trade-off. Next: User must choose: (A) Relax latency requirement to <1s, (B) Increase budget for distributed architecture (Elasticsearch + Redis), or (C) Reduce dataset size via data retention policy. Details: docs_dev/design/blockers/20260204-latency-requirement.md. Awaiting user decision."
 }
 ```
 
@@ -269,16 +124,12 @@ curl -X POST "http://localhost:23000/api/messages" \
 
 **Use Case:** After sending any AI Maestro message, you must verify that an ACK (acknowledgment) was received within 30 seconds.
 
-**curl Command Template:**
-```bash
-# Check for ACK response within 30 seconds
-curl -s "http://localhost:23000/api/messages?agent=eaa-architect-main-agent&action=list&status=unread" | jq '.messages[] | select(.subject | contains("ACK"))'
-```
+Check your inbox using the `agent-messaging` skill. Filter for messages with subjects containing "ACK".
 
 **Workflow:**
-1. Send AI Maestro message
+1. Send AI Maestro message using the `agent-messaging` skill
 2. Wait 30 seconds
-3. Run the ACK verification command above
+3. Check your inbox using the `agent-messaging` skill for ACK messages
 4. If ACK received: Proceed with next operation
 5. If NO ACK received: Proceed to **1.7 (Retry)**
 
@@ -288,40 +139,17 @@ curl -s "http://localhost:23000/api/messages?agent=eaa-architect-main-agent&acti
 
 **Use Case:** You sent a message but did not receive ACK within 30 seconds. You must retry ONCE before escalating.
 
-**curl Command Template:**
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "eaa-architect-main-agent",
-    "to": "[ORIGINAL_TARGET]",
-    "subject": "[RETRY] [ORIGINAL_SUBJECT]",
-    "priority": "high",
-    "content": {
-      "type": "retry",
-      "message": "[ORIGINAL_MESSAGE] (Retry: No ACK received within 30s)"
-    }
-  }'
-```
-
-**Message Format (JSON):**
-```json
-{
-  "from": "eaa-architect-main-agent",
-  "to": "[ORIGINAL_TARGET]",
-  "subject": "[RETRY] [ORIGINAL_SUBJECT]",
-  "priority": "high",
-  "content": {
-    "type": "retry",
-    "message": "[ORIGINAL_MESSAGE] (Retry: No ACK received within 30s)"
-  }
-}
-```
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: `[ORIGINAL_TARGET]`
+- **Subject**: `[RETRY] [ORIGINAL_SUBJECT]`
+- **Priority**: `high`
+- **Content**: `{"type": "retry", "message": "[ORIGINAL_MESSAGE] (Retry: No ACK received within 30s)"}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 **Workflow After Retry:**
-1. Send retry message
+1. Send retry message using the `agent-messaging` skill
 2. Wait another 30 seconds
-3. Run ACK verification command (see **1.6**)
+3. Check inbox for ACK (see **1.6**)
 4. If ACK received: Proceed with next operation
 5. If STILL NO ACK: Proceed to **1.8 (Escalate)**
 
@@ -331,47 +159,18 @@ curl -X POST "http://localhost:23000/api/messages" \
 
 **Use Case:** You sent a message, retried after 30 seconds, and STILL received no ACK after another 30 seconds. You must escalate to ECOS.
 
-**curl Command Template:**
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "eaa-architect-main-agent",
-    "to": "ecos",
-    "subject": "ACK Timeout Escalation",
-    "priority": "urgent",
-    "content": {
-      "type": "escalation",
-      "message": "ACK timeout from [TARGET]. Original message: [SUBJECT]. Sent: [TIMESTAMP]. Retry sent: [RETRY_TIMESTAMP]. Blocking operation: [BLOCKED_OPERATION]."
-    }
-  }'
-```
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: `ecos`
+- **Subject**: `ACK Timeout Escalation`
+- **Priority**: `urgent`
+- **Content**: `{"type": "escalation", "message": "ACK timeout from [TARGET]. Original message: [SUBJECT]. Sent: [TIMESTAMP]. Retry sent: [RETRY_TIMESTAMP]. Blocking operation: [BLOCKED_OPERATION]."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
-**Message Format (JSON):**
+**Example Content:**
 ```json
 {
-  "from": "eaa-architect-main-agent",
-  "to": "ecos",
-  "subject": "ACK Timeout Escalation",
-  "priority": "urgent",
-  "content": {
-    "type": "escalation",
-    "message": "ACK timeout from [TARGET]. Original message: [SUBJECT]. Sent: [TIMESTAMP]. Retry sent: [RETRY_TIMESTAMP]. Blocking operation: [BLOCKED_OPERATION]."
-  }
-}
-```
-
-**Example Message:**
-```json
-{
-  "from": "eaa-architect-main-agent",
-  "to": "ecos",
-  "subject": "ACK Timeout Escalation",
-  "priority": "urgent",
-  "content": {
-    "type": "escalation",
-    "message": "ACK timeout from eaa-api-researcher. Original message: API Research Request - Stripe Integration. Sent: 2026-02-05 14:30:00. Retry sent: 2026-02-05 14:30:30. Blocking operation: Cannot finalize architecture without Stripe API research results."
-  }
+  "type": "escalation",
+  "message": "ACK timeout from eaa-api-researcher. Original message: API Research Request - Stripe Integration. Sent: 2026-02-05 14:30:00. Retry sent: 2026-02-05 14:30:30. Blocking operation: Cannot finalize architecture without Stripe API research results."
 }
 ```
 
@@ -381,7 +180,7 @@ curl -X POST "http://localhost:23000/api/messages" \
 
 **Complete workflow for reliable message delivery:**
 
-1. **Send message** via curl (see sections 1.1-1.5)
+1. **Send message** using the `agent-messaging` skill (see sections 1.1-1.5)
 2. **Wait 30 seconds**
 3. **Verify ACK** (see section 1.6)
 4. **If no ACK**: Retry ONCE (see section 1.7)
@@ -429,68 +228,35 @@ All AI Maestro messages use this JSON structure:
 
 ## Example: Complete Message Send and Verify Workflow
 
-```bash
-# Step 1: Send design completion message
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "eaa-architect-main-agent",
-    "to": "ecos",
-    "subject": "Design Complete - User Authentication System",
-    "priority": "normal",
-    "content": {
-      "type": "design_complete",
-      "message": "[DONE] Design for User Authentication System complete. Architecture: FastAPI + PostgreSQL + JWT auth + bcrypt hashing. Modules: 3 (auth-service, user-service, session-service). Risks: 0/2/1. Handoff doc: docs_dev/design/handoff-f4e8a9b1.md. Ready for EOA assignment."
-    }
-  }'
+**Step 1:** Send a design completion message using the `agent-messaging` skill with:
+- **Recipient**: `ecos`
+- **Subject**: `Design Complete - User Authentication System`
+- **Priority**: `normal`
+- **Content**: `{"type": "design_complete", "message": "[DONE] Design for User Authentication System complete. Architecture: FastAPI + PostgreSQL + JWT auth + bcrypt hashing. Modules: 3 (auth-service, user-service, session-service). Risks: 0/2/1. Handoff doc: docs_dev/design/handoff-f4e8a9b1.md. Ready for EOA assignment."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
-# Step 2: Wait 30 seconds
-sleep 30
+**Step 2:** Wait 30 seconds.
 
-# Step 3: Check for ACK
-ACK_RESULT=$(curl -s "http://localhost:23000/api/messages?agent=eaa-architect-main-agent&action=list&status=unread" | jq '.messages[] | select(.subject | contains("ACK"))')
+**Step 3:** Check your inbox using the `agent-messaging` skill. Filter for messages with subjects containing "ACK".
 
-# Step 4: If ACK received, proceed
-if [ -n "$ACK_RESULT" ]; then
-  echo "ACK received. Proceeding with next operation."
-else
-  # Step 5: No ACK - retry
-  curl -X POST "http://localhost:23000/api/messages" \
-    -H "Content-Type: application/json" \
-    -d '{
-      "from": "eaa-architect-main-agent",
-      "to": "ecos",
-      "subject": "[RETRY] Design Complete - User Authentication System",
-      "priority": "high",
-      "content": {
-        "type": "retry",
-        "message": "[DONE] Design for User Authentication System complete. Architecture: FastAPI + PostgreSQL + JWT auth + bcrypt hashing. Modules: 3 (auth-service, user-service, session-service). Risks: 0/2/1. Handoff doc: docs_dev/design/handoff-f4e8a9b1.md. Ready for EOA assignment. (Retry: No ACK received within 30s)"
-      }
-    }'
+**Step 4:** If ACK received, proceed with next operation.
 
-  # Step 6: Wait 30 seconds again
-  sleep 30
+**Step 5 (if no ACK):** Retry by sending a message using the `agent-messaging` skill with:
+- **Recipient**: `ecos`
+- **Subject**: `[RETRY] Design Complete - User Authentication System`
+- **Priority**: `high`
+- **Content**: `{"type": "retry", "message": "[DONE] Design for User Authentication System complete. Architecture: FastAPI + PostgreSQL + JWT auth + bcrypt hashing. Modules: 3 (auth-service, user-service, session-service). Risks: 0/2/1. Handoff doc: docs_dev/design/handoff-f4e8a9b1.md. Ready for EOA assignment. (Retry: No ACK received within 30s)"}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
-  # Step 7: Check for ACK again
-  ACK_RESULT=$(curl -s "http://localhost:23000/api/messages?agent=eaa-architect-main-agent&action=list&status=unread" | jq '.messages[] | select(.subject | contains("ACK"))')
+**Step 6:** Wait 30 seconds again.
 
-  if [ -n "$ACK_RESULT" ]; then
-    echo "ACK received after retry. Proceeding with next operation."
-  else
-    # Step 8: Still no ACK - escalate
-    curl -X POST "http://localhost:23000/api/messages" \
-      -H "Content-Type: application/json" \
-      -d '{
-        "from": "eaa-architect-main-agent",
-        "to": "ecos",
-        "subject": "ACK Timeout Escalation",
-        "priority": "urgent",
-        "content": {
-          "type": "escalation",
-          "message": "ACK timeout from ecos. Original message: Design Complete - User Authentication System. Sent: 2026-02-05 15:00:00. Retry sent: 2026-02-05 15:00:30. Blocking operation: Cannot proceed to next design task without confirmation that handoff was received."
-        }
-      }'
-    echo "Escalated to ECOS. Waiting for manual intervention."
-  fi
-fi
-```
+**Step 7:** Check your inbox using the `agent-messaging` skill for ACK messages again.
+
+**Step 8 (if still no ACK):** Escalate by sending a message using the `agent-messaging` skill with:
+- **Recipient**: `ecos`
+- **Subject**: `ACK Timeout Escalation`
+- **Priority**: `urgent`
+- **Content**: `{"type": "escalation", "message": "ACK timeout from ecos. Original message: Design Complete - User Authentication System. Sent: 2026-02-05 15:00:00. Retry sent: 2026-02-05 15:00:30. Blocking operation: Cannot proceed to next design task without confirmation that handoff was received."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
+
+Then wait for manual intervention from ECOS.
