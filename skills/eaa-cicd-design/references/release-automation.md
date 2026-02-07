@@ -29,7 +29,7 @@
 - When you need to create a complete release workflow → [Complete Release Workflow](release-automation-part1-complete-workflow.md)
 - When you need to publish to package registries → [Complete Release Workflow](release-automation-part1-complete-workflow.md)
 - When you need platform-specific publishing (Homebrew, Windows Store, Docker) → [Platform-Specific Publishing](release-automation-part2-platform-publishing.md)
-- When you need to debug release pipeline issues → [Debug Script](release-automation-part2-platform-publishing.md#debug-script)
+- When you need to debug release pipeline issues → [Debug Script](release-automation-part2-platform-publishing.md) (section: Debug Script)
 
 ## Overview
 

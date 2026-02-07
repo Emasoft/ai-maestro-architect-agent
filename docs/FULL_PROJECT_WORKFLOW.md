@@ -293,7 +293,7 @@ EOA ◄────────────────────────�
 #### Step 20: PR Review Request
 **Actor**: EOA (Orchestrator)
 **Action**:
-- Send message to Integrator agent (EIA) to evaluate all PRs of completed tasks
+- Send message (using the `agent-messaging` skill) to Integrator agent (EIA) to evaluate all PRs of completed tasks
 - Request merge if they pass all checks
 
 **Communication**:

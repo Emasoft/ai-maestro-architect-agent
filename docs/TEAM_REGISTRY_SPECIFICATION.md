@@ -244,7 +244,7 @@ Team names must be **globally unique** across all projects managed by ECOS. ECOS
 
 ---
 
-## How to Send Messages
+## How to Send Messages (using the `agent-messaging` skill)
 
 Every agent can look up contact information from `team-registry.json`:
 
@@ -285,6 +285,8 @@ address = get_agent_address("svgbbox-orchestrator")
 ## Message Format with Agent Identity
 
 All AI Maestro messages must include full agent identity:
+
+> **Note**: The structure below shows the conceptual message content. Use the `agent-messaging` skill to send messages - it handles the exact API format automatically.
 
 ```json
 {
@@ -374,6 +376,8 @@ Fix login validation bug
 ### Registry Update Message
 
 When ECOS updates the registry, it sends:
+
+> **Note**: The structure below shows the conceptual message content. Use the `agent-messaging` skill to send messages - it handles the exact API format automatically.
 
 ```json
 {

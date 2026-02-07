@@ -34,16 +34,16 @@ This document was split into two parts for easier navigation and maintainability
 
 | Task | Document |
 |------|----------|
-| Set up basic CI | [Part 1](./bun-github-actions-part1-ci-publish.md#basic-ci-workflow) |
-| Test on multiple platforms | [Part 1](./bun-github-actions-part1-ci-publish.md#matrix-builds) |
-| Speed up builds with caching | [Part 1](./bun-github-actions-part1-ci-publish.md#caching-strategies) |
-| Publish to npm | [Part 1](./bun-github-actions-part1-ci-publish.md#publish-workflow) |
-| Create GitHub releases | [Part 1](./bun-github-actions-part1-ci-publish.md#release-automation) |
+| Set up basic CI | [Part 1](./bun-github-actions-part1-ci-publish.md) (section: Basic CI Workflow) |
+| Test on multiple platforms | [Part 1](./bun-github-actions-part1-ci-publish.md) (section: Matrix Builds) |
+| Speed up builds with caching | [Part 1](./bun-github-actions-part1-ci-publish.md) (section: Caching Strategies) |
+| Publish to npm | [Part 1](./bun-github-actions-part1-ci-publish.md) (section: Publish Workflow) |
+| Create GitHub releases | [Part 1](./bun-github-actions-part1-ci-publish.md) (section: Release Automation) |
 | Monorepo setup | [Part 2 Section 1](./bun-github-actions-part2-advanced-section1-monorepo.md) |
 | Security audits | [Part 2 Section 2](./bun-github-actions-part2-advanced-section2-security.md) |
 | Docker builds | [Part 2 Section 3](./bun-github-actions-part2-advanced-section3-docker.md) |
 | PR automation | [Part 2 Section 4](./bun-github-actions-part2-advanced-section4-pr-workflows.md) |
-| Fix common issues | [Part 2 Section 5](./bun-github-actions-part2-advanced-section5-permissions.md#troubleshooting) |
+| Fix common issues | [Part 2 Section 5](./bun-github-actions-part2-advanced-section5-permissions.md) (section: Troubleshooting) |
 
 ---
 

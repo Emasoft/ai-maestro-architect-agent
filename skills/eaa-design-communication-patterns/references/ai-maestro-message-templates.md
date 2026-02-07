@@ -128,10 +128,11 @@ Check your inbox using the `agent-messaging` skill. Filter for messages with sub
 
 **Workflow:**
 1. Send AI Maestro message using the `agent-messaging` skill
-2. Wait 30 seconds
-3. Check your inbox using the `agent-messaging` skill for ACK messages
-4. If ACK received: Proceed with next operation
-5. If NO ACK received: Proceed to **1.7 (Retry)**
+2. **Verify**: Confirm message delivery via the `agent-messaging` skill's sent messages feature
+3. Wait 30 seconds
+4. Check your inbox using the `agent-messaging` skill for ACK messages
+5. If ACK received: Proceed with next operation
+6. If NO ACK received: Proceed to **1.7 (Retry)**
 
 ---
 
@@ -148,10 +149,11 @@ Send a message using the `agent-messaging` skill with:
 
 **Workflow After Retry:**
 1. Send retry message using the `agent-messaging` skill
-2. Wait another 30 seconds
-3. Check inbox for ACK (see **1.6**)
-4. If ACK received: Proceed with next operation
-5. If STILL NO ACK: Proceed to **1.8 (Escalate)**
+2. **Verify**: Confirm message delivery via the `agent-messaging` skill's sent messages feature
+3. Wait another 30 seconds
+4. Check inbox for ACK (see **1.6**)
+5. If ACK received: Proceed with next operation
+6. If STILL NO ACK: Proceed to **1.8 (Escalate)**
 
 ---
 

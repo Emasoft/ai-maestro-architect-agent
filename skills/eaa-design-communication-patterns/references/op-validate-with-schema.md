@@ -209,4 +209,4 @@ else:
 
 - [op-load-shared-template.md](op-load-shared-template.md) - Templates produce schema-valid output
 - [op-access-shared-constants.md](op-access-shared-constants.md) - Constants define valid values
-- [op-generate-design-uuid.md](../../../eaa-github-integration/references/op-generate-design-uuid.md) - Generate valid UUID
+- [op-generate-design-uuid.md](../../eaa-github-integration/references/op-generate-design-uuid.md) - Generate valid UUID

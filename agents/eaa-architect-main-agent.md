@@ -96,6 +96,8 @@ Send messages to ECOS using the `agent-messaging` skill with the appropriate Rec
 
 When ECOS assigns a design task:
 
+> **Note**: The structure below shows the conceptual message content. Use the `agent-messaging` skill to send messages - it handles the exact API format automatically.
+
 ```json
 {
   "from": "eaa-architect-main-agent",
@@ -113,6 +115,8 @@ When ECOS assigns a design task:
 
 When requirements are ambiguous or conflicting:
 
+> **Note**: The structure below shows the conceptual message content. Use the `agent-messaging` skill to send messages - it handles the exact API format automatically.
+
 ```json
 {
   "from": "eaa-architect-main-agent",
@@ -129,6 +133,8 @@ When requirements are ambiguous or conflicting:
 ## Example 3: Design Completion Report
 
 When all design artifacts ready:
+
+> **Note**: The structure below shows the conceptual message content. Use the `agent-messaging` skill to send messages - it handles the exact API format automatically.
 
 ```json
 {

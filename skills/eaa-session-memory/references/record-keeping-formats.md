@@ -329,6 +329,8 @@ echo "Handoff validation passed"
 
 ## AI Maestro Message Formats
 
+> **Note**: JSON structures shown below document the message format used by the `agent-messaging` skill. They are NOT curl commands to be executed manually. Use the `agent-messaging` skill to send messages - it handles the exact API format automatically.
+
 ### 1. Acknowledgment of Design Request
 
 **When:** ECOS assigns you a design task

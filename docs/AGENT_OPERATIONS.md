@@ -407,9 +407,9 @@ Before sending handoff message, verify:
 |-------|-------|----------|
 | Skill not activating | Using file path instead of folder name | Reference skill by folder name only |
 | Plugin not found | `${CLAUDE_PLUGIN_ROOT}` incorrect | Check `--plugin-dir` flag used to spawn EAA |
-| Can't send message | AIMAESTRO_API not set | Use `http://localhost:23000` as default |
+| Can't send message | AI Maestro messaging unavailable | Verify AI Maestro is running, then use the `agent-messaging` skill to send messages |
 | ECOS not responding | ECOS session crashed | Report to system admin (user) |
-| Missing context | Task too vague | Send [QUESTION] message to ECOS |
+| Missing context | Task too vague | Send [QUESTION] message to ECOS using the `agent-messaging` skill |
 
 ---
 
@@ -449,7 +449,7 @@ Before sending handoff message, verify:
 | Variable | Value | Purpose |
 |----------|-------|---------|
 | `SESSION_NAME` | `eaa-<project>-<desc>` | Current EAA session name |
-| `AIMAESTRO_API` | `http://localhost:23000` | AI Maestro API endpoint |
+| `AIMAESTRO_API` | `http://localhost:23000` | AI Maestro API endpoint (accessed via the `agent-messaging` skill) |
 | `CLAUDE_PLUGIN_ROOT` | Plugin install path | Path to emasoft-architect-agent |
 | `CLAUDE_PROJECT_DIR` | Session working dir | EAA's working directory |
 
