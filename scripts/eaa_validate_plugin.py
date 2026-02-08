@@ -106,6 +106,26 @@ def validate_plugin(plugin_dir: Path, _verbose: bool = False) -> ValidationResul
         else:
             result.success(f"plugin.json has {field}: {manifest[field]}")
 
+    # Validate manifest schema — Claude Code rejects unknown keys
+    known_manifest_fields = {
+        "name", "version", "description", "author", "homepage",
+        "repository", "license", "keywords", "commands", "agents",
+        "skills", "hooks", "mcpServers", "outputStyles", "lspServers",
+    }
+    for key in manifest.keys():
+        if key not in known_manifest_fields:
+            result.error(
+                f"Unrecognized manifest field '{key}' — Claude Code rejects "
+                f"unknown keys and plugin installation will fail"
+            )
+
+    # Validate repository field type — must be string URL, not object
+    if "repository" in manifest and not isinstance(manifest["repository"], str):
+        result.error(
+            "Field 'repository' must be a string URL, not an object. "
+            "Use \"https://github.com/user/repo\" format."
+        )
+
     # Check directories
     dirs_to_check = ["agents", "commands", "skills", "scripts", "hooks"]
     for dir_name in dirs_to_check:
