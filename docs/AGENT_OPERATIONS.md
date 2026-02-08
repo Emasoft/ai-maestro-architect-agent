@@ -491,7 +491,7 @@ All projects use the canonical **8-column kanban system** on GitHub Projects:
 | Variable | Value | Purpose |
 |----------|-------|---------|
 | `SESSION_NAME` | `eaa-<project>-<desc>` | Current EAA session name |
-| `AIMAESTRO_API` | `http://localhost:23000` | AI Maestro API endpoint (accessed via the `agent-messaging` skill) |
+| (AI Maestro) | AI Maestro messaging system (AMP) | AMP handles routing automatically; use the `agent-messaging` skill for all messaging |
 | `CLAUDE_PLUGIN_ROOT` | Plugin install path | Path to emasoft-architect-agent |
 | `CLAUDE_PROJECT_DIR` | Session working dir | EAA's working directory |
 

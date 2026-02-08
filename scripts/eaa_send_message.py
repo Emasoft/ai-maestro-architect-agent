@@ -2,7 +2,7 @@
 """
 eaa_send_message.py - AI Maestro message sending wrapper.
 
-Sends messages to other agents via the AI Maestro API.
+Sends messages to other agents via the AMP CLI (amp-send).
 
 Usage:
     python eaa_send_message.py --to <agent> --subject <s> --message <m>
@@ -10,7 +10,6 @@ Usage:
     python eaa_send_message.py --to <agent> -s <subject> --type request -m <msg>
 
 Environment:
-    AIMAESTRO_API - API base URL (default: http://localhost:23000)
     SESSION_NAME - Sender agent name (auto-detected from tmux if not set)
 """
 
@@ -19,9 +18,6 @@ import json
 import os
 import subprocess
 import sys
-import urllib.request
-import urllib.error
-from typing import Any, cast
 
 
 def get_session_name() -> str:
@@ -54,9 +50,8 @@ def send_message(
     message: str,
     priority: str = "normal",
     msg_type: str = "notification",
-    api_url: str | None = None,
-) -> dict[str, Any]:
-    """Send message via AI Maestro API.
+) -> dict[str, str]:
+    """Send message via AMP CLI (amp-send).
 
     Args:
         to: Recipient agent name (full session name like 'libs-svg-svgbbox')
@@ -64,51 +59,43 @@ def send_message(
         message: Message content
         priority: Message priority (normal, high, urgent)
         msg_type: Message type (notification, request, response, status)
-        api_url: API base URL (default: from env or localhost:23000)
 
     Returns:
-        API response as dict
+        Dict with 'status' key on success, or 'error' key on failure.
     """
-    if api_url is None:
-        api_url = os.environ.get("AIMAESTRO_API", "http://localhost:23000")
-
-    sender = get_session_name()
-
-    payload = {
-        "from": sender,
-        "to": to,
-        "subject": subject,
-        "priority": priority,
-        "content": {
-            "type": msg_type,
-            "message": message,
-        },
-    }
-
-    data = json.dumps(payload).encode("utf-8")
-
-    req = urllib.request.Request(
-        f"{api_url}/api/messages",
-        data=data,
-        headers={"Content-Type": "application/json"},
-        method="POST",
-    )
-
     try:
-        with urllib.request.urlopen(req, timeout=10) as response:
-            return cast(dict[str, Any], json.loads(response.read().decode("utf-8")))
-    except urllib.error.HTTPError as e:
-        error_body = e.read().decode("utf-8") if e.fp else str(e)
-        return {"error": f"HTTP {e.code}: {error_body}"}
-    except urllib.error.URLError as e:
-        return {"error": f"Connection failed: {e.reason}"}
+        result = subprocess.run(
+            [
+                "amp-send",
+                to,
+                subject,
+                message,
+                "--priority",
+                priority,
+                "--type",
+                msg_type,
+            ],
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        if result.returncode == 0:
+            return {"status": "sent"}
+        return {
+            "error": result.stderr.strip()
+            or f"amp-send exited with code {result.returncode}"
+        }
+    except FileNotFoundError:
+        return {"error": "amp-send not found on PATH"}
+    except subprocess.TimeoutExpired:
+        return {"error": "amp-send timed out after 30 seconds"}
     except Exception as e:
         return {"error": str(e)}
 
 
 def main() -> None:
     """Main entry point."""
-    parser = argparse.ArgumentParser(description="Send message via AI Maestro API")
+    parser = argparse.ArgumentParser(description="Send message via AMP CLI")
     parser.add_argument(
         "--to",
         required=True,
@@ -138,10 +125,6 @@ def main() -> None:
         help="Message type (default: notification)",
     )
     parser.add_argument(
-        "--api-url",
-        help="AI Maestro API URL (default: from AIMAESTRO_API env or http://localhost:23000)",
-    )
-    parser.add_argument(
         "--json",
         action="store_true",
         help="Output raw JSON response",
@@ -155,7 +138,6 @@ def main() -> None:
         message=args.message,
         priority=args.priority,
         msg_type=args.msg_type,
-        api_url=args.api_url,
     )
 
     if args.json:
@@ -165,8 +147,7 @@ def main() -> None:
             print(f"ERROR: {result['error']}", file=sys.stderr)
             sys.exit(1)
         else:
-            msg_id = result.get("id", result.get("messageId", "unknown"))
-            print(f"Message sent successfully (ID: {msg_id})")
+            print("Message sent successfully")
 
     sys.exit(0 if "error" not in result else 1)
 

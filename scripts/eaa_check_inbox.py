@@ -2,7 +2,7 @@
 """
 eaa_check_inbox.py - AI Maestro inbox checking wrapper.
 
-Checks for unread messages from the AI Maestro API.
+Checks for unread messages using the AMP CLI commands.
 
 Usage:
     python eaa_check_inbox.py                    # List unread messages
@@ -11,7 +11,6 @@ Usage:
     python eaa_check_inbox.py --json             # Output raw JSON
 
 Environment:
-    AIMAESTRO_API - API base URL (default: http://localhost:23000)
     SESSION_NAME - Agent name (auto-detected from tmux if not set)
 """
 
@@ -20,9 +19,7 @@ import json
 import os
 import subprocess
 import sys
-import urllib.request
-import urllib.error
-from typing import Any, cast
+from typing import Any
 
 
 def get_session_name() -> str:
@@ -54,44 +51,49 @@ def check_inbox(
     count_only: bool = False,
     api_url: str | None = None,
 ) -> dict[str, Any]:
-    """Check inbox via AI Maestro API.
+    """Check inbox via AMP CLI.
 
     Args:
         unread_only: Only return unread messages
         count_only: Only return count, not full messages
-        api_url: API base URL (default: from env or localhost:23000)
+        api_url: Unused, kept for backward compatibility
 
     Returns:
-        API response as dict
+        Parsed JSON response as dict
     """
-    if api_url is None:
-        api_url = os.environ.get("AIMAESTRO_API", "http://localhost:23000")
-
-    agent = get_session_name()
-
-    # Build query parameters
-    params = f"agent={agent}&action="
-    if count_only:
-        params += "unread-count"
-    elif unread_only:
-        params += "list&status=unread"
-    else:
-        params += "list"
-
-    url = f"{api_url}/api/messages?{params}"
-
-    req = urllib.request.Request(url, method="GET")
+    _ = api_url  # No longer used; AMP CLI handles routing internally
 
     try:
-        with urllib.request.urlopen(req, timeout=10) as response:
-            return cast(dict[str, Any], json.loads(response.read().decode("utf-8")))
-    except urllib.error.HTTPError as e:
-        error_body = e.read().decode("utf-8") if e.fp else str(e)
-        return {"error": f"HTTP {e.code}: {error_body}"}
-    except urllib.error.URLError as e:
-        return {"error": f"Connection failed: {e.reason}"}
-    except Exception as e:
-        return {"error": str(e)}
+        result = subprocess.run(
+            ["amp-inbox"],
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+    except FileNotFoundError:
+        return {"error": "amp-inbox command not found. Is AMP CLI installed?"}
+    except subprocess.TimeoutExpired:
+        return {"error": "amp-inbox command timed out after 30 seconds"}
+
+    if result.returncode != 0:
+        stderr = result.stderr.strip()
+        return {"error": f"amp-inbox failed (exit {result.returncode}): {stderr}"}
+
+    try:
+        data: dict[str, Any] = json.loads(result.stdout)
+    except json.JSONDecodeError as e:
+        return {"error": f"Failed to parse amp-inbox output: {e}"}
+
+    # Filter to unread only if requested
+    if unread_only and "messages" in data:
+        data["messages"] = [m for m in data["messages"] if m.get("status") == "unread"]
+
+    # Return just the count if requested
+    if count_only:
+        messages = data.get("messages", [])
+        return {"count": len(messages)}
+
+    return data
 
 
 def format_message(msg: dict[str, Any]) -> str:
@@ -139,10 +141,6 @@ def main() -> None:
         help="Only show unread message count",
     )
     parser.add_argument(
-        "--api-url",
-        help="AI Maestro API URL (default: from AIMAESTRO_API env or http://localhost:23000)",
-    )
-    parser.add_argument(
         "--json",
         action="store_true",
         help="Output raw JSON response",
@@ -153,7 +151,6 @@ def main() -> None:
     result = check_inbox(
         unread_only=not args.all,
         count_only=args.count,
-        api_url=args.api_url,
     )
 
     if args.json:

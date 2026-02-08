@@ -53,7 +53,7 @@ When AI Maestro is unavailable:
 
 1. **Log the failure**:
    ```bash
-   echo "$(date -Iseconds) | AIMAESTRO_UNAVAILABLE | $AIMAESTRO_API" >> .claude/logs/maestro-failures.log
+   echo "$(date -Iseconds) | AIMAESTRO_UNAVAILABLE | AMP_SERVICE" >> .claude/logs/maestro-failures.log
    ```
 
 2. **Queue outgoing messages**:
