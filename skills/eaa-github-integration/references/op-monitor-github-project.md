@@ -97,7 +97,7 @@ gh project item-list --owner Emasoft --format json | jq '.items[] | {title, stat
 # Output:
 # {
 #   "title": "Auth Service Design",
-#   "status": "In Review",
+#   "status": "AI Review",
 #   "updatedAt": "2025-01-29T15:30:00Z"
 # }
 
@@ -106,7 +106,7 @@ gh project item-list --owner Emasoft --format json | jq '.items[] | {title, stat
 # - Recipient: `ecos`
 # - Subject: `GitHub Project Change Detected`
 # - Priority: `normal`
-# - Content: `{"type": "project_sync", "message": "Card Auth Service Design moved from Draft to In Review. Updating local design state."}`
+# - Content: `{"type": "project_sync", "message": "Card Auth Service Design moved from Draft to AI Review. Updating local design state."}`
 # - Verify: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 ```
 

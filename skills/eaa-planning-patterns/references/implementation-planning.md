@@ -337,8 +337,8 @@ Blockers and risks:
   - [Blocker 2]: [Status, mitigation action, owner]
 
 Changes requested this week:
-  - [Change 1]: [Approved/Rejected/In Review]
-  - [Change 2]: [Approved/Rejected/In Review]
+  - [Change 1]: [Approved/Rejected/Under Review]
+  - [Change 2]: [Approved/Rejected/Under Review]
 
 Next week priorities:
   1. [Priority 1 task]
