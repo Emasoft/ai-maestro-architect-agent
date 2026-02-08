@@ -88,9 +88,9 @@ Copy this checklist and track your progress:
 ### Example: Force Removing an In-Progress Section
 
 ```bash
-# Section is in_progress but user decided it's not needed
+# Section is in-progress but user decided it's not needed
 /remove-requirement requirement "Integration Requirements"
-# ERROR: Cannot remove: status is in_progress
+# ERROR: Cannot remove: status is in-progress
 
 # Force removal (use with caution)
 /remove-requirement requirement "Integration Requirements" --force

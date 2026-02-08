@@ -21,7 +21,7 @@ Use this operation when:
 
 - [ ] Plan Phase is active
 - [ ] Module exists with status `planned` or `pending`
-- [ ] Module is NOT `in_progress` or `complete` (blocked modification)
+- [ ] Module is NOT `in-progress` or `complete` (blocked modification)
 
 ## Procedure
 
@@ -44,7 +44,7 @@ Available modifications:
 | Argument | Description |
 |----------|-------------|
 | --name | New display name |
-| --status | New status (planned/pending/in_progress/complete) |
+| --status | New status (planned/pending/in-progress/complete) |
 | --criteria | New acceptance criteria |
 | --priority | New priority (critical/high/medium/low) |
 
@@ -123,9 +123,9 @@ modules:
 | Error | Cause | Resolution |
 |-------|-------|------------|
 | Module not found | ID mismatch | Check exact ID with `/planning-status --verbose` |
-| Cannot modify | Status is in_progress/complete | Only planned/pending modules can be modified |
+| Cannot modify | Status is in-progress/complete | Only planned/pending modules can be modified |
 | Invalid priority | Unknown value | Use: critical, high, medium, or low |
-| Invalid status | Unknown status | Use: planned, pending, in_progress, or complete |
+| Invalid status | Unknown status | Use: planned, pending, in-progress, or complete |
 | State file not found | Planning not started | Run `/start-planning` first |
 
 ## Related Operations

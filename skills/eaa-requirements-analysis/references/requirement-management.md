@@ -87,13 +87,13 @@ Module names are converted to kebab-case IDs:
 
 Modify requirements when:
 
-1. **Changing status** - Mark a section as in_progress or complete
+1. **Changing status** - Mark a section as in-progress or complete
 2. **Updating acceptance criteria** - Refining success criteria for modules
 3. **Changing priority** - Adjusting module importance
 4. **Renaming** - Correcting names without deleting
 
 **Restrictions:**
-- Cannot modify modules with status `in_progress` or `complete`
+- Cannot modify modules with status `in-progress` or `complete`
 - Cannot change the locked goal without user approval
 - Status changes must be logical (cannot skip states)
 
@@ -118,7 +118,7 @@ Modify requirements when:
 | `TYPE` | `requirement` or `module` | What to modify |
 | `ID` | String | ID of section/module |
 | `--name` | String | New display name |
-| `--status` | pending/in_progress/complete/planned | New status |
+| `--status` | pending/in-progress/complete/planned | New status |
 | `--criteria` | String | New acceptance criteria (modules only) |
 | `--priority` | critical/high/medium/low | New priority (modules only) |
 
@@ -168,7 +168,7 @@ Remove requirements when:
 |--------|------------|------------------|
 | pending | Yes | No |
 | planned | Yes | No |
-| in_progress | No | Yes |
+| in-progress | No | Yes |
 | complete | No | Yes |
 | Has GitHub Issue | No | Yes |
 
@@ -263,7 +263,7 @@ modules:
 ```bash
 # Attempting to remove in-progress module
 /remove-requirement module auth-core
-# ERROR: Cannot remove: status is in_progress
+# ERROR: Cannot remove: status is in-progress
 
 # Force removal (use with caution)
 /remove-requirement module auth-core --force

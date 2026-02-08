@@ -540,7 +540,7 @@ Examples:
     )
     print("=" * 80)
     print()
-    print(f"STATUS: {'phase_complete' if is_complete else 'in_progress'}")
+    print(f"STATUS: {'phase_complete' if is_complete else 'in-progress'}")
     print()
     print("YOUR THOUGHTS:")
     print(args.thoughts)

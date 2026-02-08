@@ -8,6 +8,7 @@ metadata:
   author: Emasoft
 agent: eaa-main
 context: fork
+user-invocable: false
 workflow-instruction: "Step 7"
 procedure: "proc-create-design"
 ---

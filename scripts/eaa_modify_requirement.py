@@ -147,7 +147,7 @@ def modify_module(
         if module.get("id") == module_id:
             # Check if can be modified
             current_status = module.get("status", "pending")
-            if current_status in ("in_progress", "complete"):
+            if current_status in ("in-progress", "complete"):
                 if new_status != current_status:  # Allow same status updates
                     print(f"ERROR: Cannot modify module with status '{current_status}'")
                     return False
@@ -200,7 +200,7 @@ def remove_module(data: dict, module_id: str, force: bool) -> bool:
     for i, module in enumerate(modules):
         if module.get("id") == module_id:
             status = module.get("status", "pending")
-            if status in ("in_progress", "complete") and not force:
+            if status in ("in-progress", "complete") and not force:
                 print(f"ERROR: Cannot remove module with status '{status}'")
                 print("Use --force to remove anyway (not recommended)")
                 return False
@@ -232,7 +232,7 @@ def main() -> int:
     parser.add_argument(
         "--status",
         "-s",
-        choices=["pending", "in_progress", "complete", "planned"],
+        choices=["pending", "in-progress", "complete", "planned"],
         help="New status",
     )
     parser.add_argument(

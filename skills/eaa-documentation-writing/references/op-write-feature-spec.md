@@ -43,7 +43,7 @@ Use this template:
 # Feature Specification: <Feature Name>
 
 **Version:** 1.0
-**Status:** Draft | Review | Approved | In Development | Complete
+**Status:** Draft | Review | Approved | In Progress | Complete
 **Owner:** <Name/Role>
 **Last Updated:** YYYY-MM-DD
 

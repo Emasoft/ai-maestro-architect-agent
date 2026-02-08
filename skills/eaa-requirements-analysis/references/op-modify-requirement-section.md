@@ -12,11 +12,11 @@ version: 1.0.0
 ## When to Use
 
 Use this operation when:
-- Marking a requirement section as in_progress or complete
+- Marking a requirement section as in-progress or complete
 - Renaming a requirement section
 - Tracking progress through requirement gathering
 
-Status progression: `pending` -> `in_progress` -> `complete`
+Status progression: `pending` -> `in-progress` -> `complete`
 
 ## Prerequisites
 
@@ -74,7 +74,7 @@ Copy this checklist and track your progress:
 # Shows: Functional Requirements - pending
 
 # Mark as in progress
-/modify-requirement requirement "Functional Requirements" --status in_progress
+/modify-requirement requirement "Functional Requirements" --status in-progress
 
 # After documenting requirements, mark complete
 /modify-requirement requirement "Functional Requirements" --status complete
@@ -115,7 +115,7 @@ requirements_sections:
   - name: "Functional Requirements"
     status: "complete"           # CHANGED from pending
   - name: "Non-Functional Requirements"
-    status: "in_progress"        # CHANGED from pending
+    status: "in-progress"        # CHANGED from pending
   - name: "System Architecture"  # RENAMED from Architecture Design
     status: "pending"
 ```
@@ -125,7 +125,7 @@ requirements_sections:
 | Error | Cause | Resolution |
 |-------|-------|------------|
 | Section not found | Name mismatch | Check exact name with `/planning-status` |
-| Invalid status | Unknown status value | Use: pending, in_progress, or complete |
+| Invalid status | Unknown status value | Use: pending, in-progress, or complete |
 | Invalid transition | Skipping status | Progress through statuses in order |
 | State file not found | Planning not started | Run `/start-planning` first |
 

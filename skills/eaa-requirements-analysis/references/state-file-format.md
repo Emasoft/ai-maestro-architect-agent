@@ -113,7 +113,7 @@ requirements_sections:
   - name: "Functional Requirements"
     status: "pending"
   - name: "Non-Functional Requirements"
-    status: "in_progress"
+    status: "in-progress"
   - name: "Architecture Design"
     status: "complete"
 ```
@@ -127,7 +127,7 @@ requirements_sections:
 
 **Status values:**
 - `pending` - Not started
-- `in_progress` - Currently being documented
+- `in-progress` - Currently being documented
 - `complete` - Section is fully documented
 
 **Default sections (created by /start-planning):**
@@ -171,7 +171,7 @@ modules:
 **Status values:**
 - `planned` - Defined but not started
 - `pending` - Waiting to be assigned
-- `in_progress` - Currently being implemented
+- `in-progress` - Currently being implemented
 - `complete` - Implementation finished
 
 **Priority values:**

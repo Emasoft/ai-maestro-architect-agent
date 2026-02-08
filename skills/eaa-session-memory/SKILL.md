@@ -7,8 +7,8 @@ compatibility: "Cross-platform. Requires write access to design output directori
 metadata:
   author: Emasoft
 context: fork
-agent: eaa-main
 user-invocable: false
+agent: eaa-main
 workflow-instruction: "Steps 15, support"
 procedure: "proc-handle-feedback, support-skill"
 triggers:

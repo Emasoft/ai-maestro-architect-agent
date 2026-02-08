@@ -128,7 +128,7 @@ Use `/planning-status` to view the current state of Plan Phase.
 | REQUIREMENTS PROGRESS                                             |
 +------------------------------------------------------------------+
 | [x] Functional Requirements     - complete                        |
-| [>] Non-Functional Requirements - in_progress                     |
+| [>] Non-Functional Requirements - in-progress                     |
 | [ ] Architecture Design         - pending                         |
 +------------------------------------------------------------------+
 ```
@@ -186,7 +186,7 @@ Use `/modify-requirement` to change existing requirement sections or modules.
 | --priority | No | Yes |
 
 **Restrictions:**
-- Cannot modify modules with status `in_progress` or `complete`
+- Cannot modify modules with status `in-progress` or `complete`
 - Cannot change the locked goal without user approval
 
 See [requirement-management.md](references/requirement-management.md) section 2.4-2.5 for details.
@@ -288,7 +288,7 @@ The plan phase uses a state file at `.claude/orchestrator-plan-phase.local.md` t
 | Error | Cause | Solution |
 |-------|-------|----------|
 | State file not found | Planning not started | Run `/start-planning` first |
-| Invalid status transition | Wrong status order | Follow: pending → in_progress → complete |
+| Invalid status transition | Wrong status order | Follow: pending → in-progress → complete |
 | Module has GitHub Issue | Cannot remove linked module | Use `--force` flag or close issue first |
 | Approval prerequisites failed | Incomplete requirements | Mark all sections complete first |
 | gh CLI auth failed | Not logged in | Run `gh auth login` |
@@ -369,8 +369,8 @@ python3 scripts/reset_plan_phase.py --confirm --no-backup
 
 | Type | Allowed Status Values |
 |------|----------------------|
-| Requirement sections | pending, in_progress, complete |
-| Modules | planned, pending, in_progress, complete |
+| Requirement sections | pending, in-progress, complete |
+| Modules | planned, pending, in-progress, complete |
 | Plan | drafting, reviewing, approved |
 
 ### Priority Values

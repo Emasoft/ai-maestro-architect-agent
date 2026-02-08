@@ -48,7 +48,7 @@ The status output shows:
 ### Step 3: Identify Action Items
 
 From the status output, identify:
-- Requirement sections still pending or in_progress
+- Requirement sections still pending or in-progress
 - Modules missing acceptance criteria
 - Exit criteria not yet met
 
@@ -80,7 +80,7 @@ Copy this checklist and track your progress:
 # | REQUIREMENTS PROGRESS                                             |
 # +------------------------------------------------------------------+
 # | [x] Functional Requirements     - complete                        |
-# | [>] Non-Functional Requirements - in_progress                     |
+# | [>] Non-Functional Requirements - in-progress                     |
 # | [ ] Architecture Design         - pending                         |
 # +------------------------------------------------------------------+
 ```

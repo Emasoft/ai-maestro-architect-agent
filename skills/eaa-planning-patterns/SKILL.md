@@ -7,6 +7,7 @@ compatibility: Cross-platform compatible. Requires Python 3.8+ for utility scrip
 metadata:
   author: Emasoft
 context: fork
+user-invocable: false
 workflow-instruction: "Step 7"
 procedure: "proc-create-design"
 ---

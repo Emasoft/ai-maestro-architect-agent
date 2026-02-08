@@ -8,6 +8,7 @@ metadata:
   author: Emasoft
   triggers: "User asks to research an API or library, Need to understand authentication for external service, Orchestrator needs API documentation before implementation, Integration with third-party service required"
 context: fork
+user-invocable: false
 workflow-instruction: "Step 7"
 procedure: "proc-create-design"
 ---

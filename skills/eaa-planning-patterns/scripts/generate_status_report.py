@@ -102,7 +102,7 @@ def parse_plan_markdown(plan_path: Path) -> dict[str, Any]:
                     "phase": current_phase,
                     "status": "completed"
                     if status_char == "x"
-                    else "in_progress"
+                    else "in-progress"
                     if status_char == "~"
                     else "pending",
                     "dependencies": dependencies,
@@ -150,7 +150,7 @@ def calculate_phase_progress(tasks: list[dict[str, Any]]) -> dict[str, dict[str,
     phase_stats: dict[str, dict[str, int]] = defaultdict(
         lambda: {
             "completed": 0,
-            "in_progress": 0,
+            "in-progress": 0,
             "blocked": 0,
             "pending": 0,
             "total": 0,
@@ -165,8 +165,8 @@ def calculate_phase_progress(tasks: list[dict[str, Any]]) -> dict[str, dict[str,
 
         if status == "completed":
             phase_stats[phase]["completed"] += 1
-        elif status == "in_progress":
-            phase_stats[phase]["in_progress"] += 1
+        elif status == "in-progress":
+            phase_stats[phase]["in-progress"] += 1
         elif status == "blocked":
             phase_stats[phase]["blocked"] += 1
         else:
@@ -201,7 +201,7 @@ def identify_blocked_tasks(tasks: list[dict[str, Any]]) -> list[dict[str, Any]]:
             dep for dep in dependencies if task_status.get(dep) != "completed"
         ]
 
-        if incomplete_deps and task.get("status") == "in_progress":
+        if incomplete_deps and task.get("status") == "in-progress":
             blocked_tasks.append({**task, "blockers": incomplete_deps})
 
     return blocked_tasks
@@ -284,7 +284,7 @@ def generate_executive_summary(
     _ = phase_stats  # Currently unused - will be used for phase-level metrics
     total_tasks = len(tasks)
     completed_tasks = sum(1 for t in tasks if t.get("status") == "completed")
-    in_progress_tasks = sum(1 for t in tasks if t.get("status") == "in_progress")
+    in_progress_tasks = sum(1 for t in tasks if t.get("status") == "in-progress")
     blocked_tasks = len(identify_blocked_tasks(tasks))
 
     overall_progress = (
@@ -295,7 +295,7 @@ def generate_executive_summary(
         "overall_progress": overall_progress,
         "total_tasks": total_tasks,
         "completed_tasks": completed_tasks,
-        "in_progress_tasks": in_progress_tasks,
+        "in-progress_tasks": in_progress_tasks,
         "blocked_tasks": blocked_tasks,
     }
 
@@ -319,7 +319,7 @@ def generate_status_report(data: dict[str, Any], output_path: Path) -> None:
     blocked = identify_blocked_tasks(tasks)
     upcoming = identify_upcoming_tasks(tasks)
     recent = get_recently_completed(tasks)
-    in_progress = [t for t in tasks if t.get("status") == "in_progress"]
+    in_progress = [t for t in tasks if t.get("status") == "in-progress"]
 
     # Generate report content
     report_date = datetime.now().strftime("%Y-%m-%d")
@@ -330,7 +330,7 @@ def generate_status_report(data: dict[str, Any], output_path: Path) -> None:
         "## Executive Summary",
         f"- Overall Progress: {summary['overall_progress']}% complete",
         f"- Tasks Completed This Period: {len(recent)}",
-        f"- Tasks In Progress: {summary['in_progress_tasks']}",
+        f"- Tasks In Progress: {summary['in-progress_tasks']}",
         f"- Blocked Tasks: {summary['blocked_tasks']}",
         "",
         "## Phase Progress",
@@ -340,7 +340,7 @@ def generate_status_report(data: dict[str, Any], output_path: Path) -> None:
 
     for phase, stats in sorted(phase_stats.items()):
         report_lines.append(
-            f"| {phase} | {stats['completed']} | {stats['in_progress']} | "
+            f"| {phase} | {stats['completed']} | {stats['in-progress']} | "
             f"{stats['blocked']} | {stats['pending']} | {stats['total']} |"
         )
 

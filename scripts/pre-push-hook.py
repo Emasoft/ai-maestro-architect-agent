@@ -31,7 +31,7 @@ NC = "\033[0m"
 def validate_json(file_path: Path) -> tuple[bool, str]:
     """Validate JSON file syntax."""
     try:
-        with open(file_path) as f:
+        with open(file_path, encoding="utf-8") as f:
             json.load(f)
         return True, ""
     except json.JSONDecodeError as e:
@@ -60,7 +60,7 @@ def validate_plugin_manifest(plugin_dir: Path) -> list[tuple[str, str]]:
         issues.append(("CRITICAL", f"Invalid plugin.json: {error}"))
         return issues
 
-    with open(plugin_json) as f:
+    with open(plugin_json, encoding="utf-8") as f:
         data = json.load(f)
 
     # Check required fields
@@ -107,7 +107,7 @@ def validate_hooks_config(plugin_dir: Path) -> list[tuple[str, str]]:
         issues.append(("CRITICAL", f"Invalid hooks.json: {error}"))
         return issues
 
-    with open(hooks_json) as f:
+    with open(hooks_json, encoding="utf-8") as f:
         data = json.load(f)
 
     hooks = data.get("hooks", {})
@@ -183,6 +183,37 @@ def lint_python_scripts(plugin_dir: Path) -> list[tuple[str, str]]:
     return issues
 
 
+def check_unicode_compliance(plugin_dir: Path) -> list[tuple[str, str]]:
+    """Run Unicode compliance check on text files."""
+    issues: list[tuple[str, str]] = []
+    scripts_dir = plugin_dir / "scripts"
+    skills_dir = plugin_dir / "skills"
+
+    try:
+        for check_dir in [scripts_dir, skills_dir]:
+            if not check_dir.exists():
+                continue
+            for filepath in check_dir.rglob("*"):
+                if not filepath.is_file():
+                    continue
+                if filepath.suffix not in (".py", ".md", ".json", ".yaml", ".yml", ".toml", ".sh"):
+                    continue
+                if any(p.startswith(".") or p == "__pycache__" for p in filepath.parts):
+                    continue
+                try:
+                    raw = filepath.read_bytes()
+                    if raw.startswith(b"\xef\xbb\xbf") or raw.startswith((b"\xff\xfe", b"\xfe\xff")):
+                        issues.append(("MAJOR", f"BOM detected in {filepath.relative_to(plugin_dir)}"))
+                    if b"\r\n" in raw:
+                        issues.append(("MINOR", f"CRLF line endings in {filepath.relative_to(plugin_dir)}"))
+                except OSError:
+                    pass
+    except Exception:
+        issues.append(("MINOR", "Unicode compliance check encountered an error"))
+
+    return issues
+
+
 def main() -> int:
     """Main pre-push validation."""
     # Get repo root
@@ -209,6 +240,10 @@ def main() -> int:
     # 3. Lint Python scripts
     print(f"{BLUE}Linting Python scripts...{NC}")
     all_issues.extend(lint_python_scripts(repo_root))
+
+    # 4. Unicode compliance check
+    print(f"{BLUE}Checking Unicode compliance...{NC}")
+    all_issues.extend(check_unicode_compliance(repo_root))
 
     # Categorize issues
     critical = [msg for sev, msg in all_issues if sev == "CRITICAL"]

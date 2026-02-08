@@ -122,20 +122,20 @@ def init_storage(project_root: Path) -> None:
 
     # Create .gitkeep
     gitkeep = storage_root.parent / ".gitkeep"
-    gitkeep.write_text("# EAA document storage - do not delete this folder\n")
+    gitkeep.write_text("# EAA document storage - do not delete this folder\n", encoding="utf-8")
 
     # Update .gitignore if in git repo
     gitignore_path = project_root / ".gitignore"
     gitignore_entry = "\n# EAA Document Storage (local cache)\n.eaa/\n!.eaa/.gitkeep\n"
 
     if gitignore_path.exists():
-        content = gitignore_path.read_text()
+        content = gitignore_path.read_text(encoding="utf-8")
         if ".eaa/" not in content:
-            with gitignore_path.open("a") as f:
+            with gitignore_path.open("a", encoding="utf-8") as f:
                 f.write(gitignore_entry)
             print(f"Updated {gitignore_path}")
     else:
-        gitignore_path.write_text(gitignore_entry)
+        gitignore_path.write_text(gitignore_entry, encoding="utf-8")
         print(f"Created {gitignore_path}")
 
     print("EAA storage initialized successfully")
@@ -327,7 +327,7 @@ def download_document(
     }
 
     metadata_path = folder_path / f"{filename.replace('.md', '')}_metadata.json"
-    metadata_path.write_text(json.dumps(metadata, indent=2))
+    metadata_path.write_text(json.dumps(metadata, indent=2), encoding="utf-8")
 
     # Set read-only
     set_readonly(file_path)
@@ -367,7 +367,7 @@ def lookup_documents(
                     metadata = {}
                     if metadata_file.exists():
                         try:
-                            metadata = json.loads(metadata_file.read_text())
+                            metadata = json.loads(metadata_file.read_text(encoding="utf-8"))
                         except json.JSONDecodeError:
                             pass
 
@@ -445,7 +445,7 @@ def verify_storage(project_root: Path | None = None) -> dict[str, Any]:
             else:
                 # Verify SHA256
                 try:
-                    metadata = json.loads(metadata_file.read_text())
+                    metadata = json.loads(metadata_file.read_text(encoding="utf-8"))
                     stored_hash = metadata.get("download", {}).get("sha256")
                     if stored_hash:
                         current_hash = compute_sha256(md_file)

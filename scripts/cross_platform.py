@@ -16,7 +16,7 @@ def atomic_write_json(path: Path, data: Any, indent: int = 2) -> None:
 
     # Write to temp file first, then move atomically
     with tempfile.NamedTemporaryFile(
-        mode="w", dir=path.parent, suffix=".tmp", delete=False
+        mode="w", dir=path.parent, suffix=".tmp", delete=False, encoding="utf-8"
     ) as tmp:
         json.dump(data, tmp, indent=indent)
         tmp_path = Path(tmp.name)
@@ -30,7 +30,7 @@ def atomic_write_text(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
 
     with tempfile.NamedTemporaryFile(
-        mode="w", dir=path.parent, suffix=".tmp", delete=False
+        mode="w", dir=path.parent, suffix=".tmp", delete=False, encoding="utf-8"
     ) as tmp:
         tmp.write(content)
         tmp_path = Path(tmp.name)

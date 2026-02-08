@@ -86,9 +86,9 @@ Copy this checklist and track your progress:
 ### Example: Attempting to Remove In-Progress Module
 
 ```bash
-# Module is in_progress
+# Module is in-progress
 /remove-requirement module auth-core
-# ERROR: Cannot remove: status is in_progress
+# ERROR: Cannot remove: status is in-progress
 
 # Force removal (use with caution - work may be lost)
 /remove-requirement module auth-core --force
@@ -137,7 +137,7 @@ modules:
 | Error | Cause | Resolution |
 |-------|-------|------------|
 | Module not found | ID mismatch | Check exact ID with `/planning-status --verbose` |
-| Cannot remove: in_progress | Work has started | Use --force if intentional (work lost) |
+| Cannot remove: in-progress | Work has started | Use --force if intentional (work lost) |
 | Cannot remove: complete | Module finished | Use --force if intentional |
 | Has GitHub Issue | Issue already created | Close issue first or use --force |
 | State file not found | Planning not started | Run `/start-planning` first |

@@ -1,7 +1,7 @@
 # Team Registry Specification
 
-**Version**: 1.0.0
-**Last Updated**: 2026-02-03
+**Version**: 1.1.0
+**Last Updated**: 2026-02-07
 
 This document specifies the format and location of team registries, agent contacts, and naming conventions.
 
@@ -199,9 +199,9 @@ Team names must be **globally unique** across all projects managed by ECOS. ECOS
 |------|--------|----------------|-------------|
 | `manager` | emasoft-assistant-manager-agent | 0 (org-wide) | User interface, approvals |
 | `chief-of-staff` | emasoft-chief-of-staff | 0 (org-wide) | Agent lifecycle |
-| `orchestrator` | emasoft-orchestrator-agent | **Exactly 1** | Task management, kanban |
+| `orchestrator` | emasoft-orchestrator-agent | **Exactly 1** | Task management, kanban, agent replacement, remote coordination, messaging templates |
 | `architect` | emasoft-architect-agent | **Exactly 1** | Design documents |
-| `integrator` | emasoft-integrator-agent | 1+ (can be shared) | PR review, merge |
+| `integrator` | emasoft-integrator-agent | 1+ (can be shared) | PR review, merge, CI/CD pipeline, release management, quality gates, kanban sync |
 | `implementer` | emasoft-implementer-agent | 1+ | Code implementation |
 | `tester` | emasoft-tester-agent | 0+ | Testing, QA |
 | `devops` | emasoft-devops-agent | 0+ | CI/CD, deployment |
@@ -244,7 +244,7 @@ Team names must be **globally unique** across all projects managed by ECOS. ECOS
 
 ---
 
-## How to Send Messages (using the `agent-messaging` skill)
+## How to Send Messages
 
 Every agent can look up contact information from `team-registry.json`:
 
@@ -253,7 +253,7 @@ import json
 
 def get_agent_address(agent_name: str, registry_path: str = ".emasoft/team-registry.json") -> str:
     """Get AI Maestro address for an agent."""
-    with open(registry_path) as f:
+    with open(registry_path, encoding="utf-8") as f:
         registry = json.load(f)
 
     # Check team agents
@@ -273,44 +273,37 @@ def get_agent_address(agent_name: str, registry_path: str = ".emasoft/team-regis
 
     raise ValueError(f"Agent not found: {agent_name}")
 
-# Example: Send message to orchestrator
+# Example: Look up orchestrator address
 address = get_agent_address("svgbbox-orchestrator")
 # Returns: "svgbbox-orchestrator"
 
-# Then use the agent-messaging skill to send a message to that address.
+# Then use the `agent-messaging` skill to send a message to this address.
 ```
 
 ---
 
 ## Message Format with Agent Identity
 
-All AI Maestro messages must include full agent identity:
+All AI Maestro messages must include full agent identity. Send using the `agent-messaging` skill:
 
-> **Note**: The structure below shows the conceptual message content. Use the `agent-messaging` skill to send messages - it handles the exact API format automatically.
+- **Sender**: The sending agent's name (e.g., `svgbbox-impl-01`)
+- **Recipient**: The target agent's name looked up from the team registry (e.g., `svgbbox-orchestrator`)
+- **Subject**: "[PROGRESS] Task #42: Login fix 80% complete"
+- **Priority**: `normal`
+- **Content**: Include the following fields:
+  - `type`: `progress-report`
+  - `message`: "Login fix implementation 80% complete. Running tests now."
+  - `sender_identity`: A nested structure containing:
+    - `name`: The sending agent's name (e.g., `svgbbox-impl-01`)
+    - `role`: The agent's role (e.g., `implementer`)
+    - `plugin`: The plugin name (e.g., `emasoft-implementer-agent`)
+    - `host`: The host machine identifier (e.g., `macbook-dev-01`)
+    - `team`: The team name (e.g., `svgbbox-library-team`)
+  - `task_reference`: A nested structure containing:
+    - `issue_number`: The GitHub issue number (e.g., 42)
+    - `issue_url`: Full URL to the GitHub issue
 
-```json
-{
-  "from": "svgbbox-impl-01",
-  "to": "svgbbox-orchestrator",
-  "subject": "[PROGRESS] Task #42: Login fix 80% complete",
-  "priority": "normal",
-  "content": {
-    "type": "progress-report",
-    "message": "Login fix implementation 80% complete. Running tests now.",
-    "sender_identity": {
-      "name": "svgbbox-impl-01",
-      "role": "implementer",
-      "plugin": "emasoft-implementer-agent",
-      "host": "macbook-dev-01",
-      "team": "svgbbox-library-team"
-    },
-    "task_reference": {
-      "issue_number": 42,
-      "issue_url": "https://github.com/Emasoft/svgbbox/issues/42"
-    }
-  }
-}
-```
+**Verify**: confirm message delivery via the `agent-messaging` skill's sent messages feature.
 
 ---
 
@@ -375,27 +368,22 @@ Fix login validation bug
 
 ### Registry Update Message
 
-When ECOS updates the registry, it sends:
+When ECOS updates the registry, it sends a notification to all team agents using the `agent-messaging` skill:
 
-> **Note**: The structure below shows the conceptual message content. Use the `agent-messaging` skill to send messages - it handles the exact API format automatically.
+- **Sender**: `ecos-chief-of-staff`
+- **Recipient**: Each team agent (sent individually to all agents in the registry)
+- **Subject**: "[REGISTRY UPDATE] Team contacts updated"
+- **Priority**: `normal`
+- **Content**: Include the following fields:
+  - `type`: `registry-update`
+  - `message`: "Team registry has been updated. Please pull latest changes."
+  - `changes`: List of changes made, each with:
+    - `action`: One of `added`, `removed`, or `status_change`
+    - `agent`: The affected agent name
+    - `new_status`: New status value (only for `status_change` actions)
+  - `registry_commit`: The git commit hash of the registry update
 
-```json
-{
-  "from": "ecos-chief-of-staff",
-  "to": "<all-team-agents>",
-  "subject": "[REGISTRY UPDATE] Team contacts updated",
-  "priority": "normal",
-  "content": {
-    "type": "registry-update",
-    "message": "Team registry has been updated. Please pull latest changes.",
-    "changes": [
-      {"action": "added", "agent": "svgbbox-impl-03"},
-      {"action": "status_change", "agent": "svgbbox-impl-02", "new_status": "hibernated"}
-    ],
-    "registry_commit": "abc123"
-  }
-}
-```
+**Verify**: confirm message delivery via the `agent-messaging` skill's sent messages feature.
 
 ---
 
@@ -408,6 +396,25 @@ When ECOS updates the registry, it sends:
 5. **At least one implementer** per team
 6. **All agents must have valid AI Maestro addresses**
 7. **Organization agents cannot be assigned to teams**
+
+---
+
+## Kanban System Reference
+
+All projects use the canonical **8-column kanban system** on GitHub Projects:
+
+| Column | Code | Label |
+|--------|------|-------|
+| Backlog | `backlog` | `status:backlog` |
+| Todo | `todo` | `status:todo` |
+| In Progress | `in-progress` | `status:in-progress` |
+| AI Review | `ai-review` | `status:ai-review` |
+| Human Review | `human-review` | `status:human-review` |
+| Merge/Release | `merge-release` | `status:merge-release` |
+| Done | `done` | `status:done` |
+| Blocked | `blocked` | `status:blocked` |
+
+For full kanban workflow details, task routing rules, and code format rules, see **FULL_PROJECT_WORKFLOW.md**.
 
 ---
 

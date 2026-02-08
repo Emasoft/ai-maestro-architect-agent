@@ -4,7 +4,7 @@ eaa_stop_check.py - Stop hook to block exit with incomplete design work.
 
 This script checks for:
 1. Design documents in "draft" state (not approved)
-2. Claude Tasks with pending/in_progress status
+2. Claude Tasks with pending/in-progress status
 3. Open requirements without corresponding design docs
 4. GitHub Issues assigned to architect that aren't closed
 
@@ -69,7 +69,7 @@ def check_draft_design_docs(project_root: Path) -> list[str]:
                         "## draft",
                         "wip:",
                         "status: wip",
-                        "in_progress",
+                        "in-progress",
                     ]
                 ):
                     blockers.append(
@@ -92,7 +92,7 @@ def check_pending_tasks(project_root: Path) -> list[str]:
             try:
                 task_data = json.loads(task_file.read_text(encoding="utf-8"))
                 status = task_data.get("status", "").lower()
-                if status in ["pending", "in_progress", "in-progress", "running"]:
+                if status in ["pending", "in-progress", "running"]:
                     task_name = task_data.get("name", task_file.stem)
                     blockers.append(f"Pending task: {task_name} (status: {status})")
             except (json.JSONDecodeError, OSError):

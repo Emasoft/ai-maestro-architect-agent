@@ -136,7 +136,7 @@ Solutions:
 1. Check exact ID with `/planning-status`
 2. Use the kebab-case ID, not the display name
 
-**Error: "Cannot modify module with status 'in_progress'"**
+**Error: "Cannot modify module with status 'in-progress'"**
 
 Cause: Module work has started, modification restricted.
 
@@ -154,7 +154,7 @@ Solution: Verify current status with `/planning-status` before modifying.
 
 ## 5.5 When /remove-requirement fails
 
-**Error: "Cannot remove: status is in_progress"**
+**Error: "Cannot remove: status is in-progress"**
 
 Cause: Module is being worked on.
 

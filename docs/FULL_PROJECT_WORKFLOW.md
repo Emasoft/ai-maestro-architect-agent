@@ -1,7 +1,7 @@
 # Full Project Workflow: From Requirements to Delivery
 
-**Version**: 1.0.0
-**Last Updated**: 2026-02-02
+**Version**: 1.1.0
+**Last Updated**: 2026-02-07
 
 This document describes the complete workflow for how the Emasoft agent system handles a project from initial requirements to delivery. All agents must understand this workflow to coordinate effectively.
 
@@ -60,6 +60,38 @@ EOA ◄────────────────────────�
   │ 19. Assigns next tasks                                   │
   └──────────────────────────────────────────────────────────┘
 ```
+
+---
+
+## Kanban Column System
+
+All projects use an **8-column kanban system** on GitHub Projects. Every agent must understand these columns and use the canonical code format consistently.
+
+### Canonical Columns
+
+| # | Column | Code Format | Label | Description |
+|---|--------|-------------|-------|-------------|
+| 1 | Backlog | `backlog` | `status:backlog` | Entry point for all new issues |
+| 2 | Todo | `todo` | `status:todo` | Ready to start, prioritized |
+| 3 | In Progress | `in-progress` | `status:in-progress` | Active work by assigned agent |
+| 4 | AI Review | `ai-review` | `status:ai-review` | Integrator (EIA) reviews the PR |
+| 5 | Human Review | `human-review` | `status:human-review` | User reviews (big tasks only) |
+| 6 | Merge/Release | `merge-release` | `status:merge-release` | Approved and ready to merge |
+| 7 | Done | `done` | `status:done` | Completed and merged |
+| 8 | Blocked | `blocked` | `status:blocked` | Blocked at any stage |
+
+### Task Routing
+
+- **Small tasks**: In Progress → AI Review → Merge/Release → Done
+- **Big tasks**: In Progress → AI Review → Human Review → Merge/Release → Done
+- **Human Review** is requested via EAMA (Assistant Manager asks the user to test/review)
+- **Blocked** can be set from any column; task returns to its previous column when unblocked
+
+### Code Format Rules
+
+- **Always use dashes**: `in-progress`, `ai-review`, `merge-release` (NOT underscores)
+- **Labels use `status:` prefix**: `status:in-progress`, `status:ai-review`
+- **Display names use title case**: "In Progress", "AI Review", "Merge/Release"
 
 ---
 
@@ -203,7 +235,7 @@ EOA ◄────────────────────────�
 #### Step 13: Kanban Population
 **Actor**: EOA (Orchestrator)
 **Action**:
-- Add tasks to the GitHub Project kanban "To-Do" column
+- Add tasks to the GitHub Project kanban `todo` column
 - For each task:
   - Set the "Assigned Agent" custom field
   - Attach the task-requirements-document
@@ -217,7 +249,7 @@ EOA ◄────────────────────────�
 #### Step 14: Agent Clarification
 **Actor**: EOA (Orchestrator) + IMPLEMENTER AGENTS
 **Action**:
-- Send to each agent a notification that their first task has been assigned
+- Send to each agent a notification using the `agent-messaging` skill that their first task has been assigned
 - Ask each agent if they need clarifications
 - The Orchestrator is the team lead with full project understanding (along with Architect)
 
@@ -268,7 +300,7 @@ EOA ◄────────────────────────�
 #### Step 18: Kanban Status Update
 **Actor**: EOA (Orchestrator)
 **Action**:
-- Move tasks on project kanban from "To-Do" column to "In-Dev" column
+- Move tasks on project kanban from `todo` column to `in-progress` column
 
 **Communication**:
 - GitHub: Update project item status
@@ -293,7 +325,7 @@ EOA ◄────────────────────────�
 #### Step 20: PR Review Request
 **Actor**: EOA (Orchestrator)
 **Action**:
-- Send message (using the `agent-messaging` skill) to Integrator agent (EIA) to evaluate all PRs of completed tasks
+- Send message using the `agent-messaging` skill to Integrator agent (EIA) to evaluate all PRs of completed tasks
 - Request merge if they pass all checks
 
 **Communication**:
@@ -320,7 +352,7 @@ EOA ◄────────────────────────�
 - Communicate to agents the issues and shortcomings
 - Instruct agents to fix or improve the code
 - Provide extended/improved task-requirements-document if needed
-- Move task back to "In-Dev" column
+- Move task back to `in-progress` column
 - Ask agent if they need anything to complete the task
 - If OK: implementer agent resumes work on task
 
@@ -335,14 +367,15 @@ EOA ◄────────────────────────�
 #### Step 23: Successful PR Handling
 **Actor**: EOA (Orchestrator)
 **Action**:
-- When Integrator reports successful PR merge:
-  - Move task to "Done" column
+- When Integrator reports successful PR merge, move task to `ai-review` column
+  - If AI review passes for small tasks: move to `merge-release`, then `done`
+  - If AI review passes for big tasks: move to `human-review` first, then `merge-release`, then `done`
   - Report to Manager (EAMA) for approval
   - If Manager approves: assign new task to the agent that finished
   - Keep implementer agents always working, never idle
 
 **Communication**:
-- GitHub: Update project item to Done
+- GitHub: Update project item status through kanban columns
 - AI Maestro: Completion report to EAMA
 - AI Maestro: New task assignment to agent
 
@@ -396,7 +429,7 @@ EOA ◄────────────────────────�
 | 8 | Attach design document | EAA |
 | 13 | Create task issues, add to project | EOA |
 | 13 | Set "Assigned Agent" field | EOA |
-| 18 | Move to "In-Dev" column | EOA |
+| 18 | Move to "In Progress" column | EOA |
 | 19 | Create PR | Agent |
 | 21 | Review and merge/reject PR | EIA |
 | 23 | Move to "Done" column | EOA |
@@ -410,6 +443,29 @@ EOA ◄────────────────────────�
 - **Task-Requirements-Document**: Created by EOA for each task
 - **Design-Change-Request**: Created by EOA when agents suggest improvements
 - **PR Review Report**: Created by EIA for each PR
+
+---
+
+## Wave 1-7 Skill Additions (2026-02-06 — 2026-02-07)
+
+The following skills were added to EIA and EOA plugins, integrating techniques from the DOCS_AND_SCRIPTS reference collection:
+
+### EIA (Integrator) New Skills
+- **eia-ci-cd-pipeline**: CI/CD pipeline management, GitHub Actions workflows
+- **eia-pr-review-workflow**: PR review automation, code quality checks
+- **eia-release-management**: Version management, changelog generation, release automation
+- **eia-quality-gates**: Code quality enforcement, linting, type checking
+- **eia-github-projects-sync**: GitHub Projects kanban synchronization
+- **eia-kanban-management**: Kanban column management and task routing
+
+### EOA (Orchestrator) New Skills
+- **eoa-agent-replacement**: Agent failure detection and replacement protocols
+- **eoa-remote-agent-coordinator**: Remote agent coordination and multi-host management
+- **eoa-messaging-templates**: Standardized AI Maestro message templates
+- **eoa-orchestration-patterns**: Task distribution, load balancing, dependency management
+- **eoa-module-management**: Module lifecycle and dependency tracking
+
+These skills integrate CI/CD best practices, PR review workflows, release automation, quality gates, and multi-agent coordination patterns into the Emasoft ecosystem.
 
 ---
 

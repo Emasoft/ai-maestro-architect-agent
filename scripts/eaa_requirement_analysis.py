@@ -97,7 +97,7 @@ user approval.
 | | | | |
 
 """
-        user_req_file.write_text(content)
+        user_req_file.write_text(content, encoding="utf-8")
         print(f"Created: {user_req_file}")
 
     # Create REQUIREMENT_DECISIONS.md
@@ -132,7 +132,7 @@ issues arise, the user's decision is recorded here for future reference.
 | | | | |
 
 """
-        decisions_file.write_text(content)
+        decisions_file.write_text(content, encoding="utf-8")
         print(f"Created: {decisions_file}")
 
     # Create REQUIREMENT_ANALYSIS.md
@@ -184,7 +184,7 @@ for user review.
 | | | | |
 
 """
-        analysis_file.write_text(content)
+        analysis_file.write_text(content, encoding="utf-8")
         print(f"Created: {analysis_file}")
 
     print(f"\nRequirements tracking initialized for: {project_name}")
@@ -231,7 +231,7 @@ def parse_requirements(
             req_id += 1
 
     if output_file:
-        output_file.write_text(json.dumps(requirements, indent=2))
+        output_file.write_text(json.dumps(requirements, indent=2), encoding="utf-8")
         print(f"Parsed {len(requirements)} requirements to: {output_file}")
 
     return requirements
@@ -332,7 +332,7 @@ After user decision:
 
 """
 
-    report_path.write_text(content)
+    report_path.write_text(content, encoding="utf-8")
     print(f"Generated issue report: {report_path}")
     return report_path
 
@@ -355,7 +355,7 @@ def validate_implementation(
         }
 
     # Parse requirements from file
-    req_content = req_file.read_text()
+    req_content = req_file.read_text(encoding="utf-8")
 
     # Basic validation - check if implementation files exist
     if not implementation_path.exists():
@@ -503,7 +503,7 @@ def main() -> None:
     elif args.command == "parse":
         input_text = args.input
         if os.path.isfile(input_text):
-            input_text = Path(input_text).read_text()
+            input_text = Path(input_text).read_text(encoding="utf-8")
         requirements = parse_requirements(input_text, args.output)
         if not args.output:
             print(json.dumps(requirements, indent=2))

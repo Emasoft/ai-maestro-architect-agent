@@ -154,7 +154,7 @@ gh issue create --title "[Module] Auth Core" --body "..." --label "module,priori
 #
 # Missing prerequisites:
 #   [ ] All requirement sections complete
-#       - Architecture Design: in_progress
+#       - Architecture Design: in-progress
 #   [ ] USER_REQUIREMENTS.md exists
 #
 # Fix these issues and try again.

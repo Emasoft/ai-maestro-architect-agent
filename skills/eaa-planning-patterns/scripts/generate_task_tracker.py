@@ -62,7 +62,7 @@ class Task:
             task_id: Unique task identifier
             phase: Phase number this task belongs to
             name: Task name/description
-            status: Task status (pending, in_progress, completed, blocked)
+            status: Task status (pending, in-progress, completed, blocked)
             dependencies: List of task IDs this task depends on
             assignee: Person assigned to this task
             notes: Additional notes

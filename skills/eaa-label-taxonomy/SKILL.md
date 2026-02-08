@@ -3,6 +3,8 @@ name: eaa-label-taxonomy
 description: GitHub label taxonomy reference for the Architect Agent. Use when designing architecture, identifying components, or recommending labels. Trigger with architecture label requests.
 version: 1.0.0
 compatibility: Requires AI Maestro installed.
+context: fork
+user-invocable: false
 workflow-instruction: "support"
 procedure: "support-skill"
 ---
@@ -98,6 +100,27 @@ Copy this checklist and track your progress:
 - Analyze requirements to identify affected components
 - Recommend component labels in handoff to EOA
 - Update component labels when design changes
+
+### Kanban Columns (Canonical 8-Column System)
+
+The full workflow uses these 8 status columns:
+
+| # | Column Code | Display Name | Label | Description |
+|---|-------------|-------------|-------|-------------|
+| 1 | `backlog` | Backlog | `status:backlog` | Entry point for new tasks |
+| 2 | `todo` | Todo | `status:todo` | Ready to start |
+| 3 | `in-progress` | In Progress | `status:in-progress` | Active work |
+| 4 | `ai-review` | AI Review | `status:ai-review` | Integrator agent reviews ALL tasks |
+| 5 | `human-review` | Human Review | `status:human-review` | User reviews BIG tasks only (via EAMA) |
+| 6 | `merge-release` | Merge/Release | `status:merge-release` | Ready to merge |
+| 7 | `done` | Done | `status:done` | Completed |
+| 8 | `blocked` | Blocked | `status:blocked` | Blocked at any stage |
+
+**Task Routing Rules:**
+- **Small tasks**: In Progress -> AI Review -> Merge/Release -> Done
+- **Big tasks**: In Progress -> AI Review -> Human Review -> Merge/Release -> Done
+- **Human Review** is requested via EAMA (Assistant Manager asks user to test/review)
+- Not all tasks go through Human Review -- only significant changes requiring human judgment
 
 ### Type Labels EAA Clarifies
 

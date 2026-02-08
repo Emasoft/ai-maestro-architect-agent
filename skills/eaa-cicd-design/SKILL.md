@@ -7,6 +7,7 @@ compatibility: Requires GitHub Actions, GitHub CLI (gh), and understanding of CI
 metadata:
   author: Emasoft
 context: fork
+user-invocable: false
 agent: eaa-main
 workflow-instruction: "Step 7"
 procedure: "proc-create-design"
