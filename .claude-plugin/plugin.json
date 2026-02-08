@@ -6,14 +6,8 @@
     "name": "Emasoft",
     "email": "713559+Emasoft@users.noreply.github.com"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Emasoft/emasoft-architect-agent"
-  },
+  "repository": "https://github.com/Emasoft/emasoft-architect-agent",
   "license": "MIT",
-  "engines": {
-    "claude-code": ">=1.0.0"
-  },
   "agents": [
     "./agents/eaa-architect-main-agent.md",
     "./agents/eaa-documentation-writer.md",
