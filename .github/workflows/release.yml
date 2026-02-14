@@ -27,7 +27,13 @@ jobs:
 
       - name: Validate plugin manifest
         run: |
-          python -c "import json; data = json.load(open('.claude-plugin/plugin.json')); print(f'Plugin: {data[\"name\"]} v{data[\"version\"]}')"
+          python -c "
+          import json
+          data = json.load(open('.claude-plugin/plugin.json'))
+          name = data.get('name', '?')
+          ver = data.get('version', '?')
+          print(f'Plugin: {name} v{ver}')
+          "
 
       - name: Lint Python scripts
         run: |
