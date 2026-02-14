@@ -5,6 +5,23 @@ workflow-instruction: support
 
 # Operation: Automate Multi-Platform Release
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Define Release Trigger](#step-1-define-release-trigger)
+  - [Step 2: Design Release Pipeline](#step-2-design-release-pipeline)
+  - [Step 3: Create Release Workflow](#step-3-create-release-workflow)
+  - [Step 4: Configure Registry Publishing](#step-4-configure-registry-publishing)
+  - [Step 5: Add Changelog Generation](#step-5-add-changelog-generation)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Example](#example)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Create automated release workflows that build artifacts for multiple platforms, create GitHub releases, and publish to package registries.

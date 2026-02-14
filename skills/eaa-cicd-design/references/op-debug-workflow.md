@@ -5,6 +5,25 @@ workflow-instruction: support
 
 # Operation: Debug Failing GitHub Actions Workflow
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Review Workflow Logs](#step-1-review-workflow-logs)
+  - [Step 2: Enable Debug Logging](#step-2-enable-debug-logging)
+  - [Step 3: Add Debug Steps](#step-3-add-debug-steps)
+  - [Step 4: Use tmate for Interactive Debugging](#step-4-use-tmate-for-interactive-debugging)
+  - [Step 5: Compare Local vs CI Environment](#step-5-compare-local-vs-ci-environment)
+  - [Step 6: Common Fix Patterns](#step-6-common-fix-patterns)
+  - [Step 7: Create Local Reproduction](#step-7-create-local-reproduction)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Example Debug Session](#example-debug-session)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Diagnose and fix failing GitHub Actions workflows using debugging techniques, logging, and local reproduction.

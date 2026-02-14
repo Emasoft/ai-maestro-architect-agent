@@ -5,6 +5,29 @@ workflow-instruction: support
 
 # Operation: Create API Overview Document
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Gather Overview Information](#step-1-gather-overview-information)
+  - [Step 2: Write Overview Document](#step-2-write-overview-document)
+- [What is <API-Name>?](#what-is-api-name)
+- [Key Features](#key-features)
+- [Use Cases](#use-cases)
+- [Quick Facts](#quick-facts)
+- [When to Use](#when-to-use)
+- [Related Documents](#related-documents)
+- [Official Resources](#official-resources)
+  - [Step 3: Save Document](#step-3-save-document)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Example](#example)
+- [What is Stripe?](#what-is-stripe)
+- [Key Features](#key-features)
+
 ## Purpose
 
 Create a high-level API overview document that describes the API's purpose, key features, capabilities, and when to use it.

@@ -9,6 +9,33 @@ version: 1.0.0
 
 # Create Document from Template
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Select Document Type](#step-1-select-document-type)
+  - [Step 2: Run Creation Script](#step-2-run-creation-script)
+  - [Step 3: Verify Created Document](#step-3-verify-created-document)
+  - [Step 4: Populate Document Content](#step-4-populate-document-content)
+  - [Step 5: Validate Document](#step-5-validate-document)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example 1: Create a PDR Document](#example-1-create-a-pdr-document)
+  - [Example 2: Create with All Options](#example-2-create-with-all-options)
+  - [Example 3: Create with Custom Filename](#example-3-create-with-custom-filename)
+  - [Example 4: Expected Frontmatter Output](#example-4-expected-frontmatter-output)
+- [Overview](#overview)
+- [Background](#background)
+- [Requirements](#requirements)
+- [Proposed Design](#proposed-design)
+- [Alternatives Considered](#alternatives-considered)
+- [Implementation Plan](#implementation-plan)
+- [References](#references)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

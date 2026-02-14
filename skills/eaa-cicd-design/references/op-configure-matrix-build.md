@@ -5,6 +5,24 @@ workflow-instruction: support
 
 # Operation: Configure Cross-Platform Matrix Build
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Identify Matrix Dimensions](#step-1-identify-matrix-dimensions)
+  - [Step 2: Define Basic Matrix](#step-2-define-basic-matrix)
+  - [Step 3: Add Multiple Dimensions](#step-3-add-multiple-dimensions)
+  - [Step 4: Configure Matrix Options](#step-4-configure-matrix-options)
+  - [Step 5: Add Include/Exclude for Special Cases](#step-5-add-includeexclude-for-special-cases)
+  - [Step 6: Use Matrix Values in Steps](#step-6-use-matrix-values-in-steps)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Example](#example)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Configure matrix builds to run jobs across multiple operating systems, language versions, or other dimensions simultaneously.

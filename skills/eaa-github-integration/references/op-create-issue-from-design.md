@@ -9,6 +9,23 @@ version: 1.0.0
 
 # Create GitHub Issue from Design Document
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Verify gh CLI Authentication](#step-1-verify-gh-cli-authentication)
+  - [Step 2: Verify Design Document Has UUID](#step-2-verify-design-document-has-uuid)
+  - [Step 3: Run Dry-Run First](#step-3-run-dry-run-first)
+  - [Step 4: Create the Issue](#step-4-create-the-issue)
+  - [Step 5: Verify Results](#step-5-verify-results)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Create Issue for Auth Service Spec](#example-create-issue-for-auth-service-spec)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Trigger this operation when:

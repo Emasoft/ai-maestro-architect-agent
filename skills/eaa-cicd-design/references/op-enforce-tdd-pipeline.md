@@ -5,6 +5,24 @@ workflow-instruction: support
 
 # Operation: Enforce TDD in Pipeline
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Define Coverage Thresholds](#step-1-define-coverage-thresholds)
+  - [Step 2: Configure Coverage Tool](#step-2-configure-coverage-tool)
+  - [Step 3: Add Coverage to Workflow](#step-3-add-coverage-to-workflow)
+  - [Step 4: Configure Branch Protection](#step-4-configure-branch-protection)
+  - [Step 5: Add Coverage Comments to PRs](#step-5-add-coverage-comments-to-prs)
+  - [Step 6: Block Test Skipping](#step-6-block-test-skipping)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Example](#example)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Configure CI/CD pipelines to enforce Test-Driven Development practices including coverage thresholds, test-first checks, and quality gates.

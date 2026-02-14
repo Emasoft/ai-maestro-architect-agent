@@ -5,6 +5,43 @@ workflow-instruction: support
 
 # Operation: Classify Verification Result
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Review Classification Definitions](#step-1-review-classification-definitions)
+  - [Step 2: Apply Classification Criteria](#step-2-apply-classification-criteria)
+  - [Step 3: Document Classification Decision](#step-3-document-classification-decision)
+- [Classification Decision](#classification-decision)
+  - [Final Status: <STATUS>](#final-status-status)
+  - [Evidence Summary](#evidence-summary)
+  - [Decision Rationale](#decision-rationale)
+  - [Confidence Level](#confidence-level)
+  - [Step 4: Document Conditions (if PARTIALLY VERIFIED)](#step-4-document-conditions-if-partially-verified)
+- [Conditions for Validity](#conditions-for-validity)
+  - [The claim IS valid when:](#the-claim-is-valid-when)
+  - [The claim is NOT valid when:](#the-claim-is-not-valid-when)
+  - [Boundary Conditions](#boundary-conditions)
+  - [Step 5: Create Status Badge](#step-5-create-status-badge)
+  - [Step 6: Define Implications](#step-6-define-implications)
+- [Implications](#implications)
+  - [If relying on this claim:](#if-relying-on-this-claim)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Example](#example)
+- [Classification Decision](#classification-decision)
+  - [Final Status: PARTIALLY VERIFIED](#final-status-partially-verified)
+  - [Evidence Summary](#evidence-summary)
+  - [Decision Rationale](#decision-rationale)
+  - [Confidence: HIGH](#confidence-high)
+- [Conditions for Validity](#conditions-for-validity)
+  - [Valid when:](#valid-when)
+  - [Not valid when:](#not-valid-when)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Classify the experiment result as VERIFIED, UNVERIFIED, or PARTIALLY VERIFIED based on evidence and define the conditions under which each classification applies.

@@ -9,6 +9,33 @@ version: 1.0.0
 
 # Manage Design State Transitions
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Understand the State Machine](#step-1-understand-the-state-machine)
+  - [Step 2: Check Current State](#step-2-check-current-state)
+  - [Step 3: Validate Proposed Transition](#step-3-validate-proposed-transition)
+  - [Step 4: Execute State Transition](#step-4-execute-state-transition)
+  - [Step 5: Verify Transition Success](#step-5-verify-transition-success)
+- [State Transition Rules](#state-transition-rules)
+  - [DRAFT to REVIEW](#draft-to-review)
+  - [REVIEW to APPROVED](#review-to-approved)
+  - [REVIEW to DRAFT (Revision)](#review-to-draft-revision)
+  - [APPROVED to IMPLEMENTING](#approved-to-implementing)
+  - [IMPLEMENTING to COMPLETED](#implementing-to-completed)
+  - [COMPLETED to ARCHIVED](#completed-to-archived)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Full Lifecycle Transitions](#example-full-lifecycle-transitions)
+  - [Example: Revision After Review](#example-revision-after-review)
+  - [Example: Invalid Transition Error](#example-invalid-transition-error)
+- [State Transition Matrix](#state-transition-matrix)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

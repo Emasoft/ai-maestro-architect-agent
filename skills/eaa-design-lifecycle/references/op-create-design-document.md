@@ -9,6 +9,26 @@ version: 1.0.0
 
 # Create New Design Document
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Generate Design UUID](#step-1-generate-design-uuid)
+  - [Step 2: Create Design Document from Template](#step-2-create-design-document-from-template)
+  - [Step 3: Populate Required Frontmatter](#step-3-populate-required-frontmatter)
+  - [Step 4: Set State to DRAFT](#step-4-set-state-to-draft)
+  - [Step 5: Register in Design Index](#step-5-register-in-design-index)
+  - [Step 6: Complete Design Content](#step-6-complete-design-content)
+  - [Step 7: Notify Stakeholders](#step-7-notify-stakeholders)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Create Authentication System Design](#example-create-authentication-system-design)
+  - [Example: Frontmatter for New Design](#example-frontmatter-for-new-design)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

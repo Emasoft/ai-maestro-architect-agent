@@ -1,5 +1,34 @@
 # Handoff Document Format
 
+
+## Contents
+
+- [Overview](#overview)
+- [Handoff Validation Checklist](#handoff-validation-checklist)
+  - [Validation Script](#validation-script)
+- [Handoff Document Template](#handoff-document-template)
+- [Executive Summary](#executive-summary)
+- [Design Artifacts](#design-artifacts)
+- [Implementation Sequence](#implementation-sequence)
+  - [Phase 1: Foundation (Week 1)](#phase-1-foundation-week-1)
+  - [Phase 2: Core Features (Week 2)](#phase-2-core-features-week-2)
+  - [Phase 3: Integration (Week 3)](#phase-3-integration-week-3)
+- [Risks and Mitigations](#risks-and-mitigations)
+  - [High Priority](#high-priority)
+  - [Medium Priority](#medium-priority)
+  - [Low Priority](#low-priority)
+- [Success Criteria for EOA](#success-criteria-for-eoa)
+- [Open Questions](#open-questions)
+- [Notes](#notes)
+- [Template Field Guide](#template-field-guide)
+  - [Executive Summary](#executive-summary)
+  - [Design Artifacts](#design-artifacts)
+  - [Implementation Sequence](#implementation-sequence)
+  - [Risks and Mitigations](#risks-and-mitigations)
+  - [Success Criteria for EOA](#success-criteria-for-eoa)
+  - [Open Questions](#open-questions)
+  - [Notes](#notes)
+
 ## Overview
 
 **Location:** `docs_dev/design/handoffs/`

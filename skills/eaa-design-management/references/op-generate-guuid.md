@@ -9,6 +9,29 @@ version: 1.0.0
 
 # Generate GUUID
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Understand GUUID Format](#step-1-understand-guuid-format)
+  - [Step 2: Generate Using Script (Recommended)](#step-2-generate-using-script-recommended)
+  - [Step 3: Manual Generation (Fallback)](#step-3-manual-generation-fallback)
+  - [Step 4: Verify Uniqueness](#step-4-verify-uniqueness)
+  - [Step 5: Apply UUID to Document](#step-5-apply-uuid-to-document)
+- [GUUID Format Rules](#guuid-format-rules)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example 1: Generate First UUID of the Day](#example-1-generate-first-uuid-of-the-day)
+  - [Example 2: Generate Subsequent UUID](#example-2-generate-subsequent-uuid)
+  - [Example 3: Manual Generation](#example-3-manual-generation)
+  - [Example 4: UUID in Document Context](#example-4-uuid-in-document-context)
+- [Overview](#overview)
+  - [Example 5: UUID Filename Convention](#example-5-uuid-filename-convention)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

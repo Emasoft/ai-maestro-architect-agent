@@ -5,6 +5,38 @@ workflow-instruction: support
 
 # Operation: Create Configuration Template
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Identify Configuration Options](#step-1-identify-configuration-options)
+  - [Step 2: Write Configuration Template](#step-2-write-configuration-template)
+- [Environment Variables](#environment-variables)
+  - [Required](#required)
+  - [Optional](#optional)
+- [Configuration Files](#configuration-files)
+  - [Python (config.py)](#python-configpy)
+  - [JavaScript (config.js)](#javascript-configjs)
+- [Environment Templates](#environment-templates)
+  - [Development (.env.development)](#development-envdevelopment)
+  - [Staging (.env.staging)](#staging-envstaging)
+  - [Production (.env.production)](#production-envproduction)
+- [Docker Configuration](#docker-configuration)
+  - [Dockerfile](#dockerfile)
+  - [docker-compose.yml](#docker-composeyml)
+- [Kubernetes Configuration](#kubernetes-configuration)
+  - [ConfigMap](#configmap)
+  - [Secret](#secret)
+- [Security Guidelines](#security-guidelines)
+  - [.gitignore](#gitignore)
+- [Validation Script](#validation-script)
+  - [Step 3: Save Document](#step-3-save-document)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+
 ## Purpose
 
 Create a configuration template document that provides environment setup, configuration options, and deployment templates for different environments.

@@ -9,6 +9,23 @@ version: 1.0.0
 
 # Remove Requirement Section Operation
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Verify Section Status](#step-1-verify-section-status)
+  - [Step 2: Execute Removal](#step-2-execute-removal)
+  - [Step 3: Verify Removal](#step-3-verify-removal)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Removing a Pending Section](#example-removing-a-pending-section)
+  - [Example: Force Removing an In-Progress Section](#example-force-removing-an-in-progress-section)
+  - [Example: State File After Removal](#example-state-file-after-removal)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

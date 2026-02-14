@@ -5,6 +5,24 @@ workflow-instruction: support
 
 # Operation: Set Up CI/CD Pipeline
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Analyze Project Requirements](#step-1-analyze-project-requirements)
+  - [Step 2: Create Workflow Directory](#step-2-create-workflow-directory)
+  - [Step 3: Design Pipeline Stages](#step-3-design-pipeline-stages)
+  - [Step 4: Create Main CI Workflow](#step-4-create-main-ci-workflow)
+  - [Step 5: Configure Branch Protection](#step-5-configure-branch-protection)
+  - [Step 6: Document the Pipeline](#step-6-document-the-pipeline)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Example](#example)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Set up a complete CI/CD pipeline from scratch for a new project, including workflow triggers, test stages, build stages, and deployment configuration.

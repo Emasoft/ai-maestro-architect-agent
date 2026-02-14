@@ -9,6 +9,58 @@ version: 1.0.0
 
 # Design Module APIs
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Define Public Interface for Each Module](#step-1-define-public-interface-for-each-module)
+- [Module: AuthModule](#module-authmodule)
+  - [Public Interface](#public-interface)
+  - [Internal (Not Exposed)](#internal-not-exposed)
+  - [Step 2: Document API Contracts](#step-2-document-api-contracts)
+- [API Contract: authenticate()](#api-contract-authenticate)
+  - [Description](#description)
+  - [Input](#input)
+  - [Output (Success)](#output-success)
+  - [Output (Failure)](#output-failure)
+  - [Preconditions](#preconditions)
+  - [Postconditions](#postconditions)
+  - [Side Effects](#side-effects)
+  - [Step 3: Design Data Transfer Objects (DTOs)](#step-3-design-data-transfer-objects-dtos)
+- [DTOs: AuthModule](#dtos-authmodule)
+  - [UserDTO](#userdto)
+  - [TokenDTO](#tokendto)
+  - [Do NOT Expose](#do-not-expose)
+  - [Step 4: Plan Versioning Strategy](#step-4-plan-versioning-strategy)
+- [Versioning Rules](#versioning-rules)
+  - [No Version Change Required (Backward Compatible)](#no-version-change-required-backward-compatible)
+  - [Minor Version Change (v1 → v1.1)](#minor-version-change-v1-v11)
+  - [Major Version Change (v1 → v2)](#major-version-change-v1-v2)
+  - [Step 5: Define Error Handling Contracts](#step-5-define-error-handling-contracts)
+- [Error Contract](#error-contract)
+  - [Standard Error Response](#standard-error-response)
+  - [Error Code Categories](#error-code-categories)
+  - [Error Propagation Rules](#error-propagation-rules)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Order Module API Design](#example-order-module-api-design)
+- [Public Interface](#public-interface)
+- [DTOs](#dtos)
+  - [CreateOrderRequest](#createorderrequest)
+  - [OrderDTO](#orderdto)
+  - [OrderStatus](#orderstatus)
+- [Error Codes](#error-codes)
+- [API Contract: createOrder()](#api-contract-createorder)
+  - [Input](#input)
+  - [Output (Success)](#output-success)
+  - [Output (Failure)](#output-failure)
+  - [Preconditions](#preconditions)
+  - [Side Effects](#side-effects)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

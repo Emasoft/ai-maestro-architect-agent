@@ -9,6 +9,27 @@ version: 1.0.0
 
 # Monitor GitHub Project Kanban Board
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: List All Project Items](#step-1-list-all-project-items)
+  - [Step 2: Get Specific Project Items with Details](#step-2-get-specific-project-items-with-details)
+  - [Step 3: Check for Recent Updates](#step-3-check-for-recent-updates)
+  - [Step 4: On External Change Detection](#step-4-on-external-change-detection)
+  - [Step 5: Update Local Design State](#step-5-update-local-design-state)
+  - [Step 6: Log the Change](#step-6-log-the-change)
+- [[TIMESTAMP]](#timestamp)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Detect Card Movement](#example-detect-card-movement)
+  - [Example: Automated Polling Script](#example-automated-polling-script)
+- [What to Monitor](#what-to-monitor)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Trigger this operation when:

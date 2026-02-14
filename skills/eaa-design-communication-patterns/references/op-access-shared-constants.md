@@ -9,6 +9,24 @@ version: 1.0.0
 
 # Access Shared Constants
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Import Required Constants](#step-1-import-required-constants)
+  - [Step 2: Use Constants in Validation](#step-2-use-constants-in-validation)
+  - [Step 3: Use Constants in Configuration](#step-3-use-constants-in-configuration)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Validate Design Document Status](#example-validate-design-document-status)
+  - [Example: Validate Design Type](#example-validate-design-type)
+  - [Example: Use Priority Levels](#example-use-priority-levels)
+- [Available Constants](#available-constants)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Trigger this operation when:

@@ -5,6 +5,24 @@ workflow-instruction: support
 
 # Operation: Configure GitHub Actions Workflow
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Define Workflow Triggers](#step-1-define-workflow-triggers)
+  - [Step 2: Select Runner](#step-2-select-runner)
+  - [Step 3: Define Jobs Structure](#step-3-define-jobs-structure)
+  - [Step 4: Configure Conditional Execution](#step-4-configure-conditional-execution)
+  - [Step 5: Add Environment and Secrets](#step-5-add-environment-and-secrets)
+  - [Step 6: Save Workflow File](#step-6-save-workflow-file)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Example](#example)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Configure a GitHub Actions workflow with proper triggers, jobs, steps, and dependencies for a specific use case.

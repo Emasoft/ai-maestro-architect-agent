@@ -9,6 +9,23 @@ version: 1.0.0
 
 # Start Planning Operation
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Verify No Existing Plan Phase](#step-1-verify-no-existing-plan-phase)
+  - [Step 2: Execute Start Planning Command](#step-2-execute-start-planning-command)
+  - [Step 3: Verify Initialization](#step-3-verify-initialization)
+  - [Step 4: Review Created State](#step-4-review-created-state)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Starting a REST API Project](#example-starting-a-rest-api-project)
+  - [Example: Goal with Special Characters](#example-goal-with-special-characters)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

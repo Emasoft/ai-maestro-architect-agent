@@ -9,6 +9,23 @@ version: 1.0.0
 
 # Check Planning Status Operation
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Execute Status Command](#step-1-execute-status-command)
+  - [Step 2: Review Output Sections](#step-2-review-output-sections)
+  - [Step 3: Identify Action Items](#step-3-identify-action-items)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Basic Status Check](#example-basic-status-check)
+  - [Example: Verbose Status with Modules](#example-verbose-status-with-modules)
+  - [Example: Status Before Approval](#example-status-before-approval)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

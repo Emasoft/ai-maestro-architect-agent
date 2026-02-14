@@ -9,6 +9,28 @@ version: 1.0.0
 
 # Approve Design
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Verify All Review Comments Resolved](#step-1-verify-all-review-comments-resolved)
+  - [Step 2: Collect Reviewer Approvals](#step-2-collect-reviewer-approvals)
+  - [Step 3: Update State to APPROVED](#step-3-update-state-to-approved)
+  - [Step 4: Create Implementation Tasks](#step-4-create-implementation-tasks)
+  - [Step 5: Notify Implementers](#step-5-notify-implementers)
+  - [Step 6: Link to GitHub Issues](#step-6-link-to-github-issues)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Approve Authentication Design](#example-approve-authentication-design)
+  - [Example: Approval Record in Design Document](#example-approval-record-in-design-document)
+- [Approval Record](#approval-record)
+  - [Approvers](#approvers)
+  - [Linked Issues](#linked-issues)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

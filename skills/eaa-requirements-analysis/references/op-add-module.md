@@ -9,6 +9,24 @@ version: 1.0.0
 
 # Add Module Operation
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Determine Module Properties](#step-1-determine-module-properties)
+  - [Step 2: Add the Module](#step-2-add-the-module)
+  - [Step 3: Verify Addition](#step-3-verify-addition)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Adding a Critical Module](#example-adding-a-critical-module)
+  - [Example: Adding Multiple Modules](#example-adding-multiple-modules)
+  - [Example: Module ID Normalization](#example-module-id-normalization)
+  - [Example: State File After Addition](#example-state-file-after-addition)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

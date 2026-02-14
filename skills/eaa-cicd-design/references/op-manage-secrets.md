@@ -5,6 +5,28 @@ workflow-instruction: support
 
 # Operation: Manage GitHub Secrets
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Determine Secret Scope](#step-1-determine-secret-scope)
+  - [Step 2: Create Secret via GitHub CLI](#step-2-create-secret-via-github-cli)
+  - [Step 3: List Existing Secrets](#step-3-list-existing-secrets)
+  - [Step 4: Use Secrets in Workflows](#step-4-use-secrets-in-workflows)
+  - [Step 5: Configure Environment Protection](#step-5-configure-environment-protection)
+  - [Step 6: Document Secret Requirements](#step-6-document-secret-requirements)
+- [Repository Secrets](#repository-secrets)
+- [Environment Secrets](#environment-secrets)
+  - [Production](#production)
+  - [Staging](#staging)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Example](#example)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Configure and manage GitHub secrets for secure credential storage and usage in workflows, including repository, environment, and organization secrets.

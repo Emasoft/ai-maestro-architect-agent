@@ -5,6 +5,30 @@ workflow-instruction: support
 
 # Operation: Perform 6 C's Quality Check
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Complete Check](#step-1-complete-check)
+  - [Step 2: Correct Check](#step-2-correct-check)
+  - [Step 3: Clear Check](#step-3-clear-check)
+  - [Step 4: Consistent Check](#step-4-consistent-check)
+  - [Step 5: Current Check](#step-5-current-check)
+  - [Step 6: Connected Check](#step-6-connected-check)
+  - [Step 7: Document Results](#step-7-document-results)
+- [Summary](#summary)
+- [Issues Found](#issues-found)
+  - [Critical (Must Fix)](#critical-must-fix)
+  - [Minor (Should Fix)](#minor-should-fix)
+- [Recommendation](#recommendation)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Quality Thresholds](#quality-thresholds)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Verify documentation quality against the 6 C's framework: Complete, Correct, Clear, Consistent, Current, and Connected.

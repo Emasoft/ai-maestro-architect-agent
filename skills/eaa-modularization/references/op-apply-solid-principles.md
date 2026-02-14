@@ -9,6 +9,33 @@ version: 1.0.0
 
 # Apply SOLID Principles to Modularization
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Apply Single Responsibility Principle (SRP)](#step-1-apply-single-responsibility-principle-srp)
+- [SRP Assessment: AuthModule](#srp-assessment-authmodule)
+  - [Step 2: Apply Interface Segregation Principle (ISP)](#step-2-apply-interface-segregation-principle-isp)
+- [ISP Assessment: UserService Interface](#isp-assessment-userservice-interface)
+  - [Step 3: Apply Dependency Inversion Principle (DIP)](#step-3-apply-dependency-inversion-principle-dip)
+- [DIP Assessment: OrderService](#dip-assessment-orderservice)
+  - [Step 4: Evaluate Cohesion](#step-4-evaluate-cohesion)
+  - [Step 5: Evaluate Coupling](#step-5-evaluate-coupling)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: E-Commerce Module SOLID Assessment](#example-e-commerce-module-solid-assessment)
+- [Module: OrderModule](#module-ordermodule)
+  - [SRP Assessment](#srp-assessment)
+  - [ISP Assessment](#isp-assessment)
+  - [DIP Assessment](#dip-assessment)
+  - [Cohesion: Functional (Good)](#cohesion-functional-good)
+  - [Coupling: Data (Good)](#coupling-data-good)
+  - [Example: Before/After SOLID Refactoring](#example-beforeafter-solid-refactoring)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

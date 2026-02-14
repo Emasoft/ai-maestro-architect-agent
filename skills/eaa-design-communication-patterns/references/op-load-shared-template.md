@@ -9,6 +9,24 @@ version: 1.0.0
 
 # Load and Use Shared Templates
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Identify Required Template](#step-1-identify-required-template)
+  - [Step 2: Load the Template](#step-2-load-the-template)
+  - [Step 3: Fill Template with Data](#step-3-fill-template-with-data)
+  - [Step 4: Write to File or Use Output](#step-4-write-to-file-or-use-output)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Create New Design Document](#example-create-new-design-document)
+  - [Example: Create ADR from Template](#example-create-adr-from-template)
+- [Template Placeholders](#template-placeholders)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Trigger this operation when:

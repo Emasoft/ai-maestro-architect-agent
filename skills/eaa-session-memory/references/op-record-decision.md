@@ -5,6 +5,52 @@ workflow-instruction: support
 
 # Operation: Record Architecture Decision
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Determine ADR Number](#step-1-determine-adr-number)
+  - [Step 2: Create ADR File](#step-2-create-adr-file)
+- [Status](#status)
+- [Context](#context)
+  - [Background](#background)
+  - [Constraints Considered](#constraints-considered)
+- [Decision](#decision)
+- [Rationale](#rationale)
+  - [Key Factors](#key-factors)
+- [Alternatives Considered](#alternatives-considered)
+  - [Option 1: <Alternative>](#option-1-alternative)
+  - [Option 2: <Alternative>](#option-2-alternative)
+- [Consequences](#consequences)
+  - [Positive](#positive)
+  - [Negative](#negative)
+- [Implementation Impact](#implementation-impact)
+  - [Affected Components](#affected-components)
+  - [Required Actions](#required-actions)
+- [Related](#related)
+  - [Step 3: Update Design Index](#step-3-update-design-index)
+  - [Step 4: Update Session State](#step-4-update-session-state)
+  - [Step 5: Link Related Artifacts](#step-5-link-related-artifacts)
+  - [Step 6: Report Decision Recorded](#step-6-report-decision-recorded)
+- [Decision Recorded](#decision-recorded)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Example](#example)
+- [Status](#status)
+- [Context](#context)
+- [Decision](#decision)
+- [Rationale](#rationale)
+- [Alternatives Considered](#alternatives-considered)
+  - [Option 1: PostgreSQL](#option-1-postgresql)
+  - [Option 2: In-memory](#option-2-in-memory)
+- [Consequences](#consequences)
+  - [Positive](#positive)
+  - [Negative](#negative)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Create an Architecture Decision Record (ADR) when a significant architecture decision is made, ensuring the decision and its rationale are preserved.

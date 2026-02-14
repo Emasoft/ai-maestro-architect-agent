@@ -5,6 +5,36 @@ workflow-instruction: support
 
 # Operation: Design Experiment with Multiplicity Rule
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: State the Hypothesis](#step-1-state-the-hypothesis)
+- [Hypothesis](#hypothesis)
+  - [Step 2: Identify Minimum 3 Approaches](#step-2-identify-minimum-3-approaches)
+  - [Step 3: Design Each Approach](#step-3-design-each-approach)
+  - [Approach A: <Name> (Control)](#approach-a-name-control)
+  - [Step 4: Define Measurement Protocol](#step-4-define-measurement-protocol)
+- [Measurement Protocol](#measurement-protocol)
+  - [Metrics to Collect](#metrics-to-collect)
+  - [Test Parameters](#test-parameters)
+  - [Environment Controls](#environment-controls)
+  - [Step 5: Create Experiment Matrix](#step-5-create-experiment-matrix)
+- [Experiment Matrix](#experiment-matrix)
+  - [Step 6: Create Experiment Script Template](#step-6-create-experiment-script-template)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Example](#example)
+- [Hypothesis](#hypothesis)
+  - [Approach A: In-Memory Dict (Control)](#approach-a-in-memory-dict-control)
+  - [Approach B: Redis (Claimed)](#approach-b-redis-claimed)
+  - [Approach C: Redis with Connection Pool (Alternative)](#approach-c-redis-with-connection-pool-alternative)
+- [Metrics](#metrics)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Design an experiment that tests multiple approaches (minimum 3) to verify a claim, following the Multiplicity Rule for evidence-based selection.

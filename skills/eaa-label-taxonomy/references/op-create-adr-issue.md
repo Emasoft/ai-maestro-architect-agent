@@ -7,6 +7,45 @@ procedure: "support-skill"
 
 # Operation: Create ADR Issue
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Determine Next ADR Number](#step-1-determine-next-adr-number)
+  - [Step 2: Prepare ADR Content](#step-2-prepare-adr-content)
+  - [Step 3: Create ADR Issue](#step-3-create-adr-issue)
+- [Status](#status)
+- [Context](#context)
+- [Decision Drivers](#decision-drivers)
+- [Considered Options](#considered-options)
+  - [Option 1: $OPTION_1_NAME](#option-1-option_1_name)
+  - [Option 2: $OPTION_2_NAME](#option-2-option_2_name)
+- [Decision](#decision)
+- [Consequences](#consequences)
+  - [Positive](#positive)
+  - [Negative](#negative)
+- [Related Issues](#related-issues)
+  - [Step 4: Link to Related Issues](#step-4-link-to-related-issues)
+  - [Step 5: Verify ADR Created](#step-5-verify-adr-created)
+- [Example](#example)
+- [Status](#status)
+- [Context](#context)
+- [Decision Drivers](#decision-drivers)
+- [Considered Options](#considered-options)
+  - [Option 1: PostgreSQL](#option-1-postgresql)
+  - [Option 2: MongoDB](#option-2-mongodb)
+- [Decision](#decision)
+- [Consequences](#consequences)
+  - [Positive](#positive)
+  - [Negative](#negative)
+- [Related Issues](#related-issues)
+- [ADR Status Values](#adr-status-values)
+- [Error Handling](#error-handling)
+- [Notes](#notes)
+
 ## Purpose
 
 Create a GitHub issue to track an Architecture Decision Record (ADR) when significant architectural decisions need documentation and discussion.

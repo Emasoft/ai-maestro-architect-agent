@@ -5,6 +5,28 @@ workflow-instruction: support
 
 # Operation: Record Design Pattern Selection
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Ensure Patterns File Exists](#step-1-ensure-patterns-file-exists)
+- [Applied Patterns](#applied-patterns)
+  - [Step 2: Add Pattern Entry](#step-2-add-pattern-entry)
+  - [<Pattern Name>](#pattern-name)
+  - [Step 3: Update Design Index](#step-3-update-design-index)
+  - [Step 4: Update Session State](#step-4-update-session-state)
+  - [Step 5: Report Pattern Recorded](#step-5-report-pattern-recorded)
+- [Pattern Recorded](#pattern-recorded)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Pattern Categories](#pattern-categories)
+- [Example](#example)
+  - [Repository Pattern](#repository-pattern)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Record when a design pattern is selected for application to a component or module, preserving the pattern choice and its justification.

@@ -5,6 +5,51 @@ workflow-instruction: support
 
 # Operation: Write Architecture Decision Record (ADR)
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Determine ADR Number](#step-1-determine-adr-number)
+  - [Step 2: Create ADR Document](#step-2-create-adr-document)
+- [Context](#context)
+  - [Background](#background)
+  - [Constraints](#constraints)
+  - [Requirements](#requirements)
+- [Decision](#decision)
+- [Rationale](#rationale)
+  - [Key Factors](#key-factors)
+- [Alternatives Considered](#alternatives-considered)
+  - [Option 1: <Alternative Name>](#option-1-alternative-name)
+  - [Option 2: <Another Alternative>](#option-2-another-alternative)
+- [Consequences](#consequences)
+  - [Positive](#positive)
+  - [Negative](#negative)
+  - [Neutral](#neutral)
+- [Implementation Notes](#implementation-notes)
+  - [Affected Components](#affected-components)
+  - [Migration Plan (if applicable)](#migration-plan-if-applicable)
+- [Related Decisions](#related-decisions)
+- [References](#references)
+- [Revision History](#revision-history)
+  - [Step 3: Apply Quality Check (6 C's)](#step-3-apply-quality-check-6-cs)
+  - [Step 4: Save Document](#step-4-save-document)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Example](#example)
+- [Context](#context)
+- [Decision](#decision)
+- [Rationale](#rationale)
+- [Alternatives Considered](#alternatives-considered)
+  - [Option 1: PostgreSQL](#option-1-postgresql)
+  - [Option 2: In-memory](#option-2-in-memory)
+- [Consequences](#consequences)
+  - [Positive](#positive)
+  - [Negative](#negative)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Write an Architecture Decision Record (ADR) that documents a significant architecture decision, including context, decision, rationale, alternatives considered, and consequences.

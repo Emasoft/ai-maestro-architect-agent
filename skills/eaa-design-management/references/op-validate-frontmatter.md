@@ -9,6 +9,28 @@ version: 1.0.0
 
 # Validate Document Frontmatter
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Understand Required Frontmatter](#step-1-understand-required-frontmatter)
+  - [Step 2: Validate Single Document](#step-2-validate-single-document)
+  - [Step 3: Validate All Documents](#step-3-validate-all-documents)
+  - [Step 4: Interpret Validation Output](#step-4-interpret-validation-output)
+  - [Step 5: Fix Validation Errors](#step-5-fix-validation-errors)
+  - [Step 6: Verify Fixes](#step-6-verify-fixes)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example 1: Validate Single Document](#example-1-validate-single-document)
+  - [Example 2: Validate All with Type Filter](#example-2-validate-all-with-type-filter)
+  - [Example 3: JSON Output for CI/CD](#example-3-json-output-for-cicd)
+  - [Example 4: Common Validation Errors and Fixes](#example-4-common-validation-errors-and-fixes)
+- [Validation Rules](#validation-rules)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

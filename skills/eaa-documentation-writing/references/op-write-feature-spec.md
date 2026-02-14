@@ -5,6 +5,55 @@ workflow-instruction: support
 
 # Operation: Write Feature Specification
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Gather Feature Information](#step-1-gather-feature-information)
+  - [Step 2: Create Feature Specification Document](#step-2-create-feature-specification-document)
+- [Overview](#overview)
+  - [Problem Statement](#problem-statement)
+  - [Proposed Solution](#proposed-solution)
+  - [Success Metrics](#success-metrics)
+- [User Stories](#user-stories)
+  - [US-001: <Story Title>](#us-001-story-title)
+  - [US-002: <Story Title>](#us-002-story-title)
+- [Functional Requirements](#functional-requirements)
+  - [FR-001: <Requirement Title>](#fr-001-requirement-title)
+  - [FR-002: <Requirement Title>](#fr-002-requirement-title)
+- [Non-Functional Requirements](#non-functional-requirements)
+  - [Performance](#performance)
+  - [Security](#security)
+  - [Accessibility](#accessibility)
+  - [Scalability](#scalability)
+- [User Interface](#user-interface)
+  - [Mockups](#mockups)
+  - [User Flow](#user-flow)
+- [Technical Considerations](#technical-considerations)
+  - [Architecture Impact](#architecture-impact)
+  - [Database Changes](#database-changes)
+  - [API Changes](#api-changes)
+  - [Dependencies](#dependencies)
+- [Testing Strategy](#testing-strategy)
+  - [Unit Tests](#unit-tests)
+  - [Integration Tests](#integration-tests)
+  - [End-to-End Tests](#end-to-end-tests)
+- [Rollout Plan](#rollout-plan)
+  - [Phase 1: Internal Testing](#phase-1-internal-testing)
+  - [Phase 2: Beta Release](#phase-2-beta-release)
+  - [Phase 3: General Availability](#phase-3-general-availability)
+- [Risks and Mitigations](#risks-and-mitigations)
+- [Open Questions](#open-questions)
+- [References](#references)
+  - [Step 3: Apply Quality Check (6 C's)](#step-3-apply-quality-check-6-cs)
+  - [Step 4: Save Document](#step-4-save-document)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Write a feature specification document that defines user stories, functional requirements, acceptance criteria, and implementation guidance for a new feature.

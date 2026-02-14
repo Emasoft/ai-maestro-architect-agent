@@ -9,6 +9,40 @@ version: 1.0.0
 
 # Create Roadmap
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Define Phases](#step-1-define-phases)
+- [Phases](#phases)
+  - [Phase 1: Foundation (Weeks 1-2)](#phase-1-foundation-weeks-1-2)
+  - [Phase 2: Core Features (Weeks 3-6)](#phase-2-core-features-weeks-3-6)
+  - [Phase 3: Integration (Weeks 7-8)](#phase-3-integration-weeks-7-8)
+  - [Step 2: Sequence Phases by Dependencies](#step-2-sequence-phases-by-dependencies)
+- [Phase Dependencies](#phase-dependencies)
+  - [Step 3: Define Milestones and Deliverables](#step-3-define-milestones-and-deliverables)
+- [Milestones](#milestones)
+  - [Step 4: Allocate Resources and Estimate Effort](#step-4-allocate-resources-and-estimate-effort)
+- [Resource Allocation](#resource-allocation)
+  - [Step 5: Create the Master Roadmap](#step-5-create-the-master-roadmap)
+- [Master Roadmap](#master-roadmap)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Authentication System Roadmap](#example-authentication-system-roadmap)
+- [Timeline: 8 Weeks](#timeline-8-weeks)
+  - [Phase 1: Foundation (Weeks 1-2)](#phase-1-foundation-weeks-1-2)
+  - [Phase 2: Core Authentication (Weeks 3-5)](#phase-2-core-authentication-weeks-3-5)
+  - [Phase 3: OAuth Integration (Weeks 6-7)](#phase-3-oauth-integration-weeks-6-7)
+  - [Phase 4: Security & Polish (Week 8)](#phase-4-security-polish-week-8)
+- [Total Effort: 80 person-days](#total-effort-80-person-days)
+- [Buffer: 16 person-days (20%)](#buffer-16-person-days-20)
+- [Total with Buffer: 96 person-days](#total-with-buffer-96-person-days)
+  - [Example: Dependency Graph](#example-dependency-graph)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

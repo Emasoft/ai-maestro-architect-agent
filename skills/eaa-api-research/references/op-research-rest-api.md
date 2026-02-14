@@ -5,6 +5,25 @@ workflow-instruction: support
 
 # Operation: Research REST API
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Acknowledge Assignment](#step-1-acknowledge-assignment)
+  - [Step 2: Locate Official Documentation](#step-2-locate-official-documentation)
+  - [Step 3: Gather Core Information](#step-3-gather-core-information)
+  - [Step 4: Document Authentication](#step-4-document-authentication)
+  - [Step 5: Document Endpoints](#step-5-document-endpoints)
+  - [Step 6: Create Output Documents](#step-6-create-output-documents)
+  - [Step 7: Report Completion](#step-7-report-completion)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Example](#example)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Research and document a REST API, producing comprehensive documentation covering overview, authentication, endpoints, integration, and configuration.

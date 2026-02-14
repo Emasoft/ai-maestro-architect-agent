@@ -5,6 +5,32 @@ workflow-instruction: support
 
 # Operation: Resume from Handoff Document
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Locate Handoff Document](#step-1-locate-handoff-document)
+  - [Step 2: Parse Handoff Document](#step-2-parse-handoff-document)
+  - [Step 3: Verify Referenced Files Exist](#step-3-verify-referenced-files-exist)
+  - [Step 4: Load Design Index](#step-4-load-design-index)
+  - [Step 5: Create New Session State](#step-5-create-new-session-state)
+  - [Step 6: Review Open Questions](#step-6-review-open-questions)
+- [Open Questions Requiring Attention](#open-questions-requiring-attention)
+  - [Step 7: Report Resume Complete](#step-7-report-resume-complete)
+- [Session Resumed from Handoff](#session-resumed-from-handoff)
+  - [Context Restored](#context-restored)
+  - [Current State](#current-state)
+  - [Blocking Items](#blocking-items)
+  - [Recommended Next Action](#recommended-next-action)
+  - [Files Available](#files-available)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Quick Resume Commands](#quick-resume-commands)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Restore session context from a handoff document, enabling seamless continuation of design work from a previous session.

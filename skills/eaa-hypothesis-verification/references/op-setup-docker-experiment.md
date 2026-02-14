@@ -5,6 +5,25 @@ workflow-instruction: support
 
 # Operation: Set Up Docker Experiment Container
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Verify Docker Availability](#step-1-verify-docker-availability)
+  - [Step 2: Create Experiment Directory](#step-2-create-experiment-directory)
+  - [Step 3: Create Dockerfile](#step-3-create-dockerfile)
+  - [Step 4: Create docker-compose.yml (if services needed)](#step-4-create-docker-composeyml-if-services-needed)
+  - [Step 5: Create requirements.txt](#step-5-create-requirementstxt)
+  - [Step 6: Build Container](#step-6-build-container)
+  - [Step 7: Verify Container Works](#step-7-verify-container-works)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Example](#example)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Set up an isolated Docker container environment for running experiments to verify claims and hypotheses safely without affecting the host system or production data.

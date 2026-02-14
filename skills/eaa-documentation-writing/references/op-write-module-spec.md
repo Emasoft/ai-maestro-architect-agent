@@ -5,6 +5,40 @@ workflow-instruction: support
 
 # Operation: Write Module Specification
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Gather Module Information](#step-1-gather-module-information)
+  - [Step 2: Create Module Specification Document](#step-2-create-module-specification-document)
+- [Overview](#overview)
+  - [Purpose](#purpose)
+  - [Responsibilities](#responsibilities)
+  - [Non-Responsibilities](#non-responsibilities)
+- [Public Interface](#public-interface)
+  - [Classes](#classes)
+  - [Functions](#functions)
+- [Dependencies](#dependencies)
+  - [Internal Dependencies](#internal-dependencies)
+  - [External Dependencies](#external-dependencies)
+- [Configuration](#configuration)
+  - [Environment Variables](#environment-variables)
+  - [Configuration File](#configuration-file)
+- [Error Handling](#error-handling)
+- [Usage Examples](#usage-examples)
+  - [Basic Usage](#basic-usage)
+  - [Advanced Usage](#advanced-usage)
+- [Performance Considerations](#performance-considerations)
+- [Related Modules](#related-modules)
+  - [Step 3: Apply Quality Check (6 C's)](#step-3-apply-quality-check-6-cs)
+  - [Step 4: Save Document](#step-4-save-document)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Write a comprehensive module specification document that describes a module's purpose, interfaces, dependencies, configuration, and implementation details.

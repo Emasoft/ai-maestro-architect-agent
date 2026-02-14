@@ -9,6 +9,28 @@ version: 1.0.0
 
 # Verify gh CLI Authentication
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Verify gh CLI is Installed](#step-1-verify-gh-cli-is-installed)
+  - [Step 2: Check Current Authentication Status](#step-2-check-current-authentication-status)
+  - [Step 3: Authenticate (if needed)](#step-3-authenticate-if-needed)
+  - [Step 4: Verify Repository Access](#step-4-verify-repository-access)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Fresh Installation and Authentication](#example-fresh-installation-and-authentication)
+  - [Example: Re-authenticate After Token Expiry](#example-re-authenticate-after-token-expiry)
+- [Installation Commands](#installation-commands)
+  - [macOS](#macos)
+  - [Ubuntu/Debian](#ubuntudebian)
+  - [Windows](#windows)
+- [Required Token Scopes](#required-token-scopes)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Trigger this operation when:

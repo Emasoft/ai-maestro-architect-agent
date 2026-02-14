@@ -9,6 +9,30 @@ version: 1.0.0
 
 # Report Requirement Issue Operation
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Identify Issue Type](#step-1-identify-issue-type)
+  - [Step 2: Execute Report Command](#step-2-execute-report-command)
+  - [Step 3: Review Generated Report](#step-3-review-generated-report)
+  - [Step 4: Present to User](#step-4-present-to-user)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Reporting Feasibility Issue](#example-reporting-feasibility-issue)
+  - [Example: Generated Issue Report](#example-generated-issue-report)
+- [Issue Details](#issue-details)
+- [Issue Description](#issue-description)
+- [Proposed Alternatives](#proposed-alternatives)
+- [User Decision](#user-decision)
+- [Impact](#impact)
+  - [Example: Reporting Ambiguity Issue](#example-reporting-ambiguity-issue)
+  - [Example: Reporting Conflict](#example-reporting-conflict)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

@@ -9,6 +9,24 @@ version: 1.0.0
 
 # Synchronize Design Status to GitHub Issue
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Verify Design Has Linked Issue](#step-1-verify-design-has-linked-issue)
+  - [Step 2: Sync Single Document](#step-2-sync-single-document)
+  - [Step 3: Verify Label Changes](#step-3-verify-label-changes)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Sync After Status Transition](#example-sync-after-status-transition)
+  - [Example: Sync with Status Change Comment](#example-sync-with-status-change-comment)
+  - [Example: Batch Sync All Linked Documents](#example-batch-sync-all-linked-documents)
+- [Status to Label Mapping](#status-to-label-mapping)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Trigger this operation when:

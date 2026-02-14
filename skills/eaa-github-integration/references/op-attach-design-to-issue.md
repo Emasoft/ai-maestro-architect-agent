@@ -9,6 +9,23 @@ version: 1.0.0
 
 # Attach Design Document to Existing GitHub Issue
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Verify the Issue Exists](#step-1-verify-the-issue-exists)
+  - [Step 2: Verify Design Document Has UUID](#step-2-verify-design-document-has-uuid)
+  - [Step 3: Attach the Design Document](#step-3-attach-the-design-document)
+  - [Step 4: Verify Results](#step-4-verify-results)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Attach Spec to Feature Request Issue](#example-attach-spec-to-feature-request-issue)
+  - [Example: Attach with Custom Comment Header](#example-attach-with-custom-comment-header)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Trigger this operation when:

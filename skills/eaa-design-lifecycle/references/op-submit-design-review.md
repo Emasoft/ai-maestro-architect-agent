@@ -9,6 +9,28 @@ version: 1.0.0
 
 # Submit Design for Review
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Validate Completeness Checklist](#step-1-validate-completeness-checklist)
+  - [Step 2: Update State to REVIEW](#step-2-update-state-to-review)
+  - [Step 3: Create Review Request](#step-3-create-review-request)
+  - [Step 4: Assign Reviewers](#step-4-assign-reviewers)
+  - [Step 5: Track Review Comments](#step-5-track-review-comments)
+  - [Step 6: Notify Reviewers](#step-6-notify-reviewers)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Submit Authentication Design for Review](#example-submit-authentication-design-for-review)
+  - [Example: Review Request Format](#example-review-request-format)
+- [Review Request](#review-request)
+  - [Reviewers](#reviewers)
+  - [Review Focus Areas](#review-focus-areas)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

@@ -5,6 +5,44 @@ workflow-instruction: support
 
 # Operation: Archive Valuable Prototype
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Evaluate Archive Criteria](#step-1-evaluate-archive-criteria)
+  - [Step 2: Create Archive Directory](#step-2-create-archive-directory)
+  - [Step 3: Copy Valuable Code](#step-3-copy-valuable-code)
+  - [Step 4: Create README](#step-4-create-readme)
+- [Purpose](#purpose)
+- [Background](#background)
+  - [Experiment Summary](#experiment-summary)
+- [What This Prototype Does](#what-this-prototype-does)
+  - [Key Features](#key-features)
+- [How to Use](#how-to-use)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Basic Usage](#basic-usage)
+  - [Example](#example)
+- [File Structure](#file-structure)
+- [Limitations](#limitations)
+- [When to Use This](#when-to-use-this)
+- [Adapting for Production](#adapting-for-production)
+  - [Required Changes](#required-changes)
+  - [Recommended Enhancements](#recommended-enhancements)
+- [Related Resources](#related-resources)
+- [Maintainer](#maintainer)
+- [License](#license)
+  - [Step 5: Clean Up Code](#step-5-clean-up-code)
+  - [Step 6: Add Tests (if missing)](#step-6-add-tests-if-missing)
+  - [Step 7: Verify Archive Works](#step-7-verify-archive-works)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Example](#example)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Archive a prototype from an experiment that has value for future reference, reuse, or as a starting point for implementation.

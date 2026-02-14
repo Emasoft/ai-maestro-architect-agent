@@ -9,6 +9,24 @@ version: 1.0.0
 
 # Remove Module Operation
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Verify Module Status](#step-1-verify-module-status)
+  - [Step 2: Execute Removal](#step-2-execute-removal)
+  - [Step 3: Verify Removal](#step-3-verify-removal)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Removing a Planned Module](#example-removing-a-planned-module)
+  - [Example: Attempting to Remove In-Progress Module](#example-attempting-to-remove-in-progress-module)
+  - [Example: Module with GitHub Issue](#example-module-with-github-issue)
+  - [Example: State File After Removal](#example-state-file-after-removal)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

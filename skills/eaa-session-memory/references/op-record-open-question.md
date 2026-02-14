@@ -5,6 +5,31 @@ workflow-instruction: support
 
 # Operation: Record Open Question
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Ensure Open Questions File Exists](#step-1-ensure-open-questions-file-exists)
+- [Open Questions](#open-questions)
+- [Resolved Questions](#resolved-questions)
+  - [Step 2: Determine Question ID](#step-2-determine-question-id)
+  - [Step 3: Classify Question Type](#step-3-classify-question-type)
+  - [Step 4: Add Open Question Entry](#step-4-add-open-question-entry)
+  - [OQ-<NNN>: <Question Title>](#oq-nnn-question-title)
+  - [Step 5: Update Design Index](#step-5-update-design-index)
+  - [Step 6: Update Session State](#step-6-update-session-state)
+  - [Step 7: Report Question Recorded](#step-7-report-question-recorded)
+- [Open Question Recorded](#open-question-recorded)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Resolving a Question](#resolving-a-question)
+- [Example](#example)
+  - [OQ-003: Payment Processor Selection](#oq-003-payment-processor-selection)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Record an unresolved question that arises during design work, tracking what decisions are blocked and who should resolve it.

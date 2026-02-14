@@ -9,6 +9,29 @@ version: 1.0.0
 
 # Manage Module Dependencies
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Create Module Dependency Graph](#step-1-create-module-dependency-graph)
+- [Module Dependency Graph](#module-dependency-graph)
+  - [Step 2: Identify Circular Dependencies](#step-2-identify-circular-dependencies)
+  - [Step 3: Extract Shared Code to Utility Modules](#step-3-extract-shared-code-to-utility-modules)
+- [Shared Module Structure](#shared-module-structure)
+  - [Step 4: Define Dependency Direction Rules](#step-4-define-dependency-direction-rules)
+  - [Step 5: Plan Dependency Injection Strategy](#step-5-plan-dependency-injection-strategy)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Breaking Circular Dependency](#example-breaking-circular-dependency)
+  - [Example: Dependency Graph Documentation](#example-dependency-graph-documentation)
+- [Dependency Graph](#dependency-graph)
+- [Dependency Rules](#dependency-rules)
+- [Allowed Dependencies Matrix](#allowed-dependencies-matrix)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

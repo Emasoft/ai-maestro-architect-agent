@@ -5,6 +5,31 @@ workflow-instruction: support
 
 # Operation: Record Technology Stack Choice
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Ensure Stack File Exists](#step-1-ensure-stack-file-exists)
+- [Core Technologies](#core-technologies)
+- [Infrastructure](#infrastructure)
+- [Development Tools](#development-tools)
+- [External Services](#external-services)
+  - [Step 2: Determine Category](#step-2-determine-category)
+  - [Step 3: Add Stack Entry](#step-3-add-stack-entry)
+  - [<Technology Name>](#technology-name)
+  - [Step 4: Update Design Index](#step-4-update-design-index)
+  - [Step 5: Update Session State](#step-5-update-session-state)
+  - [Step 6: Report Stack Updated](#step-6-report-stack-updated)
+- [Stack Updated](#stack-updated)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Example](#example)
+  - [Redis](#redis)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Record when a technology is selected for the project stack, preserving the choice, version, purpose, and rationale.

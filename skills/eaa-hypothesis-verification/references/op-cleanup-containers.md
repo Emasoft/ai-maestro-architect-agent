@@ -5,6 +5,29 @@ workflow-instruction: support
 
 # Operation: Clean Up Experiment Containers
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Stop Running Containers](#step-1-stop-running-containers)
+  - [Step 2: Remove Containers](#step-2-remove-containers)
+  - [Step 3: Remove Images (Optional)](#step-3-remove-images-optional)
+  - [Step 4: Remove Volumes (Optional)](#step-4-remove-volumes-optional)
+  - [Step 5: Clean Unused Resources](#step-5-clean-unused-resources)
+  - [Step 6: Verify Cleanup](#step-6-verify-cleanup)
+  - [Step 7: Document Cleanup](#step-7-document-cleanup)
+- [Cleanup Log](#cleanup-log)
+  - [Resources Removed](#resources-removed)
+  - [Disk Space Recovered](#disk-space-recovered)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Example](#example)
+- [Cleanup Script](#cleanup-script)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Remove Docker containers, images, and volumes created for the experiment to free resources and maintain a clean environment.

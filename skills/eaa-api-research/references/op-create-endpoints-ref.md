@@ -5,6 +5,27 @@ workflow-instruction: support
 
 # Operation: Create Endpoints Reference
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Organize Endpoints by Resource](#step-1-organize-endpoints-by-resource)
+  - [Step 2: Write Endpoints Reference](#step-2-write-endpoints-reference)
+- [Base URL](#base-url)
+- [Authentication](#authentication)
+- [<Resource-1>](#resource-1)
+  - [List <Resource-1>](#list-resource-1)
+  - [Get <Resource-1> by ID](#get-resource-1-by-id)
+  - [Create <Resource-1>](#create-resource-1)
+- [Error Responses](#error-responses)
+  - [Common Error Codes](#common-error-codes)
+  - [Step 3: Save Document](#step-3-save-document)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+
 ## Purpose
 
 Create a comprehensive endpoints reference document that documents all API endpoints with methods, parameters, request/response formats, and examples.

@@ -9,6 +9,23 @@ version: 1.0.0
 
 # Add Requirement Section Operation
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Review Existing Sections](#step-1-review-existing-sections)
+  - [Step 2: Add the Section](#step-2-add-the-section)
+  - [Step 3: Verify Addition](#step-3-verify-addition)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Adding Security Requirements](#example-adding-security-requirements)
+  - [Example: Adding Multiple Custom Sections](#example-adding-multiple-custom-sections)
+  - [Example: State File After Addition](#example-state-file-after-addition)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

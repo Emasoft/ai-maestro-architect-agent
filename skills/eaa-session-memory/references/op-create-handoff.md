@@ -5,6 +5,43 @@ workflow-instruction: support
 
 # Operation: Create Session Handoff Document
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Determine Handoff Type](#step-1-determine-handoff-type)
+  - [Step 2: Create Handoff Directory](#step-2-create-handoff-directory)
+  - [Step 3: Gather Session Context](#step-3-gather-session-context)
+  - [Step 4: Create Handoff Document](#step-4-create-handoff-document)
+- [Session Summary](#session-summary)
+- [Decisions Made This Session](#decisions-made-this-session)
+  - [Key Decision Details](#key-decision-details)
+- [Patterns Applied This Session](#patterns-applied-this-session)
+- [Constraints Active](#constraints-active)
+- [Open Questions](#open-questions)
+  - [Pending Resolution](#pending-resolution)
+  - [Resolved This Session](#resolved-this-session)
+- [Current Work State](#current-work-state)
+  - [Active Design Focus](#active-design-focus)
+  - [In Progress](#in-progress)
+  - [Next Steps](#next-steps)
+- [Files Modified This Session](#files-modified-this-session)
+- [Design Artifacts Summary](#design-artifacts-summary)
+- [Resume Instructions](#resume-instructions)
+  - [For Future EAA Session](#for-future-eaa-session)
+  - [Context to Restore](#context-to-restore)
+  - [Immediate Priority](#immediate-priority)
+- [Handoff Validation](#handoff-validation)
+  - [Step 5: Update Session State with Handoff Reference](#step-5-update-session-state-with-handoff-reference)
+  - [Step 6: Report Handoff Created](#step-6-report-handoff-created)
+- [Handoff Document Created](#handoff-document-created)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Create a handoff document that captures complete session context for continuity, enabling a future session (or another agent) to resume work without loss of context.

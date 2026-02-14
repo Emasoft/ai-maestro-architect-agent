@@ -7,6 +7,33 @@ procedure: "support-skill"
 
 # Operation: Create Sub-Issues
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Verify Parent Issue is Epic](#step-1-verify-parent-issue-is-epic)
+  - [Step 2: Define Sub-Issues from Architecture](#step-2-define-sub-issues-from-architecture)
+  - [Step 3: Create Each Sub-Issue](#step-3-create-each-sub-issue)
+- [Description](#description)
+- [Acceptance Criteria](#acceptance-criteria)
+- [Parent Issue](#parent-issue)
+  - [Step 4: Link Sub-Issues to Parent](#step-4-link-sub-issues-to-parent)
+  - [Step 5: Update Parent Status](#step-5-update-parent-status)
+  - [Step 6: Verify Sub-Issues Created](#step-6-verify-sub-issues-created)
+- [Example](#example)
+- [Description](#description)
+- [Acceptance Criteria](#acceptance-criteria)
+- [Parent Issue](#parent-issue)
+- [Description](#description)
+- [Acceptance Criteria](#acceptance-criteria)
+- [Parent Issue](#parent-issue)
+- [Sub-Issue Naming Convention](#sub-issue-naming-convention)
+- [Error Handling](#error-handling)
+- [Notes](#notes)
+
 ## Purpose
 
 Break down a complex issue (epic) into smaller, component-specific sub-issues that can be assigned and tracked independently.

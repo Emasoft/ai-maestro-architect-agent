@@ -5,6 +5,38 @@ workflow-instruction: support
 
 # Operation: Create Integration Guide
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Identify Integration Approach](#step-1-identify-integration-approach)
+  - [Step 2: Write Integration Guide](#step-2-write-integration-guide)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+  - [Option 1: Official SDK (Recommended)](#option-1-official-sdk-recommended)
+  - [Option 2: Direct HTTP](#option-2-direct-http)
+- [Quick Start](#quick-start)
+  - [Step 1: Set Up Credentials](#step-1-set-up-credentials)
+  - [Step 2: Initialize Client](#step-2-initialize-client)
+  - [Step 3: Make Your First Request](#step-3-make-your-first-request)
+- [Common Operations](#common-operations)
+  - [Operation 1: <Common Task>](#operation-1-common-task)
+  - [Operation 2: <Another Common Task>](#operation-2-another-common-task)
+- [Error Handling](#error-handling)
+  - [SDK Exceptions](#sdk-exceptions)
+  - [Retry Pattern](#retry-pattern)
+- [Best Practices](#best-practices)
+- [Testing Your Integration](#testing-your-integration)
+  - [Unit Tests](#unit-tests)
+  - [Integration Tests](#integration-tests)
+- [Troubleshooting](#troubleshooting)
+  - [Step 3: Save Document](#step-3-save-document)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+
 ## Purpose
 
 Create a step-by-step integration guide with code examples showing how to integrate the API into a project, including setup, common operations, and error handling.

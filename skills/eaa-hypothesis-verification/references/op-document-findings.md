@@ -5,6 +5,56 @@ workflow-instruction: support
 
 # Operation: Document Findings in Experimentation Report
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Create Report Structure](#step-1-create-report-structure)
+- [Executive Summary](#executive-summary)
+- [Hypothesis](#hypothesis)
+  - [Original Claim](#original-claim)
+  - [Source](#source)
+  - [Initial Status](#initial-status)
+- [Methodology](#methodology)
+  - [Approaches Tested](#approaches-tested)
+  - [Measurement Protocol](#measurement-protocol)
+  - [Test Parameters](#test-parameters)
+  - [Environment](#environment)
+- [Results](#results)
+  - [Summary Table](#summary-table)
+  - [Detailed Results](#detailed-results)
+  - [Visualization](#visualization)
+  - [Statistical Analysis](#statistical-analysis)
+- [Analysis](#analysis)
+  - [Key Findings](#key-findings)
+  - [Claim Evaluation](#claim-evaluation)
+- [Classification](#classification)
+  - [Final Status: <VERIFIED | UNVERIFIED | PARTIALLY VERIFIED>](#final-status-verified-unverified-partially-verified)
+  - [Justification](#justification)
+  - [Conditions (if PARTIALLY VERIFIED)](#conditions-if-partially-verified)
+- [Recommendations](#recommendations)
+  - [For Implementation](#for-implementation)
+  - [For Further Investigation](#for-further-investigation)
+- [Limitations](#limitations)
+- [Appendix](#appendix)
+  - [A. Raw Data Location](#a-raw-data-location)
+  - [B. Scripts Used](#b-scripts-used)
+  - [C. Data Quality Notes](#c-data-quality-notes)
+- [References](#references)
+  - [Step 2: Generate Visualizations](#step-2-generate-visualizations)
+  - [Step 3: Calculate Statistical Significance](#step-3-calculate-statistical-significance)
+  - [Step 4: Finalize Report](#step-4-finalize-report)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Example](#example)
+- [Executive Summary](#executive-summary)
+- [Results Summary](#results-summary)
+- [Classification: UNVERIFIED](#classification-unverified)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Create a comprehensive experimentation report documenting the hypothesis, methodology, results, and conclusions from the experiment.

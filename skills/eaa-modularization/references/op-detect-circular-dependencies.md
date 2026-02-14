@@ -9,6 +9,42 @@ version: 1.0.0
 
 # Detect Circular Dependencies
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Build Import/Dependency Graph](#step-1-build-importdependency-graph)
+- [Import Analysis](#import-analysis)
+  - [OrderModule imports:](#ordermodule-imports)
+  - [PaymentModule imports:](#paymentmodule-imports)
+  - [InventoryModule imports:](#inventorymodule-imports)
+  - [Step 2: Identify Cycles](#step-2-identify-cycles)
+- [Detected Cycles](#detected-cycles)
+  - [Cycle 1: Order ↔ Payment](#cycle-1-order-payment)
+  - [Cycle 2: Inventory → Shipping → Inventory](#cycle-2-inventory-shipping-inventory)
+  - [Step 3: Classify Cycle Severity](#step-3-classify-cycle-severity)
+  - [Step 4: Determine Root Cause](#step-4-determine-root-cause)
+  - [Step 5: Plan Resolution](#step-5-plan-resolution)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Detecting and Resolving Order-Payment Cycle](#example-detecting-and-resolving-order-payment-cycle)
+- [Detection](#detection)
+- [Severity: HIGH](#severity-high)
+- [Root Cause: Bidirectional Data Access](#root-cause-bidirectional-data-access)
+- [Resolution: Extract Interfaces + Events](#resolution-extract-interfaces-events)
+- [After Resolution](#after-resolution)
+  - [Example: Cycle Detection Report](#example-cycle-detection-report)
+- [Summary](#summary)
+- [Cycle Details](#cycle-details)
+  - [Cycle 1 (Critical)](#cycle-1-critical)
+  - [Cycle 2 (High)](#cycle-2-high)
+  - [Cycle 3 (Medium)](#cycle-3-medium)
+- [Recommended Action Order](#recommended-action-order)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

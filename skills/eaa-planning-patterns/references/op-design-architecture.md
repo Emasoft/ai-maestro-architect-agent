@@ -9,6 +9,41 @@ version: 1.0.0
 
 # Design System Architecture
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Identify System Components](#step-1-identify-system-components)
+- [System Components](#system-components)
+  - [Step 2: Define Component Responsibilities](#step-2-define-component-responsibilities)
+  - [Component: auth-service](#component-auth-service)
+  - [Step 3: Map Data Flows](#step-3-map-data-flows)
+- [Data Flows](#data-flows)
+  - [Login Flow](#login-flow)
+  - [Step 4: Identify Component Dependencies](#step-4-identify-component-dependencies)
+- [Dependency Graph](#dependency-graph)
+  - [Step 5: Define Component Interfaces](#step-5-define-component-interfaces)
+  - [Interface: auth-service](#interface-auth-service)
+  - [Step 6: Select Design Patterns](#step-6-select-design-patterns)
+  - [Step 7: Create Architecture Document](#step-7-create-architecture-document)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: E-Commerce Authentication System Architecture](#example-e-commerce-authentication-system-architecture)
+- [Components](#components)
+- [Data Flows](#data-flows)
+  - [Login Flow](#login-flow)
+- [Dependency Graph](#dependency-graph)
+- [Architectural Pattern: Hexagonal](#architectural-pattern-hexagonal)
+  - [Example: Microservices Pattern](#example-microservices-pattern)
+- [Architectural Pattern: Microservices](#architectural-pattern-microservices)
+  - [Service Boundaries](#service-boundaries)
+  - [Communication](#communication)
+  - [Data Ownership](#data-ownership)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

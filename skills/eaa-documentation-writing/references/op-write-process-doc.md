@@ -5,6 +5,41 @@ workflow-instruction: support
 
 # Operation: Write Process Documentation
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Gather Process Information](#step-1-gather-process-information)
+  - [Step 2: Create Process Documentation](#step-2-create-process-documentation)
+- [Overview](#overview)
+  - [Purpose](#purpose)
+  - [Scope](#scope)
+  - [Trigger Events](#trigger-events)
+- [Roles and Responsibilities](#roles-and-responsibilities)
+  - [RACI Matrix](#raci-matrix)
+- [Process Flow](#process-flow)
+  - [Diagram](#diagram)
+  - [Detailed Steps](#detailed-steps)
+- [Tools and Systems](#tools-and-systems)
+- [Inputs and Outputs](#inputs-and-outputs)
+  - [Process Inputs](#process-inputs)
+  - [Process Outputs](#process-outputs)
+- [Service Level Agreements](#service-level-agreements)
+- [Exception Handling](#exception-handling)
+  - [Exception 1: <Exception Type>](#exception-1-exception-type)
+- [Best Practices](#best-practices)
+- [Common Pitfalls](#common-pitfalls)
+- [Related Processes](#related-processes)
+- [Revision History](#revision-history)
+  - [Step 3: Apply Quality Check (6 C's)](#step-3-apply-quality-check-6-cs)
+  - [Step 4: Save Document](#step-4-save-document)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Write process documentation that describes workflow steps, responsibilities, tools, and best practices for a technical or organizational process.

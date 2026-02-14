@@ -7,6 +7,22 @@ procedure: "support-skill"
 
 # Operation: Add Component Labels
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Review Architecture Analysis](#step-1-review-architecture-analysis)
+  - [Step 2: Verify Labels Exist in Repository](#step-2-verify-labels-exist-in-repository)
+  - [Step 3: Add Component Labels to Issue](#step-3-add-component-labels-to-issue)
+  - [Step 4: Document Component Breakdown in Comment](#step-4-document-component-breakdown-in-comment)
+  - [Step 5: Verify Labels Applied](#step-5-verify-labels-applied)
+- [Example](#example)
+- [Component Label Reference](#component-label-reference)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 After completing architecture analysis, apply component labels to an issue to indicate which parts of the system are affected by the work.

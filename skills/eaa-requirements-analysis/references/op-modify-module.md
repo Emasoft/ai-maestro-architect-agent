@@ -9,6 +9,25 @@ version: 1.0.0
 
 # Modify Module Operation
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Identify Module to Modify](#step-1-identify-module-to-modify)
+  - [Step 2: Execute Modification](#step-2-execute-modification)
+  - [Step 3: Verify Change](#step-3-verify-change)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Updating Acceptance Criteria](#example-updating-acceptance-criteria)
+  - [Example: Changing Priority](#example-changing-priority)
+  - [Example: Renaming Module](#example-renaming-module)
+  - [Example: Multiple Modifications](#example-multiple-modifications)
+  - [Example: State File After Modification](#example-state-file-after-modification)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

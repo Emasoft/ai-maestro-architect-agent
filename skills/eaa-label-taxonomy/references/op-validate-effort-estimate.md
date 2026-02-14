@@ -7,6 +7,24 @@ procedure: "support-skill"
 
 # Operation: Validate Effort Estimate
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Check Current Effort Label](#step-1-check-current-effort-label)
+  - [Step 2: Count Affected Components](#step-2-count-affected-components)
+  - [Step 3: Compare Current vs Recommended](#step-3-compare-current-vs-recommended)
+  - [Step 4: Document Recommendation in Comment](#step-4-document-recommendation-in-comment)
+  - [Step 5: Update Effort Label (if change needed)](#step-5-update-effort-label-if-change-needed)
+  - [Step 6: Verify Update](#step-6-verify-update)
+- [Example](#example)
+- [Effort Guidelines](#effort-guidelines)
+- [Error Handling](#error-handling)
+- [Notes](#notes)
+
 ## Purpose
 
 Validate that the issue's effort label matches the actual complexity revealed by architecture analysis. Recommend adjustments if needed.

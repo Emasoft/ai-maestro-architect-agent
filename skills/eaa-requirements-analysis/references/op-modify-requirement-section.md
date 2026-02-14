@@ -9,6 +9,24 @@ version: 1.0.0
 
 # Modify Requirement Section Operation
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Identify Section to Modify](#step-1-identify-section-to-modify)
+  - [Step 2: Execute Modification](#step-2-execute-modification)
+  - [Step 3: Verify Change](#step-3-verify-change)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Marking Section Complete](#example-marking-section-complete)
+  - [Example: Completing All Default Sections](#example-completing-all-default-sections)
+  - [Example: Renaming a Section](#example-renaming-a-section)
+  - [Example: State File After Modification](#example-state-file-after-modification)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

@@ -9,6 +9,45 @@ version: 1.0.0
 
 # Identify Module Boundaries
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Map Domain Concepts](#step-1-map-domain-concepts)
+- [Domain Concept Mapping](#domain-concept-mapping)
+  - [Nouns (Entities)](#nouns-entities)
+  - [Verbs (Operations)](#verbs-operations)
+  - [Concept Groups (Candidate Modules)](#concept-groups-candidate-modules)
+  - [Step 2: Identify Change Vectors](#step-2-identify-change-vectors)
+  - [Step 3: Find Natural Seams in Code](#step-3-find-natural-seams-in-code)
+  - [Step 4: Define Bounded Contexts](#step-4-define-bounded-contexts)
+- [Bounded Contexts](#bounded-contexts)
+  - [Identity Context](#identity-context)
+  - [Catalog Context](#catalog-context)
+  - [Order Context](#order-context)
+  - [Step 5: Validate Boundaries](#step-5-validate-boundaries)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: E-Commerce Module Boundaries](#example-e-commerce-module-boundaries)
+- [Domain Concept Groups](#domain-concept-groups)
+  - [Group 1: User Identity](#group-1-user-identity)
+  - [Group 2: Customer Profile](#group-2-customer-profile)
+  - [Group 3: Product Catalog](#group-3-product-catalog)
+  - [Group 4: Shopping](#group-4-shopping)
+  - [Group 5: Orders](#group-5-orders)
+  - [Group 6: Payments](#group-6-payments)
+  - [Group 7: Fulfillment](#group-7-fulfillment)
+- [Validation Results](#validation-results)
+  - [Example: Monolith Seam Analysis](#example-monolith-seam-analysis)
+- [Package Structure Analysis](#package-structure-analysis)
+- [Database Table Clustering](#database-table-clustering)
+- [API Endpoint Groupings](#api-endpoint-groupings)
+- [Recommended Module Structure](#recommended-module-structure)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

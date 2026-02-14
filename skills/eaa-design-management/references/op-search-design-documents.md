@@ -9,6 +9,28 @@ version: 1.0.0
 
 # Search Design Documents
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Determine Search Criteria](#step-1-determine-search-criteria)
+  - [Step 2: Execute Search](#step-2-execute-search)
+  - [Step 3: Interpret Results](#step-3-interpret-results)
+  - [Step 4: Combine Filters](#step-4-combine-filters)
+  - [Step 5: Handle Empty Results](#step-5-handle-empty-results)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example 1: Find All PDRs in Review](#example-1-find-all-pdrs-in-review)
+  - [Example 2: Search by Keyword](#example-2-search-by-keyword)
+  - [Example 3: Find Specific Document by UUID](#example-3-find-specific-document-by-uuid)
+  - [Example 4: Combined Filter Search](#example-4-combined-filter-search)
+  - [Example 5: List All Documents of a Type](#example-5-list-all-documents-of-a-type)
+- [Search Result Fields](#search-result-fields)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

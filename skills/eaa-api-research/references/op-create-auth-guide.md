@@ -5,6 +5,38 @@ workflow-instruction: support
 
 # Operation: Create Authentication Guide
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Identify Authentication Type](#step-1-identify-authentication-type)
+  - [Step 2: Write Authentication Guide](#step-2-write-authentication-guide)
+- [Authentication Method](#authentication-method)
+- [Getting Credentials](#getting-credentials)
+  - [Step 1: Create Account](#step-1-create-account)
+  - [Step 2: Generate Credentials](#step-2-generate-credentials)
+- [Using Credentials](#using-credentials)
+  - [Request Format](#request-format)
+  - [Header Details](#header-details)
+- [Token Management](#token-management)
+  - [Token Expiration](#token-expiration)
+  - [Refresh Flow](#refresh-flow)
+- [Security Best Practices](#security-best-practices)
+- [Environment Setup](#environment-setup)
+  - [Development](#development)
+  - [Production](#production)
+- [Troubleshooting](#troubleshooting)
+  - [Step 3: Save Document](#step-3-save-document)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Example](#example)
+- [Authentication Method](#authentication-method)
+- [Getting Credentials](#getting-credentials)
+- [Using Credentials](#using-credentials)
+
 ## Purpose
 
 Create a comprehensive authentication guide that documents how to authenticate with the API, including credential setup, token management, and security best practices.

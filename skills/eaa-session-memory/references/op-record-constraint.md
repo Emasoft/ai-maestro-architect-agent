@@ -5,6 +5,30 @@ workflow-instruction: support
 
 # Operation: Record Discovered Constraint
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Ensure Constraints File Exists](#step-1-ensure-constraints-file-exists)
+- [Active Constraints](#active-constraints)
+- [Resolved Constraints](#resolved-constraints)
+  - [Step 2: Determine Constraint ID](#step-2-determine-constraint-id)
+  - [Step 3: Classify Constraint Type](#step-3-classify-constraint-type)
+  - [Step 4: Add Constraint Entry](#step-4-add-constraint-entry)
+  - [CON-<NNN>: <Constraint Title>](#con-nnn-constraint-title)
+  - [Step 5: Update Design Index](#step-5-update-design-index)
+  - [Step 6: Update Session State](#step-6-update-session-state)
+  - [Step 7: Report Constraint Recorded](#step-7-report-constraint-recorded)
+- [Constraint Recorded](#constraint-recorded)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Example](#example)
+  - [CON-007: Response Time Limit](#con-007-response-time-limit)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Record when a constraint is discovered during design analysis, ensuring the constraint and its impact are documented and tracked.

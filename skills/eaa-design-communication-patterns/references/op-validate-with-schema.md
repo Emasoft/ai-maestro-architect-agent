@@ -9,6 +9,27 @@ version: 1.0.0
 
 # Validate with Shared Schema
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Import Schema Validation](#step-1-import-schema-validation)
+  - [Step 2: Prepare Document Data](#step-2-prepare-document-data)
+  - [Step 3: Run Validation](#step-3-run-validation)
+  - [Step 4: Handle Validation Results](#step-4-handle-validation-results)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Validate Design Document Before GitHub Issue Creation](#example-validate-design-document-before-github-issue-creation)
+  - [Example: Validate with Specific Schema Type](#example-validate-with-specific-schema-type)
+  - [Example: Batch Validate All Design Documents](#example-batch-validate-all-design-documents)
+- [Required Fields by Schema](#required-fields-by-schema)
+  - [Design Document Schema](#design-document-schema)
+  - [ADR Schema](#adr-schema)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Trigger this operation when:

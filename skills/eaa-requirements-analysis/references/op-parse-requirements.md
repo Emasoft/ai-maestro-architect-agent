@@ -9,6 +9,29 @@ version: 1.0.0
 
 # Parse Requirements Operation
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Gather Requirements Text](#step-1-gather-requirements-text)
+  - [Step 2: Execute Parse Command](#step-2-execute-parse-command)
+  - [Step 3: Review Parsed Output](#step-3-review-parsed-output)
+  - [Step 4: Document in USER_REQUIREMENTS.md](#step-4-document-in-user_requirementsmd)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Parsing User Text](#example-parsing-user-text)
+  - [Example: Parsing from File](#example-parsing-from-file)
+  - [Example: Documenting in USER_REQUIREMENTS.md](#example-documenting-in-user_requirementsmd)
+- [Functional Requirements](#functional-requirements)
+  - [REQ-F001: User Registration](#req-f001-user-registration)
+  - [REQ-F002: Password Reset](#req-f002-password-reset)
+- [Non-Functional Requirements](#non-functional-requirements)
+  - [REQ-NF001: Concurrent Users](#req-nf001-concurrent-users)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

@@ -9,6 +9,32 @@ version: 1.0.0
 
 # Identify Risks
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Discover All Risks](#step-1-discover-all-risks)
+  - [Step 2: Assess Impact and Probability](#step-2-assess-impact-and-probability)
+  - [Step 3: Prioritize Risks](#step-3-prioritize-risks)
+  - [Step 4: Plan Mitigation Strategies](#step-4-plan-mitigation-strategies)
+  - [Step 5: Create Risk Register](#step-5-create-risk-register)
+- [Risk Register](#risk-register)
+  - [Step 6: Define Monitoring Plan](#step-6-define-monitoring-plan)
+- [Risk Monitoring](#risk-monitoring)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Authentication System Risks](#example-authentication-system-risks)
+- [Identified Risks](#identified-risks)
+  - [Technical Risks](#technical-risks)
+  - [Resource Risks](#resource-risks)
+- [Risk Matrix](#risk-matrix)
+- [Top Risks Summary](#top-risks-summary)
+  - [Example: Risk Register Template](#example-risk-register-template)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

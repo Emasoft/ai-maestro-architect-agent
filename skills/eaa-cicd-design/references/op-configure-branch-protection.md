@@ -5,6 +5,27 @@ workflow-instruction: support
 
 # Operation: Configure Branch Protection Rules
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Identify Protection Requirements](#step-1-identify-protection-requirements)
+  - [Step 2: Configure via GitHub CLI](#step-2-configure-via-github-cli)
+  - [Step 3: Configure via GitHub UI](#step-3-configure-via-github-ui)
+  - [Step 4: Add Required Status Checks](#step-4-add-required-status-checks)
+  - [Step 5: Configure CODEOWNERS](#step-5-configure-codeowners)
+  - [Step 6: Document Branch Strategy](#step-6-document-branch-strategy)
+- [Protected Branches](#protected-branches)
+- [Merge Requirements](#merge-requirements)
+- [Workflow](#workflow)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Example](#example)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Set up branch protection rules to enforce code review, status checks, and merge requirements for protected branches.

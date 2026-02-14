@@ -9,6 +9,26 @@ version: 1.0.0
 
 # Send AI Maestro Inter-Agent Message
 
+
+## Contents
+
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Determine Message Parameters](#step-1-determine-message-parameters)
+  - [Step 2: Send the Message](#step-2-send-the-message)
+  - [Step 3: Verify Delivery](#step-3-verify-delivery)
+- [Checklist](#checklist)
+- [Examples](#examples)
+  - [Example: Notify Orchestrator of Design Completion](#example-notify-orchestrator-of-design-completion)
+  - [Example: Request Code Review from Integrator](#example-request-code-review-from-integrator)
+  - [Example: Handoff Work to Implementation Agent](#example-handoff-work-to-implementation-agent)
+  - [Example: Urgent Escalation](#example-urgent-escalation)
+- [Message Types](#message-types)
+- [Priority Levels](#priority-levels)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## When to Use
 
 Trigger this operation when:

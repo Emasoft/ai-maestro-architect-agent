@@ -5,6 +5,33 @@ workflow-instruction: support
 
 # Operation: Load Session State on Start
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Check for Existing Session State](#step-1-check-for-existing-session-state)
+  - [Step 2: Read Session State File](#step-2-read-session-state-file)
+- [Current Focus](#current-focus)
+- [Recent Decisions](#recent-decisions)
+- [Active Constraints](#active-constraints)
+- [Open Questions](#open-questions)
+  - [Step 3: Load Design Index](#step-3-load-design-index)
+  - [Step 4: Check for Recent Handoffs](#step-4-check-for-recent-handoffs)
+  - [Step 5: Report Loaded Context](#step-5-report-loaded-context)
+- [Session Context Loaded](#session-context-loaded)
+  - [Design State](#design-state)
+  - [Current Focus](#current-focus)
+  - [Recommended Next Action](#recommended-next-action)
+  - [Files Loaded](#files-loaded)
+  - [Step 6: Initialize Fresh Session (if no state)](#step-6-initialize-fresh-session-if-no-state)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Example](#example)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Load existing session state and design context when starting a new session, enabling continuity from previous work.

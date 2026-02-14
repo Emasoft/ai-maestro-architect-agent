@@ -5,6 +5,36 @@ workflow-instruction: support
 
 # Operation: Write API Contract Document
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Gather API Information](#step-1-gather-api-information)
+  - [Step 2: Create API Contract Document](#step-2-create-api-contract-document)
+- [Overview](#overview)
+  - [Purpose](#purpose)
+  - [Base URL](#base-url)
+  - [Versioning](#versioning)
+- [Authentication](#authentication)
+  - [Method](#method)
+  - [Header Format](#header-format)
+  - [Required Scopes](#required-scopes)
+- [Endpoints](#endpoints)
+  - [Resource: <Resource-Name>](#resource-resource-name)
+- [Error Responses](#error-responses)
+  - [Standard Error Format](#standard-error-format)
+  - [Error Codes](#error-codes)
+- [Rate Limiting](#rate-limiting)
+- [Changelog](#changelog)
+  - [Step 3: Apply Quality Check (6 C's)](#step-3-apply-quality-check-6-cs)
+  - [Step 4: Save Document](#step-4-save-document)
+- [Output](#output)
+- [Verification Checklist](#verification-checklist)
+- [Error Handling](#error-handling)
+
 ## Purpose
 
 Write a comprehensive API contract document that defines endpoint specifications, request/response schemas, authentication, and versioning for internal or external APIs.
