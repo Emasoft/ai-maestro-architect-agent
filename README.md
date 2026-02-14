@@ -87,6 +87,6 @@ claude --plugin-dir ./OUTPUT_SKILLS/architect-agent
 ## Validation
 
 ```bash
-cd OUTPUT_SKILLS/architect-agent
-uv run python scripts/eaa_validate_plugin.py --verbose
+cd OUTPUT_SKILLS/emasoft-architect-agent
+uv run python scripts/validate_plugin.py . --verbose
 ```

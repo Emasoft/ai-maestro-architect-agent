@@ -468,7 +468,7 @@ All projects use the canonical **8-column kanban system** on GitHub Projects:
 | Script | Purpose |
 |--------|---------|
 | `scripts/pre-push-hook.py` | Pre-push validation (manifest, hooks, lint, Unicode compliance) |
-| `scripts/eaa_validate_plugin.py` | Plugin structure validation |
+| `scripts/validate_plugin.py` | Plugin structure validation |
 | `scripts/eaa_requirement_analysis.py` | Requirement analysis tooling |
 | `scripts/cross_platform.py` | Cross-platform compatibility checks |
 | `scripts/eaa_download.py` | Plugin download utility |
