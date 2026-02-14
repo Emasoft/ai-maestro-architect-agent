@@ -80,13 +80,15 @@ The Architect Agent handles **design documents, requirements analysis, and archi
 
 ## Installation (Production)
 
-Install from the Emasoft marketplace. Use `--scope local` to install only for the current project directory, or `--scope global` for all projects.
+Install from the Emasoft marketplace. Use `--scope local` to install only for this agent's directory only, or `--scope global` for all projects.
+
+Role plugins are installed with `--scope local` inside the specific agent's working directory (`~/agents/<agent-name>/`). This ensures the plugin is only available to that agent.
 
 ```bash
 # Add Emasoft marketplace (first time only)
 claude plugin marketplace add emasoft-plugins --url https://github.com/Emasoft/emasoft-plugins
 
-# Install plugin (--scope local = this project only, recommended)
+# Install plugin (--scope local = this agent's directory only, recommended)
 claude plugin install emasoft-architect-agent@emasoft-plugins --scope local
 
 # RESTART Claude Code after installing (required!)
