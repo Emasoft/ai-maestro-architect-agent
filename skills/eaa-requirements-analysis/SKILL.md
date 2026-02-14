@@ -61,6 +61,10 @@ Copy this checklist and track your progress:
 - [ ] Verify GitHub Issues created for each module
 - [ ] Begin orchestration: `/start-orchestration`
 
+## Output
+
+Each planning command produces structured output to the terminal showing the operation result and updated state. The `/planning-status` command displays a formatted table with phase status, requirements progress, and module list. The `/approve-plan` command outputs a transition summary including created GitHub Issue URLs. For detailed output format examples, see [extended-examples-and-resources.md](references/extended-examples-and-resources.md#command-output-reference).
+
 ## Commands Overview
 
 | Command | Purpose | Section |
@@ -272,7 +276,7 @@ The plan phase uses a state file at `.claude/orchestrator-plan-phase.local.md` t
 
 ---
 
-## 8.0 Error Handling
+## Error Handling
 
 **For troubleshooting issues, see [troubleshooting.md](references/troubleshooting.md):**
 - 5.1 When /start-planning fails
@@ -384,7 +388,7 @@ python3 scripts/reset_plan_phase.py --confirm --no-backup
 
 ---
 
-## 11.0 Examples
+## Examples
 
 ### Example 1: Complete Planning Workflow
 
@@ -458,7 +462,7 @@ This script enforces RULE 14: User Requirements Are Immutable. When issues arise
 
 The script is located at `../../scripts/eaa_requirement_analysis.py` relative to this skill.
 
-## 12.0 Resources
+## Resources
 
 - [start-planning-procedure.md](references/start-planning-procedure.md) - Start planning command details
 - [requirement-management.md](references/requirement-management.md) - Add/modify/remove requirements
