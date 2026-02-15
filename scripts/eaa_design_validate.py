@@ -227,8 +227,8 @@ def validate_document(filepath: Path, verbose: bool = False) -> Tuple[List[Dict]
         A tuple of (errors, warnings) where each is a list of dicts with
         keys: file, line, level, message.
     """
-    errors = []
-    warnings = []
+    errors: list[dict[str, object]] = []
+    warnings: list[dict[str, object]] = []
 
     # Read file content
     try:
@@ -250,6 +250,15 @@ def validate_document(filepath: Path, verbose: bool = False) -> Tuple[List[Dict]
             "line": 1,
             "level": "ERROR",
             "message": parse_error,
+        })
+        return errors, warnings
+
+    if frontmatter is None:
+        errors.append({
+            "file": str(filepath),
+            "line": 1,
+            "level": "ERROR",
+            "message": "No frontmatter found",
         })
         return errors, warnings
 

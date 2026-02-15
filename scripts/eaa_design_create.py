@@ -224,7 +224,7 @@ def create_design_document(
     project_root: Path,
     author: str = "",
     filename: Optional[str] = None,
-) -> Optional[Path]:
+) -> Optional[tuple[Path, str]]:
     """Create a new design document with frontmatter and template body.
 
     This is the main function that orchestrates document creation:
@@ -242,7 +242,7 @@ def create_design_document(
         filename: Optional custom filename (without .md extension).
 
     Returns:
-        Path to the created file, or None if creation failed.
+        Tuple of (filepath, guuid) on success, or None if creation failed.
     """
     design_root = project_root / "design"
     type_dir = design_root / doc_type
