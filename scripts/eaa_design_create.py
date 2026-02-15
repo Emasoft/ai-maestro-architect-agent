@@ -32,7 +32,7 @@ import re
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Optional
 
 
 # Valid document types as defined in the SKILL.md specification
@@ -206,13 +206,13 @@ def build_frontmatter(
         f"uuid: {uuid_str}",
         f'title: "{title}"',
         f"type: {doc_type}",
-        f"status: draft",
+        "status: draft",
         f'author: "{author}"',
         f"created: {today}",
         f"updated: {today}",
-        f'description: ""',
-        f"tags: []",
-        f"related: []",
+        'description: ""',
+        "tags: []",
+        "related: []",
         "---",
     ]
     return "\n".join(lines) + "\n"
@@ -376,7 +376,7 @@ Examples:
     print(f"Created: {rel_path}")
     print(f"UUID: {guuid}")
     print(f"Type: {args.type}")
-    print(f"Status: draft")
+    print("Status: draft")
 
     return 0
 
