@@ -108,6 +108,8 @@ python scripts/health_auditor.py --path . --format json --output health-report.j
 
 ### 1.4 evidence_store.py
 
+**Status: Planned — Not Yet Implemented**
+
 **Purpose**: Store and retrieve verification evidence for plan validation
 
 **Usage**:
@@ -213,7 +215,11 @@ python scripts/generate_roadmap_template.py --phases 5 --output roadmap.md
 
 ## 4. Analysis Scripts
 
+> **Note: The following analysis scripts are planned for future implementation. They are not yet available.**
+
 ### 4.1 consistency_verifier.py
+
+**Status: Planned — Not Yet Implemented**
 
 **Purpose**: Verify plan internal consistency
 
@@ -221,11 +227,15 @@ Checks that all referenced tasks exist, dependencies are valid, and no orphaned 
 
 ### 4.2 quality_pattern_detector.py
 
+**Status: Planned — Not Yet Implemented**
+
 **Purpose**: Detect code quality patterns in the codebase
 
 Identifies common patterns and anti-patterns for code review prioritization.
 
 ### 4.3 scoring_framework.py
+
+**Status: Planned — Not Yet Implemented**
 
 **Purpose**: Multi-criteria scoring system for decision making
 
@@ -233,17 +243,23 @@ Allows weighted scoring of options against defined criteria.
 
 ### 4.4 comparison_analyzer.py
 
+**Status: Planned — Not Yet Implemented**
+
 **Purpose**: Compare multiple options side by side
 
 Generates comparison matrices for technology or approach decisions.
 
 ### 4.5 ab_test_calculator.py
 
+**Status: Planned — Not Yet Implemented**
+
 **Purpose**: A/B test statistical analysis
 
 Calculates statistical significance and sample size requirements.
 
 ### 4.6 checklist_validator.py
+
+**Status: Planned — Not Yet Implemented**
 
 **Purpose**: Validate checklist completion
 

@@ -308,7 +308,7 @@ For all utility scripts, see [scripts-reference.md](./references/scripts-referen
 - 1. Universal Analysis Scripts - dependency_resolver.py, project_detector.py, health_auditor.py
 - 2. Core Planning Scripts - planner.py, executor.py
 - 3. Template Generation Scripts - generate_planning_checklist.py, generate_risk_register.py
-- 4. Analysis Scripts - consistency_verifier.py, quality_pattern_detector.py
+- 4. Analysis Scripts *(planned, not yet implemented)* - consistency_verifier.py, quality_pattern_detector.py
 - 5. Task Tracker Scripts - generate_task_tracker.py, generate_status_report.py
 
 ### Test-Driven Development
