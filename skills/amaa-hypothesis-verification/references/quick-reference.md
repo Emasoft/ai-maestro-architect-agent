@@ -1,5 +1,15 @@
 # Hypothesis Verification - Quick Reference
 
+## Table of Contents
+
+- [Status Classifications](#status-classifications)
+- [Implementation vs Experimental Code](#implementation-vs-experimental-code)
+- [Workflow Integration Points](#workflow-integration-points)
+- [IRON RULES Summary](#iron-rules-summary)
+- [Examples](#examples)
+  - [Example 1: Verify API Performance Claim](#example-1-verify-api-performance-claim)
+  - [Example 2: Verify Library Compatibility](#example-2-verify-library-compatibility)
+
 ## Status Classifications
 
 | Status | Meaning | Safe to Rely On? |

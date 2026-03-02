@@ -1,5 +1,14 @@
 # Modularization Detailed Procedures
 
+## Table of Contents
+
+- [What is a Module?](#what-is-a-module)
+- [Why Modularization Matters](#why-modularization-matters)
+- [Detailed Phase Checklist](#detailed-phase-checklist)
+- [Examples](#examples)
+- [Troubleshooting](#troubleshooting)
+- [Next Steps](#next-steps)
+
 ## What is a Module?
 
 A module is a self-contained unit of code that:

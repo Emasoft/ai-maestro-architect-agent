@@ -1,7 +1,7 @@
 """Shared utilities and configuration for Architect Agent."""
 
-from shared.cross_platform import atomic_write_json, atomic_write_text, run_command
-from shared.thresholds import (
+from lib.cross_platform import atomic_write_json, atomic_write_text, run_command
+from lib.thresholds import (
     PLANNING,
     TASK_COMPLEXITY,
     TIMEOUTS,

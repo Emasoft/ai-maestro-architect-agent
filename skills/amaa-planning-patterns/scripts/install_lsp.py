@@ -108,7 +108,7 @@ LSP_CONFIGS: dict[str, LSPConfig] = {
         "plugin": "gopls-lsp",
         "extensions": [".go"],
         "package_manager": "go",
-        "uninstall_note": "Manual removal may be needed: rm $(go env GOPATH)/bin/gopls",
+        "uninstall_note": "Manual removal may be needed from GOPATH bin directory: gopls",
     },
     "rust": {
         "binary": "rust-analyzer",

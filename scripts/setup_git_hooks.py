@@ -156,9 +156,9 @@ def _install_hooks(src_dir: Path, dest_dir: Path, *, use_symlinks: bool) -> None
     print("  git push --no-verify")
     print()
     if use_symlinks:
-        _warn("Note: Hooks are symlinked. Changes to git-hooks/ are immediate.")
+        _warn("Note: Hooks are symlinked. Changes to scripts/git-hooks/ are immediate.")
     else:
-        _warn("Note: Hooks are copied. Re-run this script after changes to git-hooks/.")
+        _warn("Note: Hooks are copied. Re-run this script after changes to scripts/git-hooks/.")
 
 
 def _make_executable(path: Path) -> None:
@@ -179,7 +179,7 @@ def _make_executable(path: Path) -> None:
 def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Install git hooks for plugin validation.",
-        epilog="Default behavior: Copy hooks from git-hooks/ to .git/hooks/.",
+        epilog="Default behavior: Copy hooks from scripts/git-hooks/ to .git/hooks/.",
     )
     group = parser.add_mutually_exclusive_group()
     group.add_argument(
@@ -207,7 +207,7 @@ def main() -> None:
 
     repo_root = _repo_root()
     git_dir = repo_root / ".git"
-    hooks_src = repo_root / "git-hooks"
+    hooks_src = repo_root / "scripts" / "git-hooks"
     hooks_dest = git_dir / "hooks"
 
     # Validate that we are inside a git repository
@@ -221,7 +221,7 @@ def main() -> None:
 
     # Validate that the source hooks directory exists
     if not hooks_src.is_dir():
-        _err("ERROR: git-hooks directory not found.")
+        _err("ERROR: scripts/git-hooks directory not found.")
         print(f"Expected location: {hooks_src}")
         sys.exit(1)
 

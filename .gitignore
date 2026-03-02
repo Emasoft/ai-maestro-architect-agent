@@ -48,6 +48,9 @@ htmlcov/
 # Logs
 *.log
 
+# Node
+node_modules/
+
 # Rust
 target/
 Cargo.lock

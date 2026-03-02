@@ -1,5 +1,17 @@
 # AMAA Label Taxonomy - Detailed Reference
 
+## Table of Contents
+
+- [Component Labels (`component:*`)](#component-labels-component)
+- [Kanban Columns (Canonical 8-Column System)](#kanban-columns-canonical-8-column-system)
+- [Type Labels AMAA Clarifies](#type-labels-amaa-clarifies)
+- [Priority Labels (`priority:*`) - Read by AMAA](#priority-labels-priority---read-by-amaa)
+- [Effort Labels (`effort:*`) - Validated by AMAA](#effort-labels-effort---validated-by-amaa)
+- [Architecture-to-Labels Mapping](#architecture-to-labels-mapping)
+- [AMAA Label Commands](#amaa-label-commands)
+- [Quick Reference](#quick-reference)
+- [ADR Labels Pattern](#adr-labels-pattern)
+
 ## Component Labels (`component:*`)
 
 AMAA recommends component labels during architecture design.

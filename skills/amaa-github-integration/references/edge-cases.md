@@ -5,6 +5,12 @@ parent-skill: amaa-github-integration
 
 # Edge Cases
 
+## Table of Contents
+
+- [Issue Already Exists](#issue-already-exists)
+- [Design Has No UUID](#design-has-no-uuid)
+- [gh CLI Not Available](#gh-cli-not-available)
+
 ## Issue Already Exists
 
 **Situation**: Design document already has `related_issues` in frontmatter.

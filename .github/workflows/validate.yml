@@ -30,7 +30,7 @@ jobs:
         uses: astral-sh/setup-uv@v5
 
       - name: Sync validation scripts from CPV
-        run: bash scripts/sync_cpv_scripts.sh
+        run: python scripts/sync_cpv_scripts.py
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

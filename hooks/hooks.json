@@ -10,7 +10,7 @@
           {
             "type": "command",
             "command": "python3 ${CLAUDE_PLUGIN_ROOT}/scripts/amaa_stop_check.py",
-            "timeout": 10
+            "timeout": 5000
           }
         ]
       }

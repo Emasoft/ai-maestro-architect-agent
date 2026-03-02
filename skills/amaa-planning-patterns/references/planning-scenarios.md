@@ -2,6 +2,19 @@
 
 Detailed scenarios for applying planning patterns in different contexts.
 
+## Table of Contents
+
+- [Scenario 1: Starting a Brand New Project](#scenario-1-starting-a-brand-new-project)
+- [Scenario 2: Expanding Existing System](#scenario-2-expanding-existing-system)
+- [Scenario 3: Replanning a Project in Progress](#scenario-3-replanning-a-project-in-progress)
+- [Scenario 4: Rapid Planning (Under Pressure)](#scenario-4-rapid-planning-under-pressure)
+- [Key Concepts](#key-concepts)
+- [Phase Navigation](#phase-navigation)
+  - [Architecture Design](#architecture-design)
+  - [Risk Identification](#risk-identification)
+  - [Roadmap Creation](#roadmap-creation)
+  - [Implementation Planning](#implementation-planning)
+
 ## Scenario 1: Starting a Brand New Project
 
 1. Architecture Design + Risk Identification (parallel)

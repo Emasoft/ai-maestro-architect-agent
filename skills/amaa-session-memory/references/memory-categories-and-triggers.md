@@ -1,5 +1,17 @@
 # Memory Categories and Triggers
 
+## Table of Contents
+
+- [What to Remember](#what-to-remember)
+  - [1. Architecture Decisions Made](#1-architecture-decisions-made)
+  - [2. Design Patterns Chosen](#2-design-patterns-chosen)
+  - [3. Technology Stack Decisions](#3-technology-stack-decisions)
+  - [4. Constraints and Requirements Discovered](#4-constraints-and-requirements-discovered)
+  - [5. Open Design Questions](#5-open-design-questions)
+- [Memory Storage Location](#memory-storage-location)
+- [Memory Retrieval Triggers](#memory-retrieval-triggers)
+- [Memory Update Triggers](#memory-update-triggers)
+
 ## What to Remember
 
 The Architect agent MUST persist the following categories of information:

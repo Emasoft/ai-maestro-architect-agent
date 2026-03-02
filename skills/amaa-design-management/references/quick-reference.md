@@ -1,5 +1,13 @@
 # Quick Reference - Design Document Management
 
+## Table of Contents
+
+- [Quick Reference Commands](#quick-reference-commands)
+- [Document Status Workflow](#document-status-workflow)
+- [Frontmatter Reference](#frontmatter-reference)
+- [Directory Structure](#directory-structure)
+- [Extended Examples](#extended-examples)
+
 ## Quick Reference Commands
 
 **Create documents:**

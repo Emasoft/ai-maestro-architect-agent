@@ -1,5 +1,12 @@
 # AI Maestro Message Response Decision Tree
 
+## Table of Contents
+
+- [Step 1: Priority Triage](#step-1-priority-triage)
+- [Step 2: Message Type Routing](#step-2-message-type-routing)
+- [Step 3: Response Actions](#step-3-response-actions)
+- [Step 4: ACK Protocol](#step-4-ack-protocol)
+
 ## Step 1: Priority Triage
 
 | Priority | Action |
