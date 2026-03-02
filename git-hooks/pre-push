@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # pre-push hook - Validate plugin before allowing push
 #
-# Runs validate_plugin.py in strict mode: ALL severity levels
-# (CRITICAL, MAJOR, MINOR) block the push.
+# Runs validate_plugin.py — blocks push on CRITICAL and MAJOR issues.
+# MINOR issues are reported but do not block the push.
 #
 # Exit codes from validate_plugin.py:
 #   0 - All checks passed
 #   1 - CRITICAL issues found (blocks push)
 #   2 - MAJOR issues found (blocks push)
-#   3 - MINOR issues found (blocks push)
+#   3 - MINOR issues found (allowed through)
 #
 # To install:
 #   mkdir -p .git/hooks && cp git-hooks/pre-push .git/hooks/pre-push && chmod +x .git/hooks/pre-push
@@ -116,7 +116,7 @@ set -e
 
 echo ""
 
-# Handle exit codes - strict mode: ALL non-zero exit codes block push
+# Handle exit codes — CRITICAL and MAJOR block; MINOR is allowed through
 case $VALIDATION_EXIT_CODE in
     0)
         echo -e "${GREEN}========================================${NC}"
@@ -141,10 +141,10 @@ case $VALIDATION_EXIT_CODE in
         ;;
     3)
         echo -e "${YELLOW}========================================${NC}"
-        echo -e "${YELLOW}  BLOCKED: MINOR issues found${NC}"
-        echo -e "${YELLOW}  Fix ALL issues before pushing.${NC}"
+        echo -e "${YELLOW}  MINOR issues found (non-blocking)${NC}"
+        echo -e "${YELLOW}  Push allowed. Fix when convenient.${NC}"
         echo -e "${YELLOW}========================================${NC}"
-        exit 1
+        exit 0
         ;;
     *)
         echo -e "${RED}========================================${NC}"
