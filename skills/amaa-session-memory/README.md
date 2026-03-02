@@ -1,8 +1,8 @@
-# EAA Session Memory Skill
+# AMAA Session Memory Skill
 
 ## Purpose
 
-This skill defines how the Architect agent (EAA) handles session memory and context persistence across multiple sessions.
+This skill defines how the Architect agent (AMAA) handles session memory and context persistence across multiple sessions.
 
 ## Contents
 
@@ -21,7 +21,7 @@ This skill defines how the Architect agent (EAA) handles session memory and cont
 
 | Content | Location |
 |---------|----------|
-| Session state | `.claude/eaa-session-state.local.md` |
+| Session state | `.claude/amaa-session-state.local.md` |
 | Design index | `docs_dev/design/index.json` |
 | Decisions | `docs_dev/design/decisions/` |
 | Patterns | `docs_dev/design/patterns.md` |
@@ -52,7 +52,7 @@ This skill defines how the Architect agent (EAA) handles session memory and cont
 
 ## Related Skills
 
-- eaa-design-lifecycle
-- eaa-requirements-analysis
-- eaa-planning-patterns
-- eaa-design-communication-patterns
+- amaa-design-lifecycle
+- amaa-requirements-analysis
+- amaa-planning-patterns
+- amaa-design-communication-patterns

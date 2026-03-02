@@ -2,8 +2,8 @@
 operation: decompose-monolith
 procedure: proc-decompose-design
 workflow-instruction: Step 10 - Design Decomposition
-parent-skill: eaa-modularization
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-modularization
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 

@@ -5,8 +5,8 @@ CLI tool that validates markdown files with YAML frontmatter (delimited by ---).
 Uses only Python stdlib (no PyYAML or external dependencies).
 
 Usage:
-    python eaa_design_validate.py FILE [--project-root PATH] [--format {json,text}] [--verbose]
-    python eaa_design_validate.py --all [--type TYPE] [--project-root PATH] [--format {json,text}] [--verbose]
+    python amaa_design_validate.py FILE [--project-root PATH] [--format {json,text}] [--verbose]
+    python amaa_design_validate.py --all [--type TYPE] [--project-root PATH] [--format {json,text}] [--verbose]
 
 Exit codes:
     0 - All validated documents are valid

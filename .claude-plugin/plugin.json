@@ -1,20 +1,20 @@
 {
-  "name": "emasoft-architect-agent",
+  "name": "ai-maestro-architect-agent",
   "version": "1.1.8",
   "description": "Design documents, requirements analysis, architecture decisions - creates specifications. Requires AI Maestro for inter-agent messaging.",
   "author": {
     "name": "Emasoft",
     "email": "713559+Emasoft@users.noreply.github.com"
   },
-  "repository": "https://github.com/Emasoft/emasoft-architect-agent",
+  "repository": "https://github.com/Emasoft/ai-maestro-architect-agent",
   "license": "MIT",
   "agents": [
-    "./agents/eaa-architect-main-agent.md",
-    "./agents/eaa-documentation-writer.md",
-    "./agents/eaa-api-researcher.md",
-    "./agents/eaa-modularizer-expert.md",
-    "./agents/eaa-planner.md",
-    "./agents/eaa-cicd-designer.md"
+    "./agents/amaa-architect-main-agent.md",
+    "./agents/amaa-documentation-writer.md",
+    "./agents/amaa-api-researcher.md",
+    "./agents/amaa-modularizer-expert.md",
+    "./agents/amaa-planner.md",
+    "./agents/amaa-cicd-designer.md"
   ],
   "skills": "./skills/"
 }

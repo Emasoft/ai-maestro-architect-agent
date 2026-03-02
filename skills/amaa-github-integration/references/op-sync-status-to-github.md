@@ -2,8 +2,8 @@
 operation: sync-status-to-github
 procedure: proc-submit-design
 workflow-instruction: Step 8 - Design Submission
-parent-skill: eaa-github-integration
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-github-integration
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -54,7 +54,7 @@ Look for `related_issues: ["#42"]` in frontmatter.
 ### Step 2: Sync Single Document
 
 ```bash
-python scripts/eaa_github_sync_status.py --uuid PROJ-SPEC-20250129-a1b2c3d4
+python scripts/amaa_github_sync_status.py --uuid PROJ-SPEC-20250129-a1b2c3d4
 ```
 
 ### Step 3: Verify Label Changes
@@ -70,7 +70,7 @@ Copy this checklist and track your progress:
 - [ ] Verify gh CLI is authenticated: `gh auth status`
 - [ ] Verify design document has `related_issues` in frontmatter
 - [ ] Note current design status (e.g., `status: approved`)
-- [ ] Run sync: `python scripts/eaa_github_sync_status.py --uuid <UUID>`
+- [ ] Run sync: `python scripts/amaa_github_sync_status.py --uuid <UUID>`
 - [ ] Verify labels updated: `gh issue view <N> --json labels`
 - [ ] Optionally add status change comment: use `--comment` flag
 
@@ -80,10 +80,10 @@ Copy this checklist and track your progress:
 
 ```bash
 # Design was transitioned from draft to review
-python scripts/eaa_design_transition.py --uuid PROJ-SPEC-... --status review
+python scripts/amaa_design_transition.py --uuid PROJ-SPEC-... --status review
 
 # Sync the status to GitHub
-python scripts/eaa_github_sync_status.py --uuid PROJ-SPEC-...
+python scripts/amaa_github_sync_status.py --uuid PROJ-SPEC-...
 
 # Output:
 # SYNCED: Issue #42 labels updated
@@ -94,7 +94,7 @@ python scripts/eaa_github_sync_status.py --uuid PROJ-SPEC-...
 ### Example: Sync with Status Change Comment
 
 ```bash
-python scripts/eaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
+python scripts/amaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
 
 # Output:
 # SYNCED: Issue #42 labels updated
@@ -106,7 +106,7 @@ python scripts/eaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
 ### Example: Batch Sync All Linked Documents
 
 ```bash
-python scripts/eaa_github_sync_status.py --all
+python scripts/amaa_github_sync_status.py --all
 
 # Output:
 # SYNCED: 5 documents

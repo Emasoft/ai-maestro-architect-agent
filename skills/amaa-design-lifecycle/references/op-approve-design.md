@@ -2,8 +2,8 @@
 operation: approve-design
 procedure: proc-approve-design
 workflow-instruction: Step 9 - Design Approval
-parent-skill: eaa-design-lifecycle
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-design-lifecycle
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -52,7 +52,7 @@ Use this operation when:
 Check that all review comments have been addressed:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --action check-review-status
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --action check-review-status
 ```
 
 Expected output: "All review comments resolved. Ready for approval."
@@ -62,7 +62,7 @@ Expected output: "All review comments resolved. Ready for approval."
 Verify that reviewers have approved:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --action list-approvals
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --action list-approvals
 ```
 
 At minimum, require approval from:
@@ -74,7 +74,7 @@ At minimum, require approval from:
 Transition the design from REVIEW to APPROVED:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --transition APPROVED
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition APPROVED
 ```
 
 This command:
@@ -88,7 +88,7 @@ This command:
 Generate GitHub Issues or task entries for implementation:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --action create-implementation-tasks
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --action create-implementation-tasks
 ```
 
 This creates tasks based on the module breakdown in the design document.
@@ -98,7 +98,7 @@ This creates tasks based on the module breakdown in the design document.
 Alert the implementation team that the design is approved and ready:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --action notify-implementers
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --action notify-implementers
 ```
 
 ### Step 6: Link to GitHub Issues
@@ -106,7 +106,7 @@ python scripts/eaa_design_lifecycle.py --uuid <UUID> --action notify-implementer
 Associate the design with GitHub Issues for traceability:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --action link-github-issues \
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --action link-github-issues \
   --issues "123,124,125"
 ```
 
@@ -130,22 +130,22 @@ Copy this checklist and track your progress:
 
 ```bash
 # Step 1: Check review status
-python scripts/eaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action check-review-status
+python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action check-review-status
 # Output: All 5 review comments resolved. Ready for approval.
 
 # Step 2: List approvals
-python scripts/eaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action list-approvals
+python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action list-approvals
 # Output:
 # Approvals:
 # - SecurityLead: APPROVED (2026-02-04)
 # - BackendLead: APPROVED (2026-02-05)
 
 # Step 3: Transition to APPROVED
-python scripts/eaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --transition APPROVED
+python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --transition APPROVED
 # Output: State transitioned: REVIEW -> APPROVED
 
 # Step 4: Create implementation tasks
-python scripts/eaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action create-implementation-tasks
+python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action create-implementation-tasks
 # Output:
 # Created 4 implementation tasks:
 # - Task 1: Implement auth-service module
@@ -154,7 +154,7 @@ python scripts/eaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --acti
 # - Task 4: Integration testing
 
 # Step 5: Link to GitHub Issues
-python scripts/eaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action link-github-issues \
+python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action link-github-issues \
   --issues "156,157,158,159"
 # Output: Linked design to GitHub Issues #156, #157, #158, #159
 ```

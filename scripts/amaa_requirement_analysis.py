@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Requirement Analysis Script for Emasoft Architect Agent
+Requirement Analysis Script for AI Maestro Architect Agent
 
 This script performs proactive requirement analysis to identify potential issues
 BEFORE implementation begins. It enforces RULE 14: User Requirements Are Immutable.
@@ -424,7 +424,7 @@ def validate_implementation(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Requirement Analysis for Emasoft Architect Agent (RULE 14 Enforcement)"
+        description="Requirement Analysis for AI Maestro Architect Agent (RULE 14 Enforcement)"
     )
     subparsers = parser.add_subparsers(dest="command", help="Commands")
 

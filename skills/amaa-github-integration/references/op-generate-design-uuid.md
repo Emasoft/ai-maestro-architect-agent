@@ -2,8 +2,8 @@
 operation: generate-design-uuid
 procedure: proc-submit-design
 workflow-instruction: Step 8 - Design Submission
-parent-skill: eaa-github-integration
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-github-integration
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -52,7 +52,7 @@ Check if frontmatter already contains `uuid:` field.
 ### Step 2: Generate UUID
 
 ```bash
-python scripts/eaa_design_uuid.py --file docs/design/specs/auth-service.md --type SPEC
+python scripts/amaa_design_uuid.py --file docs/design/specs/auth-service.md --type SPEC
 ```
 
 Document types:
@@ -81,7 +81,7 @@ Copy this checklist and track your progress:
 - [ ] Check if document already has UUID: `head -20 <file>`
 - [ ] If UUID exists, skip this operation
 - [ ] Determine document type: SPEC, ADR, RFC, GUIDE, or PLAN
-- [ ] Generate UUID: `python scripts/eaa_design_uuid.py --file <path> --type <TYPE>`
+- [ ] Generate UUID: `python scripts/amaa_design_uuid.py --file <path> --type <TYPE>`
 - [ ] Verify UUID was added to frontmatter
 - [ ] Proceed with GitHub integration operations
 
@@ -101,7 +101,7 @@ head -20 docs/design/specs/auth-service.md
 # ---
 
 # Generate UUID
-python scripts/eaa_design_uuid.py --file docs/design/specs/auth-service.md --type SPEC
+python scripts/amaa_design_uuid.py --file docs/design/specs/auth-service.md --type SPEC
 
 # Output:
 # GENERATED: UUID PROJ-SPEC-20250129-a1b2c3d4
@@ -123,11 +123,11 @@ head -20 docs/design/specs/auth-service.md
 
 ```bash
 # ADR (Architecture Decision Record)
-python scripts/eaa_design_uuid.py --file docs/design/adrs/adr-001.md --type ADR
+python scripts/amaa_design_uuid.py --file docs/design/adrs/adr-001.md --type ADR
 # Generated: PROJ-ADR-20250129-b2c3d4e5
 
 # RFC (Request for Comments)
-python scripts/eaa_design_uuid.py --file docs/design/rfcs/rfc-api-v2.md --type RFC
+python scripts/amaa_design_uuid.py --file docs/design/rfcs/rfc-api-v2.md --type RFC
 # Generated: PROJ-RFC-20250129-c3d4e5f6
 ```
 

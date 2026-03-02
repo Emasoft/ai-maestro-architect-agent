@@ -2,8 +2,8 @@
 operation: create-document-from-template
 procedure: proc-create-design
 workflow-instruction: Step 7 - Design Document Creation
-parent-skill: eaa-design-management
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-design-management
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -47,7 +47,7 @@ Use this operation when:
 ## Prerequisites
 
 - Python 3.10 or higher installed
-- Access to the `scripts/eaa_design_create.py` script
+- Access to the `scripts/amaa_design_create.py` script
 - Write access to the `design/` directory structure
 - Understanding of the document type you need to create
 
@@ -71,7 +71,7 @@ Choose the appropriate document type for your needs.
 Execute the document creation script with required arguments:
 
 ```bash
-python scripts/eaa_design_create.py --type <type> --title "<title>"
+python scripts/amaa_design_create.py --type <type> --title "<title>"
 ```
 
 **Required arguments:**
@@ -109,7 +109,7 @@ Open the created document and fill in the template sections:
 Run validation to ensure compliance:
 
 ```bash
-python scripts/eaa_design_validate.py design/<type>/<filename>.md
+python scripts/amaa_design_validate.py design/<type>/<filename>.md
 ```
 
 ## Checklist
@@ -131,7 +131,7 @@ Copy this checklist and track your progress:
 
 ```bash
 # Create a Product Design Review for user authentication
-python scripts/eaa_design_create.py --type pdr --title "User Authentication System Design"
+python scripts/amaa_design_create.py --type pdr --title "User Authentication System Design"
 
 # Output:
 # Created: design/pdr/GUUID-20260130-0001-user-authentication-system-design.md
@@ -144,7 +144,7 @@ python scripts/eaa_design_create.py --type pdr --title "User Authentication Syst
 
 ```bash
 # Create a spec with author and description
-python scripts/eaa_design_create.py \
+python scripts/amaa_design_create.py \
   --type spec \
   --title "REST API Specification v2" \
   --author "API Team" \
@@ -158,7 +158,7 @@ python scripts/eaa_design_create.py \
 
 ```bash
 # Create a decision record with custom filename
-python scripts/eaa_design_create.py \
+python scripts/amaa_design_create.py \
   --type decision \
   --title "Database Selection" \
   --filename "adr-001-database-selection"
@@ -213,7 +213,7 @@ related: []
 
 | Error | Cause | Resolution |
 |-------|-------|------------|
-| Script not found | Missing eaa_design_create.py | Verify script path: `scripts/eaa_design_create.py` |
+| Script not found | Missing amaa_design_create.py | Verify script path: `scripts/amaa_design_create.py` |
 | Invalid document type | Unsupported type specified | Use valid type: pdr, spec, feature, decision, architecture, template |
 | Permission denied | No write access to design directory | Check directory permissions |
 | UUID generation failed | System issue | Retry or generate UUID manually |

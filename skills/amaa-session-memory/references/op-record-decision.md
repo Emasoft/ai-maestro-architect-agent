@@ -258,7 +258,7 @@ def resolve_question(question_id: str, decision_id: str):
 |------|---------|
 | `docs_dev/design/decisions/ADR-NNN-*.md` | Decision record |
 | `docs_dev/design/index.json` | Updated index |
-| `.claude/eaa-session-state.local.md` | Updated session state |
+| `.claude/amaa-session-state.local.md` | Updated session state |
 
 ## Verification Checklist
 

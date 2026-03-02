@@ -205,7 +205,7 @@ def update_session_after_stack_choice(session_state: dict, tech_name: str):
 |------|---------|
 | `docs_dev/design/stack.md` | Updated stack registry |
 | `docs_dev/design/index.json` | Updated index |
-| `.claude/eaa-session-state.local.md` | Updated session state |
+| `.claude/amaa-session-state.local.md` | Updated session state |
 
 ## Verification Checklist
 

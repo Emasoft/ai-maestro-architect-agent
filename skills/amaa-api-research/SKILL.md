@@ -1,5 +1,5 @@
 ---
-name: eaa-api-researcher
+name: amaa-api-researcher
 description: Use when investigating external APIs, libraries, and services. Creates standardized API documentation with auth and endpoints. Trigger with API research or library investigation requests.
 version: 1.0.0
 license: Apache-2.0

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tests for eaa_design_create.py - Design document creation script.
+"""Tests for amaa_design_create.py - Design document creation script.
 
 Tests cover:
 - CLI argument parsing
@@ -21,7 +21,7 @@ from pathlib import Path
 import pytest
 
 # Path to the script under test
-SCRIPT_PATH = Path(__file__).parent.parent / "scripts" / "eaa_design_create.py"
+SCRIPT_PATH = Path(__file__).parent.parent / "scripts" / "amaa_design_create.py"
 
 # Valid document types as defined in the SKILL.md
 VALID_TYPES = ["pdr", "spec", "feature", "decision", "architecture", "template"]
@@ -31,7 +31,7 @@ GUUID_PATTERN = re.compile(r"^GUUID-\d{8}-\d{4}$")
 
 
 def run_script(*args, cwd=None):
-    """Run eaa_design_create.py with given arguments and return result."""
+    """Run amaa_design_create.py with given arguments and return result."""
     cmd = [sys.executable, str(SCRIPT_PATH)] + list(args)
     result = subprocess.run(
         cmd,

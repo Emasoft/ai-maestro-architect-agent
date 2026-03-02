@@ -52,7 +52,7 @@ Use these checklists to ensure nothing is missed. Update task status in AI Maest
   - [ ] Technology stack
   - [ ] Deployment architecture
 - [ ] **Identify external APIs** (list all third-party services needed)
-- [ ] **Spawn eaa-api-researcher** for each external API (if 3+ endpoints or complex auth)
+- [ ] **Spawn amaa-api-researcher** for each external API (if 3+ endpoints or complex auth)
 - [ ] **Wait for API research results** (do NOT proceed until research complete)
 - [ ] **Design system components** (clear boundaries, responsibilities)
 - [ ] **Define component interactions** (APIs, events, data flows)
@@ -62,7 +62,7 @@ Use these checklists to ensure nothing is missed. Update task status in AI Maest
 - [ ] **Create Mermaid diagrams** (system architecture, data flow, deployment)
 - [ ] **Make architectural decisions** (for significant choices, create ADRs)
 - [ ] **Document non-functional requirements** (performance, security, scalability)
-- [ ] **Spawn eaa-modularizer-expert** for module breakdown (if 5+ responsibilities)
+- [ ] **Spawn amaa-modularizer-expert** for module breakdown (if 5+ responsibilities)
 - [ ] **Wait for modularization results** (do NOT proceed until complete)
 - [ ] **Review all design artifacts** (ensure completeness, clarity, consistency)
 - [ ] **Verify RULE 14 compliance** (design implements ALL user requirements, no omissions)

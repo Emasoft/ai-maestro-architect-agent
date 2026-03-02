@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-eaa_init_design_folders.py - Initialize design document folder structure.
+amaa_init_design_folders.py - Initialize design document folder structure.
 
 Creates the required folder structure for Architect Agent design documents:
     docs/design/
@@ -10,7 +10,7 @@ Creates the required folder structure for Architect Agent design documents:
     └── exports/    (Sanitized exports for GitHub)
 
 Usage:
-    python eaa_init_design_folders.py [--project-root PATH]
+    python amaa_init_design_folders.py [--project-root PATH]
 """
 
 import argparse

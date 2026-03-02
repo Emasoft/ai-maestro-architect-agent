@@ -80,7 +80,7 @@ echo "Handoff validation passed"
 
 **Date:** [YYYY-MM-DD HH:MM:SS]
 **Project:** [PROJECT_NAME]
-**Architect:** eaa-architect-main-agent
+**Architect:** amaa-architect-main-agent
 **Handoff ID:** [UUID]
 
 ## Executive Summary

@@ -2,8 +2,8 @@
 operation: parse-requirements
 procedure: proc-route-requirements
 workflow-instruction: Step 6 - Requirements to Architect
-parent-skill: eaa-requirements-analysis
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-requirements-analysis
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -62,12 +62,12 @@ Collect the requirements from:
 
 From text:
 ```bash
-python3 scripts/eaa_requirement_analysis.py parse --input "The system must support user login with email and password. It should handle session management with JWT tokens."
+python3 scripts/amaa_requirement_analysis.py parse --input "The system must support user login with email and password. It should handle session management with JWT tokens."
 ```
 
 From file:
 ```bash
-python3 scripts/eaa_requirement_analysis.py parse --input path/to/requirements.txt
+python3 scripts/amaa_requirement_analysis.py parse --input path/to/requirements.txt
 ```
 
 ### Step 3: Review Parsed Output
@@ -98,7 +98,7 @@ Copy this checklist and track your progress:
 ### Example: Parsing User Text
 
 ```bash
-python3 scripts/eaa_requirement_analysis.py parse --input "The application needs to:
+python3 scripts/amaa_requirement_analysis.py parse --input "The application needs to:
 1. Allow users to register with email
 2. Support password reset via email link
 3. Handle 1000 concurrent users
@@ -130,7 +130,7 @@ Deployment should be containerized with Docker.
 EOF
 
 # Parse the file
-python3 scripts/eaa_requirement_analysis.py parse --input /tmp/user_reqs.txt
+python3 scripts/amaa_requirement_analysis.py parse --input /tmp/user_reqs.txt
 
 # Expected output:
 # Parsed Requirements:

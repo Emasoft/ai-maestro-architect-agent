@@ -1,6 +1,6 @@
 # Design Lifecycle References
 
-This directory contains reference documentation for the eaa-design-lifecycle skill.
+This directory contains reference documentation for the amaa-design-lifecycle skill.
 
 ## Contents
 

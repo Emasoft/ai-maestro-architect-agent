@@ -52,7 +52,7 @@
 - ❌ Create projects (EAMA only)
 - ❌ Assign tasks to agents (EOA only)
 - ❌ Manage GitHub Project kanban (EOA only)
-- ❌ Make architectural decisions (EAA only)
+- ❌ Make architectural decisions (AMAA only)
 - ❌ Perform code review (EIA only)
 - ❌ Communicate directly with user (EAMA only)
 
@@ -177,7 +177,7 @@ EOA: Sends handoff to agent-456
 
 ## Summary Table
 
-| Responsibility | EAMA | ECOS | EOA | EIA | EAA |
+| Responsibility | EAMA | ECOS | EOA | EIA | AMAA |
 |----------------|------|------|-----|-----|-----|
 | Create projects | ✅ | ❌ | ❌ | ❌ | ❌ |
 | Create agents | Approves | ✅ | Requests | ❌ | ❌ |

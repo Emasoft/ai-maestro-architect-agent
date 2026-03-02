@@ -2,8 +2,8 @@
 operation: attach-design-to-issue
 procedure: proc-submit-design
 workflow-instruction: Step 8 - Design Submission
-parent-skill: eaa-github-integration
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-github-integration
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -61,7 +61,7 @@ Look for `uuid:` field in frontmatter.
 ### Step 3: Attach the Design Document
 
 ```bash
-python scripts/eaa_github_attach_document.py --uuid PROJ-SPEC-20250129-a1b2c3d4 --issue 42
+python scripts/amaa_github_attach_document.py --uuid PROJ-SPEC-20250129-a1b2c3d4 --issue 42
 ```
 
 ### Step 4: Verify Results
@@ -79,7 +79,7 @@ Copy this checklist and track your progress:
 - [ ] Verify issue exists: `gh issue view <N>`
 - [ ] Record issue title and number for verification
 - [ ] Verify design document has UUID in frontmatter
-- [ ] Attach design: `python scripts/eaa_github_attach_document.py --uuid <UUID> --issue <N>`
+- [ ] Attach design: `python scripts/amaa_github_attach_document.py --uuid <UUID> --issue <N>`
 - [ ] Verify comment was posted: `gh issue view <N> --comments`
 - [ ] Verify labels updated on issue
 - [ ] Verify design frontmatter updated with `related_issues`
@@ -98,7 +98,7 @@ gh issue view 42
 # Labels: feature, priority:high
 
 # Attach the design document
-python scripts/eaa_github_attach_document.py --uuid PROJ-SPEC-20250129-a1b2c3d4 --issue 42
+python scripts/amaa_github_attach_document.py --uuid PROJ-SPEC-20250129-a1b2c3d4 --issue 42
 
 # Output:
 # ATTACHED: Design to issue #42
@@ -108,7 +108,7 @@ python scripts/eaa_github_attach_document.py --uuid PROJ-SPEC-20250129-a1b2c3d4 
 ### Example: Attach with Custom Comment Header
 
 ```bash
-python scripts/eaa_github_attach_document.py \
+python scripts/amaa_github_attach_document.py \
   --uuid PROJ-SPEC-20250129-a1b2c3d4 \
   --issue 42 \
   --header "Revised Architecture Design (v2)"
@@ -121,7 +121,7 @@ This adds a custom header to distinguish from previous attachments.
 | Error | Cause | Resolution |
 |-------|-------|------------|
 | `ERROR: Issue #42 not found` | Issue does not exist or wrong number | Verify issue number with `gh issue list` |
-| `ERROR: Document has no UUID` | Missing frontmatter | Run `eaa_design_uuid.py --file <path> --type SPEC` |
+| `ERROR: Document has no UUID` | Missing frontmatter | Run `amaa_design_uuid.py --file <path> --type SPEC` |
 | `ERROR: gh CLI not authenticated` | No auth token | Run `gh auth login` |
 | `ERROR: Permission denied` | No write access to repo | Request repository write access |
 | `WARNING: Design already linked to #42` | Already attached | Use [op-sync-status-to-github.md](op-sync-status-to-github.md) to update status |

@@ -2,8 +2,8 @@
 operation: plan-implementation
 procedure: proc-create-design
 workflow-instruction: Step 7 - Design Document Creation
-parent-skill: eaa-planning-patterns
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-planning-patterns
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 

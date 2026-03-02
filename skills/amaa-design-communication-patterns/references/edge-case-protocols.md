@@ -1,6 +1,6 @@
 # Edge Case Protocols for Architect Agent
 
-This document defines standardized protocols for handling edge cases and failure scenarios in the Architect Agent (eaa-) plugin.
+This document defines standardized protocols for handling edge cases and failure scenarios in the Architect Agent (amaa-) plugin.
 
 ## Table of Contents
 
@@ -101,7 +101,7 @@ When AI Maestro is down, deliver designs via:
 ## Design Delivery (AI Maestro Offline)
 
 **Project**: ${PROJECT_NAME}
-**Architect**: eaa-main
+**Architect**: amaa-main
 **Status**: Ready for Orchestration
 
 ### Design Documents
@@ -199,11 +199,11 @@ AI agents collaborate asynchronously and may be hibernated for extended periods.
 
 ### 3.2 Research Agent Unresponsive
 
-When `eaa-api-researcher` is unresponsive:
+When `amaa-api-researcher` is unresponsive:
 
 1. **First Reminder (when state = No ACK or No Progress)**:
    Send a message using the `agent-messaging` skill with:
-   - **Recipient**: `eaa-api-researcher`
+   - **Recipient**: `amaa-api-researcher`
    - **Subject**: `Research Check: ${API_NAME}`
    - **Priority**: `high`
    - **Content**: `{"type": "status_request", "message": "Please provide status update for ${API_NAME} research."}`
@@ -237,7 +237,7 @@ When `eaa-api-researcher` is unresponsive:
 
 ### 3.3 Documentation Agent Timeout
 
-When `eaa-documentation-writer` times out:
+When `amaa-documentation-writer` times out:
 
 1. **Follow escalation ladder** (same as 3.2)
 
@@ -371,7 +371,7 @@ When user is unavailable and work must proceed:
    | Archive.org | Check for historical docs |
 
 2. **If no docs found**:
-   - Document API through experimentation (see `eaa-hypothesis-verification`)
+   - Document API through experimentation (see `amaa-hypothesis-verification`)
    - Create minimal viable documentation from observed behavior
    - Mark integration as HIGH RISK
 
@@ -664,7 +664,7 @@ Recovery checkpoint: `.claude/recovery/architect-checkpoint-{timestamp}.json`
 
 ## Related Documents
 
-- **eaa-requirements-analysis** - Requirements patterns
-- **eaa-api-research** (research-procedure.md reference) - API research
-- **eaa-hypothesis-verification** - Testing assumptions
-- **eaa-planning-patterns** (planning-checklist.md reference) - Planning validation
+- **amaa-requirements-analysis** - Requirements patterns
+- **amaa-api-research** (research-procedure.md reference) - API research
+- **amaa-hypothesis-verification** - Testing assumptions
+- **amaa-planning-patterns** (planning-checklist.md reference) - Planning validation

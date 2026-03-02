@@ -138,7 +138,7 @@ def create_session_from_handoff(handoff: dict) -> dict:
     """Create new session state from handoff."""
     import datetime
 
-    session_id = f"eaa-session-{datetime.datetime.now().strftime('%Y%m%d-%H%M%S')}"
+    session_id = f"amaa-session-{datetime.datetime.now().strftime('%Y%m%d-%H%M%S')}"
 
     session_state = {
         "session_id": session_id,
@@ -177,8 +177,8 @@ def create_session_from_handoff(handoff: dict) -> dict:
 
 **Handoff File:** docs_dev/design/handoffs/handoff-20260205-143022.md
 **Handoff Type:** context_clear
-**Original Session:** eaa-session-20260205-120000
-**New Session:** eaa-session-20260205-150000
+**Original Session:** amaa-session-20260205-120000
+**New Session:** amaa-session-20260205-150000
 
 ### Context Restored
 
@@ -219,7 +219,7 @@ Ready to continue design work.
 
 | File | Content |
 |------|---------|
-| `.claude/eaa-session-state.local.md` | New session state |
+| `.claude/amaa-session-state.local.md` | New session state |
 | Console output | Resume summary |
 
 ## Verification Checklist

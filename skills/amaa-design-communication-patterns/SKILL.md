@@ -1,10 +1,10 @@
 ---
-name: eaa-design-communication-patterns
+name: amaa-design-communication-patterns
 description: Use when accessing shared utilities, templates, and constants across Architect Agent skills. Trigger with shared template access or common utility imports.
 version: 1.0.0
 compatibility: Requires AI Maestro installed.
 context: fork
-agent: eaa-planner
+agent: amaa-planner
 user-invocable: false
 workflow-instruction: "Step 8"
 procedure: "proc-submit-design"
@@ -22,9 +22,9 @@ This skill provides shared utilities, templates, and constants used across all A
 
 ## Prerequisites
 
-- Access to the eaa-design-communication-patterns skill directory
+- Access to the amaa-design-communication-patterns skill directory
 - Understanding of which resources are available
-- Other eaa-* skills that depend on shared resources
+- Other amaa-* skills that depend on shared resources
 
 ## Instructions
 
@@ -38,8 +38,8 @@ This skill provides shared utilities, templates, and constants used across all A
 Copy this checklist and track your progress:
 
 - [ ] Identify the resource type needed (Template/Script/Constant/Schema)
-- [ ] Check if resource exists in eaa-design-communication-patterns skill directory
-- [ ] Verify eaa-design-communication-patterns is in Python path (if using scripts)
+- [ ] Check if resource exists in amaa-design-communication-patterns skill directory
+- [ ] Verify amaa-design-communication-patterns is in Python path (if using scripts)
 - [ ] Import or reference the shared resource
 - [ ] Follow usage guidelines for the resource type
 - [ ] Test that the resource works correctly
@@ -60,7 +60,7 @@ Copy this checklist and track your progress:
 
 ```python
 # In another skill's script
-from eaa_shared.templates import load_template
+from amaa_shared.templates import load_template
 
 template = load_template("design-document")
 filled = template.format(
@@ -74,7 +74,7 @@ filled = template.format(
 
 ```python
 # In another skill's script
-from eaa_shared.constants import (
+from amaa_shared.constants import (
     VALID_STATUSES,
     PRIORITY_LEVELS,
     DEFAULT_TIMEOUT
@@ -88,7 +88,7 @@ if status not in VALID_STATUSES:
 
 ```python
 # Validate a design document
-from eaa_shared.schemas import validate_design
+from amaa_shared.schemas import validate_design
 
 errors = validate_design(document)
 if errors:
@@ -100,10 +100,10 @@ if errors:
 | Error | Cause | Solution |
 |-------|-------|----------|
 | Resource not found | Path incorrect | Check resource exists in shared skill |
-| Import failed | Module not in path | Ensure eaa-design-communication-patterns is in Python path |
+| Import failed | Module not in path | Ensure amaa-design-communication-patterns is in Python path |
 | Schema validation error | Document malformed | Fix document according to schema |
 | Template placeholder missing | Incomplete format call | Provide all required placeholders |
-| Version mismatch | Outdated shared resource | Update eaa-design-communication-patterns to latest version |
+| Version mismatch | Outdated shared resource | Update amaa-design-communication-patterns to latest version |
 
 ## Output
 
@@ -133,6 +133,6 @@ Detailed reference documentation for communication patterns:
 - `scripts/` - Common utility scripts
 - `constants/` - Shared configuration values
 - `schemas/` - JSON/YAML validation schemas
-- eaa-design-lifecycle - Uses shared design templates
-- eaa-requirements-analysis - Uses shared validation schemas
-- eaa-planning-patterns - Uses shared planning templates
+- amaa-design-lifecycle - Uses shared design templates
+- amaa-requirements-analysis - Uses shared validation schemas
+- amaa-planning-patterns - Uses shared planning templates

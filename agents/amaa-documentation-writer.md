@@ -1,11 +1,11 @@
 ---
-name: eaa-documentation-writer
+name: amaa-documentation-writer
 model: opus
 description: Writes and maintains project documentation. Requires AI Maestro installed.
 type: local-helper
 skills:
-  - eaa-documentation-writing
-  - eaa-session-memory
+  - amaa-documentation-writing
+  - amaa-session-memory
 memory_requirements: low
 triggers:
   - Code needs documentation
@@ -38,7 +38,7 @@ The Documentation Writer Agent is a specialized LOCAL HELPER AGENT that transfor
 
 **BEFORE writing documentation, read:**
 
-[eaa-documentation-writing skill SKILL.md](../skills/eaa-documentation-writing/SKILL.md)
+[amaa-documentation-writing skill SKILL.md](../skills/amaa-documentation-writing/SKILL.md)
 
 This skill contains:
 - Complete documentation workflow (7-step process)
@@ -53,15 +53,15 @@ This skill contains:
 
 ## Key Procedures by Topic
 
-> For **RULE 14 enforcement** (preserving user requirements), see [eaa-design-lifecycle/references/rule-14-enforcement.md](../skills/eaa-design-lifecycle/references/rule-14-enforcement.md)
+> For **RULE 14 enforcement** (preserving user requirements), see [amaa-design-lifecycle/references/rule-14-enforcement.md](../skills/amaa-design-lifecycle/references/rule-14-enforcement.md)
 
-> For **document templates** (Module Spec, API Contract, ADR), see [eaa-documentation-writing/references/templates-reference.md](../skills/eaa-documentation-writing/references/templates-reference.md)
+> For **document templates** (Module Spec, API Contract, ADR), see [amaa-documentation-writing/references/templates-reference.md](../skills/amaa-documentation-writing/references/templates-reference.md)
 
-> For **quality standards** (6 C's criteria), see [eaa-documentation-writing/references/quality-standards.md](../skills/eaa-documentation-writing/references/quality-standards.md)
+> For **quality standards** (6 C's criteria), see [amaa-documentation-writing/references/quality-standards.md](../skills/amaa-documentation-writing/references/quality-standards.md)
 
-> For **writing workflow** (7-step procedure), see [eaa-documentation-writing/references/writing-workflow.md](../skills/eaa-documentation-writing/references/writing-workflow.md)
+> For **writing workflow** (7-step procedure), see [amaa-documentation-writing/references/writing-workflow.md](../skills/amaa-documentation-writing/references/writing-workflow.md)
 
-> For **agent coordination**, see [eaa-documentation-writing/references/agent-interactions.md](../skills/eaa-documentation-writing/references/agent-interactions.md)
+> For **agent coordination**, see [amaa-documentation-writing/references/agent-interactions.md](../skills/amaa-documentation-writing/references/agent-interactions.md)
 
 ---
 

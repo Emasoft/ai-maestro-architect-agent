@@ -1,5 +1,5 @@
 ---
-name: eaa-session-memory
+name: amaa-session-memory
 description: "Architecture decision and design pattern persistence. Use when preserving architectural context across sessions or creating design handoffs. Trigger with session start."
 version: 1.0.0
 license: Apache-2.0
@@ -8,7 +8,7 @@ metadata:
   author: Emasoft
 context: fork
 user-invocable: false
-agent: eaa-main
+agent: amaa-main
 workflow-instruction: "Steps 15, support"
 procedure: "proc-handle-feedback, support-skill"
 triggers:
@@ -26,7 +26,7 @@ triggers:
 
 ## Overview
 
-This skill defines how the Architect agent (EAA) handles session memory and context persistence. Session memory ensures that architecture decisions, design patterns, technology choices, and discovered constraints survive across multiple sessions, preventing loss of critical design context and enabling seamless session continuity.
+This skill defines how the Architect agent (AMAA) handles session memory and context persistence. Session memory ensures that architecture decisions, design patterns, technology choices, and discovered constraints survive across multiple sessions, preventing loss of critical design context and enabling seamless session continuity.
 
 The Architect role involves deep analysis and iterative refinement of designs. Without session memory, each new session would start from zero, forcing re-discovery of decisions already made. This skill provides the mechanisms to persist and retrieve architectural context.
 
@@ -44,7 +44,7 @@ Session memory serves four critical functions for the Architect agent:
 ## Prerequisites
 
 - Write access to design output directories (`docs_dev/design/`, `.claude/`)
-- Understanding of EAA role responsibilities (see plugin docs/ROLE_BOUNDARIES.md)
+- Understanding of AMAA role responsibilities (see plugin docs/ROLE_BOUNDARIES.md)
 - Familiarity with session state files and design index formats
 
 ## Instructions
@@ -67,7 +67,7 @@ Session memory serves four critical functions for the Architect agent:
 Copy this checklist and track your progress:
 
 - [ ] **Session Start**
-  - [ ] Check for existing session state file at `.claude/eaa-session-state.local.md`
+  - [ ] Check for existing session state file at `.claude/amaa-session-state.local.md`
   - [ ] Load design index from `docs_dev/design/index.json`
   - [ ] Report retrieved context summary
 - [ ] **During Session**
@@ -92,7 +92,7 @@ Copy this checklist and track your progress:
 | **Technology Stack** | `docs_dev/design/stack.md` | Record technology choices |
 | **Constraints Registry** | `docs_dev/design/constraints.md` | Track discovered constraints |
 | **Open Questions** | `docs_dev/design/open-questions.md` | Track unresolved questions |
-| **Session State** | `.claude/eaa-session-state.local.md` | Current session context |
+| **Session State** | `.claude/amaa-session-state.local.md` | Current session context |
 | **Design Index** | `docs_dev/design/index.json` | Quick lookup of all artifacts |
 | **Handoff Documents** | `docs_dev/design/handoffs/handoff-{timestamp}.md` | Context transfer documents |
 
@@ -183,7 +183,7 @@ All session memory is persisted to file-based storage in the project directory:
 | Technology stack | `docs_dev/design/stack.md` | Markdown |
 | Constraints registry | `docs_dev/design/constraints.md` | Markdown |
 | Open questions | `docs_dev/design/open-questions.md` | Markdown |
-| Session state | `.claude/eaa-session-state.local.md` | YAML frontmatter + Markdown |
+| Session state | `.claude/amaa-session-state.local.md` | YAML frontmatter + Markdown |
 | Handoff documents | `docs_dev/design/handoffs/` | Markdown files |
 
 ## Memory Retrieval Triggers
@@ -229,9 +229,9 @@ Create a handoff document when:
 
 | Type | Purpose | Target |
 |------|---------|--------|
-| `session_continuity` | Continue work in new session | Future EAA session |
+| `session_continuity` | Continue work in new session | Future AMAA session |
 | `orchestrator_handoff` | Design approved, ready for implementation | EOA (via EAMA) |
-| `context_clear` | Save state before context window reset | Future EAA session |
+| `context_clear` | Save state before context window reset | Future AMAA session |
 
 ### Handoff Document Structure
 
@@ -262,10 +262,10 @@ Create a handoff document when:
 ### Example 1: Session Start with Existing Context
 
 ```
-EAA: Checking for existing session state...
-Found: .claude/eaa-session-state.local.md
+AMAA: Checking for existing session state...
+Found: .claude/amaa-session-state.local.md
 
-Session ID: eaa-session-20260203-091500
+Session ID: amaa-session-20260203-091500
 Last Activity: architecture_decision_made
 Decisions: 4
 Constraints: 6
@@ -284,7 +284,7 @@ Ready to continue design work.
 ### Example 2: Architecture Decision Made
 
 ```
-EAA: Recording architecture decision...
+AMAA: Recording architecture decision...
 
 Creating: docs_dev/design/decisions/ADR-005-session-storage.md
 
@@ -325,10 +325,10 @@ Decision ADR-005 recorded. Session state: 5 decisions, 6 constraints, 2 open que
 ### Example 3: Handoff Creation for Context Clear
 
 ```
-EAA: Creating handoff document for context preservation...
+AMAA: Creating handoff document for context preservation...
 
 Gathering session context:
-- Session ID: eaa-session-20260204-120000
+- Session ID: amaa-session-20260204-120000
 - Decisions made: 3 (ADR-003, ADR-004, ADR-005)
 - Constraints discovered: 1 (CON-007)
 - Open questions: 1 resolved, 1 remaining
@@ -355,7 +355,7 @@ Detailed reference documentation for session memory operations:
 
 | Resource | Location |
 |----------|----------|
-| Session state file | `.claude/eaa-session-state.local.md` |
+| Session state file | `.claude/amaa-session-state.local.md` |
 | Design index | `docs_dev/design/index.json` |
 | Decisions directory | `docs_dev/design/decisions/` |
 | Patterns registry | `docs_dev/design/patterns.md` |
@@ -366,7 +366,7 @@ Detailed reference documentation for session memory operations:
 
 ## Related Skills
 
-- eaa-design-lifecycle - Design document states and transitions
-- eaa-requirements-analysis - Requirements gathering and management
-- eaa-planning-patterns - Architecture planning procedures
-- eaa-design-communication-patterns - Inter-agent communication
+- amaa-design-lifecycle - Design document states and transitions
+- amaa-requirements-analysis - Requirements gathering and management
+- amaa-planning-patterns - Architecture planning procedures
+- amaa-design-communication-patterns - Inter-agent communication

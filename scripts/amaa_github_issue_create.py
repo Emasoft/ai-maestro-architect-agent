@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-eaa_github_issue_create.py - Create GitHub issue from design document.
+amaa_github_issue_create.py - Create GitHub issue from design document.
 
 Reads a design document by UUID, extracts metadata from frontmatter,
 and creates a corresponding GitHub issue using the gh CLI.
@@ -8,13 +8,13 @@ Updates the design document with the created issue number.
 
 Usage:
     # Create issue from design document
-    python eaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4
+    python amaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4
 
     # Create issue with custom labels
-    python eaa_github_issue_create.py --uuid PROJ-SPEC-... --labels "design,priority:high"
+    python amaa_github_issue_create.py --uuid PROJ-SPEC-... --labels "design,priority:high"
 
     # Dry run (show what would be created)
-    python eaa_github_issue_create.py --uuid PROJ-SPEC-... --dry-run
+    python amaa_github_issue_create.py --uuid PROJ-SPEC-... --dry-run
 
 Dependencies: Python 3.8+, gh CLI (authenticated)
 """
@@ -163,7 +163,7 @@ def extract_issue_data(frontmatter: dict, body: str, doc_path: Path) -> dict:
             "---",
             "",
             f"*This issue is linked to design document `{uuid_str}`*",
-            "*Use `/eaa-sync-status` to synchronize status changes*",
+            "*Use `/amaa-sync-status` to synchronize status changes*",
         ]
     )
 
@@ -307,13 +307,13 @@ def main() -> int:
         epilog="""
 Examples:
   # Create issue from design document
-  python eaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4
+  python amaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4
 
   # Create issue with custom labels
-  python eaa_github_issue_create.py --uuid PROJ-SPEC-... --labels "priority:high"
+  python amaa_github_issue_create.py --uuid PROJ-SPEC-... --labels "priority:high"
 
   # Dry run
-  python eaa_github_issue_create.py --uuid PROJ-SPEC-... --dry-run
+  python amaa_github_issue_create.py --uuid PROJ-SPEC-... --dry-run
         """,
     )
 

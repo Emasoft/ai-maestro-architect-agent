@@ -1,6 +1,6 @@
-# AI Maestro Message Templates for EAA
+# AI Maestro Message Templates for AMAA
 
-This document provides all message templates and format examples for the Emasoft Architect Agent (EAA) to communicate via AI Maestro using the `agent-messaging` skill.
+This document provides all message templates and format examples for the AI Maestro Architect Agent (AMAA) to communicate via AI Maestro using the `agent-messaging` skill.
 
 ## Contents
 
@@ -172,7 +172,7 @@ Send a message using the `agent-messaging` skill with:
 ```json
 {
   "type": "escalation",
-  "message": "ACK timeout from eaa-api-researcher. Original message: API Research Request - Stripe Integration. Sent: 2026-02-05 14:30:00. Retry sent: 2026-02-05 14:30:30. Blocking operation: Cannot finalize architecture without Stripe API research results."
+  "message": "ACK timeout from amaa-api-researcher. Original message: API Research Request - Stripe Integration. Sent: 2026-02-05 14:30:00. Retry sent: 2026-02-05 14:30:30. Blocking operation: Cannot finalize architecture without Stripe API research results."
 }
 ```
 

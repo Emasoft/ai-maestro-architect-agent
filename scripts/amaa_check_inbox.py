@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-eaa_check_inbox.py - AI Maestro inbox checking wrapper.
+amaa_check_inbox.py - AI Maestro inbox checking wrapper.
 
 Checks for unread messages using the AMP CLI commands.
 
 Usage:
-    python eaa_check_inbox.py                    # List unread messages
-    python eaa_check_inbox.py --count            # Just show count
-    python eaa_check_inbox.py --all              # List all messages (not just unread)
-    python eaa_check_inbox.py --json             # Output raw JSON
+    python amaa_check_inbox.py                    # List unread messages
+    python amaa_check_inbox.py --count            # Just show count
+    python amaa_check_inbox.py --all              # List all messages (not just unread)
+    python amaa_check_inbox.py --json             # Output raw JSON
 
 Environment:
     SESSION_NAME - Agent name (auto-detected from tmux if not set)

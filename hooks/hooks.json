@@ -4,12 +4,12 @@
   "hooks": {
     "Stop": [
       {
-        "_id": "eaa-stop-check",
+        "_id": "amaa-stop-check",
         "_description": "Blocks exit until all design work is complete",
         "hooks": [
           {
             "type": "command",
-            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/scripts/eaa_stop_check.py"
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/scripts/amaa_stop_check.py"
           }
         ]
       }

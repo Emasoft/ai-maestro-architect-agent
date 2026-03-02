@@ -31,7 +31,7 @@ workflow-instruction: support
 - [Files Modified This Session](#files-modified-this-session)
 - [Design Artifacts Summary](#design-artifacts-summary)
 - [Resume Instructions](#resume-instructions)
-  - [For Future EAA Session](#for-future-eaa-session)
+  - [For Future AMAA Session](#for-future-amaa-session)
   - [Context to Restore](#context-to-restore)
   - [Immediate Priority](#immediate-priority)
 - [Handoff Validation](#handoff-validation)
@@ -68,9 +68,9 @@ Create a handoff document that captures complete session context for continuity,
 
 | Type | Purpose | Target |
 |------|---------|--------|
-| `session_continuity` | Continue design work | Future EAA session |
+| `session_continuity` | Continue design work | Future AMAA session |
 | `orchestrator_handoff` | Design complete | EOA (via EAMA) |
-| `context_clear` | Preserve before reset | Future EAA session |
+| `context_clear` | Preserve before reset | Future AMAA session |
 
 ### Step 2: Create Handoff Directory
 
@@ -205,10 +205,10 @@ Collect from current session:
 
 ## Resume Instructions
 
-### For Future EAA Session
+### For Future AMAA Session
 
 1. Load this handoff document
-2. Read current session state from `.claude/eaa-session-state.local.md`
+2. Read current session state from `.claude/amaa-session-state.local.md`
 3. Load design index from `docs_dev/design/index.json`
 4. Review open questions for blocking items
 5. Continue from "Next Steps" above
@@ -276,7 +276,7 @@ Ready for context clear.
 | File | Content |
 |------|---------|
 | `docs_dev/design/handoffs/handoff-*.md` | Complete handoff document |
-| `.claude/eaa-session-state.local.md` | Updated with handoff reference |
+| `.claude/amaa-session-state.local.md` | Updated with handoff reference |
 
 ## Verification Checklist
 

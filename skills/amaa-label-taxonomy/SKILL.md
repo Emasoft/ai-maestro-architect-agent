@@ -1,5 +1,5 @@
 ---
-name: eaa-label-taxonomy
+name: amaa-label-taxonomy
 description: GitHub label taxonomy reference for the Architect Agent. Use when designing architecture, identifying components, or recommending labels. Trigger with architecture label requests.
 version: 1.0.0
 compatibility: Requires AI Maestro installed.
@@ -9,11 +9,11 @@ workflow-instruction: "support"
 procedure: "support-skill"
 ---
 
-# EAA Label Taxonomy
+# AMAA Label Taxonomy
 
 ## Overview
 
-This skill provides the label taxonomy relevant to the Architect Agent (EAA) role. Each role plugin has its own label-taxonomy skill covering the labels that role manages.
+This skill provides the label taxonomy relevant to the Architect Agent (AMAA) role. Each role plugin has its own label-taxonomy skill covering the labels that role manages.
 
 ---
 
@@ -21,7 +21,7 @@ This skill provides the label taxonomy relevant to the Architect Agent (EAA) rol
 
 1. GitHub CLI (`gh`) installed and authenticated
 2. Active issue number for architecture work
-3. Understanding of EAA role responsibilities (see **AGENT_OPERATIONS.md**)
+3. Understanding of AMAA role responsibilities (see **AGENT_OPERATIONS.md**)
 4. Completed architecture analysis for the feature
 
 ---
@@ -79,13 +79,13 @@ Copy this checklist and track your progress:
 
 ---
 
-## Labels EAA Manages
+## Labels AMAA Manages
 
 ### Component Labels (`component:*`)
 
-**EAA recommends component labels during architecture design.**
+**AMAA recommends component labels during architecture design.**
 
-| Label | Description | When EAA Recommends It |
+| Label | Description | When AMAA Recommends It |
 |-------|-------------|------------------------|
 | `component:api` | API endpoints | Feature touches REST/GraphQL APIs |
 | `component:ui` | User interface | Feature has UI changes |
@@ -96,7 +96,7 @@ Copy this checklist and track your progress:
 | `component:tests` | Test infrastructure | Test framework changes |
 | `component:docs` | Documentation | Doc system changes |
 
-**EAA Component Responsibilities:**
+**AMAA Component Responsibilities:**
 - Analyze requirements to identify affected components
 - Recommend component labels in handoff to EOA
 - Update component labels when design changes
@@ -122,9 +122,9 @@ The full workflow uses these 8 status columns:
 - **Human Review** is requested via EAMA (Assistant Manager asks user to test/review)
 - Not all tasks go through Human Review -- only significant changes requiring human judgment
 
-### Type Labels EAA Clarifies
+### Type Labels AMAA Clarifies
 
-EAA may recommend type changes based on architecture analysis:
+AMAA may recommend type changes based on architecture analysis:
 
 | Scenario | Type Recommendation |
 |----------|---------------------|
@@ -134,11 +134,11 @@ EAA may recommend type changes based on architecture analysis:
 
 ---
 
-## Labels EAA Reads (Set by Others)
+## Labels AMAA Reads (Set by Others)
 
 ### Priority Labels (`priority:*`)
 
-EAA uses priority to scope architecture:
+AMAA uses priority to scope architecture:
 - `priority:critical` - Minimal viable design, fastest path
 - `priority:high` - Solid design, balance speed/quality
 - `priority:normal` - Full architecture consideration
@@ -146,14 +146,14 @@ EAA uses priority to scope architecture:
 
 ### Effort Labels (`effort:*`)
 
-EAA validates effort estimates:
+AMAA validates effort estimates:
 - Does design complexity match effort label?
 - Should `effort:m` be upgraded to `effort:l`?
-- EAA recommends effort changes to EOA
+- AMAA recommends effort changes to EOA
 
 ---
 
-## EAA Label Commands
+## AMAA Label Commands
 
 ### When Completing Architecture
 
@@ -192,7 +192,7 @@ gh issue edit $ISSUE_NUMBER --remove-label "type:feature" --add-label "type:epic
 
 ### Module Breakdown → Component Labels
 
-When EAA breaks down a feature:
+When AMAA breaks down a feature:
 
 ```markdown
 ## Architecture Breakdown
@@ -278,7 +278,7 @@ gh issue create \
 
 ## Quick Reference
 
-### EAA Label Responsibilities
+### AMAA Label Responsibilities
 
 | Action | Labels Involved |
 |--------|-----------------|
@@ -288,16 +288,16 @@ gh issue create \
 | Create sub-issues | Set `type:*`, `component:*`, `status:backlog` |
 | Design change | May update `type:*` (with EOA approval) |
 
-### Labels EAA Never Sets
+### Labels AMAA Never Sets
 
 - `assign:*` - Set by EOA/ECOS
 - `status:*` - Set by working agent
 - `review:*` - Managed by EIA
 - `priority:*` - Set by EAMA/EOA
 
-### EAA Handoff Labels
+### AMAA Handoff Labels
 
-When handing off design to EOA, EAA should ensure:
+When handing off design to EOA, AMAA should ensure:
 1. All `component:*` labels are set
 2. `effort:*` is validated
 3. Sub-issues created if `type:epic`
@@ -322,5 +322,5 @@ gh issue create \
 
 ## Resources
 
-- **AGENT_OPERATIONS.md** - EAA role definition and responsibilities
-- **eaa-modularization** - Module breakdown procedures
+- **AGENT_OPERATIONS.md** - AMAA role definition and responsibilities
+- **amaa-modularization** - Module breakdown procedures

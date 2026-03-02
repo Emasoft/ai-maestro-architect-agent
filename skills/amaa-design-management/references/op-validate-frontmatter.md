@@ -2,8 +2,8 @@
 operation: validate-frontmatter
 procedure: proc-create-design
 workflow-instruction: Step 7 - Design Document Creation
-parent-skill: eaa-design-management
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-design-management
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -43,7 +43,7 @@ Use this operation when:
 ## Prerequisites
 
 - Python 3.10 or higher installed
-- Access to the `scripts/eaa_design_validate.py` script
+- Access to the `scripts/amaa_design_validate.py` script
 - Design documents exist in the `design/` directory structure
 - Understanding of required frontmatter fields
 
@@ -79,7 +79,7 @@ related: [GUUID-..., GUUID-...]    # Optional: Related documents
 To validate a specific document:
 
 ```bash
-python scripts/eaa_design_validate.py design/pdr/my-document.md
+python scripts/amaa_design_validate.py design/pdr/my-document.md
 ```
 
 **Output on success:**
@@ -103,12 +103,12 @@ Validation passed: 0 errors, 0 warnings
 To validate all documents in the design directory:
 
 ```bash
-python scripts/eaa_design_validate.py --all
+python scripts/amaa_design_validate.py --all
 ```
 
 **Filter by type:**
 ```bash
-python scripts/eaa_design_validate.py --all --type pdr
+python scripts/amaa_design_validate.py --all --type pdr
 ```
 
 ### Step 4: Interpret Validation Output
@@ -144,7 +144,7 @@ Address each error in order:
 Re-run validation after fixing:
 
 ```bash
-python scripts/eaa_design_validate.py design/pdr/fixed-document.md
+python scripts/amaa_design_validate.py design/pdr/fixed-document.md
 ```
 
 ## Checklist
@@ -164,7 +164,7 @@ Copy this checklist and track your progress:
 ### Example 1: Validate Single Document
 
 ```bash
-python scripts/eaa_design_validate.py design/pdr/GUUID-20260130-0001-auth-design.md
+python scripts/amaa_design_validate.py design/pdr/GUUID-20260130-0001-auth-design.md
 
 # Output:
 # Validating: design/pdr/GUUID-20260130-0001-auth-design.md
@@ -183,7 +183,7 @@ python scripts/eaa_design_validate.py design/pdr/GUUID-20260130-0001-auth-design
 ### Example 2: Validate All with Type Filter
 
 ```bash
-python scripts/eaa_design_validate.py --all --type pdr --verbose
+python scripts/amaa_design_validate.py --all --type pdr --verbose
 
 # Output:
 # Scanning: design/pdr/
@@ -212,7 +212,7 @@ python scripts/eaa_design_validate.py --all --type pdr --verbose
 ### Example 3: JSON Output for CI/CD
 
 ```bash
-python scripts/eaa_design_validate.py --all --format json
+python scripts/amaa_design_validate.py --all --format json
 
 # Output:
 # {

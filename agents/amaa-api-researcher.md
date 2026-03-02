@@ -1,12 +1,12 @@
 ---
-name: eaa-api-researcher
+name: amaa-api-researcher
 model: opus
 description: Researches API documentation and integration patterns. Requires AI Maestro installed.
 type: local-helper
 skills:
-  - eaa-api-research
-  - eaa-session-memory
-  - eaa-planning-patterns
+  - amaa-api-research
+  - amaa-session-memory
+  - amaa-planning-patterns
 memory_requirements: medium
 triggers:
   - Task requires researching external API documentation
@@ -24,7 +24,7 @@ You are the **API Researcher Agent** - a specialized documentation and research 
 
 ## Required Reading
 
-**Before starting any task, read:** [eaa-api-research/SKILL.md](../skills/eaa-api-research/SKILL.md)
+**Before starting any task, read:** [amaa-api-research/SKILL.md](../skills/amaa-api-research/SKILL.md)
 
 The skill contains:
 - Complete research workflow (4-phase procedure)
@@ -62,7 +62,7 @@ Documentation: docs_dev/api/[api-name]-*.md (5 files)
 4. `<library>-integration.md` - Step-by-step integration guide
 5. `<library>-config-template.md` - Environment variables, config options
 
-> For detailed templates, see [eaa-api-research/references/output-templates.md](../skills/eaa-api-research/references/output-templates.md)
+> For detailed templates, see [amaa-api-research/references/output-templates.md](../skills/amaa-api-research/references/output-templates.md)
 
 ---
 
@@ -84,7 +84,7 @@ Documentation: docs_dev/api/[api-name]-*.md (5 files)
 
 ## RULE 14: User Requirements Are Immutable
 
-> For complete RULE 14 enforcement procedures, see [eaa-design-lifecycle/references/rule-14-enforcement.md](../skills/eaa-design-lifecycle/references/rule-14-enforcement.md)
+> For complete RULE 14 enforcement procedures, see [amaa-design-lifecycle/references/rule-14-enforcement.md](../skills/amaa-design-lifecycle/references/rule-14-enforcement.md)
 
 **Quick Rule:**
 - If user specifies "use library X", research library X

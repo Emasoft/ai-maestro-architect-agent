@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-eaa_design_create.py - Create new design documents from templates.
+amaa_design_create.py - Create new design documents from templates.
 
 Creates a new design document with proper GUUID-based filename, populated
 YAML frontmatter, and template body sections. Documents are placed in the
@@ -13,16 +13,16 @@ UUID Format: GUUID-YYYYMMDD-NNNN
 
 Usage:
     # Create a PDR document
-    python scripts/eaa_design_create.py --type pdr --title "User Auth Design"
+    python scripts/amaa_design_create.py --type pdr --title "User Auth Design"
 
     # Create with author
-    python scripts/eaa_design_create.py --type feature --title "OAuth" --author "John"
+    python scripts/amaa_design_create.py --type feature --title "OAuth" --author "John"
 
     # Create with custom filename
-    python scripts/eaa_design_create.py --type decision --title "DB Selection" --filename "adr-001-db"
+    python scripts/amaa_design_create.py --type decision --title "DB Selection" --filename "adr-001-db"
 
     # Specify project root
-    python scripts/eaa_design_create.py --type spec --title "API v2" --project-root /path/to/project
+    python scripts/amaa_design_create.py --type spec --title "API v2" --project-root /path/to/project
 
 Dependencies: Python 3.8+ (stdlib only, no external packages)
 """
@@ -297,13 +297,13 @@ def main() -> int:
         epilog="""
 Examples:
   # Create a PDR document
-  python scripts/eaa_design_create.py --type pdr --title "User Auth Design"
+  python scripts/amaa_design_create.py --type pdr --title "User Auth Design"
 
   # Create with author
-  python scripts/eaa_design_create.py --type feature --title "OAuth" --author "John"
+  python scripts/amaa_design_create.py --type feature --title "OAuth" --author "John"
 
   # Create with custom filename
-  python scripts/eaa_design_create.py --type decision --title "DB Selection" --filename "adr-001-db"
+  python scripts/amaa_design_create.py --type decision --title "DB Selection" --filename "adr-001-db"
 """,
     )
 

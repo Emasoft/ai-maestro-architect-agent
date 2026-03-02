@@ -2,8 +2,8 @@
 operation: manage-state-transitions
 procedure: proc-create-design
 workflow-instruction: Step 7 - Design Document Creation
-parent-skill: eaa-design-lifecycle
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-design-lifecycle
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -78,7 +78,7 @@ DRAFT → REVIEW → APPROVED → IMPLEMENTING → COMPLETED → ARCHIVED
 Before transitioning, verify the current state:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --action check-state
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --action check-state
 ```
 
 ### Step 3: Validate Proposed Transition
@@ -86,7 +86,7 @@ python scripts/eaa_design_lifecycle.py --uuid <UUID> --action check-state
 Check if a transition is valid:
 
 ```bash
-python scripts/eaa_design_transition.py --uuid <UUID> --from <CURRENT> --to <TARGET> --validate
+python scripts/amaa_design_transition.py --uuid <UUID> --from <CURRENT> --to <TARGET> --validate
 ```
 
 ### Step 4: Execute State Transition
@@ -94,7 +94,7 @@ python scripts/eaa_design_transition.py --uuid <UUID> --from <CURRENT> --to <TAR
 Perform the transition:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --transition <TARGET_STATE>
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition <TARGET_STATE>
 ```
 
 The script:
@@ -109,7 +109,7 @@ The script:
 Confirm the state change:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --action check-state
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --action check-state
 ```
 
 ## State Transition Rules
@@ -121,7 +121,7 @@ python scripts/eaa_design_lifecycle.py --uuid <UUID> --action check-state
 - Completeness checklist passed
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --transition REVIEW
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition REVIEW
 ```
 
 ### REVIEW to APPROVED
@@ -131,7 +131,7 @@ python scripts/eaa_design_lifecycle.py --uuid <UUID> --transition REVIEW
 - At least one reviewer approval
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --transition APPROVED
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition APPROVED
 ```
 
 ### REVIEW to DRAFT (Revision)
@@ -139,7 +139,7 @@ python scripts/eaa_design_lifecycle.py --uuid <UUID> --transition APPROVED
 **When to use:** Design needs significant changes based on review feedback.
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --transition DRAFT
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition DRAFT
 ```
 
 ### APPROVED to IMPLEMENTING
@@ -149,7 +149,7 @@ python scripts/eaa_design_lifecycle.py --uuid <UUID> --transition DRAFT
 - Resources allocated
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --transition IMPLEMENTING
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition IMPLEMENTING
 ```
 
 ### IMPLEMENTING to COMPLETED
@@ -160,7 +160,7 @@ python scripts/eaa_design_lifecycle.py --uuid <UUID> --transition IMPLEMENTING
 - Testing passed
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --transition COMPLETED
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition COMPLETED
 ```
 
 ### COMPLETED to ARCHIVED
@@ -170,7 +170,7 @@ python scripts/eaa_design_lifecycle.py --uuid <UUID> --transition COMPLETED
 - Stakeholders notified
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --transition ARCHIVED
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition ARCHIVED
 ```
 
 ## Checklist
@@ -191,27 +191,27 @@ Copy this checklist and track your progress:
 
 ```bash
 # Create new design - starts in DRAFT
-python scripts/eaa_design_lifecycle.py --uuid design-api-20260130-abc123 --action check-state
+python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --action check-state
 # Output: Current state: DRAFT
 
 # Complete draft, submit for review
-python scripts/eaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition REVIEW
+python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition REVIEW
 # Output: State transitioned: DRAFT -> REVIEW
 
 # After review approval
-python scripts/eaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition APPROVED
+python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition APPROVED
 # Output: State transitioned: REVIEW -> APPROVED
 
 # Begin implementation
-python scripts/eaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition IMPLEMENTING
+python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition IMPLEMENTING
 # Output: State transitioned: APPROVED -> IMPLEMENTING
 
 # Implementation complete
-python scripts/eaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition COMPLETED
+python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition COMPLETED
 # Output: State transitioned: IMPLEMENTING -> COMPLETED
 
 # Archive for history
-python scripts/eaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition ARCHIVED
+python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition ARCHIVED
 # Output: State transitioned: COMPLETED -> ARCHIVED (terminal state)
 ```
 
@@ -219,15 +219,15 @@ python scripts/eaa_design_lifecycle.py --uuid design-api-20260130-abc123 --trans
 
 ```bash
 # Design is in REVIEW but needs major changes
-python scripts/eaa_design_lifecycle.py --uuid design-api-20260130-abc123 --action check-state
+python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --action check-state
 # Output: Current state: REVIEW
 
 # Return to DRAFT for revision
-python scripts/eaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition DRAFT
+python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition DRAFT
 # Output: State transitioned: REVIEW -> DRAFT (revision)
 
 # Make changes, then resubmit
-python scripts/eaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition REVIEW
+python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition REVIEW
 # Output: State transitioned: DRAFT -> REVIEW
 ```
 
@@ -235,7 +235,7 @@ python scripts/eaa_design_lifecycle.py --uuid design-api-20260130-abc123 --trans
 
 ```bash
 # Attempt invalid transition: DRAFT -> APPROVED (skipping REVIEW)
-python scripts/eaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition APPROVED
+python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition APPROVED
 # Output: ERROR: Invalid state transition
 # Cannot transition from DRAFT to APPROVED
 # Valid transitions from DRAFT: REVIEW

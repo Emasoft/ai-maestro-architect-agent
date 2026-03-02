@@ -2,8 +2,8 @@
 operation: archive-design
 procedure: proc-handle-feedback
 workflow-instruction: Step 15 - Design Archival
-parent-skill: eaa-design-lifecycle
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-design-lifecycle
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -55,7 +55,7 @@ Use this operation when:
 Check that every requirement in the design has been implemented:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --action verify-completion
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --action verify-completion
 ```
 
 This checks:
@@ -68,7 +68,7 @@ This checks:
 Transition the design from IMPLEMENTING to COMPLETED:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --transition COMPLETED
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition COMPLETED
 ```
 
 ### Step 3: Create Completion Report
@@ -76,7 +76,7 @@ python scripts/eaa_design_lifecycle.py --uuid <UUID> --transition COMPLETED
 Generate a final report documenting the implementation:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --action create-completion-report
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --action create-completion-report
 ```
 
 The report includes:
@@ -90,7 +90,7 @@ The report includes:
 Move the design document to the archive:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --action archive
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --action archive
 ```
 
 This:
@@ -103,7 +103,7 @@ This:
 Ensure the design index reflects the archived status:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --transition ARCHIVED
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition ARCHIVED
 ```
 
 ### Step 6: Final State - ARCHIVED
@@ -134,7 +134,7 @@ Copy this checklist and track your progress:
 
 ```bash
 # Step 1: Verify completion
-python scripts/eaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action verify-completion
+python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action verify-completion
 # Output:
 # Completion Verification: design-auth-20260130-abc123
 # Requirements: 4/4 implemented (100%)
@@ -143,19 +143,19 @@ python scripts/eaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --acti
 # Status: READY FOR COMPLETION
 
 # Step 2: Transition to COMPLETED
-python scripts/eaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --transition COMPLETED
+python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --transition COMPLETED
 # Output: State transitioned: IMPLEMENTING -> COMPLETED
 
 # Step 3: Create completion report
-python scripts/eaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action create-completion-report
+python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action create-completion-report
 # Output: Completion report saved to docs_dev/design/completed/design-auth-20260130-abc123-report.md
 
 # Step 4: Archive
-python scripts/eaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action archive
+python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action archive
 # Output: Design archived to docs_dev/design/completed/design-auth-20260130-abc123.md
 
 # Step 5: Final state
-python scripts/eaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --transition ARCHIVED
+python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --transition ARCHIVED
 # Output: State transitioned: COMPLETED -> ARCHIVED (terminal state)
 ```
 

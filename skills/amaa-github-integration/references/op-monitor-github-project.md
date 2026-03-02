@@ -2,8 +2,8 @@
 operation: monitor-github-project
 procedure: proc-submit-design
 workflow-instruction: Step 8 - Design Submission
-parent-skill: eaa-github-integration
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-github-integration
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 

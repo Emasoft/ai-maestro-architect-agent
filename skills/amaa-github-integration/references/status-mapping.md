@@ -116,7 +116,7 @@ draft ---+--> review ----+--> approved ---+--> implementing ---+--> implemented
 
 ### Sync Behavior
 
-When `eaa_github_sync_status.py` runs:
+When `amaa_github_sync_status.py` runs:
 
 1. **Reads** current status from design document frontmatter
 2. **Gets** current labels from GitHub issue
@@ -137,7 +137,7 @@ Document status changes from `draft` to `review`:
 ### Sync with Comment
 
 ```bash
-python scripts/eaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
+python scripts/amaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
 ```
 
 Adds a comment like:

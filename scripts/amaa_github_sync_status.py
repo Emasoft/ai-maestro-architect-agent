@@ -1,25 +1,25 @@
 #!/usr/bin/env python3
 """
-eaa_github_sync_status.py - Sync design document status with GitHub issue.
+amaa_github_sync_status.py - Sync design document status with GitHub issue.
 
 Reads the current status of a design document and updates the corresponding
 GitHub issue labels. Optionally adds a status change comment.
 
 Usage:
     # Sync status to linked issues
-    python eaa_github_sync_status.py --uuid PROJ-SPEC-20250129-a1b2c3d4
+    python amaa_github_sync_status.py --uuid PROJ-SPEC-20250129-a1b2c3d4
 
     # Sync status to specific issue
-    python eaa_github_sync_status.py --uuid PROJ-SPEC-... --issue 42
+    python amaa_github_sync_status.py --uuid PROJ-SPEC-... --issue 42
 
     # Sync with comment
-    python eaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
+    python amaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
 
     # Batch sync all documents with linked issues
-    python eaa_github_sync_status.py --all
+    python amaa_github_sync_status.py --all
 
     # Dry run
-    python eaa_github_sync_status.py --uuid PROJ-SPEC-... --dry-run
+    python amaa_github_sync_status.py --uuid PROJ-SPEC-... --dry-run
 
 Dependencies: Python 3.8+, gh CLI (authenticated)
 """
@@ -325,19 +325,19 @@ def main() -> int:
         epilog="""
 Examples:
   # Sync status to linked issues
-  python eaa_github_sync_status.py --uuid PROJ-SPEC-20250129-a1b2c3d4
+  python amaa_github_sync_status.py --uuid PROJ-SPEC-20250129-a1b2c3d4
 
   # Sync status to specific issue
-  python eaa_github_sync_status.py --uuid PROJ-SPEC-... --issue 42
+  python amaa_github_sync_status.py --uuid PROJ-SPEC-... --issue 42
 
   # Sync with comment
-  python eaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
+  python amaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
 
   # Batch sync all documents
-  python eaa_github_sync_status.py --all
+  python amaa_github_sync_status.py --all
 
   # Dry run
-  python eaa_github_sync_status.py --uuid PROJ-SPEC-... --dry-run
+  python amaa_github_sync_status.py --uuid PROJ-SPEC-... --dry-run
         """,
     )
 

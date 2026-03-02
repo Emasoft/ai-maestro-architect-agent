@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-eaa_stop_check.py - Stop hook to block exit with incomplete design work.
+amaa_stop_check.py - Stop hook to block exit with incomplete design work.
 
 This script checks for:
 1. Design documents in "draft" state (not approved)

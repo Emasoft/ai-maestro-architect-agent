@@ -5,13 +5,13 @@
 - [1. When to research external APIs instead of using existing documentation](#1-when-to-research-external-apis-instead-of-using-existing-documentation)
   - [1.1 Research External APIs when](#11-research-external-apis-when)
   - [1.2 Use Existing Docs when](#12-use-existing-docs-when)
-  - [1.3 Spawn eaa-api-researcher for](#13-spawn-eaa-api-researcher-for)
+  - [1.3 Spawn amaa-api-researcher for](#13-spawn-amaa-api-researcher-for)
 - [2. When to create an ADR instead of just documenting the decision](#2-when-to-create-an-adr-instead-of-just-documenting-the-decision)
   - [2.1 Create ADR (Architecture Decision Record) when](#21-create-adr-architecture-decision-record-when)
   - [2.2 Just Document in architecture.md when](#22-just-document-in-architecturemd-when)
   - [2.3 ADR Template Location](#23-adr-template-location)
 - [3. When to modularize a system instead of keeping it simple](#3-when-to-modularize-a-system-instead-of-keeping-it-simple)
-  - [3.1 Spawn eaa-modularizer-expert when](#31-spawn-eaa-modularizer-expert-when)
+  - [3.1 Spawn amaa-modularizer-expert when](#31-spawn-amaa-modularizer-expert-when)
   - [3.2 Keep Simple (single module) when](#32-keep-simple-single-module-when)
   - [3.3 Modularization Threshold](#33-modularization-threshold)
 - [4. When to escalate unclear requirements to ECOS for clarification](#4-when-to-escalate-unclear-requirements-to-ecos-for-clarification)
@@ -39,7 +39,7 @@ As the Architect, you make daily decisions about depth and scope when dealing wi
 - Simple integration (single endpoint, basic auth)
 - API already validated by team in previous projects
 
-### 1.3 Spawn eaa-api-researcher for
+### 1.3 Spawn amaa-api-researcher for
 
 - 3+ endpoints to integrate
 - Complex authentication flows (OAuth2, JWT, custom)
@@ -75,7 +75,7 @@ As the Architect, you make daily decisions about depth and scope when dealing wi
 
 ## 3. When to modularize a system instead of keeping it simple
 
-### 3.1 Spawn eaa-modularizer-expert when
+### 3.1 Spawn amaa-modularizer-expert when
 
 - System has 5+ distinct responsibilities
 - Multiple teams will work on different parts

@@ -2,8 +2,8 @@
 operation: modify-module
 procedure: proc-route-requirements
 workflow-instruction: Step 6 - Requirements to Architect
-parent-skill: eaa-requirements-analysis
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-requirements-analysis
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 

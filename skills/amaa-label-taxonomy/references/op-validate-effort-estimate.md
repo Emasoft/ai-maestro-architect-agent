@@ -147,6 +147,6 @@ gh issue view 123 --json labels --jq '.labels[].name | select(startswith("effort
 
 ## Notes
 
-- EAA recommends effort changes but EOA has final authority
+- AMAA recommends effort changes but EOA has final authority
 - Document all rationale in issue comments for transparency
 - Consider both technical complexity and unknowns/risks

@@ -26,9 +26,9 @@ ECOS (Chief of Staff)                                        │
   ▼                                                          │
 EAMA ─────────────────────────────────────────────────────►  │
   │                                                          │
-  │ 6. Sends requirements to EAA                             │
+  │ 6. Sends requirements to AMAA                             │
   ▼                                                          │
-EAA (Architect)                                              │
+AMAA (Architect)                                              │
   │                                                          │
   │ 7. Creates design document                               │
   │ 8. Sends design to EAMA                                  │
@@ -157,17 +157,17 @@ All projects use an **8-column kanban system** on GitHub Projects. Every agent m
 #### Step 6: Requirements to Architect
 **Actor**: EAMA (Manager)
 **Action**:
-- Send the requirements to the Architect agent (EAA)
+- Send the requirements to the Architect agent (AMAA)
 - Expand the requirements with more details
 - Include the list of team member names in the requirements
 - Assign to the Architect the task of developing the design document
 
 **Communication**:
-- GitHub: Create issue with requirements, assign label for EAA
-- AI Maestro: Message to EAA with full requirements and team roster
+- GitHub: Create issue with requirements, assign label for AMAA
+- AI Maestro: Message to AMAA with full requirements and team roster
 
 #### Step 7: Design Document Creation
-**Actor**: EAA (Architect)
+**Actor**: AMAA (Architect)
 **Action**:
 - Receive the task (on the kanban) to convert requirements into a full design document
 - Create design document with:
@@ -182,7 +182,7 @@ All projects use an **8-column kanban system** on GitHub Projects. Every agent m
 - AI Maestro: Progress updates to EAMA
 
 #### Step 8: Design Submission
-**Actor**: EAA (Architect)
+**Actor**: AMAA (Architect)
 **Action**:
 - Send the completed design document back to the Manager
 
@@ -257,7 +257,7 @@ All projects use an **8-column kanban system** on GitHub Projects. Every agent m
 - AI Maestro: Task assignment messages with clarification request
 
 #### Step 15: Feedback and Design Updates (if needed)
-**Actor**: IMPLEMENTER AGENTS → EOA → EAA
+**Actor**: IMPLEMENTER AGENTS → EOA → AMAA
 **Action**:
 - If agents reply presenting problems or improvement suggestions:
   - Orchestrator evaluates the feedback
@@ -267,8 +267,8 @@ All projects use an **8-column kanban system** on GitHub Projects. Every agent m
 
 **Communication**:
 - AI Maestro: Feedback from agents to EOA
-- AI Maestro: Design change request from EOA to EAA
-- AI Maestro: Updated design from EAA to EOA
+- AI Maestro: Design change request from EOA to AMAA
+- AI Maestro: Updated design from AMAA to EOA
 
 #### Step 16: Task Updates from Design Changes
 **Actor**: EOA (Orchestrator)
@@ -394,12 +394,12 @@ All projects use an **8-column kanban system** on GitHub Projects. Every agent m
 |------|-----|---------|---------|
 | EAMA | ECOS | AI Maestro | Requirements, team requests |
 | ECOS | EAMA | AI Maestro | Team proposals, status updates |
-| EAMA | EAA | GitHub + AI Maestro | Requirements, design requests |
-| EAA | EAMA | GitHub + AI Maestro | Design documents |
+| EAMA | AMAA | GitHub + AI Maestro | Requirements, design requests |
+| AMAA | EAMA | GitHub + AI Maestro | Design documents |
 | EAMA | EOA | GitHub + AI Maestro | Approved designs |
 | EOA | Agents | GitHub + AI Maestro | Task assignments |
 | Agents | EOA | AI Maestro | Status updates, questions |
-| EOA | EAA | AI Maestro | Design change requests |
+| EOA | AMAA | AI Maestro | Design change requests |
 | EOA | EIA | AI Maestro | PR review requests |
 | EIA | EOA | AI Maestro | PR review results |
 | EOA | EAMA | AI Maestro | Completion reports |
@@ -412,7 +412,7 @@ All projects use an **8-column kanban system** on GitHub Projects. Every agent m
 |------|---------|---------|-----------|
 | **EAMA** | Projects | Approvals, user communication | Task assignment |
 | **ECOS** | Agents, teams | Agent lifecycle | Task assignment, projects |
-| **EAA** | Designs | Architecture | Task assignment |
+| **AMAA** | Designs | Architecture | Task assignment |
 | **EOA** | Tasks, plans | Kanban, agent coordination | Agents, projects |
 | **EIA** | Nothing | PR reviews, merges | Task assignment |
 | **Agents** | Code, PRs | Their assigned tasks | Everything else |
@@ -425,8 +425,8 @@ All projects use an **8-column kanban system** on GitHub Projects. Every agent m
 |------|---------------|-------|
 | 1 | Create repository | EAMA |
 | 6 | Create requirements issue | EAMA |
-| 7 | Update issue with progress | EAA |
-| 8 | Attach design document | EAA |
+| 7 | Update issue with progress | AMAA |
+| 8 | Attach design document | AMAA |
 | 13 | Create task issues, add to project | EOA |
 | 13 | Set "Assigned Agent" field | EOA |
 | 18 | Move to "In Progress" column | EOA |
@@ -438,8 +438,8 @@ All projects use an **8-column kanban system** on GitHub Projects. Every agent m
 
 ## Document References
 
-- **Requirements Document**: Created by EAMA, sent to EAA
-- **Design Document**: Created by EAA, approved by EAMA/User
+- **Requirements Document**: Created by EAMA, sent to AMAA
+- **Design Document**: Created by AMAA, approved by EAMA/User
 - **Task-Requirements-Document**: Created by EOA for each task
 - **Design-Change-Request**: Created by EOA when agents suggest improvements
 - **PR Review Report**: Created by EIA for each PR

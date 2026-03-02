@@ -1,10 +1,10 @@
 ---
-name: eaa-design-lifecycle
+name: amaa-design-lifecycle
 description: Use when creating, reviewing, or archiving design documents. Manages design lifecycle from draft to archival. Trigger with design creation, review, or archival requests.
 version: 1.0.0
 compatibility: Requires AI Maestro installed.
 context: fork
-agent: eaa-main
+agent: amaa-main
 user-invocable: false
 workflow-instruction: "Steps 7, 8, 9, 15"
 procedure: "proc-create-design, proc-submit-design, proc-approve-design, proc-handle-feedback"
@@ -136,7 +136,7 @@ Located at: `templates/design-template.md`
 User: I need to build a real-time collaborative document editor similar to
 Google Docs. Can you help design the architecture?
 
-EAA (You): Starting architecture design for real-time collaborative document
+AMAA (You): Starting architecture design for real-time collaborative document
 editor.
 
 Phase 1 - Research:
@@ -180,7 +180,7 @@ Files created:
 ```
 User: We need to integrate Stripe payments into our existing e-commerce platform.
 
-EAA (You): Analyzing Stripe integration requirements for e-commerce platform.
+AMAA (You): Analyzing Stripe integration requirements for e-commerce platform.
 
 Phase 1 - Research:
 - Read existing codebase to understand current payment flow
@@ -255,13 +255,13 @@ The following scripts automate design lifecycle operations:
 
 | Script | Purpose | Usage |
 |--------|---------|-------|
-| `eaa_design_lifecycle.py` | Manage design document state transitions | `python scripts/eaa_design_lifecycle.py --uuid <UUID> --transition <STATE>` |
-| `eaa_design_transition.py` | Validate and execute state transitions | `python scripts/eaa_design_transition.py --from <STATE> --to <STATE>` |
-| `eaa_design_uuid.py` | Generate GUUIDs for new design documents | `python scripts/eaa_design_uuid.py --type <DOC_TYPE>` |
-| `eaa_design_version.py` | Track document versions | `python scripts/eaa_design_version.py --uuid <UUID> --bump` |
-| `eaa_design_export.py` | Export design documents to various formats | `python scripts/eaa_design_export.py --uuid <UUID> --format <FORMAT>` |
-| `eaa_design_handoff.py` | Generate handoff documents for EOA | `python scripts/eaa_design_handoff.py --design <UUID> --target eoa` |
-| `eaa_init_design_folders.py` | Initialize design folder structure | `python scripts/eaa_init_design_folders.py --project-root <PATH>` |
+| `amaa_design_lifecycle.py` | Manage design document state transitions | `python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition <STATE>` |
+| `amaa_design_transition.py` | Validate and execute state transitions | `python scripts/amaa_design_transition.py --from <STATE> --to <STATE>` |
+| `amaa_design_uuid.py` | Generate GUUIDs for new design documents | `python scripts/amaa_design_uuid.py --type <DOC_TYPE>` |
+| `amaa_design_version.py` | Track document versions | `python scripts/amaa_design_version.py --uuid <UUID> --bump` |
+| `amaa_design_export.py` | Export design documents to various formats | `python scripts/amaa_design_export.py --uuid <UUID> --format <FORMAT>` |
+| `amaa_design_handoff.py` | Generate handoff documents for EOA | `python scripts/amaa_design_handoff.py --design <UUID> --target eoa` |
+| `amaa_init_design_folders.py` | Initialize design folder structure | `python scripts/amaa_init_design_folders.py --project-root <PATH>` |
 
 ### Script Locations
 
@@ -284,6 +284,6 @@ Detailed reference documentation for design lifecycle operations:
 
 - `templates/design-template.md` - Design document template
 - `design/requirements/index.json` - Design index location
-- eaa-requirements-analysis - Requirements input skill
-- eaa-planning-patterns - Planning integration skill
-- eaa-documentation-writing - Documentation skill
+- amaa-requirements-analysis - Requirements input skill
+- amaa-planning-patterns - Planning integration skill
+- amaa-documentation-writing - Documentation skill

@@ -2,8 +2,8 @@
 operation: design-architecture
 procedure: proc-create-design
 workflow-instruction: Step 7 - Design Document Creation
-parent-skill: eaa-planning-patterns
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-planning-patterns
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -199,7 +199,7 @@ Choose architectural patterns that fit your requirements.
 Compile all findings into the architecture design document.
 
 ```bash
-python scripts/eaa_architecture_generator.py --output docs_dev/design/architecture.md
+python scripts/amaa_architecture_generator.py --output docs_dev/design/architecture.md
 ```
 
 ## Checklist

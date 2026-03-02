@@ -2,8 +2,8 @@
 operation: apply-solid-principles
 procedure: proc-create-design
 workflow-instruction: Step 7 - Design Document Creation
-parent-skill: eaa-modularization
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-modularization
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: eaa-planning-patterns
+name: amaa-planning-patterns
 description: "Use when creating architecture plans. Trigger with /plan project or design system requests."
 version: 1.0.0
 license: Apache-2.0

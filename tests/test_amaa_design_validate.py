@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tests for eaa_design_validate.py - Design document validation script.
+"""Tests for amaa_design_validate.py - Design document validation script.
 
 Tests cover:
 - CLI argument parsing (single file, --all, --type, --verbose, --format)
@@ -25,7 +25,7 @@ from pathlib import Path
 import pytest
 
 # Path to the script under test
-SCRIPT_PATH = Path(__file__).parent.parent / "scripts" / "eaa_design_validate.py"
+SCRIPT_PATH = Path(__file__).parent.parent / "scripts" / "amaa_design_validate.py"
 
 # Valid statuses from the SKILL.md
 VALID_STATUSES = ["draft", "review", "approved", "implemented", "deprecated", "rejected"]
@@ -35,7 +35,7 @@ VALID_TYPES = ["pdr", "spec", "feature", "decision", "architecture", "template"]
 
 
 def run_script(*args, cwd=None):
-    """Run eaa_design_validate.py with given arguments and return result."""
+    """Run amaa_design_validate.py with given arguments and return result."""
     cmd = [sys.executable, str(SCRIPT_PATH)] + list(args)
     result = subprocess.run(
         cmd,

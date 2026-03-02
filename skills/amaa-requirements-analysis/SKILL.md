@@ -1,5 +1,5 @@
 ---
-name: eaa-requirements-analysis
+name: amaa-requirements-analysis
 description: "Use when managing planning phase: start planning, track progress, manage requirements/modules, or approve plans. Trigger with /start-planning or /planning-status commands."
 version: 1.0.0
 license: Apache-2.0
@@ -432,16 +432,16 @@ python3 scripts/reset_plan_phase.py --confirm --no-backup
 
 The following scripts automate RULE 14 (User Requirements Are Immutable) enforcement:
 
-### eaa_requirement_analysis.py
+### amaa_requirement_analysis.py
 
 Manages requirement tracking documents and validates implementations against requirements.
 
 | Command | Purpose | Usage |
 |---------|---------|-------|
-| `init` | Initialize requirements tracking structure | `python scripts/eaa_requirement_analysis.py init --project-root <PATH> --project-name "<NAME>"` |
-| `parse` | Parse requirements from user text | `python scripts/eaa_requirement_analysis.py parse --input "<TEXT_OR_FILE>"` |
-| `report` | Generate requirement issue report | `python scripts/eaa_requirement_analysis.py report --project-root <PATH> --requirement-id REQ-001 --requirement-text "<TEXT>" --issue-type Feasibility --description "<ISSUE>"` |
-| `validate` | Validate implementation against requirements | `python scripts/eaa_requirement_analysis.py validate --project-root <PATH> --implementation <IMPL_PATH>` |
+| `init` | Initialize requirements tracking structure | `python scripts/amaa_requirement_analysis.py init --project-root <PATH> --project-name "<NAME>"` |
+| `parse` | Parse requirements from user text | `python scripts/amaa_requirement_analysis.py parse --input "<TEXT_OR_FILE>"` |
+| `report` | Generate requirement issue report | `python scripts/amaa_requirement_analysis.py report --project-root <PATH> --requirement-id REQ-001 --requirement-text "<TEXT>" --issue-type Feasibility --description "<ISSUE>"` |
+| `validate` | Validate implementation against requirements | `python scripts/amaa_requirement_analysis.py validate --project-root <PATH> --implementation <IMPL_PATH>` |
 
 ### When to Use
 
@@ -460,7 +460,7 @@ This script enforces RULE 14: User Requirements Are Immutable. When issues arise
 
 ### Script Location
 
-The script is located at `../../scripts/eaa_requirement_analysis.py` relative to this skill.
+The script is located at `../../scripts/amaa_requirement_analysis.py` relative to this skill.
 
 ## Resources
 

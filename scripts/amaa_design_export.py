@@ -118,7 +118,7 @@ def format_for_issue(content: str, uuid_str: str) -> str:
 {body.strip()}
 
 ---
-*Exported from EAA design documents*
+*Exported from AMAA design documents*
 """
 
     return issue_body

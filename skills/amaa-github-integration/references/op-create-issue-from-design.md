@@ -2,8 +2,8 @@
 operation: create-issue-from-design
 procedure: proc-submit-design
 workflow-instruction: Step 8 - Design Submission
-parent-skill: eaa-github-integration
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-github-integration
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -63,7 +63,7 @@ Look for `uuid:` field in frontmatter.
 Always run dry-run before creating the actual issue:
 
 ```bash
-python scripts/eaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4 --dry-run
+python scripts/amaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4 --dry-run
 ```
 
 Expected output:
@@ -75,7 +75,7 @@ DRY-RUN: Would add labels: design, design:spec, status:draft
 ### Step 4: Create the Issue
 
 ```bash
-python scripts/eaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4
+python scripts/amaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4
 ```
 
 ### Step 5: Verify Results
@@ -95,9 +95,9 @@ Copy this checklist and track your progress:
 - [ ] Verify gh CLI is authenticated: `gh auth status`
 - [ ] Verify current directory is a GitHub repository: `git remote -v`
 - [ ] Verify design document has UUID in frontmatter
-- [ ] Run dry-run: `python scripts/eaa_github_issue_create.py --uuid <UUID> --dry-run`
+- [ ] Run dry-run: `python scripts/amaa_github_issue_create.py --uuid <UUID> --dry-run`
 - [ ] Review dry-run output for correctness
-- [ ] Create issue: `python scripts/eaa_github_issue_create.py --uuid <UUID>`
+- [ ] Create issue: `python scripts/amaa_github_issue_create.py --uuid <UUID>`
 - [ ] Verify issue was created: check URL in output
 - [ ] Verify design frontmatter updated with `related_issues`
 
@@ -107,14 +107,14 @@ Copy this checklist and track your progress:
 
 ```bash
 # Dry-run first
-python scripts/eaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4 --dry-run
+python scripts/amaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4 --dry-run
 
 # Output:
 # DRY-RUN: Would create issue with title "[SPEC] Auth Service Architecture"
 # DRY-RUN: Would add labels: design, design:spec, status:draft
 
 # Create the issue
-python scripts/eaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4
+python scripts/amaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4
 
 # Output:
 # CREATED: https://github.com/owner/repo/issues/123
@@ -127,7 +127,7 @@ python scripts/eaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4
 |-------|-------|------------|
 | `ERROR: gh CLI not found` | gh CLI not installed | Install via `brew install gh` (macOS) or `apt install gh` (Linux) |
 | `ERROR: gh CLI not authenticated` | No auth token | Run `gh auth login` |
-| `ERROR: Document has no UUID` | Missing frontmatter | Run `eaa_design_uuid.py --file <path> --type SPEC` |
+| `ERROR: Document has no UUID` | Missing frontmatter | Run `amaa_design_uuid.py --file <path> --type SPEC` |
 | `WARNING: Document already linked to issues` | Issue already exists | Use [op-attach-design-to-issue.md](op-attach-design-to-issue.md) or [op-sync-status-to-github.md](op-sync-status-to-github.md) instead |
 | `ERROR: Repository not found` | Not in git repo | Navigate to repository root |
 

@@ -2,8 +2,8 @@
 operation: search-design-documents
 procedure: proc-create-design
 workflow-instruction: Step 7 - Design Document Creation
-parent-skill: eaa-design-management
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-design-management
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -43,7 +43,7 @@ Use this operation when:
 ## Prerequisites
 
 - Python 3.10 or higher installed
-- Access to the `scripts/eaa_design_search.py` script
+- Access to the `scripts/amaa_design_search.py` script
 - Design documents exist in the `design/` directory structure
 - Understanding of frontmatter fields for filtering
 
@@ -66,22 +66,22 @@ Identify what you're searching for:
 Run the search script with your criteria:
 
 ```bash
-python scripts/eaa_design_search.py [options]
+python scripts/amaa_design_search.py [options]
 ```
 
 **Search by UUID:**
 ```bash
-python scripts/eaa_design_search.py --uuid GUUID-20260130-0001
+python scripts/amaa_design_search.py --uuid GUUID-20260130-0001
 ```
 
 **Search by type and status:**
 ```bash
-python scripts/eaa_design_search.py --type pdr --status approved
+python scripts/amaa_design_search.py --type pdr --status approved
 ```
 
 **Search by keyword:**
 ```bash
-python scripts/eaa_design_search.py --keyword "authentication"
+python scripts/amaa_design_search.py --keyword "authentication"
 ```
 
 ### Step 3: Interpret Results
@@ -90,12 +90,12 @@ Results can be displayed in two formats:
 
 **JSON format (default):**
 ```bash
-python scripts/eaa_design_search.py --type pdr --format json
+python scripts/amaa_design_search.py --type pdr --format json
 ```
 
 **Table format:**
 ```bash
-python scripts/eaa_design_search.py --type pdr --format table
+python scripts/amaa_design_search.py --type pdr --format table
 ```
 
 ### Step 4: Combine Filters
@@ -103,7 +103,7 @@ python scripts/eaa_design_search.py --type pdr --format table
 Combine multiple filters for precise results:
 
 ```bash
-python scripts/eaa_design_search.py \
+python scripts/amaa_design_search.py \
   --type spec \
   --status approved \
   --keyword "api"
@@ -133,7 +133,7 @@ Copy this checklist and track your progress:
 ### Example 1: Find All PDRs in Review
 
 ```bash
-python scripts/eaa_design_search.py --type pdr --status review --format table
+python scripts/amaa_design_search.py --type pdr --status review --format table
 
 # Output:
 # +---------------------+----------------------------------+--------+------------+
@@ -148,7 +148,7 @@ python scripts/eaa_design_search.py --type pdr --status review --format table
 ### Example 2: Search by Keyword
 
 ```bash
-python scripts/eaa_design_search.py --keyword "oauth" --format json
+python scripts/amaa_design_search.py --keyword "oauth" --format json
 
 # Output:
 # [
@@ -166,7 +166,7 @@ python scripts/eaa_design_search.py --keyword "oauth" --format json
 ### Example 3: Find Specific Document by UUID
 
 ```bash
-python scripts/eaa_design_search.py --uuid GUUID-20260128-0001 --format json
+python scripts/amaa_design_search.py --uuid GUUID-20260128-0001 --format json
 
 # Output:
 # {
@@ -184,7 +184,7 @@ python scripts/eaa_design_search.py --uuid GUUID-20260128-0001 --format json
 ### Example 4: Combined Filter Search
 
 ```bash
-python scripts/eaa_design_search.py \
+python scripts/amaa_design_search.py \
   --type spec \
   --status approved \
   --keyword "rest api" \
@@ -202,7 +202,7 @@ python scripts/eaa_design_search.py \
 ### Example 5: List All Documents of a Type
 
 ```bash
-python scripts/eaa_design_search.py --type decision --format table
+python scripts/amaa_design_search.py --type decision --format table
 
 # Output:
 # +---------------------+----------------------------------+----------+------------+
@@ -238,7 +238,7 @@ python scripts/eaa_design_search.py --type decision --format table
 | Invalid status | Unknown status value | Use valid status: draft, review, approved, implemented, deprecated, rejected |
 | Directory not found | Design directory missing | Verify `design/` directory exists |
 | Malformed frontmatter | Document has invalid YAML | Run validation on documents first |
-| Script not found | Missing search script | Verify script path: `scripts/eaa_design_search.py` |
+| Script not found | Missing search script | Verify script path: `scripts/amaa_design_search.py` |
 
 ## Related Operations
 

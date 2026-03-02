@@ -1,13 +1,13 @@
-# EAA Modularization Skill
+# AMAA Modularization Skill
 
 ## Purpose
 
-This skill teaches the Emasoft Architect Agent (EAA) how to decompose systems into well-defined modules with clear boundaries, minimal coupling, and high cohesion.
+This skill teaches the AI Maestro Architect Agent (AMAA) how to decompose systems into well-defined modules with clear boundaries, minimal coupling, and high cohesion.
 
 ## Contents
 
 ```
-eaa-modularization/
+amaa-modularization/
   SKILL.md              # Main skill document with modularization principles
   README.md             # This file
   references/           # Detailed reference documents (to be populated)
@@ -60,6 +60,6 @@ Use this skill when:
 
 ## Related Skills
 
-- `eaa-planning-patterns` - Planning integration
-- `eaa-design-lifecycle` - Design document management
-- `eaa-requirements-analysis` - Requirements gathering
+- `amaa-planning-patterns` - Planning integration
+- `amaa-design-lifecycle` - Design document management
+- `amaa-requirements-analysis` - Requirements gathering

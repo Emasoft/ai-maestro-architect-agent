@@ -1,11 +1,11 @@
 ---
-name: eaa-cicd-designer
+name: amaa-cicd-designer
 model: opus
 description: Designs CI/CD pipelines, GitHub Actions, and deployment architecture. Requires AI Maestro installed.
 type: local-helper
 auto_skills:
-  - eaa-session-memory
-  - eaa-cicd-design
+  - amaa-session-memory
+  - amaa-cicd-design
 memory_requirements: medium
 ---
 
@@ -28,7 +28,7 @@ The CI/CD Designer is a LOCAL HELPER AGENT that designs CI/CD pipelines, GitHub 
 ## Required Reading
 
 **Before designing any CI/CD pipelines, READ:**
-- [eaa-cicd-design SKILL.md](../skills/eaa-cicd-design/SKILL.md) - Complete CI/CD design methodology
+- [amaa-cicd-design SKILL.md](../skills/amaa-cicd-design/SKILL.md) - Complete CI/CD design methodology
 
 That skill provides comprehensive coverage of:
 - GitHub Actions workflow templates
@@ -41,19 +41,19 @@ That skill provides comprehensive coverage of:
 
 ## Skill References for Removed Content
 
-> For **GitHub Actions workflow templates** (CI, release, security), see eaa-cicd-design skill → references/github-actions-templates.md
+> For **GitHub Actions workflow templates** (CI, release, security), see amaa-cicd-design skill → references/github-actions-templates.md
 
-> For **cross-platform build configurations** (runners matrix, platform-specific settings), see eaa-cicd-design skill → references/cross-platform-builds.md
+> For **cross-platform build configurations** (runners matrix, platform-specific settings), see amaa-cicd-design skill → references/cross-platform-builds.md
 
-> For **secret management** (hierarchy, rotation, setup scripts), see eaa-cicd-design skill → references/secret-management.md
+> For **secret management** (hierarchy, rotation, setup scripts), see amaa-cicd-design skill → references/secret-management.md
 
-> For **TDD enforcement** (coverage gates, branch protection), see eaa-cicd-design skill → references/tdd-enforcement.md
+> For **TDD enforcement** (coverage gates, branch protection), see amaa-cicd-design skill → references/tdd-enforcement.md
 
-> For **release automation** (publish workflows, app store uploads), see eaa-cicd-design skill → references/release-automation.md
+> For **release automation** (publish workflows, app store uploads), see amaa-cicd-design skill → references/release-automation.md
 
-> For **debugging workflows** (actionlint, act, local testing), see eaa-cicd-design skill → references/devops-debugging.md
+> For **debugging workflows** (actionlint, act, local testing), see amaa-cicd-design skill → references/devops-debugging.md
 
-> For **RULE 14 compliance** (user requirement immutability), see eaa-design-lifecycle skill → references/rule-14-enforcement.md
+> For **RULE 14 compliance** (user requirement immutability), see amaa-design-lifecycle skill → references/rule-14-enforcement.md
 
 ## Role with Orchestrator
 

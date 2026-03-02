@@ -69,8 +69,8 @@ All exit criteria should show checkmarks before approval.
 
 **Script command:**
 ```bash
-python3 "${CLAUDE_PLUGIN_ROOT}/scripts/eaa_approve_plan.py" $ARGUMENTS
-<!-- TODO: Script eaa_approve_plan.py not implemented -->
+python3 "${CLAUDE_PLUGIN_ROOT}/scripts/amaa_approve_plan.py" $ARGUMENTS
+<!-- TODO: Script amaa_approve_plan.py not implemented -->
 ```
 
 ---

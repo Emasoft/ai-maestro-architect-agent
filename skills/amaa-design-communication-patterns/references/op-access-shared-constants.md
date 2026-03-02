@@ -2,8 +2,8 @@
 operation: access-shared-constants
 procedure: proc-submit-design
 workflow-instruction: Step 8 - Design Submission
-parent-skill: eaa-design-communication-patterns
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-design-communication-patterns
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -37,8 +37,8 @@ Trigger this operation when:
 
 ## Prerequisites
 
-- eaa-design-communication-patterns skill directory accessible
-- Python environment configured with eaa_shared module in path
+- amaa-design-communication-patterns skill directory accessible
+- Python environment configured with amaa_shared module in path
 - Constants defined in `constants/` subdirectory
 
 ## Procedure
@@ -46,7 +46,7 @@ Trigger this operation when:
 ### Step 1: Import Required Constants
 
 ```python
-from eaa_shared.constants import (
+from amaa_shared.constants import (
     VALID_STATUSES,
     PRIORITY_LEVELS,
     DEFAULT_TIMEOUT,
@@ -78,8 +78,8 @@ priority = PRIORITY_LEVELS["high"]
 Copy this checklist and track your progress:
 
 - [ ] Identify which constants are needed
-- [ ] Verify eaa-design-communication-patterns is in Python path
-- [ ] Import constants from `eaa_shared.constants`
+- [ ] Verify amaa-design-communication-patterns is in Python path
+- [ ] Import constants from `amaa_shared.constants`
 - [ ] Use constants in validation logic
 - [ ] Do NOT hardcode values that exist as constants
 - [ ] Update usage if constants change in future versions
@@ -89,7 +89,7 @@ Copy this checklist and track your progress:
 ### Example: Validate Design Document Status
 
 ```python
-from eaa_shared.constants import VALID_STATUSES
+from amaa_shared.constants import VALID_STATUSES
 
 def validate_design_status(status: str) -> bool:
     """Validate that status is an allowed value."""
@@ -109,7 +109,7 @@ validate_design_status("invalid")    # Raises ValueError
 ### Example: Validate Design Type
 
 ```python
-from eaa_shared.constants import DESIGN_TYPES
+from amaa_shared.constants import DESIGN_TYPES
 
 def create_design(doc_type: str, title: str):
     """Create a design document of specified type."""
@@ -130,7 +130,7 @@ create_design("ADR", "Database Choice")  # OK
 ### Example: Use Priority Levels
 
 ```python
-from eaa_shared.constants import PRIORITY_LEVELS
+from amaa_shared.constants import PRIORITY_LEVELS
 
 def send_notification(message: str, priority: str = "normal"):
     """Send notification with specified priority."""
@@ -162,7 +162,7 @@ send_notification("Design approved", priority="high")
 
 | Error | Cause | Resolution |
 |-------|-------|------------|
-| `ModuleNotFoundError: eaa_shared` | Module not in path | Add eaa-design-communication-patterns to Python path |
+| `ModuleNotFoundError: amaa_shared` | Module not in path | Add amaa-design-communication-patterns to Python path |
 | `ImportError: cannot import CONSTANT` | Constant not defined | Check constant name spelling; verify version |
 | `KeyError` on dict constant | Invalid key used | Use only documented keys |
 | `TypeError: unhashable type` | Using list instead of set | Use `in` operator, not index |

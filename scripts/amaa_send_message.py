@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-eaa_send_message.py - AI Maestro message sending wrapper.
+amaa_send_message.py - AI Maestro message sending wrapper.
 
 Sends messages to other agents via the AMP CLI (amp-send).
 
 Usage:
-    python eaa_send_message.py --to <agent> --subject <s> --message <m>
-    python eaa_send_message.py --to <agent> -s <subject> -m <msg> --priority high
-    python eaa_send_message.py --to <agent> -s <subject> --type request -m <msg>
+    python amaa_send_message.py --to <agent> --subject <s> --message <m>
+    python amaa_send_message.py --to <agent> -s <subject> -m <msg> --priority high
+    python amaa_send_message.py --to <agent> -s <subject> --type request -m <msg>
 
 Environment:
     SESSION_NAME - Sender agent name (auto-detected from tmux if not set)

@@ -223,7 +223,7 @@ def update_session_after_question(session_state: dict, question_id: str):
 |------|---------|
 | `docs_dev/design/open-questions.md` | Updated questions registry |
 | `docs_dev/design/index.json` | Updated index |
-| `.claude/eaa-session-state.local.md` | Updated session state |
+| `.claude/amaa-session-state.local.md` | Updated session state |
 
 ## Verification Checklist
 

@@ -164,7 +164,7 @@ def update_session_after_pattern(session_state: dict, pattern_name: str):
 |------|---------|
 | `docs_dev/design/patterns.md` | Updated patterns registry |
 | `docs_dev/design/index.json` | Updated index |
-| `.claude/eaa-session-state.local.md` | Updated session state |
+| `.claude/amaa-session-state.local.md` | Updated session state |
 
 ## Verification Checklist
 

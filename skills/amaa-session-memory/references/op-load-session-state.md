@@ -46,7 +46,7 @@ Load existing session state and design context when starting a new session, enab
 
 | Input | Source | Required |
 |-------|--------|----------|
-| Session state file | `.claude/eaa-session-state.local.md` | If exists |
+| Session state file | `.claude/amaa-session-state.local.md` | If exists |
 | Design index | `docs_dev/design/index.json` | If exists |
 | Handoff documents | `docs_dev/design/handoffs/` | If exists |
 
@@ -55,7 +55,7 @@ Load existing session state and design context when starting a new session, enab
 ### Step 1: Check for Existing Session State
 
 ```bash
-SESSION_STATE_FILE=".claude/eaa-session-state.local.md"
+SESSION_STATE_FILE=".claude/amaa-session-state.local.md"
 
 if [ -f "$SESSION_STATE_FILE" ]; then
     echo "Found existing session state"
@@ -70,7 +70,7 @@ If session state exists, parse the YAML frontmatter and content:
 
 ```markdown
 ---
-session_id: eaa-session-20260203-091500
+session_id: amaa-session-20260203-091500
 project: project-name
 design_id: design-payments-xyz789
 phase: architecture
@@ -165,7 +165,7 @@ Generate summary for the session:
 ```markdown
 ## Session Context Loaded
 
-**Session ID:** eaa-session-20260203-091500
+**Session ID:** amaa-session-20260203-091500
 **Project:** project-name
 **Last Activity:** 2026-02-03T09:15:00Z
 
@@ -188,7 +188,7 @@ Resolve OQ-001: Payment processor selection
 
 ### Files Loaded
 
-- `.claude/eaa-session-state.local.md`
+- `.claude/amaa-session-state.local.md`
 - `docs_dev/design/index.json`
 - `docs_dev/design/handoffs/handoff-20260203-090000.md`
 ```
@@ -202,7 +202,7 @@ def initialize_session():
     """Initialize a new session state."""
     import datetime
 
-    session_id = f"eaa-session-{datetime.datetime.now().strftime('%Y%m%d-%H%M%S')}"
+    session_id = f"amaa-session-{datetime.datetime.now().strftime('%Y%m%d-%H%M%S')}"
 
     session_state = {
         "session_id": session_id,
@@ -238,10 +238,10 @@ def initialize_session():
 ## Example
 
 ```
-EAA: Checking for existing session state...
-Found: .claude/eaa-session-state.local.md
+AMAA: Checking for existing session state...
+Found: .claude/amaa-session-state.local.md
 
-Session ID: eaa-session-20260203-091500
+Session ID: amaa-session-20260203-091500
 Last Activity: architecture_decision_made
 Decisions: 4
 Constraints: 6

@@ -2,8 +2,8 @@
 operation: report-requirement-issue
 procedure: proc-route-requirements
 workflow-instruction: Step 6 - Requirements to Architect
-parent-skill: eaa-requirements-analysis
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-requirements-analysis
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -65,7 +65,7 @@ This operation enforces RULE 14 (User Requirements Are Immutable): requirements 
 ### Step 2: Execute Report Command
 
 ```bash
-python3 scripts/eaa_requirement_analysis.py report \
+python3 scripts/amaa_requirement_analysis.py report \
   --project-root . \
   --requirement-id REQ-001 \
   --requirement-text "Original requirement text" \
@@ -101,7 +101,7 @@ Copy this checklist and track your progress:
 ### Example: Reporting Feasibility Issue
 
 ```bash
-python3 scripts/eaa_requirement_analysis.py report \
+python3 scripts/amaa_requirement_analysis.py report \
   --project-root . \
   --requirement-id REQ-F003 \
   --requirement-text "System must support real-time video processing for 10000 concurrent streams" \
@@ -153,7 +153,7 @@ Current infrastructure cannot support 10000 concurrent video streams. Maximum fe
 ### Example: Reporting Ambiguity Issue
 
 ```bash
-python3 scripts/eaa_requirement_analysis.py report \
+python3 scripts/amaa_requirement_analysis.py report \
   --project-root . \
   --requirement-id REQ-F007 \
   --requirement-text "Users should be able to export data easily" \
@@ -164,7 +164,7 @@ python3 scripts/eaa_requirement_analysis.py report \
 ### Example: Reporting Conflict
 
 ```bash
-python3 scripts/eaa_requirement_analysis.py report \
+python3 scripts/amaa_requirement_analysis.py report \
   --project-root . \
   --requirement-id REQ-NF002 \
   --requirement-text "All API responses must be under 50ms" \

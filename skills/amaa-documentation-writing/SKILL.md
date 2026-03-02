@@ -1,5 +1,5 @@
 ---
-name: eaa-documentation-writer
+name: amaa-documentation-writer
 description: Use when writing module specs, API contracts, ADRs, or feature specs. Follows 6 C's quality framework. Trigger with technical documentation requests for modules or architecture.
 version: 1.0.0
 license: Apache-2.0

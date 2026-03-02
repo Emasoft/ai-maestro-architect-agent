@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 """
-eaa_github_attach_document.py - Attach design document to existing GitHub issue.
+amaa_github_attach_document.py - Attach design document to existing GitHub issue.
 
 Takes a design document UUID and an existing GitHub issue number,
 posts the document content as a comment, and updates issue labels.
 
 Usage:
     # Attach design document to issue
-    python eaa_github_attach_document.py --uuid PROJ-SPEC-20250129-a1b2c3d4 --issue 42
+    python amaa_github_attach_document.py --uuid PROJ-SPEC-20250129-a1b2c3d4 --issue 42
 
     # Attach with custom comment header
-    python eaa_github_attach_document.py --uuid PROJ-SPEC-... --issue 42 --header "Updated design"
+    python amaa_github_attach_document.py --uuid PROJ-SPEC-... --issue 42 --header "Updated design"
 
     # Dry run
-    python eaa_github_attach_document.py --uuid PROJ-SPEC-... --issue 42 --dry-run
+    python amaa_github_attach_document.py --uuid PROJ-SPEC-... --issue 42 --dry-run
 
 Dependencies: Python 3.8+, gh CLI (authenticated)
 """
@@ -375,13 +375,13 @@ def main() -> int:
         epilog="""
 Examples:
   # Attach design document to issue
-  python eaa_github_attach_document.py --uuid PROJ-SPEC-20250129-a1b2c3d4 --issue 42
+  python amaa_github_attach_document.py --uuid PROJ-SPEC-20250129-a1b2c3d4 --issue 42
 
   # Attach with custom header
-  python eaa_github_attach_document.py --uuid PROJ-SPEC-... --issue 42 --header "Updated design"
+  python amaa_github_attach_document.py --uuid PROJ-SPEC-... --issue 42 --header "Updated design"
 
   # Dry run
-  python eaa_github_attach_document.py --uuid PROJ-SPEC-... --issue 42 --dry-run
+  python amaa_github_attach_document.py --uuid PROJ-SPEC-... --issue 42 --dry-run
         """,
     )
 

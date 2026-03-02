@@ -1,6 +1,6 @@
 # Record-Keeping and Logging Formats
 
-This document defines all standard formats for record-keeping, logging, and documentation in the EAA Architect workflow.
+This document defines all standard formats for record-keeping, logging, and documentation in the AMAA Architect workflow.
 
 ## Contents
 
@@ -191,7 +191,7 @@ docs_dev/design/
 
 **Date:** [YYYY-MM-DD HH:MM:SS]
 **Project:** [PROJECT_NAME]
-**Architect:** eaa-architect-main-agent
+**Architect:** amaa-architect-main-agent
 **Handoff ID:** [UUID]
 
 ## Executive Summary
@@ -346,7 +346,7 @@ Send a message using the `agent-messaging` skill with:
 **Example:**
 ```json
 {
-  "from": "eaa-architect-main-agent",
+  "from": "amaa-architect-main-agent",
   "to": "ecos",
   "subject": "Design Request Acknowledged",
   "priority": "normal",
@@ -372,7 +372,7 @@ Send a message using the `agent-messaging` skill with:
 **Example:**
 ```json
 {
-  "from": "eaa-architect-main-agent",
+  "from": "amaa-architect-main-agent",
   "to": "ecos",
   "subject": "Clarification Needed - Payment Gateway Integration",
   "priority": "high",
@@ -398,7 +398,7 @@ Send a message using the `agent-messaging` skill with:
 **Example:**
 ```json
 {
-  "from": "eaa-architect-main-agent",
+  "from": "amaa-architect-main-agent",
   "to": "ecos",
   "subject": "Design Complete - E-Commerce Product Catalog",
   "priority": "normal",
@@ -424,7 +424,7 @@ Send a message using the `agent-messaging` skill with:
 **Example:**
 ```json
 {
-  "from": "eaa-architect-main-agent",
+  "from": "amaa-architect-main-agent",
   "to": "ecos",
   "subject": "Handoff Ready - Payment Gateway Integration",
   "priority": "normal",
@@ -450,7 +450,7 @@ Send a message using the `agent-messaging` skill with:
 **Example:**
 ```json
 {
-  "from": "eaa-architect-main-agent",
+  "from": "amaa-architect-main-agent",
   "to": "ecos",
   "subject": "BLOCKED - Real-Time Analytics Dashboard",
   "priority": "urgent",
@@ -535,7 +535,7 @@ mv docs_dev/design/architecture.md docs_dev/design/architecture-archived-2026020
 
 Track current work state in a session memory file (not part of permanent artifacts):
 
-**Location:** `docs_dev/design/.eaa-session-state.json` (gitignored)
+**Location:** `docs_dev/design/.amaa-session-state.json` (gitignored)
 
 **Format:**
 ```json
@@ -569,7 +569,7 @@ Track current work state in a session memory file (not part of permanent artifac
   ],
   "sub_agents": [
     {
-      "agent": "eaa-api-researcher",
+      "agent": "amaa-api-researcher",
       "task": "Research Stripe API",
       "status": "running",
       "started_at": "2026-02-04T11:00:00Z"

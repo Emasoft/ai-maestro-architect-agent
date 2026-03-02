@@ -2,8 +2,8 @@
 operation: init-requirements-tracking
 procedure: proc-route-requirements
 workflow-instruction: Step 6 - Requirements to Architect
-parent-skill: eaa-requirements-analysis
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-requirements-analysis
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -62,7 +62,7 @@ Ensure you are in the project root directory.
 ### Step 2: Execute Init Command
 
 ```bash
-python3 scripts/eaa_requirement_analysis.py init --project-root . --project-name "Project Name"
+python3 scripts/amaa_requirement_analysis.py init --project-root . --project-name "Project Name"
 ```
 
 ### Step 3: Verify Created Structure
@@ -93,7 +93,7 @@ Copy this checklist and track your progress:
 cd /path/to/my-project
 
 # Initialize requirements tracking
-python3 scripts/eaa_requirement_analysis.py init --project-root . --project-name "User Management API"
+python3 scripts/amaa_requirement_analysis.py init --project-root . --project-name "User Management API"
 
 # Expected output:
 # Requirements tracking initialized for: User Management API

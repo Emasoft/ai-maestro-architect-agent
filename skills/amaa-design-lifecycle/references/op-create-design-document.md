@@ -2,8 +2,8 @@
 operation: create-design-document
 procedure: proc-create-design
 workflow-instruction: Step 7 - Design Document Creation
-parent-skill: eaa-design-lifecycle
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-design-lifecycle
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -50,7 +50,7 @@ Use this operation when:
 Generate a unique identifier for the design document using the UUID generation script.
 
 ```bash
-python scripts/eaa_design_uuid.py --type design
+python scripts/amaa_design_uuid.py --type design
 ```
 
 The UUID follows the format: `design-<feature-name>-<YYYYMMDD>-<unique-id>`
@@ -90,7 +90,7 @@ The initial state must always be DRAFT. This is set in the frontmatter `status` 
 Add the new design to the design index file:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action register
+python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action register
 ```
 
 This updates `design/requirements/index.json` with the new entry.
@@ -116,11 +116,11 @@ After creating the design document, notify relevant stakeholders that a new desi
 
 Copy this checklist and track your progress:
 
-- [ ] Generate design UUID using `eaa_design_uuid.py`
+- [ ] Generate design UUID using `amaa_design_uuid.py`
 - [ ] Copy template to `docs_dev/design/` with UUID-based filename
 - [ ] Populate all required frontmatter fields
 - [ ] Verify status is set to `draft`
-- [ ] Register design in index using `eaa_design_lifecycle.py --action register`
+- [ ] Register design in index using `amaa_design_lifecycle.py --action register`
 - [ ] Complete all template sections with design content
 - [ ] Add data flow diagrams if applicable
 - [ ] Document API specifications if applicable
@@ -133,14 +133,14 @@ Copy this checklist and track your progress:
 
 ```bash
 # Step 1: Generate UUID
-python scripts/eaa_design_uuid.py --type design
+python scripts/amaa_design_uuid.py --type design
 # Output: design-20260130-7f3a2b
 
 # Step 2: Create document
 cp templates/design-template.md docs_dev/design/design-auth-system-20260130-7f3a2b.md
 
 # Step 3: Register in index
-python scripts/eaa_design_lifecycle.py --uuid design-auth-system-20260130-7f3a2b --action register
+python scripts/amaa_design_lifecycle.py --uuid design-auth-system-20260130-7f3a2b --action register
 # Output: Registered design-auth-system-20260130-7f3a2b in design index
 ```
 

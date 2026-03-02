@@ -22,9 +22,9 @@ Link design documents to GitHub issues for complete traceability and status sync
 
 | Script | Purpose |
 |--------|---------|
-| `eaa_github_issue_create.py` | Create GitHub issue from design document |
-| `eaa_github_attach_document.py` | Attach design to existing issue |
-| `eaa_github_sync_status.py` | Sync status to GitHub labels |
+| `amaa_github_issue_create.py` | Create GitHub issue from design document |
+| `amaa_github_attach_document.py` | Attach design to existing issue |
+| `amaa_github_sync_status.py` | Sync status to GitHub labels |
 
 ## Quick Start
 

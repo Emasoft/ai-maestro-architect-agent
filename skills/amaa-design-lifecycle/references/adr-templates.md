@@ -1,6 +1,6 @@
 # ADR Templates
 
-This document provides Architecture Decision Record (ADR) templates extracted from the EAA Architect Main Agent.
+This document provides Architecture Decision Record (ADR) templates extracted from the AMAA Architect Main Agent.
 
 ## Standard ADR Template
 

@@ -1,8 +1,8 @@
 ---
 name: extended-examples-and-resources
-description: Additional planning phase examples, error handling details, and resource links for the eaa-requirements-analysis skill.
+description: Additional planning phase examples, error handling details, and resource links for the amaa-requirements-analysis skill.
 version: 1.0.0
-parent-skill: eaa-requirements-analysis
+parent-skill: amaa-requirements-analysis
 ---
 
 ## Contents
@@ -120,9 +120,9 @@ Located in this skill's references directory:
 
 ### Related Skills
 
-- `eaa-orchestration-commands` - The orchestration phase skill that follows after plan approval
-- `eaa-agent-management` - Registering and assigning agents to approved modules
-- `eaa-module-lifecycle` - Tracking module implementation progress after planning
+- `amaa-orchestration-commands` - The orchestration phase skill that follows after plan approval
+- `amaa-agent-management` - Registering and assigning agents to approved modules
+- `amaa-module-lifecycle` - Tracking module implementation progress after planning
 
 ### External Dependencies
 

@@ -2,8 +2,8 @@
 operation: track-implementation
 procedure: proc-handle-feedback
 workflow-instruction: Step 15 - Implementation Tracking
-parent-skill: eaa-design-lifecycle
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-design-lifecycle
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -56,7 +56,7 @@ Use this operation when:
 When implementation begins, transition the design state:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --transition IMPLEMENTING
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition IMPLEMENTING
 ```
 
 ### Step 2: Monitor Implementation Progress
@@ -64,7 +64,7 @@ python scripts/eaa_design_lifecycle.py --uuid <UUID> --transition IMPLEMENTING
 Track the status of implementation tasks:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --action check-progress
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --action check-progress
 ```
 
 This shows:
@@ -82,7 +82,7 @@ If implementation reveals necessary changes to the design:
 3. Record the deviation
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --action record-deviation \
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --action record-deviation \
   --reason "API endpoint structure changed for performance" \
   --section "API Specifications"
 ```
@@ -92,7 +92,7 @@ python scripts/eaa_design_lifecycle.py --uuid <UUID> --action record-deviation \
 Link requirements to implementation artifacts:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --action update-traceability \
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --action update-traceability \
   --requirement "REQ-AUTH-001" \
   --artifact "src/auth/service.py"
 ```
@@ -102,7 +102,7 @@ python scripts/eaa_design_lifecycle.py --uuid <UUID> --action update-traceabilit
 When implementation deviates from the design, document it:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --action document-deviation \
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --action document-deviation \
   --description "Changed token expiry from 1 hour to 30 minutes" \
   --reason "Security requirement update from security team" \
   --impact "Minor - configuration change only"
@@ -113,7 +113,7 @@ python scripts/eaa_design_lifecycle.py --uuid <UUID> --action document-deviation
 Create a status report for stakeholders:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --action generate-report
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --action generate-report
 ```
 
 ## Checklist
@@ -135,11 +135,11 @@ Copy this checklist and track your progress:
 
 ```bash
 # Step 1: Begin implementation
-python scripts/eaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --transition IMPLEMENTING
+python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --transition IMPLEMENTING
 # Output: State transitioned: APPROVED -> IMPLEMENTING
 
 # Step 2: Check progress (weekly)
-python scripts/eaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action check-progress
+python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action check-progress
 # Output:
 # Implementation Progress: design-auth-20260130-abc123
 # Tasks: 3/4 complete (75%)
@@ -151,13 +151,13 @@ python scripts/eaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --acti
 # Overdue: 0
 
 # Step 3: Record a deviation
-python scripts/eaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action record-deviation \
+python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action record-deviation \
   --reason "Added rate limiting to auth endpoints" \
   --section "API Specifications"
 # Output: Deviation recorded in design history
 
 # Step 4: Update traceability
-python scripts/eaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action update-traceability \
+python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action update-traceability \
   --requirement "REQ-AUTH-001" \
   --artifact "src/auth/service.py:authenticate()"
 # Output: Traceability updated: REQ-AUTH-001 -> src/auth/service.py:authenticate()

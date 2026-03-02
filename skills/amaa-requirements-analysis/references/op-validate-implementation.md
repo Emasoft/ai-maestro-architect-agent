@@ -2,8 +2,8 @@
 operation: validate-implementation
 procedure: proc-route-requirements
 workflow-instruction: Step 6 - Requirements to Architect
-parent-skill: eaa-requirements-analysis
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-requirements-analysis
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -62,7 +62,7 @@ Determine which module or implementation path to validate.
 ### Step 2: Execute Validate Command
 
 ```bash
-python3 scripts/eaa_requirement_analysis.py validate \
+python3 scripts/amaa_requirement_analysis.py validate \
   --project-root . \
   --implementation path/to/module/or/code
 ```
@@ -97,7 +97,7 @@ Copy this checklist and track your progress:
 ### Example: Validating a Module Implementation
 
 ```bash
-python3 scripts/eaa_requirement_analysis.py validate \
+python3 scripts/amaa_requirement_analysis.py validate \
   --project-root . \
   --implementation src/auth/
 
@@ -129,7 +129,7 @@ python3 scripts/eaa_requirement_analysis.py validate \
 - **Date**: 2026-01-15T14:30:22
 - **Implementation**: src/auth/
 - **Requirements Source**: USER_REQUIREMENTS.md
-- **Validator**: eaa_requirement_analysis.py
+- **Validator**: amaa_requirement_analysis.py
 
 ## Results Summary
 - **Total Requirements**: 4
@@ -172,7 +172,7 @@ python3 scripts/eaa_requirement_analysis.py validate \
 ### Example: Validation with Failures
 
 ```bash
-python3 scripts/eaa_requirement_analysis.py validate \
+python3 scripts/amaa_requirement_analysis.py validate \
   --project-root . \
   --implementation src/api/
 

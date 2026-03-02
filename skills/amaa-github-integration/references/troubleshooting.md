@@ -124,7 +124,7 @@ ERROR: Document not found with UUID: PROJ-SPEC-20250129-a1b2c3d4
 
 1. List all UUIDs to find the correct one:
    ```bash
-   python scripts/eaa_design_uuid.py --list
+   python scripts/amaa_design_uuid.py --list
    ```
 
 2. Check the design root path:
@@ -152,7 +152,7 @@ ERROR: Document has no UUID in frontmatter: docs/design/specs/auth.md
 
 ```bash
 # Add UUID to the document
-python scripts/eaa_design_uuid.py --file docs/design/specs/auth.md --type SPEC
+python scripts/amaa_design_uuid.py --file docs/design/specs/auth.md --type SPEC
 ```
 
 ---
@@ -185,7 +185,7 @@ created: 2025-01-29
 
 Or use the UUID script to add it automatically:
 ```bash
-python scripts/eaa_design_uuid.py --file docs/design/specs/auth.md --type SPEC
+python scripts/amaa_design_uuid.py --file docs/design/specs/auth.md --type SPEC
 ```
 
 ---
@@ -268,7 +268,7 @@ The scripts automatically truncate long content. If you still get this error:
 2. Try attaching a shorter document
 3. Use dry-run to preview the comment:
    ```bash
-   python scripts/eaa_github_attach_document.py --uuid PROJ-SPEC-... --issue 42 --dry-run
+   python scripts/amaa_github_attach_document.py --uuid PROJ-SPEC-... --issue 42 --dry-run
    ```
 
 ---
@@ -288,12 +288,12 @@ ERROR: Document has no linked issues. Use --issue to specify one.
 
 Either specify the issue explicitly:
 ```bash
-python scripts/eaa_github_sync_status.py --uuid PROJ-SPEC-... --issue 42
+python scripts/amaa_github_sync_status.py --uuid PROJ-SPEC-... --issue 42
 ```
 
 Or first create/attach to an issue:
 ```bash
-python scripts/eaa_github_issue_create.py --uuid PROJ-SPEC-...
+python scripts/amaa_github_issue_create.py --uuid PROJ-SPEC-...
 ```
 
 ---
@@ -314,7 +314,7 @@ python scripts/eaa_github_issue_create.py --uuid PROJ-SPEC-...
 
 2. Re-run sync:
    ```bash
-   python scripts/eaa_github_sync_status.py --uuid PROJ-SPEC-...
+   python scripts/amaa_github_sync_status.py --uuid PROJ-SPEC-...
    ```
 
 ---
@@ -333,7 +333,7 @@ WARNING: Failed to sync issue #45
 
 1. Run sync individually for failed issues:
    ```bash
-   python scripts/eaa_github_sync_status.py --uuid <failed-uuid> --dry-run
+   python scripts/amaa_github_sync_status.py --uuid <failed-uuid> --dry-run
    ```
 
 2. Check specific issue:

@@ -1,11 +1,11 @@
 ---
-name: eaa-modularization
+name: amaa-modularization
 description: Use when designing modular systems, breaking up monoliths, or defining module boundaries and APIs. Trigger with modularization requests, system decomposition, or coupling analysis.
 version: 1.0.0
 license: Apache-2.0
 compatibility: Requires AI Maestro installed.
 context: fork
-agent: eaa-main
+agent: amaa-main
 user-invocable: false
 workflow-instruction: "Steps 7, 10"
 procedure: "proc-create-design, proc-decompose-design"

@@ -201,7 +201,7 @@ def update_session_after_constraint(session_state: dict, constraint_id: str):
 |------|---------|
 | `docs_dev/design/constraints.md` | Updated constraints registry |
 | `docs_dev/design/index.json` | Updated index |
-| `.claude/eaa-session-state.local.md` | Updated session state |
+| `.claude/amaa-session-state.local.md` | Updated session state |
 
 ## Verification Checklist
 

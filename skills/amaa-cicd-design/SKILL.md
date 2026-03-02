@@ -1,5 +1,5 @@
 ---
-name: eaa-cicd-design
+name: amaa-cicd-design
 description: "Use when designing CI/CD workflows and DevOps architecture. Trigger with CI/CD pipeline or GitHub Actions design requests."
 version: 1.0.0
 license: Apache-2.0
@@ -8,7 +8,7 @@ metadata:
   author: Emasoft
 context: fork
 user-invocable: false
-agent: eaa-main
+agent: amaa-main
 workflow-instruction: "Step 7"
 procedure: "proc-create-design"
 ---

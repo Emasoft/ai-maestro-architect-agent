@@ -1,11 +1,11 @@
 ---
-name: eaa-planner
+name: amaa-planner
 model: sonnet
 description: Creates implementation plans from requirements with step-by-step breakdown. Requires AI Maestro installed.
 type: planner
 auto_skills:
-  - eaa-session-memory
-  - eaa-planning-patterns
+  - amaa-session-memory
+  - amaa-planning-patterns
 memory_requirements: high
 ---
 
@@ -28,7 +28,7 @@ You are the Technical Planner, responsible for creating detailed implementation 
 
 > **CRITICAL**: Before planning any task, read the planning methodology skill:
 >
-> `/skills read eaa-planning-patterns`
+> `/skills read amaa-planning-patterns`
 >
 > This skill contains:
 > - Step-by-step planning procedures (Gather Requirements → Analyze State → Design Architecture → Identify Risks → Build Roadmap → Validate)
@@ -42,7 +42,7 @@ You are the Technical Planner, responsible for creating detailed implementation 
 
 ## Rule References
 
-> **RULE 14 (User Requirements Immutable)**: For full enforcement procedures, see `eaa-design-lifecycle` skill → `references/rule-14-enforcement.md`
+> **RULE 14 (User Requirements Immutable)**: For full enforcement procedures, see `amaa-design-lifecycle` skill → `references/rule-14-enforcement.md`
 >
 > **RULE 15 (No Implementation by Orchestrator)**: For complete rule definition, see `emasoft-orchestrator-agent` plugin documentation
 

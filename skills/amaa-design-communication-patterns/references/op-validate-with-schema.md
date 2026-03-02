@@ -2,8 +2,8 @@
 operation: validate-with-schema
 procedure: proc-submit-design
 workflow-instruction: Step 8 - Design Submission
-parent-skill: eaa-design-communication-patterns
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-design-communication-patterns
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -40,8 +40,8 @@ Trigger this operation when:
 
 ## Prerequisites
 
-- eaa-design-communication-patterns skill directory accessible
-- Python environment configured with eaa_shared module in path
+- amaa-design-communication-patterns skill directory accessible
+- Python environment configured with amaa_shared module in path
 - Schemas defined in `schemas/` subdirectory
 - Document data in dict or YAML format
 
@@ -50,7 +50,7 @@ Trigger this operation when:
 ### Step 1: Import Schema Validation
 
 ```python
-from eaa_shared.schemas import validate_design
+from amaa_shared.schemas import validate_design
 ```
 
 ### Step 2: Prepare Document Data
@@ -61,7 +61,7 @@ document = {
     "title": "Auth Service Architecture",
     "uuid": "PROJ-SPEC-20250129-a1b2c3d4",
     "status": "draft",
-    "author": "eaa-architect-main-agent",
+    "author": "amaa-architect-main-agent",
     "type": "SPEC"
 }
 ```
@@ -90,8 +90,8 @@ if errors:
 Copy this checklist and track your progress:
 
 - [ ] Identify which schema applies (design, adr, rfc, etc.)
-- [ ] Ensure eaa-design-communication-patterns is in Python path
-- [ ] Import validation function from `eaa_shared.schemas`
+- [ ] Ensure amaa-design-communication-patterns is in Python path
+- [ ] Import validation function from `amaa_shared.schemas`
 - [ ] Parse document into dict format
 - [ ] Run validation
 - [ ] If errors exist, fix them before proceeding
@@ -102,7 +102,7 @@ Copy this checklist and track your progress:
 ### Example: Validate Design Document Before GitHub Issue Creation
 
 ```python
-from eaa_shared.schemas import validate_design
+from amaa_shared.schemas import validate_design
 import yaml
 
 # Load document frontmatter
@@ -127,7 +127,7 @@ print("Document valid - creating GitHub issue...")
 ### Example: Validate with Specific Schema Type
 
 ```python
-from eaa_shared.schemas import validate_adr, validate_rfc
+from amaa_shared.schemas import validate_adr, validate_rfc
 
 # Validate ADR
 adr_data = {
@@ -160,7 +160,7 @@ if errors:
 
 ```python
 from pathlib import Path
-from eaa_shared.schemas import validate_design
+from amaa_shared.schemas import validate_design
 import yaml
 
 design_dir = Path("docs/design/specs")
@@ -220,7 +220,7 @@ else:
 
 | Error | Cause | Resolution |
 |-------|-------|------------|
-| `ModuleNotFoundError: eaa_shared` | Module not in path | Add eaa-design-communication-patterns to Python path |
+| `ModuleNotFoundError: amaa_shared` | Module not in path | Add amaa-design-communication-patterns to Python path |
 | `KeyError: missing required field` | Field not in document | Add the required field |
 | `ValueError: invalid status` | Status not in allowed values | Use valid status from VALID_STATUSES |
 | `ValueError: invalid UUID format` | UUID malformed | Generate new UUID with correct format |
@@ -230,4 +230,4 @@ else:
 
 - [op-load-shared-template.md](op-load-shared-template.md) - Templates produce schema-valid output
 - [op-access-shared-constants.md](op-access-shared-constants.md) - Constants define valid values
-- [op-generate-design-uuid.md](../../eaa-github-integration/references/op-generate-design-uuid.md) - Generate valid UUID
+- [op-generate-design-uuid.md](../../amaa-github-integration/references/op-generate-design-uuid.md) - Generate valid UUID

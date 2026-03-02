@@ -92,7 +92,7 @@ Team names must be **globally unique** across all projects managed by ECOS. ECOS
     {
       "name": "svgbbox-architect",
       "role": "architect",
-      "plugin": "emasoft-architect-agent",
+      "plugin": "ai-maestro-architect-agent",
       "host": "macbook-dev-01",
       "ai_maestro_address": "svgbbox-architect",
       "status": "active",
@@ -200,7 +200,7 @@ Team names must be **globally unique** across all projects managed by ECOS. ECOS
 | `manager` | emasoft-assistant-manager-agent | 0 (org-wide) | User interface, approvals |
 | `chief-of-staff` | emasoft-chief-of-staff | 0 (org-wide) | Agent lifecycle |
 | `orchestrator` | emasoft-orchestrator-agent | **Exactly 1** | Task management, kanban, agent replacement, remote coordination, messaging templates |
-| `architect` | emasoft-architect-agent | **Exactly 1** | Design documents |
+| `architect` | ai-maestro-architect-agent | **Exactly 1** | Design documents |
 | `integrator` | emasoft-integrator-agent | 1+ (can be shared) | PR review, merge, CI/CD pipeline, release management, quality gates, kanban sync |
 | `implementer` | emasoft-implementer-agent | 1+ | Code implementation |
 | `tester` | emasoft-tester-agent | 0+ | Testing, QA |

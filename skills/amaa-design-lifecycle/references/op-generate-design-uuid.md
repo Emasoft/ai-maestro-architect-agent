@@ -2,8 +2,8 @@
 operation: generate-design-uuid
 procedure: proc-create-design
 workflow-instruction: Step 7 - Design Document Creation
-parent-skill: eaa-design-lifecycle
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-design-lifecycle
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -39,7 +39,7 @@ Use this operation when:
 ## Prerequisites
 
 - Python 3.8+ installed
-- Access to the UUID generation script at `scripts/eaa_design_uuid.py`
+- Access to the UUID generation script at `scripts/amaa_design_uuid.py`
 - Understanding of the UUID format requirements
 
 ## Procedure
@@ -65,13 +65,13 @@ Example: `design-user-authentication-20260130-7f3a2b`
 Use the generation script to create a unique identifier:
 
 ```bash
-python scripts/eaa_design_uuid.py --type design
+python scripts/amaa_design_uuid.py --type design
 ```
 
 For a specific feature name:
 
 ```bash
-python scripts/eaa_design_uuid.py --type design --name "user-authentication"
+python scripts/amaa_design_uuid.py --type design --name "user-authentication"
 ```
 
 ### Step 3: Verify UUID Uniqueness
@@ -79,7 +79,7 @@ python scripts/eaa_design_uuid.py --type design --name "user-authentication"
 The script automatically checks uniqueness against the design index:
 
 ```bash
-python scripts/eaa_design_uuid.py --type design --verify
+python scripts/amaa_design_uuid.py --type design --verify
 ```
 
 ### Step 4: Manual UUID Generation (Fallback)
@@ -115,19 +115,19 @@ Copy this checklist and track your progress:
 
 ```bash
 # Basic generation
-python scripts/eaa_design_uuid.py --type design
+python scripts/amaa_design_uuid.py --type design
 # Output: design-20260130-abc123
 
 # With feature name
-python scripts/eaa_design_uuid.py --type design --name "payment-gateway"
+python scripts/amaa_design_uuid.py --type design --name "payment-gateway"
 # Output: design-payment-gateway-20260130-def456
 
 # For a PDR document
-python scripts/eaa_design_uuid.py --type pdr --name "api-v2-migration"
+python scripts/amaa_design_uuid.py --type pdr --name "api-v2-migration"
 # Output: pdr-api-v2-migration-20260130-ghi789
 
 # Verify uniqueness
-python scripts/eaa_design_uuid.py --type design --name "payment-gateway" --verify
+python scripts/amaa_design_uuid.py --type design --name "payment-gateway" --verify
 # Output: UUID is unique. Ready to use.
 ```
 
@@ -173,7 +173,7 @@ updated: 2026-01-30
 
 | Error | Cause | Resolution |
 |-------|-------|------------|
-| Script not found | Missing eaa_design_uuid.py | Check script path; restore from backup |
+| Script not found | Missing amaa_design_uuid.py | Check script path; restore from backup |
 | UUID collision | Generated UUID already exists | Regenerate with different suffix |
 | Invalid type | Unknown document type | Use valid type: design, pdr, spec, feature, decision, architecture |
 | Invalid characters | Special characters in feature name | Use only lowercase letters, numbers, hyphens |

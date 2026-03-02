@@ -2,8 +2,8 @@
 operation: load-shared-template
 procedure: proc-submit-design
 workflow-instruction: Step 8 - Design Submission
-parent-skill: eaa-design-communication-patterns
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-design-communication-patterns
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -36,9 +36,9 @@ Trigger this operation when:
 
 ## Prerequisites
 
-- eaa-design-communication-patterns skill directory accessible
+- amaa-design-communication-patterns skill directory accessible
 - Template exists in `templates/` subdirectory
-- Python environment configured with eaa_shared module in path
+- Python environment configured with amaa_shared module in path
 
 ## Procedure
 
@@ -54,7 +54,7 @@ Available templates in `templates/` directory:
 ### Step 2: Load the Template
 
 ```python
-from eaa_shared.templates import load_template
+from amaa_shared.templates import load_template
 
 template = load_template("design-document")
 ```
@@ -88,8 +88,8 @@ Copy this checklist and track your progress:
 
 - [ ] Identify the template needed (design-document, adr, rfc, etc.)
 - [ ] Verify template exists: check `templates/` directory
-- [ ] Ensure eaa-design-communication-patterns is in Python path
-- [ ] Import `load_template` from `eaa_shared.templates`
+- [ ] Ensure amaa-design-communication-patterns is in Python path
+- [ ] Import `load_template` from `amaa_shared.templates`
 - [ ] Load the template by name
 - [ ] Identify ALL required placeholders in template
 - [ ] Prepare values for each placeholder
@@ -102,7 +102,7 @@ Copy this checklist and track your progress:
 ### Example: Create New Design Document
 
 ```python
-from eaa_shared.templates import load_template
+from amaa_shared.templates import load_template
 from datetime import datetime
 
 # Load the design document template
@@ -111,7 +111,7 @@ template = load_template("design-document")
 # Fill with data
 document = template.format(
     title="Authentication Service Architecture",
-    author="eaa-architect-main-agent",
+    author="amaa-architect-main-agent",
     date=datetime.now().strftime("%Y-%m-%d"),
     status="draft",
     overview="This document describes the authentication service architecture.",
@@ -130,7 +130,7 @@ print("Created: docs/design/specs/auth-service.md")
 ### Example: Create ADR from Template
 
 ```python
-from eaa_shared.templates import load_template
+from amaa_shared.templates import load_template
 
 template = load_template("adr-template")
 
@@ -167,7 +167,7 @@ Each template has specific placeholders. Common ones include:
 
 | Error | Cause | Resolution |
 |-------|-------|------------|
-| `ModuleNotFoundError: eaa_shared` | Module not in path | Add eaa-design-communication-patterns to Python path |
+| `ModuleNotFoundError: amaa_shared` | Module not in path | Add amaa-design-communication-patterns to Python path |
 | `KeyError: template_name` | Template not found | Verify template exists in `templates/` directory |
 | `KeyError: placeholder` | Missing format argument | Provide all required placeholders to `format()` |
 | `ValueError: incomplete format` | Unfilled placeholders | Check for typos in placeholder names |

@@ -2,8 +2,8 @@
 operation: generate-guuid
 procedure: proc-create-design
 workflow-instruction: Step 7 - Design Document Creation
-parent-skill: eaa-design-management
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-design-management
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -72,7 +72,7 @@ GUUID-YYYYMMDD-NNNN
 Use the automated generation script:
 
 ```bash
-python scripts/eaa_design_uuid.py
+python scripts/amaa_design_uuid.py
 ```
 
 **Output:**
@@ -108,7 +108,7 @@ If the script is unavailable, generate manually:
 Before using the UUID, verify it doesn't already exist:
 
 ```bash
-python scripts/eaa_design_search.py --uuid GUUID-20260130-0001
+python scripts/amaa_design_search.py --uuid GUUID-20260130-0001
 ```
 
 If found, increment the sequence number.
@@ -155,11 +155,11 @@ Copy this checklist and track your progress:
 
 ```bash
 # Check what exists today
-python scripts/eaa_design_search.py --uuid "GUUID-20260130"
+python scripts/amaa_design_search.py --uuid "GUUID-20260130"
 # Output: No documents found
 
 # Generate new UUID
-python scripts/eaa_design_uuid.py
+python scripts/amaa_design_uuid.py
 # Output: GUUID-20260130-0001
 ```
 
@@ -167,7 +167,7 @@ python scripts/eaa_design_uuid.py
 
 ```bash
 # Check what exists today
-python scripts/eaa_design_search.py --uuid "GUUID-20260130" --format table
+python scripts/amaa_design_search.py --uuid "GUUID-20260130" --format table
 # Output:
 # +---------------------+----------------------+--------+
 # | UUID                | Title                | Status |
@@ -177,7 +177,7 @@ python scripts/eaa_design_search.py --uuid "GUUID-20260130" --format table
 # +---------------------+----------------------+--------+
 
 # Next available: GUUID-20260130-0003
-python scripts/eaa_design_uuid.py
+python scripts/amaa_design_uuid.py
 # Output: GUUID-20260130-0003
 ```
 

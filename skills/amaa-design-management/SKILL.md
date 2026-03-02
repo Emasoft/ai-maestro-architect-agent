@@ -1,12 +1,12 @@
 ---
-name: eaa-design-management
+name: amaa-design-management
 description: "Use when managing design documents. Trigger with design search, validation, or creation requests."
 version: 1.0.0
 license: Apache-2.0
 compatibility: Requires Python 3.10 or higher. Requires AI Maestro installed.
 metadata:
   author: Emasoft
-agent: eaa-main
+agent: amaa-main
 context: fork
 user-invocable: false
 workflow-instruction: "Step 7"
@@ -41,10 +41,10 @@ Copy this checklist and track your progress:
 
 - [ ] Read UUID Specification reference (understand GUUID format)
 - [ ] Review Document Types reference (select appropriate type: pdr, spec, feature, decision, architecture, template)
-- [ ] Create design document using `python scripts/eaa_design_create.py --type <type> --title "<title>"`
+- [ ] Create design document using `python scripts/amaa_design_create.py --type <type> --title "<title>"`
 - [ ] Verify document was created with proper UUID and frontmatter
-- [ ] Search existing documents if needed: `python scripts/eaa_design_search.py --type <type> --status <status>`
-- [ ] Validate all documents: `python scripts/eaa_design_validate.py --all`
+- [ ] Search existing documents if needed: `python scripts/amaa_design_search.py --type <type> --status <status>`
+- [ ] Validate all documents: `python scripts/amaa_design_validate.py --all`
 - [ ] Fix any validation errors reported
 - [ ] Consult Troubleshooting reference if errors persist
 
@@ -62,17 +62,17 @@ Copy this checklist and track your progress:
 
 **Create a new design document (30 seconds):**
 ```bash
-python scripts/eaa_design_create.py --type pdr --title "My Feature Design"
+python scripts/amaa_design_create.py --type pdr --title "My Feature Design"
 ```
 
 **Search existing documents:**
 ```bash
-python scripts/eaa_design_search.py --type pdr --status approved
+python scripts/amaa_design_search.py --type pdr --status approved
 ```
 
 **Validate all documents:**
 ```bash
-python scripts/eaa_design_validate.py --all
+python scripts/amaa_design_validate.py --all
 ```
 
 ## Core Workflow Sequence
@@ -144,7 +144,7 @@ Each reference document focuses on a specific aspect of design management. Read 
 - When the script reports an error - Creation Error Handling
 
 **What you will learn:**
-- Using `eaa_design_create.py` with required arguments
+- Using `amaa_design_create.py` with required arguments
 - Specifying optional metadata (author, description)
 - Automatic UUID generation
 - Template population
@@ -167,7 +167,7 @@ Each reference document focuses on a specific aspect of design management. Read 
 - When no results are returned - Empty Results Handling
 
 **What you will learn:**
-- Using `eaa_design_search.py` with different filters
+- Using `amaa_design_search.py` with different filters
 - Combining multiple search criteria
 - Output formats (JSON and table)
 - Handling empty results
@@ -187,7 +187,7 @@ Each reference document focuses on a specific aspect of design management. Read 
 - When fixing validation issues - Error Resolution
 
 **What you will learn:**
-- Using `eaa_design_validate.py` for single and bulk validation
+- Using `amaa_design_validate.py` for single and bulk validation
 - Required frontmatter fields
 - Error messages and line numbers
 - Warning vs error severity
@@ -220,43 +220,43 @@ Each reference document focuses on a specific aspect of design management. Read 
 **Create documents:**
 ```bash
 # Create a PDR
-python scripts/eaa_design_create.py --type pdr --title "Feature Design"
+python scripts/amaa_design_create.py --type pdr --title "Feature Design"
 
 # Create with author
-python scripts/eaa_design_create.py --type feature --title "OAuth" --author "John"
+python scripts/amaa_design_create.py --type feature --title "OAuth" --author "John"
 
 # Create with custom filename
-python scripts/eaa_design_create.py --type spec --title "API Spec" --filename "api-v2"
+python scripts/amaa_design_create.py --type spec --title "API Spec" --filename "api-v2"
 ```
 
 **Search documents:**
 ```bash
 # Search by UUID
-python scripts/eaa_design_search.py --uuid GUUID-20250129-0001
+python scripts/amaa_design_search.py --uuid GUUID-20250129-0001
 
 # Search by type and status
-python scripts/eaa_design_search.py --type pdr --status approved
+python scripts/amaa_design_search.py --type pdr --status approved
 
 # Search by keyword
-python scripts/eaa_design_search.py --keyword "authentication"
+python scripts/amaa_design_search.py --keyword "authentication"
 
 # Table output
-python scripts/eaa_design_search.py --type feature --format table
+python scripts/amaa_design_search.py --type feature --format table
 ```
 
 **Validate documents:**
 ```bash
 # Validate single file
-python scripts/eaa_design_validate.py design/pdr/my-design.md
+python scripts/amaa_design_validate.py design/pdr/my-design.md
 
 # Validate all documents
-python scripts/eaa_design_validate.py --all
+python scripts/amaa_design_validate.py --all
 
 # Validate specific type
-python scripts/eaa_design_validate.py --all --type pdr
+python scripts/amaa_design_validate.py --all --type pdr
 
 # Verbose output with warnings
-python scripts/eaa_design_validate.py --all --verbose --format text
+python scripts/amaa_design_validate.py --all --verbose --format text
 ```
 
 ## Document Status Workflow
@@ -312,7 +312,7 @@ design/
 
 ```bash
 # Create a Product Design Review document
-python scripts/eaa_design_create.py --type pdr --title "User Authentication Redesign"
+python scripts/amaa_design_create.py --type pdr --title "User Authentication Redesign"
 
 # Output: Created design/pdr/GUUID-20250129-0001-user-authentication-redesign.md
 ```
@@ -321,10 +321,10 @@ python scripts/eaa_design_create.py --type pdr --title "User Authentication Rede
 
 ```bash
 # Find all approved PDRs
-python scripts/eaa_design_search.py --type pdr --status approved --format table
+python scripts/amaa_design_search.py --type pdr --status approved --format table
 
 # Validate all documents for frontmatter compliance
-python scripts/eaa_design_validate.py --all --verbose
+python scripts/amaa_design_validate.py --all --verbose
 ```
 
 ## Resources

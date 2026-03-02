@@ -1,10 +1,10 @@
 ---
-name: eaa-github-integration
+name: amaa-github-integration
 description: Use when linking design documents to GitHub issues. Creates issues from designs and syncs status. Trigger with GitHub issue linking or design traceability requests.
 version: 1.0.0
 compatibility: Requires AI Maestro installed.
 context: fork
-agent: eaa-planner
+agent: amaa-planner
 user-invocable: true
 workflow-instruction: "Step 8"
 procedure: "proc-submit-design"
@@ -48,15 +48,15 @@ Copy this checklist and track your progress:
 - [ ] Verify design document has UUID in frontmatter
 - [ ] Choose operation: Create Issue / Attach to Issue / Sync Status
 - [ ] For Create Issue:
-  - [ ] Run dry-run first: `python scripts/eaa_github_issue_create.py --uuid <UUID> --dry-run`
-  - [ ] Create issue: `python scripts/eaa_github_issue_create.py --uuid <UUID>`
+  - [ ] Run dry-run first: `python scripts/amaa_github_issue_create.py --uuid <UUID> --dry-run`
+  - [ ] Create issue: `python scripts/amaa_github_issue_create.py --uuid <UUID>`
   - [ ] Verify issue created and design frontmatter updated
 - [ ] For Attach to Issue:
   - [ ] Verify issue exists: `gh issue view <N>`
-  - [ ] Attach design: `python scripts/eaa_github_attach_document.py --uuid <UUID> --issue <N>`
+  - [ ] Attach design: `python scripts/amaa_github_attach_document.py --uuid <UUID> --issue <N>`
   - [ ] Verify comment posted and labels updated
 - [ ] For Sync Status:
-  - [ ] Run sync: `python scripts/eaa_github_sync_status.py --uuid <UUID>`
+  - [ ] Run sync: `python scripts/amaa_github_sync_status.py --uuid <UUID>`
   - [ ] Verify labels updated to match design status
 
 ---
@@ -92,9 +92,9 @@ For status mapping reference, see [status-mapping.md](references/status-mapping.
 
 | Script | Purpose | Usage |
 |--------|---------|-------|
-| `scripts/eaa_github_issue_create.py` | Create issue from design | `--uuid <UUID>` |
-| `scripts/eaa_github_attach_document.py` | Attach design to issue | `--uuid <UUID> --issue <N>` |
-| `scripts/eaa_github_sync_status.py` | Sync status to issue | `--uuid <UUID>` |
+| `scripts/amaa_github_issue_create.py` | Create issue from design | `--uuid <UUID>` |
+| `scripts/amaa_github_attach_document.py` | Attach design to issue | `--uuid <UUID> --issue <N>` |
+| `scripts/amaa_github_sync_status.py` | Sync status to issue | `--uuid <UUID>` |
 
 ### Status to Label Mapping
 
@@ -128,13 +128,13 @@ Use this when you have a design document and need to create a corresponding GitH
 gh auth status
 
 # Verify design document exists and has UUID
-python scripts/eaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4 --dry-run
+python scripts/amaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4 --dry-run
 ```
 
 **Step 2: Create the Issue**
 
 ```bash
-python scripts/eaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4
+python scripts/amaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4
 ```
 
 **Step 3: Verify Results**
@@ -176,7 +176,7 @@ gh issue view 42
 **Step 2: Attach the Design Document**
 
 ```bash
-python scripts/eaa_github_attach_document.py --uuid PROJ-SPEC-20250129-a1b2c3d4 --issue 42
+python scripts/amaa_github_attach_document.py --uuid PROJ-SPEC-20250129-a1b2c3d4 --issue 42
 ```
 
 **Step 3: Verify Results**
@@ -189,7 +189,7 @@ The script will:
 ### Custom Comment Header
 
 ```bash
-python scripts/eaa_github_attach_document.py --uuid PROJ-SPEC-... --issue 42 --header "Revised Architecture Design"
+python scripts/amaa_github_attach_document.py --uuid PROJ-SPEC-... --issue 42 --header "Revised Architecture Design"
 ```
 
 ---
@@ -201,19 +201,19 @@ Use this when design status changes and GitHub issue labels need updating.
 ### Single Document Sync
 
 ```bash
-python scripts/eaa_github_sync_status.py --uuid PROJ-SPEC-20250129-a1b2c3d4
+python scripts/amaa_github_sync_status.py --uuid PROJ-SPEC-20250129-a1b2c3d4
 ```
 
 ### With Status Change Comment
 
 ```bash
-python scripts/eaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
+python scripts/amaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
 ```
 
 ### Batch Sync All Linked Documents
 
 ```bash
-python scripts/eaa_github_sync_status.py --all
+python scripts/amaa_github_sync_status.py --all
 ```
 
 ### Expected Behavior
@@ -239,12 +239,12 @@ WARNING: Document already linked to issues: ["#42"]
 
 1. **Attach to existing issue instead**:
    ```bash
-   python scripts/eaa_github_attach_document.py --uuid PROJ-SPEC-... --issue 42
+   python scripts/amaa_github_attach_document.py --uuid PROJ-SPEC-... --issue 42
    ```
 
 2. **Sync status to existing issue**:
    ```bash
-   python scripts/eaa_github_sync_status.py --uuid PROJ-SPEC-...
+   python scripts/amaa_github_sync_status.py --uuid PROJ-SPEC-...
    ```
 
 3. **Create additional issue anyway** (if truly needed):
@@ -266,7 +266,7 @@ ERROR: Document has no UUID in frontmatter: docs/design/specs/auth.md
 
 1. **Generate UUID for the document**:
    ```bash
-   python scripts/eaa_design_uuid.py --file docs/design/specs/auth.md --type SPEC
+   python scripts/amaa_design_uuid.py --file docs/design/specs/auth.md --type SPEC
    ```
 
 2. **Verify UUID was added**:
@@ -276,7 +276,7 @@ ERROR: Document has no UUID in frontmatter: docs/design/specs/auth.md
 
 3. **Retry the GitHub integration**:
    ```bash
-   python scripts/eaa_github_issue_create.py --uuid <new-uuid>
+   python scripts/amaa_github_issue_create.py --uuid <new-uuid>
    ```
 
 ---
@@ -381,30 +381,30 @@ gh project item-list --owner Emasoft --format json | jq --arg cutoff "$(date -v-
 
 1. **Create Design Document**
    ```bash
-   python scripts/eaa_design_uuid.py --file docs/design/specs/new-feature.md --type SPEC
+   python scripts/amaa_design_uuid.py --file docs/design/specs/new-feature.md --type SPEC
    ```
 
 2. **Create GitHub Issue**
    ```bash
-   python scripts/eaa_github_issue_create.py --uuid PROJ-SPEC-...
+   python scripts/amaa_github_issue_create.py --uuid PROJ-SPEC-...
    ```
 
 3. **Design Review** (status: draft -> review)
    ```bash
-   python scripts/eaa_design_transition.py --uuid PROJ-SPEC-... --status review
-   python scripts/eaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
+   python scripts/amaa_design_transition.py --uuid PROJ-SPEC-... --status review
+   python scripts/amaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
    ```
 
 4. **Design Approved** (status: review -> approved)
    ```bash
-   python scripts/eaa_design_transition.py --uuid PROJ-SPEC-... --status approved
-   python scripts/eaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
+   python scripts/amaa_design_transition.py --uuid PROJ-SPEC-... --status approved
+   python scripts/amaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
    ```
 
 5. **Implementation Complete** (close issue)
    ```bash
-   python scripts/eaa_design_transition.py --uuid PROJ-SPEC-... --status completed
-   python scripts/eaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
+   python scripts/amaa_design_transition.py --uuid PROJ-SPEC-... --status completed
+   python scripts/amaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
    gh issue close <issue-number> --comment "Design implemented"
    ```
 
@@ -440,10 +440,10 @@ Each GitHub integration operation produces specific outputs that confirm success
 ```bash
 # Verify prerequisites
 gh auth status
-python scripts/eaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4 --dry-run
+python scripts/amaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4 --dry-run
 
 # Create the issue
-python scripts/eaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4
+python scripts/amaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4
 
 # Expected output:
 # CREATED: https://github.com/owner/repo/issues/123
@@ -454,18 +454,18 @@ python scripts/eaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4
 
 ```bash
 # Step 1: Create design with UUID
-python scripts/eaa_design_uuid.py --file docs/design/specs/new-feature.md --type SPEC
+python scripts/amaa_design_uuid.py --file docs/design/specs/new-feature.md --type SPEC
 
 # Step 2: Create GitHub issue
-python scripts/eaa_github_issue_create.py --uuid PROJ-SPEC-...
+python scripts/amaa_github_issue_create.py --uuid PROJ-SPEC-...
 
 # Step 3: Transition to review
-python scripts/eaa_design_transition.py --uuid PROJ-SPEC-... --status review
-python scripts/eaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
+python scripts/amaa_design_transition.py --uuid PROJ-SPEC-... --status review
+python scripts/amaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
 
 # Step 4: Approve design
-python scripts/eaa_design_transition.py --uuid PROJ-SPEC-... --status approved
-python scripts/eaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
+python scripts/amaa_design_transition.py --uuid PROJ-SPEC-... --status approved
+python scripts/amaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
 ```
 
 ## Error Handling
@@ -474,7 +474,7 @@ python scripts/eaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
 |-------|-------|----------|
 | gh CLI not found | Not installed | Install via `brew install gh` or equivalent |
 | gh CLI not authenticated | No auth token | Run `gh auth login` |
-| Document has no UUID | Missing frontmatter | Run `eaa_design_uuid.py --file <path>` |
+| Document has no UUID | Missing frontmatter | Run `amaa_design_uuid.py --file <path>` |
 | Issue already exists | Duplicate creation attempt | Use attach or sync instead |
 | Label creation failed | Missing permissions | Create labels manually or request access |
 
@@ -482,9 +482,9 @@ python scripts/eaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
 
 - [troubleshooting.md](references/troubleshooting.md) - Common errors and solutions
 - [status-mapping.md](references/status-mapping.md) - Design status to GitHub label mapping
-- `scripts/eaa_github_issue_create.py` - Create issue from design
-- `scripts/eaa_github_attach_document.py` - Attach design to issue
-- `scripts/eaa_github_sync_status.py` - Sync status to issue
-- eaa-design-lifecycle - Design document state management
-- eaa-requirements-analysis - Requirements extraction and tracking
-- eaa-planning-patterns - Implementation planning from designs
+- `scripts/amaa_github_issue_create.py` - Create issue from design
+- `scripts/amaa_github_attach_document.py` - Attach design to issue
+- `scripts/amaa_github_sync_status.py` - Sync status to issue
+- amaa-design-lifecycle - Design document state management
+- amaa-requirements-analysis - Requirements extraction and tracking
+- amaa-planning-patterns - Implementation planning from designs

@@ -1,4 +1,4 @@
-# AGENT_OPERATIONS.md - EAA (Emasoft Architect Agent)
+# AGENT_OPERATIONS.md - AMAA (AI Maestro Architect Agent)
 
 **SINGLE SOURCE OF TRUTH for Architect Agent Operations**
 
@@ -8,34 +8,34 @@
 
 ### Format
 ```
-eaa-<project>-<descriptive>
+amaa-<project>-<descriptive>
 ```
 
 ### Examples
-- `eaa-svgbbox-architect` - Architecture work for svgbbox project
-- `eaa-design-lead` - General design leadership
-- `eaa-pdftools-api-designer` - API design for pdftools project
-- `eaa-infrastructure-planner` - Infrastructure architecture
+- `amaa-svgbbox-architect` - Architecture work for svgbbox project
+- `amaa-design-lead` - General design leadership
+- `amaa-pdftools-api-designer` - API design for pdftools project
+- `amaa-infrastructure-planner` - Infrastructure architecture
 
 ### Rules
-- **Prefix MUST be `eaa-`** (all lowercase)
+- **Prefix MUST be `amaa-`** (all lowercase)
 - Project name should be kebab-case
 - Descriptive suffix clarifies the architectural focus
-- Session name chosen by ECOS (Orchestrator) when spawning EAA
+- Session name chosen by ECOS (Orchestrator) when spawning AMAA
 
 ---
 
-## 2. HOW EAA IS CREATED
+## 2. HOW AMAA IS CREATED
 
 ### Spawning Command (executed by ECOS)
 
-ECOS spawns EAA agents using the `ai-maestro-agents-management` skill. The skill handles agent creation with the appropriate parameters:
+ECOS spawns AMAA agents using the `ai-maestro-agents-management` skill. The skill handles agent creation with the appropriate parameters:
 
-- **Session Name**: `eaa-<project>-architect`
+- **Session Name**: `amaa-<project>-architect`
 - **Working Directory**: `~/agents/$SESSION_NAME`
 - **Task**: `Design architecture for <project>`
-- **Plugin**: `emasoft-architect-agent`
-- **Agent**: `eaa-architect-main-agent`
+- **Plugin**: `ai-maestro-architect-agent`
+- **Agent**: `amaa-architect-main-agent`
 
 Refer to the `ai-maestro-agents-management` skill for the exact creation procedure.
 
@@ -43,18 +43,18 @@ Refer to the `ai-maestro-agents-management` skill for the exact creation procedu
 
 | Parameter | Purpose |
 |-----------|---------|
-| `SESSION_NAME` | Unique session identifier following eaa- naming convention |
-| `--dir ~/agents/$SESSION_NAME` | Dedicated working directory for this EAA instance |
-| `--task "..."` | Task description shown to EAA on startup |
+| `SESSION_NAME` | Unique session identifier following amaa- naming convention |
+| `--dir ~/agents/$SESSION_NAME` | Dedicated working directory for this AMAA instance |
+| `--task "..."` | Task description shown to AMAA on startup |
 | `--dangerously-skip-permissions` | Skip permission prompts (trusted environment) |
 | `--chrome` | Enable Chrome DevTools MCP for UI research |
 | `--add-dir /tmp` | Allow temporary file access |
-| `--plugin-dir` | Load emasoft-architect-agent plugin |
-| `--agent eaa-architect-main-agent` | Start with the main architect agent |
+| `--plugin-dir` | Load ai-maestro-architect-agent plugin |
+| `--agent amaa-architect-main-agent` | Start with the main architect agent |
 
-### Who Spawns EAA?
+### Who Spawns AMAA?
 
-**ONLY ECOS (Emasoft Orchestrator)** spawns EAA agents. EAA cannot self-spawn or spawn other EAA instances.
+**ONLY ECOS (Emasoft Orchestrator)** spawns AMAA agents. AMAA cannot self-spawn or spawn other AMAA instances.
 
 ---
 
@@ -64,8 +64,8 @@ Refer to the `ai-maestro-agents-management` skill for the exact creation procedu
 
 | Variable | Points To | Example |
 |----------|-----------|---------|
-| `${CLAUDE_PLUGIN_ROOT}` | emasoft-architect-agent plugin root | `~/agents/eaa-project/...emasoft-architect-agent/` |
-| `${CLAUDE_PROJECT_DIR}` | EAA working directory | `~/agents/eaa-project-architect/` |
+| `${CLAUDE_PLUGIN_ROOT}` | ai-maestro-architect-agent plugin root | `~/agents/amaa-project/...ai-maestro-architect-agent/` |
+| `${CLAUDE_PROJECT_DIR}` | AMAA working directory | `~/agents/amaa-project-architect/` |
 
 ### Plugin Structure
 
@@ -74,32 +74,32 @@ ${CLAUDE_PLUGIN_ROOT}/
 ├── .claude-plugin/
 │   └── plugin.json
 ├── agents/
-│   ├── eaa-architect-main-agent.md
-│   ├── eaa-pdr-writer.md
-│   ├── eaa-requirements-analyst.md
-│   ├── eaa-api-researcher.md
-│   └── eaa-ci-pipeline-designer.md
+│   ├── amaa-architect-main-agent.md
+│   ├── amaa-pdr-writer.md
+│   ├── amaa-requirements-analyst.md
+│   ├── amaa-api-researcher.md
+│   └── amaa-ci-pipeline-designer.md
 ├── skills/
-│   ├── eaa-design-lifecycle/
-│   ├── eaa-requirements-analysis/
-│   ├── eaa-pdr-writing/
-│   ├── eaa-api-research/
-│   └── eaa-ci-pipeline-design/
+│   ├── amaa-design-lifecycle/
+│   ├── amaa-requirements-analysis/
+│   ├── amaa-pdr-writing/
+│   ├── amaa-api-research/
+│   └── amaa-ci-pipeline-design/
 ├── hooks/
 │   └── hooks.json
 ├── scripts/
-│   └── eaa-*.py
+│   └── amaa-*.py
 └── docs/
     ├── AGENT_OPERATIONS.md  ← YOU ARE HERE
-    ├── EAA-ARCHITECTURE.md
+    ├── AMAA-ARCHITECTURE.md
     └── PLUGIN-VALIDATION.md
 ```
 
 ### Local Plugin Location
 
-Each EAA session has a local copy of the plugin:
+Each AMAA session has a local copy of the plugin:
 ```
-~/agents/<session-name>/.claude/plugins/emasoft-architect-agent/
+~/agents/<session-name>/.claude/plugins/ai-maestro-architect-agent/
 ```
 
 This allows per-session plugin customization if needed (rare).
@@ -108,13 +108,13 @@ This allows per-session plugin customization if needed (rare).
 
 ## 4. PLUGIN MUTUAL EXCLUSIVITY
 
-### What EAA Has
+### What AMAA Has
 
-EAA agents have **ONLY** the `emasoft-architect-agent` plugin loaded.
+AMAA agents have **ONLY** the `ai-maestro-architect-agent` plugin loaded.
 
-### What EAA Does NOT Have
+### What AMAA Does NOT Have
 
-EAA **CANNOT** access:
+AMAA **CANNOT** access:
 - `emasoft-orchestrator-agent` (EOA) - Orchestration skills
 - `emasoft-integrator-agent` (EIA) - Code review, quality gates
 - `emasoft-assistant-manager-agent` (EAMA) - User communication
@@ -123,13 +123,13 @@ EAA **CANNOT** access:
 ### Why This Matters
 
 - **Clear separation of concerns** - Architecture focus only
-- **No orchestration** - EAA cannot spawn other agents
-- **No code review** - EAA designs, EIA validates
-- **No user communication** - EAA reports to ECOS, not users
+- **No orchestration** - AMAA cannot spawn other agents
+- **No code review** - AMAA designs, EIA validates
+- **No user communication** - AMAA reports to ECOS, not users
 
 ### Cross-Role Communication
 
-EAA communicates with other roles **ONLY via AI Maestro messaging**:
+AMAA communicates with other roles **ONLY via AI Maestro messaging**:
 
 To report to ECOS, send a message using the `agent-messaging` skill with:
 - **Recipient**: `orchestrator-master`
@@ -146,17 +146,17 @@ To report to ECOS, send a message using the `agent-messaging` skill with:
 
 **CORRECT** - Reference by folder name:
 ```
-eaa-design-lifecycle
-eaa-requirements-analysis
-eaa-pdr-writing
-eaa-api-research
-eaa-ci-pipeline-design
+amaa-design-lifecycle
+amaa-requirements-analysis
+amaa-pdr-writing
+amaa-api-research
+amaa-ci-pipeline-design
 ```
 
 **WRONG** - Do NOT use file paths:
 ```
-/path/to/eaa-design-lifecycle/SKILL.md  ❌
-./skills/eaa-design-lifecycle/           ❌
+/path/to/amaa-design-lifecycle/SKILL.md  ❌
+./skills/amaa-design-lifecycle/           ❌
 ${CLAUDE_PLUGIN_ROOT}/skills/...         ❌
 ```
 
@@ -169,11 +169,11 @@ Claude Code's skill system resolves skill names automatically. Using paths break
 Skills activate automatically when:
 1. User mentions skill-related keywords
 2. Perfect Skill Suggester (PSS) detects relevance
-3. EAA agent references the skill by folder name
+3. AMAA agent references the skill by folder name
 
 ---
 
-## 6. EAA RESPONSIBILITIES
+## 6. AMAA RESPONSIBILITIES
 
 ### Core Responsibilities
 
@@ -186,9 +186,9 @@ Skills activate automatically when:
 | **CI/CD Pipeline Design** | Design testing, deployment, release pipelines | Pipeline configs, workflow designs |
 | **API Research** | Research external APIs, libraries, tools | API comparison docs, integration guides |
 
-### What EAA Does NOT Do
+### What AMAA Does NOT Do
 
-| NOT EAA's Job | Whose Job? |
+| NOT AMAA's Job | Whose Job? |
 |---------------|------------|
 | Code implementation | Developer agents (spawned by EOA) |
 | Code review | EIA (Integrator) |
@@ -204,7 +204,7 @@ Skills activate automatically when:
 
 ### Communication Protocol
 
-EAA communicates with ECOS via AI Maestro messages.
+AMAA communicates with ECOS via AI Maestro messages.
 
 ### Message Format
 
@@ -237,7 +237,7 @@ Send a message using the `agent-messaging` skill with:
 
 ### Response Format Rules
 
-**CRITICAL:** EAA must return minimal responses to save ECOS context.
+**CRITICAL:** AMAA must return minimal responses to save ECOS context.
 
 #### Task Completion
 ```
@@ -276,13 +276,13 @@ I have completed the architecture design. The document is located at /path/to/fi
 
 ## 8. WORKING DIRECTORY STRUCTURE
 
-### EAA Session Directory Layout
+### AMAA Session Directory Layout
 
 ```
 ~/agents/<session-name>/
 ├── .claude/
 │   └── plugins/
-│       └── emasoft-architect-agent/  ← Local plugin copy
+│       └── ai-maestro-architect-agent/  ← Local plugin copy
 ├── docs/
 │   ├── architecture/
 │   │   ├── PDR.md
@@ -319,11 +319,11 @@ I have completed the architecture design. The document is located at /path/to/fi
 
 | Skill | Use When | Output |
 |-------|----------|--------|
-| **eaa-design-lifecycle** | Starting new design, need design process | Design phase checklist, milestones |
-| **eaa-requirements-analysis** | Gathering/documenting requirements | Requirements document |
-| **eaa-pdr-writing** | Creating Preliminary Design Review doc | PDR.md |
-| **eaa-api-research** | Need to choose external API/library | API comparison, recommendations |
-| **eaa-ci-pipeline-design** | Designing CI/CD workflow | Pipeline config, workflow diagram |
+| **amaa-design-lifecycle** | Starting new design, need design process | Design phase checklist, milestones |
+| **amaa-requirements-analysis** | Gathering/documenting requirements | Requirements document |
+| **amaa-pdr-writing** | Creating Preliminary Design Review doc | PDR.md |
+| **amaa-api-research** | Need to choose external API/library | API comparison, recommendations |
+| **amaa-ci-pipeline-design** | Designing CI/CD workflow | Pipeline config, workflow diagram |
 
 ### Skill Activation Pattern
 
@@ -359,14 +359,14 @@ Send a message using the `agent-messaging` skill with:
 1. ECOS receives handoff message
 2. ECOS reviews deliverables
 3. ECOS routes to EIA for quality check (if needed)
-4. ECOS sends acknowledgment to EAA
-5. ECOS terminates EAA session (if task complete)
+4. ECOS sends acknowledgment to AMAA
+5. ECOS terminates AMAA session (if task complete)
 
 ---
 
 ## 11. ERROR HANDLING
 
-### When EAA Encounters Issues
+### When AMAA Encounters Issues
 
 | Issue Type | Action | Message Priority |
 |------------|--------|------------------|
@@ -406,7 +406,7 @@ Before sending handoff message, verify:
 | Issue | Cause | Solution |
 |-------|-------|----------|
 | Skill not activating | Using file path instead of folder name | Reference skill by folder name only |
-| Plugin not found | `${CLAUDE_PLUGIN_ROOT}` incorrect | Check `--plugin-dir` flag used to spawn EAA |
+| Plugin not found | `${CLAUDE_PLUGIN_ROOT}` incorrect | Check `--plugin-dir` flag used to spawn AMAA |
 | Can't send message | AI Maestro messaging unavailable | Verify AI Maestro is running, then use the `agent-messaging` skill to send messages |
 | ECOS not responding | ECOS session crashed | Report to system admin (user) |
 | Missing context | Task too vague | Send [QUESTION] message to ECOS using the `agent-messaging` skill |
@@ -469,9 +469,9 @@ All projects use the canonical **8-column kanban system** on GitHub Projects:
 |--------|---------|
 | `scripts/pre-push-hook.py` | Pre-push validation (manifest, hooks, lint, Unicode compliance) |
 | `scripts/validate_plugin.py` | Plugin structure validation |
-| `scripts/eaa_requirement_analysis.py` | Requirement analysis tooling |
+| `scripts/amaa_requirement_analysis.py` | Requirement analysis tooling |
 | `scripts/cross_platform.py` | Cross-platform compatibility checks |
-| `scripts/eaa_download.py` | Plugin download utility |
+| `scripts/amaa_download.py` | Plugin download utility |
 
 ---
 
@@ -490,19 +490,19 @@ All projects use the canonical **8-column kanban system** on GitHub Projects:
 
 | Variable | Value | Purpose |
 |----------|-------|---------|
-| `SESSION_NAME` | `eaa-<project>-<desc>` | Current EAA session name |
+| `SESSION_NAME` | `amaa-<project>-<desc>` | Current AMAA session name |
 | (AI Maestro) | AI Maestro messaging system (AMP) | AMP handles routing automatically; use the `agent-messaging` skill for all messaging |
-| `CLAUDE_PLUGIN_ROOT` | Plugin install path | Path to emasoft-architect-agent |
-| `CLAUDE_PROJECT_DIR` | Session working dir | EAA's working directory |
+| `CLAUDE_PLUGIN_ROOT` | Plugin install path | Path to ai-maestro-architect-agent |
+| `CLAUDE_PROJECT_DIR` | Session working dir | AMAA's working directory |
 
 ### Related Documentation
 
 | Document | Location | Purpose |
 |----------|----------|---------|
-| **EAA Architecture** | `${CLAUDE_PLUGIN_ROOT}/docs/EAA-ARCHITECTURE.md` | Plugin design philosophy |
+| **AMAA Architecture** | `${CLAUDE_PLUGIN_ROOT}/docs/AMAA-ARCHITECTURE.md` | Plugin design philosophy |
 | **Plugin Validation** | `${CLAUDE_PLUGIN_ROOT}/docs/PLUGIN-VALIDATION.md` | Validation procedures |
-| **Skill: Design Lifecycle** | `${CLAUDE_PLUGIN_ROOT}/skills/eaa-design-lifecycle/` | Design process guide |
-| **Skill: PDR Writing** | `${CLAUDE_PLUGIN_ROOT}/skills/eaa-pdr-writing/` | PDR creation guide |
+| **Skill: Design Lifecycle** | `${CLAUDE_PLUGIN_ROOT}/skills/amaa-design-lifecycle/` | Design process guide |
+| **Skill: PDR Writing** | `${CLAUDE_PLUGIN_ROOT}/skills/amaa-pdr-writing/` | PDR creation guide |
 
 ---
 

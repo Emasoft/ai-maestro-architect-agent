@@ -2,8 +2,8 @@
 operation: submit-design-review
 procedure: proc-submit-design
 workflow-instruction: Step 8 - Design Review Submission
-parent-skill: eaa-design-lifecycle
-parent-plugin: emasoft-architect-agent
+parent-skill: amaa-design-lifecycle
+parent-plugin: ai-maestro-architect-agent
 version: 1.0.0
 ---
 
@@ -52,7 +52,7 @@ Use this operation when:
 Before submission, verify all required sections are complete:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --action validate-completeness
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --action validate-completeness
 ```
 
 Required sections:
@@ -67,7 +67,7 @@ Required sections:
 Transition the design from DRAFT to REVIEW state:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --transition REVIEW
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition REVIEW
 ```
 
 This command:
@@ -81,7 +81,7 @@ This command:
 Document the review request with scope and timeline:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --action create-review-request \
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --action create-review-request \
   --scope "Full design review" \
   --deadline "2026-02-05"
 ```
@@ -91,7 +91,7 @@ python scripts/eaa_design_lifecycle.py --uuid <UUID> --action create-review-requ
 Specify who should review the design:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --action assign-reviewers \
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --action assign-reviewers \
   --reviewers "Alice,Bob,Charlie"
 ```
 
@@ -100,7 +100,7 @@ python scripts/eaa_design_lifecycle.py --uuid <UUID> --action assign-reviewers \
 Set up tracking for review comments. Comments can be added to the design document itself or tracked separately:
 
 ```bash
-python scripts/eaa_design_lifecycle.py --uuid <UUID> --action init-review-tracking
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --action init-review-tracking
 ```
 
 ### Step 6: Notify Reviewers
@@ -127,21 +127,21 @@ Copy this checklist and track your progress:
 
 ```bash
 # Step 1: Validate completeness
-python scripts/eaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action validate-completeness
+python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action validate-completeness
 # Output: Completeness check passed. 8/8 required sections complete.
 
 # Step 2: Transition to REVIEW
-python scripts/eaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --transition REVIEW
+python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --transition REVIEW
 # Output: State transitioned: DRAFT -> REVIEW
 
 # Step 3: Create review request
-python scripts/eaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action create-review-request \
+python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action create-review-request \
   --scope "Full architecture review" \
   --deadline "2026-02-07"
 # Output: Review request created. Deadline: 2026-02-07
 
 # Step 4: Assign reviewers
-python scripts/eaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action assign-reviewers \
+python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action assign-reviewers \
   --reviewers "SecurityLead,BackendLead"
 # Output: Assigned 2 reviewers to design
 ```

@@ -170,8 +170,8 @@ def rebuild_search_index(dry_run: bool) -> None:
 
     # Try to find and execute search script
     search_scripts = [
-        Path("scripts/eaa-design-search.sh"),
-        Path("eaa-design-search.sh"),
+        Path("scripts/amaa-design-search.sh"),
+        Path("amaa-design-search.sh"),
     ]
 
     for script in search_scripts:

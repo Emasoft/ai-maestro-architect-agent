@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Plan validation script for emasoft-architect-agent.
+"""Plan validation script for ai-maestro-architect-agent.
 
 Validates that plan files meet all requirements:
 - All required phases present
