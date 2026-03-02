@@ -1,6 +1,9 @@
 # Notify marketplace repo when this plugin is updated
 # Place this in each plugin repo: .github/workflows/notify-marketplace.yml
 #
+# STATUS: DISABLED - No marketplace configured yet for ai-maestro-architect-agent.
+# Re-enable by updating MARKETPLACE_OWNER/MARKETPLACE_REPO and removing "if: false".
+#
 # SETUP INSTRUCTIONS:
 # 1. Create a Personal Access Token (PAT):
 #    - Go to GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
@@ -40,11 +43,13 @@ env:
   # Example: If your marketplace is at https://github.com/johndoe/my-claude-plugins
   #   MARKETPLACE_OWNER: 'johndoe'
   #   MARKETPLACE_REPO: 'my-claude-plugins'
-  MARKETPLACE_OWNER: 'Emasoft'
-  MARKETPLACE_REPO: 'emasoft-plugins'
+  MARKETPLACE_OWNER: ''
+  MARKETPLACE_REPO: ''
 
 jobs:
   notify:
+    # DISABLED: No marketplace configured. Remove "if: false" once a marketplace is set up.
+    if: false
     runs-on: ubuntu-latest
     steps:
       - name: Get plugin info
