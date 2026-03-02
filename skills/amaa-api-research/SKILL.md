@@ -1,6 +1,6 @@
 ---
 name: amaa-api-research
-description: Use when researching external APIs, libraries, and services. Creates standardized documentation with authentication, endpoints, and integration guides.
+description: "Use when researching external APIs, libraries, and services. Trigger with API research request or library investigation task."
 context: fork
 user-invocable: false
 ---
@@ -26,6 +26,8 @@ Structured workflow for investigating external APIs, libraries, and services. Pr
 
 ### Checklist
 
+Copy this checklist and track your progress:
+
 - [ ] Receive assignment with library name and scope
 - [ ] Acknowledge: `[RESEARCH STARTED] <library> API - <scope>`
 - [ ] Consult official docs, GitHub repo, API explorer
@@ -37,12 +39,12 @@ Structured workflow for investigating external APIs, libraries, and services. Pr
 
 | Document | Description |
 |----------|-------------|
-| [research-procedure.md](references/research-procedure.md) | Step-by-step research workflow |
-| [output-templates.md](references/output-templates.md) | All 5 documentation templates |
-| [tools-reference.md](references/tools-reference.md) | Available tools and usage |
-| [research-scenarios.md](references/research-scenarios.md) | REST, Python, Cloud, GraphQL patterns |
-| [collaboration-patterns.md](references/collaboration-patterns.md) | Agent interaction and handoff protocols |
-| [quick-reference.md](references/quick-reference.md) | TOC, workflow tables, communication formats |
+| [research-procedure.md](references/research-procedure.md) | Step-by-step research workflow (Understand Requirements, Gather Information, Document Findings, Report to Orchestrator) |
+| [output-templates.md](references/output-templates.md) | All 5 documentation templates (API Overview Document, Authentication Guide, Endpoints Reference, Integration Guide, Configuration Template) |
+| [tools-reference.md](references/tools-reference.md) | Available tools and usage (Read Tool, WebFetch Tool, WebSearch Tool, Write Tool, Glob/Grep Tools) |
+| [research-scenarios.md](references/research-scenarios.md) | REST, Python, Cloud, GraphQL patterns (Scenario 1: Research REST API, Scenario 2: Research Python Library, Scenario 3: Research Cloud Service API) |
+| [collaboration-patterns.md](references/collaboration-patterns.md) | Agent interaction and handoff protocols (Integration with Orchestrator, Handling Blockers, Handoff Protocol) |
+| [quick-reference.md](references/quick-reference.md) | TOC, workflow tables, communication formats (Research Procedures, Step 1: Understand Requirements) |
 
 ## Examples
 
@@ -83,6 +85,6 @@ Output: stripe-api-overview.md, stripe-authentication.md,
 
 ## Resources
 
-- [research-procedure.md](references/research-procedure.md) - Full research workflow
-- [output-templates.md](references/output-templates.md) - Documentation templates
-- [quick-reference.md](references/quick-reference.md) - Tables, formats, extended examples
+- [research-procedure.md](references/research-procedure.md) - Full research workflow (Step 1: Understand Requirements, Step 2: Gather Information, Step 3: Document Findings)
+- [output-templates.md](references/output-templates.md) - Documentation templates (API Overview Document, Authentication Guide, Endpoints Reference)
+- [quick-reference.md](references/quick-reference.md) - Tables, formats, extended examples (Step 1: Understand Requirements, Step 2: Gather Information, Step 3: Document Findings)

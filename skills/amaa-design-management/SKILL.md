@@ -1,6 +1,6 @@
 ---
 name: amaa-design-management
-description: "Use when creating, searching, or validating design documents from templates in the design/ directory."
+description: "Use when creating, searching, or validating design documents. Trigger with document management or UUID generation request."
 agent: amaa-main
 context: fork
 user-invocable: false
@@ -20,25 +20,35 @@ Manages design documents in the `design/` directory. Covers creating documents f
 
 ## Instructions
 
-1. Read UUID Specification reference to understand the GUUID format
-2. Review Document Types reference to select the appropriate type
-3. Create document: `python scripts/amaa_design_create.py --type <type> --title "<title>"`
-4. Verify document has proper UUID and frontmatter
-5. Search documents: `python scripts/amaa_design_search.py --type <type> --status <status>`
-6. Validate all: `python scripts/amaa_design_validate.py --all`
-7. Fix any validation errors; consult Troubleshooting if errors persist
+1. Read UUID Specification to understand the GUUID format
+2. Select document type from Document Types reference
+3. Create document using `amaa_design_create.py`
+4. Validate using `amaa_design_validate.py --all`
+5. Search and retrieve using `amaa_design_search.py`
+
+### Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Read UUID Specification reference to understand the GUUID format
+- [ ] Review Document Types reference to select the appropriate type
+- [ ] Create document: `python scripts/amaa_design_create.py --type <type> --title "<title>"`
+- [ ] Verify document has proper UUID and frontmatter
+- [ ] Search documents: `python scripts/amaa_design_search.py --type <type> --status <status>`
+- [ ] Validate all: `python scripts/amaa_design_validate.py --all`
+- [ ] Fix any validation errors; consult Troubleshooting if errors persist
 
 ## Reference Documents
 
 | Document | Description |
 |----------|-------------|
-| [uuid-specification.md](references/uuid-specification.md) | GUUID format and generation rules |
-| [document-types.md](references/document-types.md) | Six document type categories and when to use each |
-| [creating-documents.md](references/creating-documents.md) | Document creation workflow and templates |
-| [searching-documents.md](references/searching-documents.md) | Query and filter documents by metadata/content |
-| [validating-documents.md](references/validating-documents.md) | Frontmatter validation rules and fixes |
-| [troubleshooting.md](references/troubleshooting.md) | Common issues and recovery procedures |
-| [quick-reference.md](references/quick-reference.md) | Commands, status workflow, frontmatter fields, examples |
+| [uuid-specification.md](references/uuid-specification.md) | GUUID format and rules (1 UUID Format Definition, 2 Date Component Requirements) |
+| [document-types.md](references/document-types.md) | Document types (1 Type Selection Guide, 2 PDR Documents (pdr/)) |
+| [creating-documents.md](references/creating-documents.md) | Creation workflow (1 Basic Document Creation, 2 Required Arguments) |
+| [searching-documents.md](references/searching-documents.md) | Query and filter (1 UUID Search, 2 Type Filter) |
+| [validating-documents.md](references/validating-documents.md) | Validation rules (1 Single File Validation, 2 Bulk Validation) |
+| [troubleshooting.md](references/troubleshooting.md) | Recovery procedures (1 UUID Generation Issues, 2 Creation Failures) |
+| [quick-reference.md](references/quick-reference.md) | Commands and reference (Quick Reference Commands, Document Status Workflow, Frontmatter Reference) |
 
 ## Examples
 
@@ -68,7 +78,7 @@ python scripts/amaa_design_validate.py --all
 
 ## Resources
 
-- [references/quick-reference.md](references/quick-reference.md) - Commands cheat sheet and examples
-- [references/uuid-specification.md](references/uuid-specification.md) - GUUID format spec
-- [references/document-types.md](references/document-types.md) - Document type guide
-- [references/troubleshooting.md](references/troubleshooting.md) - Troubleshooting guide
+- [references/quick-reference.md](references/quick-reference.md) - Commands cheat sheet and examples (Quick Reference Commands, Document Status Workflow, Frontmatter Reference, Directory Structure, Extended Examples)
+- [references/uuid-specification.md](references/uuid-specification.md) - GUUID format spec (1 UUID Format Definition, 2 Date Component Requirements)
+- [references/document-types.md](references/document-types.md) - Document type guide (1 Type Selection Guide, 2 PDR Documents (pdr/))
+- [references/troubleshooting.md](references/troubleshooting.md) - Troubleshooting guide (1 UUID Generation Issues, 2 Creation Failures)

@@ -54,7 +54,7 @@ Documentation: docs_dev/api/[api-name]-*.md (5 files)
 4. `<library>-integration.md` - Step-by-step integration guide
 5. `<library>-config-template.md` - Environment variables, config options
 
-> For detailed templates, see [amaa-api-research/references/output-templates.md](../skills/amaa-api-research/references/output-templates.md)
+> For detailed templates, see [amaa-api-research/references/output-templates.md](../skills/amaa-api-research/references/output-templates.md) (API Overview Document, Authentication Guide, Endpoints Reference, Integration Guide, Configuration Template)
 
 ---
 
@@ -76,7 +76,7 @@ Documentation: docs_dev/api/[api-name]-*.md (5 files)
 
 ## RULE 14: User Requirements Are Immutable
 
-> For complete RULE 14 enforcement procedures, see [amaa-design-lifecycle/references/rule-14-enforcement.md](../skills/amaa-design-lifecycle/references/rule-14-enforcement.md)
+> For complete RULE 14 enforcement procedures, see [amaa-design-lifecycle/references/rule-14-enforcement.md](../skills/amaa-design-lifecycle/references/rule-14-enforcement.md) (1 When handling user requirements in any workflow, 2 When detecting potential requirement deviations, 3 When a technical constraint conflicts with a requirement, 4 When documenting requirement compliance)
 
 **Quick Rule:**
 - If user specifies "use library X", research library X

@@ -1,6 +1,6 @@
 ---
 name: amaa-github-integration
-description: Use when linking design documents to GitHub issues, creating issues from designs, or syncing status labels.
+description: Use when syncing designs to GitHub issues or managing project boards. Trigger with GitHub integration or issue sync request.
 context: fork
 agent: amaa-planner
 user-invocable: true
@@ -31,6 +31,18 @@ Link design documents to GitHub issues for complete traceability. Create issues 
 6. For batch sync of all linked documents: `--all` flag on sync script
 7. Monitor GitHub Project board for external changes (see monitoring ref)
 
+## Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Verify gh CLI is installed and authenticated
+- [ ] Confirm design document has valid UUID in frontmatter
+- [ ] Choose the correct operation (create, attach, or sync)
+- [ ] Run with `--dry-run` flag to preview before executing
+- [ ] Execute the chosen operation
+- [ ] Verify design frontmatter was updated with results
+- [ ] Confirm GitHub issue reflects the expected state
+
 ## Reference Documents
 
 | Document | Description |
@@ -41,9 +53,9 @@ Link design documents to GitHub issues for complete traceability. Create issues 
 | [op-monitor-github-project.md](references/op-monitor-github-project.md) | Monitor GitHub Project Kanban |
 | [op-generate-design-uuid.md](references/op-generate-design-uuid.md) | Generate UUID for design docs |
 | [op-verify-gh-cli-auth.md](references/op-verify-gh-cli-auth.md) | Verify gh CLI authentication |
-| [edge-cases.md](references/edge-cases.md) | Edge cases and resolutions |
-| [status-mapping.md](references/status-mapping.md) | Design status to GitHub label mapping |
-| [troubleshooting.md](references/troubleshooting.md) | Common errors and solutions |
+| [edge-cases.md](references/edge-cases.md) | Edge cases and resolutions (Issue Already Exists, Design Has No UUID, gh CLI Not Available) |
+| [status-mapping.md](references/status-mapping.md) | Design status to GitHub label mapping (Design Status Values, GitHub Label Mapping, Valid Status Transitions, Label Naming Convention) |
+| [troubleshooting.md](references/troubleshooting.md) | Common errors and solutions (gh CLI Errors, CLI not found, Authentication failed, Permission denied, Document Errors) |
 | [design-lifecycle-workflow.md](references/design-lifecycle-workflow.md) | Full design-to-implementation workflow |
 
 ## Examples
@@ -76,6 +88,6 @@ python scripts/amaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4
 
 ## Resources
 
-- [troubleshooting.md](references/troubleshooting.md) - Common errors and solutions
-- [status-mapping.md](references/status-mapping.md) - Status to label mapping
+- [troubleshooting.md](references/troubleshooting.md) - Common errors and solutions (gh CLI Errors, 1 CLI not found, 2 Authentication failed)
+- [status-mapping.md](references/status-mapping.md) - Status to label mapping (Design Status Values, GitHub Label Mapping, Valid Status Transitions, Label Naming Convention)
 - Related skills: amaa-design-lifecycle, amaa-requirements-analysis

@@ -1,6 +1,6 @@
 ---
 name: amaa-documentation-writing
-description: "Use when writing module specs, API contracts, ADRs, or feature specs following the 6 C's quality framework."
+description: "Use when writing module specs, API contracts, ADRs, or feature docs. Trigger with documentation writing or spec creation request."
 context: fork
 user-invocable: false
 ---
@@ -9,7 +9,18 @@ user-invocable: false
 
 ## Overview
 
-Technical documentation creation skill for the Documentation Writer Agent. Provides templates, quality standards, and workflows for producing module specifications, API contracts, architecture decision records (ADRs), and feature specifications. **This skill is for DOCUMENTATION ONLY -- never write source code.**
+Technical documentation creation for module specs, API contracts, ADRs, and feature specs. **DOCUMENTATION ONLY -- never write source code.**
+
+## Checklist
+
+Copy this checklist and track your progress:
+- [ ] Receive and parse documentation assignment
+- [ ] Gather context from existing code and specifications
+- [ ] Select appropriate template from templates-reference.md
+- [ ] Write core content following quality standards
+- [ ] Add cross-references to related documents
+- [ ] Perform 6 C's quality check (Complete, Correct, Clear, Consistent, Current, Connected)
+- [ ] Commit document and report completion
 
 ## Prerequisites
 
@@ -30,11 +41,11 @@ Technical documentation creation skill for the Documentation Writer Agent. Provi
 
 | Document | Path | Contents |
 |----------|------|----------|
-| Templates | [templates-reference.md](references/templates-reference.md) | Module spec, API contract, ADR, feature spec templates |
-| Quality Standards | [quality-standards.md](references/quality-standards.md) | 6 C's criteria, must-include/must-avoid rules |
-| Writing Workflow | [writing-workflow.md](references/writing-workflow.md) | Step-by-step procedure for each document type |
-| Operational Guidelines | [operational-guidelines.md](references/operational-guidelines.md) | When to create/update docs, versioning, troubleshooting |
-| Agent Interactions | [agent-interactions.md](references/agent-interactions.md) | Upstream/downstream agents, handoff protocol |
+| Templates | [templates-reference.md](references/templates-reference.md) | Templates (Module Specification Template, API Contract Template, ADR Template, Input Format Examples) |
+| Quality Standards | [quality-standards.md](references/quality-standards.md) | 6 C's rules (Documentation Quality Criteria, Must Be 6 C's, Must Include, Must Avoid, Feature Specification Example) |
+| Writing Workflow | [writing-workflow.md](references/writing-workflow.md) | Procedure (Step 1: Receive and Parse Assignment, Step 2: Gather Context, Step 3: Create Document Structure) |
+| Operational Guidelines | [operational-guidelines.md](references/operational-guidelines.md) | Ops (When to Create New Documents, When to Update Existing, Document Organization, Version Control, Troubleshooting) |
+| Agent Interactions | [agent-interactions.md](references/agent-interactions.md) | Coordination (Upstream Agents, Downstream Agents, Peer Agents, Handoff Protocol) |
 | Op: Module Spec | [op-write-module-spec.md](references/op-write-module-spec.md) | Detailed module spec writing procedure |
 | Op: API Contract | [op-write-api-contract.md](references/op-write-api-contract.md) | Detailed API contract writing procedure |
 | Op: ADR | [op-write-adr.md](references/op-write-adr.md) | Detailed ADR writing procedure |
@@ -44,7 +55,16 @@ Technical documentation creation skill for the Documentation Writer Agent. Provi
 
 ## Examples
 
-Document auth-service module: Read code → Use Module Specification template → Write purpose, interfaces, dependencies → Quality check 6 C's → Output to `/docs/module-specs/auth-service.md`
+```
+input: "Document the auth-service module"
+output: /docs/module-specs/auth-service.md (purpose, interfaces, dependencies, 6 C's verified)
+
+input: "Write an ADR for switching from REST to GraphQL"
+output: /docs/adrs/ADR-042-graphql-migration.md (context, decision, consequences)
+
+input: "Create API contract for /api/users endpoint"
+output: /docs/api-contracts/users-api.md (endpoints, request/response schemas, error codes)
+```
 
 ## Error Handling
 
@@ -66,7 +86,7 @@ Document auth-service module: Read code → Use Module Specification template �
 
 ## Resources
 
-- [templates-reference.md](references/templates-reference.md) - All document templates
-- [quality-standards.md](references/quality-standards.md) - Quality criteria
-- [writing-workflow.md](references/writing-workflow.md) - Step-by-step procedure
-- [agent-interactions.md](references/agent-interactions.md) - Agent coordination
+- [templates-reference.md](references/templates-reference.md) (Module Specification Template, API Contract Template, ADR Template, Input Format Examples)
+- [quality-standards.md](references/quality-standards.md) (Documentation Quality Criteria, Must Be 6 C's, Must Include, Must Avoid, Feature Specification Example)
+- [writing-workflow.md](references/writing-workflow.md) (Step 1: Receive and Parse Assignment, Step 2: Gather Context, Step 3: Create Document Structure)
+- [agent-interactions.md](references/agent-interactions.md) (Upstream Agents (Receive Input From), Downstream Agents (Provide Output To), Peer Agents (Bidirectional))

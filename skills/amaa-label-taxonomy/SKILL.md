@@ -1,6 +1,6 @@
 ---
 name: amaa-label-taxonomy
-description: "Use when managing GitHub labels for the Architect Agent: component, effort, type, and priority labels."
+description: "Use when managing GitHub labels for the Architect Agent: component, effort, type, and priority labels. Trigger with label management or taxonomy request."
 context: fork
 user-invocable: false
 ---
@@ -17,6 +17,18 @@ Provides the label taxonomy for the Architect Agent (AMAA) role. AMAA recommends
 - Active issue number for architecture work
 - Familiarity with AMAA role (see AGENT_OPERATIONS.md)
 
+## Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Analyze requirements to identify affected components
+- [ ] Review `priority:*` labels to scope design constraints
+- [ ] Validate `effort:*` against design complexity
+- [ ] Recommend `component:*` labels from module breakdown
+- [ ] Create sub-issues with `type:*`, `component:*`, `status:backlog`
+- [ ] Update effort label if architecture reveals mismatch
+- [ ] Ensure all labels set before handoff to AMOA
+
 ## Instructions
 
 1. Analyze requirements to identify affected components
@@ -31,12 +43,12 @@ Provides the label taxonomy for the Architect Agent (AMAA) role. AMAA recommends
 
 | Document | Description |
 |----------|-------------|
-| [label-taxonomy-details.md](references/label-taxonomy-details.md) | Full label tables, kanban columns, commands, mapping rules |
-| [examples-extended.md](references/examples-extended.md) | Extended examples with bash commands |
-| [op-add-component-labels.md](references/op-add-component-labels.md) | Procedure: adding component labels |
-| [op-validate-effort-estimate.md](references/op-validate-effort-estimate.md) | Procedure: validating effort estimates |
-| [op-create-sub-issues.md](references/op-create-sub-issues.md) | Procedure: creating sub-issues |
-| [op-create-adr-issue.md](references/op-create-adr-issue.md) | Procedure: creating ADR issues |
+| [label-taxonomy-details.md](references/label-taxonomy-details.md) | Full label tables, kanban columns, commands, mapping rules (Component Labels (`component:*`), Kanban Columns (Canonical 8-Column System), Type Labels AMAA Clarifies) |
+| [examples-extended.md](references/examples-extended.md) | Extended examples with bash commands (Example 1: Adding Component Labels After Architecture Analysis, Example 2: Validating Effort Estimate, Example 3: Creating Component-Specific Sub-Issues, Example 4: Architecture Decision Record (ADR)) |
+| [op-add-component-labels.md](references/op-add-component-labels.md) | Procedure: adding component labels (Purpose, When to Use, Prerequisites, Procedure) |
+| [op-validate-effort-estimate.md](references/op-validate-effort-estimate.md) | Procedure: validating effort estimates (Purpose, When to Use, Prerequisites, Procedure) |
+| [op-create-sub-issues.md](references/op-create-sub-issues.md) | Procedure: creating sub-issues (Purpose, When to Use, Prerequisites, Procedure) |
+| [op-create-adr-issue.md](references/op-create-adr-issue.md) | Procedure: creating ADR issues (Purpose, When to Use, Prerequisites, Procedure) |
 
 ## Examples
 

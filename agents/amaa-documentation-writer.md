@@ -44,15 +44,15 @@ This skill contains:
 
 ## Key Procedures by Topic
 
-> For **RULE 14 enforcement** (preserving user requirements), see [amaa-design-lifecycle/references/rule-14-enforcement.md](../skills/amaa-design-lifecycle/references/rule-14-enforcement.md)
+> For **RULE 14 enforcement** (preserving user requirements), see [amaa-design-lifecycle/references/rule-14-enforcement.md](../skills/amaa-design-lifecycle/references/rule-14-enforcement.md) (1 When handling user requirements in any workflow, 2 When detecting potential requirement deviations, 3 When a technical constraint conflicts with a requirement, 4 When documenting requirement compliance)
 
-> For **document templates** (Module Spec, API Contract, ADR), see [amaa-documentation-writing/references/templates-reference.md](../skills/amaa-documentation-writing/references/templates-reference.md)
+> For **document templates** (Module Spec, API Contract, ADR), see [amaa-documentation-writing/references/templates-reference.md](../skills/amaa-documentation-writing/references/templates-reference.md) (Module Specification Template, API Contract Template, Architecture Decision Record Template, Input Format Examples)
 
-> For **quality standards** (6 C's criteria), see [amaa-documentation-writing/references/quality-standards.md](../skills/amaa-documentation-writing/references/quality-standards.md)
+> For **quality standards** (6 C's criteria), see [amaa-documentation-writing/references/quality-standards.md](../skills/amaa-documentation-writing/references/quality-standards.md) (Documentation Quality Criteria, Must Be 6 C's, Must Include, Must Avoid, Feature Specification Example)
 
-> For **writing workflow** (7-step procedure), see [amaa-documentation-writing/references/writing-workflow.md](../skills/amaa-documentation-writing/references/writing-workflow.md)
+> For **writing workflow** (7-step procedure), see [amaa-documentation-writing/references/writing-workflow.md](../skills/amaa-documentation-writing/references/writing-workflow.md) (Step 1: Receive and Parse Assignment, Step 2: Gather Context, Step 3: Create Document Structure, Step 4: Write Core Content, Step 5: Add Cross-References)
 
-> For **agent coordination**, see [amaa-documentation-writing/references/agent-interactions.md](../skills/amaa-documentation-writing/references/agent-interactions.md)
+> For **agent coordination**, see [amaa-documentation-writing/references/agent-interactions.md](../skills/amaa-documentation-writing/references/agent-interactions.md) (Upstream Agents, Downstream Agents, Peer Agents, Handoff Protocol)
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: amaa-design-lifecycle
-description: Use when managing design document lifecycle from draft through approval, implementation, and archival.
+description: Use when managing design document states or lifecycle transitions. Trigger with design lifecycle or state transition request.
 context: fork
 agent: amaa-main
 user-invocable: false
@@ -11,6 +11,22 @@ user-invocable: false
 ## Overview
 
 Manages the complete lifecycle of design documents: creation, review, approval, implementation tracking, and archival. Enforces valid state transitions (DRAFT->REVIEW->APPROVED->IMPLEMENTING->COMPLETED->ARCHIVED) and generates handoff documents for implementers.
+
+## Checklist
+
+Copy this checklist and track your progress:
+- [ ] Receive requirements from AMCOS or user
+- [ ] Research APIs/technologies
+- [ ] Create design documents in `docs_dev/design/`
+- [ ] Generate design UUID and register in index with state DRAFT
+- [ ] Complete design and validate checklist
+- [ ] Submit for review (state: REVIEW)
+- [ ] Address review comments
+- [ ] Update state to APPROVED
+- [ ] Create handoff document for AMOA
+- [ ] Report completion to AMCOS
+- [ ] Track implementation progress
+- [ ] Archive when complete (state: ARCHIVED)
 
 ## Prerequisites
 
@@ -33,14 +49,14 @@ Manages the complete lifecycle of design documents: creation, review, approval, 
 |-----------|-------------|
 | [procedures.md](references/procedures.md) | Detailed procedures for each lifecycle phase |
 | [design-states.md](references/design-states.md) | State machine with valid transitions |
-| [examples.md](references/examples.md) | Full worked examples |
+| [examples.md](references/examples.md) | Full worked examples (Example 1: Design Real-Time Collaborative Editor, Example 2: Design Stripe Payment Integration) |
 | [scripts.md](references/scripts.md) | Automation scripts reference |
-| [rule-14-enforcement.md](references/rule-14-enforcement.md) | RULE 14: User Requirements Are Immutable |
-| [judgment-guidelines.md](references/judgment-guidelines.md) | Architecture judgment guidelines |
-| [success-criteria.md](references/success-criteria.md) | Design validation checklist |
-| [workflow-checklists.md](references/workflow-checklists.md) | Per-phase workflow checklists |
+| [rule-14-enforcement.md](references/rule-14-enforcement.md) | RULE 14: User Requirements Are Immutable (1 When handling user requirements in any workflow, 2 When detecting potential requirement deviations) |
+| [judgment-guidelines.md](references/judgment-guidelines.md) | Architecture judgment guidelines (When to research external APIs instead of using existing documentation, When to create an ADR instead of just documenting the decision) |
+| [success-criteria.md](references/success-criteria.md) | Design validation checklist (Overview, Requirements Captured, Architecture Designed, APIs Researched, Modules Specified) |
+| [workflow-checklists.md](references/workflow-checklists.md) | Per-phase workflow checklists (Introduction, Checklist: Requirements Analysis, Checklist: Design Phase, Checklist: Handoff Preparation) |
 | [adr-templates.md](references/adr-templates.md) | Architecture Decision Record templates |
-| [handoff-format.md](references/handoff-format.md) | Handoff format specification |
+| [handoff-format.md](references/handoff-format.md) | Handoff format specification (Overview, Handoff Validation Checklist, Validation Script, Handoff Document Template) |
 
 ## Examples
 

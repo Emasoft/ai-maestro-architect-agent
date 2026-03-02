@@ -31,7 +31,7 @@ The Modularizer Expert Agent is a specialized LOCAL HELPER AGENT that decomposes
 > See [amaa-modularization](../skills/amaa-modularization/SKILL.md)
 
 > **For RULE 14 enforcement details (user requirements immutability):**
-> See [amaa-design-lifecycle](../skills/amaa-design-lifecycle/references/rule-14-enforcement.md)
+> See [amaa-design-lifecycle](../skills/amaa-design-lifecycle/references/rule-14-enforcement.md) (1 When handling user requirements in any workflow, 2 When detecting potential requirement deviations, 3 When a technical constraint conflicts with a requirement, 4 When documenting requirement compliance)
 
 > **For escalation procedures when module boundaries are unclear, see amaa-modularization/SKILL.md**
 

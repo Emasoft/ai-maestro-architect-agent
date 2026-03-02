@@ -1,6 +1,6 @@
 ---
 name: amaa-hypothesis-verification
-description: Use when verifying claims through Docker experimentation using the TBV principle before relying on them.
+description: Use when verifying technical claims through Docker-isolated experiments. Trigger with hypothesis test or experiment request.
 agent: test-engineer
 context: fork
 user-invocable: false
@@ -18,6 +18,18 @@ Verify claims through controlled Docker experimentation. Everything is "To Be Ve
 - Write access to experiment output directories
 - Understanding of the claim to be verified
 
+## Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Identify the claim and mark as TBV
+- [ ] Set up Docker container for isolated testing
+- [ ] Design experiment with 3+ approaches (Multiplicity Rule)
+- [ ] Execute experiments and collect measurements
+- [ ] Classify: VERIFIED / UNVERIFIED / PARTIALLY VERIFIED
+- [ ] Document findings in experimentation report
+- [ ] Clean up containers; archive prototype if valuable
+
 ## Instructions
 
 1. Identify the claim and mark as TBV
@@ -32,11 +44,11 @@ Verify claims through controlled Docker experimentation. Everything is "To Be Ve
 
 | Document | Content |
 |----------|---------|
-| [docker-experimentation.md](references/docker-experimentation.md) | Container setup and templates |
-| [researcher-vs-experimenter.md](references/researcher-vs-experimenter.md) | TBV principle and role distinction |
-| [experiment-scenarios.md](references/experiment-scenarios.md) | When to invoke the experimenter |
-| [multiplicity-rule.md](references/multiplicity-rule.md) | Evidence-based selection process |
-| [output-templates.md](references/output-templates.md) | Report and archive templates |
+| [docker-experimentation.md](references/docker-experimentation.md) | Container setup and templates (Why Docker is Required, Container Structure Template, docker-compose.yml Template, Container Cleanup Procedure) |
+| [researcher-vs-experimenter.md](references/researcher-vs-experimenter.md) | TBV principle and role distinction (The Researcher (What OTHERS say is true), The Experimenter (What I can PROVE is true), The TBV Principle (To Be Verified)) |
+| [experiment-scenarios.md](references/experiment-scenarios.md) | When to invoke the experimenter (Case 1: Post-Research Validation, Case 2: Issue Reproduction in Isolation, Case 3: Architectural Bug Investigation) |
+| [multiplicity-rule.md](references/multiplicity-rule.md) | Evidence-based selection process (The Multiplicity Process, Example: Implementing a Paper Algorithm, Iterative Selection Workflow) |
+| [output-templates.md](references/output-templates.md) | Report and archive templates (Experiment Directory Structure, Experimentation Report Template, Prototype Archive Policy) |
 | [quick-reference.md](references/quick-reference.md) | Status classifications, iron rules, examples |
 
 ## Examples
@@ -68,7 +80,7 @@ Claim: "Redis caches responses 10x faster than in-memory dict" (TBV)
 
 ## Resources
 
-- [docker-experimentation.md](references/docker-experimentation.md)
-- [multiplicity-rule.md](references/multiplicity-rule.md)
-- [output-templates.md](references/output-templates.md)
-- [quick-reference.md](references/quick-reference.md)
+- [docker-experimentation.md](references/docker-experimentation.md) (Why Docker is Required, Container Structure Template)
+- [multiplicity-rule.md](references/multiplicity-rule.md) (The Multiplicity Process, Iterative Selection Workflow)
+- [output-templates.md](references/output-templates.md) (Experiment Directory Structure, Experimentation Report Template)
+- [quick-reference.md](references/quick-reference.md) (Status Classifications, Implementation vs Experimental Code, Workflow Integration Points)

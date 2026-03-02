@@ -1,6 +1,6 @@
 ---
 name: amaa-modularization
-description: Use when decomposing systems into modules with clear boundaries, minimal coupling, and high cohesion.
+description: "Use when decomposing systems into modules with clear boundaries. Trigger with modularization or module boundary request."
 context: fork
 agent: amaa-main
 user-invocable: false
@@ -30,17 +30,28 @@ Use when starting new projects, refactoring monoliths, analyzing coupling, desig
 
 See [Detailed Procedures](./references/detailed-procedures.md) for the full phase checklist.
 
+## Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Apply SOLID principles to guide decomposition
+- [ ] Identify natural module boundaries via domain mapping
+- [ ] Design interfaces and contracts between modules
+- [ ] Graph dependencies and resolve circulars
+- [ ] Extract shared code into dedicated modules
+- [ ] Validate testability, coupling metrics, and deployment independence
+
 ## Reference Documents
 
 | Document | Contents |
 |----------|----------|
-| [SOLID Principles](./references/solid-principles.md) | SRP, ISP, DIP application guidance |
-| [Boundary Patterns](./references/boundary-patterns.md) | Domain mapping, change vectors, bounded contexts |
-| [API Design Guide](./references/api-design-guide.md) | Interface design, contracts, versioning |
-| [Dependency Analysis](./references/dependency-analysis.md) | Dependency graphs, shared code strategies |
-| [Strangler Pattern](./references/strangler-pattern.md) | Monolith decomposition approach |
-| [Module Testing](./references/module-testing.md) | Testing strategies for modular systems |
-| [Detailed Procedures](./references/detailed-procedures.md) | Full checklist, examples, troubleshooting |
+| [SOLID Principles](./references/solid-principles.md) | SRP, ISP, DIP application guidance (Overview, The Five SOLID Principles, Single Responsibility Principle, Open/Closed Principle, Liskov Substitution Principle) |
+| [Boundary Patterns](./references/boundary-patterns.md) | Domain mapping, change vectors, bounded contexts (Overview, Core Principle, Map Domain Concepts, Domain-Driven Design Approach, Entity Relationship Analysis) |
+| [API Design Guide](./references/api-design-guide.md) | Interface design, contracts, versioning (Overview, Core API Design Principles, Minimal Surface Area, Stable Contracts, Clear Semantics) |
+| [Dependency Analysis](./references/dependency-analysis.md) | Dependency graphs, shared code strategies (Overview, The Dependency Problem, What is a Dependency, Why Dependencies Matter, Dependency Direction Rules) |
+| [Strangler Pattern](./references/strangler-pattern.md) | Monolith decomposition approach (Overview, Why Strangler Pattern, The Big Rewrite Problem, Strangler Pattern Benefits, The Strangler Fig Pattern) |
+| [Module Testing](./references/module-testing.md) | Testing strategies for modular systems (Overview, Testing Pyramid for Modular Systems, Unit Testing Modules, Unit Test Definition, Unit Test Example) |
+| [Detailed Procedures](./references/detailed-procedures.md) | Full checklist, examples, troubleshooting (What is a Module?, Why Modularization Matters, Detailed Phase Checklist) |
 
 ## Examples
 
@@ -51,7 +62,7 @@ After:  AuthenticationModule, UserProfileModule,
         UserReportingModule
 ```
 
-See [Detailed Procedures](./references/detailed-procedures.md) for full examples.
+See [Detailed Procedures](./references/detailed-procedures.md) for full examples (What is a Module?, Why Modularization Matters, Detailed Phase Checklist).
 
 ## Error Handling
 
@@ -74,7 +85,7 @@ See [Detailed Procedures](./references/detailed-procedures.md) for full examples
 
 ## Resources
 
-- [SOLID Principles Reference](./references/solid-principles.md)
-- [Boundary Patterns](./references/boundary-patterns.md)
-- [Strangler Pattern](./references/strangler-pattern.md)
-- [Module Testing Guide](./references/module-testing.md)
+- [SOLID Principles Reference](./references/solid-principles.md) (Overview, The Five SOLID Principles, Single Responsibility Principle)
+- [Boundary Patterns](./references/boundary-patterns.md) (Overview, Core Principle, Map Domain Concepts)
+- [Strangler Pattern](./references/strangler-pattern.md) (Overview, Why Strangler Pattern, The Strangler Fig Pattern)
+- [Module Testing Guide](./references/module-testing.md) (Overview, Testing Pyramid, Unit Testing Modules)

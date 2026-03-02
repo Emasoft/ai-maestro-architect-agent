@@ -1,6 +1,6 @@
 ---
 name: amaa-cicd-design
-description: "Use when designing CI/CD pipelines, GitHub Actions workflows, cross-platform builds, and release automation."
+description: "Use when designing CI/CD pipelines, GitHub Actions, or release automation. Trigger with CI/CD design request or pipeline task."
 context: fork
 user-invocable: false
 agent: amaa-main
@@ -10,7 +10,7 @@ agent: amaa-main
 
 ## Overview
 
-Design and configure CI/CD pipelines, GitHub Actions workflows, cross-platform build automation, secret management, and release processes. This skill produces workflow YAML files, configuration, and documentation -- it never executes code directly.
+Design and configure CI/CD pipelines, GitHub Actions workflows, cross-platform builds, secret management, and release processes. Produces workflow YAML, configuration, and documentation -- never executes code directly.
 
 ## Prerequisites
 
@@ -29,48 +29,59 @@ Design and configure CI/CD pipelines, GitHub Actions workflows, cross-platform b
 7. Add debug/validation scripts and document setup
 8. Test workflows on all target platforms
 
+## Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Review project requirements and target platforms
+- [ ] Define workflow triggers and select GitHub runners
+- [ ] Configure secret management via `gh` CLI
+- [ ] Set up TDD enforcement with coverage thresholds (>= 80%)
+- [ ] Create multi-platform CI workflow with matrix builds
+- [ ] Set up release automation workflow
+- [ ] Add debug/validation scripts and document setup
+- [ ] Test workflows on all target platforms
+
 ## Reference Documents
 
 | Document | Content |
 |----------|---------|
-| [github-actions.md](references/github-actions.md) | Workflow structure, runners, matrix builds, secrets, reusable workflows |
-| [cross-platform-builds.md](references/cross-platform-builds.md) | Runner matrix, free tier, multi-platform CI, platform-specific jobs |
-| [secret-management.md](references/secret-management.md) | Secret hierarchy, creating/using secrets, environment secrets |
-| [tdd-enforcement.md](references/tdd-enforcement.md) | Coverage requirements, per-language config, branch protection |
-| [release-automation.md](references/release-automation.md) | Pipeline stages, semantic versioning, changelog generation |
-| [release-automation-part1-complete-workflow.md](references/release-automation-part1-complete-workflow.md) | Complete release workflow |
-| [release-automation-part2-platform-publishing.md](references/release-automation-part2-platform-publishing.md) | Platform-specific publishing |
-| [devops-debugging.md](references/devops-debugging.md) | Debugging techniques and troubleshooting |
-| [gh-cli-scripts.md](references/gh-cli-scripts.md) | GitHub CLI script recipes |
-| [platform-test-protocols.md](references/platform-test-protocols.md) | Platform-specific test protocols |
-| [github-actions-templates.md](references/github-actions-templates.md) | Ready-to-use workflow templates |
-| [quick-reference-tables.md](references/quick-reference-tables.md) | Runners, secrets, scripts, competency index |
-| [error-handling-examples.md](references/error-handling-examples.md) | Common errors and workflow examples |
+| [github-actions.md](references/github-actions.md) | Workflows, runners, matrix builds (Use Cases, Overview, Workflow Structure, Runners) |
+| [cross-platform-builds.md](references/cross-platform-builds.md) | Runner matrix, multi-platform CI (Use Cases, Overview, Runner Matrix) |
+| [secret-management.md](references/secret-management.md) | Secret hierarchy, env secrets (Use Cases, Overview, Secret Hierarchy) |
+| [tdd-enforcement.md](references/tdd-enforcement.md) | Coverage, branch protection (Use Cases, Core Principles, TDD Pipeline Rules) |
+| [release-automation.md](references/release-automation.md) | Versioning, changelog (Use Cases, Overview, Complete Release Workflow) |
+| [release-automation-part1-complete-workflow.md](references/release-automation-part1-complete-workflow.md) | Release workflow (Tag-Triggered Release) |
+| [release-automation-part2-platform-publishing.md](references/release-automation-part2-platform-publishing.md) | Publishing (Platform-Specific Publishing, Homebrew, Docker Hub) |
+| [devops-debugging.md](references/devops-debugging.md) | Debug tools (Debug Script Template, Common Debugging Commands) |
+| [gh-cli-scripts.md](references/gh-cli-scripts.md) | CLI recipes (Repository Setup Script, Branch Protection Configuration) |
+| [platform-test-protocols.md](references/platform-test-protocols.md) | Test protocols (Language-Specific Test Commands) |
+| [github-actions-templates.md](references/github-actions-templates.md) | Templates (Multi-Platform CI Workflow Template, Release Workflow Template) |
+| [quick-reference-tables.md](references/quick-reference-tables.md) | Quick reference tables (GitHub Runners Matrix, Workflow Templates, Required Secrets per Platform) |
+| [error-handling-examples.md](references/error-handling-examples.md) | Error examples |
 
 ## Examples
 
 ```yaml
-name: CI
-on: [push, pull_request]
+# Example: Multi-platform CI workflow trigger
+on:
+  push:
+    branches: [main]
 jobs:
   test:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-14, windows-latest]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v4
-      - run: pytest --cov=src tests/
+        os: [ubuntu-latest, macos-latest, windows-latest]
 ```
 
 ## Error Handling
 
 | Issue | Cause | Fix |
 |-------|-------|-----|
-| CI fails, local passes | Environment differences | Check env vars, dependency versions, path case sensitivity |
-| Workflow not triggering | YAML error or filter mismatch | Validate YAML, check branch/path filters, verify Actions enabled |
-| Secrets unavailable | Scope or name mismatch | Verify exact name, correct scope, fork limitations |
-| Deployment timeout | Network or config issues | Increase timeout, check connectivity, verify credentials |
+| CI fails, local passes | Environment differences | Check env vars, dependency versions, path sensitivity |
+| Workflow not triggering | YAML error or filter mismatch | Validate YAML, check filters, verify Actions enabled |
+| Secrets unavailable | Scope or name mismatch | Verify exact name, correct scope, fork limits |
+| Deployment timeout | Network or config issues | Increase timeout, check connectivity, verify creds |
 
 See [error-handling-examples.md](references/error-handling-examples.md) for detailed solutions.
 

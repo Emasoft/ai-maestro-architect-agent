@@ -1,6 +1,6 @@
 ---
 name: amaa-session-memory
-description: "Use when persisting architecture decisions, design patterns, and constraints across sessions."
+description: "Use when persisting decisions, patterns, and constraints across sessions. Trigger with session memory or handoff request."
 context: fork
 user-invocable: false
 agent: amaa-main
@@ -26,6 +26,8 @@ This skill defines how the Architect agent (AMAA) handles session memory and con
 4. **Session Resume** -- Load session state and latest handoff document to restore context
 
 ### Checklist
+
+Copy this checklist and track your progress:
 
 - [ ] Load session state and design index on start
 - [ ] Create ADR in `docs_dev/design/decisions/` for each architecture decision
@@ -64,17 +66,17 @@ Next action: Resolve OQ-002 (Payment processor selection)
 
 | Reference | Description |
 |-----------|-------------|
-| [record-keeping-formats.md](references/record-keeping-formats.md) | Session record-keeping formats and file structure specs |
-| [memory-categories-and-triggers.md](references/memory-categories-and-triggers.md) | Detailed memory categories, required fields, storage locations, and triggers |
-| [handoff-procedures.md](references/handoff-procedures.md) | Handoff document types, structure, and extended examples |
-| [op-load-session-state.md](references/op-load-session-state.md) | Procedure: load session state |
-| [op-record-decision.md](references/op-record-decision.md) | Procedure: record architecture decision |
-| [op-record-pattern.md](references/op-record-pattern.md) | Procedure: record design pattern |
-| [op-record-stack-choice.md](references/op-record-stack-choice.md) | Procedure: record technology stack choice |
-| [op-record-constraint.md](references/op-record-constraint.md) | Procedure: record constraint |
-| [op-record-open-question.md](references/op-record-open-question.md) | Procedure: record open question |
-| [op-create-handoff.md](references/op-create-handoff.md) | Procedure: create handoff document |
-| [op-resume-from-handoff.md](references/op-resume-from-handoff.md) | Procedure: resume from handoff |
+| [record-keeping-formats.md](references/record-keeping-formats.md) | Session record-keeping formats and file structure specs (ADR Template, Handoff Document Template) |
+| [memory-categories-and-triggers.md](references/memory-categories-and-triggers.md) | Detailed memory categories, required fields, storage locations, and triggers (What to Remember, Architecture Decisions Made) |
+| [handoff-procedures.md](references/handoff-procedures.md) | Handoff document types, structure, and extended examples (Handoff Document Types, Handoff Document Structure) |
+| [op-load-session-state.md](references/op-load-session-state.md) | Procedure: load session state (Procedure, Check for Existing Session State) |
+| [op-record-decision.md](references/op-record-decision.md) | Procedure: record architecture decision (Procedure, Determine ADR Number) |
+| [op-record-pattern.md](references/op-record-pattern.md) | Procedure: record design pattern (Purpose, When to Use, Procedure) |
+| [op-record-stack-choice.md](references/op-record-stack-choice.md) | Procedure: record technology stack choice (Purpose, When to Use, Procedure) |
+| [op-record-constraint.md](references/op-record-constraint.md) | Procedure: record constraint (Purpose, When to Use, Procedure) |
+| [op-record-open-question.md](references/op-record-open-question.md) | Procedure: record open question (Procedure, Ensure Open Questions File Exists) |
+| [op-create-handoff.md](references/op-create-handoff.md) | Procedure: create handoff document (Purpose, When to Use, Procedure) |
+| [op-resume-from-handoff.md](references/op-resume-from-handoff.md) | Procedure: resume from handoff (Purpose, When to Use, Procedure) |
 
 ## Resources
 

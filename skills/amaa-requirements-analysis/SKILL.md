@@ -1,6 +1,6 @@
 ---
 name: amaa-requirements-analysis
-description: "Use when managing planning phase: start planning, track requirements, manage modules, approve plans."
+description: "Use when managing requirements, initializing plans, or approving transitions. Trigger with requirements analysis or plan initialization request."
 user-invocable: false
 context: fork
 ---
@@ -17,6 +17,18 @@ Handles all planning phase commands for the Architect Agent. The planning phase 
 - GitHub CLI (`gh`) authenticated for issue creation
 - Write access to `.claude/` directory
 
+## Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Start planning session with goal description
+- [ ] Add all required requirements
+- [ ] Add all modules with criteria and priority
+- [ ] Track progress with planning-status
+- [ ] Modify requirements as needed
+- [ ] Approve the plan
+- [ ] Begin orchestration
+
 ## Instructions
 
 1. Start planning: `/start-planning "goal description"`
@@ -31,11 +43,11 @@ Handles all planning phase commands for the Architect Agent. The planning phase 
 
 | Document | Content |
 |----------|---------|
-| [start-planning-procedure](references/start-planning-procedure.md) | `/start-planning` command details and post-init steps |
-| [requirement-management](references/requirement-management.md) | Add/modify/remove requirements and modules |
-| [plan-approval-transition](references/plan-approval-transition.md) | Approval validation and phase transition |
-| [state-file-format](references/state-file-format.md) | State file schema at `.claude/orchestrator-plan-phase.local.md` |
-| [troubleshooting](references/troubleshooting.md) | Common issues, recovery, GitHub problems |
+| [start-planning-procedure](references/start-planning-procedure.md) | `/start-planning` command (1 When to use /start-planning command, 2 Prerequisites before starting planning) |
+| [requirement-management](references/requirement-management.md) | Add/modify/remove requirements (1 When to add a new requirement section, 2 When to add a new module) |
+| [plan-approval-transition](references/plan-approval-transition.md) | Approval validation (1 When to approve the plan, 2 Prerequisites for plan approval) |
+| [state-file-format](references/state-file-format.md) | State file schema (1 Plan phase state file location and purpose, 2 YAML frontmatter structure) |
+| [troubleshooting](references/troubleshooting.md) | Common issues and recovery (1 When /start-planning fails, 2 When /planning-status shows errors) |
 | [quick-reference-and-scripts](references/quick-reference-and-scripts.md) | Command table, status/priority values, utility scripts |
 | [extended-examples-and-resources](references/extended-examples-and-resources.md) | Extended examples and command output reference |
 
@@ -67,7 +79,7 @@ Handles all planning phase commands for the Architect Agent. The planning phase 
 
 ## Resources
 
-- [requirement-management.md](references/requirement-management.md) - Core requirement operations
-- [plan-approval-transition.md](references/plan-approval-transition.md) - Approval workflow
-- [quick-reference-and-scripts.md](references/quick-reference-and-scripts.md) - Quick ref and utility scripts
+- [requirement-management.md](references/requirement-management.md) - Core requirement operations (1 When to add a new requirement section, 2 When to add a new module)
+- [plan-approval-transition.md](references/plan-approval-transition.md) - Approval workflow (1 When to approve the plan, 2 Prerequisites for plan approval)
+- [quick-reference-and-scripts.md](references/quick-reference-and-scripts.md) - Quick ref and utility scripts (Command Quick Reference, Status Values, Priority Values, Modifiable Fields, Utility Scripts)
 - [extended-examples-and-resources.md](references/extended-examples-and-resources.md) - Extended examples
