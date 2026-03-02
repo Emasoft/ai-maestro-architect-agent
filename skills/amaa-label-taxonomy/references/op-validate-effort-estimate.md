@@ -33,7 +33,7 @@ Validate that the issue's effort label matches the actual complexity revealed by
 
 - After completing architecture breakdown
 - When design reveals more complexity than initially estimated
-- During architecture handoff to EOA
+- During architecture handoff to AMOA
 
 ## Prerequisites
 
@@ -143,10 +143,10 @@ gh issue view 123 --json labels --jq '.labels[].name | select(startswith("effort
 |-------|-------|----------|
 | No effort label found | Never assigned | Recommend appropriate effort based on analysis |
 | Multiple effort labels | Data error | Remove all, add single correct label |
-| EOA rejects change | Disagreement on estimate | Document rationale, defer to EOA decision |
+| AMOA rejects change | Disagreement on estimate | Document rationale, defer to AMOA decision |
 
 ## Notes
 
-- AMAA recommends effort changes but EOA has final authority
+- AMAA recommends effort changes but AMOA has final authority
 - Document all rationale in issue comments for transparency
 - Consider both technical complexity and unknowns/risks

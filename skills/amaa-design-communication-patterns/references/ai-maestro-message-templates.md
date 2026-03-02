@@ -4,20 +4,20 @@ This document provides all message templates and format examples for the AI Maes
 
 ## Contents
 
-- **1.1** Sending acknowledgment when receiving a design request from ECOS
-- **1.2** Requesting clarification from ECOS for ambiguous requirements
-- **1.3** Reporting design completion to ECOS
-- **1.4** Notifying ECOS that handoff document is ready for EOA
+- **1.1** Sending acknowledgment when receiving a design request from AMCOS
+- **1.2** Requesting clarification from AMCOS for ambiguous requirements
+- **1.3** Reporting design completion to AMCOS
+- **1.4** Notifying AMCOS that handoff document is ready for AMOA
 - **1.5** Reporting blocker that prevents design progress
 - **1.6** Verifying ACK receipt after sending a message
 - **1.7** Retrying message when ACK not received within 30 seconds
-- **1.8** Escalating to ECOS when ACK timeout occurs after retry
+- **1.8** Escalating to AMCOS when ACK timeout occurs after retry
 
 ---
 
-## 1.1 Sending Acknowledgment When Receiving Design Request from ECOS
+## 1.1 Sending Acknowledgment When Receiving Design Request from AMCOS
 
-**Use Case:** ECOS assigns you a design task via AI Maestro. You must acknowledge receipt and provide an ETA.
+**Use Case:** AMCOS assigns you a design task via AI Maestro. You must acknowledge receipt and provide an ETA.
 
 Send a message using the `agent-messaging` skill with:
 - **Recipient**: `ecos`
@@ -36,7 +36,7 @@ Send a message using the `agent-messaging` skill with:
 
 ---
 
-## 1.2 Requesting Clarification from ECOS for Ambiguous Requirements
+## 1.2 Requesting Clarification from AMCOS for Ambiguous Requirements
 
 **Use Case:** User requirements are ambiguous, conflicting, or unclear. You cannot proceed until clarification is received.
 
@@ -57,43 +57,43 @@ Send a message using the `agent-messaging` skill with:
 
 ---
 
-## 1.3 Reporting Design Completion to ECOS
+## 1.3 Reporting Design Completion to AMCOS
 
-**Use Case:** All design artifacts are complete, and handoff document is prepared. You are ready for ECOS to assign the work to EOA.
+**Use Case:** All design artifacts are complete, and handoff document is prepared. You are ready for AMCOS to assign the work to AMOA.
 
 Send a message using the `agent-messaging` skill with:
 - **Recipient**: `ecos`
 - **Subject**: `Design Complete - [PROJECT_NAME]`
 - **Priority**: `normal`
-- **Content**: `{"type": "design_complete", "message": "[DONE] Design for [PROJECT_NAME] complete. Architecture: [BRIEF_SUMMARY]. Modules: [MODULE_COUNT]. Risks: [HIGH_COUNT]/[MEDIUM_COUNT]/[LOW_COUNT]. Handoff doc: docs_dev/design/handoff-[UUID].md. Ready for EOA assignment."}`
+- **Content**: `{"type": "design_complete", "message": "[DONE] Design for [PROJECT_NAME] complete. Architecture: [BRIEF_SUMMARY]. Modules: [MODULE_COUNT]. Risks: [HIGH_COUNT]/[MEDIUM_COUNT]/[LOW_COUNT]. Handoff doc: docs_dev/design/handoff-[UUID].md. Ready for AMOA assignment."}`
 - **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 **Example Content:**
 ```json
 {
   "type": "design_complete",
-  "message": "[DONE] Design for E-Commerce Product Catalog complete. Architecture: REST API + PostgreSQL + Redis cache + React frontend. Modules: 5 (product-service, inventory-service, search-service, cart-service, frontend). Risks: 1/3/2. Handoff doc: docs_dev/design/handoff-a7f8b2d4.md. Ready for EOA assignment."
+  "message": "[DONE] Design for E-Commerce Product Catalog complete. Architecture: REST API + PostgreSQL + Redis cache + React frontend. Modules: 5 (product-service, inventory-service, search-service, cart-service, frontend). Risks: 1/3/2. Handoff doc: docs_dev/design/handoff-a7f8b2d4.md. Ready for AMOA assignment."
 }
 ```
 
 ---
 
-## 1.4 Notifying ECOS That Handoff Document is Ready for EOA
+## 1.4 Notifying AMCOS That Handoff Document is Ready for AMOA
 
-**Use Case:** Design artifacts are complete and packaged in a handoff document. You are notifying ECOS that the handoff is ready for EOA assignment.
+**Use Case:** Design artifacts are complete and packaged in a handoff document. You are notifying AMCOS that the handoff is ready for AMOA assignment.
 
 Send a message using the `agent-messaging` skill with:
 - **Recipient**: `ecos`
 - **Subject**: `Handoff Ready - [PROJECT_NAME]`
 - **Priority**: `normal`
-- **Content**: `{"type": "handoff", "message": "Design handoff ready for [PROJECT_NAME]. Implementation sequence: [PHASE_1] -> [PHASE_2] -> [PHASE_3]. Critical path: [TOP_3_ITEMS]. All artifacts in docs_dev/design/. Handoff doc: handoff-[UUID].md. Awaiting EOA assignment from ECOS."}`
+- **Content**: `{"type": "handoff", "message": "Design handoff ready for [PROJECT_NAME]. Implementation sequence: [PHASE_1] -> [PHASE_2] -> [PHASE_3]. Critical path: [TOP_3_ITEMS]. All artifacts in docs_dev/design/. Handoff doc: handoff-[UUID].md. Awaiting AMOA assignment from AMCOS."}`
 - **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 **Example Content:**
 ```json
 {
   "type": "handoff",
-  "message": "Design handoff ready for Payment Gateway Integration. Implementation sequence: Phase 1 (Database schema + Payment model) -> Phase 2 (Stripe API integration) -> Phase 3 (Webhook handlers + retry logic) -> Phase 4 (Frontend payment form). Critical path: Stripe API credentials, webhook endpoint setup, PCI compliance review. All artifacts in docs_dev/design/. Handoff doc: handoff-c3e9f1a8.md. Awaiting EOA assignment from ECOS."
+  "message": "Design handoff ready for Payment Gateway Integration. Implementation sequence: Phase 1 (Database schema + Payment model) -> Phase 2 (Stripe API integration) -> Phase 3 (Webhook handlers + retry logic) -> Phase 4 (Frontend payment form). Critical path: Stripe API credentials, webhook endpoint setup, PCI compliance review. All artifacts in docs_dev/design/. Handoff doc: handoff-c3e9f1a8.md. Awaiting AMOA assignment from AMCOS."
 }
 ```
 
@@ -101,7 +101,7 @@ Send a message using the `agent-messaging` skill with:
 
 ## 1.5 Reporting Blocker That Prevents Design Progress
 
-**Use Case:** You cannot proceed due to missing information, infeasible requirement, or external dependency. You must escalate to ECOS for user decision.
+**Use Case:** You cannot proceed due to missing information, infeasible requirement, or external dependency. You must escalate to AMCOS for user decision.
 
 Send a message using the `agent-messaging` skill with:
 - **Recipient**: `ecos`
@@ -157,9 +157,9 @@ Send a message using the `agent-messaging` skill with:
 
 ---
 
-## 1.8 Escalating to ECOS When ACK Timeout Occurs After Retry
+## 1.8 Escalating to AMCOS When ACK Timeout Occurs After Retry
 
-**Use Case:** You sent a message, retried after 30 seconds, and STILL received no ACK after another 30 seconds. You must escalate to ECOS.
+**Use Case:** You sent a message, retried after 30 seconds, and STILL received no ACK after another 30 seconds. You must escalate to AMCOS.
 
 Send a message using the `agent-messaging` skill with:
 - **Recipient**: `ecos`
@@ -188,7 +188,7 @@ Send a message using the `agent-messaging` skill with:
 4. **If no ACK**: Retry ONCE (see section 1.7)
 5. **Wait 30 seconds again**
 6. **Verify ACK again** (see section 1.6)
-7. **If still no ACK**: Escalate to ECOS (see section 1.8)
+7. **If still no ACK**: Escalate to AMCOS (see section 1.8)
 8. **Do NOT proceed** with dependent operations until ACK received
 
 **CRITICAL:** Never proceed with operations that depend on the message being received until ACK is confirmed!
@@ -234,7 +234,7 @@ All AI Maestro messages use this JSON structure:
 - **Recipient**: `ecos`
 - **Subject**: `Design Complete - User Authentication System`
 - **Priority**: `normal`
-- **Content**: `{"type": "design_complete", "message": "[DONE] Design for User Authentication System complete. Architecture: FastAPI + PostgreSQL + JWT auth + bcrypt hashing. Modules: 3 (auth-service, user-service, session-service). Risks: 0/2/1. Handoff doc: docs_dev/design/handoff-f4e8a9b1.md. Ready for EOA assignment."}`
+- **Content**: `{"type": "design_complete", "message": "[DONE] Design for User Authentication System complete. Architecture: FastAPI + PostgreSQL + JWT auth + bcrypt hashing. Modules: 3 (auth-service, user-service, session-service). Risks: 0/2/1. Handoff doc: docs_dev/design/handoff-f4e8a9b1.md. Ready for AMOA assignment."}`
 - **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 **Step 2:** Wait 30 seconds.
@@ -247,7 +247,7 @@ All AI Maestro messages use this JSON structure:
 - **Recipient**: `ecos`
 - **Subject**: `[RETRY] Design Complete - User Authentication System`
 - **Priority**: `high`
-- **Content**: `{"type": "retry", "message": "[DONE] Design for User Authentication System complete. Architecture: FastAPI + PostgreSQL + JWT auth + bcrypt hashing. Modules: 3 (auth-service, user-service, session-service). Risks: 0/2/1. Handoff doc: docs_dev/design/handoff-f4e8a9b1.md. Ready for EOA assignment. (Retry: No ACK received within 30s)"}`
+- **Content**: `{"type": "retry", "message": "[DONE] Design for User Authentication System complete. Architecture: FastAPI + PostgreSQL + JWT auth + bcrypt hashing. Modules: 3 (auth-service, user-service, session-service). Risks: 0/2/1. Handoff doc: docs_dev/design/handoff-f4e8a9b1.md. Ready for AMOA assignment. (Retry: No ACK received within 30s)"}`
 - **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 **Step 6:** Wait 30 seconds again.
@@ -261,4 +261,4 @@ All AI Maestro messages use this JSON structure:
 - **Content**: `{"type": "escalation", "message": "ACK timeout from ecos. Original message: Design Complete - User Authentication System. Sent: 2026-02-05 15:00:00. Retry sent: 2026-02-05 15:00:30. Blocking operation: Cannot proceed to next design task without confirmation that handoff was received."}`
 - **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
-Then wait for manual intervention from ECOS.
+Then wait for manual intervention from AMCOS.

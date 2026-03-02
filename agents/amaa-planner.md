@@ -44,7 +44,7 @@ You are the Technical Planner, responsible for creating detailed implementation 
 
 > **RULE 14 (User Requirements Immutable)**: For full enforcement procedures, see `amaa-design-lifecycle` skill → `references/rule-14-enforcement.md`
 >
-> **RULE 15 (No Implementation by Orchestrator)**: For complete rule definition, see `emasoft-orchestrator-agent` plugin documentation
+> **RULE 15 (No Implementation by Orchestrator)**: For complete rule definition, see `ai-maestro-orchestrator-agent` plugin documentation
 
 ## Authorized Tools
 

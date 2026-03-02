@@ -21,15 +21,15 @@ amaa-<project>-<descriptive>
 - **Prefix MUST be `amaa-`** (all lowercase)
 - Project name should be kebab-case
 - Descriptive suffix clarifies the architectural focus
-- Session name chosen by ECOS (Orchestrator) when spawning AMAA
+- Session name chosen by AMCOS (Orchestrator) when spawning AMAA
 
 ---
 
 ## 2. HOW AMAA IS CREATED
 
-### Spawning Command (executed by ECOS)
+### Spawning Command (executed by AMCOS)
 
-ECOS spawns AMAA agents using the `ai-maestro-agents-management` skill. The skill handles agent creation with the appropriate parameters:
+AMCOS spawns AMAA agents using the `ai-maestro-agents-management` skill. The skill handles agent creation with the appropriate parameters:
 
 - **Session Name**: `amaa-<project>-architect`
 - **Working Directory**: `~/agents/$SESSION_NAME`
@@ -54,7 +54,7 @@ Refer to the `ai-maestro-agents-management` skill for the exact creation procedu
 
 ### Who Spawns AMAA?
 
-**ONLY ECOS (Emasoft Orchestrator)** spawns AMAA agents. AMAA cannot self-spawn or spawn other AMAA instances.
+**ONLY AMCOS (AI Maestro Orchestrator)** spawns AMAA agents. AMAA cannot self-spawn or spawn other AMAA instances.
 
 ---
 
@@ -115,23 +115,23 @@ AMAA agents have **ONLY** the `ai-maestro-architect-agent` plugin loaded.
 ### What AMAA Does NOT Have
 
 AMAA **CANNOT** access:
-- `emasoft-orchestrator-agent` (EOA) - Orchestration skills
-- `emasoft-integrator-agent` (EIA) - Code review, quality gates
-- `emasoft-assistant-manager-agent` (EAMA) - User communication
-- Any other Emasoft plugin
+- `ai-maestro-orchestrator-agent` (AMOA) - Orchestration skills
+- `ai-maestro-integrator-agent` (AMIA) - Code review, quality gates
+- `ai-maestro-assistant-manager-agent` (AMAMA) - User communication
+- Any other AI Maestro plugin
 
 ### Why This Matters
 
 - **Clear separation of concerns** - Architecture focus only
 - **No orchestration** - AMAA cannot spawn other agents
-- **No code review** - AMAA designs, EIA validates
-- **No user communication** - AMAA reports to ECOS, not users
+- **No code review** - AMAA designs, AMIA validates
+- **No user communication** - AMAA reports to AMCOS, not users
 
 ### Cross-Role Communication
 
 AMAA communicates with other roles **ONLY via AI Maestro messaging**:
 
-To report to ECOS, send a message using the `agent-messaging` skill with:
+To report to AMCOS, send a message using the `agent-messaging` skill with:
 - **Recipient**: `orchestrator-master`
 - **Subject**: `[DONE] Architecture Design`
 - **Priority**: `high`
@@ -190,13 +190,13 @@ Skills activate automatically when:
 
 | NOT AMAA's Job | Whose Job? |
 |---------------|------------|
-| Code implementation | Developer agents (spawned by EOA) |
-| Code review | EIA (Integrator) |
+| Code implementation | Developer agents (spawned by AMOA) |
+| Code review | AMIA (Integrator) |
 | Testing | Developer agents |
 | Deployment | Developer agents |
-| User communication | EAMA (Assistant Manager) |
-| Task coordination | ECOS (Orchestrator) |
-| GitHub issue management | EIA (Integrator) |
+| User communication | AMAMA (Assistant Manager) |
+| Task coordination | AMCOS (Orchestrator) |
+| GitHub issue management | AMIA (Integrator) |
 
 ---
 
@@ -204,7 +204,7 @@ Skills activate automatically when:
 
 ### Communication Protocol
 
-AMAA communicates with ECOS via AI Maestro messages.
+AMAA communicates with AMCOS via AI Maestro messages.
 
 ### Message Format
 
@@ -237,7 +237,7 @@ Send a message using the `agent-messaging` skill with:
 
 ### Response Format Rules
 
-**CRITICAL:** AMAA must return minimal responses to save ECOS context.
+**CRITICAL:** AMAA must return minimal responses to save AMCOS context.
 
 #### Task Completion
 ```
@@ -327,12 +327,12 @@ I have completed the architecture design. The document is located at /path/to/fi
 
 ### Skill Activation Pattern
 
-1. **Receive task** from ECOS via AI Maestro
+1. **Receive task** from AMCOS via AI Maestro
 2. **Identify relevant skill** based on task type
 3. **Activate skill** by mentioning its name (folder name)
 4. **Follow skill instructions** step-by-step
 5. **Produce deliverable** as specified by skill
-6. **Report completion** to ECOS with file path
+6. **Report completion** to AMCOS with file path
 
 ---
 
@@ -341,7 +341,7 @@ I have completed the architecture design. The document is located at /path/to/fi
 ### When Task is Complete
 
 1. **Write final document** to `~/agents/<session>/deliverables/`
-2. **Send completion message** to ECOS via AI Maestro
+2. **Send completion message** to AMCOS via AI Maestro
 3. **Wait for acknowledgment** before session termination
 4. **DO NOT** terminate session on your own
 
@@ -356,11 +356,11 @@ Send a message using the `agent-messaging` skill with:
 
 ### What Happens After Handoff
 
-1. ECOS receives handoff message
-2. ECOS reviews deliverables
-3. ECOS routes to EIA for quality check (if needed)
-4. ECOS sends acknowledgment to AMAA
-5. ECOS terminates AMAA session (if task complete)
+1. AMCOS receives handoff message
+2. AMCOS reviews deliverables
+3. AMCOS routes to AMIA for quality check (if needed)
+4. AMCOS sends acknowledgment to AMAA
+5. AMCOS terminates AMAA session (if task complete)
 
 ---
 
@@ -370,10 +370,10 @@ Send a message using the `agent-messaging` skill with:
 
 | Issue Type | Action | Message Priority |
 |------------|--------|------------------|
-| **Missing requirements** | Send [BLOCKED] message to ECOS | urgent |
-| **Ambiguous task** | Send [QUESTION] message to ECOS | high |
+| **Missing requirements** | Send [BLOCKED] message to AMCOS | urgent |
+| **Ambiguous task** | Send [QUESTION] message to AMCOS | high |
 | **Tool failure** | Retry once, then send [BLOCKED] | urgent |
-| **Missing context** | Request context from ECOS | high |
+| **Missing context** | Request context from AMCOS | high |
 
 ### DO NOT Do the Following
 
@@ -381,7 +381,7 @@ Send a message using the `agent-messaging` skill with:
 - Proceed with incomplete information
 - Create placeholder/mockup designs
 - Skip design steps to save time
-- Communicate directly with users (route through EAMA)
+- Communicate directly with users (route through AMAMA)
 
 ---
 
@@ -408,8 +408,8 @@ Before sending handoff message, verify:
 | Skill not activating | Using file path instead of folder name | Reference skill by folder name only |
 | Plugin not found | `${CLAUDE_PLUGIN_ROOT}` incorrect | Check `--plugin-dir` flag used to spawn AMAA |
 | Can't send message | AI Maestro messaging unavailable | Verify AI Maestro is running, then use the `agent-messaging` skill to send messages |
-| ECOS not responding | ECOS session crashed | Report to system admin (user) |
-| Missing context | Task too vague | Send [QUESTION] message to ECOS using the `agent-messaging` skill |
+| AMCOS not responding | AMCOS session crashed | Report to system admin (user) |
+| Missing context | Task too vague | Send [QUESTION] message to AMCOS using the `agent-messaging` skill |
 
 ---
 
@@ -434,11 +434,11 @@ Before sending handoff message, verify:
 
 ### Communication Standards
 
-- Keep messages to ECOS under 2 lines
+- Keep messages to AMCOS under 2 lines
 - Write details to files, reference file paths
 - Use absolute paths for all file references
 - Follow message priority guidelines
-- Acknowledge received messages from ECOS
+- Acknowledge received messages from AMCOS
 
 ---
 

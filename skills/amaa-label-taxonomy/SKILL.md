@@ -53,7 +53,7 @@ Copy this checklist and track your progress:
 - [ ] Ensure all `component:*` labels are set
 - [ ] Ensure `effort:*` is validated and correct
 - [ ] Create sub-issues if `type:epic`
-- [ ] Document component breakdown in handoff to EOA
+- [ ] Document component breakdown in handoff to AMOA
 
 ---
 
@@ -98,7 +98,7 @@ Copy this checklist and track your progress:
 
 **AMAA Component Responsibilities:**
 - Analyze requirements to identify affected components
-- Recommend component labels in handoff to EOA
+- Recommend component labels in handoff to AMOA
 - Update component labels when design changes
 
 ### Kanban Columns (Canonical 8-Column System)
@@ -111,7 +111,7 @@ The full workflow uses these 8 status columns:
 | 2 | `todo` | Todo | `status:todo` | Ready to start |
 | 3 | `in-progress` | In Progress | `status:in-progress` | Active work |
 | 4 | `ai-review` | AI Review | `status:ai-review` | Integrator agent reviews ALL tasks |
-| 5 | `human-review` | Human Review | `status:human-review` | User reviews BIG tasks only (via EAMA) |
+| 5 | `human-review` | Human Review | `status:human-review` | User reviews BIG tasks only (via AMAMA) |
 | 6 | `merge-release` | Merge/Release | `status:merge-release` | Ready to merge |
 | 7 | `done` | Done | `status:done` | Completed |
 | 8 | `blocked` | Blocked | `status:blocked` | Blocked at any stage |
@@ -119,7 +119,7 @@ The full workflow uses these 8 status columns:
 **Task Routing Rules:**
 - **Small tasks**: In Progress -> AI Review -> Merge/Release -> Done
 - **Big tasks**: In Progress -> AI Review -> Human Review -> Merge/Release -> Done
-- **Human Review** is requested via EAMA (Assistant Manager asks user to test/review)
+- **Human Review** is requested via AMAMA (Assistant Manager asks user to test/review)
 - Not all tasks go through Human Review -- only significant changes requiring human judgment
 
 ### Type Labels AMAA Clarifies
@@ -149,7 +149,7 @@ AMAA uses priority to scope architecture:
 AMAA validates effort estimates:
 - Does design complexity match effort label?
 - Should `effort:m` be upgraded to `effort:l`?
-- AMAA recommends effort changes to EOA
+- AMAA recommends effort changes to AMOA
 
 ---
 
@@ -286,18 +286,18 @@ gh issue create \
 | Identify components | Recommend `component:*` |
 | Validate effort | Recommend `effort:*` changes |
 | Create sub-issues | Set `type:*`, `component:*`, `status:backlog` |
-| Design change | May update `type:*` (with EOA approval) |
+| Design change | May update `type:*` (with AMOA approval) |
 
 ### Labels AMAA Never Sets
 
-- `assign:*` - Set by EOA/ECOS
+- `assign:*` - Set by AMOA/AMCOS
 - `status:*` - Set by working agent
-- `review:*` - Managed by EIA
-- `priority:*` - Set by EAMA/EOA
+- `review:*` - Managed by AMIA
+- `priority:*` - Set by AMAMA/AMOA
 
 ### AMAA Handoff Labels
 
-When handing off design to EOA, AMAA should ensure:
+When handing off design to AMOA, AMAA should ensure:
 1. All `component:*` labels are set
 2. `effort:*` is validated
 3. Sub-issues created if `type:epic`

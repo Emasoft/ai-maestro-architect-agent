@@ -14,7 +14,7 @@
   - [3.1 Spawn amaa-modularizer-expert when](#31-spawn-amaa-modularizer-expert-when)
   - [3.2 Keep Simple (single module) when](#32-keep-simple-single-module-when)
   - [3.3 Modularization Threshold](#33-modularization-threshold)
-- [4. When to escalate unclear requirements to ECOS for clarification](#4-when-to-escalate-unclear-requirements-to-ecos-for-clarification)
+- [4. When to escalate unclear requirements to AMCOS for clarification](#4-when-to-escalate-unclear-requirements-to-amcos-for-clarification)
   - [4.1 Escalate immediately when](#41-escalate-immediately-when)
   - [4.2 Escalation Format](#42-escalation-format)
 
@@ -98,7 +98,7 @@ If architecture.md grows beyond 500 lines, consider modularization.
 
 ---
 
-## 4. When to escalate unclear requirements to ECOS for clarification
+## 4. When to escalate unclear requirements to AMCOS for clarification
 
 ### 4.1 Escalate immediately when
 

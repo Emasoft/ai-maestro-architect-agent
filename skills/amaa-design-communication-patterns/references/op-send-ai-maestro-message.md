@@ -97,7 +97,7 @@ Send a message using the `agent-messaging` skill with:
 ### Example: Request Code Review from Integrator
 
 Send a message using the `agent-messaging` skill with:
-- **Recipient**: `eia-integrator-main-agent`
+- **Recipient**: `amia-integrator-main-agent`
 - **Subject**: `Review Request: Auth Service Design`
 - **Priority**: `high`
 - **Content**: `{"type": "request", "message": "Please review design document at docs/design/specs/auth-service.md. Focus areas: security requirements, API contracts. GitHub issue: #123."}`

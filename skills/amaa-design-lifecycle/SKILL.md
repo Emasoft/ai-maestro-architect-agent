@@ -38,7 +38,7 @@ This skill manages the complete lifecycle of design documents from creation thro
 
 Copy this checklist and track your progress:
 
-- [ ] Receive requirements from ECOS or user
+- [ ] Receive requirements from AMCOS or user
 - [ ] Analyze and clarify requirements
 - [ ] Research APIs and technologies
 - [ ] Create design documents in `docs_dev/design/`
@@ -51,8 +51,8 @@ Copy this checklist and track your progress:
 - [ ] Submit for review (state: REVIEW)
 - [ ] Address all review comments
 - [ ] Update state to APPROVED
-- [ ] Create handoff document for EOA
-- [ ] Report completion to ECOS
+- [ ] Create handoff document for AMOA
+- [ ] Report completion to AMCOS
 - [ ] Track implementation progress
 - [ ] Archive completed design (state: ARCHIVED)
 
@@ -165,7 +165,7 @@ Phase 4 - Module Breakdown:
   * Client SDK
 
 Phase 5 - Handoff:
-- Generated handoff document for EOA with implementation phases
+- Generated handoff document for AMOA with implementation phases
 - Included dependency graph
 
 Files created:
@@ -260,7 +260,7 @@ The following scripts automate design lifecycle operations:
 | `amaa_design_uuid.py` | Generate GUUIDs for new design documents | `python scripts/amaa_design_uuid.py --type <DOC_TYPE>` |
 | `amaa_design_version.py` | Track document versions | `python scripts/amaa_design_version.py --uuid <UUID> --bump` |
 | `amaa_design_export.py` | Export design documents to various formats | `python scripts/amaa_design_export.py --uuid <UUID> --format <FORMAT>` |
-| `amaa_design_handoff.py` | Generate handoff documents for EOA | `python scripts/amaa_design_handoff.py --design <UUID> --target eoa` |
+| `amaa_design_handoff.py` | Generate handoff documents for AMOA | `python scripts/amaa_design_handoff.py --design <UUID> --target eoa` |
 | `amaa_init_design_folders.py` | Initialize design folder structure | `python scripts/amaa_init_design_folders.py --project-root <PATH>` |
 
 ### Script Locations

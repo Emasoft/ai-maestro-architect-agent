@@ -352,8 +352,8 @@ gh project item-list --owner Emasoft --format json | jq --arg cutoff "$(date -v-
 **Actions on External Change Detection:**
 
 1. **On card movement detected:**
-   Notify EOA about the status change. Send a message using the `agent-messaging` skill with:
-   - **Recipient**: `ecos`
+   Notify AMOA about the status change. Send a message using the `agent-messaging` skill with:
+   - **Recipient**: `amcos`
    - **Subject**: `GitHub Project Change Detected`
    - **Priority**: `normal`
    - **Content**: `{"type": "project_sync", "message": "Card [CARD_TITLE] moved from [OLD_STATUS] to [NEW_STATUS]. Updating local design state."}`
@@ -370,7 +370,7 @@ gh project item-list --owner Emasoft --format json | jq --arg cutoff "$(date -v-
 - Change: [OLD_STATUS] -> [NEW_STATUS]
 - Source: GitHub Project external update
 - Action: Updated local design state
-- Notified: EOA via AI Maestro
+- Notified: AMOA via AI Maestro
 ```
 
 ---

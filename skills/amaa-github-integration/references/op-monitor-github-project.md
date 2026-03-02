@@ -68,8 +68,8 @@ gh project item-list --owner Emasoft --format json | jq --arg cutoff "$(date -v-
 
 ### Step 4: On External Change Detection
 
-When changes are detected, notify EOA (Emasoft Orchestrator Agent). Send a message using the `agent-messaging` skill with:
-- **Recipient**: `ecos`
+When changes are detected, notify AMOA (AI Maestro Orchestrator Agent). Send a message using the `agent-messaging` skill with:
+- **Recipient**: `amcos`
 - **Subject**: `GitHub Project Change Detected`
 - **Priority**: `normal`
 - **Content**: `{"type": "project_sync", "message": "Card [CARD_TITLE] moved from [OLD_STATUS] to [NEW_STATUS]. Updating local design state."}`
@@ -89,7 +89,7 @@ Append to `docs_dev/design/project-sync-log.md`:
 - Change: [OLD_STATUS] -> [NEW_STATUS]
 - Source: GitHub Project external update
 - Action: Updated local design state
-- Notified: EOA via AI Maestro
+- Notified: AMOA via AI Maestro
 ```
 
 ## Checklist
@@ -102,7 +102,7 @@ Copy this checklist and track your progress:
 - [ ] Check for items updated since last poll
 - [ ] For each changed item:
   - [ ] Identify the change type (status, labels, assignment)
-  - [ ] Notify EOA via AI Maestro
+  - [ ] Notify AMOA via AI Maestro
   - [ ] Update local design document state
   - [ ] Log change to project-sync-log.md
 - [ ] Schedule next poll (5 minutes)
@@ -123,8 +123,8 @@ gh project item-list --owner Emasoft --format json | jq '.items[] | {title, stat
 # }
 
 # Previous status was "Draft" - movement detected!
-# Notify EOA using the `agent-messaging` skill with:
-# - Recipient: `ecos`
+# Notify AMOA using the `agent-messaging` skill with:
+# - Recipient: `amcos`
 # - Subject: `GitHub Project Change Detected`
 # - Priority: `normal`
 # - Content: `{"type": "project_sync", "message": "Card Auth Service Design moved from Draft to AI Review. Updating local design state."}`
@@ -155,7 +155,7 @@ date -u +%Y-%m-%dT%H:%M:%SZ > /tmp/gh-project-last-check
 
 | Change Type | Detection Method | Action |
 |-------------|------------------|--------|
-| Card movement (status) | `status` field differs | Update local design status, notify EOA |
+| Card movement (status) | `status` field differs | Update local design status, notify AMOA |
 | New comments | Check issue comments API | Review and respond if needed |
 | Label changes | `labels` field differs | Sync labels to local design |
 | Assignment changes | `assignees` field differs | Update design assignee field |

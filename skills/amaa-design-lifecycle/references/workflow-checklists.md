@@ -11,7 +11,7 @@
 
 ## 1. Introduction
 
-Use these checklists to ensure nothing is missed. Update task status in AI Maestro messages to ECOS.
+Use these checklists to ensure nothing is missed. Update task status in AI Maestro messages to AMCOS.
 
 ---
 
@@ -19,7 +19,7 @@ Use these checklists to ensure nothing is missed. Update task status in AI Maest
 
 **Phase:** Receive and analyze user requirements
 
-- [ ] **Receive requirements from ECOS** (via AI Maestro message)
+- [ ] **Receive requirements from AMCOS** (via AI Maestro message)
 - [ ] **Read FULL_PROJECT_WORKFLOW.md** to understand project context
 - [ ] **Extract user requirements** (exact quotes, no paraphrasing)
 - [ ] **Document in USER_REQUIREMENTS.md** with sections:
@@ -29,7 +29,7 @@ Use these checklists to ensure nothing is missed. Update task status in AI Maest
   - [ ] Success metrics (how to measure success)
 - [ ] **Identify ambiguities** (requirements that can be interpreted multiple ways)
 - [ ] **Check feasibility** of each requirement (can it be built with available resources?)
-- [ ] **Request clarifications** if needed (send AI Maestro message to ECOS)
+- [ ] **Request clarifications** if needed (send AI Maestro message to AMCOS)
 - [ ] **Wait for clarifications** (do NOT proceed if requirements unclear)
 - [ ] **Log in requirements-log.md** (timestamp, requirements received, clarifications requested)
 - [ ] **Verify RULE 14 compliance** (requirements are immutable, no changes without user approval)
@@ -75,7 +75,7 @@ Use these checklists to ensure nothing is missed. Update task status in AI Maest
 
 ## 4. Checklist: Handoff Preparation
 
-**Phase:** Prepare complete handoff package for EOA
+**Phase:** Prepare complete handoff package for AMOA
 
 - [ ] **Verify all design artifacts complete:**
   - [ ] USER_REQUIREMENTS.md exists and complete
@@ -88,7 +88,7 @@ Use these checklists to ensure nothing is missed. Update task status in AI Maest
 - [ ] **Create implementation sequence** (which modules to build first, dependency order)
 - [ ] **Identify risks** (technical, resource, dependency risks)
 - [ ] **Document mitigation strategies** (for each identified risk)
-- [ ] **Define success criteria for EOA** (how to verify implementation is correct)
+- [ ] **Define success criteria for AMOA** (how to verify implementation is correct)
 - [ ] **Resolve or escalate open questions** (do NOT handoff with unresolved questions)
 - [ ] **Create handoff-{uuid}.md** with sections:
   - [ ] Executive summary (what was designed)
@@ -98,8 +98,8 @@ Use these checklists to ensure nothing is missed. Update task status in AI Maest
   - [ ] Success criteria
   - [ ] Open questions (if any, with escalation status)
 - [ ] **Self-review using Success Criteria section** (verify all criteria met)
-- [ ] **Send AI Maestro message to ECOS** (design complete, ready for handoff)
+- [ ] **Send AI Maestro message to AMCOS** (design complete, ready for handoff)
 
 **Output:** `docs_dev/design/handoff-{uuid}.md`
 
-**Next:** Wait for ECOS to route handoff to EOA
+**Next:** Wait for AMCOS to route handoff to AMOA

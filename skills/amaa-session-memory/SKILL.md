@@ -221,7 +221,7 @@ Handoff documents enable session continuity across context clears or agent trans
 Create a handoff document when:
 - Context window approaching limit
 - Session ending intentionally
-- Transitioning to implementation (handoff to EOA)
+- Transitioning to implementation (handoff to AMOA)
 - Major design milestone reached
 - Significant time gap expected
 
@@ -230,7 +230,7 @@ Create a handoff document when:
 | Type | Purpose | Target |
 |------|---------|--------|
 | `session_continuity` | Continue work in new session | Future AMAA session |
-| `orchestrator_handoff` | Design approved, ready for implementation | EOA (via EAMA) |
+| `orchestrator_handoff` | Design approved, ready for implementation | AMOA (via AMAMA) |
 | `context_clear` | Save state before context window reset | Future AMAA session |
 
 ### Handoff Document Structure

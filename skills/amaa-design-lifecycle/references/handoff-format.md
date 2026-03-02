@@ -17,7 +17,7 @@
   - [High Priority](#high-priority)
   - [Medium Priority](#medium-priority)
   - [Low Priority](#low-priority)
-- [Success Criteria for EOA](#success-criteria-for-eoa)
+- [Success Criteria for AMOA](#success-criteria-for-eoa)
 - [Open Questions](#open-questions)
 - [Notes](#notes)
 - [Template Field Guide](#template-field-guide)
@@ -25,7 +25,7 @@
   - [Design Artifacts](#design-artifacts)
   - [Implementation Sequence](#implementation-sequence)
   - [Risks and Mitigations](#risks-and-mitigations)
-  - [Success Criteria for EOA](#success-criteria-for-eoa)
+  - [Success Criteria for AMOA](#success-criteria-for-eoa)
   - [Open Questions](#open-questions)
   - [Notes](#notes)
 
@@ -33,13 +33,13 @@
 
 **Location:** `docs_dev/design/handoffs/`
 
-**Purpose:** Complete package of design artifacts for EOA to begin implementation.
+**Purpose:** Complete package of design artifacts for AMOA to begin implementation.
 
 **Naming Convention:** `handoff-{uuid}.md` (generate UUID with `uuidgen` command)
 
 ## Handoff Validation Checklist
 
-**CRITICAL:** Before sending handoff to EOA/ECOS, verify ALL items:
+**CRITICAL:** Before sending handoff to AMOA/AMCOS, verify ALL items:
 
 - [ ] **All referenced files exist** - Every file path in handoff document is valid
 - [ ] **All design artifacts complete** - No empty or placeholder documents
@@ -149,7 +149,7 @@ echo "Handoff validation passed"
    **Mitigation:** Use code splitting, lazy loading for non-critical components
    **Owner:** Frontend team
 
-## Success Criteria for EOA
+## Success Criteria for AMOA
 Implementation is complete when:
 - [ ] All modules implemented per specifications in docs_dev/design/modules/
 - [ ] All API endpoints match integration-points.md specification
@@ -163,17 +163,17 @@ Implementation is complete when:
 [List any unresolved questions. If ANY exist, escalation status must be included.]
 
 1. **Question:** [QUESTION_TEXT]
-   **Status:** Escalated to ECOS on [DATE] (Message ID: [ID])
+   **Status:** Escalated to AMCOS on [DATE] (Message ID: [ID])
    **Blocking:** [Yes/No]
 
 2. **Question:** [QUESTION_TEXT]
-   **Status:** Escalated to ECOS on [DATE] (Message ID: [ID])
+   **Status:** Escalated to AMCOS on [DATE] (Message ID: [ID])
    **Blocking:** [Yes/No]
 
 [If no open questions: "None. All design decisions finalized."]
 
 ## Notes
-[Any additional context for EOA.]
+[Any additional context for AMOA.]
 ```
 
 ## Template Field Guide
@@ -202,7 +202,7 @@ Implementation is complete when:
 - **Complete register**: All identified risks during design must be listed
 - **Actionable mitigations**: Each mitigation must be specific and implementable
 
-### Success Criteria for EOA
+### Success Criteria for AMOA
 - **Format**: Checklist with measurable outcomes
 - **Coverage**: Must cover all design artifacts and requirements
 - **Testability**: Each criterion must be verifiable (tests pass, metrics met, etc.)

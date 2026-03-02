@@ -33,7 +33,7 @@ version: 1.0.0
 
 Use this operation when:
 - Starting a new design effort from scratch
-- Requirements have been received from ECOS or directly from user
+- Requirements have been received from AMCOS or directly from user
 - A new feature, system, or architectural change needs to be documented
 
 ## Prerequisites

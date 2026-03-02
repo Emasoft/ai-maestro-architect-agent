@@ -367,7 +367,7 @@ python scripts/eia_design_validate.py --all --verbose --format text
 Scripts expect to be run from the plugin root:
 ```bash
 # Correct
-cd /path/to/emasoft-integrator-agent
+cd /path/to/ai-maestro-integrator-agent
 python scripts/eia_design_create.py --type pdr --title "Test"
 
 # Also correct (explicit path)

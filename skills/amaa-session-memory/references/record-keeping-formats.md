@@ -37,8 +37,8 @@ This document defines all standard formats for record-keeping, logging, and docu
 - Ambiguity 2: "[SPECIFIC_QUESTION]" (Context: "[USER_QUOTE]")
 
 ### Clarifications Requested
-- [TIMESTAMP]: Asked ECOS about [ISSUE] (Message ID: [MESSAGE_ID])
-- [TIMESTAMP]: Received clarification: "[ECOS_RESPONSE]"
+- [TIMESTAMP]: Asked AMCOS about [ISSUE] (Message ID: [MESSAGE_ID])
+- [TIMESTAMP]: Received clarification: "[AMCOS_RESPONSE]"
 
 ### Decisions Made
 - Decision 1: "[DECISION]" (Rationale: "[REASON]")
@@ -70,7 +70,7 @@ docs_dev/design/
 ├── data-models.md              # Database schemas, relationships
 ├── integration-points.md       # External APIs, webhooks, queues
 ├── module-dependency-graph.md  # Mermaid graph of module dependencies
-├── handoff-{uuid}.md           # Handoff document to EOA
+├── handoff-{uuid}.md           # Handoff document to AMOA
 ├── adrs/                       # Architecture Decision Records
 │   ├── 001-database-choice.md
 │   ├── 002-api-framework.md
@@ -182,7 +182,7 @@ docs_dev/design/
 
 **Location:** `docs_dev/design/handoff-{uuid}.md`
 
-**Purpose:** Complete package of design artifacts for EOA to begin implementation.
+**Purpose:** Complete package of design artifacts for AMOA to begin implementation.
 
 **Template:**
 
@@ -260,7 +260,7 @@ docs_dev/design/
    **Mitigation:** Use code splitting, lazy loading for non-critical components
    **Owner:** Frontend team
 
-## Success Criteria for EOA
+## Success Criteria for AMOA
 Implementation is complete when:
 - [ ] All modules implemented per specifications in docs_dev/design/modules/
 - [ ] All API endpoints match integration-points.md specification
@@ -274,24 +274,24 @@ Implementation is complete when:
 [List any unresolved questions. If ANY exist, escalation status must be included.]
 
 1. **Question:** [QUESTION_TEXT]
-   **Status:** Escalated to ECOS on [DATE] (Message ID: [ID])
+   **Status:** Escalated to AMCOS on [DATE] (Message ID: [ID])
    **Blocking:** [Yes/No]
 
 2. **Question:** [QUESTION_TEXT]
-   **Status:** Escalated to ECOS on [DATE] (Message ID: [ID])
+   **Status:** Escalated to AMCOS on [DATE] (Message ID: [ID])
    **Blocking:** [Yes/No]
 
 [If no open questions: "None. All design decisions finalized."]
 
 ## Notes
-[Any additional context for EOA.]
+[Any additional context for AMOA.]
 ```
 
 ---
 
 ## Handoff Validation Checklist
 
-**CRITICAL:** Before sending handoff to EOA/ECOS, verify ALL items:
+**CRITICAL:** Before sending handoff to AMOA/AMCOS, verify ALL items:
 
 - [ ] **All referenced files exist** - Every file path in handoff document is valid
 - [ ] **All design artifacts complete** - No empty or placeholder documents
@@ -333,11 +333,11 @@ echo "Handoff validation passed"
 
 ### 1. Acknowledgment of Design Request
 
-**When:** ECOS assigns you a design task
+**When:** AMCOS assigns you a design task
 
 **Format:**
 Send a message using the `agent-messaging` skill with:
-- **Recipient**: `ecos`
+- **Recipient**: `amcos`
 - **Subject**: `Design Request Acknowledged`
 - **Priority**: `normal`
 - **Content**: `{"type": "acknowledgment", "message": "Design request received for [PROJECT_NAME]. Starting requirements analysis. ETA: [ESTIMATED_COMPLETION_TIME]."}`
@@ -347,7 +347,7 @@ Send a message using the `agent-messaging` skill with:
 ```json
 {
   "from": "amaa-architect-main-agent",
-  "to": "ecos",
+  "to": "amcos",
   "subject": "Design Request Acknowledged",
   "priority": "normal",
   "content": {
@@ -363,7 +363,7 @@ Send a message using the `agent-messaging` skill with:
 
 **Format:**
 Send a message using the `agent-messaging` skill with:
-- **Recipient**: `ecos`
+- **Recipient**: `amcos`
 - **Subject**: `Clarification Needed - [PROJECT_NAME]`
 - **Priority**: `high`
 - **Content**: `{"type": "clarification_request", "message": "BLOCKING: Requirement ambiguity detected. Question: [SPECIFIC_QUESTION]. Context: [USER_REQUIREMENT_QUOTE]. Cannot proceed until clarified. Details: docs_dev/design/clarifications/[TIMESTAMP]-[ISSUE].md"}`
@@ -373,7 +373,7 @@ Send a message using the `agent-messaging` skill with:
 ```json
 {
   "from": "amaa-architect-main-agent",
-  "to": "ecos",
+  "to": "amcos",
   "subject": "Clarification Needed - Payment Gateway Integration",
   "priority": "high",
   "content": {
@@ -389,22 +389,22 @@ Send a message using the `agent-messaging` skill with:
 
 **Format:**
 Send a message using the `agent-messaging` skill with:
-- **Recipient**: `ecos`
+- **Recipient**: `amcos`
 - **Subject**: `Design Complete - [PROJECT_NAME]`
 - **Priority**: `normal`
-- **Content**: `{"type": "design_complete", "message": "[DONE] Design for [PROJECT_NAME] complete. Architecture: [BRIEF_SUMMARY]. Modules: [MODULE_COUNT]. Risks: [HIGH_COUNT]/[MEDIUM_COUNT]/[LOW_COUNT]. Handoff doc: docs_dev/design/handoff-[UUID].md. Ready for EOA assignment."}`
+- **Content**: `{"type": "design_complete", "message": "[DONE] Design for [PROJECT_NAME] complete. Architecture: [BRIEF_SUMMARY]. Modules: [MODULE_COUNT]. Risks: [HIGH_COUNT]/[MEDIUM_COUNT]/[LOW_COUNT]. Handoff doc: docs_dev/design/handoff-[UUID].md. Ready for AMOA assignment."}`
 - **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 **Example:**
 ```json
 {
   "from": "amaa-architect-main-agent",
-  "to": "ecos",
+  "to": "amcos",
   "subject": "Design Complete - E-Commerce Product Catalog",
   "priority": "normal",
   "content": {
     "type": "design_complete",
-    "message": "[DONE] Design for E-Commerce Product Catalog complete. Architecture: REST API + PostgreSQL + Redis cache + React frontend. Modules: 5 (product-service, inventory-service, search-service, cart-service, frontend). Risks: 1/3/2. Handoff doc: docs_dev/design/handoff-a7f8b2d4.md. Ready for EOA assignment."
+    "message": "[DONE] Design for E-Commerce Product Catalog complete. Architecture: REST API + PostgreSQL + Redis cache + React frontend. Modules: 5 (product-service, inventory-service, search-service, cart-service, frontend). Risks: 1/3/2. Handoff doc: docs_dev/design/handoff-a7f8b2d4.md. Ready for AMOA assignment."
   }
 }
 ```
@@ -415,22 +415,22 @@ Send a message using the `agent-messaging` skill with:
 
 **Format:**
 Send a message using the `agent-messaging` skill with:
-- **Recipient**: `ecos`
+- **Recipient**: `amcos`
 - **Subject**: `Handoff Ready - [PROJECT_NAME]`
 - **Priority**: `normal`
-- **Content**: `{"type": "handoff", "message": "Design handoff ready for [PROJECT_NAME]. Implementation sequence: [PHASE_1] -> [PHASE_2] -> [PHASE_3]. Critical path: [TOP_3_ITEMS]. All artifacts in docs_dev/design/. Handoff doc: handoff-[UUID].md. Awaiting EOA assignment from ECOS."}`
+- **Content**: `{"type": "handoff", "message": "Design handoff ready for [PROJECT_NAME]. Implementation sequence: [PHASE_1] -> [PHASE_2] -> [PHASE_3]. Critical path: [TOP_3_ITEMS]. All artifacts in docs_dev/design/. Handoff doc: handoff-[UUID].md. Awaiting AMOA assignment from AMCOS."}`
 - **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 **Example:**
 ```json
 {
   "from": "amaa-architect-main-agent",
-  "to": "ecos",
+  "to": "amcos",
   "subject": "Handoff Ready - Payment Gateway Integration",
   "priority": "normal",
   "content": {
     "type": "handoff",
-    "message": "Design handoff ready for Payment Gateway Integration. Implementation sequence: Phase 1 (Database schema + Payment model) → Phase 2 (Stripe API integration) → Phase 3 (Webhook handlers + retry logic) → Phase 4 (Frontend payment form). Critical path: Stripe API credentials, webhook endpoint setup, PCI compliance review. All artifacts in docs_dev/design/. Handoff doc: handoff-c3e9f1a8.md. Awaiting EOA assignment from ECOS."
+    "message": "Design handoff ready for Payment Gateway Integration. Implementation sequence: Phase 1 (Database schema + Payment model) → Phase 2 (Stripe API integration) → Phase 3 (Webhook handlers + retry logic) → Phase 4 (Frontend payment form). Critical path: Stripe API credentials, webhook endpoint setup, PCI compliance review. All artifacts in docs_dev/design/. Handoff doc: handoff-c3e9f1a8.md. Awaiting AMOA assignment from AMCOS."
   }
 }
 ```
@@ -441,7 +441,7 @@ Send a message using the `agent-messaging` skill with:
 
 **Format:**
 Send a message using the `agent-messaging` skill with:
-- **Recipient**: `ecos`
+- **Recipient**: `amcos`
 - **Subject**: `BLOCKED - [PROJECT_NAME]`
 - **Priority**: `urgent`
 - **Content**: `{"type": "blocker", "message": "[BLOCKED] Design for [PROJECT_NAME]. Blocker: [SPECIFIC_ISSUE]. Impact: [IMPACT_DESCRIPTION]. Next: [WHAT_IS_NEEDED]. Details: docs_dev/design/blockers/[TIMESTAMP]-[ISSUE].md. Awaiting user decision."}`
@@ -451,7 +451,7 @@ Send a message using the `agent-messaging` skill with:
 ```json
 {
   "from": "amaa-architect-main-agent",
-  "to": "ecos",
+  "to": "amcos",
   "subject": "BLOCKED - Real-Time Analytics Dashboard",
   "priority": "urgent",
   "content": {
@@ -483,7 +483,7 @@ Send a message using the `agent-messaging` skill with:
 
 **Escalation Format:**
 Send a message using the `agent-messaging` skill with:
-- **Recipient**: `ecos`
+- **Recipient**: `amcos`
 - **Subject**: `ACK Timeout Escalation`
 - **Priority**: `urgent`
 - **Content**: `{"type": "escalation", "message": "ACK timeout from [TARGET]. Original message: [SUBJECT]. Sent: [TIMESTAMP]. Retry sent: [RETRY_TIMESTAMP]. Blocking operation: [BLOCKED_OPERATION]."}`
@@ -547,7 +547,7 @@ Track current work state in a session memory file (not part of permanent artifac
     {
       "issue": "Payment flow unclear",
       "blocking_since": "2026-02-04T10:30:00Z",
-      "escalated_to": "ecos",
+      "escalated_to": "amcos",
       "message_id": "msg-12345"
     }
   ],
@@ -555,7 +555,7 @@ Track current work state in a session memory file (not part of permanent artifac
     {
       "question": "Sync vs async payment?",
       "asked_at": "2026-02-04T09:00:00Z",
-      "target": "ecos"
+      "target": "amcos"
     }
   ],
   "completed_artifacts": [
@@ -605,7 +605,7 @@ Before marking any phase complete, log verification:
 ### Checklist Verification
 - [x] All user requirements extracted (verbatim quotes in USER_REQUIREMENTS.md)
 - [x] Ambiguities identified and logged (2 ambiguities in requirements-log.md)
-- [x] Clarification requests sent to ECOS (Message IDs: msg-123, msg-456)
+- [x] Clarification requests sent to AMCOS (Message IDs: msg-123, msg-456)
 - [x] Functional requirements separated from non-functional
 - [x] Constraints documented (budget: $50K, timeline: 6 weeks, tech: Python/React)
 - [x] Dependencies identified (Stripe API, PostgreSQL, AWS S3)
@@ -617,7 +617,7 @@ Before marking any phase complete, log verification:
 - docs_dev/design/clarifications/20260204-payment-flow.md (created)
 
 ### Self-Check Result
-✓ PASS: "Can EOA implement this without asking me what the user wanted?" - YES
+✓ PASS: "Can AMOA implement this without asking me what the user wanted?" - YES
 
 ### Next Phase
 Design Phase (architecture.md, data models, API research)

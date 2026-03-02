@@ -23,7 +23,7 @@ Every architecture phase has specific completion criteria. Use these to self-ver
 
 - [ ] All user requirements extracted (verbatim quotes in USER_REQUIREMENTS.md)
 - [ ] Ambiguities identified and logged
-- [ ] Clarification requests sent to ECOS (if needed)
+- [ ] Clarification requests sent to AMCOS (if needed)
 - [ ] Functional requirements separated from non-functional
 - [ ] Constraints documented (technical, budget, timeline, resources)
 - [ ] Dependencies identified (internal systems, external APIs, team skills)
@@ -37,7 +37,7 @@ Every architecture phase has specific completion criteria. Use these to self-ver
 
 ### Self-Check Question
 
-"Can EOA implement this without asking me what the user wanted?"
+"Can AMOA implement this without asking me what the user wanted?"
 
 ---
 
@@ -87,7 +87,7 @@ Every architecture phase has specific completion criteria. Use these to self-ver
 
 ### Self-Check Question
 
-"Can EOA integrate this API without further research?"
+"Can AMOA integrate this API without further research?"
 
 ---
 
@@ -123,7 +123,7 @@ Every architecture phase has specific completion criteria. Use these to self-ver
 - [ ] Risks identified and mitigation strategies documented
 - [ ] Open questions resolved or escalated
 - [ ] Handoff document created with all file paths
-- [ ] Success criteria defined for EOA (how to know implementation is correct)
+- [ ] Success criteria defined for AMOA (how to know implementation is correct)
 
 ### Evidence Files
 

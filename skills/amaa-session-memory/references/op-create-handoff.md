@@ -69,7 +69,7 @@ Create a handoff document that captures complete session context for continuity,
 | Type | Purpose | Target |
 |------|---------|--------|
 | `session_continuity` | Continue design work | Future AMAA session |
-| `orchestrator_handoff` | Design complete | EOA (via EAMA) |
+| `orchestrator_handoff` | Design complete | AMOA (via AMAMA) |
 | `context_clear` | Preserve before reset | Future AMAA session |
 
 ### Step 2: Create Handoff Directory
