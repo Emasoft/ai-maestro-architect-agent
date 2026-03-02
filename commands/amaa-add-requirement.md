@@ -1,6 +1,6 @@
 ---
 name: amaa-add-requirement
-description: "Add a new requirement or module to the plan during Plan Phase"
+description: "Add a requirement or module to the plan"
 argument-hint: "<TYPE> <NAME> [--criteria TEXT] [--priority LEVEL]"
 allowed-tools: ["Bash(python3 ${CLAUDE_PLUGIN_ROOT}/scripts/amaa_modify_requirement.py:*)"]
 ---

@@ -1,6 +1,11 @@
 ---
 name: amaa-cicd-design
 description: "Use when designing CI/CD workflows and DevOps architecture. Trigger with CI/CD pipeline or GitHub Actions design requests."
+triggers:
+  - "CI/CD pipeline"
+  - "GitHub Actions workflow"
+  - "continuous integration"
+  - "deployment pipeline"
 version: 1.0.0
 license: Apache-2.0
 compatibility: Requires GitHub Actions, GitHub CLI (gh), and understanding of CI/CD concepts. Supports macOS, Windows, Linux, iOS, Android build automation. Requires AI Maestro installed.

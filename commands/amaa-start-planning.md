@@ -1,6 +1,6 @@
 ---
 name: amaa-start-planning
-description: "Enter Plan Phase Mode - begin requirements gathering and planning before implementation"
+description: "Enter Plan Phase for requirements and design"
 argument-hint: "[GOAL_DESCRIPTION]"
 allowed-tools: ["Bash(python3 ${CLAUDE_PLUGIN_ROOT}/scripts/amaa_start_planning.py:*)"]
 ---

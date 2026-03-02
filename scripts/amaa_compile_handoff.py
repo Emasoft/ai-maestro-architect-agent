@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-arch_compile_handoff.py - Compile template to handoff document for implementer.
+amaa_compile_handoff.py - Compile template to handoff document for implementer.
 
 Takes a module specification and compiles it with the handoff template,
 filling in all placeholders with module-specific data.
@@ -90,12 +90,10 @@ def parse_yaml_frontmatter(content: str) -> tuple[dict[str, str | list[str]], st
 
             if value == "":
                 # Start of a list or nested object
-                _ = key  # noqa: F841 - key tracked via data[key]
                 current_list = []
                 data[key] = current_list
             else:
                 # Simple value - reset list context
-                _ = key  # Track key for potential future use
                 current_list = None
                 # Remove quotes if present
                 if value.startswith('"') and value.endswith('"'):

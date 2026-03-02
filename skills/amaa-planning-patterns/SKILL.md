@@ -1,6 +1,11 @@
 ---
 name: amaa-planning-patterns
 description: "Use when creating architecture plans. Trigger with /plan project or design system requests."
+triggers:
+  - "create plan"
+  - "implementation plan"
+  - "planning pattern"
+  - "task breakdown"
 version: 1.0.0
 license: Apache-2.0
 compatibility: Cross-platform compatible. Requires Python 3.8+ for utility scripts. Works with all project types and toolchains. Supports atomic file operations with UTF-8 encoding using pathlib for universal path handling. Requires AI Maestro installed.

@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 """
-arch_design_version.py - Design document version management.
+amaa_design_version.py - Design document version management.
 
 Creates new versions of existing design documents.
-Uses arch_design_search.py to find documents and arch_design_uuid.py for UUIDs.
+Uses amaa_design_search.py to find documents and amaa_design_uuid.py for UUIDs.
 
 Usage:
     # Create new version of a document
-    python arch_design_version.py --uuid PROJ-SPEC-20250108-a7b3f2e1
+    python amaa_design_version.py --uuid PROJ-SPEC-20250108-a7b3f2e1
 
     # Create version with reason
-    python arch_design_version.py --uuid PROJ-SPEC-... --reason "Major API changes"
+    python amaa_design_version.py --uuid PROJ-SPEC-... --reason "Major API changes"
 
     # List all versions of a document
-    python arch_design_version.py --list PROJ-SPEC-20250108-a7b3f2e1
+    python amaa_design_version.py --list PROJ-SPEC-20250108-a7b3f2e1
 
-Dependencies: Python 3.8+, arch_design_search.py, arch_design_uuid.py (same directory)
+Dependencies: Python 3.8+, amaa_design_search.py, amaa_design_uuid.py (same directory)
 """
 
 import argparse
@@ -28,9 +28,9 @@ from typing import Any
 
 
 def run_search_script(args: list[str], project_root: Path) -> str:
-    """Run arch_design_search.py with given arguments."""
-    script_path = Path(__file__).parent / "arch_design_search.py"
-    cmd = ["python3", str(script_path)] + args + ["--project-root", str(project_root)]
+    """Run amaa_design_search.py with given arguments."""
+    script_path = Path(__file__).parent / "amaa_design_search.py"
+    cmd = [sys.executable, str(script_path)] + args + ["--project-root", str(project_root)]
     result = subprocess.run(cmd, capture_output=True, text=True)
     return result.stdout.strip()
 
@@ -222,7 +222,9 @@ def list_versions(base_uuid: str, project_root: Path) -> int:
         print(f"No versions found for: {base_uuid}")
         return 1
 
-    print(f"\nVersions of {re.sub(r'_v\\d{4}$', '', base_uuid)}:\n")
+    # Extract base UUID without version suffix for display
+    display_uuid = re.sub(r"_v\d{4}$", "", base_uuid)
+    print(f"\nVersions of {display_uuid}:\n")
     print(f"{'Version':<10} {'UUID':<45} {'Path'}")
     print("-" * 100)
 

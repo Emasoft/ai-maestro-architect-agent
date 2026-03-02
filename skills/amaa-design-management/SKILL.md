@@ -1,6 +1,11 @@
 ---
 name: amaa-design-management
 description: "Use when managing design documents. Trigger with design search, validation, or creation requests."
+triggers:
+  - "create design document"
+  - "search design"
+  - "validate design"
+  - "design management"
 version: 1.0.0
 license: Apache-2.0
 compatibility: Requires Python 3.10 or higher. Requires AI Maestro installed.

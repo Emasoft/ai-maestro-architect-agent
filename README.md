@@ -1,6 +1,6 @@
 # Architect Agent (amaa-)
 
-**Version**: 1.0.0
+**Version**: 2.0.0
 
 ## Overview
 
@@ -60,7 +60,7 @@ The Architect Agent handles **design documents, requirements analysis, and archi
 
 | Hook | Event | Description |
 |------|-------|-------------|
-| `amaa-skill-activation` | UserPromptSubmit | Activate relevant design skills |
+| `amaa-stop-check` | Stop | Block exit until all design work is complete |
 
 ## Workflow
 

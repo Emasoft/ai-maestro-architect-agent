@@ -1,6 +1,11 @@
 ---
-name: amaa-documentation-writer
+name: amaa-documentation-writing
 description: Use when writing module specs, API contracts, ADRs, or feature specs. Follows 6 C's quality framework. Trigger with technical documentation requests for modules or architecture.
+triggers:
+  - "create technical documentation"
+  - "write API contract"
+  - "architecture decision record"
+  - "feature specification"
 version: 1.0.0
 license: Apache-2.0
 compatibility: Works with any codebase. Outputs to standardized documentation directories (/docs/module-specs/, /docs/api-contracts/, /docs/adrs/). Requires AI Maestro installed.

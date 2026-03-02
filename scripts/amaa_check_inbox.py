@@ -105,9 +105,8 @@ def format_message(msg: dict[str, Any]) -> str:
 
     from_agent = msg.get("from", "unknown")
     subject = msg.get("subject", "(no subject)")
-    timestamp = msg.get("timestamp", msg.get("createdAt", ""))[
-        :19
-    ]  # Truncate to datetime
+    # Use 'or' chain to handle None values from JSON null fields
+    timestamp = (msg.get("timestamp") or msg.get("createdAt") or "")[:19]
 
     lines.append(f"{priority_icon} [{timestamp}] From: {from_agent}")
     lines.append(f"   Subject: {subject}")

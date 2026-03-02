@@ -1,6 +1,6 @@
 ---
 name: amaa-remove-requirement
-description: "Remove a pending requirement or module from the plan (only if not started)"
+description: "Remove a pending requirement or module from plan"
 argument-hint: "<TYPE> <ID> [--force]"
 allowed-tools: ["Bash(python3 ${CLAUDE_PLUGIN_ROOT}/scripts/amaa_modify_requirement.py:*)"]
 ---

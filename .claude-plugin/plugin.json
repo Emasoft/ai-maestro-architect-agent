@@ -16,5 +16,11 @@
     "./agents/amaa-planner.md",
     "./agents/amaa-cicd-designer.md"
   ],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "commands": [
+    "./commands/amaa-add-requirement.md",
+    "./commands/amaa-modify-requirement.md",
+    "./commands/amaa-remove-requirement.md",
+    "./commands/amaa-start-planning.md"
+  ]
 }

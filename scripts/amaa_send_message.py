@@ -149,8 +149,6 @@ def main() -> None:
         else:
             print("Message sent successfully")
 
-    sys.exit(0 if "error" not in result else 1)
-
 
 if __name__ == "__main__":
     main()

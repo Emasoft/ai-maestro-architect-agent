@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-arch_design_handoff.py - Export design documents to GitHub issue attachments.
+amaa_design_handoff.py - Export design documents to GitHub issue attachments.
 
 This script exports a design document to a GitHub issue attachment.
 Works identically in both single-git and dual-git modes.

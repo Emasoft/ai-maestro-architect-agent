@@ -14,6 +14,7 @@ Examples:
 from __future__ import annotations
 
 import argparse
+import shlex
 import subprocess
 import sys
 from pathlib import Path
@@ -194,8 +195,8 @@ class WorkflowDebugger:
 
         try:
             result = subprocess.run(
-                command,
-                shell=True,
+                shlex.split(command),
+                shell=False,
                 env=full_env,
                 capture_output=not self.verbose,
                 text=True,

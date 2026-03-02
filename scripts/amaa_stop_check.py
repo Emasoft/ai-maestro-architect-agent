@@ -14,6 +14,7 @@ Exit codes:
 """
 
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -134,8 +135,6 @@ def check_orphan_requirements(project_root: Path) -> list[str]:
         try:
             content = req_file.read_text(encoding="utf-8")
             # Look for requirement IDs like REQ-001, R001, etc.
-            import re
-
             req_ids = re.findall(
                 r"(?:REQ|R|REQUIREMENT)-?\d{1,4}", content, re.IGNORECASE
             )

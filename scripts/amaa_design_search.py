@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-arch_design_search.py - Filesystem-based design document search (Manus principle).
+amaa_design_search.py - Filesystem-based design document search (Manus principle).
 
 This script searches design documents using the filesystem as the database,
 following the Manus principle: "Use the filesystem as the DB and filenames as indexes."

@@ -26,8 +26,12 @@ REQUIRED_FIELDS = ["uuid", "title", "status", "created", "updated"]
 # Valid status values (case-insensitive matching)
 VALID_STATUSES = ["draft", "review", "approved", "implemented", "deprecated", "rejected"]
 
-# Regex pattern for GUUID format: GUUID-YYYYMMDD-NNNN
-GUUID_PATTERN = re.compile(r"^GUUID-\d{8}-\d{4}$")
+# Regex pattern for UUID formats:
+# - Legacy GUUID format: GUUID-YYYYMMDD-NNNN
+# - Extended format: PREFIX-TYPE-YYYYMMDD-HEX8 (with optional _vNNNN version suffix)
+GUUID_PATTERN = re.compile(
+    r"^(?:GUUID-\d{8}-\d{4}|[A-Z]{2,6}-[A-Z]+-\d{8}-[a-f0-9]{8}(?:_v\d{4})?)$"
+)
 
 # Regex pattern for ISO date format: YYYY-MM-DD
 DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}$")

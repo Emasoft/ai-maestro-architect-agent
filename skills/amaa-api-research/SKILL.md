@@ -1,6 +1,12 @@
 ---
-name: amaa-api-researcher
+name: amaa-api-research
 description: Use when investigating external APIs, libraries, and services. Creates standardized API documentation with auth and endpoints. Trigger with API research or library investigation requests.
+triggers:
+  - "research an API"
+  - "library investigation"
+  - "API documentation"
+  - "external service authentication"
+  - "third-party integration"
 version: 1.0.0
 license: Apache-2.0
 compatibility: Requires web access for documentation lookup. Works with REST APIs, GraphQL APIs, Python libraries, npm packages, and cloud service APIs. Requires AI Maestro installed.

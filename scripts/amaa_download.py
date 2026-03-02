@@ -241,6 +241,9 @@ def download_document(
     cat_config = CATEGORIES[category]
     folder_template: str = cat_config["path"]
 
+    # Sanitize task_id to prevent path traversal
+    task_id = re.sub(r'[^a-zA-Z0-9_-]', '', task_id)
+
     if "{task_id}" in folder_template:
         folder_path: Path = storage_root / folder_template.format(task_id=task_id)
     else:
@@ -258,6 +261,8 @@ def download_document(
     else:
         # Extract from URL or use default
         url_filename = url.split("/")[-1]
+        # Sanitize filename to prevent path traversal or injection
+        url_filename = re.sub(r'[^a-zA-Z0-9._-]', '_', url_filename)
         if url_filename.endswith(".md"):
             filename = f"{timestamp}_{url_filename}"
         else:
@@ -274,6 +279,13 @@ def download_document(
         download_url = attachment_url
     else:
         download_url = url
+
+    # Validate URL scheme and domain before downloading
+    from urllib.parse import urlparse
+    parsed = urlparse(download_url)
+    if parsed.scheme != "https" or parsed.hostname not in ("github.com", "raw.githubusercontent.com"):
+        print(f"ERROR: URL must be https:// and from github.com or raw.githubusercontent.com, got: {download_url}")
+        return None
 
     # Download file
     print(f"Downloading: {download_url}")
@@ -329,10 +341,9 @@ def download_document(
     metadata_path = folder_path / f"{filename.replace('.md', '')}_metadata.json"
     metadata_path.write_text(json.dumps(metadata, indent=2), encoding="utf-8")
 
-    # Set read-only
+    # Set read-only (files only; folder left writable for future additions)
     set_readonly(file_path)
     set_readonly(metadata_path)
-    set_readonly(folder_path)
 
     print(f"Downloaded and locked: {file_path}")
     print(f"SHA256: {sha256}")

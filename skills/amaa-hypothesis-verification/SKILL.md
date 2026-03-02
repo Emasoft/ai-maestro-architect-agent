@@ -1,6 +1,10 @@
 ---
 name: amaa-hypothesis-verification
 description: Use when verifying claims through Docker experimentation. Applies TBV principle to test claims before relying on them. Trigger with experiment setup or claim verification.
+triggers:
+  - "verify hypothesis"
+  - "test assumption"
+  - "validate assumption"
 version: 1.0.0
 compatibility: Requires AI Maestro installed.
 agent: test-engineer

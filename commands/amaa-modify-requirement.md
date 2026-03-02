@@ -1,6 +1,6 @@
 ---
 name: amaa-modify-requirement
-description: "Modify an existing requirement or module specification during Plan Phase"
+description: "Modify an existing requirement or module spec"
 argument-hint: "<TYPE> <ID> [--name NAME] [--criteria TEXT] [--status STATUS] [--priority LEVEL]"
 allowed-tools: ["Bash(python3 ${CLAUDE_PLUGIN_ROOT}/scripts/amaa_modify_requirement.py:*)"]
 ---

@@ -32,6 +32,22 @@ Thumbs.db
 # examples_dev, downloads_dev, libs_dev, builds_dev, etc.
 *_dev/
 
+# Environment & secrets
+.env
+.env.*
+
+# Virtual environments
+.venv/
+venv/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+*.log
+
 # Rust
 target/
 Cargo.lock

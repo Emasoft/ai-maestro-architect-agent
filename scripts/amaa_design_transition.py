@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-arch_design_transition.py - Transition from dual-git to single-git design management.
+amaa_design_transition.py - Transition from dual-git to single-git design management.
 
 This script migrates design documents from private (.design/) to public (docs/design/).
 UUIDs are preserved, ensuring all GitHub issue references remain valid.
@@ -169,9 +169,9 @@ def rebuild_search_index(dry_run: bool) -> None:
         return
 
     # Try to find and execute search script
+    # Use the Python search script to rebuild index
     search_scripts = [
-        Path("scripts/amaa-design-search.sh"),
-        Path("amaa-design-search.sh"),
+        Path("scripts/amaa_design_search.py"),
     ]
 
     for script in search_scripts:

@@ -1,7 +1,18 @@
 #!/usr/bin/env bash
 # Sync validation scripts from claude-plugins-validation (CPV) repo.
-# Downloads latest scripts from Emasoft/claude-plugins-validation main branch.
+# Downloads scripts from Emasoft/claude-plugins-validation at a pinned commit SHA.
 # Preserves existing non-CPV scripts (amaa_*.py).
+#
+# SUPPLY CHAIN SECURITY: This script pins to a specific commit SHA to prevent
+# supply chain attacks via branch tampering. Do NOT replace PINNED_SHA with a
+# branch name.
+#
+# To update the pinned SHA:
+#   1. Review the new commits:
+#      gh api repos/Emasoft/claude-plugins-validation/commits?per_page=10 --jq '.[].sha'
+#   2. After verifying the commits are safe, update PINNED_SHA below:
+#      gh api repos/Emasoft/claude-plugins-validation/git/ref/heads/master --jq '.object.sha'
+#   3. Run this script to sync.
 #
 # Usage: bash scripts/sync_cpv_scripts.sh
 # Requires: gh CLI authenticated
@@ -9,7 +20,8 @@
 set -euo pipefail
 
 REPO="Emasoft/claude-plugins-validation"
-BRANCH="main"
+# Pinned commit SHA for supply chain security (do not use branch names)
+PINNED_SHA="246ce10a5261b7d490fd5a5dd40884ebc00e3f8f"
 REMOTE_DIR="scripts"
 LOCAL_DIR="$(cd "$(dirname "$0")" && pwd)"
 
@@ -18,10 +30,10 @@ if ! command -v gh &> /dev/null; then
     exit 1
 fi
 
-echo "Syncing validation scripts from $REPO ($BRANCH)..."
+echo "Syncing validation scripts from $REPO (pinned: ${PINNED_SHA:0:12})..."
 
-# List .py files in the remote scripts/ directory
-FILES=$(gh api "repos/$REPO/contents/$REMOTE_DIR?ref=$BRANCH" --jq '.[] | select(.name | endswith(".py")) | .name' 2>/dev/null)
+# List .py files in the remote scripts/ directory at the pinned commit
+FILES=$(gh api "repos/$REPO/contents/$REMOTE_DIR?ref=$PINNED_SHA" --jq '.[] | select(.name | endswith(".py")) | .name' 2>/dev/null)
 
 if [ -z "$FILES" ]; then
     echo "ERROR: Could not list files from $REPO/$REMOTE_DIR"
@@ -33,7 +45,7 @@ FAILED=0
 
 while IFS= read -r filename; do
     # Download raw content
-    if gh api "repos/$REPO/contents/$REMOTE_DIR/$filename?ref=$BRANCH" --jq '.content' 2>/dev/null | base64 -d > "$LOCAL_DIR/$filename.tmp" 2>/dev/null; then
+    if gh api "repos/$REPO/contents/$REMOTE_DIR/$filename?ref=$PINNED_SHA" --jq '.content' 2>/dev/null | base64 -d > "$LOCAL_DIR/$filename.tmp" 2>/dev/null; then
         mv "$LOCAL_DIR/$filename.tmp" "$LOCAL_DIR/$filename"
         UPDATED=$((UPDATED + 1))
     else

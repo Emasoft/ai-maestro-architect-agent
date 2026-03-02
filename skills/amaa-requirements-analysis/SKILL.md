@@ -1,6 +1,10 @@
 ---
 name: amaa-requirements-analysis
 description: "Use when managing planning phase: start planning, track progress, manage requirements/modules, or approve plans. Trigger with /start-planning or /planning-status commands."
+triggers:
+  - "analyze requirements"
+  - "requirements gathering"
+  - "requirement analysis"
 version: 1.0.0
 license: Apache-2.0
 compatibility: "Requires Python 3.8+, PyYAML, GitHub CLI for issue creation. Cross-platform compatible. Requires AI Maestro installed."
