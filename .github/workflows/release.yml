@@ -25,6 +25,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install ruff mypy pyyaml types-PyYAML
 
+      - name: Sync validation scripts from CPV
+        run: bash scripts/sync_cpv_scripts.sh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Validate plugin manifest
         run: |
           python -c "

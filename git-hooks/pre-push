@@ -76,6 +76,16 @@ echo ""
 
 cd "$REPO_ROOT"
 
+# Sync validation scripts from CPV repo (if gh CLI available and online)
+if command -v gh &> /dev/null; then
+    echo -e "${BLUE}Syncing validation scripts from CPV repo...${NC}"
+    if bash "$REPO_ROOT/scripts/sync_cpv_scripts.sh" 2>/dev/null; then
+        echo -e "${GREEN}Validation scripts synced.${NC}"
+    else
+        echo -e "${YELLOW}Could not sync validation scripts (offline?). Using local copies.${NC}"
+    fi
+fi
+
 # Check that the validator script exists
 if [ ! -f "scripts/validate_plugin.py" ]; then
     echo -e "${RED}ERROR: scripts/validate_plugin.py not found${NC}"

@@ -29,6 +29,11 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v5
 
+      - name: Sync validation scripts from CPV
+        run: bash scripts/sync_cpv_scripts.sh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Validate plugin
         run: |
           echo "=== Plugin Validation (strict mode) ==="
