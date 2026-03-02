@@ -1,231 +1,53 @@
 ---
 name: amaa-cicd-design
-description: "Use when designing CI/CD workflows and DevOps architecture. Trigger with CI/CD pipeline or GitHub Actions design requests."
-triggers:
-  - "CI/CD pipeline"
-  - "GitHub Actions workflow"
-  - "continuous integration"
-  - "deployment pipeline"
-version: 1.0.0
-license: Apache-2.0
-compatibility: Requires GitHub Actions, GitHub CLI (gh), and understanding of CI/CD concepts. Supports macOS, Windows, Linux, iOS, Android build automation. Requires AI Maestro installed.
-metadata:
-  author: Emasoft
+description: "Use when designing CI/CD pipelines, GitHub Actions workflows, cross-platform builds, and release automation."
 context: fork
 user-invocable: false
 agent: amaa-main
-workflow-instruction: "Step 7"
-procedure: "proc-create-design"
 ---
 
 # DevOps Expert Skill
 
 ## Overview
 
-Design and configure CI/CD pipelines, GitHub Actions workflows, cross-platform build automation, secret management, and release processes.
+Design and configure CI/CD pipelines, GitHub Actions workflows, cross-platform build automation, secret management, and release processes. This skill produces workflow YAML files, configuration, and documentation -- it never executes code directly.
 
 ## Prerequisites
 
 - GitHub Actions access on target repository
-- GitHub CLI (gh) installed and authenticated
-- Understanding of CI/CD concepts
+- GitHub CLI (`gh`) installed and authenticated
 - Access to required secrets (API keys, certificates)
-
-## Output
-
-| Output Type | Description |
-|-------------|-------------|
-| GitHub Actions Workflows | Complete `.github/workflows/` directory with YAML files |
-| Secret Management Documentation | Instructions for configuring secrets via gh CLI |
-| Debug Scripts | Python scripts for workflow validation and local debugging |
-| Release Checklist | Step-by-step guide for release process |
-| Pipeline Configurations | CI/CD configurations for multi-platform builds |
 
 ## Instructions
 
-1. Setting up CI/CD pipelines for new projects
-2. Configuring GitHub Actions workflows
-3. Managing secrets across environments
-4. Automating multi-platform releases
-5. Debugging failing workflows
-6. Enforcing TDD in pipelines
+1. Review project requirements and target platforms
+2. Define workflow triggers and select GitHub runners
+3. Configure secret management via `gh` CLI
+4. Set up TDD enforcement with coverage thresholds (>= 80%)
+5. Create multi-platform CI workflow with matrix builds
+6. Set up release automation workflow
+7. Add debug/validation scripts and document setup
+8. Test workflows on all target platforms
 
-## Checklist
+## Reference Documents
 
-Copy this checklist and track your progress:
-
-- [ ] Review project requirements and target platforms
-- [ ] Define workflow triggers (push, PR, tags)
-- [ ] Select appropriate GitHub runners for each platform
-- [ ] Configure secret management (API keys, certificates)
-- [ ] Set up TDD enforcement with coverage thresholds
-- [ ] Create multi-platform CI workflow YAML
-- [ ] Configure matrix builds for cross-platform testing
-- [ ] Set up release automation workflow
-- [ ] Add debug scripts for local workflow simulation
-- [ ] Validate YAML syntax and workflow structure
-- [ ] Document secret setup instructions
-- [ ] Create release checklist
-- [ ] Test workflows on all target platforms
-- [ ] Configure branch protection rules
-
-## Core Competencies
-
-### 1. GitHub Actions Workflows ([references/github-actions.md](references/github-actions.md))
-
-- When you need to define workflow triggers → [Workflow Structure](references/github-actions.md) (section: Workflow Structure)
-- When you need to choose the right runner → [Runners](references/github-actions.md) (section: Runners)
-- When you need to build on multiple platforms → [Matrix Builds](references/github-actions.md) (section: Matrix Builds)
-- When you need to use secrets securely → [Secrets](references/github-actions.md) (section: Secrets)
-- When you need conditional execution logic → [Conditional Execution](references/github-actions.md) (section: Conditional Execution)
-- When you need to pass data between jobs → [Outputs and Dependencies](references/github-actions.md) (section: Outputs and Dependencies)
-- When you need to reuse workflow code → [Reusable Workflows](references/github-actions.md) (section: Reusable Workflows)
-- When you need to create releases → [Release Workflow](references/github-actions.md) (section: Release Workflow)
-- When you need to debug failing workflows → [Debugging](references/github-actions.md) (section: Debugging)
-
-### 2. Cross-Platform Build Automation ([references/cross-platform-builds.md](references/cross-platform-builds.md))
-
-- When you need to choose runners for your target platforms → [Runner Matrix](references/cross-platform-builds.md) (section: Runner Matrix)
-- When you need to check free tier minute limits → [Free Tier Minutes](references/cross-platform-builds.md) (section: Free Tier Minutes)
-- When you need to configure a multi-platform CI workflow → [Multi-Platform CI Workflow](references/cross-platform-builds.md) (section: Multi-Platform CI Workflow)
-- When you need to set up matrix builds with platform-specific configuration → [Complete Matrix Build](references/cross-platform-builds.md) (section: Complete Matrix Build)
-- When you need to handle platform-specific build steps → [Platform-Specific Jobs](references/cross-platform-builds.md) (section: Platform-Specific Jobs)
-
-### 3. Secret Management ([references/secret-management.md](references/secret-management.md))
-
-- When you need to decide which secret level to use → [Secret Hierarchy](references/secret-management.md) (section: Secret Hierarchy)
-- When you need to create secrets via GitHub CLI → [Creating Secrets](references/secret-management.md) (section: Creating Secrets)
-- When you need to use secrets in workflows → [Using Secrets in Workflows](references/secret-management.md) (section: Using Secrets in Workflows)
-- When you need to handle environment-specific secrets → [Environment Secrets](references/secret-management.md) (section: Environment Secrets)
-- When you need to manage organization-wide secrets → [Organization Secrets](references/secret-management.md) (section: Secret Hierarchy)
-- When you need to secure sensitive files (certificates, keys) → [Creating Secrets](references/secret-management.md) (section: Creating Secrets)
-
-### 4. TDD Enforcement ([references/tdd-enforcement.md](references/tdd-enforcement.md))
-
-- When you need to understand TDD principles → [Core Principles](references/tdd-enforcement.md) (section: Core Principles)
-- When you need to set coverage thresholds for your project → [Coverage Requirements](references/tdd-enforcement.md) (section: Coverage Requirements)
-- When you need to configure coverage for Python → [Python (pytest-cov)](references/tdd-enforcement.md) (section: Python pytest-cov)
-- When you need to configure coverage for Rust → [Rust (cargo-tarpaulin)](references/tdd-enforcement.md) (section: Rust cargo-tarpaulin)
-- When you need to configure coverage for TypeScript/JavaScript → [TypeScript/JavaScript (vitest)](references/tdd-enforcement.md) (section: TypeScript/JavaScript vitest)
-- When you need to configure coverage for Go → [Go (go test)](references/tdd-enforcement.md) (section: Go go test)
-- When you need to implement branch protection rules → [Branch Protection Rules](references/tdd-enforcement.md) (section: Branch Protection Rules)
-
-### 5. Release Automation ([references/release-automation.md](references/release-automation.md))
-
-- When you need to understand the release workflow stages → [Release Pipeline Stages](references/release-automation.md) (section: Release Pipeline Stages)
-- When you need to implement semantic versioning → [Semantic Versioning](references/release-automation.md) (section: Semantic Versioning)
-- When you need to automatically bump versions → [Version Bumping Automation](references/release-automation.md) (section: Version Bumping Automation)
-- When you need to generate changelogs → [Changelog Generation](references/release-automation.md) (section: Changelog Generation)
-- When you need to create a complete release workflow → [Complete Release Workflow](references/release-automation-part1-complete-workflow.md)
-- When you need to publish to package registries → [Platform-Specific Publishing](references/release-automation-part2-platform-publishing.md)
-
-## Quick Reference
-
-### GitHub Runners Matrix
-
-| Platform | Runner | Architecture | Free Tier |
-|----------|--------|--------------|-----------|
-| macOS | `macos-14` | ARM64 (M1) | 2000 min/month |
-| macOS | `macos-13` | x86_64 | 2000 min/month |
-| Windows | `windows-latest` | x86_64 | 2000 min/month |
-| Linux | `ubuntu-latest` | x86_64 | 2000 min/month |
-
-### Workflow Templates
-
-| Template | Purpose |
+| Document | Content |
 |----------|---------|
-| `templates/ci-multi-platform.yml` | Multi-platform CI |
-| `templates/release-github.yml` | GitHub Release |
-| `templates/security-scan.yml` | Security scanning |
-| `templates/docs-generate.yml` | Documentation |
-
-### Required Secrets per Platform
-
-| Platform | Secrets |
-|----------|---------|
-| Apple | `APPLE_CERTIFICATE`, `APPLE_ID`, `NOTARIZATION_PASSWORD` |
-| Windows | `WINDOWS_CERTIFICATE`, `WINDOWS_CERTIFICATE_PASSWORD` |
-| Android | `ANDROID_KEYSTORE`, `KEYSTORE_PASSWORD` |
-| npm | `NPM_TOKEN` |
-| PyPI | `PYPI_API_TOKEN` |
-
-## TDD Enforcement Rules
-
-```yaml
-# Every pipeline MUST:
-1. Run tests before build
-2. Fail if coverage < 80%
-3. Block PR merge if tests fail
-4. Run tests on all target platforms
-5. No test skipping without documented reason
-```
-
-## Workflow Structure
-
-```yaml
-name: CI Pipeline
-
-on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main]
-
-jobs:
-  lint-format:        # Stage 1: Quality checks
-  type-check:         # Stage 2: Type safety
-  test-matrix:        # Stage 3: Tests on all platforms
-  build-matrix:       # Stage 4: Build artifacts
-  release:            # Stage 5: Release (tags only)
-```
-
-## Debug Scripts
-
-Every workflow should have a debug script:
-
-| Script | Purpose |
-|--------|---------|
-| `scripts/debug_workflow.py` | Simulate workflow locally |
-| `scripts/validate_yaml.py` | Validate workflow syntax |
-| `scripts/setup_secrets.py` | Configure GitHub secrets |
-
-## Handoff Protocol
-
-### From Modularizer Expert
-Receive:
-- Module list with platform targets
-- Build system requirements
-- Test matrix requirements
-
-### Output
-Provide:
-- Complete `.github/workflows/` directory
-- Secret management documentation
-- Debug scripts for each workflow
-- Release checklist
-
-## Scripts
-
-| Script | Purpose |
-|--------|---------|
-| `scripts/debug_workflow.py` | Debug workflow locally |
-| `scripts/validate_yaml.py` | Validate YAML syntax |
-| `scripts/setup_secrets.py` | Configure secrets via gh CLI |
-| `scripts/list_runners.py` | List available runners |
-
-## IRON RULE
-
-This skill NEVER executes code. All outputs are:
-- GitHub Actions workflow files (YAML)
-- Configuration files
-- Documentation (Markdown)
-- Script templates (for manual execution)
-
-Actual pipeline execution happens on GitHub Actions runners.
+| [github-actions.md](references/github-actions.md) | Workflow structure, runners, matrix builds, secrets, reusable workflows |
+| [cross-platform-builds.md](references/cross-platform-builds.md) | Runner matrix, free tier, multi-platform CI, platform-specific jobs |
+| [secret-management.md](references/secret-management.md) | Secret hierarchy, creating/using secrets, environment secrets |
+| [tdd-enforcement.md](references/tdd-enforcement.md) | Coverage requirements, per-language config, branch protection |
+| [release-automation.md](references/release-automation.md) | Pipeline stages, semantic versioning, changelog generation |
+| [release-automation-part1-complete-workflow.md](references/release-automation-part1-complete-workflow.md) | Complete release workflow |
+| [release-automation-part2-platform-publishing.md](references/release-automation-part2-platform-publishing.md) | Platform-specific publishing |
+| [devops-debugging.md](references/devops-debugging.md) | Debugging techniques and troubleshooting |
+| [gh-cli-scripts.md](references/gh-cli-scripts.md) | GitHub CLI script recipes |
+| [platform-test-protocols.md](references/platform-test-protocols.md) | Platform-specific test protocols |
+| [github-actions-templates.md](references/github-actions-templates.md) | Ready-to-use workflow templates |
+| [quick-reference-tables.md](references/quick-reference-tables.md) | Runners, secrets, scripts, competency index |
+| [error-handling-examples.md](references/error-handling-examples.md) | Common errors and workflow examples |
 
 ## Examples
-
-### Example 1: Multi-Platform CI Workflow
 
 ```yaml
 name: CI
@@ -238,99 +60,31 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-      - name: Run tests
-        run: |
-          pip install -r requirements.txt
-          pytest --cov=src tests/
+      - run: pytest --cov=src tests/
 ```
-
-### Example 2: Release Workflow
-
-```yaml
-name: Release
-on:
-  push:
-    tags: ['v*']
-jobs:
-  release:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Build and publish
-        run: |
-          python -m build
-          twine upload dist/*
-        env:
-          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
-```
-
----
 
 ## Error Handling
 
-### Issue: CI pipeline fails but tests pass locally
+| Issue | Cause | Fix |
+|-------|-------|-----|
+| CI fails, local passes | Environment differences | Check env vars, dependency versions, path case sensitivity |
+| Workflow not triggering | YAML error or filter mismatch | Validate YAML, check branch/path filters, verify Actions enabled |
+| Secrets unavailable | Scope or name mismatch | Verify exact name, correct scope, fork limitations |
+| Deployment timeout | Network or config issues | Increase timeout, check connectivity, verify credentials |
 
-**Cause**: Environment differences between local and CI.
+See [error-handling-examples.md](references/error-handling-examples.md) for detailed solutions.
 
-**Solution**:
-1. Check CI environment variables vs local
-2. Verify dependency versions match (package-lock.json, pyproject.toml)
-3. Check for filesystem path differences (case sensitivity)
-4. Review CI logs for environment-specific errors
+## Output
 
-### Issue: Docker build fails in CI but works locally
-
-**Cause**: Docker cache differences or missing dependencies.
-
-**Solution**:
-1. Add `--no-cache` to CI docker build to eliminate cache issues
-2. Check base image availability in CI environment
-3. Verify all required files are in Docker context (not gitignored)
-4. Check CI runner has sufficient disk space
-
-### Issue: Deployment script times out
-
-**Cause**: Network issues or slow operations not properly configured.
-
-**Solution**:
-1. Increase timeout values in deployment configuration
-2. Check network connectivity between CI and deployment target
-3. Verify credentials/tokens haven't expired
-4. Split large deployments into smaller steps
-
-### Issue: GitHub Actions workflow not triggering
-
-**Cause**: YAML syntax error or trigger condition not met.
-
-**Solution**:
-1. Validate YAML syntax with online validator
-2. Check branch/path filters match actual changes
-3. Verify workflow file is in `.github/workflows/`
-4. Check repository Actions settings are enabled
-
-### Issue: Secrets not available in workflow
-
-**Cause**: Secret scope incorrect or name mismatch.
-
-**Solution**:
-1. Verify secret name matches exactly (case-sensitive)
-2. Check secret is set at correct scope (repo/org/environment)
-3. For forks, secrets are not available by default
-4. Use `${{ secrets.SECRET_NAME }}` syntax
-
----
+| Output Type | Description |
+|-------------|-------------|
+| Workflow YAML | `.github/workflows/` directory with CI/CD files |
+| Secret Docs | Instructions for configuring secrets via `gh` CLI |
+| Debug Scripts | Workflow validation and local debugging scripts |
+| Release Checklist | Step-by-step release process guide |
 
 ## Resources
 
-- [github-actions.md](references/github-actions.md) - Workflow structure and features
-- [cross-platform-builds.md](references/cross-platform-builds.md) - Multi-platform CI setup
-- [secret-management.md](references/secret-management.md) - Secret hierarchy and usage
-- [tdd-enforcement.md](references/tdd-enforcement.md) - Test coverage requirements
-- [release-automation.md](references/release-automation.md) - Release pipeline stages
-- [devops-debugging.md](references/devops-debugging.md) - DevOps debugging techniques and troubleshooting strategies
-- [gh-cli-scripts.md](references/gh-cli-scripts.md) - GitHub CLI script recipes for automation tasks
-- [platform-test-protocols.md](references/platform-test-protocols.md) - Platform-specific test execution protocols and matrix configurations
-- [github-actions-templates.md](references/github-actions-templates.md) - Ready-to-use GitHub Actions workflow templates
-- `templates/ci-multi-platform.yml` - Multi-platform CI template
-- `templates/release-github.yml` - GitHub release template
-- `templates/security-scan.yml` - Security scanning template
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- [GitHub CLI Manual](https://cli.github.com/manual/)
+- [Semantic Versioning](https://semver.org/)

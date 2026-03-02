@@ -2,11 +2,9 @@
 name: amaa-planner
 model: sonnet
 description: Creates implementation plans from requirements with step-by-step breakdown. Requires AI Maestro installed.
-type: planner
-auto_skills:
+skills:
   - amaa-session-memory
   - amaa-planning-patterns
-memory_requirements: high
 ---
 
 # Technical Planner Agent

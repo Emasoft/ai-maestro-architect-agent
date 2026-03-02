@@ -308,7 +308,7 @@ which jdtls
 
 ### Java/Kotlin: "JDK not found"
 1. Install JDK 11+: `java --version`
-2. Set JAVA_HOME: `export JAVA_HOME=$(/usr/libexec/java_home)`
+2. Set JAVA_HOME: `export JAVA_HOME=<your-jdk-path>` (macOS: use `java_home` command)
 
 ### C#: "dotnet not found"
 1. Install .NET SDK: https://dotnet.microsoft.com/download

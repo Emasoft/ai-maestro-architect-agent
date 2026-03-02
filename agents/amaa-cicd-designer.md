@@ -2,11 +2,9 @@
 name: amaa-cicd-designer
 model: opus
 description: Designs CI/CD pipelines, GitHub Actions, and deployment architecture. Requires AI Maestro installed.
-type: local-helper
-auto_skills:
+skills:
   - amaa-session-memory
   - amaa-cicd-design
-memory_requirements: medium
 ---
 
 # CI/CD Designer Agent

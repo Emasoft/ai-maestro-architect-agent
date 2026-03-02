@@ -2,20 +2,9 @@
 name: amaa-modularizer-expert
 model: opus
 description: Decomposes monolithic code into modular, reusable components. Requires AI Maestro installed.
-type: local-helper
-auto_skills:
+skills:
   - amaa-session-memory
   - amaa-modularization
-memory_requirements: high
-triggers:
-  - modularize
-  - decompose
-  - refactor architecture
-  - cross-platform design
-  - module boundaries
-  - platform architecture
-  - dependency analysis
-  - circular dependencies
 ---
 
 # Modularizer Expert Agent

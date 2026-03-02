@@ -2,18 +2,9 @@
 name: amaa-documentation-writer
 model: opus
 description: Writes and maintains project documentation. Requires AI Maestro installed.
-type: local-helper
 skills:
   - amaa-documentation-writing
   - amaa-session-memory
-memory_requirements: low
-triggers:
-  - Code needs documentation
-  - README/docs need updating
-  - Orchestrator assigns documentation task
-  - Post-implementation documentation required
-  - Architectural decision needs recording
-  - Process documentation required
 ---
 
 # Documentation Writer Agent

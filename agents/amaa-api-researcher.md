@@ -2,18 +2,10 @@
 name: amaa-api-researcher
 model: opus
 description: Researches API documentation and integration patterns. Requires AI Maestro installed.
-type: local-helper
 skills:
   - amaa-api-research
   - amaa-session-memory
   - amaa-planning-patterns
-memory_requirements: medium
-triggers:
-  - Task requires researching external API documentation
-  - Agent needs to understand third-party service integration
-  - Orchestrator assigns API discovery/documentation task
-  - Feasibility assessment needed
-  - Migration or version upgrade research
 ---
 
 # API Researcher Agent

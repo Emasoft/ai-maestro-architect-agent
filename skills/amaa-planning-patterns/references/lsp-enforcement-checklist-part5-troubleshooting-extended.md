@@ -59,16 +59,16 @@ java --version  # Should be JDK 11+
 
 **Solution:**
 ```bash
-# Set JAVA_HOME
-export JAVA_HOME=$(/usr/libexec/java_home -v 17)  # macOS
-export JAVA_HOME=/usr/lib/jvm/java-17-openjdk    # Linux
+# Set JAVA_HOME (adjust path for your platform)
+# macOS: export JAVA_HOME=$( java_home -v 17 )    # via /usr/.../java_home
+# Linux: export JAVA_HOME=<jvm-install-dir>/java-17-openjdk
 
 # Verify path
 echo $JAVA_HOME
 $JAVA_HOME/bin/java --version
 
-# Add to shell profile
-echo 'export JAVA_HOME=$(/usr/libexec/java_home -v 17)' >> ~/.zshrc
+# Add to shell profile (adjust for your platform)
+echo 'export JAVA_HOME=<your-java-home-path>' >> ~/.zshrc
 ```
 
 ---

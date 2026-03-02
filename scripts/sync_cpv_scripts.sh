@@ -15,7 +15,8 @@
 #   3. Run this script to sync.
 #
 # Usage: bash scripts/sync_cpv_scripts.sh
-# Requires: gh CLI authenticated
+# Requires: gh CLI authenticated, base64 command (macOS/Linux)
+# Platform: macOS and Linux (Windows users should use Git Bash or WSL)
 
 set -euo pipefail
 
@@ -28,6 +29,15 @@ LOCAL_DIR="$(cd "$(dirname "$0")" && pwd)"
 if ! command -v gh &> /dev/null; then
     echo "ERROR: gh CLI not found. Install with: brew install gh"
     exit 1
+fi
+
+# Detect base64 decode flag (macOS uses -D, GNU/Linux uses -d)
+if base64 --help 2>&1 | grep -q '\-d'; then
+    BASE64_DECODE="base64 -d"
+elif base64 -D /dev/null 2>/dev/null; then
+    BASE64_DECODE="base64 -D"
+else
+    BASE64_DECODE="base64 -d"
 fi
 
 echo "Syncing validation scripts from $REPO (pinned: ${PINNED_SHA:0:12})..."
@@ -45,7 +55,7 @@ FAILED=0
 
 while IFS= read -r filename; do
     # Download raw content
-    if gh api "repos/$REPO/contents/$REMOTE_DIR/$filename?ref=$PINNED_SHA" --jq '.content' 2>/dev/null | base64 -d > "$LOCAL_DIR/$filename.tmp" 2>/dev/null; then
+    if gh api "repos/$REPO/contents/$REMOTE_DIR/$filename?ref=$PINNED_SHA" --jq '.content' 2>/dev/null | $BASE64_DECODE > "$LOCAL_DIR/$filename.tmp" 2>/dev/null; then
         mv "$LOCAL_DIR/$filename.tmp" "$LOCAL_DIR/$filename"
         UPDATED=$((UPDATED + 1))
     else
