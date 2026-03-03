@@ -49,7 +49,7 @@ jobs:
           # Exit codes: 0=pass, 1=CRITICAL, 2=MAJOR, 3=MINOR
           # Strict mode: ALL non-zero exit codes block
           set +e
-          uv run --with pyyaml python scripts/validate_plugin.py . --verbose
+          uv run --with pyyaml --with types-PyYAML python scripts/validate_plugin.py . --verbose
           exit_code=$?
           set -e
 
