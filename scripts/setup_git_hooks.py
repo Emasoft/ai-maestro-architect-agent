@@ -207,7 +207,7 @@ def main() -> None:
 
     repo_root = _repo_root()
     git_dir = repo_root / ".git"
-    hooks_src = repo_root / "git-hooks"
+    hooks_src = repo_root / "scripts" / "git-hooks"
     hooks_dest = git_dir / "hooks"
 
     # Validate that we are inside a git repository
@@ -221,7 +221,7 @@ def main() -> None:
 
     # Validate that the source hooks directory exists
     if not hooks_src.is_dir():
-        _err("ERROR: git-hooks directory not found.")
+        _err("ERROR: scripts/git-hooks directory not found.")
         print(f"Expected location: {hooks_src}")
         sys.exit(1)
 
