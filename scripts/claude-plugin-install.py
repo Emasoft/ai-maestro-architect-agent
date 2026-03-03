@@ -23,7 +23,7 @@ import tarfile
 import tempfile
 import zipfile
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Literal, Optional, Tuple
 
 IS_WINDOWS = platform.system() == "Windows"
 PYTHON_VERSION = sys.version_info
@@ -65,14 +65,14 @@ ENABLED_PLUGINS_FILE = SETTINGS_FILE
 # ── Colors ────────────────────────────────────────────────
 
 
-def _enable_ansi_windows() -> None:
+def _enable_ansi_windows():
     """Enable ANSI escape codes on Windows 10+ terminals."""
     if not IS_WINDOWS:
         return
     try:
         import ctypes
 
-        kernel32 = ctypes.windll.kernel32  # type: ignore[attr-defined]
+        kernel32 = ctypes.windll.kernel32  # type: ignore[attr-defined]  # Windows-only attribute
         handle = kernel32.GetStdHandle(-11)  # STD_OUTPUT_HANDLE
         mode = ctypes.c_ulong()
         kernel32.GetConsoleMode(handle, ctypes.byref(mode))
@@ -81,7 +81,7 @@ def _enable_ansi_windows() -> None:
         pass
 
 
-def supports_color() -> bool:
+def supports_color():
     if IS_WINDOWS:
         _enable_ansi_windows()
         if os.environ.get("WT_SESSION") or os.environ.get("TERM_PROGRAM"):
@@ -99,19 +99,19 @@ BOLD = "\033[1m" if C else ""
 NC = "\033[0m" if C else ""
 
 
-def ok(msg: str) -> None:
+def ok(msg: str):
     print(f"{GREEN}✔{NC} {msg}")
 
 
-def info(msg: str) -> None:
+def info(msg: str):
     print(f"{CYAN}ℹ{NC} {msg}")
 
 
-def warn(msg: str) -> None:
+def warn(msg: str):
     print(f"{YELLOW}⚠{NC} {msg}")
 
 
-def err(msg: str) -> None:
+def err(msg: str):
     print(f"{RED}✖{NC} {msg}")
 
 
@@ -172,18 +172,18 @@ def strip_trailing_commas(text: str) -> str:
     return re.sub(r",\s*([}\]])", r"\1", text)
 
 
-def load_jsonc(path: Path) -> Dict[str, Any]:
+def load_jsonc(path: Path) -> dict[str, Any]:
     """Load a JSONC file (JSON with comments and trailing commas)."""
     text = path.read_text(encoding="utf-8")
     cleaned = strip_trailing_commas(strip_jsonc_comments(text))
-    result: Dict[str, Any] = json.loads(cleaned)
+    result: dict[str, Any] = json.loads(cleaned)
     return result
 
 
 # ── Safe JSON file operations ─────────────────────────────
 
 
-def backup_file(path: Path) -> None:
+def backup_file(path: Path):
     """Create a timestamped backup of a file before modifying it."""
     if not path.exists():
         return
@@ -198,7 +198,7 @@ def backup_file(path: Path) -> None:
         old.unlink(missing_ok=True)
 
 
-def load_json_safe(path: Path) -> Dict[str, Any]:
+def load_json_safe(path: Path) -> dict[str, Any]:
     """Load a JSON/JSONC file safely, returning {} if missing or corrupt."""
     if not path.exists():
         return {}
@@ -208,13 +208,13 @@ def load_json_safe(path: Path) -> Dict[str, Any]:
         warn(f"Could not parse {path}: {e}")
         warn("The file may be corrupt. A backup will be created before any changes.")
         try:
-            result: Dict[str, Any] = json.loads(path.read_text(encoding="utf-8"))
+            result: dict[str, Any] = json.loads(path.read_text(encoding="utf-8"))
             return result
         except Exception:
             return {}
 
 
-def save_json_safe(path: Path, data: Dict[str, Any], dry_run: bool = False) -> None:
+def save_json_safe(path: Path, data: dict, dry_run: bool = False):
     """Atomically write JSON with backup. Cross-platform."""
     if dry_run:
         return
@@ -237,7 +237,7 @@ def save_json_safe(path: Path, data: Dict[str, Any], dry_run: bool = False) -> N
 # ── Archive extraction ────────────────────────────────────
 
 
-def extract_archive(archive_path: str, dest: Path) -> None:
+def extract_archive(archive_path: str, dest: Path):
     """Extract .tar.gz/.tgz/.zip/.tar.bz2/.tar.xz to dest directory."""
     archive = Path(archive_path)
     if not archive.exists():
@@ -262,7 +262,7 @@ def extract_archive(archive_path: str, dest: Path) -> None:
         sys.exit(1)
 
 
-def _extract_zip(archive: Path, dest: Path) -> None:
+def _extract_zip(archive: Path, dest: Path):
     """Extract a zip archive with path traversal prevention."""
     with zipfile.ZipFile(archive, "r") as zf:
         for info in zf.infolist():
@@ -278,9 +278,9 @@ def _extract_zip(archive: Path, dest: Path) -> None:
         zf.extractall(dest)
 
 
-def _extract_tar(archive: Path, dest: Path, mode: str) -> None:
+def _extract_tar(archive: Path, dest: Path, mode: Literal["r:gz", "r:bz2", "r:xz", "r:"]) -> None:
     """Extract a tar archive with security filtering."""
-    with tarfile.open(archive, mode) as tf:  # type: ignore[call-overload]
+    with tarfile.open(str(archive), mode) as tf:
         if PYTHON_VERSION >= (3, 12):
             tf.extractall(dest, filter="data")
         else:
@@ -318,7 +318,7 @@ def find_plugin_root(search_dir: Path) -> Optional[Path]:
 # ── Plugin metadata ───────────────────────────────────────
 
 
-def read_plugin_meta(plugin_root: Path) -> Dict[str, str]:
+def read_plugin_meta(plugin_root: Path) -> dict:
     """Read plugin.json and return metadata with defaults."""
     pj = plugin_root / ".claude-plugin" / "plugin.json"
     try:
@@ -351,7 +351,7 @@ def _is_executable(path: Path) -> bool:
     return os.access(path, os.X_OK)
 
 
-def _make_executable(path: Path) -> None:
+def _make_executable(path: Path):
     """Make a file executable. No-op on Windows."""
     if IS_WINDOWS:
         return
@@ -380,7 +380,7 @@ def _find_all_scripts(plugin_dir: Path) -> List[Path]:
     return scripts
 
 
-def _fix_permissions(plugin_dir: Path) -> None:
+def _fix_permissions(plugin_dir: Path):
     """Make all script files executable (Unix) or verify shebangs (Windows)."""
     for f in _find_all_scripts(plugin_dir):
         _make_executable(f)
@@ -439,8 +439,8 @@ COMPONENT_PATH_FIELDS = {
 }
 
 
-def _check_type(value: Any, expected_types: Tuple[str, ...]) -> Optional[str]:
-    type_map: Dict[str, Any] = {"string": str, "array": list, "object": dict, "boolean": bool, "number": (int, float)}
+def _check_type(value, expected_types):
+    type_map = {"string": str, "array": list, "object": dict, "boolean": bool, "number": (int, float)}
     for t in expected_types:
         if isinstance(value, type_map.get(t, type(None))):
             return None
@@ -462,13 +462,16 @@ def _fuzzy_match_event(wrong_name: str) -> Optional[str]:
     return None
 
 
-def _validate_matcher(matcher: str, event_name: str, path: str) -> List[str]:
-    warnings: List[str] = []
+def _validate_matcher(matcher: str, event_name: str, path: str) -> list[str]:
+    warnings: list[str] = []
     if not matcher or matcher == "*":
         return warnings
 
     if event_name in NO_MATCHER_EVENTS:
-        warnings.append(f"{path}: '{event_name}' does not use matchers — the matcher '{matcher}' will be ignored. Remove it or omit the matcher field.")
+        warnings.append(
+            f"{path}: '{event_name}' does not use matchers — "
+            f"the matcher '{matcher}' will be ignored. Remove it or omit the matcher field."
+        )
         return warnings
 
     if event_name in TOOL_MATCHER_EVENTS:
@@ -477,32 +480,44 @@ def _validate_matcher(matcher: str, event_name: str, path: str) -> List[str]:
             if clean and clean not in KNOWN_TOOL_MATCHERS and not part.startswith("mcp__"):
                 close = [t for t in KNOWN_TOOL_MATCHERS if t.lower() == clean.lower()]
                 if close:
-                    warnings.append(f"{path}: matcher '{part}' — did you mean '{close[0]}'? (matchers are case-sensitive)")
+                    warnings.append(
+                        f"{path}: matcher '{part}' — did you mean '{close[0]}'? (matchers are case-sensitive)"
+                    )
                 else:
-                    warnings.append(f"{path}: matcher '{part}' doesn't match any known tool. Known tools: {', '.join(sorted(KNOWN_TOOL_MATCHERS))}. MCP tools use pattern: mcp__<server>__<tool>")
+                    warnings.append(
+                        f"{path}: matcher '{part}' doesn't match any known tool. "
+                        f"Known tools: {', '.join(sorted(KNOWN_TOOL_MATCHERS))}. "
+                        f"MCP tools use pattern: mcp__<server>__<tool>"
+                    )
     elif event_name == "Notification":
         for part in [p.strip() for p in matcher.split("|")]:
             clean = re.sub(r"[.*+?^$()\\]", "", part)
             if clean and clean not in NOTIFICATION_MATCHERS:
-                warnings.append(f"{path}: Notification matcher '{part}' — known types: {', '.join(sorted(NOTIFICATION_MATCHERS))}")
+                warnings.append(
+                    f"{path}: Notification matcher '{part}' — known types: {', '.join(sorted(NOTIFICATION_MATCHERS))}"
+                )
     elif event_name == "SessionStart":
         for part in [p.strip() for p in matcher.split("|")]:
             clean = re.sub(r"[.*+?^$()\\]", "", part)
             if clean and clean not in SESSION_START_MATCHERS:
-                warnings.append(f"{path}: SessionStart matcher '{part}' — known values: {', '.join(sorted(SESSION_START_MATCHERS))}")
+                warnings.append(
+                    f"{path}: SessionStart matcher '{part}' — known values: {', '.join(sorted(SESSION_START_MATCHERS))}"
+                )
     elif event_name == "PreCompact":
         for part in [p.strip() for p in matcher.split("|")]:
             clean = re.sub(r"[.*+?^$()\\]", "", part)
             if clean and clean not in PRECOMPACT_MATCHERS:
-                warnings.append(f"{path}: PreCompact matcher '{part}' — known values: {', '.join(sorted(PRECOMPACT_MATCHERS))}")
+                warnings.append(
+                    f"{path}: PreCompact matcher '{part}' — known values: {', '.join(sorted(PRECOMPACT_MATCHERS))}"
+                )
 
     return warnings
 
 
-def _validate_bash_command(cmd: str, path: str, plugin_root: Optional[Path] = None) -> Tuple[List[str], List[str]]:
+def _validate_bash_command(cmd: str, path: str, plugin_root: Optional[Path] = None) -> tuple[list[str], list[str]]:
     """Returns (errors, warnings)."""
-    errors: List[str] = []
-    warnings: List[str] = []
+    errors: list[str] = []
+    warnings: list[str] = []
     stripped = cmd.strip()
     if not stripped:
         return errors, warnings
@@ -533,17 +548,29 @@ def _validate_bash_command(cmd: str, path: str, plugin_root: Optional[Path] = No
                     has_shebang = _has_shebang(sp)
 
             if not has_shebang:
-                note = " — on Windows, scripts always need an explicit interpreter" if IS_WINDOWS else f" or add a shebang line (e.g. #!/usr/bin/env {interpreters[0]})"
-                warnings.append(f"{path}: command runs '{first_token}' without an interpreter. Add one of: {' / '.join(interpreters)} (e.g. '{interpreters[0]} {stripped}'){note}")
+                note = (
+                    " — on Windows, scripts always need an explicit interpreter"
+                    if IS_WINDOWS
+                    else f" or add a shebang line (e.g. #!/usr/bin/env {interpreters[0]})"
+                )
+                warnings.append(
+                    f"{path}: command runs '{first_token}' without an interpreter. "
+                    f"Add one of: {' / '.join(interpreters)} "
+                    f"(e.g. '{interpreters[0]} {stripped}'){note}"
+                )
             break
 
     # ── Tilde expansion ──
     if stripped.startswith("~/"):
-        warnings.append(f"{path}: command starts with '~/' — tilde expansion may not work in hook commands. Use $HOME/ instead.")
+        warnings.append(
+            f"{path}: command starts with '~/' — tilde expansion may not work in hook commands. Use $HOME/ instead."
+        )
 
     # ── cd without follow-up ──
     if stripped.startswith("cd ") and "&&" not in stripped and ";" not in stripped:
-        warnings.append(f"{path}: 'cd' alone has no effect — each hook runs in a fresh shell. Combine: 'cd /dir && your-command'")
+        warnings.append(
+            f"{path}: 'cd' alone has no effect — each hook runs in a fresh shell. Combine: 'cd /dir && your-command'"
+        )
 
     # ── Windows backslash paths ──
     if IS_WINDOWS and "\\" in cmd and "${CLAUDE_PLUGIN_ROOT}" not in cmd:
@@ -557,7 +584,25 @@ def _validate_bash_command(cmd: str, path: str, plugin_root: Optional[Path] = No
         if not tokens:
             return errors, warnings
 
-        interpreters_set = {"python3", "python", "node", "bash", "sh", "zsh", "ruby", "perl", "ts-node", "tsx", "npx", "bunx", "bun", "pnpm", "uvx", "uv", "deno"}
+        interpreters_set = {
+            "python3",
+            "python",
+            "node",
+            "bash",
+            "sh",
+            "zsh",
+            "ruby",
+            "perl",
+            "ts-node",
+            "tsx",
+            "npx",
+            "bunx",
+            "bun",
+            "pnpm",
+            "uvx",
+            "uv",
+            "deno",
+        }
         script_path = None
         if tokens[0] in interpreters_set or Path(tokens[0]).name in interpreters_set:
             for t in tokens[1:]:
@@ -584,9 +629,9 @@ def _validate_bash_command(cmd: str, path: str, plugin_root: Optional[Path] = No
     return errors, warnings
 
 
-def _validate_hooks_structure(hooks_data: Dict[str, Any], source_file: str, plugin_root: Optional[Path] = None) -> Tuple[List[str], List[str]]:
-    errors: List[str] = []
-    warnings: List[str] = []
+def _validate_hooks_structure(hooks_data: dict, source_file: str, plugin_root: Optional[Path] = None):
+    errors = []
+    warnings = []
 
     if "hooks" in hooks_data and isinstance(hooks_data.get("hooks"), dict):
         hooks_obj = hooks_data["hooks"]
@@ -600,19 +645,29 @@ def _validate_hooks_structure(hooks_data: Dict[str, Any], source_file: str, plug
         if event_name not in VALID_HOOK_EVENTS:
             suggestion = _fuzzy_match_event(event_name)
             if suggestion:
-                errors.append(f"{source_file}: unknown hook event '{event_name}' — did you mean '{suggestion}'? (event names are case-sensitive)")
+                errors.append(
+                    f"{source_file}: unknown hook event '{event_name}' — did you mean '{suggestion}'? (event names are case-sensitive)"
+                )
             else:
-                errors.append(f"{source_file}: unknown hook event '{event_name}'. Valid events: {', '.join(sorted(VALID_HOOK_EVENTS))}")
+                errors.append(
+                    f"{source_file}: unknown hook event '{event_name}'. Valid events: {', '.join(sorted(VALID_HOOK_EVENTS))}"
+                )
 
         if not isinstance(event_value, list):
-            errors.append(f'{source_file}: \'{event_name}\' must be an array of matcher groups, got {type(event_value).__name__}. Correct: "{event_name}": [{{"hooks": [...]}}]')
+            errors.append(
+                f"{source_file}: '{event_name}' must be an array of matcher groups, "
+                f"got {type(event_value).__name__}. "
+                f'Correct: "{event_name}": [{{"hooks": [...]}}]'
+            )
             continue
 
         for gi, group in enumerate(event_value):
             gpath = f"{source_file}: {event_name}[{gi}]"
 
             if not isinstance(group, dict):
-                errors.append(f'{gpath}: each matcher group must be an object, got {type(group).__name__}. Correct: {{"matcher": "...", "hooks": [...]}}')
+                errors.append(
+                    f'{gpath}: each matcher group must be an object, got {type(group).__name__}. Correct: {{"matcher": "...", "hooks": [...]}}'
+                )
                 continue
 
             matcher = group.get("matcher")
@@ -623,11 +678,15 @@ def _validate_hooks_structure(hooks_data: Dict[str, Any], source_file: str, plug
 
             inner_hooks = group.get("hooks")
             if inner_hooks is None:
-                errors.append(f'{gpath}: missing \'hooks\' array. Each matcher group needs: {{"hooks": [{{"type": "command", "command": "..."}}]}}')
+                errors.append(
+                    f'{gpath}: missing \'hooks\' array. Each matcher group needs: {{"hooks": [{{"type": "command", "command": "..."}}]}}'
+                )
                 continue
 
             if not isinstance(inner_hooks, list):
-                errors.append(f'{gpath}.hooks: must be an array of hook handlers, got {type(inner_hooks).__name__}. Correct: "hooks": [{{"type": "command", "command": "..."}}]')
+                errors.append(
+                    f'{gpath}.hooks: must be an array of hook handlers, got {type(inner_hooks).__name__}. Correct: "hooks": [{{"type": "command", "command": "..."}}]'
+                )
                 continue
 
             for hi, handler in enumerate(inner_hooks):
@@ -639,9 +698,13 @@ def _validate_hooks_structure(hooks_data: Dict[str, Any], source_file: str, plug
 
                 htype = handler.get("type")
                 if not htype:
-                    errors.append(f"{hpath}: missing 'type' field. Must be one of: {', '.join(sorted(VALID_HOOK_TYPES))}")
+                    errors.append(
+                        f"{hpath}: missing 'type' field. Must be one of: {', '.join(sorted(VALID_HOOK_TYPES))}"
+                    )
                 elif htype not in VALID_HOOK_TYPES:
-                    errors.append(f"{hpath}: invalid type '{htype}'. Must be one of: {', '.join(sorted(VALID_HOOK_TYPES))}")
+                    errors.append(
+                        f"{hpath}: invalid type '{htype}'. Must be one of: {', '.join(sorted(VALID_HOOK_TYPES))}"
+                    )
                 else:
                     if htype == "command":
                         cmd = handler.get("command")
@@ -651,7 +714,9 @@ def _validate_hooks_structure(hooks_data: Dict[str, Any], source_file: str, plug
                             errors.append(f"{hpath}.command: must be a string, got {type(cmd).__name__}")
                         else:
                             if "${CLAUDE_PLUGIN_ROOT}" not in cmd and "/" in cmd and not cmd.startswith("jq"):
-                                warnings.append(f"{hpath}.command: uses a path without ${{CLAUDE_PLUGIN_ROOT}} — may not work after installation")
+                                warnings.append(
+                                    f"{hpath}.command: uses a path without ${{CLAUDE_PLUGIN_ROOT}} — may not work after installation"
+                                )
                             cmd_errors, cmd_warnings = _validate_bash_command(cmd, hpath, plugin_root)
                             errors.extend(cmd_errors)
                             warnings.extend(cmd_warnings)
@@ -749,11 +814,13 @@ SKILL_MAX_LINES = 500
 SKILL_MAX_CHARS = 5000
 
 
-def _validate_markdown_frontmatter(md_path: Path, component_type: str, rel_prefix: str = "") -> Tuple[List[str], List[str]]:
+def _validate_markdown_frontmatter(
+    md_path: Path, component_type: str, rel_prefix: str = ""
+) -> Tuple[List[str], List[str]]:
     """Validate YAML frontmatter in agent/command/skill markdown files.
     Returns (errors, warnings)."""
-    errors: List[str] = []
-    warnings: List[str] = []
+    errors: list[str] = []
+    warnings: list[str] = []
 
     try:
         text = md_path.read_text(encoding="utf-8")
@@ -775,12 +842,24 @@ def _validate_markdown_frontmatter(md_path: Path, component_type: str, rel_prefi
             warnings.append(f"{label}: frontmatter '---' block is not properly closed")
             return errors, warnings
         if component_type == "agent":
-            warnings.append(f"{label}: missing YAML frontmatter. Agents should start with:\n           ---\n           name: my-agent\n           description: What this agent does\n           ---")
+            warnings.append(
+                f"{label}: missing YAML frontmatter. Agents should start with:\n"
+                f"           ---\n"
+                f"           name: my-agent\n"
+                f"           description: What this agent does\n"
+                f"           ---"
+            )
         elif component_type == "skill":
-            warnings.append(f"{label}: missing YAML frontmatter. Skills should start with:\n           ---\n           description: What this skill does and when to use it\n           ---")
+            warnings.append(
+                f"{label}: missing YAML frontmatter. Skills should start with:\n"
+                f"           ---\n"
+                f"           description: What this skill does and when to use it\n"
+                f"           ---"
+            )
         return errors, warnings
 
-    fm, body = parsed
+    fm, _body = parsed
+    del _body  # only frontmatter is validated
 
     # ── Unclosed frontmatter ──
     # (already handled by _parse_simple_frontmatter returning None for bad split)
@@ -798,7 +877,10 @@ def _validate_markdown_frontmatter(md_path: Path, component_type: str, rel_prefi
         for req in ("name", "description"):
             if req not in fm:
                 if req == "description":
-                    warnings.append(f"{label}: missing 'description' in frontmatter — Claude Code uses this to decide when to invoke the agent")
+                    warnings.append(
+                        f"{label}: missing 'description' in frontmatter — "
+                        f"Claude Code uses this to decide when to invoke the agent"
+                    )
                 else:
                     warnings.append(f"{label}: missing '{req}' in frontmatter")
 
@@ -810,7 +892,9 @@ def _validate_markdown_frontmatter(md_path: Path, component_type: str, rel_prefi
         # ── Unknown fields ──
         for key in fm:
             if key not in AGENT_KNOWN_FIELDS:
-                warnings.append(f"{label}: unknown frontmatter field '{key}'. Known fields: {', '.join(sorted(AGENT_KNOWN_FIELDS))}")
+                warnings.append(
+                    f"{label}: unknown frontmatter field '{key}'. Known fields: {', '.join(sorted(AGENT_KNOWN_FIELDS))}"
+                )
 
         # ── Model validation ──
         model_val = fm.get("model", "").lower()
@@ -827,7 +911,9 @@ def _validate_markdown_frontmatter(md_path: Path, component_type: str, rel_prefi
         # ── permissionMode ──
         pm = fm.get("permissionmode", "")
         if pm and pm.lower() not in AGENT_VALID_PERMISSION_MODES:
-            warnings.append(f"{label}: permissionMode '{pm}' — known values: default, acceptEdits, dontAsk, bypassPermissions, plan")
+            warnings.append(
+                f"{label}: permissionMode '{pm}' — known values: default, acceptEdits, dontAsk, bypassPermissions, plan"
+            )
 
         # ── maxTurns ──
         mt = fm.get("maxturns", "")
@@ -850,12 +936,18 @@ def _validate_markdown_frontmatter(md_path: Path, component_type: str, rel_prefi
     elif component_type == "command":
         # ── Recommended field ──
         if fm and "description" not in fm:
-            warnings.append(f"{label}: frontmatter present but no 'description' — add one so it shows in autocomplete when users type '/'")
+            warnings.append(
+                f"{label}: frontmatter present but no 'description' — "
+                f"add one so it shows in autocomplete when users type '/'"
+            )
 
         # ── Unknown fields ──
         for key in fm:
             if key not in COMMAND_KNOWN_FIELDS:
-                warnings.append(f"{label}: unknown frontmatter field '{key}'. Command fields: {', '.join(sorted(COMMAND_KNOWN_FIELDS))}")
+                warnings.append(
+                    f"{label}: unknown frontmatter field '{key}'. "
+                    f"Command fields: {', '.join(sorted(COMMAND_KNOWN_FIELDS))}"
+                )
 
         # ── Model validation ──
         model_val = fm.get("model", "").lower()
@@ -865,7 +957,10 @@ def _validate_markdown_frontmatter(md_path: Path, component_type: str, rel_prefi
     elif component_type == "skill":
         # ── Recommended field ──
         if "description" not in fm:
-            warnings.append(f"{label}: missing 'description' — Claude uses this for auto-discovery. Without it, Claude falls back to the first paragraph of the content.")
+            warnings.append(
+                f"{label}: missing 'description' — Claude uses this for auto-discovery. "
+                f"Without it, Claude falls back to the first paragraph of the content."
+            )
         else:
             desc = fm["description"]
             if desc and len(desc) > 200:
@@ -882,7 +977,9 @@ def _validate_markdown_frontmatter(md_path: Path, component_type: str, rel_prefi
         # ── Unknown fields ──
         for key in fm:
             if key not in SKILL_KNOWN_FIELDS:
-                warnings.append(f"{label}: unknown frontmatter field '{key}'. Known fields: {', '.join(sorted(SKILL_KNOWN_FIELDS))}")
+                warnings.append(
+                    f"{label}: unknown frontmatter field '{key}'. Known fields: {', '.join(sorted(SKILL_KNOWN_FIELDS))}"
+                )
 
         # ── Boolean fields ──
         for bf in SKILL_BOOLEAN_FIELDS:
@@ -905,19 +1002,29 @@ def _validate_markdown_frontmatter(md_path: Path, component_type: str, rel_prefi
         total_chars = len(text)
 
         if total_lines > SKILL_MAX_LINES:
-            warnings.append(f"{label}: {total_lines} lines exceeds the {SKILL_MAX_LINES}-line limit. Progressive discovery won't work for this skill.")
+            warnings.append(
+                f"{label}: {total_lines} lines exceeds the {SKILL_MAX_LINES}-line limit. "
+                f"Progressive discovery won't work for this skill."
+            )
         if total_chars > SKILL_MAX_CHARS:
-            warnings.append(f"{label}: {total_chars} chars exceeds the {SKILL_MAX_CHARS}-char limit. Progressive discovery won't work for this skill.")
+            warnings.append(
+                f"{label}: {total_chars} chars exceeds the {SKILL_MAX_CHARS}-char limit. "
+                f"Progressive discovery won't work for this skill."
+            )
         elif total_lines > SKILL_MAX_LINES * 0.8 or total_chars > SKILL_MAX_CHARS * 0.8:
-            warnings.append(f"{label}: {total_lines} lines / {total_chars} chars — approaching the limit ({SKILL_MAX_LINES} lines / {SKILL_MAX_CHARS} chars). Consider trimming to stay within progressive discovery limits.")
+            warnings.append(
+                f"{label}: {total_lines} lines / {total_chars} chars — "
+                f"approaching the limit ({SKILL_MAX_LINES} lines / {SKILL_MAX_CHARS} chars). "
+                f"Consider trimming to stay within progressive discovery limits."
+            )
 
     return errors, warnings
 
 
-def validate_plugin(plugin_root: Path) -> Tuple[List[str], List[str]]:
+def validate_plugin(plugin_root: Path) -> tuple[list[str], list[str]]:
     """Validate a plugin directory. Returns (errors, warnings)."""
-    errors: List[str] = []
-    warnings: List[str] = []
+    errors: list[str] = []
+    warnings: list[str] = []
 
     # ── 1. Manifest ──────────────────────────────────────────
 
@@ -957,7 +1064,13 @@ def validate_plugin(plugin_root: Path) -> Tuple[List[str], List[str]]:
     if not manifest.get("description"):
         warnings.append("plugin.json: 'description' field is recommended")
 
-    for field, expected_type in [("author", dict), ("keywords", list), ("homepage", str), ("repository", str), ("license", str)]:
+    for field, expected_type in [
+        ("author", dict),
+        ("keywords", list),
+        ("homepage", str),
+        ("repository", str),
+        ("license", str),
+    ]:
         val = manifest.get(field)
         if val is not None and not isinstance(val, expected_type):
             warnings.append(f"plugin.json: '{field}' should be {expected_type.__name__}, got {type(val).__name__}")
@@ -992,7 +1105,9 @@ def validate_plugin(plugin_root: Path) -> Tuple[List[str], List[str]]:
     claude_plugin_dir = plugin_root / ".claude-plugin"
     for component in ("commands", "agents", "hooks", "skills", "scripts"):
         if (claude_plugin_dir / component).exists():
-            errors.append(f"'{component}/' is inside .claude-plugin/ — move it to the plugin root. Only plugin.json belongs in .claude-plugin/")
+            errors.append(
+                f"'{component}/' is inside .claude-plugin/ — move it to the plugin root. Only plugin.json belongs in .claude-plugin/"
+            )
 
     # ── 5. Hooks deep validation ─────────────────────────────
 
@@ -1070,10 +1185,19 @@ def validate_plugin(plugin_root: Path) -> Tuple[List[str], List[str]]:
 
     if non_executable:
         fix_note = "auto-fixed during install" if not IS_WINDOWS else "ensure shebangs are present"
-        warnings.append(f"Scripts not executable ({fix_note}): " + ", ".join(non_executable[:5]) + (f" +{len(non_executable) - 5} more" if len(non_executable) > 5 else ""))
+        warnings.append(
+            f"Scripts not executable ({fix_note}): "
+            + ", ".join(non_executable[:5])
+            + (f" +{len(non_executable) - 5} more" if len(non_executable) > 5 else "")
+        )
 
     if missing_shebang:
-        warnings.append("Scripts missing shebang (e.g. #!/usr/bin/env python3): " + ", ".join(missing_shebang[:5]) + (f" +{len(missing_shebang) - 5} more" if len(missing_shebang) > 5 else "") + ". Without a shebang, scripts may not run correctly across platforms.")
+        warnings.append(
+            "Scripts missing shebang (e.g. #!/usr/bin/env python3): "
+            + ", ".join(missing_shebang[:5])
+            + (f" +{len(missing_shebang) - 5} more" if len(missing_shebang) > 5 else "")
+            + ". Without a shebang, scripts may not run correctly across platforms."
+        )
 
     # ── 8. Content directories and frontmatter ───────────────
 
@@ -1084,9 +1208,9 @@ def validate_plugin(plugin_root: Path) -> Tuple[List[str], List[str]]:
             warnings.append("commands/ directory exists but contains no .md files")
         else:
             for md in cmd_files:
-                md_errors, md_warnings = _validate_markdown_frontmatter(md, "command")
-                errors.extend(md_errors)
-                warnings.extend(md_warnings)
+                fm_errs, fm_warns = _validate_markdown_frontmatter(md, "command")
+                errors.extend(fm_errs)
+                warnings.extend(fm_warns)
 
     skills_dir = plugin_root / "skills"
     if skills_dir.exists() and skills_dir.is_dir():
@@ -1097,9 +1221,11 @@ def validate_plugin(plugin_root: Path) -> Tuple[List[str], List[str]]:
             for md in skill_mds:
                 # Build a relative path like "skills/code-review/SKILL.md"
                 rel = str(md.relative_to(plugin_root))
-                md_errors, md_warnings = _validate_markdown_frontmatter(md, "skill", rel_prefix=str(md.parent.relative_to(plugin_root)))
-                errors.extend(md_errors)
-                warnings.extend(md_warnings)
+                fm_errs, fm_warns = _validate_markdown_frontmatter(
+                    md, "skill", rel_prefix=str(md.parent.relative_to(plugin_root))
+                )
+                errors.extend(fm_errs)
+                warnings.extend(fm_warns)
 
     agents_dir = plugin_root / "agents"
     if agents_dir.exists() and agents_dir.is_dir():
@@ -1108,9 +1234,9 @@ def validate_plugin(plugin_root: Path) -> Tuple[List[str], List[str]]:
             warnings.append("agents/ directory exists but contains no .md files")
         else:
             for md in agent_mds:
-                md_errors, md_warnings = _validate_markdown_frontmatter(md, "agent")
-                errors.extend(md_errors)
-                warnings.extend(md_warnings)
+                fm_errs, fm_warns = _validate_markdown_frontmatter(md, "agent")
+                errors.extend(fm_errs)
+                warnings.extend(fm_warns)
 
     # ── 9. LSP configuration (.lsp.json) ────────────────────
 
@@ -1152,18 +1278,25 @@ def validate_plugin(plugin_root: Path) -> Tuple[List[str], List[str]]:
             supported_keys = {"agent"}
             for key in ps_data:
                 if key not in supported_keys:
-                    warnings.append(f"settings.json: key '{key}' is not a recognized plugin setting. Currently supported: {', '.join(sorted(supported_keys))}")
+                    warnings.append(
+                        f"settings.json: key '{key}' is not a recognized plugin setting. "
+                        f"Currently supported: {', '.join(sorted(supported_keys))}"
+                    )
 
     # ── 11. Check plugin has actual content ──────────────────
 
-    has_content = any((plugin_root / d).exists() for d in ("commands", "skills", "agents", "hooks", "scripts", ".mcp.json", ".lsp.json"))
+    has_content = any(
+        (plugin_root / d).exists()
+        for d in ("commands", "skills", "agents", "hooks", "scripts", ".mcp.json", ".lsp.json")
+    )
     if not has_content:
         warnings.append("Plugin has a manifest but no commands, skills, agents, hooks, MCP, or LSP config")
 
     return errors, warnings
 
 
-def print_validation_report(errors: List[str], warnings: List[str], plugin_name: str) -> bool:
+def print_validation_report(errors, warnings, _plugin_name):
+    del _plugin_name  # reserved for future use in report header
     if errors:
         print()
         for e in errors:
@@ -1186,7 +1319,7 @@ def print_validation_report(errors: List[str], warnings: List[str], plugin_name:
 # ── Install ───────────────────────────────────────────────
 
 
-def do_install(archive_path: str, marketplace_name: Optional[str], force: bool = False, dry_run: bool = False) -> None:
+def do_install(archive_path: str, marketplace_name: Optional[str], force: bool = False, dry_run: bool = False):
     if dry_run:
         info("DRY RUN — no files will be modified")
 
@@ -1237,7 +1370,10 @@ def do_install(archive_path: str, marketplace_name: Optional[str], force: bool =
         dest_plugin_dir = mp_dir / "plugins" / plugin_name
         if dest_plugin_dir.exists():
             if force or dry_run:
-                info(f"Updating '{plugin_name}' in marketplace '{marketplace_name}'" + (" (--force)" if force else " (dry run)"))
+                info(
+                    f"Updating '{plugin_name}' in marketplace '{marketplace_name}'"
+                    + (" (--force)" if force else " (dry run)")
+                )
             else:
                 warn(f"Plugin '{plugin_name}' already exists in marketplace '{marketplace_name}'")
                 answer = input("  Overwrite? [y/N] ").strip().lower()
@@ -1350,7 +1486,7 @@ def do_install(archive_path: str, marketplace_name: Optional[str], force: bool =
 # ── Uninstall ─────────────────────────────────────────────
 
 
-def do_uninstall(plugin_key: str) -> None:
+def do_uninstall(plugin_key: str):
     if "@" not in plugin_key:
         err("Format: --uninstall <plugin-name>@<marketplace-name>")
         sys.exit(1)
@@ -1403,7 +1539,7 @@ def do_uninstall(plugin_key: str) -> None:
 # ── List ──────────────────────────────────────────────────
 
 
-def do_list() -> None:
+def do_list():
     if not MARKETPLACES_DIR.exists():
         info("No local marketplaces found. Nothing installed yet.")
         return
@@ -1468,7 +1604,7 @@ def do_list() -> None:
 def do_validate(source_path: str) -> None:
     p = Path(source_path)
     tmpdir: Optional[str] = None  # Track if we created a temp dir
-    plugin_root: Path
+    plugin_root: Optional[Path] = None
 
     # Handle plugin@marketplace syntax for installed plugins
     if "@" in source_path and not p.exists():
@@ -1483,17 +1619,16 @@ def do_validate(source_path: str) -> None:
             sys.exit(1)
     elif p.is_dir():
         info(f"Validating plugin directory: {p}")
-        found_root: Optional[Path] = p if (p / ".claude-plugin" / "plugin.json").exists() else find_plugin_root(p)
-        if not found_root:
+        plugin_root = p if (p / ".claude-plugin" / "plugin.json").exists() else find_plugin_root(p)
+        if plugin_root is None:
             err("No plugin found in directory. Expected: .claude-plugin/plugin.json")
             sys.exit(1)
-        plugin_root = found_root
     elif p.is_file():
         info("Extracting archive for validation...")
         tmpdir = tempfile.mkdtemp()
         extract_archive(source_path, Path(tmpdir))
-        found_archive_root: Optional[Path] = find_plugin_root(Path(tmpdir))
-        if not found_archive_root:
+        plugin_root = find_plugin_root(Path(tmpdir))
+        if plugin_root is None:
             err("No plugin found in archive. Expected: <dir>/.claude-plugin/plugin.json")
             print("\nArchive contents:")
             for f in sorted(Path(tmpdir).rglob("*")):
@@ -1501,11 +1636,11 @@ def do_validate(source_path: str) -> None:
                     print(f"  {f.relative_to(Path(tmpdir))}")
             shutil.rmtree(tmpdir, ignore_errors=True)
             sys.exit(1)
-        plugin_root = found_archive_root
     else:
         err(f"Not found: {source_path}")
         sys.exit(1)
 
+    assert plugin_root is not None  # All None paths call sys.exit above
     meta = read_plugin_meta(plugin_root)
     ok(f"Found plugin: {BOLD}{meta['name']}{NC} v{meta['version']}")
     if meta["description"]:
@@ -1533,7 +1668,7 @@ def do_validate(source_path: str) -> None:
 # ── Doctor ───────────────────────────────────────────────
 
 
-def do_doctor() -> None:
+def do_doctor():
     """Check overall health of local plugin installation."""
     print(f"{BOLD}Plugin installation health check{NC}")
     print()
@@ -1657,7 +1792,13 @@ def do_doctor() -> None:
 
             # Check enabled status
             enabled = settings.get("enabledPlugins", {}).get(plugin_key)
-            en_str = f"{GREEN}enabled{NC}" if enabled else f"{YELLOW}disabled{NC}" if enabled is False else f"{YELLOW}not in enabledPlugins{NC}"
+            en_str = (
+                f"{GREEN}enabled{NC}"
+                if enabled
+                else f"{YELLOW}disabled{NC}"
+                if enabled is False
+                else f"{YELLOW}not in enabledPlugins{NC}"
+            )
 
             print(f"    {meta['name']} v{meta['version']}  [{en_str}]  [{', '.join(status_parts)}]")
 
@@ -1813,10 +1954,13 @@ HELP_EPILOG = f"""\
 """
 
 
-def main() -> None:
+def main():
     parser = argparse.ArgumentParser(
         prog="claude-plugin-install",
-        description=("Install, validate, and manage Claude Code plugins.\nCross-platform: macOS, Linux, and Windows. Python 3.8+, no dependencies."),
+        description=(
+            "Install, validate, and manage Claude Code plugins.\n"
+            "Cross-platform: macOS, Linux, and Windows. Python 3.8+, no dependencies."
+        ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=HELP_EPILOG,
     )
@@ -1825,13 +1969,21 @@ def main() -> None:
     group = parser.add_mutually_exclusive_group()
     group.add_argument("archive", nargs="?", help="Plugin archive to install (.tar.gz, .tgz, .zip, .tar.bz2, .tar.xz)")
     group.add_argument("--uninstall", metavar="NAME@MARKETPLACE", help="Remove a plugin and clean up settings")
-    group.add_argument("--validate", metavar="PATH", help="Validate an archive, directory, or installed plugin (name@marketplace)")
+    group.add_argument(
+        "--validate", metavar="PATH", help="Validate an archive, directory, or installed plugin (name@marketplace)"
+    )
     group.add_argument("--list", action="store_true", help="Show all plugins installed by this tool")
     group.add_argument("--doctor", action="store_true", help="Run health checks on all installed plugins and settings")
 
-    parser.add_argument("marketplace", nargs="?", default=None, help="Marketplace name to install into (default: local-<plugin-name>)")
-    parser.add_argument("-f", "--force", action="store_true", help="Install despite validation errors; skip overwrite prompt")
-    parser.add_argument("-n", "--dry-run", action="store_true", help="Preview what would happen without writing any files")
+    parser.add_argument(
+        "marketplace", nargs="?", default=None, help="Marketplace name to install into (default: local-<plugin-name>)"
+    )
+    parser.add_argument(
+        "-f", "--force", action="store_true", help="Install despite validation errors; skip overwrite prompt"
+    )
+    parser.add_argument(
+        "-n", "--dry-run", action="store_true", help="Preview what would happen without writing any files"
+    )
 
     args = parser.parse_args()
 
