@@ -28,7 +28,7 @@ from pathlib import Path
 
 REPO = "Emasoft/claude-plugins-validation"
 # Pinned commit SHA for supply chain security (do not use branch names)
-PINNED_SHA = "246ce10a5261b7d490fd5a5dd40884ebc00e3f8f"
+PINNED_SHA = "503aab7ba38d0f3d49615821f332b4b2523e82b0"
 REMOTE_DIR = "scripts"
 # Local directory is the same folder as this script
 LOCAL_DIR = Path(__file__).parent.resolve()
