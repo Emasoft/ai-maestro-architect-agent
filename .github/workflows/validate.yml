@@ -34,11 +34,6 @@ jobs:
       - name: Install linting tools
         run: pip install ruff mypy pyyaml types-PyYAML
 
-      - name: Sync validation scripts from CPV
-        run: python scripts/sync_cpv_scripts.py
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Validate plugin
         run: |
           echo "=== Plugin Validation (strict mode) ==="
