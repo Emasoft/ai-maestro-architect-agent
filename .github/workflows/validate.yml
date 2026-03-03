@@ -10,9 +10,11 @@ on:
       - 'skills/**'
       - 'hooks/**'
       - 'scripts/**'
+      - '.github/workflows/**'
       - '*.mcp.json'
   pull_request:
     branches: [main, master]
+  workflow_dispatch:
 
 jobs:
   validate:
