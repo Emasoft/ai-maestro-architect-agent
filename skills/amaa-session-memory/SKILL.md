@@ -3,7 +3,7 @@ name: amaa-session-memory
 description: "Use when persisting decisions, patterns, and constraints across sessions. Trigger with session memory or handoff request."
 context: fork
 user-invocable: false
-agent: amaa-main
+agent: amaa-architect-main-agent
 ---
 
 # Session Memory Skill

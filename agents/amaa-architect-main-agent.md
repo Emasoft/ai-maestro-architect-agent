@@ -8,6 +8,9 @@ skills:
   - amaa-session-memory
   - amaa-github-integration
   - amaa-hypothesis-verification
+  - amaa-design-management
+  - amaa-label-taxonomy
+  - amaa-requirements-analysis
 ---
 
 # Architect Main Agent

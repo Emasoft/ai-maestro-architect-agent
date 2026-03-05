@@ -1,7 +1,7 @@
 ---
 name: amaa-hypothesis-verification
 description: Use when verifying technical claims through Docker-isolated experiments. Trigger with hypothesis test or experiment request.
-agent: test-engineer
+agent: amaa-architect-main-agent
 context: fork
 user-invocable: false
 ---

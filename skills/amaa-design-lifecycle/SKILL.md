@@ -2,7 +2,7 @@
 name: amaa-design-lifecycle
 description: Use when managing design document states or lifecycle transitions. Trigger with design lifecycle or state transition request.
 context: fork
-agent: amaa-main
+agent: amaa-architect-main-agent
 user-invocable: false
 ---
 
