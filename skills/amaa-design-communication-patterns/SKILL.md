@@ -10,7 +10,7 @@ user-invocable: false
 
 ## Overview
 
-Centralizes communication patterns, messaging protocols, and design document standards for all Architect Agent skills. Requires AI Maestro installed and running.
+Centralizes communication patterns, messaging protocols, and design document standards. Requires AI Maestro running.
 
 ## Prerequisites
 

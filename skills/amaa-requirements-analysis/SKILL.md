@@ -1,6 +1,7 @@
 ---
 name: amaa-requirements-analysis
 description: "Use when managing requirements, initializing plans, or approving transitions. Trigger with requirements analysis or plan initialization request."
+agent: amaa-architect-main-agent
 user-invocable: false
 context: fork
 ---

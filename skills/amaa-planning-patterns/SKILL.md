@@ -2,6 +2,7 @@
 name: amaa-planning-patterns
 description: "Use when designing architectures, identifying risks, creating roadmaps, or breaking work into tasks. Trigger with planning or architecture design request."
 context: fork
+agent: amaa-planner
 user-invocable: false
 ---
 

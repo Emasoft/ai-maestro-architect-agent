@@ -2,6 +2,7 @@
 name: amaa-label-taxonomy
 description: "Use when managing GitHub labels for the Architect Agent: component, effort, type, and priority labels. Trigger with label management or taxonomy request."
 context: fork
+agent: amaa-architect-main-agent
 user-invocable: false
 ---
 
