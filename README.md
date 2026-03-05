@@ -1,6 +1,6 @@
 # Architect Agent (amaa-)
 
-**Version**: 2.0.0
+**Version**: 2.0.6
 
 ## Overview
 
@@ -78,36 +78,34 @@ The Architect Agent handles **design documents, requirements analysis, and archi
 - Architecture diagrams (mermaid)
 - Handoff files for Orchestrator
 
-## Installation (Production)
+## Installation
 
-> **Note**: Marketplace installation is temporarily unavailable. Use the development installation method below.
+### From Git Repository (recommended)
 
-Once a marketplace is available, role plugins can be installed with `--scope local` inside the specific agent's working directory (`~/agents/<agent-name>/`). This ensures the plugin is only available to that agent.
+Install directly from the GitHub repo using the `git-subdir` source type (points to a subdirectory within the repo):
 
-<!--
 ```bash
-# Add marketplace (first time only)
-# claude plugin marketplace add <marketplace-name> --url <marketplace-url>
-
-# Install plugin (--scope local = this agent's directory only, recommended)
-# claude plugin install ai-maestro-architect-agent@<marketplace-name> --scope local
-
-# RESTART Claude Code after installing (required!)
+claude plugin install --source git-subdir --url https://github.com/Emasoft/ai-maestro-architect-agent --scope local
 ```
--->
 
-Once installed, start a session with the main agent:
+After installing, activate changes without restarting:
+
+```bash
+/reload-plugins
+```
+
+Then start a session with the main agent:
 
 ```bash
 claude --agent amaa-architect-main-agent
 ```
 
-## Development Only (--plugin-dir)
+### Development Only (--plugin-dir)
 
-`--plugin-dir` loads a plugin directly from a local directory without marketplace installation. Use only during plugin development.
+`--plugin-dir` loads a plugin directly from a local directory without installation. Use only during plugin development.
 
 ```bash
-claude --plugin-dir ./OUTPUT_SKILLS/ai-maestro-architect-agent
+claude --plugin-dir ./ai-maestro-architect-agent
 ```
 
 ## Non-Standard Directories
