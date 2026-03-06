@@ -177,7 +177,7 @@ gh issue create --title "[Module] Auth Core" --body "..." --label "module,priori
 # Fix these issues and try again.
 
 # Fix and retry
-/modify-requirement requirement "Architecture Design" --status complete
+/amaa-modify-requirement requirement "Architecture Design" --status complete
 # Create USER_REQUIREMENTS.md
 /approve-plan
 ```
@@ -187,11 +187,11 @@ gh issue create --title "[Module] Auth Core" --body "..." --label "module,priori
 | Error | Cause | Resolution |
 |-------|-------|------------|
 | Requirements file not found | USER_REQUIREMENTS.md missing | Create the file |
-| Requirement section incomplete | Section not marked complete | Use `/modify-requirement` |
-| No modules defined | modules array empty | Use `/add-requirement module` |
-| Module missing criteria | Module lacks acceptance_criteria | Use `/modify-requirement module` |
+| Requirement section incomplete | Section not marked complete | Use `/amaa-modify-requirement` |
+| No modules defined | modules array empty | Use `/amaa-add-requirement module` |
+| Module missing criteria | Module lacks acceptance_criteria | Use `/amaa-modify-requirement module` |
 | gh CLI auth failed | Not logged in | Run `gh auth login` |
-| State file not found | Planning not started | Run `/start-planning` first |
+| State file not found | Planning not started | Run `/amaa-start-planning` first |
 
 ## Related Operations
 

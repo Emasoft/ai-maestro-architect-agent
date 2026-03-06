@@ -51,19 +51,19 @@ The command creates `.claude/orchestrator-plan-phase.local.md` with YAML frontma
 The stop hook will block exit while in Plan Phase until:
 - USER_REQUIREMENTS.md is complete
 - All modules defined with acceptance criteria
-- User approves the plan via `/approve-plan`
+- User approves the plan
 
 ## Next Steps After Starting
 
-1. Run `/planning-status` to see current progress
-2. Use `/add-requirement` to add requirements and modules
-3. Use `/modify-requirement` to refine specifications
-4. Run `/approve-plan` when planning is complete
+1. Review `.claude/orchestrator-plan-phase.local.md` to see current progress
+2. Use `/amaa-add-requirement` to add requirements and modules
+3. Use `/amaa-modify-requirement` to refine specifications
+4. Mark all requirements as complete when planning is done
 
 ## Example
 
 ```
-/start-planning "Build a user authentication system with OAuth2 support"
+/amaa-start-planning "Build a user authentication system with OAuth2 support"
 ```
 
 This will:

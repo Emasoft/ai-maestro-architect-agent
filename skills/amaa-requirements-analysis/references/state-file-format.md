@@ -130,7 +130,7 @@ requirements_sections:
 - `in-progress` - Currently being documented
 - `complete` - Section is fully documented
 
-**Default sections (created by /start-planning):**
+**Default sections (created by /amaa-start-planning):**
 1. Functional Requirements
 2. Non-Functional Requirements
 3. Architecture Design
@@ -200,7 +200,7 @@ exit_criteria:
   - "User approved the plan"
 ```
 
-**Default exit criteria (created by /start-planning):**
+**Default exit criteria (created by /amaa-start-planning):**
 1. USER_REQUIREMENTS.md complete
 2. All modules defined with acceptance criteria
 3. GitHub Issues created for all modules
@@ -270,13 +270,13 @@ for section in data.get("requirements_sections", []):
 
 ## 4.8 State file lifecycle
 
-**Creation (by /start-planning):**
+**Creation (by /amaa-start-planning):**
 1. Check if file already exists (error if yes)
 2. Generate unique plan_id from timestamp
 3. Write initial YAML frontmatter with defaults
 4. Write body with instructions
 
-**Updates (by /add-requirement, /modify-requirement, /remove-requirement):**
+**Updates (by /amaa-add-requirement, /amaa-modify-requirement, /amaa-remove-requirement):**
 1. Parse existing frontmatter
 2. Modify the relevant section (requirements_sections or modules)
 3. Write updated frontmatter back

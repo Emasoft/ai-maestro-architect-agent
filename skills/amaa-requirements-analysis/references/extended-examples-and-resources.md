@@ -29,11 +29,11 @@ Common errors encountered during the planning phase and how to resolve them:
 
 **1. "State file not found" when running any planning command**
 - Cause: Planning was not initialized, or the state file at `.claude/orchestrator-plan-phase.local.md` was deleted or moved.
-- Resolution: Run `/start-planning "your goal"` to create the state file. If the file was accidentally deleted, use `scripts/reset_plan_phase.py --confirm` to reinitialize, then re-add your requirements and modules.
+- Resolution: Run `/amaa-start-planning "your goal"` to create the state file. If the file was accidentally deleted, use `scripts/reset_plan_phase.py --confirm` to reinitialize, then re-add your requirements and modules.
 
 **2. "Approval prerequisites failed" when running /approve-plan**
 - Cause: One or more exit criteria are not met (missing USER_REQUIREMENTS.md, incomplete requirement sections, modules without acceptance criteria, or no modules defined).
-- Resolution: Run `/planning-status --verbose` to see which criteria are failing. Address each one: create USER_REQUIREMENTS.md if missing, mark all requirement sections complete with `/modify-requirement requirement "Name" --status complete`, and ensure every module has `--criteria` set. Then retry `/approve-plan`.
+- Resolution: Run `/planning-status --verbose` to see which criteria are failing. Address each one: create USER_REQUIREMENTS.md if missing, mark all requirement sections complete with `/amaa-modify-requirement requirement "Name" --status complete`, and ensure every module has `--criteria` set. Then retry `/approve-plan`.
 
 **3. "GitHub Issue creation failed" during plan approval**
 - Cause: The GitHub CLI (`gh`) is not authenticated, the repository does not exist, or network connectivity is lost.
@@ -47,22 +47,22 @@ Common errors encountered during the planning phase and how to resolve them:
 
 ```bash
 # Initialize planning for a new notification microservice
-/start-planning "Build a notification microservice supporting email, SMS, and push notifications"
+/amaa-start-planning "Build a notification microservice supporting email, SMS, and push notifications"
 
 # Define the core modules with acceptance criteria
-/add-requirement module "notification-dispatcher" --criteria "Route notifications to correct channel based on user preferences" --priority critical
-/add-requirement module "email-provider" --criteria "Send emails via SMTP with template support and retry logic" --priority high
-/add-requirement module "sms-provider" --criteria "Send SMS via Twilio API with rate limiting" --priority high
-/add-requirement module "push-provider" --criteria "Send push notifications via Firebase Cloud Messaging" --priority medium
+/amaa-add-requirement module "notification-dispatcher" --criteria "Route notifications to correct channel based on user preferences" --priority critical
+/amaa-add-requirement module "email-provider" --criteria "Send emails via SMTP with template support and retry logic" --priority high
+/amaa-add-requirement module "sms-provider" --criteria "Send SMS via Twilio API with rate limiting" --priority high
+/amaa-add-requirement module "push-provider" --criteria "Send push notifications via Firebase Cloud Messaging" --priority medium
 
 # Add a custom requirement section for compliance
-/add-requirement requirement "Compliance Requirements"
+/amaa-add-requirement requirement "Compliance Requirements"
 
 # Mark sections complete as you document them
-/modify-requirement requirement "Functional Requirements" --status complete
-/modify-requirement requirement "Non-Functional Requirements" --status complete
-/modify-requirement requirement "Compliance Requirements" --status complete
-/modify-requirement requirement "Architecture Design" --status complete
+/amaa-modify-requirement requirement "Functional Requirements" --status complete
+/amaa-modify-requirement requirement "Non-Functional Requirements" --status complete
+/amaa-modify-requirement requirement "Compliance Requirements" --status complete
+/amaa-modify-requirement requirement "Architecture Design" --status complete
 
 # Verify everything is ready, then approve
 /planning-status --verbose
@@ -76,13 +76,13 @@ Common errors encountered during the planning phase and how to resolve them:
 /planning-status
 
 # User feedback: auth module needs to support SSO in addition to JWT
-/modify-requirement module auth-jwt --criteria "Support JWT authentication AND SSO via SAML 2.0" --priority critical
+/amaa-modify-requirement module auth-jwt --criteria "Support JWT authentication AND SSO via SAML 2.0" --priority critical
 
 # User feedback: remove the legacy-api module that is no longer needed
-/remove-requirement module legacy-api
+/amaa-remove-requirement module legacy-api
 
 # Add a new module based on review feedback
-/add-requirement module "rate-limiter" --criteria "Implement token bucket rate limiting per API key" --priority high
+/amaa-add-requirement module "rate-limiter" --criteria "Implement token bucket rate limiting per API key" --priority high
 
 # Verify updated plan
 /planning-status --verbose
@@ -96,7 +96,7 @@ Common errors encountered during the planning phase and how to resolve them:
 # Output: "Approval prerequisites failed: Non-Functional Requirements is not complete"
 
 # Fix the missing prerequisite
-/modify-requirement requirement "Non-Functional Requirements" --status complete
+/amaa-modify-requirement requirement "Non-Functional Requirements" --status complete
 
 # Run the prerequisite check script to verify everything
 python3 scripts/check_plan_prerequisites.py --fix-suggestions
@@ -112,7 +112,7 @@ python3 scripts/check_plan_prerequisites.py --fix-suggestions
 ### Reference Documents
 
 Located in this skill's references directory:
-- [start-planning-procedure.md](start-planning-procedure.md) - Detailed /start-planning command procedure, prerequisites, and post-initialization steps
+- [start-planning-procedure.md](start-planning-procedure.md) - Detailed /amaa-start-planning command procedure, prerequisites, and post-initialization steps
 - [requirement-management.md](requirement-management.md) - Complete guide to adding, modifying, and removing requirements and modules
 - [plan-approval-transition.md](plan-approval-transition.md) - Approval validation checks, GitHub Issue creation, and state transitions
 - [state-file-format.md](state-file-format.md) - YAML frontmatter schema, field definitions, and state file lifecycle
@@ -137,9 +137,9 @@ Each planning command produces specific output. See detailed command documentati
 
 | Command | Output Type | Details |
 |---------|-------------|---------|
-| `/start-planning` | State file creation + confirmation message | See section 1.0 |
+| `/amaa-start-planning` | State file creation + confirmation message | See section 1.0 |
 | `/planning-status` | Formatted status table with progress | See section 2.0 |
-| `/add-requirement` | Confirmation message + updated state | See section 3.0 |
-| `/modify-requirement` | Confirmation message + updated state | See section 4.0 |
-| `/remove-requirement` | Confirmation message + updated state | See section 5.0 |
+| `/amaa-add-requirement` | Confirmation message + updated state | See section 3.0 |
+| `/amaa-modify-requirement` | Confirmation message + updated state | See section 4.0 |
+| `/amaa-remove-requirement` | Confirmation message + updated state | See section 5.0 |
 | `/approve-plan` | Validation results + GitHub Issues created | See section 6.0 |

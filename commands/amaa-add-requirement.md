@@ -27,7 +27,7 @@ python3 "${CLAUDE_PLUGIN_ROOT}/scripts/amaa_modify_requirement.py" add $ARGUMENT
 ## Adding a Requirement Section
 
 ```
-/add-requirement requirement "Security Requirements"
+/amaa-add-requirement requirement "Security Requirements"
 ```
 
 This adds a new requirement section to track in USER_REQUIREMENTS.md.
@@ -35,7 +35,7 @@ This adds a new requirement section to track in USER_REQUIREMENTS.md.
 ## Adding a Module
 
 ```
-/add-requirement module "password-reset" --criteria "Users can reset password via email link" --priority high
+/amaa-add-requirement module "password-reset" --criteria "Users can reset password via email link" --priority high
 ```
 
 This adds a new module to the plan with:
@@ -77,17 +77,16 @@ modules:
 
 ```bash
 # Add functional requirement section
-/add-requirement requirement "API Requirements"
+/amaa-add-requirement requirement "API Requirements"
 
 # Add a critical module
-/add-requirement module "auth-2fa" --criteria "Support TOTP-based 2FA" --priority critical
+/amaa-add-requirement module "auth-2fa" --criteria "Support TOTP-based 2FA" --priority critical
 
 # Add a low-priority enhancement module
-/add-requirement module "remember-me" --criteria "Remember login for 30 days" --priority low
+/amaa-add-requirement module "remember-me" --criteria "Remember login for 30 days" --priority low
 ```
 
 ## Related Commands
 
-- `/planning-status` - View all requirements and modules
-- `/modify-requirement` - Change existing requirement/module
-- `/remove-requirement` - Remove pending requirement/module
+- `/amaa-modify-requirement` - Change existing requirement/module
+- `/amaa-remove-requirement` - Remove pending requirement/module

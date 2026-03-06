@@ -54,12 +54,12 @@ Check the module exists, its status, and whether it has a GitHub Issue.
 
 Standard removal (planned/pending only):
 ```bash
-/remove-requirement module module-id
+/amaa-remove-requirement module module-id
 ```
 
 Force removal (any status):
 ```bash
-/remove-requirement module module-id --force
+/amaa-remove-requirement module module-id --force
 ```
 
 ### Step 3: Verify Removal
@@ -78,7 +78,7 @@ Copy this checklist and track your progress:
 - [ ] Verify module status is planned or pending
 - [ ] Check if module has GitHub Issue
 - [ ] Confirm removal is intentional (no undo)
-- [ ] Execute `/remove-requirement module ...`
+- [ ] Execute `/amaa-remove-requirement module ...`
 - [ ] Verify module is removed from status
 
 ## Examples
@@ -91,7 +91,7 @@ Copy this checklist and track your progress:
 # Shows: oauth-facebook | Medium | ... | planned
 
 # Remove module no longer needed
-/remove-requirement module oauth-facebook
+/amaa-remove-requirement module oauth-facebook
 
 # Expected output:
 # Removed module: oauth-facebook
@@ -105,11 +105,11 @@ Copy this checklist and track your progress:
 
 ```bash
 # Module is in-progress
-/remove-requirement module auth-core
+/amaa-remove-requirement module auth-core
 # ERROR: Cannot remove: status is in-progress
 
 # Force removal (use with caution - work may be lost)
-/remove-requirement module auth-core --force
+/amaa-remove-requirement module auth-core --force
 
 # Expected output:
 # Removed module: auth-core (forced)
@@ -120,11 +120,11 @@ Copy this checklist and track your progress:
 
 ```bash
 # Module was approved and has GitHub Issue #42
-/remove-requirement module user-mgmt
+/amaa-remove-requirement module user-mgmt
 # ERROR: Cannot remove: module has GitHub Issue #42
 
 # Force removal (issue remains open)
-/remove-requirement module user-mgmt --force
+/amaa-remove-requirement module user-mgmt --force
 
 # Expected output:
 # Removed module: user-mgmt (forced)
@@ -158,7 +158,7 @@ modules:
 | Cannot remove: in-progress | Work has started | Use --force if intentional (work lost) |
 | Cannot remove: complete | Module finished | Use --force if intentional |
 | Has GitHub Issue | Issue already created | Close issue first or use --force |
-| State file not found | Planning not started | Run `/start-planning` first |
+| State file not found | Planning not started | Run `/amaa-start-planning` first |
 
 ## Related Operations
 

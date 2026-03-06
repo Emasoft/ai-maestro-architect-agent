@@ -6,8 +6,8 @@ Initializes Plan Phase Mode by creating the plan state file and setting up
 requirements tracking. This is the entry point for the Two-Phase workflow.
 
 Usage:
-    python3 arch_start_planning.py "Goal description here"
-    python3 arch_start_planning.py --goal "Build user authentication"
+    python3 amaa_start_planning.py "Goal description here"
+    python3 amaa_start_planning.py --goal "Build user authentication"
 """
 
 import argparse
@@ -37,7 +37,7 @@ def create_plan_state_file(goal: str) -> bool:
     if PLAN_STATE_FILE.exists():
         print(f"ERROR: Plan Phase already active. State file exists: {PLAN_STATE_FILE}")
         print(
-            "Use /planning-status to view current plan, "
+            "Use /amaa-start-planning to view current plan, "
             "or delete the state file to start fresh."
         )
         return False
@@ -88,16 +88,16 @@ Phase: Planning (drafting)
 
 ## Instructions
 
-1. Use `/planning-status` to view progress
-2. Use `/add-requirement` to add requirements and modules
-3. Use `/modify-requirement` to update specifications
-4. Use `/approve-plan` when all requirements are complete
+1. Use `/amaa-start-planning` to view progress
+2. Use `/amaa-add-requirement` to add requirements and modules
+3. Use `/amaa-modify-requirement` to update specifications
+4. Use `/amaa-modify-requirement ... --status complete` when all requirements are complete
 
 ## Notes
 
 - The stop hook will block exit until the plan is approved
 - You can add/modify/remove requirements at any time during this phase
-- GitHub Issues will be created when you run `/approve-plan`
+- GitHub Issues will be created when you run `/amaa-modify-requirement ... --status complete`
 """
 
     try:
@@ -109,9 +109,9 @@ Phase: Planning (drafting)
         print()
         print("Next steps:")
         print("  1. Create USER_REQUIREMENTS.md with detailed requirements")
-        print("  2. Use /add-requirement to define modules")
-        print("  3. Use /planning-status to track progress")
-        print("  4. Use /approve-plan when ready to implement")
+        print("  2. Use /amaa-add-requirement to define modules")
+        print("  3. Use /amaa-start-planning to track progress")
+        print("  4. Use /amaa-modify-requirement ... --status complete when ready to implement")
         return True
     except Exception as e:
         print(f"ERROR: Failed to create state file: {e}")
@@ -136,7 +136,7 @@ def main() -> int:
 
     if not goal:
         print("ERROR: Goal is required")
-        print('Usage: /start-planning "Your goal description here"')
+        print('Usage: /amaa-start-planning "Your goal description here"')
         return 1
 
     # Clean up goal string (remove surrounding quotes if present)

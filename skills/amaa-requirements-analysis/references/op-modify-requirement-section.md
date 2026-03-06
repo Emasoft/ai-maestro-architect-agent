@@ -56,12 +56,12 @@ Review the requirements sections and their current statuses.
 
 To change status:
 ```bash
-/modify-requirement requirement "Section Name" --status complete
+/amaa-modify-requirement requirement "Section Name" --status complete
 ```
 
 To rename:
 ```bash
-/modify-requirement requirement "Section Name" --name "New Section Name"
+/amaa-modify-requirement requirement "Section Name" --name "New Section Name"
 ```
 
 ### Step 3: Verify Change
@@ -78,7 +78,7 @@ Copy this checklist and track your progress:
 
 - [ ] Identify section to modify with `/planning-status`
 - [ ] Determine new status or name
-- [ ] Execute `/modify-requirement requirement ...`
+- [ ] Execute `/amaa-modify-requirement requirement ...`
 - [ ] Verify change in `/planning-status`
 - [ ] Update USER_REQUIREMENTS.md if section content changed
 
@@ -92,10 +92,10 @@ Copy this checklist and track your progress:
 # Shows: Functional Requirements - pending
 
 # Mark as in progress
-/modify-requirement requirement "Functional Requirements" --status in-progress
+/amaa-modify-requirement requirement "Functional Requirements" --status in-progress
 
 # After documenting requirements, mark complete
-/modify-requirement requirement "Functional Requirements" --status complete
+/amaa-modify-requirement requirement "Functional Requirements" --status complete
 
 # Verify
 /planning-status
@@ -106,9 +106,9 @@ Copy this checklist and track your progress:
 
 ```bash
 # Mark all sections as complete after documenting
-/modify-requirement requirement "Functional Requirements" --status complete
-/modify-requirement requirement "Non-Functional Requirements" --status complete
-/modify-requirement requirement "Architecture Design" --status complete
+/amaa-modify-requirement requirement "Functional Requirements" --status complete
+/amaa-modify-requirement requirement "Non-Functional Requirements" --status complete
+/amaa-modify-requirement requirement "Architecture Design" --status complete
 
 # Verify all complete
 /planning-status
@@ -119,7 +119,7 @@ Copy this checklist and track your progress:
 
 ```bash
 # Rename for clarity
-/modify-requirement requirement "Architecture Design" --name "System Architecture"
+/amaa-modify-requirement requirement "Architecture Design" --name "System Architecture"
 
 # Verify
 /planning-status
@@ -145,7 +145,7 @@ requirements_sections:
 | Section not found | Name mismatch | Check exact name with `/planning-status` |
 | Invalid status | Unknown status value | Use: pending, in-progress, or complete |
 | Invalid transition | Skipping status | Progress through statuses in order |
-| State file not found | Planning not started | Run `/start-planning` first |
+| State file not found | Planning not started | Run `/amaa-start-planning` first |
 
 ## Related Operations
 

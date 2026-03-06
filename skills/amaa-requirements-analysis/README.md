@@ -17,9 +17,9 @@ planning-commands/
 ├── SKILL.md                 # Main skill documentation (entry point)
 ├── README.md                # This file
 ├── references/              # Detailed reference documents
-│   ├── start-planning-procedure.md    # /start-planning workflow
+│   ├── start-planning-procedure.md    # /amaa-start-planning workflow
 │   ├── requirement-management.md      # Add/modify/remove operations
-│   ├── plan-approval-transition.md    # /approve-plan + transition
+│   ├── plan-approval-transition.md    # plan approval + transition
 │   ├── state-file-format.md           # State file schema
 │   └── troubleshooting.md             # Common issues and solutions
 └── scripts/                 # Utility scripts
@@ -32,12 +32,10 @@ planning-commands/
 
 | Command | Description |
 |---------|-------------|
-| `/start-planning` | Enter Plan Phase Mode |
-| `/planning-status` | View requirements progress |
-| `/add-requirement` | Add requirement or module |
-| `/modify-requirement` | Change requirement specs |
-| `/remove-requirement` | Remove pending requirement |
-| `/approve-plan` | Transition to Orchestration Phase |
+| `/amaa-start-planning` | Enter Plan Phase Mode |
+| `/amaa-add-requirement` | Add requirement or module |
+| `/amaa-modify-requirement` | Change requirement specs |
+| `/amaa-remove-requirement` | Remove pending requirement |
 
 ## Usage
 
@@ -48,7 +46,7 @@ planning-commands/
 ## Scripts
 
 ### check_plan_prerequisites.py
-Verifies all prerequisites are met before running `/approve-plan`.
+Verifies all prerequisites are met before running `plan approval`.
 ```bash
 python3 scripts/check_plan_prerequisites.py --fix-suggestions
 ```

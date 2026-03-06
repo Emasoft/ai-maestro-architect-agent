@@ -59,12 +59,12 @@ If file exists, either resume with `/planning-status` or delete to start fresh (
 ### Step 2: Execute Start Planning Command
 
 ```bash
-/start-planning "Goal description here"
+/amaa-start-planning "Goal description here"
 ```
 
 Alternative syntax:
 ```bash
-/start-planning --goal "Goal description here"
+/amaa-start-planning --goal "Goal description here"
 ```
 
 ### Step 3: Verify Initialization
@@ -90,7 +90,7 @@ Copy this checklist and track your progress:
 
 - [ ] Verify no existing plan phase active
 - [ ] Obtain clear goal description from user
-- [ ] Execute `/start-planning "goal"`
+- [ ] Execute `/amaa-start-planning "goal"`
 - [ ] Verify state file created at `.claude/orchestrator-plan-phase.local.md`
 - [ ] Confirm goal is correctly recorded
 - [ ] Proceed to create USER_REQUIREMENTS.md
@@ -105,7 +105,7 @@ ls -la .claude/orchestrator-plan-phase.local.md
 # ls: .claude/orchestrator-plan-phase.local.md: No such file or directory
 
 # Start planning
-/start-planning "Build a REST API for user management"
+/amaa-start-planning "Build a REST API for user management"
 
 # Expected output:
 # Planning initialized
@@ -115,7 +115,7 @@ ls -la .claude/orchestrator-plan-phase.local.md
 #
 # Next steps:
 #   1. Create USER_REQUIREMENTS.md with detailed requirements
-#   2. Use /add-requirement to define modules
+#   2. Use /amaa-add-requirement to define modules
 #   3. Use /planning-status to track progress
 #   4. Use /approve-plan when ready to implement
 
@@ -126,7 +126,7 @@ ls -la .claude/orchestrator-plan-phase.local.md
 ### Example: Goal with Special Characters
 
 ```bash
-/start-planning "Build OAuth2/OIDC authentication with JWT tokens"
+/amaa-start-planning "Build OAuth2/OIDC authentication with JWT tokens"
 ```
 
 ## Error Handling

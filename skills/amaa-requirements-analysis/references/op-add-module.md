@@ -54,7 +54,7 @@ Define:
 ### Step 2: Add the Module
 
 ```bash
-/add-requirement module "module-name" --criteria "Acceptance criteria text" --priority high
+/amaa-add-requirement module "module-name" --criteria "Acceptance criteria text" --priority high
 ```
 
 Arguments:
@@ -80,7 +80,7 @@ Copy this checklist and track your progress:
 - [ ] Define module name and scope
 - [ ] Write clear acceptance criteria
 - [ ] Determine priority level
-- [ ] Execute `/add-requirement module ...`
+- [ ] Execute `/amaa-add-requirement module ...`
 - [ ] Verify module appears in `/planning-status --verbose`
 - [ ] Review module ID (kebab-case conversion)
 
@@ -89,7 +89,7 @@ Copy this checklist and track your progress:
 ### Example: Adding a Critical Module
 
 ```bash
-/add-requirement module "user-authentication" --criteria "Support email/password login with rate limiting" --priority critical
+/amaa-add-requirement module "user-authentication" --criteria "Support email/password login with rate limiting" --priority critical
 
 # Expected output:
 # Added module: user-authentication
@@ -103,16 +103,16 @@ Copy this checklist and track your progress:
 
 ```bash
 # Core authentication
-/add-requirement module "auth-core" --criteria "JWT token generation and validation" --priority critical
+/amaa-add-requirement module "auth-core" --criteria "JWT token generation and validation" --priority critical
 
 # User management
-/add-requirement module "user-crud" --criteria "Create, read, update, delete user operations" --priority high
+/amaa-add-requirement module "user-crud" --criteria "Create, read, update, delete user operations" --priority high
 
 # API documentation
-/add-requirement module "api-docs" --criteria "OpenAPI/Swagger documentation" --priority medium
+/amaa-add-requirement module "api-docs" --criteria "OpenAPI/Swagger documentation" --priority medium
 
 # Audit logging
-/add-requirement module "audit-log" --criteria "Log all authentication events" --priority low
+/amaa-add-requirement module "audit-log" --criteria "Log all authentication events" --priority low
 ```
 
 ### Example: Module ID Normalization
@@ -148,7 +148,7 @@ modules:
 | Error | Cause | Resolution |
 |-------|-------|------------|
 | Module already exists | Duplicate ID | Use a different name or modify existing |
-| State file not found | Planning not started | Run `/start-planning` first |
+| State file not found | Planning not started | Run `/amaa-start-planning` first |
 | Empty module name | No name provided | Provide module name in quotes |
 | Invalid priority | Unknown priority value | Use: critical, high, medium, or low |
 

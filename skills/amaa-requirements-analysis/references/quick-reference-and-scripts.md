@@ -20,13 +20,13 @@
 
 | Action | Command |
 |--------|---------|
-| Start planning | `/start-planning "goal"` |
+| Start planning | `/amaa-start-planning "goal"` |
 | Check status | `/planning-status` |
-| Add requirement section | `/add-requirement requirement "Name"` |
-| Add module | `/add-requirement module "name" --criteria "..." --priority high` |
-| Mark section complete | `/modify-requirement requirement "Name" --status complete` |
-| Update module criteria | `/modify-requirement module id --criteria "..."` |
-| Remove module | `/remove-requirement module id` |
+| Add requirement section | `/amaa-add-requirement requirement "Name"` |
+| Add module | `/amaa-add-requirement module "name" --criteria "..." --priority high` |
+| Mark section complete | `/amaa-modify-requirement requirement "Name" --status complete` |
+| Update module criteria | `/amaa-modify-requirement module id --criteria "..."` |
+| Remove module | `/amaa-remove-requirement module id` |
 | Approve plan | `/approve-plan` |
 
 ## Status Values
@@ -85,18 +85,18 @@ python3 scripts/reset_plan_phase.py --confirm --no-backup
 
 ```bash
 # Step 1: Start planning
-/start-planning "Build a REST API for user management"
+/amaa-start-planning "Build a REST API for user management"
 
 # Step 2: Add modules
-/add-requirement module "user-crud" --criteria "CRUD operations" --priority critical
-/add-requirement module "auth-jwt" --criteria "JWT authentication" --priority high
+/amaa-add-requirement module "user-crud" --criteria "CRUD operations" --priority critical
+/amaa-add-requirement module "auth-jwt" --criteria "JWT authentication" --priority high
 
 # Step 3: Create USER_REQUIREMENTS.md manually
 
 # Step 4: Mark sections complete
-/modify-requirement requirement "Functional Requirements" --status complete
-/modify-requirement requirement "Non-Functional Requirements" --status complete
-/modify-requirement requirement "Architecture Design" --status complete
+/amaa-modify-requirement requirement "Functional Requirements" --status complete
+/amaa-modify-requirement requirement "Non-Functional Requirements" --status complete
+/amaa-modify-requirement requirement "Architecture Design" --status complete
 
 # Step 5: Verify and approve
 /planning-status --verbose

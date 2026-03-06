@@ -40,7 +40,7 @@ def parse_frontmatter(file_path: Path) -> dict:
         return {}
 
 
-def check_prerequisites(show_fixes: bool = False) -> tuple[list, list]:
+def check_prerequisites() -> tuple[list, list]:
     """Check all prerequisites and return (passed, failed) lists."""
     passed = []
     failed = []
@@ -49,7 +49,7 @@ def check_prerequisites(show_fixes: bool = False) -> tuple[list, list]:
     if PLAN_STATE_FILE.exists():
         passed.append("Plan phase state file exists")
     else:
-        failed.append(("Plan phase state file missing", "/start-planning \"Your goal\""))
+        failed.append(("Plan phase state file missing", "/amaa-start-planning \"Your goal\""))
         return passed, failed  # Cannot continue without state file
 
     data = parse_frontmatter(PLAN_STATE_FILE)
@@ -74,7 +74,7 @@ def check_prerequisites(show_fixes: bool = False) -> tuple[list, list]:
         else:
             failed.append(
                 (f"Requirement section incomplete: {name} ({status})",
-                 f"/modify-requirement requirement \"{name}\" --status complete")
+                 f"/amaa-modify-requirement requirement \"{name}\" --status complete")
             )
 
     # Check 4: Modules defined
@@ -82,7 +82,7 @@ def check_prerequisites(show_fixes: bool = False) -> tuple[list, list]:
     if modules:
         passed.append(f"Modules defined: {len(modules)}")
     else:
-        failed.append(("No modules defined", "/add-requirement module \"name\" --criteria \"criteria\""))
+        failed.append(("No modules defined", "/amaa-add-requirement module \"name\" --criteria \"criteria\""))
 
     # Check 5: All modules have acceptance criteria
     for module in modules:
@@ -93,7 +93,7 @@ def check_prerequisites(show_fixes: bool = False) -> tuple[list, list]:
         else:
             failed.append(
                 (f"Module missing criteria: {mod_id}",
-                 f"/modify-requirement module {mod_id} --criteria \"criteria\"")
+                 f"/amaa-modify-requirement module {mod_id} --criteria \"criteria\"")
             )
 
     # Check 6: Not already approved
@@ -114,7 +114,7 @@ def main() -> int:
     print("Checking Plan Prerequisites")
     print("=" * 50)
 
-    passed, failed = check_prerequisites(args.fix_suggestions)
+    passed, failed = check_prerequisites()
 
     # Print passed checks
     print("\nPassed:")

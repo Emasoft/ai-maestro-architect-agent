@@ -29,7 +29,7 @@ python3 "${CLAUDE_PLUGIN_ROOT}/scripts/amaa_modify_requirement.py" modify $ARGUM
 ## Modifying a Requirement Section
 
 ```
-/modify-requirement requirement "Functional Requirements" --status complete
+/amaa-modify-requirement requirement "Functional Requirements" --status complete
 ```
 
 Marks the Functional Requirements section as complete.
@@ -37,7 +37,7 @@ Marks the Functional Requirements section as complete.
 ## Modifying a Module
 
 ```
-/modify-requirement module auth-core --criteria "Support JWT and session tokens" --priority critical
+/amaa-modify-requirement module auth-core --criteria "Support JWT and session tokens" --priority critical
 ```
 
 Updates the auth-core module with new acceptance criteria and priority.
@@ -68,20 +68,19 @@ Modifications are reflected immediately in:
 
 ```bash
 # Mark a requirement section as complete
-/modify-requirement requirement "API Requirements" --status complete
+/amaa-modify-requirement requirement "API Requirements" --status complete
 
 # Add criteria to an existing module
-/modify-requirement module oauth-google --criteria "Support Google Workspace SSO"
+/amaa-modify-requirement module oauth-google --criteria "Support Google Workspace SSO"
 
 # Change module priority
-/modify-requirement module remember-me --priority low
+/amaa-modify-requirement module remember-me --priority low
 
 # Rename a module
-/modify-requirement module auth-2fa --name "Two-Factor Authentication"
+/amaa-modify-requirement module auth-2fa --name "Two-Factor Authentication"
 ```
 
 ## Related Commands
 
-- `/planning-status` - View current state
-- `/add-requirement` - Add new requirement/module
-- `/remove-requirement` - Remove pending requirement/module
+- `/amaa-add-requirement` - Add new requirement/module
+- `/amaa-remove-requirement` - Remove pending requirement/module

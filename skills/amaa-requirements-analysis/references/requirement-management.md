@@ -21,9 +21,9 @@ Add a new requirement section when:
 2. **Compliance requirements** - Need to track security, legal, or regulatory requirements separately
 3. **Domain-specific grouping** - Project needs specialized requirement categories
 
-Use `/add-requirement requirement "Section Name"` to add a section.
+Use `/amaa-add-requirement requirement "Section Name"` to add a section.
 
-**Default sections already created by /start-planning:**
+**Default sections already created by /amaa-start-planning:**
 - Functional Requirements
 - Non-Functional Requirements
 - Architecture Design
@@ -54,12 +54,12 @@ Add a new module when:
 
 **Adding a requirement section:**
 ```
-/add-requirement requirement "Section Name"
+/amaa-add-requirement requirement "Section Name"
 ```
 
 **Adding a module:**
 ```
-/add-requirement module "module-name" --criteria "Acceptance criteria text" --priority high
+/amaa-add-requirement module "module-name" --criteria "Acceptance criteria text" --priority high
 ```
 
 **Full argument reference:**
@@ -103,12 +103,12 @@ Modify requirements when:
 
 **Modifying a requirement section:**
 ```
-/modify-requirement requirement "Section Name" --status complete
+/amaa-modify-requirement requirement "Section Name" --status complete
 ```
 
 **Modifying a module:**
 ```
-/modify-requirement module module-id --criteria "New criteria" --priority critical
+/amaa-modify-requirement module module-id --criteria "New criteria" --priority critical
 ```
 
 **Full argument reference:**
@@ -149,17 +149,17 @@ Remove requirements when:
 
 **Removing a requirement section:**
 ```
-/remove-requirement requirement "Section Name"
+/amaa-remove-requirement requirement "Section Name"
 ```
 
 **Removing a module:**
 ```
-/remove-requirement module module-id
+/amaa-remove-requirement module module-id
 ```
 
 **Force removal (bypass checks):**
 ```
-/remove-requirement module module-id --force
+/amaa-remove-requirement module module-id --force
 ```
 
 **Restrictions:**
@@ -223,21 +223,21 @@ modules:
 **Example 1: Building a complete requirement set**
 ```bash
 # Add custom requirement section
-/add-requirement requirement "Security Requirements"
+/amaa-add-requirement requirement "Security Requirements"
 
 # Add multiple modules
-/add-requirement module "user-login" --criteria "Email/password authentication" --priority critical
-/add-requirement module "session-mgmt" --criteria "Token refresh and expiry" --priority high
-/add-requirement module "audit-log" --criteria "Log all auth events" --priority medium
+/amaa-add-requirement module "user-login" --criteria "Email/password authentication" --priority critical
+/amaa-add-requirement module "session-mgmt" --criteria "Token refresh and expiry" --priority high
+/amaa-add-requirement module "audit-log" --criteria "Log all auth events" --priority medium
 
 # Update module criteria after discussion
-/modify-requirement module user-login --criteria "Email/password auth with rate limiting"
+/amaa-modify-requirement module user-login --criteria "Email/password auth with rate limiting"
 
 # Change priority based on user feedback
-/modify-requirement module audit-log --priority low
+/amaa-modify-requirement module audit-log --priority low
 
 # Mark requirement section complete
-/modify-requirement requirement "Security Requirements" --status complete
+/amaa-modify-requirement requirement "Security Requirements" --status complete
 ```
 
 **Example 2: Removing a module**
@@ -246,7 +246,7 @@ modules:
 /planning-status
 
 # Remove module that's no longer needed
-/remove-requirement module oauth-facebook
+/amaa-remove-requirement module oauth-facebook
 
 # Verify removal
 /planning-status
@@ -255,21 +255,21 @@ modules:
 **Example 3: Renaming a module**
 ```bash
 # Change display name without affecting ID
-/modify-requirement module auth-2fa --name "Two-Factor Authentication Module"
+/amaa-modify-requirement module auth-2fa --name "Two-Factor Authentication Module"
 ```
 
 **Error handling examples:**
 
 ```bash
 # Attempting to remove in-progress module
-/remove-requirement module auth-core
+/amaa-remove-requirement module auth-core
 # ERROR: Cannot remove: status is in-progress
 
 # Force removal (use with caution)
-/remove-requirement module auth-core --force
+/amaa-remove-requirement module auth-core --force
 # Module removed (work may be lost)
 
 # Adding duplicate module
-/add-requirement module auth-core --criteria "Test"
+/amaa-add-requirement module auth-core --criteria "Test"
 # ERROR: Module 'auth-core' already exists
 ```

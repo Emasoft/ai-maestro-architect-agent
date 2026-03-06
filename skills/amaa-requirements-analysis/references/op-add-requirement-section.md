@@ -34,7 +34,7 @@ Use this operation when:
 - Creating domain-specific requirement categories
 - Organizing requirements by stakeholder or feature area
 
-Default sections created by `/start-planning`:
+Default sections created by `/amaa-start-planning`:
 - Functional Requirements
 - Non-Functional Requirements
 - Architecture Design
@@ -58,7 +58,7 @@ Verify the section does not already exist.
 ### Step 2: Add the Section
 
 ```bash
-/add-requirement requirement "Section Name"
+/amaa-add-requirement requirement "Section Name"
 ```
 
 ### Step 3: Verify Addition
@@ -75,7 +75,7 @@ Copy this checklist and track your progress:
 
 - [ ] Check existing sections with `/planning-status`
 - [ ] Determine appropriate section name
-- [ ] Execute `/add-requirement requirement "Name"`
+- [ ] Execute `/amaa-add-requirement requirement "Name"`
 - [ ] Verify section appears in status output
 - [ ] Document requirements for this section in USER_REQUIREMENTS.md
 
@@ -89,7 +89,7 @@ Copy this checklist and track your progress:
 # Shows: Functional, Non-Functional, Architecture Design
 
 # Add security section
-/add-requirement requirement "Security Requirements"
+/amaa-add-requirement requirement "Security Requirements"
 
 # Expected output:
 # Added requirement section: Security Requirements
@@ -104,13 +104,13 @@ Copy this checklist and track your progress:
 
 ```bash
 # Add compliance section
-/add-requirement requirement "Compliance Requirements"
+/amaa-add-requirement requirement "Compliance Requirements"
 
 # Add performance section
-/add-requirement requirement "Performance Requirements"
+/amaa-add-requirement requirement "Performance Requirements"
 
 # Add integration section
-/add-requirement requirement "Integration Requirements"
+/amaa-add-requirement requirement "Integration Requirements"
 
 # Verify all added
 /planning-status --verbose
@@ -135,7 +135,7 @@ requirements_sections:
 | Error | Cause | Resolution |
 |-------|-------|------------|
 | Section already exists | Duplicate name | Use a different name or modify existing |
-| State file not found | Planning not started | Run `/start-planning` first |
+| State file not found | Planning not started | Run `/amaa-start-planning` first |
 | Empty section name | No name provided | Provide section name in quotes |
 | Invalid characters | Special characters in name | Use alphanumeric characters and spaces only |
 

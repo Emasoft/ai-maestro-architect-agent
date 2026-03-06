@@ -142,7 +142,7 @@ Copy this checklist and track your progress:
 
 | Error | Cause | Resolution |
 |-------|-------|------------|
-| State file not found | Planning not started | Run `/start-planning` first |
+| State file not found | Planning not started | Run `/amaa-start-planning` first |
 | Invalid YAML in state file | Corrupted state | See troubleshooting.md section 5.7 |
 | Cannot read state file | Permission issue | Check file permissions |
 

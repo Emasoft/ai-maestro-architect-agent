@@ -1,7 +1,7 @@
 # Start Planning Procedure Reference
 
 ## Table of Contents
-- 1.1 When to use /start-planning command
+- 1.1 When to use /amaa-start-planning command
 - 1.2 Prerequisites before starting planning
 - 1.3 Command syntax and arguments
 - 1.4 What the command creates
@@ -10,16 +10,16 @@
 
 ---
 
-## 1.1 When to use /start-planning command
+## 1.1 When to use /amaa-start-planning command
 
-Use the `/start-planning` command when you need to:
+Use the `/amaa-start-planning` command when you need to:
 
 1. **Begin a new project** - Before any implementation, enter Plan Phase to define requirements
 2. **Transition from discussion to planning** - When user goals are clear enough to document
 3. **Create formal requirements** - When you need trackable, versioned requirements
 4. **Enable exit blocking** - When you want the stop hook to enforce plan completion
 
-Do NOT use `/start-planning` when:
+Do NOT use `/amaa-start-planning` when:
 - A Plan Phase is already active (check with `/planning-status`)
 - You want to jump directly to implementation (use `/start-orchestration` instead)
 - Requirements are already documented and approved elsewhere
@@ -28,7 +28,7 @@ Do NOT use `/start-planning` when:
 
 ## 1.2 Prerequisites before starting planning
 
-Before running `/start-planning`, ensure:
+Before running `/amaa-start-planning`, ensure:
 
 1. **Clear user goal** - You must have a concise description of what to build
 2. **No existing Plan Phase** - Check that `.claude/orchestrator-plan-phase.local.md` does not exist
@@ -45,12 +45,12 @@ If a Plan Phase already exists, you must either:
 
 **Basic syntax:**
 ```
-/start-planning "Goal description here"
+/amaa-start-planning "Goal description here"
 ```
 
 **Alternative syntax with flag:**
 ```
-/start-planning --goal "Goal description here"
+/amaa-start-planning --goal "Goal description here"
 ```
 
 **Arguments:**
@@ -101,7 +101,7 @@ The command creates a state file at `.claude/orchestrator-plan-phase.local.md` c
 
 ## 1.5 Post-initialization steps
 
-After `/start-planning` succeeds, perform these steps in order:
+After `/amaa-start-planning` succeeds, perform these steps in order:
 
 **Step 1: Verify initialization**
 ```
@@ -127,13 +127,13 @@ Create the requirements document at project root:
 **Step 3: Add modules**
 For each implementation unit:
 ```
-/add-requirement module "module-name" --criteria "Acceptance criteria" --priority high
+/amaa-add-requirement module "module-name" --criteria "Acceptance criteria" --priority high
 ```
 
 **Step 4: Mark sections complete**
 As you complete each section:
 ```
-/modify-requirement requirement "Functional Requirements" --status complete
+/amaa-modify-requirement requirement "Functional Requirements" --status complete
 ```
 
 **Step 5: Review and approve**
@@ -150,22 +150,22 @@ Complete example from start to approval:
 
 ```bash
 # Step 1: Start planning
-/start-planning "Build a REST API for user management"
+/amaa-start-planning "Build a REST API for user management"
 
 # Step 2: Check status
 /planning-status
 
 # Step 3: Add modules
-/add-requirement module "user-crud" --criteria "Create, read, update, delete users" --priority critical
-/add-requirement module "auth-jwt" --criteria "JWT token generation and validation" --priority high
-/add-requirement module "api-docs" --criteria "OpenAPI/Swagger documentation" --priority medium
+/amaa-add-requirement module "user-crud" --criteria "Create, read, update, delete users" --priority critical
+/amaa-add-requirement module "auth-jwt" --criteria "JWT token generation and validation" --priority high
+/amaa-add-requirement module "api-docs" --criteria "OpenAPI/Swagger documentation" --priority medium
 
 # Step 4: Create USER_REQUIREMENTS.md manually (write the document)
 
 # Step 5: Mark requirement sections as complete
-/modify-requirement requirement "Functional Requirements" --status complete
-/modify-requirement requirement "Non-Functional Requirements" --status complete
-/modify-requirement requirement "Architecture Design" --status complete
+/amaa-modify-requirement requirement "Functional Requirements" --status complete
+/amaa-modify-requirement requirement "Non-Functional Requirements" --status complete
+/amaa-modify-requirement requirement "Architecture Design" --status complete
 
 # Step 6: Verify all criteria met
 /planning-status --verbose
@@ -174,7 +174,7 @@ Complete example from start to approval:
 /approve-plan
 ```
 
-**Expected output after /start-planning:**
+**Expected output after /amaa-start-planning:**
 ```
 Planning initialized
   Plan ID: plan-20260109-143022
@@ -183,7 +183,7 @@ Planning initialized
 
 Next steps:
   1. Create USER_REQUIREMENTS.md with detailed requirements
-  2. Use /add-requirement to define modules
+  2. Use /amaa-add-requirement to define modules
   3. Use /planning-status to track progress
   4. Use /approve-plan when ready to implement
 ```

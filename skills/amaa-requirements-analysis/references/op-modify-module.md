@@ -55,7 +55,7 @@ Review modules and their current properties.
 ### Step 2: Execute Modification
 
 ```bash
-/modify-requirement module module-id --criteria "New criteria" --priority critical
+/amaa-modify-requirement module module-id --criteria "New criteria" --priority critical
 ```
 
 Available modifications:
@@ -82,7 +82,7 @@ Copy this checklist and track your progress:
 - [ ] Identify module ID with `/planning-status --verbose`
 - [ ] Verify module status is planned or pending
 - [ ] Determine which fields to update
-- [ ] Execute `/modify-requirement module ...`
+- [ ] Execute `/amaa-modify-requirement module ...`
 - [ ] Verify changes in status output
 
 ## Examples
@@ -91,7 +91,7 @@ Copy this checklist and track your progress:
 
 ```bash
 # After user feedback, add rate limiting requirement
-/modify-requirement module user-login --criteria "Email/password auth with rate limiting"
+/amaa-modify-requirement module user-login --criteria "Email/password auth with rate limiting"
 
 # Expected output:
 # Modified module: user-login
@@ -102,7 +102,7 @@ Copy this checklist and track your progress:
 
 ```bash
 # Elevate priority based on business needs
-/modify-requirement module audit-log --priority high
+/amaa-modify-requirement module audit-log --priority high
 
 # Verify
 /planning-status --verbose
@@ -113,7 +113,7 @@ Copy this checklist and track your progress:
 
 ```bash
 # Rename for clarity
-/modify-requirement module auth-2fa --name "Two-Factor Authentication Module"
+/amaa-modify-requirement module auth-2fa --name "Two-Factor Authentication Module"
 
 # Note: ID remains auth-2fa, only display name changes
 ```
@@ -122,7 +122,7 @@ Copy this checklist and track your progress:
 
 ```bash
 # Update both criteria and priority
-/modify-requirement module session-mgmt --criteria "Token refresh with 24h expiry" --priority critical
+/amaa-modify-requirement module session-mgmt --criteria "Token refresh with 24h expiry" --priority critical
 ```
 
 ### Example: State File After Modification
@@ -145,7 +145,7 @@ modules:
 | Cannot modify | Status is in-progress/complete | Only planned/pending modules can be modified |
 | Invalid priority | Unknown value | Use: critical, high, medium, or low |
 | Invalid status | Unknown status | Use: planned, pending, in-progress, or complete |
-| State file not found | Planning not started | Run `/start-planning` first |
+| State file not found | Planning not started | Run `/amaa-start-planning` first |
 
 ## Related Operations
 

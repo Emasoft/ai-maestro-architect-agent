@@ -56,12 +56,12 @@ Check the section exists and its current status.
 
 Standard removal (pending sections only):
 ```bash
-/remove-requirement requirement "Section Name"
+/amaa-remove-requirement requirement "Section Name"
 ```
 
 Force removal (any status):
 ```bash
-/remove-requirement requirement "Section Name" --force
+/amaa-remove-requirement requirement "Section Name" --force
 ```
 
 ### Step 3: Verify Removal
@@ -79,7 +79,7 @@ Copy this checklist and track your progress:
 - [ ] Identify section to remove with `/planning-status`
 - [ ] Verify section status is pending (or use --force)
 - [ ] Confirm removal is intentional (no undo)
-- [ ] Execute `/remove-requirement requirement ...`
+- [ ] Execute `/amaa-remove-requirement requirement ...`
 - [ ] Verify section is removed from status
 
 ## Examples
@@ -92,7 +92,7 @@ Copy this checklist and track your progress:
 # Shows: ..., Legacy Support - pending, ...
 
 # Remove unused section
-/remove-requirement requirement "Legacy Support"
+/amaa-remove-requirement requirement "Legacy Support"
 
 # Expected output:
 # Removed requirement section: Legacy Support
@@ -106,11 +106,11 @@ Copy this checklist and track your progress:
 
 ```bash
 # Section is in-progress but user decided it's not needed
-/remove-requirement requirement "Integration Requirements"
+/amaa-remove-requirement requirement "Integration Requirements"
 # ERROR: Cannot remove: status is in-progress
 
 # Force removal (use with caution)
-/remove-requirement requirement "Integration Requirements" --force
+/amaa-remove-requirement requirement "Integration Requirements" --force
 
 # Expected output:
 # Removed requirement section: Integration Requirements (forced)
@@ -141,7 +141,7 @@ requirements_sections:
 |-------|-------|------------|
 | Section not found | Name mismatch | Check exact name with `/planning-status` |
 | Cannot remove | Status not pending | Use --force flag if intentional |
-| State file not found | Planning not started | Run `/start-planning` first |
+| State file not found | Planning not started | Run `/amaa-start-planning` first |
 | Cannot remove default | Trying to remove core section | Default sections required for approval |
 
 ## Related Operations

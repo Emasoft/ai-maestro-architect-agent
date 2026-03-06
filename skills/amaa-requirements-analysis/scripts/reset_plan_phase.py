@@ -54,7 +54,7 @@ def reset_plan_phase(create_backup: bool = True) -> bool:
         PLAN_STATE_FILE.unlink()
         print(f"Removed: {PLAN_STATE_FILE}")
         print("\nPlan phase has been reset.")
-        print("Run /start-planning to begin a new plan.")
+        print("Run /amaa-start-planning to begin a new plan.")
         return True
     except Exception as e:
         print(f"ERROR: Failed to remove state file: {e}")

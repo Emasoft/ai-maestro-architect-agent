@@ -6,25 +6,46 @@ Handles add, modify, and remove operations for requirements and modules
 during Plan Phase. Supports dynamic flexibility in the planning process.
 
 Usage:
-    python3 arch_modify_requirement.py add requirement "Security Requirements"
-    python3 arch_modify_requirement.py add module "auth-core" --criteria "Support JWT"
-    python3 arch_modify_requirement.py modify module auth-core --priority critical
-    python3 arch_modify_requirement.py remove module legacy-api
+    python3 amaa_modify_requirement.py add requirement "Security Requirements"
+    python3 amaa_modify_requirement.py add module "auth-core" --criteria "Support JWT"
+    python3 amaa_modify_requirement.py modify module auth-core --priority critical
+    python3 amaa_modify_requirement.py remove module legacy-api
 """
 
 import argparse
 import re
 import sys
 from pathlib import Path
-
-import yaml
+from typing import Any
 
 # Plan phase state file location
 PLAN_STATE_FILE = Path(".claude/orchestrator-plan-phase.local.md")
 
 
+def _parse_yaml_value(val: str) -> Any:
+    """Parse a simple YAML scalar value (no external dependency)."""
+    val = val.strip()
+    if val in ('true', 'True'):
+        return True
+    if val in ('false', 'False'):
+        return False
+    if val in ('null', 'None', '~', ''):
+        return None
+    if val == '[]':
+        return []
+    # Remove surrounding quotes
+    if (val.startswith('"') and val.endswith('"')) or (val.startswith("'") and val.endswith("'")):
+        return val[1:-1]
+    # Try integer
+    try:
+        return int(val)
+    except ValueError:
+        pass
+    return val
+
+
 def parse_frontmatter(file_path: Path) -> tuple[dict, str]:
-    """Parse YAML frontmatter and return (data, body)."""
+    """Parse YAML frontmatter and return (data, body). No PyYAML dependency."""
     if not file_path.exists():
         return {}, ""
 
@@ -37,28 +58,135 @@ def parse_frontmatter(file_path: Path) -> tuple[dict, str]:
     if end_index == -1:
         return {}, content
 
-    yaml_content = content[3:end_index].strip()
-    body = content[end_index + 3 :].strip()
+    yaml_text = content[3:end_index].strip()
+    body = content[end_index + 3:].strip()
 
-    try:
-        data = yaml.safe_load(yaml_content) or {}
-        return data, body
-    except yaml.YAMLError:
-        return {}, content
+    data: dict[str, Any] = {}
+    lines = yaml_text.split("\n")
+    i = 0
+    current_key: str | None = None
+    current_list: list[Any] | None = None
+
+    while i < len(lines):
+        line = lines[i]
+        stripped = line.strip()
+
+        # Skip comments and blank lines
+        if not stripped or stripped.startswith("#"):
+            i += 1
+            continue
+
+        # List item (starts with "- ")
+        if stripped.startswith("- ") and current_key is not None:
+            item_text = stripped[2:]
+            # Check if it's a dict item (key: value)
+            if ": " in item_text:
+                item_dict: dict[str, Any] = {}
+                # Parse first key-value of this list item
+                k, v = item_text.split(": ", 1)
+                item_dict[k.strip()] = _parse_yaml_value(v)
+                # Check subsequent indented lines for more keys in this dict
+                i += 1
+                while i < len(lines):
+                    next_line = lines[i]
+                    next_stripped = next_line.strip()
+                    # Must be indented more than the "- " and be a key: value
+                    if next_stripped and not next_stripped.startswith("- ") and not next_stripped.startswith("#") and ": " in next_stripped:
+                        indent = len(next_line) - len(next_line.lstrip())
+                        if indent >= 4:  # Part of the dict item
+                            nk, nv = next_stripped.split(": ", 1)
+                            item_dict[nk.strip()] = _parse_yaml_value(nv)
+                            i += 1
+                            continue
+                    break
+                if current_list is not None:
+                    current_list.append(item_dict)
+                continue
+            else:
+                # Simple list item
+                if current_list is not None:
+                    current_list.append(_parse_yaml_value(item_text))
+                i += 1
+                continue
+
+        # Top-level key: value
+        if ": " in stripped or stripped.endswith(":"):
+            if ": " in stripped:
+                key, val = stripped.split(": ", 1)
+            else:
+                key = stripped[:-1]
+                val = ""
+            key = key.strip()
+
+            parsed_val = _parse_yaml_value(val)
+            if parsed_val == [] or val.strip() == "":
+                # Could be a list that follows
+                data[key] = []
+                current_key = key
+                current_list = data[key]
+            else:
+                data[key] = parsed_val
+                current_key = key
+                current_list = None
+
+            i += 1
+            continue
+
+        i += 1
+
+    return data, body
 
 
 def write_state_file(data: dict, body: str) -> bool:
-    """Write the state file with updated frontmatter."""
+    """Write the state file with YAML frontmatter. No PyYAML dependency."""
     try:
-        yaml_content = yaml.dump(
-            data, default_flow_style=False, allow_unicode=True, sort_keys=False
-        )
-        content = f"---\n{yaml_content}---\n\n{body}"
+        lines: list[str] = []
+        for key, value in data.items():
+            if isinstance(value, list):
+                if not value:
+                    lines.append(f"{key}: []")
+                else:
+                    lines.append(f"{key}:")
+                    for item in value:
+                        if isinstance(item, dict):
+                            first = True
+                            for ik, iv in item.items():
+                                formatted_v = _format_yaml_value(iv)
+                                if first:
+                                    lines.append(f"  - {ik}: {formatted_v}")
+                                    first = False
+                                else:
+                                    lines.append(f"    {ik}: {formatted_v}")
+                        else:
+                            lines.append(f"  - {_format_yaml_value(item)}")
+            elif isinstance(value, bool):
+                lines.append(f"{key}: {'true' if value else 'false'}")
+            elif value is None:
+                lines.append(f"{key}: null")
+            else:
+                lines.append(f"{key}: {_format_yaml_value(value)}")
+
+        yaml_content = "\n".join(lines)
+        content = f"---\n{yaml_content}\n---\n\n{body}"
         PLAN_STATE_FILE.write_text(content, encoding="utf-8")
         return True
     except Exception as e:
         print(f"ERROR: Failed to write state file: {e}")
         return False
+
+
+def _format_yaml_value(val: Any) -> str:
+    """Format a value for YAML output."""
+    if val is None:
+        return "null"
+    if isinstance(val, bool):
+        return "true" if val else "false"
+    if isinstance(val, str):
+        # Quote strings that contain special characters
+        if any(c in val for c in ':#{}[]|>&*!%@`') or val in ('true', 'false', 'null'):
+            return f'"{val}"'
+        return f'"{val}"'
+    return str(val)
 
 
 def normalize_id(name: str) -> str:
@@ -252,7 +380,7 @@ def main() -> int:
     # Check if in plan phase
     if not PLAN_STATE_FILE.exists():
         print("ERROR: Not in Plan Phase")
-        print("Run /start-planning to begin planning")
+        print("Run /amaa-start-planning to begin planning")
         return 1
 
     data, body = parse_frontmatter(PLAN_STATE_FILE)

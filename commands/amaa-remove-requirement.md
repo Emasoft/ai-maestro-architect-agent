@@ -26,7 +26,7 @@ python3 "${CLAUDE_PLUGIN_ROOT}/scripts/amaa_modify_requirement.py" remove $ARGUM
 ## Removing a Requirement Section
 
 ```
-/remove-requirement requirement "Legacy Support"
+/amaa-remove-requirement requirement "Legacy Support"
 ```
 
 Removes the "Legacy Support" requirement section if it has `pending` status.
@@ -34,7 +34,7 @@ Removes the "Legacy Support" requirement section if it has `pending` status.
 ## Removing a Module
 
 ```
-/remove-requirement module legacy-api
+/amaa-remove-requirement module legacy-api
 ```
 
 Removes the legacy-api module if it has `planned` or `pending` status.
@@ -46,7 +46,7 @@ Removes the legacy-api module if it has `planned` or `pending` status.
 - Complete (`complete` status)
 - Already have GitHub Issues assigned
 
-**Rationale**: Once work has started, the orchestrator must complete it. Use `/modify-requirement` to adjust scope instead.
+**Rationale**: Once work has started, the orchestrator must complete it. Use `/amaa-modify-requirement` to adjust scope instead.
 
 ## Dynamic Flexibility
 
@@ -60,7 +60,7 @@ Before removal:
   - Modules: [A: done, B: in_progress, C: pending]
   - Pending: 2
 
-/remove-requirement module C
+/amaa-remove-requirement module C
 
 After removal:
   - Modules: [A: done, B: in_progress]
@@ -80,7 +80,7 @@ modules:
     status: "planned"
 ```
 
-**After `/remove-requirement module legacy-api`:**
+**After `/amaa-remove-requirement module legacy-api`:**
 ```yaml
 modules:
   - id: "auth-core"
@@ -91,13 +91,13 @@ modules:
 
 ```bash
 # Remove a pending requirement section
-/remove-requirement requirement "Legacy Compatibility"
+/amaa-remove-requirement requirement "Legacy Compatibility"
 
 # Remove a planned module
-/remove-requirement module oauth-facebook
+/amaa-remove-requirement module oauth-facebook
 
 # Remove with force (skip confirmation)
-/remove-requirement module oauth-twitter --force
+/amaa-remove-requirement module oauth-twitter --force
 ```
 
 ## Error Messages
@@ -107,10 +107,9 @@ modules:
 | "Cannot remove: status is in_progress" | Module work started | Complete or reassign instead |
 | "Cannot remove: status is complete" | Work already done | Cannot undo completed work |
 | "Cannot remove: has GitHub Issue" | Issue already created | Close issue manually first |
-| "Not found: module X" | Invalid ID | Check `/planning-status` for correct IDs |
+| "Not found: module X" | Invalid ID | Check plan state file for correct IDs |
 
 ## Related Commands
 
-- `/planning-status` - View all requirements and modules
-- `/add-requirement` - Add new requirement/module
-- `/modify-requirement` - Change existing specifications
+- `/amaa-add-requirement` - Add new requirement/module
+- `/amaa-modify-requirement` - Change existing specifications

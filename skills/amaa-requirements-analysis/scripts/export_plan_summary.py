@@ -120,7 +120,7 @@ def main() -> int:
 
     if not PLAN_STATE_FILE.exists():
         print("ERROR: Not in Plan Phase")
-        print("Run /start-planning to begin planning")
+        print("Run /amaa-start-planning to begin planning")
         return 1
 
     data = parse_frontmatter(PLAN_STATE_FILE)

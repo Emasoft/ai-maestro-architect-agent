@@ -1,11 +1,11 @@
 # Troubleshooting Reference
 
 ## Table of Contents
-- 5.1 When /start-planning fails
+- 5.1 When /amaa-start-planning fails
 - 5.2 When /planning-status shows errors
-- 5.3 When /add-requirement fails
-- 5.4 When /modify-requirement fails
-- 5.5 When /remove-requirement fails
+- 5.3 When /amaa-add-requirement fails
+- 5.4 When /amaa-modify-requirement fails
+- 5.5 When /amaa-remove-requirement fails
 - 5.6 When /approve-plan fails
 - 5.7 State file corruption recovery
 - 5.8 GitHub Issue creation problems
@@ -13,7 +13,7 @@
 
 ---
 
-## 5.1 When /start-planning fails
+## 5.1 When /amaa-start-planning fails
 
 **Error: "Plan Phase already active"**
 
@@ -24,7 +24,7 @@ Solutions:
 2. Delete state file to start fresh (requires user approval):
    ```bash
    rm .claude/orchestrator-plan-phase.local.md
-   /start-planning "New goal"
+   /amaa-start-planning "New goal"
    ```
 
 **Error: "Goal is required"**
@@ -33,7 +33,7 @@ Cause: No goal provided to the command.
 
 Solution: Provide goal as argument:
 ```bash
-/start-planning "Your project goal here"
+/amaa-start-planning "Your project goal here"
 ```
 
 **Error: "Goal cannot be empty"**
@@ -60,7 +60,7 @@ Solutions:
 Cause: State file does not exist.
 
 Solutions:
-1. Run `/start-planning` to begin planning
+1. Run `/amaa-start-planning` to begin planning
 2. Verify you are in the correct project directory
 
 **Error: "Could not parse plan state file"**
@@ -78,24 +78,24 @@ Cause: Status field not updated after completing requirements.
 
 Solution: Mark sections complete:
 ```bash
-/modify-requirement requirement "Functional Requirements" --status complete
+/amaa-modify-requirement requirement "Functional Requirements" --status complete
 ```
 
 ---
 
-## 5.3 When /add-requirement fails
+## 5.3 When /amaa-add-requirement fails
 
 **Error: "Not in Plan Phase"**
 
 Cause: Plan phase state file does not exist.
 
-Solution: Run `/start-planning` first.
+Solution: Run `/amaa-start-planning` first.
 
 **Error: "Requirement section 'X' already exists"**
 
 Cause: Attempting to add a duplicate requirement section.
 
-Solution: Use `/modify-requirement` to change existing section.
+Solution: Use `/amaa-modify-requirement` to change existing section.
 
 **Error: "Module 'X' already exists"**
 
@@ -103,8 +103,8 @@ Cause: Attempting to add a module with the same ID.
 
 Solutions:
 1. Use a different name (ID is derived from name)
-2. Remove existing module first: `/remove-requirement module X`
-3. Modify existing module: `/modify-requirement module X --criteria "new"`
+2. Remove existing module first: `/amaa-remove-requirement module X`
+3. Modify existing module: `/amaa-modify-requirement module X --criteria "new"`
 
 **Module ID is different than expected:**
 
@@ -118,7 +118,7 @@ This is expected behavior. Use the normalized ID in subsequent commands.
 
 ---
 
-## 5.4 When /modify-requirement fails
+## 5.4 When /amaa-modify-requirement fails
 
 **Error: "Requirement section 'X' not found"**
 
@@ -126,7 +126,7 @@ Cause: The specified requirement section does not exist.
 
 Solutions:
 1. Check exact name with `/planning-status`
-2. Add the section first: `/add-requirement requirement "X"`
+2. Add the section first: `/amaa-add-requirement requirement "X"`
 
 **Error: "Module 'X' not found"**
 
@@ -152,7 +152,7 @@ Solution: Verify current status with `/planning-status` before modifying.
 
 ---
 
-## 5.5 When /remove-requirement fails
+## 5.5 When /amaa-remove-requirement fails
 
 **Error: "Cannot remove: status is in-progress"**
 
@@ -162,7 +162,7 @@ Solutions:
 1. Wait for completion
 2. Force removal (data loss risk):
    ```bash
-   /remove-requirement module X --force
+   /amaa-remove-requirement module X --force
    ```
 
 **Error: "Cannot remove: status is complete"**
@@ -197,7 +197,7 @@ Solution: Check exact IDs with `/planning-status`.
 
 Cause: Plan phase state file does not exist.
 
-Solution: Run `/start-planning` first.
+Solution: Run `/amaa-start-planning` first.
 
 **Error: "Plan already approved"**
 
@@ -220,7 +220,7 @@ Cause: Section X is not marked as complete.
 
 Solution:
 ```bash
-/modify-requirement requirement "X" --status complete
+/amaa-modify-requirement requirement "X" --status complete
 ```
 
 **Error: "No modules defined"**
@@ -229,7 +229,7 @@ Cause: No modules added to the plan.
 
 Solution: Add at least one module:
 ```bash
-/add-requirement module "core-feature" --criteria "Success criteria here"
+/amaa-add-requirement module "core-feature" --criteria "Success criteria here"
 ```
 
 **Error: "Module missing acceptance criteria: X"**
@@ -238,7 +238,7 @@ Cause: Module X has no acceptance criteria defined.
 
 Solution:
 ```bash
-/modify-requirement module X --criteria "Acceptance criteria here"
+/amaa-modify-requirement module X --criteria "Acceptance criteria here"
 ```
 
 ---
@@ -272,7 +272,7 @@ Solution:
    If file is unrecoverable, start fresh:
    ```bash
    rm .claude/orchestrator-plan-phase.local.md
-   /start-planning "Your goal"
+   /amaa-start-planning "Your goal"
    # Re-add modules from memory or notes
    ```
 

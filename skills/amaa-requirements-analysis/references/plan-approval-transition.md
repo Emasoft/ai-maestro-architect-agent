@@ -36,9 +36,9 @@ Do NOT approve the plan when:
 | Prerequisite | How to Verify | How to Fix |
 |--------------|---------------|------------|
 | USER_REQUIREMENTS.md exists | `ls USER_REQUIREMENTS.md` | Create the file |
-| All sections complete | `/planning-status` | `/modify-requirement requirement "Name" --status complete` |
-| All modules have criteria | `/planning-status --verbose` | `/modify-requirement module id --criteria "..."` |
-| At least one module defined | `/planning-status` | `/add-requirement module "name" --criteria "..."` |
+| All sections complete | `/planning-status` | `/amaa-modify-requirement requirement "Name" --status complete` |
+| All modules have criteria | `/planning-status --verbose` | `/amaa-modify-requirement module id --criteria "..."` |
+| At least one module defined | `/planning-status` | `/amaa-add-requirement module "name" --criteria "..."` |
 
 **Quick verification:**
 ```bash
@@ -100,9 +100,9 @@ The /approve-plan command validates the plan before approval:
 | Error | Cause | Solution |
 |-------|-------|----------|
 | "Requirements file not found" | USER_REQUIREMENTS.md missing | Create the file |
-| "Requirement section incomplete" | Section not marked complete | Use /modify-requirement |
-| "No modules defined" | modules array empty | Use /add-requirement module |
-| "Module missing acceptance criteria" | Module lacks criteria | Use /modify-requirement |
+| "Requirement section incomplete" | Section not marked complete | Use /amaa-modify-requirement |
+| "No modules defined" | modules array empty | Use /amaa-add-requirement module |
+| "Module missing acceptance criteria" | Module lacks criteria | Use /amaa-modify-requirement |
 
 ---
 
