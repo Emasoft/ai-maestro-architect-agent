@@ -316,7 +316,7 @@ class {self.class_name}:
         if json_format:
             # WHY: JSON enables integration with other tools and pipelines
             if output:
-                atomic_write_json(self.results, output)
+                atomic_write_json(output, self.results)
                 if self.verbose:
                     print(f"JSON report written to {{output}}")
             else:
@@ -337,7 +337,7 @@ class {self.class_name}:
             report_text = "\\n".join(report_lines)
 
             if output:
-                atomic_write_text(report_text, output)
+                atomic_write_text(output, report_text)
                 if self.verbose:
                     print(f"Report written to {{output}}")
             else:

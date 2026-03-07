@@ -10,14 +10,14 @@ NO external dependencies - Python 3.8+ stdlib only.
 
 Usage:
     # Compile handoff for module assignment
-    python3 arch_compile_handoff.py auth-core implementer-1 --platform web
+    python3 amaa_compile_handoff.py auth-core implementer-1 --platform web
 
     # With custom template
-    python3 arch_compile_handoff.py auth-core implementer-1 --platform web \
+    python3 amaa_compile_handoff.py auth-core implementer-1 --platform web \
         --template custom-handoff-template.md
 
     # Preview without saving
-    python3 arch_compile_handoff.py auth-core implementer-1 --platform web --preview
+    python3 amaa_compile_handoff.py auth-core implementer-1 --platform web --preview
 
 Exit codes:
     0 - Success

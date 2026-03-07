@@ -20,6 +20,7 @@ Supported languages:
 from __future__ import annotations
 
 import argparse
+import io
 import json
 import os
 import platform
@@ -28,6 +29,8 @@ import subprocess
 import sys
 from collections.abc import Callable
 from pathlib import Path
+
+from gitignore_filter import GitignoreFilter
 
 # ---------------------------------------------------------------------------
 # Terminal colors — respects NO_COLOR (https://no-color.org/) and non-TTY output
@@ -84,121 +87,95 @@ def _resolve_tool(tool_name: str) -> list[str] | None:
 def detect_languages(repo_root: Path) -> dict[str, list[Path]]:
     """Detect which programming languages are present in the repo.
 
+    Uses GitignoreFilter to respect .gitignore patterns instead of hardcoded exclude dirs.
+
     Returns:
         Dictionary mapping language name to list of files.
     """
-    exclude_dirs = {
-        ".venv",
-        "venv",
-        "__pycache__",
-        ".git",
-        "node_modules",
-        ".mypy_cache",
-        ".ruff_cache",
-        "build",
-        "dist",
-        ".tox",
-    }
-
-    def should_include(path: Path) -> bool:
-        return not any(part in exclude_dirs for part in path.parts)
+    gi = GitignoreFilter(repo_root)
 
     languages: dict[str, list[Path]] = {}
 
     # Python
-    py_files = [f for f in repo_root.glob("**/*.py") if should_include(f)]
+    py_files = list(gi.rglob("*.py"))
     if py_files:
         languages["python"] = py_files
 
     # JavaScript/TypeScript
-    js_exts = ("**/*.js", "**/*.ts", "**/*.jsx", "**/*.tsx")
     all_js: list[Path] = []
-    for ext in js_exts:
-        all_js.extend(f for f in repo_root.glob(ext) if should_include(f))
+    for ext in ("*.js", "*.ts", "*.jsx", "*.tsx"):
+        all_js.extend(gi.rglob(ext))
     if all_js:
         languages["javascript"] = all_js
 
     # Shell/Bash
-    sh_files = [f for f in repo_root.glob("**/*.sh") if should_include(f)]
-    bash_files = [f for f in repo_root.glob("**/*.bash") if should_include(f)]
-    all_shell = sh_files + bash_files
+    all_shell = list(gi.rglob("*.sh")) + list(gi.rglob("*.bash"))
     if all_shell:
         languages["shell"] = all_shell
 
     # Go
-    go_files = [f for f in repo_root.glob("**/*.go") if should_include(f)]
+    go_files = list(gi.rglob("*.go"))
     if go_files:
         languages["go"] = go_files
 
     # Rust
-    rs_files = [f for f in repo_root.glob("**/*.rs") if should_include(f)]
+    rs_files = list(gi.rglob("*.rs"))
     if rs_files:
         languages["rust"] = rs_files
 
     # Markdown
-    md_files = [f for f in repo_root.glob("**/*.md") if should_include(f)]
-    mdx_files = [f for f in repo_root.glob("**/*.mdx") if should_include(f)]
-    all_md = md_files + mdx_files
+    all_md = list(gi.rglob("*.md")) + list(gi.rglob("*.mdx"))
     if all_md:
         languages["markdown"] = all_md
 
     # JSON
-    json_files = [f for f in repo_root.glob("**/*.json") if should_include(f)]
+    json_files = list(gi.rglob("*.json"))
     if json_files:
         languages["json"] = json_files
 
     # YAML
-    yml_files = [f for f in repo_root.glob("**/*.yml") if should_include(f)]
-    yaml_files = [f for f in repo_root.glob("**/*.yaml") if should_include(f)]
-    all_yaml = yml_files + yaml_files
+    all_yaml = list(gi.rglob("*.yml")) + list(gi.rglob("*.yaml"))
     if all_yaml:
         languages["yaml"] = all_yaml
 
     # Dockerfile
-    dockerfile_files = [f for f in repo_root.glob("**/Dockerfile") if should_include(f)]
-    dockerfile_files += [f for f in repo_root.glob("**/Dockerfile.*") if should_include(f)]
-    dockerfile_files += [f for f in repo_root.glob("**/*.dockerfile") if should_include(f)]
+    dockerfile_files = list(gi.rglob("Dockerfile")) + list(gi.rglob("Dockerfile.*")) + list(gi.rglob("*.dockerfile"))
     if dockerfile_files:
         languages["dockerfile"] = dockerfile_files
 
     # XML
-    xml_exts = ("**/*.xml", "**/*.xhtml", "**/*.xsd", "**/*.xsl")
     all_xml: list[Path] = []
-    for ext in xml_exts:
-        all_xml.extend(f for f in repo_root.glob(ext) if should_include(f))
+    for ext in ("*.xml", "*.xhtml", "*.xsd", "*.xsl"):
+        all_xml.extend(gi.rglob(ext))
     if all_xml:
         languages["xml"] = all_xml
 
     # CSS/SCSS/Less
-    css_exts = ("**/*.css", "**/*.scss", "**/*.less")
     all_css: list[Path] = []
-    for ext in css_exts:
-        all_css.extend(f for f in repo_root.glob(ext) if should_include(f))
+    for ext in ("*.css", "*.scss", "*.less"):
+        all_css.extend(gi.rglob(ext))
     if all_css:
         languages["css"] = all_css
 
     # HTML
-    html_files = [f for f in repo_root.glob("**/*.html") if should_include(f)]
-    htm_files = [f for f in repo_root.glob("**/*.htm") if should_include(f)]
-    all_html = html_files + htm_files
+    all_html = list(gi.rglob("*.html")) + list(gi.rglob("*.htm"))
     if all_html:
         languages["html"] = all_html
 
     # SQL
-    sql_files = [f for f in repo_root.glob("**/*.sql") if should_include(f)]
+    sql_files = list(gi.rglob("*.sql"))
     if sql_files:
         languages["sql"] = sql_files
 
     # TOML
-    toml_files = [f for f in repo_root.glob("**/*.toml") if should_include(f)]
+    toml_files = list(gi.rglob("*.toml"))
     if toml_files:
         languages["toml"] = toml_files
 
     # PowerShell
-    ps_exts = ("**/*.ps1", "**/*.psm1", "**/*.psd1")
     all_ps: list[Path] = []
-    for ext in ps_exts:
-        all_ps.extend(f for f in repo_root.glob(ext) if should_include(f))
+    for ext in ("*.ps1", "*.psm1", "*.psd1"):
+        all_ps.extend(gi.rglob(ext))
     if all_ps:
         languages["powershell"] = all_ps
 
@@ -221,7 +198,9 @@ def install_python_tool(tool: str) -> bool:
     # uv tool install (preferred)
     if shutil.which("uv"):
         try:
-            result = subprocess.run(["uv", "tool", "install", "--python", "3.12", tool], capture_output=True, text=True, timeout=120)
+            result = subprocess.run(
+                ["uv", "tool", "install", "--python", "3.12", tool], capture_output=True, text=True, timeout=120
+            )
             if result.returncode == 0:
                 print(f"{GREEN}  ✔ {tool} installed via uv tool (Python 3.12){NC}")
                 return True
@@ -254,7 +233,9 @@ def install_python_tool(tool: str) -> bool:
     for pip_cmd in ["pip3", "pip"]:
         if shutil.which(pip_cmd):
             try:
-                result = subprocess.run([pip_cmd, "install", "--user", tool], capture_output=True, text=True, timeout=120)
+                result = subprocess.run(
+                    [pip_cmd, "install", "--user", tool], capture_output=True, text=True, timeout=120
+                )
                 if result.returncode == 0:
                     print(f"{GREEN}  ✔ {tool} installed via {pip_cmd} --user{NC}")
                     return True
@@ -383,13 +364,17 @@ def ensure_linter_installed(language: str, repo_root: Path) -> bool:
             if not shutil.which("rustfmt") and has_rustup:
                 print(f"{YELLOW}  Installing rustfmt via rustup...{NC}")
                 try:
-                    subprocess.run(["rustup", "component", "add", "rustfmt"], capture_output=True, text=True, timeout=120)
+                    subprocess.run(
+                        ["rustup", "component", "add", "rustfmt"], capture_output=True, text=True, timeout=120
+                    )
                 except (subprocess.TimeoutExpired, OSError):
                     print(f"{YELLOW}  ⚠ rustfmt install failed{NC}")
             if not shutil.which("cargo-clippy") and has_rustup:
                 print(f"{YELLOW}  Installing clippy via rustup...{NC}")
                 try:
-                    subprocess.run(["rustup", "component", "add", "clippy"], capture_output=True, text=True, timeout=120)
+                    subprocess.run(
+                        ["rustup", "component", "add", "clippy"], capture_output=True, text=True, timeout=120
+                    )
                 except (subprocess.TimeoutExpired, OSError):
                     print(f"{YELLOW}  ⚠ clippy install failed{NC}")
             return True
@@ -483,7 +468,7 @@ def ensure_linter_installed(language: str, repo_root: Path) -> bool:
             return True
         except ModuleNotFoundError:
             try:
-                import tomli  # type: ignore[import-untyped,reportUnusedImport]  # noqa: F401
+                import tomli  # type: ignore[import-untyped,import-not-found]  # noqa: F401
 
                 return True
             except ModuleNotFoundError:
@@ -496,7 +481,9 @@ def ensure_linter_installed(language: str, repo_root: Path) -> bool:
         if os_type == "windows":
             hint = "Install-Module -Name PSScriptAnalyzer -Scope CurrentUser"
         else:
-            hint = "brew install powershell/tap/powershell && pwsh -c 'Install-Module PSScriptAnalyzer -Scope CurrentUser'"
+            hint = (
+                "brew install powershell/tap/powershell && pwsh -c 'Install-Module PSScriptAnalyzer -Scope CurrentUser'"
+            )
         print(f"{YELLOW}  ⚠ PSScriptAnalyzer not found (install via: {hint}){NC}")
         return False
 
@@ -541,7 +528,9 @@ def lint_python(repo_root: Path, files: list[Path] | None = None) -> bool:  # no
     if shutil.which("mypy"):
         print(f"{BLUE}    [2/2] mypy...{NC}")
         try:
-            result = subprocess.run(["mypy", "--ignore-missing-imports", str(repo_root)], capture_output=True, text=True, timeout=180)
+            result = subprocess.run(
+                ["mypy", "--ignore-missing-imports", str(repo_root)], capture_output=True, text=True, timeout=180
+            )
             if result.returncode != 0:
                 print(f"{RED}    Type errors found:{NC}")
                 for line in result.stdout.strip().splitlines()[:10]:
@@ -902,7 +891,9 @@ def lint_sql(repo_root: Path, files: list[Path]) -> bool:
 
     print(f"{BLUE}    sqlfluff lint...{NC}")
     try:
-        result = subprocess.run(cmd + ["lint", "--dialect", "ansi"] + file_paths, cwd=repo_root, capture_output=True, text=True, timeout=180)
+        result = subprocess.run(
+            cmd + ["lint", "--dialect", "ansi"] + file_paths, cwd=repo_root, capture_output=True, text=True, timeout=180
+        )
         if result.returncode != 0 and result.stdout:
             for line in result.stdout.strip().splitlines()[:5]:
                 print(f"{YELLOW}    {line}{NC}")
@@ -924,7 +915,9 @@ def lint_toml(repo_root: Path, files: list[Path]) -> bool:  # noqa: ARG001
         try:
             import tomli as tomllib  # type: ignore[no-redef]
         except ModuleNotFoundError:
-            print(f"{YELLOW}    ⚠ No TOML parser available (need Python 3.11+ or 'pip install tomli'), cannot lint TOML files{NC}")
+            print(
+                f"{YELLOW}    ⚠ No TOML parser available (need Python 3.11+ or 'pip install tomli'), cannot lint TOML files{NC}"
+            )
             return True
 
     print(f"{BLUE}    TOML syntax validation...{NC}")
@@ -1030,13 +1023,17 @@ def run_linting(repo_root: Path) -> bool:
 
         # Ensure linter is installed — emit WARNING if unavailable
         if not ensure_linter_installed(lang, repo_root):
-            print(f"{YELLOW}  ⚠ WARNING: {len(files)} {lang.upper()} file(s) cannot be validated — no linter available for this format{NC}")
+            print(
+                f"{YELLOW}  ⚠ WARNING: {len(files)} {lang.upper()} file(s) cannot be validated — no linter available for this format{NC}"
+            )
             continue
 
         # Dispatch to language-specific linter
         lint_fn = _LINT_DISPATCH.get(lang)
         if lint_fn is None:
-            print(f"{YELLOW}  ⚠ WARNING: {len(files)} {lang.upper()} file(s) cannot be validated — no lint function registered{NC}")
+            print(
+                f"{YELLOW}  ⚠ WARNING: {len(files)} {lang.upper()} file(s) cannot be validated — no lint function registered{NC}"
+            )
             continue
 
         passed = lint_fn(repo_root, files)
@@ -1069,9 +1066,17 @@ def main() -> int:
         help="Repository root path (default: auto-detected via git)",
     )
     parser.add_argument(
-        "--verbose", "-v",
+        "--verbose",
+        "-v",
         action="store_true",
         help="Show detailed output for each linter",
+    )
+    parser.add_argument(
+        "--report",
+        type=str,
+        default=None,
+        metavar="PATH",
+        help="Save full output to file, print only compact summary to stdout",
     )
     args = parser.parse_args()
 
@@ -1080,6 +1085,39 @@ def main() -> int:
     if not repo_root.is_dir():
         print(f"{RED}Error: {repo_root} is not a directory{NC}", file=sys.stderr)
         return 1
+
+    # When --report is used, capture all output to file and print only a summary
+    if args.report:
+        report_path = Path(args.report)
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        # Capture all stdout to a StringIO buffer
+        captured = io.StringIO()
+        original_stdout = sys.stdout
+        sys.stdout = captured
+        try:
+            print(f"{'=' * 60}")
+            print("File Linting (read-only, no auto-fix)")
+            print(f"{'=' * 60}")
+            print()
+            passed = run_linting(repo_root)
+            print()
+            if passed:
+                print("All linting checks passed")
+            else:
+                print("Linting issues found")
+        finally:
+            sys.stdout = original_stdout
+        # Write captured output to report file (strip ANSI codes for readability)
+        import re
+
+        ansi_escape = re.compile(r"\x1b\[[0-9;]*m")
+        report_content = ansi_escape.sub("", captured.getvalue())
+        report_path.write_text(report_content, encoding="utf-8")
+        # Print compact summary to real stdout
+        verdict = "PASS" if passed else "FAIL"
+        print(f"Lint: {verdict}")
+        print(f"  Report: {report_path}")
+        return 0 if passed else 1
 
     print(f"{BOLD}{'=' * 60}{NC}")
     print(f"{BOLD}File Linting (read-only, no auto-fix){NC}")

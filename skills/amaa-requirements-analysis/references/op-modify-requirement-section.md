@@ -46,11 +46,7 @@ Status progression: `pending` -> `in-progress` -> `complete`
 
 ### Step 1: Identify Section to Modify
 
-```bash
-/planning-status
-```
-
-Review the requirements sections and their current statuses.
+Check the plan state file at `.claude/orchestrator-plan-phase.local.md` to review the requirements sections and their current statuses.
 
 ### Step 2: Execute Modification
 
@@ -66,20 +62,16 @@ To rename:
 
 ### Step 3: Verify Change
 
-```bash
-/planning-status
-```
-
-Confirm the section shows the updated status or name.
+Check the plan state file at `.claude/orchestrator-plan-phase.local.md` to confirm the section shows the updated status or name.
 
 ## Checklist
 
 Copy this checklist and track your progress:
 
-- [ ] Identify section to modify with `/planning-status`
+- [ ] Identify section to modify by checking the plan state file at `.claude/orchestrator-plan-phase.local.md`
 - [ ] Determine new status or name
 - [ ] Execute `/amaa-modify-requirement requirement ...`
-- [ ] Verify change in `/planning-status`
+- [ ] Verify change in the plan state file at `.claude/orchestrator-plan-phase.local.md`
 - [ ] Update USER_REQUIREMENTS.md if section content changed
 
 ## Examples
@@ -87,8 +79,7 @@ Copy this checklist and track your progress:
 ### Example: Marking Section Complete
 
 ```bash
-# Check current status
-/planning-status
+# Check current status in plan state file (.claude/orchestrator-plan-phase.local.md)
 # Shows: Functional Requirements - pending
 
 # Mark as in progress
@@ -97,8 +88,7 @@ Copy this checklist and track your progress:
 # After documenting requirements, mark complete
 /amaa-modify-requirement requirement "Functional Requirements" --status complete
 
-# Verify
-/planning-status
+# Verify in plan state file (.claude/orchestrator-plan-phase.local.md)
 # Shows: Functional Requirements - complete
 ```
 
@@ -110,8 +100,7 @@ Copy this checklist and track your progress:
 /amaa-modify-requirement requirement "Non-Functional Requirements" --status complete
 /amaa-modify-requirement requirement "Architecture Design" --status complete
 
-# Verify all complete
-/planning-status
+# Verify all complete in plan state file (.claude/orchestrator-plan-phase.local.md)
 # All sections show checkmarks
 ```
 
@@ -121,8 +110,7 @@ Copy this checklist and track your progress:
 # Rename for clarity
 /amaa-modify-requirement requirement "Architecture Design" --name "System Architecture"
 
-# Verify
-/planning-status
+# Verify in plan state file (.claude/orchestrator-plan-phase.local.md)
 # Shows: System Architecture - pending
 ```
 
@@ -142,7 +130,7 @@ requirements_sections:
 
 | Error | Cause | Resolution |
 |-------|-------|------------|
-| Section not found | Name mismatch | Check exact name with `/planning-status` |
+| Section not found | Name mismatch | Check exact name in the plan state file at `.claude/orchestrator-plan-phase.local.md` |
 | Invalid status | Unknown status value | Use: pending, in-progress, or complete |
 | Invalid transition | Skipping status | Progress through statuses in order |
 | State file not found | Planning not started | Run `/amaa-start-planning` first |

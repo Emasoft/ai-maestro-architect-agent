@@ -11,7 +11,7 @@ NO external dependencies - Python 3.8+ stdlib only.
 Uses subprocess for git commands.
 
 Usage:
-    python3 arch_design_transition.py [options]
+    python3 amaa_design_transition.py [options]
 
 Options:
     --force         Skip confirmation prompt
@@ -34,6 +34,7 @@ Exit codes:
 """
 
 import argparse
+import os
 import shutil
 import subprocess
 import sys
@@ -168,24 +169,19 @@ def rebuild_search_index(dry_run: bool) -> None:
     if dry_run:
         return
 
-    # Try to find and execute search script
-    # Use the Python search script to rebuild index
-    search_scripts = [
-        Path("scripts/amaa_design_search.py"),
-    ]
-
-    for script in search_scripts:
-        if script.exists() and script.stat().st_mode & 0o111:  # Check executable
-            try:
-                subprocess.run(
-                    [str(script), "--rebuild-index"],
-                    env={"DESIGN_ROOT": "docs/design"},
-                    stderr=subprocess.DEVNULL,
-                    check=False,
-                )
-                return
-            except (subprocess.SubprocessError, OSError):
-                continue
+    # Run the search script with --list to force re-scan of design documents
+    search_script = Path("scripts/amaa_design_search.py")
+    if search_script.exists():
+        try:
+            subprocess.run(
+                ["python3", str(search_script), "--list"],
+                env={**os.environ, "DESIGN_ROOT": "docs/design"},
+                stderr=subprocess.DEVNULL,
+                stdout=subprocess.DEVNULL,
+                check=False,
+            )
+        except (subprocess.SubprocessError, OSError):
+            pass
 
 
 def commit_transition(

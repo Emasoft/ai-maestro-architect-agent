@@ -1,6 +1,6 @@
 # Architect Agent (amaa-)
 
-**Version**: 2.0.9
+**Version**: 2.1.0
 
 ## Overview
 
@@ -112,7 +112,7 @@ claude --plugin-dir ./ai-maestro-architect-agent
 
 | Directory | Purpose |
 |-----------|---------|
-| (in `scripts/git-hooks/`) | Pre-push validation hook. Install: `python scripts/setup_git_hooks.py` |
+| `scripts/git-hooks/` | Pre-push validation hook. Install: `python3 scripts/setup_git_hooks.py` |
 | `lib/` | Shared constants, templates, and schemas used across skills and agents |
 
 ## Platform Requirements
@@ -123,6 +123,5 @@ claude --plugin-dir ./ai-maestro-architect-agent
 ## Validation
 
 ```bash
-cd OUTPUT_SKILLS/ai-maestro-architect-agent
-uv run python scripts/validate_plugin.py . --verbose
+python3 scripts/validate_plugin.py . --strict --verbose
 ```

@@ -1,6 +1,6 @@
 # Searching Documents
 
-This document explains how to search design documents using the `eia_design_search.py` script.
+This document explains how to search design documents using the `amaa_design_search.py` script.
 
 ## Contents
 
@@ -21,7 +21,7 @@ This document explains how to search design documents using the `eia_design_sear
 Search for a specific document by its UUID:
 
 ```bash
-python scripts/eia_design_search.py --uuid GUUID-20250129-0001
+python scripts/amaa_design_search.py --uuid GUUID-20250129-0001
 ```
 
 **Output:**
@@ -51,7 +51,7 @@ python scripts/eia_design_search.py --uuid GUUID-20250129-0001
 
 **Invalid UUID format:**
 ```bash
-python scripts/eia_design_search.py --uuid invalid-uuid
+python scripts/amaa_design_search.py --uuid invalid-uuid
 ```
 
 ```json
@@ -70,7 +70,7 @@ python scripts/eia_design_search.py --uuid invalid-uuid
 Search for all documents of a specific type:
 
 ```bash
-python scripts/eia_design_search.py --type pdr
+python scripts/amaa_design_search.py --type pdr
 ```
 
 **Output:**
@@ -116,7 +116,7 @@ python scripts/eia_design_search.py --type pdr
 Search for documents with a specific status:
 
 ```bash
-python scripts/eia_design_search.py --status approved
+python scripts/amaa_design_search.py --status approved
 ```
 
 **Valid status values:**
@@ -129,12 +129,12 @@ python scripts/eia_design_search.py --status approved
 
 **Example: Find all draft documents:**
 ```bash
-python scripts/eia_design_search.py --status draft
+python scripts/amaa_design_search.py --status draft
 ```
 
 **Example: Find deprecated documents:**
 ```bash
-python scripts/eia_design_search.py --status deprecated
+python scripts/amaa_design_search.py --status deprecated
 ```
 
 ---
@@ -144,7 +144,7 @@ python scripts/eia_design_search.py --status deprecated
 Search for documents containing a keyword in title or content:
 
 ```bash
-python scripts/eia_design_search.py --keyword "authentication"
+python scripts/amaa_design_search.py --keyword "authentication"
 ```
 
 **Search behavior:**
@@ -155,13 +155,13 @@ python scripts/eia_design_search.py --keyword "authentication"
 **Examples:**
 ```bash
 # Search for OAuth-related documents
-python scripts/eia_design_search.py --keyword "oauth"
+python scripts/amaa_design_search.py --keyword "oauth"
 
 # Search for API-related documents
-python scripts/eia_design_search.py --keyword "api"
+python scripts/amaa_design_search.py --keyword "api"
 
 # Search for specific technology
-python scripts/eia_design_search.py --keyword "postgresql"
+python scripts/amaa_design_search.py --keyword "postgresql"
 ```
 
 ---
@@ -172,16 +172,16 @@ Use glob patterns to search specific files or directories:
 
 ```bash
 # All files in pdr/ directory
-python scripts/eia_design_search.py --pattern "pdr/*.md"
+python scripts/amaa_design_search.py --pattern "pdr/*.md"
 
 # All files recursively in design/
-python scripts/eia_design_search.py --pattern "**/*.md"
+python scripts/amaa_design_search.py --pattern "**/*.md"
 
 # Files starting with "api-"
-python scripts/eia_design_search.py --pattern "**/api-*.md"
+python scripts/amaa_design_search.py --pattern "**/api-*.md"
 
 # Files in specific subdirectory
-python scripts/eia_design_search.py --pattern "spec/v2/*.md"
+python scripts/amaa_design_search.py --pattern "spec/v2/*.md"
 ```
 
 **Common patterns:**
@@ -201,13 +201,13 @@ Combine multiple filters to narrow results:
 
 ```bash
 # PDR documents that are approved
-python scripts/eia_design_search.py --type pdr --status approved
+python scripts/amaa_design_search.py --type pdr --status approved
 
 # Draft features containing "api"
-python scripts/eia_design_search.py --type feature --status draft --keyword "api"
+python scripts/amaa_design_search.py --type feature --status draft --keyword "api"
 
 # Approved specs in specific directory
-python scripts/eia_design_search.py --pattern "spec/v2/*.md" --status approved
+python scripts/amaa_design_search.py --pattern "spec/v2/*.md" --status approved
 ```
 
 **Filter logic:**
@@ -218,13 +218,13 @@ python scripts/eia_design_search.py --pattern "spec/v2/*.md" --status approved
 **Examples:**
 ```bash
 # Find all approved PDRs about authentication
-python scripts/eia_design_search.py \
+python scripts/amaa_design_search.py \
   --type pdr \
   --status approved \
   --keyword "authentication"
 
 # Find draft decision records
-python scripts/eia_design_search.py \
+python scripts/amaa_design_search.py \
   --type decision \
   --status draft
 ```
@@ -264,13 +264,13 @@ No documents found matching criteria.
 **Debugging empty results:**
 ```bash
 # List all documents (no filters)
-python scripts/eia_design_search.py
+python scripts/amaa_design_search.py
 
 # Check if type directory has documents
 ls design/pdr/
 
 # Try broader search
-python scripts/eia_design_search.py --pattern "**/*.md"
+python scripts/amaa_design_search.py --pattern "**/*.md"
 ```
 
 ---
@@ -280,7 +280,7 @@ python scripts/eia_design_search.py --pattern "**/*.md"
 ### JSON Format (Default)
 
 ```bash
-python scripts/eia_design_search.py --type pdr --format json
+python scripts/amaa_design_search.py --type pdr --format json
 ```
 
 **Output structure:**
@@ -295,7 +295,7 @@ python scripts/eia_design_search.py --type pdr --format json
 ### Table Format
 
 ```bash
-python scripts/eia_design_search.py --type pdr --format table
+python scripts/amaa_design_search.py --type pdr --format table
 ```
 
 **Output:**
@@ -315,7 +315,7 @@ Total: 2 document(s)
 ### Full Command Syntax
 
 ```bash
-python scripts/eia_design_search.py \
+python scripts/amaa_design_search.py \
   [--uuid UUID] \
   [--type TYPE] \
   [--status STATUS] \

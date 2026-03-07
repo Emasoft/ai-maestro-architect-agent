@@ -1,6 +1,6 @@
 # Creating Documents
 
-This document explains how to create new design documents using the `eia_design_create.py` script.
+This document explains how to create new design documents using the `amaa_design_create.py` script.
 
 ## Contents
 
@@ -19,7 +19,7 @@ This document explains how to create new design documents using the `eia_design_
 The simplest way to create a design document:
 
 ```bash
-python scripts/eia_design_create.py --type pdr --title "My Design Document"
+python scripts/amaa_design_create.py --type pdr --title "My Design Document"
 ```
 
 **What happens:**
@@ -62,22 +62,22 @@ Two arguments are always required:
 
 ```bash
 # Product Design Review
-python scripts/eia_design_create.py --type pdr --title "User Authentication System"
+python scripts/amaa_design_create.py --type pdr --title "User Authentication System"
 
 # Technical Specification
-python scripts/eia_design_create.py --type spec --title "REST API v2 Specification"
+python scripts/amaa_design_create.py --type spec --title "REST API v2 Specification"
 
 # Feature Document
-python scripts/eia_design_create.py --type feature --title "OAuth Login Feature"
+python scripts/amaa_design_create.py --type feature --title "OAuth Login Feature"
 
 # Architecture Decision Record
-python scripts/eia_design_create.py --type decision --title "Use PostgreSQL for Primary Database"
+python scripts/amaa_design_create.py --type decision --title "Use PostgreSQL for Primary Database"
 
 # Architecture Document
-python scripts/eia_design_create.py --type architecture --title "Payment Processing Architecture"
+python scripts/amaa_design_create.py --type architecture --title "Payment Processing Architecture"
 
 # Template
-python scripts/eia_design_create.py --type template --title "Sprint Retrospective Template"
+python scripts/amaa_design_create.py --type template --title "Sprint Retrospective Template"
 ```
 
 ---
@@ -89,7 +89,7 @@ python scripts/eia_design_create.py --type template --title "Sprint Retrospectiv
 Add an author name to the frontmatter:
 
 ```bash
-python scripts/eia_design_create.py \
+python scripts/amaa_design_create.py \
   --type pdr \
   --title "Authentication System" \
   --author "John Smith"
@@ -113,7 +113,7 @@ author: "John Smith"
 Add a brief description:
 
 ```bash
-python scripts/eia_design_create.py \
+python scripts/amaa_design_create.py \
   --type decision \
   --title "Database Selection" \
   --description "ADR for choosing between PostgreSQL and MongoDB"
@@ -137,7 +137,7 @@ description: "ADR for choosing between PostgreSQL and MongoDB"
 All optional fields can be combined:
 
 ```bash
-python scripts/eia_design_create.py \
+python scripts/amaa_design_create.py \
   --type feature \
   --title "OAuth 2.0 Integration" \
   --author "Jane Doe" \
@@ -151,7 +151,7 @@ python scripts/eia_design_create.py \
 By default, the filename is derived from the title. Use `--filename` to override:
 
 ```bash
-python scripts/eia_design_create.py \
+python scripts/amaa_design_create.py \
   --type spec \
   --title "REST API Version 2.0 Specification" \
   --filename "api-v2-spec"
@@ -207,7 +207,7 @@ Every created document is automatically validated. The validation result is incl
 **Manual validation:**
 ```bash
 # Validate the created file
-python scripts/eia_design_validate.py design/pdr/my-document.md
+python scripts/amaa_design_validate.py design/pdr/my-document.md
 ```
 
 ---
@@ -220,18 +220,18 @@ If a file with the generated name already exists, the script appends the UUID se
 
 ```bash
 # First creation
-python scripts/eia_design_create.py --type pdr --title "My Design"
+python scripts/amaa_design_create.py --type pdr --title "My Design"
 # Creates: design/pdr/my-design.md
 
 # Second creation with same title
-python scripts/eia_design_create.py --type pdr --title "My Design"
+python scripts/amaa_design_create.py --type pdr --title "My Design"
 # Creates: design/pdr/my-design-0002.md
 ```
 
 ### Invalid Type
 
 ```bash
-python scripts/eia_design_create.py --type invalid --title "Test"
+python scripts/amaa_design_create.py --type invalid --title "Test"
 ```
 
 **Output:**
@@ -265,7 +265,7 @@ chmod 755 design/pdr/
 ### Empty Title
 
 ```bash
-python scripts/eia_design_create.py --type pdr --title ""
+python scripts/amaa_design_create.py --type pdr --title ""
 ```
 
 The script will generate a fallback filename using the UUID sequence number.
@@ -277,7 +277,7 @@ The script will generate a fallback filename using the UUID sequence number.
 ### Full Command Syntax
 
 ```bash
-python scripts/eia_design_create.py \
+python scripts/amaa_design_create.py \
   --type TYPE \
   --title TITLE \
   [--author AUTHOR] \
@@ -310,10 +310,10 @@ python scripts/eia_design_create.py \
 
 ```bash
 # Minimal creation
-python scripts/eia_design_create.py --type pdr --title "Auth System"
+python scripts/amaa_design_create.py --type pdr --title "Auth System"
 
 # With all options
-python scripts/eia_design_create.py \
+python scripts/amaa_design_create.py \
   --type feature \
   --title "OAuth Support" \
   --author "Dev Team" \
@@ -322,7 +322,7 @@ python scripts/eia_design_create.py \
   --format text
 
 # Custom design directory
-python scripts/eia_design_create.py \
+python scripts/amaa_design_create.py \
   --type spec \
   --title "API Spec" \
   --design-dir /path/to/project/design

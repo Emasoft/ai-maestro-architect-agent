@@ -31,7 +31,7 @@ This document provides solutions for common issues when working with design docu
 
 2. Find the highest sequence number:
    ```bash
-   python scripts/eia_design_search.py --pattern "**/*.md" | grep "GUUID-$(date +%Y%m%d)" | sort
+   python scripts/amaa_design_search.py --pattern "**/*.md" | grep "GUUID-$(date +%Y%m%d)" | sort
    ```
 
 3. Manually specify next sequence if needed by editing the created file.
@@ -74,7 +74,7 @@ Invalid: UUID-20250129-0001    (wrong prefix)
 
 2. Or specify the path explicitly:
    ```bash
-   python scripts/eia_design_create.py \
+   python scripts/amaa_design_create.py \
      --type pdr \
      --title "Test" \
      --design-dir /full/path/to/design
@@ -114,7 +114,7 @@ Invalid: UUID-20250129-0001    (wrong prefix)
 
 2. Validate and view errors:
    ```bash
-   python scripts/eia_design_validate.py design/pdr/my-document.md --format text
+   python scripts/amaa_design_validate.py design/pdr/my-document.md --format text
    ```
 
 3. Fix the frontmatter manually if needed.
@@ -135,7 +135,7 @@ Invalid: UUID-20250129-0001    (wrong prefix)
    ls -la design/
 
    # Specify correct path
-   python scripts/eia_design_search.py --design-dir /correct/path/design
+   python scripts/amaa_design_search.py --design-dir /correct/path/design
    ```
 
 2. **Documents have no frontmatter**
@@ -147,13 +147,13 @@ Invalid: UUID-20250129-0001    (wrong prefix)
 3. **Status filter too restrictive**
    ```bash
    # Try without status filter first
-   python scripts/eia_design_search.py --type pdr
+   python scripts/amaa_design_search.py --type pdr
    ```
 
 4. **Keyword not in title or content**
    ```bash
    # Try partial keyword
-   python scripts/eia_design_search.py --keyword "auth"
+   python scripts/amaa_design_search.py --keyword "auth"
    ```
 
 ### Search Errors on Valid UUID
@@ -359,7 +359,7 @@ chmod 644 design/**/*.md
 
 Most scripts support verbose output:
 ```bash
-python scripts/eia_design_validate.py --all --verbose --format text
+python scripts/amaa_design_validate.py --all --verbose --format text
 ```
 
 ### Check Script Location
@@ -368,10 +368,10 @@ Scripts expect to be run from the plugin root:
 ```bash
 # Correct
 cd /path/to/ai-maestro-integrator-agent
-python scripts/eia_design_create.py --type pdr --title "Test"
+python scripts/amaa_design_create.py --type pdr --title "Test"
 
 # Also correct (explicit path)
-python scripts/eia_design_create.py \
+python scripts/amaa_design_create.py \
   --type pdr \
   --title "Test" \
   --design-dir /explicit/path/to/design
@@ -381,7 +381,7 @@ python scripts/eia_design_create.py \
 
 Always validate after manually editing frontmatter:
 ```bash
-python scripts/eia_design_validate.py design/pdr/my-doc.md
+python scripts/amaa_design_validate.py design/pdr/my-doc.md
 ```
 
 ---

@@ -1,6 +1,6 @@
 # Validating Documents
 
-This document explains how to validate design documents using the `eia_design_validate.py` script.
+This document explains how to validate design documents using the `amaa_design_validate.py` script.
 
 ## Contents
 
@@ -19,7 +19,7 @@ This document explains how to validate design documents using the `eia_design_va
 Validate a specific document:
 
 ```bash
-python scripts/eia_design_validate.py design/pdr/auth-system.md
+python scripts/amaa_design_validate.py design/pdr/auth-system.md
 ```
 
 **Output (JSON format):**
@@ -59,7 +59,7 @@ python scripts/eia_design_validate.py design/pdr/auth-system.md
 ### Validate All Documents
 
 ```bash
-python scripts/eia_design_validate.py --all
+python scripts/amaa_design_validate.py --all
 ```
 
 **Output:**
@@ -84,16 +84,16 @@ python scripts/eia_design_validate.py --all
 
 ```bash
 # Validate all PDR documents
-python scripts/eia_design_validate.py --all --type pdr
+python scripts/amaa_design_validate.py --all --type pdr
 
 # Validate all specifications
-python scripts/eia_design_validate.py --all --type spec
+python scripts/amaa_design_validate.py --all --type spec
 ```
 
 ### Verbose Text Output
 
 ```bash
-python scripts/eia_design_validate.py --all --format text --verbose
+python scripts/amaa_design_validate.py --all --format text --verbose
 ```
 
 **Output:**
@@ -303,8 +303,8 @@ description: "Brief description of the document"
 ### Full Command Syntax
 
 ```bash
-python scripts/eia_design_validate.py FILE
-python scripts/eia_design_validate.py --all [--type TYPE]
+python scripts/amaa_design_validate.py FILE
+python scripts/amaa_design_validate.py --all [--type TYPE]
 ```
 
 ### Arguments
@@ -329,16 +329,16 @@ python scripts/eia_design_validate.py --all [--type TYPE]
 
 ```bash
 # Validate single file
-python scripts/eia_design_validate.py design/pdr/auth.md
+python scripts/amaa_design_validate.py design/pdr/auth.md
 
 # Validate all with text output
-python scripts/eia_design_validate.py --all --format text
+python scripts/amaa_design_validate.py --all --format text
 
 # Validate all PDRs with verbose output
-python scripts/eia_design_validate.py --all --type pdr --verbose --format text
+python scripts/amaa_design_validate.py --all --type pdr --verbose --format text
 
 # Validate with custom design directory
-python scripts/eia_design_validate.py --all --design-dir /path/to/design
+python scripts/amaa_design_validate.py --all --design-dir /path/to/design
 ```
 
 ---

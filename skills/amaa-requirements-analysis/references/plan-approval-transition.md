@@ -31,18 +31,18 @@ Do NOT approve the plan when:
 
 ## 3.2 Prerequisites for plan approval
 
-**Checklist before running /approve-plan:**
+**Checklist before running approve-plan (set plan_phase_complete: true):**
 
 | Prerequisite | How to Verify | How to Fix |
 |--------------|---------------|------------|
 | USER_REQUIREMENTS.md exists | `ls USER_REQUIREMENTS.md` | Create the file |
-| All sections complete | `/planning-status` | `/amaa-modify-requirement requirement "Name" --status complete` |
-| All modules have criteria | `/planning-status --verbose` | `/amaa-modify-requirement module id --criteria "..."` |
-| At least one module defined | `/planning-status` | `/amaa-add-requirement module "name" --criteria "..."` |
+| All sections complete | `check plan status (check_plan_prerequisites.py)` | `/amaa-modify-requirement requirement "Name" --status complete` |
+| All modules have criteria | `check plan status (check_plan_prerequisites.py) --verbose` | `/amaa-modify-requirement module id --criteria "..."` |
+| At least one module defined | `check plan status (check_plan_prerequisites.py)` | `/amaa-add-requirement module "name" --criteria "..."` |
 
 **Quick verification:**
 ```bash
-/planning-status --verbose
+check plan status (check_plan_prerequisites.py) --verbose
 ```
 
 All exit criteria should show checkmarks before approval.
@@ -53,12 +53,12 @@ All exit criteria should show checkmarks before approval.
 
 **Basic syntax:**
 ```
-/approve-plan
+approve-plan (set plan_phase_complete: true)
 ```
 
 **Skip GitHub Issue creation:**
 ```
-/approve-plan --skip-issues
+approve-plan (set plan_phase_complete: true) --skip-issues
 ```
 
 **Options:**
@@ -77,7 +77,7 @@ python3 "${CLAUDE_PLUGIN_ROOT}/scripts/amaa_approve_plan.py" $ARGUMENTS
 
 ## 3.4 Validation checks performed
 
-The /approve-plan command validates the plan before approval:
+The approve-plan (set plan_phase_complete: true) command validates the plan before approval:
 
 **Check 1: Requirements file exists**
 - Looks for file specified in `requirements_file` field (default: USER_REQUIREMENTS.md)
@@ -151,7 +151,7 @@ After creation, the issue number (e.g., "#42") is stored in the module's `github
 
 ## 3.6 State file transitions
 
-**Before /approve-plan:**
+**Before approve-plan (set plan_phase_complete: true):**
 
 Plan state file (`.claude/orchestrator-plan-phase.local.md`):
 ```yaml
@@ -163,7 +163,7 @@ modules:
     github_issue: null
 ```
 
-**After /approve-plan:**
+**After approve-plan (set plan_phase_complete: true):**
 
 Plan state file (updated):
 ```yaml
@@ -253,7 +253,7 @@ ls .claude/orchestrator-exec-phase.local.md
 
 ```bash
 # Step 1: Verify plan is ready
-/planning-status --verbose
+check plan status (check_plan_prerequisites.py) --verbose
 
 # Expected output shows all checkmarks:
 # [x] USER_REQUIREMENTS.md complete
@@ -262,7 +262,7 @@ ls .claude/orchestrator-exec-phase.local.md
 # [ ] User approved the plan
 
 # Step 2: Approve the plan
-/approve-plan
+approve-plan (set plan_phase_complete: true)
 
 # Expected output:
 # Validating plan...
@@ -300,7 +300,7 @@ ls .claude/orchestrator-exec-phase.local.md
 
 ```bash
 # Approve without creating issues
-/approve-plan --skip-issues
+approve-plan (set plan_phase_complete: true) --skip-issues
 
 # Issues can be created manually later via gh CLI
 gh issue create --title "[Module] Auth Core" --body "..." --label "module"

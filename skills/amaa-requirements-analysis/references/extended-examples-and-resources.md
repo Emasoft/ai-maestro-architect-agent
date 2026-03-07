@@ -9,7 +9,7 @@ parent-skill: amaa-requirements-analysis
 
 - [Error Handling Details](#error-handling-details)
   - [State file not found](#1-state-file-not-found-when-running-any-planning-command)
-  - [Approval prerequisites failed](#2-approval-prerequisites-failed-when-running-approve-plan)
+  - [Approval prerequisites failed](#2-approval-prerequisites-failed-when-running-plan-approval)
   - [GitHub Issue creation failed](#3-github-issue-creation-failed-during-plan-approval)
 - [Extended Examples](#extended-examples)
   - [Example 1: Planning a Microservice from Scratch](#example-1-planning-a-microservice-from-scratch)
@@ -31,13 +31,13 @@ Common errors encountered during the planning phase and how to resolve them:
 - Cause: Planning was not initialized, or the state file at `.claude/orchestrator-plan-phase.local.md` was deleted or moved.
 - Resolution: Run `/amaa-start-planning "your goal"` to create the state file. If the file was accidentally deleted, use `scripts/reset_plan_phase.py --confirm` to reinitialize, then re-add your requirements and modules.
 
-**2. "Approval prerequisites failed" when running /approve-plan**
+**2. "Approval prerequisites failed" when running plan approval**
 - Cause: One or more exit criteria are not met (missing USER_REQUIREMENTS.md, incomplete requirement sections, modules without acceptance criteria, or no modules defined).
-- Resolution: Run `/planning-status --verbose` to see which criteria are failing. Address each one: create USER_REQUIREMENTS.md if missing, mark all requirement sections complete with `/amaa-modify-requirement requirement "Name" --status complete`, and ensure every module has `--criteria` set. Then retry `/approve-plan`.
+- Resolution: Run `python3 ${CLAUDE_PLUGIN_ROOT}/scripts/check_plan_prerequisites.py --fix-suggestions` to see which criteria are failing. Address each one: create USER_REQUIREMENTS.md if missing, mark all requirement sections complete with `/amaa-modify-requirement requirement "Name" --status complete`, and ensure every module has `--criteria` set. Then set `plan_phase_complete: true` in the state file.
 
 **3. "GitHub Issue creation failed" during plan approval**
 - Cause: The GitHub CLI (`gh`) is not authenticated, the repository does not exist, or network connectivity is lost.
-- Resolution: Run `gh auth status` to verify authentication. If not logged in, run `gh auth login`. Verify the repository exists with `gh repo view`. If you need to approve the plan without creating issues, use `/approve-plan --skip-issues` and create issues manually later.
+- Resolution: Run `gh auth status` to verify authentication. If not logged in, run `gh auth login`. Verify the repository exists with `gh repo view`. If you need to approve the plan without creating issues, set `plan_phase_complete: true` in the state file and skip the issue creation step, then create issues manually later.
 
 ---
 
@@ -64,16 +64,17 @@ Common errors encountered during the planning phase and how to resolve them:
 /amaa-modify-requirement requirement "Compliance Requirements" --status complete
 /amaa-modify-requirement requirement "Architecture Design" --status complete
 
-# Verify everything is ready, then approve
-/planning-status --verbose
-/approve-plan
+# Verify everything is ready
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/check_plan_prerequisites.py --fix-suggestions
+
+# Approve plan transition: set plan_phase_complete: true in state file
 ```
 
 ### Example 2: Iterating on a Plan After Initial Review
 
 ```bash
 # Check current status after initial planning
-/planning-status
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/check_plan_prerequisites.py
 
 # User feedback: auth module needs to support SSO in addition to JWT
 /amaa-modify-requirement module auth-jwt --criteria "Support JWT authentication AND SSO via SAML 2.0" --priority critical
@@ -85,14 +86,13 @@ Common errors encountered during the planning phase and how to resolve them:
 /amaa-add-requirement module "rate-limiter" --criteria "Implement token bucket rate limiting per API key" --priority high
 
 # Verify updated plan
-/planning-status --verbose
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/check_plan_prerequisites.py --fix-suggestions
 ```
 
 ### Example 3: Recovering from a Failed Approval
 
 ```bash
-# Attempt to approve the plan
-/approve-plan
+# Attempt to approve the plan (set plan_phase_complete: true in state file)
 # Output: "Approval prerequisites failed: Non-Functional Requirements is not complete"
 
 # Fix the missing prerequisite
@@ -101,8 +101,7 @@ Common errors encountered during the planning phase and how to resolve them:
 # Run the prerequisite check script to verify everything
 python3 scripts/check_plan_prerequisites.py --fix-suggestions
 
-# Retry approval
-/approve-plan
+# Retry approval: set plan_phase_complete: true in state file
 ```
 
 ---
@@ -126,7 +125,7 @@ Located in this skill's references directory:
 
 ### External Dependencies
 
-- [GitHub CLI documentation](https://cli.github.com/manual/) - Required for issue creation during `/approve-plan`
+- [GitHub CLI documentation](https://cli.github.com/manual/) - Required for issue creation during approve plan transition
 - [AI Maestro messaging](https://github.com/Emasoft/ai-maestro) - Required for inter-agent communication during plan handoff
 
 ---
@@ -138,8 +137,8 @@ Each planning command produces specific output. See detailed command documentati
 | Command | Output Type | Details |
 |---------|-------------|---------|
 | `/amaa-start-planning` | State file creation + confirmation message | See section 1.0 |
-| `/planning-status` | Formatted status table with progress | See section 2.0 |
+| `python3 scripts/check_plan_prerequisites.py` | Formatted status table with progress | See section 2.0 |
 | `/amaa-add-requirement` | Confirmation message + updated state | See section 3.0 |
 | `/amaa-modify-requirement` | Confirmation message + updated state | See section 4.0 |
 | `/amaa-remove-requirement` | Confirmation message + updated state | See section 5.0 |
-| `/approve-plan` | Validation results + GitHub Issues created | See section 6.0 |
+| Approve plan transition | Validation results + GitHub Issues created | See section 6.0 |

@@ -20,7 +20,7 @@ Use the `/amaa-start-planning` command when you need to:
 4. **Enable exit blocking** - When you want the stop hook to enforce plan completion
 
 Do NOT use `/amaa-start-planning` when:
-- A Plan Phase is already active (check with `/planning-status`)
+- A Plan Phase is already active (check planning status first)
 - You want to jump directly to implementation (use `/start-orchestration` instead)
 - Requirements are already documented and approved elsewhere
 
@@ -36,7 +36,7 @@ Before running `/amaa-start-planning`, ensure:
 4. **User agreement** - The user should understand that exit will be blocked until plan completion
 
 If a Plan Phase already exists, you must either:
-- Resume it with `/planning-status`
+- Resume it by running `check_plan_prerequisites.py` to check planning status
 - Delete the state file manually to start fresh (requires user approval)
 
 ---
@@ -105,9 +105,9 @@ After `/amaa-start-planning` succeeds, perform these steps in order:
 
 **Step 1: Verify initialization**
 ```
-/planning-status
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/check_plan_prerequisites.py
 ```
-Confirm the state file was created with correct goal.
+Run check_plan_prerequisites.py to check planning status. Confirm the state file was created with correct goal.
 
 **Step 2: Create USER_REQUIREMENTS.md**
 Create the requirements document at project root:
@@ -137,10 +137,7 @@ As you complete each section:
 ```
 
 **Step 5: Review and approve**
-When all criteria are met:
-```
-/approve-plan
-```
+Mark all requirements as complete to approve plan transition. When all criteria are met, set `plan_phase_complete: true` in the state file.
 
 ---
 
@@ -153,7 +150,7 @@ Complete example from start to approval:
 /amaa-start-planning "Build a REST API for user management"
 
 # Step 2: Check status
-/planning-status
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/check_plan_prerequisites.py
 
 # Step 3: Add modules
 /amaa-add-requirement module "user-crud" --criteria "Create, read, update, delete users" --priority critical
@@ -168,10 +165,9 @@ Complete example from start to approval:
 /amaa-modify-requirement requirement "Architecture Design" --status complete
 
 # Step 6: Verify all criteria met
-/planning-status --verbose
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/check_plan_prerequisites.py --fix-suggestions
 
-# Step 7: Approve and transition
-/approve-plan
+# Step 7: Approve plan transition (set plan_phase_complete: true in state file)
 ```
 
 **Expected output after /amaa-start-planning:**
@@ -184,6 +180,6 @@ Planning initialized
 Next steps:
   1. Create USER_REQUIREMENTS.md with detailed requirements
   2. Use /amaa-add-requirement to define modules
-  3. Use /planning-status to track progress
-  4. Use /approve-plan when ready to implement
+  3. Run check_plan_prerequisites.py to check planning status
+  4. Mark all requirements as complete to approve plan transition
 ```

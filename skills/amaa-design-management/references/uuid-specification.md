@@ -75,7 +75,7 @@ The sequence number (`NNNN`) follows these rules:
 4. **Maximum 9999**: Supports up to 9999 documents per day
 
 **Automatic generation:**
-The `eia_design_create.py` script automatically finds the highest existing sequence number for the current date and increments it.
+The `amaa_design_create.py` script automatically finds the highest existing sequence number for the current date and increments it.
 
 **Example sequence:**
 ```
@@ -100,7 +100,7 @@ date +%Y%m%d
 **Step 2: Find the highest existing sequence**
 ```bash
 # Search for existing UUIDs with today's date
-python scripts/eia_design_search.py --pattern "**/*.md" --format table | grep "GUUID-20250129"
+python scripts/amaa_design_search.py --pattern "**/*.md" --format table | grep "GUUID-20250129"
 ```
 
 **Step 3: Increment and format**
@@ -108,7 +108,7 @@ If the highest existing is GUUID-20250129-0005, use GUUID-20250129-0006.
 
 **Step 4: Verify uniqueness**
 ```bash
-python scripts/eia_design_search.py --uuid GUUID-20250129-0006
+python scripts/amaa_design_search.py --uuid GUUID-20250129-0006
 # Should return 0 results
 ```
 

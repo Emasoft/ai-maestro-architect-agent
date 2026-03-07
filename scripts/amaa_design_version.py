@@ -250,13 +250,13 @@ def main() -> int:
         epilog="""
 Examples:
   # Create new version
-  python arch_design_version.py --uuid PROJ-SPEC-20250108-a7b3f2e1
+  python amaa_design_version.py --uuid PROJ-SPEC-20250108-a7b3f2e1
 
   # Create with reason
-  python arch_design_version.py --uuid PROJ-SPEC-... --reason "API update"
+  python amaa_design_version.py --uuid PROJ-SPEC-... --reason "API update"
 
   # List all versions
-  python arch_design_version.py --list PROJ-SPEC-20250108-a7b3f2e1
+  python amaa_design_version.py --list PROJ-SPEC-20250108-a7b3f2e1
         """,
     )
 

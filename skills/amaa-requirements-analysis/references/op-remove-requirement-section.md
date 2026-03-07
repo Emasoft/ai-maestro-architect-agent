@@ -46,11 +46,7 @@ Use this operation when:
 
 ### Step 1: Verify Section Status
 
-```bash
-/planning-status
-```
-
-Check the section exists and its current status.
+Check the plan state file at `.claude/orchestrator-plan-phase.local.md` to verify the section exists and its current status.
 
 ### Step 2: Execute Removal
 
@@ -66,17 +62,13 @@ Force removal (any status):
 
 ### Step 3: Verify Removal
 
-```bash
-/planning-status
-```
-
-Confirm the section no longer appears.
+Check the plan state file at `.claude/orchestrator-plan-phase.local.md` to confirm the section no longer appears.
 
 ## Checklist
 
 Copy this checklist and track your progress:
 
-- [ ] Identify section to remove with `/planning-status`
+- [ ] Identify section to remove by checking the plan state file at `.claude/orchestrator-plan-phase.local.md`
 - [ ] Verify section status is pending (or use --force)
 - [ ] Confirm removal is intentional (no undo)
 - [ ] Execute `/amaa-remove-requirement requirement ...`
@@ -87,8 +79,8 @@ Copy this checklist and track your progress:
 ### Example: Removing a Pending Section
 
 ```bash
-# Check current sections
-/planning-status
+# Check current sections in the plan state file
+# .claude/orchestrator-plan-phase.local.md
 # Shows: ..., Legacy Support - pending, ...
 
 # Remove unused section
@@ -97,8 +89,8 @@ Copy this checklist and track your progress:
 # Expected output:
 # Removed requirement section: Legacy Support
 
-# Verify
-/planning-status
+# Verify by checking plan state file
+# .claude/orchestrator-plan-phase.local.md
 # Section no longer appears
 ```
 
@@ -139,7 +131,7 @@ requirements_sections:
 
 | Error | Cause | Resolution |
 |-------|-------|------------|
-| Section not found | Name mismatch | Check exact name with `/planning-status` |
+| Section not found | Name mismatch | Check exact name in the plan state file at `.claude/orchestrator-plan-phase.local.md` |
 | Cannot remove | Status not pending | Use --force flag if intentional |
 | State file not found | Planning not started | Run `/amaa-start-planning` first |
 | Cannot remove default | Trying to remove core section | Default sections required for approval |

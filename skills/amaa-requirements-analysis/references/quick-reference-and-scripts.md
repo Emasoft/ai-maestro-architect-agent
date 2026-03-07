@@ -21,13 +21,13 @@
 | Action | Command |
 |--------|---------|
 | Start planning | `/amaa-start-planning "goal"` |
-| Check status | `/planning-status` |
+| Check status | `python3 scripts/check_plan_prerequisites.py` |
 | Add requirement section | `/amaa-add-requirement requirement "Name"` |
 | Add module | `/amaa-add-requirement module "name" --criteria "..." --priority high` |
 | Mark section complete | `/amaa-modify-requirement requirement "Name" --status complete` |
 | Update module criteria | `/amaa-modify-requirement module id --criteria "..."` |
 | Remove module | `/amaa-remove-requirement module id` |
-| Approve plan | `/approve-plan` |
+| Approve plan | Mark all requirements complete, then set `plan_phase_complete: true` in state file |
 
 ## Status Values
 
@@ -99,8 +99,8 @@ python3 scripts/reset_plan_phase.py --confirm --no-backup
 /amaa-modify-requirement requirement "Architecture Design" --status complete
 
 # Step 5: Verify and approve
-/planning-status --verbose
-/approve-plan
+python3 scripts/check_plan_prerequisites.py --fix-suggestions
+# Then approve plan transition: set plan_phase_complete: true in state file
 
 # Step 6: Begin orchestration
 /start-orchestration

@@ -211,19 +211,19 @@ def main() -> int:
         epilog="""
 Examples:
   # Export single document (preserves internal markers)
-  python arch_design_export.py --uuid PROJ-SPEC-20250108-a7b3f2e1
+  python amaa_design_export.py --uuid PROJ-SPEC-20250108-a7b3f2e1
 
   # Export to specific directory
-  python arch_design_export.py --uuid PROJ-SPEC-... --output-dir exports/
+  python amaa_design_export.py --uuid PROJ-SPEC-... --output-dir exports/
 
   # Export as GitHub issue body
-  python arch_design_export.py --uuid PROJ-SPEC-... --format issue
+  python amaa_design_export.py --uuid PROJ-SPEC-... --format issue
 
   # Export all specs
-  python arch_design_export.py --type SPEC --output-dir exports/
+  python amaa_design_export.py --type SPEC --output-dir exports/
 
   # Export with sanitization (removes internal markers)
-  python arch_design_export.py --uuid PROJ-SPEC-... --sanitize
+  python amaa_design_export.py --uuid PROJ-SPEC-... --sanitize
         """,
     )
 

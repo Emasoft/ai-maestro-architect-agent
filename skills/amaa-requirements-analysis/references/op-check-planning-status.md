@@ -42,15 +42,16 @@ Use this operation when:
 
 ## Procedure
 
-### Step 1: Execute Status Command
+### Step 1: Execute Status Check
 
+Run the prerequisites check script:
 ```bash
-/planning-status
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/check_plan_prerequisites.py
 ```
 
-For detailed output including all modules:
+Or inspect the plan state file directly:
 ```bash
-/planning-status --verbose
+cat .claude/orchestrator-plan-phase.local.md
 ```
 
 ### Step 2: Review Output Sections
@@ -73,7 +74,7 @@ From the status output, identify:
 
 Copy this checklist and track your progress:
 
-- [ ] Execute `/planning-status`
+- [ ] Check plan state file at `.claude/orchestrator-plan-phase.local.md`
 - [ ] Review requirements section statuses
 - [ ] Review module definitions and criteria
 - [ ] Check exit criteria checklist
@@ -84,7 +85,7 @@ Copy this checklist and track your progress:
 ### Example: Basic Status Check
 
 ```bash
-/planning-status
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/check_plan_prerequisites.py
 
 # Expected output:
 # +------------------------------------------------------------------+
@@ -105,7 +106,7 @@ Copy this checklist and track your progress:
 ### Example: Verbose Status with Modules
 
 ```bash
-/planning-status --verbose
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/check_plan_prerequisites.py --fix-suggestions
 
 # Expected output includes:
 # +------------------------------------------------------------------+
@@ -126,7 +127,7 @@ Copy this checklist and track your progress:
 ### Example: Status Before Approval
 
 ```bash
-/planning-status --verbose
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/check_plan_prerequisites.py
 
 # All checkmarks indicate ready for approval:
 # | EXIT CRITERIA                                                     |

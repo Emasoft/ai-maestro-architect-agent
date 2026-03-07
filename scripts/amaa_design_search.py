@@ -23,9 +23,9 @@ Directory Structure as Index:
     └── exports/    <- sanitized exports for GitHub
 
 Usage:
-    python arch_design_search.py --uuid PROJ-SPEC-20250108-a7b3f2e1
-    python arch_design_search.py --type SPEC --status draft
-    python arch_design_search.py --text "JWT token" --output json
+    python amaa_design_search.py --uuid PROJ-SPEC-20250108-a7b3f2e1
+    python amaa_design_search.py --type SPEC --status draft
+    python amaa_design_search.py --text "JWT token" --output json
 
 Dependencies: Python 3.8+ (uses pathlib only)
 """
@@ -268,9 +268,9 @@ Search Speed (fastest to slowest):
   4. --text       : Full file content search (slowest)
 
 Examples:
-  python arch_design_search.py --uuid PROJ-SPEC-20250108-a7b3f2e1
-  python arch_design_search.py --type SPEC --status draft
-  python arch_design_search.py --text "JWT token" --output json
+  python amaa_design_search.py --uuid PROJ-SPEC-20250108-a7b3f2e1
+  python amaa_design_search.py --type SPEC --status draft
+  python amaa_design_search.py --text "JWT token" --output json
         """,
     )
 

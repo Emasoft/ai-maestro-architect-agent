@@ -35,7 +35,7 @@ Use this operation when:
 - Enabling exit blocking to enforce plan completion
 
 Do NOT use when:
-- A Plan Phase is already active (check with `/planning-status`)
+- A Plan Phase is already active (check the plan state file at `.claude/orchestrator-plan-phase.local.md`)
 - Jumping directly to implementation (use `/start-orchestration` instead)
 - Requirements are already documented and approved elsewhere
 
@@ -54,7 +54,7 @@ Do NOT use when:
 ls -la .claude/orchestrator-plan-phase.local.md
 ```
 
-If file exists, either resume with `/planning-status` or delete to start fresh (requires user approval).
+If file exists, either resume by checking the plan state file at `.claude/orchestrator-plan-phase.local.md` or delete to start fresh (requires user approval).
 
 ### Step 2: Execute Start Planning Command
 
@@ -69,11 +69,7 @@ Alternative syntax:
 
 ### Step 3: Verify Initialization
 
-```bash
-/planning-status
-```
-
-Confirm state file was created with correct goal.
+Check the plan state file at `.claude/orchestrator-plan-phase.local.md` to confirm it was created with the correct goal.
 
 ### Step 4: Review Created State
 
@@ -116,11 +112,11 @@ ls -la .claude/orchestrator-plan-phase.local.md
 # Next steps:
 #   1. Create USER_REQUIREMENTS.md with detailed requirements
 #   2. Use /amaa-add-requirement to define modules
-#   3. Use /planning-status to track progress
-#   4. Use /approve-plan when ready to implement
+#   3. Check .claude/orchestrator-plan-phase.local.md to track progress
+#   4. Mark all requirements complete and set plan_phase_complete: true when ready to implement
 
-# Verify
-/planning-status
+# Verify by checking plan state file
+# cat .claude/orchestrator-plan-phase.local.md
 ```
 
 ### Example: Goal with Special Characters
@@ -133,7 +129,7 @@ ls -la .claude/orchestrator-plan-phase.local.md
 
 | Error | Cause | Resolution |
 |-------|-------|------------|
-| State file already exists | Plan Phase active | Use `/planning-status` to resume or delete file with user approval |
+| State file already exists | Plan Phase active | Check the plan state file at `.claude/orchestrator-plan-phase.local.md` to resume or delete file with user approval |
 | Goal is empty | No goal provided | Provide goal as positional argument or with --goal flag |
 | Permission denied | Cannot write to .claude/ | Ensure write access to project directory |
 | Script not found | Plugin not loaded | Verify plugin is enabled with `/plugins` |

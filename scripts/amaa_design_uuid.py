@@ -17,20 +17,20 @@ UUID Format: {PREFIX}-{TYPE}-{YYYYMMDD}-{UUID8}[_v{VERSION}]
 
 Usage:
     # Generate new UUID
-    python arch_design_uuid.py --type SPEC
-    python arch_design_uuid.py --type PLAN --prefix AUTH
+    python amaa_design_uuid.py --type SPEC
+    python amaa_design_uuid.py --type PLAN --prefix AUTH
 
     # Generate versioned UUID
-    python arch_design_uuid.py --version PROJ-SPEC-20250108-a7b3f2e1
+    python amaa_design_uuid.py --version PROJ-SPEC-20250108-a7b3f2e1
 
     # Add frontmatter to file
-    python arch_design_uuid.py --file docs/design/specs/auth-service.md --type SPEC
+    python amaa_design_uuid.py --file docs/design/specs/auth-service.md --type SPEC
 
     # Batch add frontmatter to directory
-    python arch_design_uuid.py --dir docs/design/specs --type SPEC
+    python amaa_design_uuid.py --dir docs/design/specs --type SPEC
 
     # List all UUIDs in design root
-    python arch_design_uuid.py --list
+    python amaa_design_uuid.py --list
 
 Dependencies: Python 3.8+ (uses pathlib, uuid, dataclasses)
 """
@@ -365,19 +365,19 @@ def main() -> int:
         epilog="""
 Examples:
   # Generate new UUID
-  python arch_design_uuid.py --type SPEC
+  python amaa_design_uuid.py --type SPEC
 
   # Generate versioned UUID
-  python arch_design_uuid.py --version PROJ-SPEC-20250108-a7b3f2e1
+  python amaa_design_uuid.py --version PROJ-SPEC-20250108-a7b3f2e1
 
   # Add frontmatter to file
-  python arch_design_uuid.py --file docs/design/specs/auth.md --type SPEC
+  python amaa_design_uuid.py --file docs/design/specs/auth.md --type SPEC
 
   # Batch process directory
-  python arch_design_uuid.py --dir docs/design/specs --type SPEC
+  python amaa_design_uuid.py --dir docs/design/specs --type SPEC
 
   # List all UUIDs
-  python arch_design_uuid.py --list
+  python amaa_design_uuid.py --list
         """,
     )
 

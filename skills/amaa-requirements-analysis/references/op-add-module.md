@@ -68,10 +68,10 @@ Arguments:
 ### Step 3: Verify Addition
 
 ```bash
-/planning-status --verbose
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/check_plan_prerequisites.py --fix-suggestions
 ```
 
-Confirm the module appears with correct criteria and priority.
+Run check_plan_prerequisites.py to check planning status. Confirm the module appears with correct criteria and priority.
 
 ## Checklist
 
@@ -81,7 +81,7 @@ Copy this checklist and track your progress:
 - [ ] Write clear acceptance criteria
 - [ ] Determine priority level
 - [ ] Execute `/amaa-add-requirement module ...`
-- [ ] Verify module appears in `/planning-status --verbose`
+- [ ] Verify module appears when running check_plan_prerequisites.py
 - [ ] Review module ID (kebab-case conversion)
 
 ## Examples

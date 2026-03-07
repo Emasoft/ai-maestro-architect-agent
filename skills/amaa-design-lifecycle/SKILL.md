@@ -30,8 +30,8 @@ Copy this checklist and track your progress:
 
 ## Prerequisites
 
-- Design document template at `templates/design-template.md`
-- Write access to design index at `design/requirements/index.json`
+- Write access to `docs_dev/design/` directory for design documents
+- Design scripts available at `${CLAUDE_PLUGIN_ROOT}/scripts/amaa_design_*.py`
 
 ## Instructions
 

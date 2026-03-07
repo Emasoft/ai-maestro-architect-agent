@@ -49,11 +49,7 @@ Default sections created by `/amaa-start-planning`:
 
 ### Step 1: Review Existing Sections
 
-```bash
-/planning-status
-```
-
-Verify the section does not already exist.
+Check the plan state file at `.claude/orchestrator-plan-phase.local.md` to verify the section does not already exist.
 
 ### Step 2: Add the Section
 
@@ -63,17 +59,13 @@ Verify the section does not already exist.
 
 ### Step 3: Verify Addition
 
-```bash
-/planning-status
-```
-
-Confirm the new section appears in the requirements progress list with status "pending".
+Check the plan state file at `.claude/orchestrator-plan-phase.local.md` to confirm the new section appears in the requirements progress list with status "pending".
 
 ## Checklist
 
 Copy this checklist and track your progress:
 
-- [ ] Check existing sections with `/planning-status`
+- [ ] Check existing sections in the plan state file at `.claude/orchestrator-plan-phase.local.md`
 - [ ] Determine appropriate section name
 - [ ] Execute `/amaa-add-requirement requirement "Name"`
 - [ ] Verify section appears in status output
@@ -84,8 +76,7 @@ Copy this checklist and track your progress:
 ### Example: Adding Security Requirements
 
 ```bash
-# Check existing sections
-/planning-status
+# Check existing sections in plan state file (.claude/orchestrator-plan-phase.local.md)
 # Shows: Functional, Non-Functional, Architecture Design
 
 # Add security section
@@ -95,8 +86,7 @@ Copy this checklist and track your progress:
 # Added requirement section: Security Requirements
 # Status: pending
 
-# Verify
-/planning-status
+# Verify in plan state file (.claude/orchestrator-plan-phase.local.md)
 # Now shows: Functional, Non-Functional, Architecture Design, Security Requirements
 ```
 
@@ -112,8 +102,7 @@ Copy this checklist and track your progress:
 # Add integration section
 /amaa-add-requirement requirement "Integration Requirements"
 
-# Verify all added
-/planning-status --verbose
+# Verify all added in plan state file (.claude/orchestrator-plan-phase.local.md)
 ```
 
 ### Example: State File After Addition

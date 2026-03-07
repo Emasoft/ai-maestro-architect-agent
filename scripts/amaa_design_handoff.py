@@ -8,7 +8,7 @@ Works identically in both single-git and dual-git modes.
 NO external dependencies - Python 3.8+ stdlib only.
 
 Usage:
-    arch_design_handoff.py <uuid_or_file> <issue_number> [options]
+    amaa_design_handoff.py <uuid_or_file> <issue_number> [options]
 
 Arguments:
     uuid_or_file    Document UUID (e.g., PROJ-SPEC-20250108-0001) or file path
@@ -20,9 +20,9 @@ Options:
     -h, --help      Show this help
 
 Examples:
-    arch_design_handoff.py PROJ-SPEC-20250108-0001 234
-    arch_design_handoff.py PROJ-SPEC-20250108-0001 234 --sanitize
-    arch_design_handoff.py docs/design/specs/auth.md 234 --sanitize
+    amaa_design_handoff.py PROJ-SPEC-20250108-0001 234
+    amaa_design_handoff.py PROJ-SPEC-20250108-0001 234 --sanitize
+    amaa_design_handoff.py docs/design/specs/auth.md 234 --sanitize
 
 The script:
 1. Finds the document by UUID or path
@@ -223,7 +223,7 @@ def attach_to_issue(file_path: Path, issue: str, mode: str, dry_run: bool) -> No
 </details>
 
 ---
-*Exported via arch_design_handoff.py*"""
+*Exported via amaa_design_handoff.py*"""
 
     if dry_run:
         print()
@@ -409,9 +409,9 @@ def main() -> int:
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  arch_design_handoff.py PROJ-SPEC-20250108-0001 234
-  arch_design_handoff.py PROJ-SPEC-20250108-0001 234 --sanitize
-  arch_design_handoff.py docs/design/specs/auth.md 234 --sanitize
+  amaa_design_handoff.py PROJ-SPEC-20250108-0001 234
+  amaa_design_handoff.py PROJ-SPEC-20250108-0001 234 --sanitize
+  amaa_design_handoff.py docs/design/specs/auth.md 234 --sanitize
         """,
     )
     parser.add_argument(

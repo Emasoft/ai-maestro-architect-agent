@@ -353,16 +353,16 @@ Lifecycle States:
 
 Examples:
   # Update status
-  python arch_design_lifecycle.py status --uuid PROJ-SPEC-... --status approved
+  python amaa_design_lifecycle.py status --uuid PROJ-SPEC-... --status approved
 
   # Archive
-  python arch_design_lifecycle.py archive --uuid PROJ-SPEC-... --reason "Obsolete"
+  python amaa_design_lifecycle.py archive --uuid PROJ-SPEC-... --reason "Obsolete"
 
   # Supersede
-  python arch_design_lifecycle.py supersede --uuid OLD-UUID --by NEW-UUID
+  python amaa_design_lifecycle.py supersede --uuid OLD-UUID --by NEW-UUID
 
   # Show history
-  python arch_design_lifecycle.py history --uuid PROJ-SPEC-...
+  python amaa_design_lifecycle.py history --uuid PROJ-SPEC-...
         """,
     )
 

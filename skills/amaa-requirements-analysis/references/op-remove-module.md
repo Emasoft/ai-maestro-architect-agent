@@ -44,11 +44,7 @@ Use this operation when:
 
 ### Step 1: Verify Module Status
 
-```bash
-/planning-status --verbose
-```
-
-Check the module exists, its status, and whether it has a GitHub Issue.
+Check the plan state file at `.claude/orchestrator-plan-phase.local.md` to verify the module exists, its status, and whether it has a GitHub Issue.
 
 ### Step 2: Execute Removal
 
@@ -64,17 +60,13 @@ Force removal (any status):
 
 ### Step 3: Verify Removal
 
-```bash
-/planning-status --verbose
-```
-
-Confirm the module no longer appears.
+Check the plan state file at `.claude/orchestrator-plan-phase.local.md` to confirm the module no longer appears.
 
 ## Checklist
 
 Copy this checklist and track your progress:
 
-- [ ] Identify module ID with `/planning-status --verbose`
+- [ ] Identify module ID by checking the plan state file at `.claude/orchestrator-plan-phase.local.md`
 - [ ] Verify module status is planned or pending
 - [ ] Check if module has GitHub Issue
 - [ ] Confirm removal is intentional (no undo)
@@ -86,8 +78,8 @@ Copy this checklist and track your progress:
 ### Example: Removing a Planned Module
 
 ```bash
-# Check current modules
-/planning-status --verbose
+# Check current modules in the plan state file
+# .claude/orchestrator-plan-phase.local.md
 # Shows: oauth-facebook | Medium | ... | planned
 
 # Remove module no longer needed
@@ -96,8 +88,8 @@ Copy this checklist and track your progress:
 # Expected output:
 # Removed module: oauth-facebook
 
-# Verify
-/planning-status --verbose
+# Verify by checking plan state file
+# .claude/orchestrator-plan-phase.local.md
 # Module no longer appears
 ```
 
@@ -154,7 +146,7 @@ modules:
 
 | Error | Cause | Resolution |
 |-------|-------|------------|
-| Module not found | ID mismatch | Check exact ID with `/planning-status --verbose` |
+| Module not found | ID mismatch | Check exact ID in the plan state file at `.claude/orchestrator-plan-phase.local.md` |
 | Cannot remove: in-progress | Work has started | Use --force if intentional (work lost) |
 | Cannot remove: complete | Module finished | Use --force if intentional |
 | Has GitHub Issue | Issue already created | Close issue first or use --force |

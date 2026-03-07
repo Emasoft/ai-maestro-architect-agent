@@ -5,13 +5,33 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-import yaml
+from typing import Any
+
+def _parse_yaml_value(val: str) -> Any:
+    """Parse a simple YAML scalar value (no external dependency)."""
+    val = val.strip()
+    if val in ('true', 'True'):
+        return True
+    if val in ('false', 'False'):
+        return False
+    if val in ('null', 'None', '~', ''):
+        return None
+    if val == '[]':
+        return []
+    if (val.startswith('"') and val.endswith('"')) or (val.startswith("'") and val.endswith("'")):
+        return val[1:-1]
+    try:
+        return int(val)
+    except ValueError:
+        pass
+    return val
+
 
 PLAN_STATE_FILE = Path(".claude/orchestrator-plan-phase.local.md")
 
 
 def parse_frontmatter(file_path: Path) -> dict:
-    """Parse YAML frontmatter from a markdown file."""
+    """Parse YAML frontmatter from a markdown file (stdlib only, no PyYAML)."""
     if not file_path.exists():
         return {}
 
@@ -23,11 +43,53 @@ def parse_frontmatter(file_path: Path) -> dict:
     if end_index == -1:
         return {}
 
-    yaml_content = content[3:end_index].strip()
-    try:
-        return yaml.safe_load(yaml_content) or {}
-    except yaml.YAMLError:
-        return {}
+    yaml_text = content[3:end_index].strip()
+    result: dict[str, Any] = {}
+    current_key: str | None = None
+    current_list: list | None = None
+
+    for line in yaml_text.splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+
+        if stripped.startswith("- ") and current_key is not None and current_list is not None:
+            item_val = stripped[2:].strip()
+            if ": " in item_val:
+                item_dict: dict[str, Any] = {}
+                for part in item_val.split(", "):
+                    if ": " in part:
+                        k, v = part.split(": ", 1)
+                        item_dict[k.strip()] = _parse_yaml_value(v)
+                current_list.append(item_dict)
+            else:
+                current_list.append(_parse_yaml_value(item_val))
+            continue
+
+        if ": " in stripped or stripped.endswith(":"):
+            if ": " in stripped:
+                key, val = stripped.split(": ", 1)
+            else:
+                key = stripped[:-1]
+                val = ""
+
+            key = key.strip()
+            parsed_val = _parse_yaml_value(val)
+
+            if parsed_val == "" or parsed_val is None:
+                current_key = key
+                current_list = []
+                result[key] = current_list
+            elif isinstance(parsed_val, list):
+                current_key = key
+                current_list = parsed_val
+                result[key] = current_list
+            else:
+                current_key = None
+                current_list = None
+                result[key] = parsed_val
+
+    return result
 
 
 def generate_summary(data: dict) -> str:

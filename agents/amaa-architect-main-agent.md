@@ -95,72 +95,17 @@ Send messages to AMCOS using the `agent-messaging` skill with the appropriate Re
 > For complete message templates (acknowledgment, clarification, completion, blocker, handoff), see **amaa-design-communication-patterns/references/ai-maestro-message-templates.md**
 > For ACK timeout handling and response decisions, see **amaa-design-communication-patterns/references/message-response-decision-tree.md**
 
-## Example 1: Design Request Acknowledgment
+> For message examples (acknowledgment, clarification, completion), see **amaa-design-communication-patterns/references/ai-maestro-message-examples.md**
 
-When AMCOS assigns a design task:
+> For CSS framework guidelines, see **amaa-design-lifecycle/references/style-guidelines.md**
 
-> **Note**: The structure below shows the conceptual message content. Use the `agent-messaging` skill to send messages - it handles the exact API format automatically.
+## Sub-Agent Reporting Rules
 
-```json
-{
-  "from": "amaa-architect-main-agent",
-  "to": "amcos",
-  "subject": "Design Request Acknowledged",
-  "priority": "normal",
-  "content": {
-    "type": "acknowledgment",
-    "message": "Design request received for E-Commerce Product Catalog. Starting requirements analysis. ETA: 2 hours."
-  }
-}
-```
-
-## Example 2: Clarification Request (Blocking)
-
-When requirements are ambiguous or conflicting:
-
-> **Note**: The structure below shows the conceptual message content. Use the `agent-messaging` skill to send messages - it handles the exact API format automatically.
-
-```json
-{
-  "from": "amaa-architect-main-agent",
-  "to": "amcos",
-  "subject": "Clarification Needed - Payment Gateway Integration",
-  "priority": "high",
-  "content": {
-    "type": "clarification_request",
-    "message": "BLOCKING: Requirement ambiguity detected. Question: Should payment processing be synchronous or asynchronous? Context: User said 'fast payment processing' but also 'reliable with retries'. Synchronous = fast but no retries. Asynchronous = reliable retries but slower user feedback. Cannot proceed until clarified. Details: docs_dev/design/clarifications/20260204-payment-flow.md"
-  }
-}
-```
-
-## Example 3: Design Completion Report
-
-When all design artifacts ready:
-
-> **Note**: The structure below shows the conceptual message content. Use the `agent-messaging` skill to send messages - it handles the exact API format automatically.
-
-```json
-{
-  "from": "amaa-architect-main-agent",
-  "to": "amcos",
-  "subject": "Design Complete - E-Commerce Product Catalog",
-  "priority": "normal",
-  "content": {
-    "type": "design_complete",
-    "message": "[DONE] Design for E-Commerce Product Catalog complete. Architecture: REST API + PostgreSQL + Redis cache + React frontend. Modules: 5 (product-service, inventory-service, search-service, cart-service, frontend). Risks: 1/3/2. Handoff doc: docs_dev/design/handoff-a7f8b2d4.md. Ready for AMOA assignment."
-  }
-}
-```
-
-## Anti-Tailwind CSS Policy
-
-**Never recommend Tailwind CSS in architecture designs.** Tailwind CSS creates long-term maintenance debt: utility class strings become unreadable at scale, styling is tightly coupled to markup (violating separation of concerns), code review becomes difficult because changes are buried in class attribute noise, and responsive designs require duplicating utility classes across breakpoints. When designing frontend architecture, recommend these alternatives instead:
-
-- **CSS Modules** - Scoped styles, zero runtime cost, works with any framework
-- **Vanilla CSS with Custom Properties** - Native browser support, no build step, excellent performance
-- **styled-components / Emotion** - Component-scoped styles for React projects, good TypeScript support
-
-If a project requirement explicitly demands Tailwind CSS, document this as a design risk in the Architecture Decision Record (ADR) with the rationale above.
+When spawning sub-agents (planner, api-researcher, modularizer, cicd-designer, doc-writer):
+- Instruct them to write ALL detailed output to timestamped .md files in `docs_dev/`
+- Require ONLY: `[DONE/FAILED] <task> - <one-line result>. Report: <filepath>`
+- NEVER accept code blocks, file contents, or verbose explanations from sub-agents
+- Max 3 lines of text back from any sub-agent
 
 ## Quality Standards
 

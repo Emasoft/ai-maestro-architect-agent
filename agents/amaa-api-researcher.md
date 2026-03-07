@@ -89,25 +89,15 @@ Documentation: docs_dev/api/[api-name]-*.md (5 files)
 ## Examples
 
 <example>
-user: Research the Stripe API for payment processing. We need to understand how to handle subscriptions and webhooks.
-assistant: [RESEARCH STARTED] Stripe API - subscriptions and webhooks
-Researched Stripe API documentation using WebFetch and WebSearch tools. Created 5 comprehensive documentation files covering API overview, authentication (API keys and OAuth), subscription endpoints (create/update/cancel), webhook handling (signature verification and event types), and integration guide with configuration templates. All documentation saved to docs_dev/stripe-*.md with examples and best practices.
-[DONE] Stripe API research complete
-- Docs: docs_dev/stripe-*.md (5 files)
-- Key finding: Webhook signature verification is critical for security
-- Authentication: API keys (secret/publishable) or OAuth
-- Rate limits: 100 requests/second per account
-- Ready for: code implementation
+user: Research the Stripe API for payment processing — subscriptions and webhooks.
+assistant: [DONE] api-research - Stripe API research complete
+Docs: docs_dev/api/stripe-*.md (5 files)
+Key: Webhook signature verification critical, 100 req/s rate limit
 </example>
 
 <example>
-user: We're considering using the GitHub GraphQL API instead of REST. Can you research what's available in their GraphQL API v4?
-assistant: [RESEARCH STARTED] GitHub GraphQL API - capabilities analysis
-Used WebFetch to examine GitHub's official GraphQL API documentation. Documented all available queries (repository, user, organization, issues, pull requests), mutations (create/update/delete operations), and schema introspection capabilities. Created authentication guide (personal access tokens with scopes), pagination patterns (cursor-based), and rate limiting details (5000 points/hour). Generated integration guide with example queries and error handling patterns.
-[DONE] GitHub GraphQL API research complete
-- Docs: docs_dev/github-graphql-*.md (5 files)
-- Key finding: More efficient than REST for complex nested data retrieval
-- Authentication: Personal access tokens with fine-grained permissions
-- Rate limits: 5000 points/hour (cost varies per query complexity)
-- Ready for: code implementation
+user: Research GitHub GraphQL API v4 capabilities.
+assistant: [DONE] api-research - GitHub GraphQL API research complete
+Docs: docs_dev/api/github-graphql-*.md (5 files)
+Key: More efficient than REST for nested data, 5000 points/hr
 </example>

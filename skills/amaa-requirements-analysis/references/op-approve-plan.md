@@ -48,22 +48,16 @@ All of these must be true:
 
 ### Step 1: Verify All Prerequisites
 
+Run the prerequisites check script to verify all exit criteria show checkmarks:
 ```bash
-/planning-status --verbose
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/check_plan_prerequisites.py
 ```
-
-All exit criteria should show checkmarks.
 
 ### Step 2: Execute Approval
 
-```bash
-/approve-plan
-```
+Mark all requirements as complete using `/amaa-modify-requirement`, then set `plan_phase_complete: true` in the state file at `.claude/orchestrator-plan-phase.local.md`.
 
-To skip GitHub Issue creation (offline work):
-```bash
-/approve-plan --skip-issues
-```
+To skip GitHub Issue creation (offline work), omit the issue creation step and create issues manually later.
 
 ### Step 3: Verify Transition
 
@@ -84,7 +78,7 @@ Copy this checklist and track your progress:
 - [ ] Confirm all modules have acceptance criteria
 - [ ] Confirm at least one module is defined
 - [ ] Get explicit user approval
-- [ ] Execute `/approve-plan`
+- [ ] Execute plan approval (set `plan_phase_complete: true` in the state file)
 - [ ] Verify GitHub Issues created for each module
 - [ ] Verify orchestration state file created
 - [ ] Begin orchestration with `/start-orchestration`
@@ -95,7 +89,7 @@ Copy this checklist and track your progress:
 
 ```bash
 # Step 1: Verify readiness
-/planning-status --verbose
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/check_plan_prerequisites.py
 
 # Expected output shows all checkmarks:
 # | EXIT CRITERIA                                                     |
@@ -106,8 +100,8 @@ Copy this checklist and track your progress:
 # | [x] All modules have acceptance criteria                          |
 # +------------------------------------------------------------------+
 
-# Step 2: Approve
-/approve-plan
+# Step 2: Approve - Mark all requirements complete, then set plan_phase_complete: true
+# in .claude/orchestrator-plan-phase.local.md
 
 # Expected output:
 # Validating plan...
@@ -145,7 +139,8 @@ Copy this checklist and track your progress:
 
 ```bash
 # Approve without GitHub Issue creation
-/approve-plan --skip-issues
+# Set plan_phase_complete: true in .claude/orchestrator-plan-phase.local.md
+# Skip the issue creation step
 
 # Expected output:
 # Validating plan...
@@ -163,10 +158,10 @@ gh issue create --title "[Module] Auth Core" --body "..." --label "module,priori
 ### Example: Failed Approval
 
 ```bash
-/approve-plan
+# Run prerequisites check
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/check_plan_prerequisites.py
 
-# If prerequisites not met:
-# Validating plan...
+# If prerequisites not met, output shows:
 # Plan validation FAILED
 #
 # Missing prerequisites:
@@ -179,7 +174,7 @@ gh issue create --title "[Module] Auth Core" --body "..." --label "module,priori
 # Fix and retry
 /amaa-modify-requirement requirement "Architecture Design" --status complete
 # Create USER_REQUIREMENTS.md
-/approve-plan
+# Then set plan_phase_complete: true in .claude/orchestrator-plan-phase.local.md
 ```
 
 ## Error Handling

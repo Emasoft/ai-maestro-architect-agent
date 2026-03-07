@@ -206,7 +206,7 @@ exit_criteria:
 3. GitHub Issues created for all modules
 4. User approved the plan
 
-These strings are displayed in `/planning-status` output and used by the stop hook to determine if exit should be blocked.
+These strings are displayed in the planning status output and used by the stop hook to determine if exit should be blocked.
 
 ---
 
@@ -282,7 +282,7 @@ for section in data.get("requirements_sections", []):
 3. Write updated frontmatter back
 4. Preserve body content
 
-**Approval (by /approve-plan):**
+**Approval (plan approval transition):**
 1. Validate all exit criteria
 2. Create GitHub Issues for modules
 3. Update `github_issue` field for each module

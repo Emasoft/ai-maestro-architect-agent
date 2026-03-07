@@ -6,11 +6,11 @@ This script performs proactive requirement analysis to identify potential issues
 BEFORE implementation begins. It enforces RULE 14: User Requirements Are Immutable.
 
 Usage:
-    python requirement-analysis.py init --project-root <path>
-    python requirement-analysis.py parse --input <file_or_text>
-    python requirement-analysis.py analyze --requirements <file>
-    python requirement-analysis.py report --issue <description> --requirement <id>
-    python requirement-analysis.py validate --implementation <path>
+    python3 amaa_requirement_analysis.py init --project-root <path>
+    python3 amaa_requirement_analysis.py parse --input <file_or_text>
+    python3 amaa_requirement_analysis.py analyze --requirements <file>
+    python3 amaa_requirement_analysis.py report --issue <description> --requirement <id>
+    python3 amaa_requirement_analysis.py validate --implementation <path>
 
 The script helps orchestrators:
 1. Parse and document user requirements

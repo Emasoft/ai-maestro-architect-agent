@@ -243,13 +243,13 @@ modules:
 **Example 2: Removing a module**
 ```bash
 # Check current modules
-/planning-status
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/check_plan_prerequisites.py
 
 # Remove module that's no longer needed
 /amaa-remove-requirement module oauth-facebook
 
 # Verify removal
-/planning-status
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/check_plan_prerequisites.py
 ```
 
 **Example 3: Renaming a module**

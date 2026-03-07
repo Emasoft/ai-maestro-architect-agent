@@ -46,11 +46,7 @@ Use this operation when:
 
 ### Step 1: Identify Module to Modify
 
-```bash
-/planning-status --verbose
-```
-
-Review modules and their current properties.
+Check the plan state file at `.claude/orchestrator-plan-phase.local.md` to review modules and their current properties.
 
 ### Step 2: Execute Modification
 
@@ -69,17 +65,13 @@ Available modifications:
 
 ### Step 3: Verify Change
 
-```bash
-/planning-status --verbose
-```
-
-Confirm module shows updated properties.
+Check the plan state file at `.claude/orchestrator-plan-phase.local.md` to confirm module shows updated properties.
 
 ## Checklist
 
 Copy this checklist and track your progress:
 
-- [ ] Identify module ID with `/planning-status --verbose`
+- [ ] Identify module ID by checking the plan state file at `.claude/orchestrator-plan-phase.local.md`
 - [ ] Verify module status is planned or pending
 - [ ] Determine which fields to update
 - [ ] Execute `/amaa-modify-requirement module ...`
@@ -104,8 +96,7 @@ Copy this checklist and track your progress:
 # Elevate priority based on business needs
 /amaa-modify-requirement module audit-log --priority high
 
-# Verify
-/planning-status --verbose
+# Verify in plan state file (.claude/orchestrator-plan-phase.local.md)
 # Shows: audit-log | High | ...
 ```
 
@@ -141,7 +132,7 @@ modules:
 
 | Error | Cause | Resolution |
 |-------|-------|------------|
-| Module not found | ID mismatch | Check exact ID with `/planning-status --verbose` |
+| Module not found | ID mismatch | Check exact ID in the plan state file at `.claude/orchestrator-plan-phase.local.md` |
 | Cannot modify | Status is in-progress/complete | Only planned/pending modules can be modified |
 | Invalid priority | Unknown value | Use: critical, high, medium, or low |
 | Invalid status | Unknown status | Use: planned, pending, in-progress, or complete |

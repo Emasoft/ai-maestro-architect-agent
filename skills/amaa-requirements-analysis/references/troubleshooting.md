@@ -2,11 +2,11 @@
 
 ## Table of Contents
 - 5.1 When /amaa-start-planning fails
-- 5.2 When /planning-status shows errors
+- 5.2 When checking planning status shows errors
 - 5.3 When /amaa-add-requirement fails
 - 5.4 When /amaa-modify-requirement fails
 - 5.5 When /amaa-remove-requirement fails
-- 5.6 When /approve-plan fails
+- 5.6 When plan approval fails
 - 5.7 State file corruption recovery
 - 5.8 GitHub Issue creation problems
 - 5.9 Exit blocking issues
@@ -20,7 +20,7 @@
 Cause: State file `.claude/orchestrator-plan-phase.local.md` already exists.
 
 Solutions:
-1. Resume existing plan: `/planning-status`
+1. Resume existing plan: check the plan state file at `.claude/orchestrator-plan-phase.local.md`
 2. Delete state file to start fresh (requires user approval):
    ```bash
    rm .claude/orchestrator-plan-phase.local.md
@@ -53,7 +53,7 @@ Solutions:
 
 ---
 
-## 5.2 When /planning-status shows errors
+## 5.2 When Checking Planning Status Shows Errors
 
 **Error: "Not in Plan Phase"**
 
@@ -125,7 +125,7 @@ This is expected behavior. Use the normalized ID in subsequent commands.
 Cause: The specified requirement section does not exist.
 
 Solutions:
-1. Check exact name with `/planning-status`
+1. Check exact name by running `python3 ${CLAUDE_PLUGIN_ROOT}/scripts/check_plan_prerequisites.py`
 2. Add the section first: `/amaa-add-requirement requirement "X"`
 
 **Error: "Module 'X' not found"**
@@ -133,7 +133,7 @@ Solutions:
 Cause: The specified module ID does not exist.
 
 Solutions:
-1. Check exact ID with `/planning-status`
+1. Check exact ID by inspecting the plan state file at `.claude/orchestrator-plan-phase.local.md`
 2. Use the kebab-case ID, not the display name
 
 **Error: "Cannot modify module with status 'in-progress'"**
@@ -148,7 +148,7 @@ Solutions:
 
 Cause: Same status provided as current status.
 
-Solution: Verify current status with `/planning-status` before modifying.
+Solution: Verify current status by checking the plan state file at `.claude/orchestrator-plan-phase.local.md` before modifying.
 
 ---
 
@@ -187,11 +187,11 @@ Solutions:
 
 Cause: Invalid module ID provided.
 
-Solution: Check exact IDs with `/planning-status`.
+Solution: Check exact IDs in the plan state file at `.claude/orchestrator-plan-phase.local.md`.
 
 ---
 
-## 5.6 When /approve-plan fails
+## 5.6 When Plan Approval Fails
 
 **Error: "Not in Plan Phase"**
 
@@ -303,7 +303,8 @@ Solutions:
 1. Install gh CLI: `brew install gh`
 2. Or use `--skip-issues` flag:
    ```bash
-   /approve-plan --skip-issues
+   # Mark all requirements as complete using /amaa-modify-requirement, then set plan_phase_complete: true in the state file
+   # Use --skip-issues if needed when approving the plan
    ```
 
 **Warning: "Timeout creating issue"**
@@ -334,9 +335,9 @@ modules:
 
 Cause: Exit criteria not met.
 
-Solution: Check which criteria are incomplete:
+Solution: Check which criteria are incomplete by running:
 ```bash
-/planning-status
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/check_plan_prerequisites.py
 ```
 Complete remaining criteria before exit.
 
@@ -345,7 +346,7 @@ Complete remaining criteria before exit.
 Cause: State file shows plan_phase_complete as false despite approval.
 
 Solutions:
-1. Re-run `/approve-plan`
+1. Mark all requirements as complete using `/amaa-modify-requirement` and re-verify prerequisites
 2. Manually set in state file:
    ```yaml
    plan_phase_complete: true

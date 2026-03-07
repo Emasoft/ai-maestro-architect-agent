@@ -6,7 +6,7 @@ user-invocable: false
 context: fork
 ---
 
-# Planning Commands Skill
+# Requirements Analysis Skill
 
 ## Overview
 

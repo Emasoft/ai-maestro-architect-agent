@@ -87,7 +87,4 @@ output: /docs/api-contracts/users-api.md (endpoints, request/response schemas, e
 
 ## Resources
 
-- [templates-reference.md](references/templates-reference.md) (Module Specification Template, API Contract Template, ADR Template, Input Format Examples)
-- [quality-standards.md](references/quality-standards.md) (Documentation Quality Criteria, Must Be 6 C's, Must Include, Must Avoid, Feature Specification Example)
-- [writing-workflow.md](references/writing-workflow.md) (Step 1: Receive and Parse Assignment, Step 2: Gather Context, Step 3: Create Document Structure)
-- [agent-interactions.md](references/agent-interactions.md) (Upstream Agents (Receive Input From), Downstream Agents (Provide Output To), Peer Agents (Bidirectional))
+See **Reference Documents** table above for all reference files and their contents.
