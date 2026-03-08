@@ -9,21 +9,13 @@ operation: design-architecture
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [System Components](#system-components)
-- [Data Flows](#data-flows)
-- [Dependency Graph](#dependency-graph)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [Components](#components)
-- [Data Flows](#data-flows)
-- [Dependency Graph](#dependency-graph)
-- [Architectural Pattern: Hexagonal](#architectural-pattern-hexagonal)
-- [Architectural Pattern: Microservices](#architectural-pattern-microservices)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- System Components
+- Examples
+- Data Flows
+- Error Handling
 
 ## When to Use
 

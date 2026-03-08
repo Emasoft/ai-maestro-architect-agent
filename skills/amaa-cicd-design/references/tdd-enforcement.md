@@ -3,17 +3,14 @@
 
 ## Contents
 
-- [Use Cases (Quick Reference)](#use-cases-quick-reference)
-- [Overview](#overview)
-- [Core Principles](#core-principles)
-- [Coverage Requirements](#coverage-requirements)
-- [Complete TDD Workflow](#complete-tdd-workflow)
-- [Test Skipping Policy](#test-skipping-policy)
-- [Mutation Testing](#mutation-testing)
-- [Debug Script](#debug-script)
-- [Checklist](#checklist)
+- Use Cases (Quick Reference)
+- Overview
+- Core Principles
+- Coverage Requirements
+- Complete TDD Workflow
+- Test Skipping Policy
+- Mutation Testing
 
----
 ## Use Cases (Quick Reference)
 
 - When you need to understand TDD principles → [Core Principles](#core-principles)

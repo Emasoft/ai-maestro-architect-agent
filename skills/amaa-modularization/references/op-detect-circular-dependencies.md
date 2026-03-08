@@ -9,23 +9,13 @@ operation: detect-circular-dependencies
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [Import Analysis](#import-analysis)
-- [Detected Cycles](#detected-cycles)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [Detection](#detection)
-- [Severity: HIGH](#severity-high)
-- [Root Cause: Bidirectional Data Access](#root-cause-bidirectional-data-access)
-- [Resolution: Extract Interfaces + Events](#resolution-extract-interfaces-events)
-- [After Resolution](#after-resolution)
-- [Summary](#summary)
-- [Cycle Details](#cycle-details)
-- [Recommended Action Order](#recommended-action-order)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- Import Analysis
+- Detected Cycles
+- Examples
+- Error Handling
 
 ## When to Use
 

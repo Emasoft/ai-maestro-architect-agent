@@ -8,18 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Open Questions](#open-questions)
-- [Resolved Questions](#resolved-questions)
-- [Open Question Recorded](#open-question-recorded)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Resolving a Question](#resolving-a-question)
-- [Example](#example)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Open Questions
+- Example
+- Error Handling
+
 ## Purpose
 
 Record an unresolved question that arises during design work, tracking what decisions are blocked and who should resolve it.

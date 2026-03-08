@@ -44,12 +44,12 @@ Copy this checklist and track your progress:
 
 | Document | Description |
 |----------|-------------|
-| [label-taxonomy-details.md](references/label-taxonomy-details.md) | Full label tables, kanban columns, commands, mapping rules (Component Labels (`component:*`), Kanban Columns (Canonical 8-Column System), Type Labels AMAA Clarifies) |
+| [label-taxonomy-details.md](references/label-taxonomy-details.md) | Component Labels (`component:*`), Kanban Columns (Canonical 8-Column System), Type Labels AMAA Clarifies, Priority Labels (`priority:*`) - Read by AMAA, Effort Labels (`effort:*`) - Validated by AMAA, Architecture-to-Labels Mapping, Architecture Breakdown |
 | [examples-extended.md](references/examples-extended.md) | Extended examples with bash commands (Example 1: Adding Component Labels After Architecture Analysis, Example 2: Validating Effort Estimate, Example 3: Creating Component-Specific Sub-Issues, Example 4: Architecture Decision Record (ADR)) |
-| [op-add-component-labels.md](references/op-add-component-labels.md) | Procedure: adding component labels (Purpose, When to Use, Prerequisites, Procedure) |
-| [op-validate-effort-estimate.md](references/op-validate-effort-estimate.md) | Procedure: validating effort estimates (Purpose, When to Use, Prerequisites, Procedure) |
-| [op-create-sub-issues.md](references/op-create-sub-issues.md) | Procedure: creating sub-issues (Purpose, When to Use, Prerequisites, Procedure) |
-| [op-create-adr-issue.md](references/op-create-adr-issue.md) | Procedure: creating ADR issues (Purpose, When to Use, Prerequisites, Procedure) |
+| [op-add-component-labels.md](references/op-add-component-labels.md) | Purpose, When to Use, Prerequisites, Procedure, Example, Component Label Reference, Error Handling |
+| [op-validate-effort-estimate.md](references/op-validate-effort-estimate.md) | Purpose, When to Use, Prerequisites, Procedure, Example, Effort Guidelines, Error Handling, Notes |
+| [op-create-sub-issues.md](references/op-create-sub-issues.md) | Purpose, When to Use, Prerequisites, Procedure, Description, Acceptance Criteria, Parent Issue, Example, Description, Acceptance Criteria, Parent Issue, Description, Acceptance Criteria, Parent Issue, Sub-Issue Naming Convention, Error Handling, Notes |
+| [op-create-adr-issue.md](references/op-create-adr-issue.md) | Purpose, When to Use, Prerequisites, Procedure, Status, Context, Decision Drivers, Considered Options, Decision, Consequences, Related Issues, Example, Status, Context, Decision Drivers, Considered Options, Decision, Consequences, Related Issues, ADR Status Values, Error Handling, Notes |
 
 ## Examples
 

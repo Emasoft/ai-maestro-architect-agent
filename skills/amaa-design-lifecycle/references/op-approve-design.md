@@ -9,14 +9,13 @@ operation: approve-design
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [Approval Record](#approval-record)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- Checklist
+- Examples
+- Approval Record
+- Error Handling
 
 ## When to Use
 

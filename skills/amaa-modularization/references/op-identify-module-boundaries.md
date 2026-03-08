@@ -9,21 +9,13 @@ operation: identify-module-boundaries
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [Domain Concept Mapping](#domain-concept-mapping)
-- [Bounded Contexts](#bounded-contexts)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [Domain Concept Groups](#domain-concept-groups)
-- [Validation Results](#validation-results)
-- [Package Structure Analysis](#package-structure-analysis)
-- [Database Table Clustering](#database-table-clustering)
-- [API Endpoint Groupings](#api-endpoint-groupings)
-- [Recommended Module Structure](#recommended-module-structure)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- Domain Concept Mapping
+- Bounded Contexts
+- Examples
+- Error Handling
 
 ## When to Use
 

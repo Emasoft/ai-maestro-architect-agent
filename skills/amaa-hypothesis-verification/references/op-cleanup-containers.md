@@ -8,16 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Cleanup Log](#cleanup-log)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Example](#example)
-- [Cleanup Script](#cleanup-script)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Cleanup Log
+- Example
+- Error Handling
+
 ## Purpose
 
 Remove Docker containers, images, and volumes created for the experiment to free resources and maintain a clean environment.

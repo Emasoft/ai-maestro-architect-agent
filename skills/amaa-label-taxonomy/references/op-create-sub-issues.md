@@ -10,23 +10,13 @@ description: Operation procedure for creating component-specific sub-issues from
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [Description](#description)
-- [Acceptance Criteria](#acceptance-criteria)
-- [Parent Issue](#parent-issue)
-- [Example](#example)
-- [Description](#description)
-- [Acceptance Criteria](#acceptance-criteria)
-- [Parent Issue](#parent-issue)
-- [Description](#description)
-- [Acceptance Criteria](#acceptance-criteria)
-- [Parent Issue](#parent-issue)
-- [Sub-Issue Naming Convention](#sub-issue-naming-convention)
-- [Error Handling](#error-handling)
-- [Notes](#notes)
+- Purpose
+- When to Use
+- Prerequisites
+- Procedure
+- Example
+- Description
+- Error Handling
 
 ## Purpose
 

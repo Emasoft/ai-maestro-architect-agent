@@ -9,18 +9,13 @@ operation: archive-design
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [Summary](#summary)
-- [Requirements Coverage](#requirements-coverage)
-- [Deviations Summary](#deviations-summary)
-- [Timeline](#timeline)
-- [Lessons Learned](#lessons-learned)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- Checklist
+- Examples
+- Summary
+- Error Handling
 
 ## When to Use
 

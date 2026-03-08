@@ -8,17 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Protected Branches](#protected-branches)
-- [Merge Requirements](#merge-requirements)
-- [Workflow](#workflow)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Example](#example)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Protected Branches
+- Example
+- Error Handling
+
 ## Purpose
 
 Set up branch protection rules to enforce code review, status checks, and merge requirements for protected branches.

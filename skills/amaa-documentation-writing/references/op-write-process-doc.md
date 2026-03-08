@@ -8,24 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Overview](#overview)
-- [Roles and Responsibilities](#roles-and-responsibilities)
-- [Process Flow](#process-flow)
-- [Tools and Systems](#tools-and-systems)
-- [Inputs and Outputs](#inputs-and-outputs)
-- [Service Level Agreements](#service-level-agreements)
-- [Exception Handling](#exception-handling)
-- [Best Practices](#best-practices)
-- [Common Pitfalls](#common-pitfalls)
-- [Related Processes](#related-processes)
-- [Revision History](#revision-history)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Overview
+- Roles and Responsibilities
+- Error Handling
+
 ## Purpose
 
 Write process documentation that describes workflow steps, responsibilities, tools, and best practices for a technical or organizational process.

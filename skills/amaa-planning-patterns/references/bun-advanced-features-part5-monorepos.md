@@ -1,22 +1,13 @@
 # Bun Advanced Features Part 5: Monorepos
 
 ## Table of Contents
-1. [What is a Monorepo?](#what-is-a-monorepo)
-2. [What are Workspaces?](#what-are-workspaces)
-3. [Why Use Monorepos and Workspaces?](#why-use-monorepos-and-workspaces)
-4. [Setting Up a Monorepo with Bun](#setting-up-a-monorepo-with-bun)
-5. [Workspace Package Configuration](#workspace-package-configuration)
-6. [Installing Dependencies in a Workspace](#installing-dependencies-in-a-workspace)
-7. [Workspace Protocol](#workspace-protocol)
-8. [Running Scripts Across Workspaces](#running-scripts-across-workspaces)
-9. [Building a Monorepo Library](#building-a-monorepo-library)
-10. [Build Configuration for Monorepo](#build-configuration-for-monorepo)
-11. [Shared TypeScript Configuration](#shared-typescript-configuration)
-12. [Versioning and Publishing](#versioning-and-publishing)
-13. [Monorepo Build Optimization](#monorepo-build-optimization)
-14. [Monorepo Best Practices](#monorepo-best-practices)
-
----
+- What is a Monorepo?
+- What are Workspaces?
+- Why Use Monorepos and Workspaces?
+- Setting Up a Monorepo with Bun
+- Workspace Package Configuration
+- Installing Dependencies in a Workspace
+- Workspace Protocol
 
 ## What is a Monorepo?
 

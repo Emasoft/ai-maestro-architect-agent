@@ -5,14 +5,13 @@ This document defines standardized protocols for handling edge cases and failure
 ## Table of Contents
 
 - 1.0 AI Maestro Unavailable
+- Design Delivery (AI Maestro Offline)
 - 2.0 GitHub Unavailable
-- 3.0 Remote Agent Timeout
+- 3.0 Remote Agent Unresponsive
 - 4.0 Requirements Ambiguity
 - 5.0 API Research Failures
 - 6.0 Design Conflicts
-- 7.0 Planning Validation Failures
 
----
 ## 1.0 AI Maestro Unavailable
 
 ### 1.1 Detection Methods

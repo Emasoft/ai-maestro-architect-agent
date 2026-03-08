@@ -9,17 +9,13 @@ operation: validate-implementation
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [Validation Details](#validation-details)
-- [Results Summary](#results-summary)
-- [Detailed Results](#detailed-results)
-- [Next Steps](#next-steps)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- Checklist
+- Examples
+- Validation Details
+- Error Handling
 
 ## When to Use
 

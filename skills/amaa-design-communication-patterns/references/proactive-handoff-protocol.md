@@ -10,11 +10,6 @@
 - Context
 - Progress
 - Current State
-- Blockers (if any)
-- Next Steps
-- References
-- Proactive Writing Rules
-- Handoff Quality Checklist
 
 ## Standard Handoff Format
 

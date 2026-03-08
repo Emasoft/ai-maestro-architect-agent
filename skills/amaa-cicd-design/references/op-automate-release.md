@@ -8,14 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Example](#example)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Output
+- Example
+- Error Handling
+
 ## Purpose
 
 Create automated release workflows that build artifacts for multiple platforms, create GitHub releases, and publish to package registries.

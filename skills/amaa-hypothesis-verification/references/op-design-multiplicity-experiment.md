@@ -8,19 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Hypothesis](#hypothesis)
-- [Measurement Protocol](#measurement-protocol)
-- [Experiment Matrix](#experiment-matrix)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Example](#example)
-- [Hypothesis](#hypothesis)
-- [Metrics](#metrics)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Example
+- Hypothesis
+- Error Handling
+
 ## Purpose
 
 Design an experiment that tests multiple approaches (minimum 3) to verify a claim, following the Multiplicity Rule for evidence-based selection.

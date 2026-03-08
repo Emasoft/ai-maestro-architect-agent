@@ -9,14 +9,13 @@ operation: access-shared-constants
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [Available Constants](#available-constants)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- Checklist
+- Examples
+- Available Constants
+- Error Handling
 
 ## When to Use
 

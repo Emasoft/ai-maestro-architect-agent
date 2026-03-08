@@ -9,16 +9,13 @@ description: "Strangler Fig pattern for monolith migration."
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Why Strangler Pattern?](#why-strangler-pattern)
-- [The Strangler Fig Pattern](#the-strangler-fig-pattern)
-- [Step-by-Step Monolith Decomposition](#step-by-step-monolith-decomposition)
-- [Dealing with Dependencies](#dealing-with-dependencies)
-- [Risk Mitigation](#risk-mitigation)
-- [Module Dependency Graphs](#module-dependency-graphs)
-- [Strangler Pattern Checklist](#strangler-pattern-checklist)
-- [Example: Extracting Authentication](#example-extracting-authentication)
-- [Summary](#summary)
+- Overview
+- Why Strangler Pattern?
+- The Strangler Fig Pattern
+- Step-by-Step Monolith Decomposition
+- Extraction Candidate: [Feature Name]
+- Dealing with Dependencies
+- Example: Extracting Authentication
 
 ## Overview
 

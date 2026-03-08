@@ -9,14 +9,13 @@ operation: sync-status-to-github
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [Status to Label Mapping](#status-to-label-mapping)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- Checklist
+- Examples
+- Status to Label Mapping
+- Error Handling
 
 ## When to Use
 

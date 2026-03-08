@@ -8,20 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Quick Start](#quick-start)
-- [Common Operations](#common-operations)
-- [Error Handling](#error-handling)
-- [Best Practices](#best-practices)
-- [Testing Your Integration](#testing-your-integration)
-- [Troubleshooting](#troubleshooting)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Prerequisites
+- Installation
+- Error Handling
+
 ## Purpose
 
 Create a step-by-step integration guide with code examples showing how to integrate the API into a project, including setup, common operations, and error handling.

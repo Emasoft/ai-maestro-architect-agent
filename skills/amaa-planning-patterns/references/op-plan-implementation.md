@@ -9,20 +9,13 @@ operation: plan-implementation
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [Milestone M2: Users Can Login](#milestone-m2-users-can-login)
-- [Task Dependencies](#task-dependencies)
-- [Responsibility Matrix](#responsibility-matrix)
-- [Week 3 Plan](#week-3-plan)
-- [Task Success Criteria](#task-success-criteria)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [Phase 2: Core Authentication (Weeks 3-5)](#phase-2-core-authentication-weeks-3-5)
-- [Task T2.5: Create Login Endpoint](#task-t25-create-login-endpoint)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- Milestone M2: Users Can Login
+- Task Dependencies
+- Examples
+- Error Handling
 
 ## When to Use
 

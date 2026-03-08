@@ -2,12 +2,14 @@
 
 ## Table of Contents
 
-1. [What is Architecture Design?](#what-is-architecture-design)
-2. [Architecture Design in Five Steps](#architecture-design-in-five-steps)
-3. [Architecture Design Document Template](#architecture-design-document-template)
-4. [Common Architecture Patterns](#common-architecture-patterns)
-5. [Architecture Design Checklist](#architecture-design-checklist)
-6. [Next Steps](#next-steps)
+- What is Architecture Design?
+- Architecture Design in Five Steps
+- Architecture Design Document Template
+- 1. Component Inventory
+- 2. Component Responsibilities
+- 3. Data Flow Diagrams
+- 4. Dependency Graph
+
 ## What is Architecture Design?
 
 Architecture design is the process of defining the fundamental structure of your system: what components exist, how they connect, what each component does, and how data flows between them.

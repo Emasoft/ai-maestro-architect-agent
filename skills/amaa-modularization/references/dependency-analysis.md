@@ -9,17 +9,13 @@ description: "Module dependency analysis techniques."
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [The Dependency Problem](#the-dependency-problem)
-- [Dependency Direction Rules](#dependency-direction-rules)
-- [Visualizing Dependencies](#visualizing-dependencies)
-- [The Shared Code Problem](#the-shared-code-problem)
-- [Circular Dependency Detection and Resolution](#circular-dependency-detection-and-resolution)
-- [Dependency Injection](#dependency-injection)
-- [Dependency Metrics](#dependency-metrics)
-- [Dependency Documentation](#dependency-documentation)
-- [Anti-Patterns](#anti-patterns)
-- [Summary](#summary)
+- Overview
+- The Dependency Problem
+- Dependency Direction Rules
+- Visualizing Dependencies
+- The Shared Code Problem
+- Circular Dependency Detection and Resolution
+- Dependency Injection
 
 ## Overview
 

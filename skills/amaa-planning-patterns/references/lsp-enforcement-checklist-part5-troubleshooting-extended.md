@@ -6,16 +6,14 @@ Troubleshooting guide for Java, Kotlin, C/C++, C#, PHP, Ruby, and cross-language
 
 ## Table of Contents
 
-- [Java (jdtls) Issues](#java-jdtls-issues)
-- [Kotlin Issues](#kotlin-issues)
-- [C/C++ (clangd) Issues](#cc-clangd-issues)
-- [C# (OmniSharp) Issues](#c-omnisharp-issues)
-- [PHP (Intelephense) Issues](#php-intelephense-issues)
-- [Ruby (Solargraph) Issues](#ruby-solargraph-issues)
-- [Cross-Language Issues](#cross-language-issues)
-- [Official Documentation](#official-documentation)
+- Java (jdtls) Issues
+- Kotlin Issues
+- C/C++ (clangd) Issues
+- C# (OmniSharp) Issues
+- PHP (Intelephense) Issues
+- Ruby (Solargraph) Issues
+- Cross-Language Issues
 
----
 ## Java (jdtls) Issues
 
 ### "Cannot resolve symbol" for imported classes

@@ -66,17 +66,17 @@ Next action: Resolve OQ-002 (Payment processor selection)
 
 | Reference | Description |
 |-----------|-------------|
-| [record-keeping-formats.md](references/record-keeping-formats.md) | Session record-keeping formats and file structure specs (ADR Template, Handoff Document Template) |
-| [memory-categories-and-triggers.md](references/memory-categories-and-triggers.md) | Detailed memory categories, required fields, storage locations, and triggers (What to Remember, Architecture Decisions Made) |
-| [handoff-procedures.md](references/handoff-procedures.md) | Handoff document types, structure, and extended examples (Handoff Document Types, Handoff Document Structure) |
-| [op-load-session-state.md](references/op-load-session-state.md) | Procedure: load session state (Procedure, Check for Existing Session State) |
-| [op-record-decision.md](references/op-record-decision.md) | Procedure: record architecture decision (Procedure, Determine ADR Number) |
-| [op-record-pattern.md](references/op-record-pattern.md) | Procedure: record design pattern (Purpose, When to Use, Procedure) |
-| [op-record-stack-choice.md](references/op-record-stack-choice.md) | Procedure: record technology stack choice (Purpose, When to Use, Procedure) |
-| [op-record-constraint.md](references/op-record-constraint.md) | Procedure: record constraint (Purpose, When to Use, Procedure) |
-| [op-record-open-question.md](references/op-record-open-question.md) | Procedure: record open question (Procedure, Ensure Open Questions File Exists) |
-| [op-create-handoff.md](references/op-create-handoff.md) | Procedure: create handoff document (Purpose, When to Use, Procedure) |
-| [op-resume-from-handoff.md](references/op-resume-from-handoff.md) | Procedure: resume from handoff (Purpose, When to Use, Procedure) |
+| [record-keeping-formats.md](references/record-keeping-formats.md) | Requirements Log Format, [TIMESTAMP] - [PROJECT_NAME], Design Artifacts Structure, ADR Template, Context, Decision, Alternatives Considered |
+| [memory-categories-and-triggers.md](references/memory-categories-and-triggers.md) | What to Remember, Memory Storage Location, Memory Retrieval Triggers, Memory Update Triggers |
+| [handoff-procedures.md](references/handoff-procedures.md) | When to Create Handoff Documents, Handoff Document Types, Handoff Document Structure, Examples, Decision, Rationale, Alternatives Considered |
+| [op-load-session-state.md](references/op-load-session-state.md) | Purpose, When to Use, Inputs, Procedure, Current Focus, Recent Decisions, Active Constraints, Open Questions, Session Context Loaded, Output, Verification Checklist, Example, Error Handling |
+| [op-record-decision.md](references/op-record-decision.md) | Purpose, When to Use, Inputs, Procedure, Status, Context, Decision, Rationale, Alternatives Considered, Consequences, Implementation Impact, Related, Decision Recorded, Output, Verification Checklist, Example, Status, Context, Decision, Rationale, Alternatives Considered, Consequences, Error Handling |
+| [op-record-pattern.md](references/op-record-pattern.md) | Purpose, When to Use, Inputs, Procedure, Applied Patterns, Pattern Recorded, Output, Verification Checklist, Pattern Categories, Example, Error Handling |
+| [op-record-stack-choice.md](references/op-record-stack-choice.md) | Purpose, When to Use, Inputs, Procedure, Core Technologies, Infrastructure, Development Tools, External Services, Stack Updated, Output, Verification Checklist, Example, Error Handling |
+| [op-record-constraint.md](references/op-record-constraint.md) | Purpose, When to Use, Inputs, Procedure, Active Constraints, Resolved Constraints, Constraint Recorded, Output, Verification Checklist, Example, Error Handling |
+| [op-record-open-question.md](references/op-record-open-question.md) | Purpose, When to Use, Inputs, Procedure, Open Questions, Resolved Questions, Open Question Recorded, Output, Verification Checklist, Resolving a Question, Example, Error Handling |
+| [op-create-handoff.md](references/op-create-handoff.md) | Purpose, When to Use, Inputs, Procedure, Session Summary, Decisions Made This Session, Patterns Applied This Session, Constraints Active, Open Questions, Current Work State, Files Modified This Session, Design Artifacts Summary, Resume Instructions, Handoff Validation, Handoff Document Created, Output, Verification Checklist, Error Handling |
+| [op-resume-from-handoff.md](references/op-resume-from-handoff.md) | Purpose, When to Use, Inputs, Procedure, Open Questions Requiring Attention, Session Resumed from Handoff, Output, Verification Checklist, Quick Resume Commands, Error Handling |
 
 ## Resources
 

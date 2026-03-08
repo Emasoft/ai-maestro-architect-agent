@@ -11,11 +11,6 @@ This protocol defines standards for creating, validating, and searching design d
 - 5. Search Procedures
 - 6. GitHub Integration
 - 7. Edge Cases and Error Handling
-- 8. File Naming Convention
-- 9. Cross-Plugin Protocol
-- 10. Quick Reference
-
----
 
 ## 1. Document UUID Format (GUUID)
 

@@ -41,11 +41,11 @@ Copy this checklist and track your progress:
 | Document | Description |
 |----------|-------------|
 | [research-procedure.md](references/research-procedure.md) | Step 1: Understand Requirements, Step 2: Gather Information, Step 3: Document Findings, Step 4: Report to Orchestrator |
-| [output-templates.md](references/output-templates.md) | API Overview Document, Authentication Guide, Endpoints Reference, Integration Guide, Configuration Template |
+| [output-templates.md](references/output-templates.md) | API Overview Document, Description, Official Resources, Capabilities, Limitations, Example Configuration, Prerequisites |
 | [tools-reference.md](references/tools-reference.md) | Read Tool, WebFetch Tool, WebSearch Tool, Write Tool, Glob/Grep Tools |
-| [research-scenarios.md](references/research-scenarios.md) | Scenario 1: Research REST API, Scenario 2: Research Python Library, Scenario 3: Research Cloud Service API, Scenario 4: Research GraphQL API |
-| [collaboration-patterns.md](references/collaboration-patterns.md) | Agent interaction and handoff protocols (Integration with Orchestrator, Handling Blockers, Handoff Protocol) |
-| [quick-reference.md](references/quick-reference.md) | TOC, workflow tables, communication formats (Research Procedures, Step 1: Understand Requirements) |
+| [research-scenarios.md](references/research-scenarios.md) | Scenario 1: Research REST API, Scenario 2: Research Python Library, Scenario 3: Research Cloud Service API, Scenario 4: Research GraphQL API, Types, Queries, Mutations |
+| [collaboration-patterns.md](references/collaboration-patterns.md) | Integration with Orchestrator, Handling Blockers, Handoff Protocol, Collaboration with Other Agents, Best Practices |
+| [quick-reference.md](references/quick-reference.md) | Research Output Files, Research Workflow, Communication Formats, Extended Examples |
 
 ## Examples
 
@@ -86,6 +86,6 @@ Output: stripe-api-overview.md, stripe-authentication.md,
 
 ## Resources
 
-- [research-procedure.md](references/research-procedure.md) - Full research workflow (Step 1: Understand Requirements, Step 2: Gather Information, Step 3: Document Findings)
-- [output-templates.md](references/output-templates.md) - Documentation templates (API Overview Document, Authentication Guide, Endpoints Reference)
-- [quick-reference.md](references/quick-reference.md) - Tables, formats, extended examples (Step 1: Understand Requirements, Step 2: Gather Information, Step 3: Document Findings)
+- [research-procedure.md](references/research-procedure.md) - Step 1: Understand Requirements, Step 2: Gather Information, Step 3: Document Findings, Step 4: Report to Orchestrator
+- [output-templates.md](references/output-templates.md) - API Overview Document, Description, Official Resources, Capabilities, Limitations, Example Configuration, Prerequisites
+- [quick-reference.md](references/quick-reference.md) - Research Output Files, Research Workflow, Communication Formats, Extended Examples

@@ -9,17 +9,13 @@ operation: apply-solid-principles
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [SRP Assessment: AuthModule](#srp-assessment-authmodule)
-- [ISP Assessment: UserService Interface](#isp-assessment-userservice-interface)
-- [DIP Assessment: OrderService](#dip-assessment-orderservice)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [Module: OrderModule](#module-ordermodule)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- SRP Assessment: AuthModule
+- ISP Assessment: UserService Interface
+- Examples
+- Error Handling
 
 ## When to Use
 

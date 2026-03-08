@@ -8,19 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Environment Variables](#environment-variables)
-- [Configuration Files](#configuration-files)
-- [Environment Templates](#environment-templates)
-- [Docker Configuration](#docker-configuration)
-- [Kubernetes Configuration](#kubernetes-configuration)
-- [Security Guidelines](#security-guidelines)
-- [Validation Script](#validation-script)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Environment Variables
+- Configuration Files
+- Environment Templates
+
 ## Purpose
 
 Create a configuration template document that provides environment setup, configuration options, and deployment templates for different environments.

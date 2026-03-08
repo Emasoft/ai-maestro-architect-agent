@@ -8,14 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Example](#example)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Output
+- Example
+- Error Handling
+
 ## Purpose
 
 Research and document a cloud service API (AWS, GCP, Azure, etc.), producing comprehensive documentation covering service overview, authentication, SDK usage, and integration patterns.

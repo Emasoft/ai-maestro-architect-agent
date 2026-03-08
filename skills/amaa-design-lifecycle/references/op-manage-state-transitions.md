@@ -9,15 +9,13 @@ operation: manage-state-transitions
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [State Transition Rules](#state-transition-rules)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [State Transition Matrix](#state-transition-matrix)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- State Transition Rules
+- Checklist
+- Examples
+- Error Handling
 
 ## When to Use
 

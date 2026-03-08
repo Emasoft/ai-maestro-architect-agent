@@ -9,15 +9,13 @@ operation: send-ai-maestro-message
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [Message Types](#message-types)
-- [Priority Levels](#priority-levels)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- Checklist
+- Examples
+- Message Types
+- Error Handling
 
 ## When to Use
 

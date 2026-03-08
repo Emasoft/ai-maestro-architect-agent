@@ -3,16 +3,14 @@
 
 ## Contents
 
-- [Use Cases (Quick Reference)](#use-cases-quick-reference)
-- [Overview](#overview)
-- [Secret Hierarchy](#secret-hierarchy)
-- [Required Secrets by Platform](#required-secrets-by-platform)
-- [Using Secrets in Workflows](#using-secrets-in-workflows)
-- [Security Best Practices](#security-best-practices)
-- [Debugging Secret Issues](#debugging-secret-issues)
-- [Checklist](#checklist)
+- Use Cases (Quick Reference)
+- Overview
+- Secret Hierarchy
+- Required Secrets by Platform
+- Using Secrets in Workflows
+- Security Best Practices
+- Debugging Secret Issues
 
----
 ## Use Cases (Quick Reference)
 
 - When you need to decide which secret level to use → [Secret Hierarchy](#secret-hierarchy)

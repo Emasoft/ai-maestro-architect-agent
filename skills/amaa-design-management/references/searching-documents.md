@@ -11,10 +11,6 @@ This document explains how to search design documents using the `amaa_design_sea
 - 4.5 Glob Pattern Search
 - 4.6 Combined Filters
 - 4.7 Empty Results Handling
-- 4.8 Output Formats
-- 4.9 Script Reference
-
----
 
 ## 4.1 UUID Search
 

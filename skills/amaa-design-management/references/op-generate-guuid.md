@@ -9,15 +9,13 @@ operation: generate-guuid
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [GUUID Format Rules](#guuid-format-rules)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [Overview](#overview)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- GUUID Format Rules
+- Checklist
+- Examples
+- Error Handling
 
 ## When to Use
 

@@ -46,19 +46,19 @@ Copy this checklist and track your progress:
 
 | Document | Content |
 |----------|---------|
-| [github-actions.md](references/github-actions.md) | Workflows, runners, matrix builds (Use Cases, Overview, Workflow Structure, Runners) |
-| [cross-platform-builds.md](references/cross-platform-builds.md) | Runner matrix, multi-platform CI (Use Cases, Overview, Runner Matrix) |
-| [secret-management.md](references/secret-management.md) | Secret hierarchy, env secrets (Use Cases, Overview, Secret Hierarchy) |
-| [tdd-enforcement.md](references/tdd-enforcement.md) | Coverage, branch protection (Use Cases, Core Principles, TDD Pipeline Rules) |
-| [release-automation.md](references/release-automation.md) | Versioning, changelog (Use Cases, Overview, Complete Release Workflow) |
-| [release-automation-part1-complete-workflow.md](references/release-automation-part1-complete-workflow.md) | Release workflow (Tag-Triggered Release) |
-| [release-automation-part2-platform-publishing.md](references/release-automation-part2-platform-publishing.md) | Publishing (Platform-Specific Publishing, Homebrew, Docker Hub) |
-| [devops-debugging.md](references/devops-debugging.md) | Debug tools (Debug Script Template, Common Debugging Commands) |
-| [gh-cli-scripts.md](references/gh-cli-scripts.md) | CLI recipes (Repository Setup Script, Branch Protection Configuration) |
-| [platform-test-protocols.md](references/platform-test-protocols.md) | Test protocols (Language-Specific Test Commands) |
-| [github-actions-templates.md](references/github-actions-templates.md) | Templates (Multi-Platform CI Workflow Template, Release Workflow Template) |
-| [quick-reference-tables.md](references/quick-reference-tables.md) | Quick reference tables (GitHub Runners Matrix, Workflow Templates, Required Secrets per Platform) |
-| [error-handling-examples.md](references/error-handling-examples.md) | Error examples |
+| [github-actions.md](references/github-actions.md) | Use Cases (Quick Reference), Overview, Part 1: Workflow Basics and Runners, Part 2: Matrix Builds, Secrets, and Conditionals, Part 3: Reusable Workflows and Releases, Part 4: Debugging and Common Patterns, Quick Command Reference |
+| [cross-platform-builds.md](references/cross-platform-builds.md) | Use Cases (Quick Reference), Overview, Runner Matrix, Multi-Platform CI Workflow, Build Optimization, Checklist |
+| [secret-management.md](references/secret-management.md) | Use Cases (Quick Reference), Overview, Secret Hierarchy, Required Secrets by Platform, Using Secrets in Workflows, Security Best Practices, Debugging Secret Issues, Checklist |
+| [tdd-enforcement.md](references/tdd-enforcement.md) | Use Cases (Quick Reference), Overview, Core Principles, Coverage Requirements, Complete TDD Workflow, Test Skipping Policy, Mutation Testing, Debug Script, Checklist |
+| [release-automation.md](references/release-automation.md) | Use Cases (Quick Reference), Overview, Part Files, Release Pipeline Stages, Semantic Versioning, Version Bumping Automation, Changelog Generation, Checklist |
+| [release-automation-part1-complete-workflow.md](references/release-automation-part1-complete-workflow.md) | Table of Contents, Tag-Triggered Release |
+| [release-automation-part2-platform-publishing.md](references/release-automation-part2-platform-publishing.md) | Table of Contents, Platform-Specific Publishing, Debug Script |
+| [devops-debugging.md](references/devops-debugging.md) | Table of Contents, Debug Script Template, Common Debugging Commands, Troubleshooting Common Issues, Debug Workflow Checklist |
+| [gh-cli-scripts.md](references/gh-cli-scripts.md) | Table of Contents, Repository Setup Script, GraphQL Queries, Workflow Management Scripts, Secret Automation, Quick Reference |
+| [platform-test-protocols.md](references/platform-test-protocols.md) | Table of Contents, Language-Specific Test Commands, Cross-Platform Test Matrix, Coverage Configuration, Performance Testing, Test Protocol Checklist |
+| [github-actions-templates.md](references/github-actions-templates.md) | Table of Contents, Multi-Platform CI Workflow Template, Release Workflow Template, Security Scanning Workflow, GitHub Runners Matrix, Workflow Types Reference |
+| [quick-reference-tables.md](references/quick-reference-tables.md) | GitHub Runners Matrix, Workflow Templates, Required Secrets per Platform, TDD Enforcement Rules, Recommended Pipeline Stages, Debug Scripts, Handoff Protocol, Competency Index |
+| [error-handling-examples.md](references/error-handling-examples.md) | Error Handling, Examples |
 
 ## Examples
 

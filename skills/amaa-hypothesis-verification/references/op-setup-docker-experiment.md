@@ -8,14 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Example](#example)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Output
+- Example
+- Error Handling
+
 ## Purpose
 
 Set up an isolated Docker container environment for running experiments to verify claims and hypotheses safely without affecting the host system or production data.

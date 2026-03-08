@@ -10,8 +10,9 @@ Common API research scenarios and step-by-step approaches.
 - 2. Scenario 2: Research Python Library
 - 3. Scenario 3: Research Cloud Service API
 - 4. Scenario 4: Research GraphQL API
-
----
+- Types
+- Queries
+- Mutations
 
 ## 1. Scenario 1: Research REST API
 

@@ -8,8 +8,12 @@ Quality criteria and standards for technical documentation.
 
 - 1. Documentation Quality Criteria
 - 2. Feature Specification Example
+- Executive Summary
+- User Stories
+- Functional Requirements
+- Non-Functional Requirements
+- Data Model
 
----
 ## 1. Documentation Quality Criteria
 
 ### 1.1 Must Be (The 6 C's)

@@ -4,19 +4,14 @@ How the orchestrator manages LSP servers for remote AI agents.
 
 ## Table of Contents
 
-1. [Critical Distinction: Global vs Local](#critical-distinction-global-vs-local)
-2. [Overview](#overview)
-3. [Orchestrator Responsibilities](#orchestrator-responsibilities)
-4. [Command Reference](#command-reference)
-5. [Workflow Examples](#workflow-examples)
-6. [Task Assignment Template](#task-assignment-template)
-7. [JSON API for Automation](#json-api-for-automation)
-8. [Shared Package Handling](#shared-package-handling)
-9. [Troubleshooting](#troubleshooting)
-10. [Best Practices](#best-practices)
-11. [Local State File](#local-state-file)
-12. [Official Documentation](#official-documentation)
-13. [Supported Languages (13 total)](#supported-languages-13-total)
+- Critical Distinction: Global vs Local
+- Overview
+- Orchestrator Responsibilities
+- LSP Activation Required
+- Command Reference
+- Workflow Examples
+- Task Assignment Template
+
 ## Critical Distinction: Global vs Local
 
 **LSP management has TWO separate concerns:**

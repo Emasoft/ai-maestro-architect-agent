@@ -12,8 +12,6 @@ This document provides solutions for common issues when working with design docu
 - 6.6 Permission Issues
 - 6.7 Encoding Issues
 
----
-
 ## 6.1 UUID Generation Issues
 
 ### Duplicate UUID Generated

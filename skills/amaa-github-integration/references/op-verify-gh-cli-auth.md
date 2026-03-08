@@ -9,15 +9,13 @@ operation: verify-gh-cli-auth
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [Installation Commands](#installation-commands)
-- [Required Token Scopes](#required-token-scopes)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- Checklist
+- Examples
+- Installation Commands
+- Error Handling
 
 ## When to Use
 

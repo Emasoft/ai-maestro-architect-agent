@@ -8,16 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Base URL](#base-url)
-- [Authentication](#authentication)
-- [<Resource-1>](#resource-1)
-- [Error Responses](#error-responses)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Base URL
+- Authentication
+- <Resource-1>
+
 ## Purpose
 
 Create a comprehensive endpoints reference document that documents all API endpoints with methods, parameters, request/response formats, and examples.

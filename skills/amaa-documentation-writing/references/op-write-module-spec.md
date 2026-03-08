@@ -8,21 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Overview](#overview)
-- [Public Interface](#public-interface)
-- [Dependencies](#dependencies)
-- [Configuration](#configuration)
-- [Error Handling](#error-handling)
-- [Usage Examples](#usage-examples)
-- [Performance Considerations](#performance-considerations)
-- [Related Modules](#related-modules)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Usage Examples
+- Error Handling
+- Error Handling
+
 ## Purpose
 
 Write a comprehensive module specification document that describes a module's purpose, interfaces, dependencies, configuration, and implementation details.

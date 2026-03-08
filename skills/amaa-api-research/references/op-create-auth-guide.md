@@ -8,23 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Authentication Method](#authentication-method)
-- [Getting Credentials](#getting-credentials)
-- [Using Credentials](#using-credentials)
-- [Token Management](#token-management)
-- [Security Best Practices](#security-best-practices)
-- [Environment Setup](#environment-setup)
-- [Troubleshooting](#troubleshooting)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Example](#example)
-- [Authentication Method](#authentication-method)
-- [Getting Credentials](#getting-credentials)
-- [Using Credentials](#using-credentials)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Example
+- Authentication Method
+- Getting Credentials
+
 ## Purpose
 
 Create a comprehensive authentication guide that documents how to authenticate with the API, including credential setup, token management, and security best practices.

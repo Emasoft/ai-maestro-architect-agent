@@ -8,19 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Current Focus](#current-focus)
-- [Recent Decisions](#recent-decisions)
-- [Active Constraints](#active-constraints)
-- [Open Questions](#open-questions)
-- [Session Context Loaded](#session-context-loaded)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Example](#example)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Current Focus
+- Example
+- Error Handling
+
 ## Purpose
 
 Load existing session state and design context when starting a new session, enabling continuity from previous work.

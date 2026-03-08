@@ -14,8 +14,6 @@ Step-by-step procedure for creating documentation.
 - 6. Step 6: Quality Check
 - 7. Step 7: Commit and Report
 
----
-
 ## 1. Step 1: Receive and Parse Assignment
 
 **Action**: Read the orchestrator's task assignment and identify:

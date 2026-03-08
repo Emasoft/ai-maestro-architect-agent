@@ -12,8 +12,6 @@ This document explains how to validate design documents using the `amaa_design_v
 - 5.6 Required Frontmatter Fields
 - 5.7 Script Reference
 
----
-
 ## 5.1 Single File Validation
 
 Validate a specific document:

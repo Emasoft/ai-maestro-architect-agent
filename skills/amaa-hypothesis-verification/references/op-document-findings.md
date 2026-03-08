@@ -8,27 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Executive Summary](#executive-summary)
-- [Hypothesis](#hypothesis)
-- [Methodology](#methodology)
-- [Results](#results)
-- [Analysis](#analysis)
-- [Classification](#classification)
-- [Recommendations](#recommendations)
-- [Limitations](#limitations)
-- [Appendix](#appendix)
-- [References](#references)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Example](#example)
-- [Executive Summary](#executive-summary)
-- [Results Summary](#results-summary)
-- [Classification: UNVERIFIED](#classification-unverified)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Example
+- Executive Summary
+- Error Handling
+
 ## Purpose
 
 Create a comprehensive experimentation report documenting the hypothesis, methodology, results, and conclusions from the experiment.

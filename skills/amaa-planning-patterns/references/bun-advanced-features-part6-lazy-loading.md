@@ -1,19 +1,13 @@
 # Bun Advanced Features Part 6: Lazy Loading
 
 ## Table of Contents
-1. [What are Dynamic Imports?](#what-are-dynamic-imports)
-2. [Basic Dynamic Import Syntax](#basic-dynamic-import-syntax)
-3. [Simple Dynamic Import Example](#simple-dynamic-import-example)
-4. [Conditional Module Loading](#conditional-module-loading)
-5. [Feature-Based Dynamic Loading](#feature-based-dynamic-loading)
-6. [Dynamic Import with Error Handling](#dynamic-import-with-error-handling)
-7. [Plugin System with Dynamic Imports](#plugin-system-with-dynamic-imports)
-8. [Route-Based Code Splitting (Web App)](#route-based-code-splitting-web-app)
-9. [Locale/Translation Loading](#localetranslation-loading)
-10. [Building with Dynamic Imports](#building-with-dynamic-imports)
-11. [Dynamic Import Best Practices](#dynamic-import-best-practices)
-
----
+- What are Dynamic Imports?
+- Basic Dynamic Import Syntax
+- Simple Dynamic Import Example
+- Conditional Module Loading
+- Feature-Based Dynamic Loading
+- Dynamic Import with Error Handling
+- Plugin System with Dynamic Imports
 
 ## What are Dynamic Imports?
 

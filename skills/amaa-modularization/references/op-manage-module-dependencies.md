@@ -9,18 +9,13 @@ operation: manage-module-dependencies
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [Module Dependency Graph](#module-dependency-graph)
-- [Shared Module Structure](#shared-module-structure)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [Dependency Graph](#dependency-graph)
-- [Dependency Rules](#dependency-rules)
-- [Allowed Dependencies Matrix](#allowed-dependencies-matrix)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- Module Dependency Graph
+- Shared Module Structure
+- Examples
+- Error Handling
 
 ## When to Use
 

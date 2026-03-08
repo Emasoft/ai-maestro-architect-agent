@@ -8,10 +8,11 @@ Templates for experiment documentation and prototype archiving.
 
 - 1. Experiment Directory Structure
 - 2. Experimentation Report Template
-- 3. Prototype Archive Policy
-- 4. Archive README Template
-
----
+- Hypothesis
+- Candidates Tested
+- Experimental Setup
+- Results
+- Evidence-Based Conclusions
 
 ## 1. Experiment Directory Structure
 

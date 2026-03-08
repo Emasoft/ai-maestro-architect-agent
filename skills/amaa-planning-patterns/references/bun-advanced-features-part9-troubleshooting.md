@@ -3,31 +3,8 @@
 
 ## Table of Contents
 
-### Part 1: Edge Cases
-**File:** [bun-advanced-features-part9-troubleshooting-part1-edge-cases.md](./bun-advanced-features-part9-troubleshooting-part1-edge-cases.md)
-
-- 1.1 Monorepo / Workspaces
-- 1.2 Dynamic Imports
-- 1.3 Binary / Native Modules
-- 1.4 JSON Imports
-
----
-
-### Part 2: Troubleshooting
-**File:** [bun-advanced-features-part9-troubleshooting-part2-troubleshooting.md](./bun-advanced-features-part9-troubleshooting-part2-troubleshooting.md)
-
-- 2.1 Code Splitting Issues
-- 2.2 Tree Shaking Issues
-- 2.3 Drop Console/Debugger Issues
-- 2.4 Banner/Footer Issues
-- 2.5 Standalone Executable Issues
-- 2.6 Monorepo/Workspace Issues
-- 2.7 Dynamic Import Issues
-- 2.8 Native Module Issues
-- 2.9 JSON Import Issues
-- 2.10 General Build Issues
-
----
+- Overview
+- Summary
 
 ## Overview
 

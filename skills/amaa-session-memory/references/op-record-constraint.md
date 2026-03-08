@@ -8,17 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Active Constraints](#active-constraints)
-- [Resolved Constraints](#resolved-constraints)
-- [Constraint Recorded](#constraint-recorded)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Example](#example)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Active Constraints
+- Example
+- Error Handling
+
 ## Purpose
 
 Record when a constraint is discovered during design analysis, ensuring the constraint and its impact are documented and tracked.

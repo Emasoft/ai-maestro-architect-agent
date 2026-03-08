@@ -3,17 +3,14 @@
 
 ## Contents
 
-- [Overview](#overview)
-- [Handoff Validation Checklist](#handoff-validation-checklist)
-- [Handoff Document Template](#handoff-document-template)
-- [Executive Summary](#executive-summary)
-- [Design Artifacts](#design-artifacts)
-- [Implementation Sequence](#implementation-sequence)
-- [Risks and Mitigations](#risks-and-mitigations)
-- [Success Criteria for AMOA](#success-criteria-for-eoa)
-- [Open Questions](#open-questions)
-- [Notes](#notes)
-- [Template Field Guide](#template-field-guide)
+- Overview
+- Handoff Validation Checklist
+- Handoff Document Template
+- Executive Summary
+- Design Artifacts
+- Implementation Sequence
+- Risks and Mitigations
+
 ## Overview
 
 **Location:** `docs_dev/design/handoffs/`

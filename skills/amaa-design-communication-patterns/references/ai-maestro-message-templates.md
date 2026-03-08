@@ -3,19 +3,13 @@
 
 ## Contents
 
-- **1.1** Sending acknowledgment when receiving a design request from AMCOS
-- **1.2** Requesting clarification from AMCOS for ambiguous requirements
-- **1.3** Reporting design completion to AMCOS
-- **1.4** Notifying AMCOS that handoff document is ready for AMOA
-- **1.5** Reporting blocker that prevents design progress
-- **1.6** Verifying ACK receipt after sending a message
-- **1.7** Retrying message when ACK not received within 30 seconds
-- **1.8** Escalating to AMCOS when ACK timeout occurs after retry
-
----
-
-This document provides all message templates and format examples for the AI Maestro Architect Agent (AMAA) to communicate via AI Maestro using the `agent-messaging` skill.
-
+- 1.1 Sending Acknowledgment When Receiving Design Request from AMCOS
+- 1.2 Requesting Clarification from AMCOS for Ambiguous Requirements
+- 1.3 Reporting Design Completion to AMCOS
+- 1.4 Notifying AMCOS That Handoff Document is Ready for AMOA
+- 1.5 Reporting Blocker That Prevents Design Progress
+- 1.6 Verifying ACK Receipt After Sending a Message
+- Example: Complete Message Send and Verify Workflow
 
 ## 1.1 Sending Acknowledgment When Receiving Design Request from AMCOS
 

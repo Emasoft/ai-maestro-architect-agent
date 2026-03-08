@@ -6,11 +6,8 @@
 - 3.3 Approve plan syntax and options
 - 3.4 Validation checks performed
 - 3.5 GitHub Issue creation process
-- 3.6 State file transitions
-- 3.7 Post-approval next steps
+- Module: {module_name}
 - 3.8 Approval workflow example
-
----
 
 ## 3.1 When to approve the plan
 

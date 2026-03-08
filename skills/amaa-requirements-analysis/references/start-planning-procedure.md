@@ -6,9 +6,8 @@
 - 1.3 Command syntax and arguments
 - 1.4 What the command creates
 - 1.5 Post-initialization steps
+- Functional Requirements
 - 1.6 Example workflow after starting planning
-
----
 
 ## 1.1 When to use /amaa-start-planning command
 

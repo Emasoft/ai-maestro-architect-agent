@@ -1,18 +1,13 @@
 # Bun Advanced Features Part 9.2: Troubleshooting
 
 ## Table of Contents
-- 2.1 [Code Splitting Issues](#code-splitting-issues)
-- 2.2 [Tree Shaking Issues](#tree-shaking-issues)
-- 2.3 [Drop Console/Debugger Issues](#drop-consoledebugger-issues)
-- 2.4 [Banner/Footer Issues](#bannerfooter-issues)
-- 2.5 [Standalone Executable Issues](#standalone-executable-issues)
-- 2.6 [Monorepo/Workspace Issues](#monorepoworkspace-issues)
-- 2.7 [Dynamic Import Issues](#dynamic-import-issues)
-- 2.8 [Native Module Issues](#native-module-issues)
-- 2.9 [JSON Import Issues](#json-import-issues)
-- 2.10 [General Build Issues](#general-build-issues)
-
----
+- Code Splitting Issues
+- Tree Shaking Issues
+- Drop Console/Debugger Issues
+- Banner/Footer Issues
+- Standalone Executable Issues
+- Monorepo/Workspace Issues
+- Dynamic Import Issues
 
 ## Code Splitting Issues
 

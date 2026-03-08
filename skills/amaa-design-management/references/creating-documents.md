@@ -6,13 +6,11 @@ This document explains how to create new design documents using the `amaa_design
 
 - 3.1 Basic Document Creation
 - 3.2 Required Arguments
-- 3.3 Optional Fields (author, description)
+- 3.3 Optional Fields
 - 3.4 Custom Filenames
 - 3.5 Post-Creation Validation
 - 3.6 Creation Error Handling
 - 3.7 Script Reference
-
----
 
 ## 3.1 Basic Document Creation
 

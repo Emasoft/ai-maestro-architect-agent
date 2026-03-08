@@ -9,15 +9,13 @@ operation: monitor-github-project
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [[TIMESTAMP]](#timestamp)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [What to Monitor](#what-to-monitor)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- [TIMESTAMP]
+- Checklist
+- Examples
+- Error Handling
 
 ## When to Use
 

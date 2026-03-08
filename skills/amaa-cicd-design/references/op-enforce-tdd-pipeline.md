@@ -8,14 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Example](#example)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Output
+- Example
+- Error Handling
+
 ## Purpose
 
 Configure CI/CD pipelines to enforce Test-Driven Development practices including coverage thresholds, test-first checks, and quality gates.

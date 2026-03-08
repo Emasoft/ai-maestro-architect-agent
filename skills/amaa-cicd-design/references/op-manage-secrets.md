@@ -8,16 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Repository Secrets](#repository-secrets)
-- [Environment Secrets](#environment-secrets)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Example](#example)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Repository Secrets
+- Example
+- Error Handling
+
 ## Purpose
 
 Configure and manage GitHub secrets for secure credential storage and usage in workflows, including repository, environment, and organization secrets.

@@ -9,18 +9,13 @@ operation: identify-risks
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [Risk Register](#risk-register)
-- [Risk Monitoring](#risk-monitoring)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [Identified Risks](#identified-risks)
-- [Risk Matrix](#risk-matrix)
-- [Top Risks Summary](#top-risks-summary)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- Risk Register
+- Risk Monitoring
+- Examples
+- Error Handling
 
 ## When to Use
 

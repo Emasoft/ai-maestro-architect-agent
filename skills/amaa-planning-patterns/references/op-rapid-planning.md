@@ -9,26 +9,13 @@ operation: rapid-planning
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [Quick Architecture](#quick-architecture)
-- [Top 5 Blocking Risks](#top-5-blocking-risks)
-- [Quick Roadmap](#quick-roadmap)
-- [Immediate Plan (Next 5 Days)](#immediate-plan-next-5-days)
-- [Later Phases (High Level)](#later-phases-high-level)
-- [Key Principle](#key-principle)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [Quick Architecture (45 min)](#quick-architecture-45-min)
-- [Quick Risks (20 min)](#quick-risks-20-min)
-- [Quick Roadmap (15 min)](#quick-roadmap-15-min)
-- [Immediate Tasks (40 min)](#immediate-tasks-40-min)
-- [Unknowns (to resolve this week)](#unknowns-to-resolve-this-week)
-- [Follow-up Planning](#follow-up-planning)
-- [Rapid Planning Session Agenda](#rapid-planning-session-agenda)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- Quick Architecture
+- Top 5 Blocking Risks
+- Examples
+- Error Handling
 
 ## When to Use
 

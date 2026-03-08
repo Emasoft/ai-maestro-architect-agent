@@ -4,15 +4,13 @@ This document defines all standard formats for record-keeping, logging, and docu
 
 ## Contents
 
-1. [Requirements Log Format](#requirements-log-format)
-2. [Design Artifacts Structure](#design-artifacts-structure)
-3. [ADR Template](#adr-template)
-4. [Handoff Document Template](#handoff-document-template)
-5. [Handoff Validation Checklist](#handoff-validation-checklist)
-6. [AI Maestro Message Formats](#ai-maestro-message-formats)
-7. [File Organization Rules](#file-organization-rules)
-
----
+- Requirements Log Format
+- [TIMESTAMP] - [PROJECT_NAME]
+- Design Artifacts Structure
+- ADR Template
+- Context
+- Decision
+- Alternatives Considered
 
 ## Requirements Log Format
 

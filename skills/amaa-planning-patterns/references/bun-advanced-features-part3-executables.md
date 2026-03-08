@@ -1,18 +1,13 @@
 # Bun Advanced Features Part 3: Standalone Executables
 
 ## Table of Contents
-1. [What is a Standalone Executable?](#what-is-a-standalone-executable)
-2. [Why Create Standalone Executables?](#why-create-standalone-executables)
-3. [Creating a Basic Executable](#creating-a-basic-executable)
-4. [Executable with Dependencies](#executable-with-dependencies)
-5. [Cross-Platform Executables](#cross-platform-executables)
-6. [CLI Application Example](#cli-application-example)
-7. [Including Static Assets](#including-static-assets)
-8. [Server Application Example](#server-application-example)
-9. [Executable Best Practices](#executable-best-practices)
-10. [Executable Size Optimization](#executable-size-optimization)
-
----
+- What is a Standalone Executable?
+- Why Create Standalone Executables?
+- Creating a Basic Executable
+- Executable with Dependencies
+- Cross-Platform Executables
+- CLI Application Example
+- Server Application Example
 
 ## What is a Standalone Executable?
 

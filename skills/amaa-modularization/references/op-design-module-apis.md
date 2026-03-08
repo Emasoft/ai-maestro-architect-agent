@@ -9,22 +9,13 @@ operation: design-module-apis
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [Module: AuthModule](#module-authmodule)
-- [API Contract: authenticate()](#api-contract-authenticate)
-- [DTOs: AuthModule](#dtos-authmodule)
-- [Versioning Rules](#versioning-rules)
-- [Error Contract](#error-contract)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [Public Interface](#public-interface)
-- [DTOs](#dtos)
-- [Error Codes](#error-codes)
-- [API Contract: createOrder()](#api-contract-createorder)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- Module: AuthModule
+- API Contract: authenticate()
+- Examples
+- Error Handling
 
 ## When to Use
 

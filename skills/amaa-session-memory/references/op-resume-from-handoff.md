@@ -8,16 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Open Questions Requiring Attention](#open-questions-requiring-attention)
-- [Session Resumed from Handoff](#session-resumed-from-handoff)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Quick Resume Commands](#quick-resume-commands)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Open Questions Requiring Attention
+- Session Resumed from Handoff
+- Error Handling
+
 ## Purpose
 
 Restore session context from a handoff document, enabling seamless continuation of design work from a previous session.

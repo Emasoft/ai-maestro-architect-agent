@@ -7,12 +7,12 @@ Templates for API research documentation deliverables.
 ## Table of Contents
 
 - 1. API Overview Document
-- 2. Authentication Guide
-- 3. Endpoints Reference
-- 4. Integration Guide
-- 5. Configuration Template
-
----
+- Description
+- Official Resources
+- Capabilities
+- Limitations
+- Example Configuration
+- Prerequisites
 
 ## 1. API Overview Document
 

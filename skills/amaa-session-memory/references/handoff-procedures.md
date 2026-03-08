@@ -2,10 +2,14 @@
 
 ## Table of Contents
 
-- [When to Create Handoff Documents](#when-to-create-handoff-documents)
-- [Handoff Document Types](#handoff-document-types)
-- [Handoff Document Structure](#handoff-document-structure)
-- [Examples](#examples)
+- When to Create Handoff Documents
+- Handoff Document Types
+- Handoff Document Structure
+- Examples
+- Decision
+- Rationale
+- Alternatives Considered
+
 ## When to Create Handoff Documents
 
 Create a handoff document when:

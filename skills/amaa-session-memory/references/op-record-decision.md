@@ -8,29 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Status](#status)
-- [Context](#context)
-- [Decision](#decision)
-- [Rationale](#rationale)
-- [Alternatives Considered](#alternatives-considered)
-- [Consequences](#consequences)
-- [Implementation Impact](#implementation-impact)
-- [Related](#related)
-- [Decision Recorded](#decision-recorded)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Example](#example)
-- [Status](#status)
-- [Context](#context)
-- [Decision](#decision)
-- [Rationale](#rationale)
-- [Alternatives Considered](#alternatives-considered)
-- [Consequences](#consequences)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Example
+- Status
+- Error Handling
+
 ## Purpose
 
 Create an Architecture Decision Record (ADR) when a significant architecture decision is made, ensuring the decision and its rationale are preserved.

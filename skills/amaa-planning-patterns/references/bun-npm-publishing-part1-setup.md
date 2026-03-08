@@ -1,15 +1,14 @@
 # npm Publishing with Bun - Part 1: Setup & Configuration
 
 ## Table of Contents
-1. [OIDC Trusted Publishing](#oidc-trusted-publishing)
-2. [Traditional npm Token Publishing](#traditional-npm-token-publishing)
-3. [Version Management](#version-management)
-4. [Pre-publish Validation](#pre-publish-validation)
-5. [Registry Configuration](#registry-configuration)
+- OIDC Trusted Publishing
+- Step 1: Configure npm Package
+- Step 2: Required Permissions
+- Step 3: Registry URL Required
+- Step 4: Use npm (NOT bun) for Publishing
+- Scoped Packages
+- Critical Lessons Learned
 
-**See also**: [Part 2: Advanced Publishing](./bun-npm-publishing-part2-advanced.md)
-
----
 ## OIDC Trusted Publishing
 
 ## Step 1: Configure npm Package

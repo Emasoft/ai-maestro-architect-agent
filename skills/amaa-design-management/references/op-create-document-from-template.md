@@ -9,20 +9,13 @@ operation: create-document-from-template
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [Overview](#overview)
-- [Background](#background)
-- [Requirements](#requirements)
-- [Proposed Design](#proposed-design)
-- [Alternatives Considered](#alternatives-considered)
-- [Implementation Plan](#implementation-plan)
-- [References](#references)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- Checklist
+- Examples
+- Overview
+- Error Handling
 
 ## When to Use
 

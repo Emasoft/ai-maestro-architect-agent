@@ -8,22 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [What is <API-Name>?](#what-is-api-name)
-- [Key Features](#key-features)
-- [Use Cases](#use-cases)
-- [Quick Facts](#quick-facts)
-- [When to Use](#when-to-use)
-- [Related Documents](#related-documents)
-- [Official Resources](#official-resources)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Example](#example)
-- [What is Stripe?](#what-is-stripe)
-- [Key Features](#key-features)
+- Purpose
+- Inputs
+- Procedure
+- What is <API-Name>?
+- When to Use
+- When to Use
+- Example
+
 ## Purpose
 
 Create a high-level API overview document that describes the API's purpose, key features, capabilities, and when to use it.

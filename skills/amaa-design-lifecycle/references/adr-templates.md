@@ -10,10 +10,6 @@
 - Rationale
 - Consequences
 - Related Decisions
-- Notes
-- Usage Guidelines
-
-This document provides Architecture Decision Record (ADR) templates extracted from the AMAA Architect Main Agent.
 
 ## Standard ADR Template
 

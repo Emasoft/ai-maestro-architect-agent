@@ -10,14 +10,13 @@ description: "Validate effort estimates."
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [Example](#example)
-- [Effort Guidelines](#effort-guidelines)
-- [Error Handling](#error-handling)
-- [Notes](#notes)
+- Purpose
+- When to Use
+- Prerequisites
+- Procedure
+- Example
+- Effort Guidelines
+- Error Handling
 
 ## Purpose
 

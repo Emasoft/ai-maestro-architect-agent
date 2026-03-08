@@ -8,17 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Applied Patterns](#applied-patterns)
-- [Pattern Recorded](#pattern-recorded)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Pattern Categories](#pattern-categories)
-- [Example](#example)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Applied Patterns
+- Example
+- Error Handling
+
 ## Purpose
 
 Record when a design pattern is selected for application to a component or module, preserving the pattern choice and its justification.

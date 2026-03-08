@@ -8,25 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Purpose](#purpose)
-- [Background](#background)
-- [What This Prototype Does](#what-this-prototype-does)
-- [How to Use](#how-to-use)
-- [File Structure](#file-structure)
-- [Limitations](#limitations)
-- [When to Use This](#when-to-use-this)
-- [Adapting for Production](#adapting-for-production)
-- [Related Resources](#related-resources)
-- [Maintainer](#maintainer)
-- [License](#license)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Example](#example)
-- [Error Handling](#error-handling)
+- When to Use
+- Inputs
+- Procedure
+- Purpose
+- When to Use This
+- Example
+- Error Handling
+
 ## Purpose
 
 Archive a prototype from an experiment that has value for future reference, reuse, or as a starting point for implementation.

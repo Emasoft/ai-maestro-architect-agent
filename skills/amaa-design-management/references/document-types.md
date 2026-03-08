@@ -11,9 +11,6 @@ This document describes the six document type categories used in the design/ dir
 - 2.5 Decision Documents (decision/)
 - 2.6 Architecture Documents (architecture/)
 - 2.7 Template Documents (template/)
-- 2.8 Directory Structure
-
----
 
 ## 2.1 Type Selection Guide
 

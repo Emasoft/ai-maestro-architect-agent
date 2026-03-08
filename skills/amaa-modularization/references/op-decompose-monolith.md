@@ -9,32 +9,13 @@ operation: decompose-monolith
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [Strangler Fig Stages](#strangler-fig-stages)
-- [Extraction Priority](#extraction-priority)
-- [Facade Routing Configuration](#facade-routing-configuration)
-- [Data Migration Strategy](#data-migration-strategy)
-- [Traffic Shift Schedule](#traffic-shift-schedule)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [Current State](#current-state)
-- [Target State](#target-state)
-- [Phase 1: Foundation (Weeks 1-4)](#phase-1-foundation-weeks-1-4)
-- [Phase 2: Auth (Weeks 5-8)](#phase-2-auth-weeks-5-8)
-- [Phase 3: Catalog (Weeks 9-14)](#phase-3-catalog-weeks-9-14)
-- [Phase 4-7: Remaining Modules (Weeks 15-30)](#phase-4-7-remaining-modules-weeks-15-30)
-- [Phase 8: Retirement (Weeks 31-32)](#phase-8-retirement-weeks-31-32)
-- [Risk Mitigation](#risk-mitigation)
-- [Pre-Extraction](#pre-extraction)
-- [Infrastructure](#infrastructure)
-- [Implementation](#implementation)
-- [Data Migration](#data-migration)
-- [Traffic Shift](#traffic-shift)
-- [Cleanup](#cleanup)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- Strangler Fig Stages
+- Extraction Priority
+- Examples
+- Error Handling
 
 ## When to Use
 

@@ -9,17 +9,13 @@ description: "Module boundary identification patterns."
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Core Principle](#core-principle)
-- [Step 1: Map Domain Concepts](#step-1-map-domain-concepts)
-- [Step 2: Identify Change Vectors](#step-2-identify-change-vectors)
-- [Step 3: Find Natural Seams](#step-3-find-natural-seams)
-- [Step 4: Define Bounded Contexts](#step-4-define-bounded-contexts)
-- [Step 5: Validate Boundaries](#step-5-validate-boundaries)
-- [Common Boundary Patterns](#common-boundary-patterns)
-- [Anti-Patterns](#anti-patterns)
-- [Decision Framework](#decision-framework)
-- [Summary](#summary)
+- Overview
+- Core Principle
+- Step 1: Map Domain Concepts
+- Step 2: Identify Change Vectors
+- Step 3: Find Natural Seams
+- Step 4: Define Bounded Contexts
+- Step 5: Validate Boundaries
 
 ## Overview
 

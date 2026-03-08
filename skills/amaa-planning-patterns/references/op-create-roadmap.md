@@ -9,22 +9,13 @@ operation: create-roadmap
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [Phases](#phases)
-- [Phase Dependencies](#phase-dependencies)
-- [Milestones](#milestones)
-- [Resource Allocation](#resource-allocation)
-- [Master Roadmap](#master-roadmap)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [Timeline: 8 Weeks](#timeline-8-weeks)
-- [Total Effort: 80 person-days](#total-effort-80-person-days)
-- [Buffer: 16 person-days (20%)](#buffer-16-person-days-20)
-- [Total with Buffer: 96 person-days](#total-with-buffer-96-person-days)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- Phases
+- Phase Dependencies
+- Examples
+- Error Handling
 
 ## When to Use
 

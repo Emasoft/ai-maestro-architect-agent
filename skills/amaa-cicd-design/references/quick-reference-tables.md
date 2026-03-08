@@ -2,14 +2,13 @@
 
 ## Table of Contents
 
-- [GitHub Runners Matrix](#github-runners-matrix)
-- [Workflow Templates](#workflow-templates)
-- [Required Secrets per Platform](#required-secrets-per-platform)
-- [TDD Enforcement Rules](#tdd-enforcement-rules)
-- [Recommended Pipeline Stages](#recommended-pipeline-stages)
-- [Debug Scripts](#debug-scripts)
-- [Handoff Protocol](#handoff-protocol)
-- [Competency Index](#competency-index)
+- GitHub Runners Matrix
+- Workflow Templates
+- Required Secrets per Platform
+- TDD Enforcement Rules
+- Recommended Pipeline Stages
+- Debug Scripts
+- Handoff Protocol
 
 ## GitHub Runners Matrix
 

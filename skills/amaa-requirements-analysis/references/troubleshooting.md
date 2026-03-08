@@ -2,16 +2,12 @@
 
 ## Table of Contents
 - 5.1 When /amaa-start-planning fails
-- 5.2 When checking planning status shows errors
+- 5.2 When Checking Planning Status Shows Errors
 - 5.3 When /amaa-add-requirement fails
 - 5.4 When /amaa-modify-requirement fails
 - 5.5 When /amaa-remove-requirement fails
-- 5.6 When plan approval fails
+- 5.6 When Plan Approval Fails
 - 5.7 State file corruption recovery
-- 5.8 GitHub Issue creation problems
-- 5.9 Exit blocking issues
-
----
 
 ## 5.1 When /amaa-start-planning fails
 

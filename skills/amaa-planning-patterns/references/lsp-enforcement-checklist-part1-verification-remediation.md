@@ -2,22 +2,10 @@
 
 
 ## Table of Contents
-1. [Pre-Assignment Checks](#pre-assignment-checks)
-2. [Installation Verification](#installation-verification)
-3. [Automated Verification](#automated-verification)
-4. [Remediation Procedures](#remediation-procedures)
-
-**Related Documents:**
-- [Part 2: Remediation](./lsp-enforcement-checklist-part2-remediation.md)
-- [Part 3: Verification](./lsp-enforcement-checklist-part3-verification.md)
-- [Part 4: Troubleshooting Core](./lsp-enforcement-checklist-part4-troubleshooting-core.md)
-- [Part 5: Troubleshooting Extended](./lsp-enforcement-checklist-part5-troubleshooting-extended.md)
-- [Index](./lsp-enforcement-checklist.md)
-
----
-
-Covers pre-assignment checks, installation verification, and remediation procedures for all 11 languages supported by Claude Code LSP (December 2025).
-
+- Pre-Assignment Checks
+- Installation Verification
+- Automated Verification
+- Remediation Procedures
 
 ## Pre-Assignment Checks
 

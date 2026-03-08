@@ -9,14 +9,13 @@ operation: generate-design-uuid
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [UUID Format Rules](#uuid-format-rules)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- Checklist
+- Examples
+- UUID Format Rules
+- Error Handling
 
 ## When to Use
 

@@ -10,28 +10,13 @@ description: Operation procedure for creating Architecture Decision Record (ADR)
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [Status](#status)
-- [Context](#context)
-- [Decision Drivers](#decision-drivers)
-- [Considered Options](#considered-options)
-- [Decision](#decision)
-- [Consequences](#consequences)
-- [Related Issues](#related-issues)
-- [Example](#example)
-- [Status](#status)
-- [Context](#context)
-- [Decision Drivers](#decision-drivers)
-- [Considered Options](#considered-options)
-- [Decision](#decision)
-- [Consequences](#consequences)
-- [Related Issues](#related-issues)
-- [ADR Status Values](#adr-status-values)
-- [Error Handling](#error-handling)
-- [Notes](#notes)
+- Purpose
+- When to Use
+- Prerequisites
+- Procedure
+- Example
+- Status
+- Error Handling
 
 ## Purpose
 

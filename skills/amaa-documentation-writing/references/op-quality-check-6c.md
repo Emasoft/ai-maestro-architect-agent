@@ -8,17 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Summary](#summary)
-- [Issues Found](#issues-found)
-- [Recommendation](#recommendation)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Quality Thresholds](#quality-thresholds)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Summary
+- Issues Found
+- Error Handling
+
 ## Purpose
 
 Verify documentation quality against the 6 C's framework: Complete, Correct, Clear, Consistent, Current, and Connected.

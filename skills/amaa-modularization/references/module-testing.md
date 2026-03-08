@@ -9,16 +9,13 @@ description: "Testing strategies for modular systems."
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Testing Pyramid for Modular Systems](#testing-pyramid-for-modular-systems)
-- [Unit Testing Modules](#unit-testing-modules)
-- [Mocking Module Dependencies](#mocking-module-dependencies)
-- [Contract Testing](#contract-testing)
-- [Integration Testing](#integration-testing)
-- [Test Doubles Taxonomy](#test-doubles-taxonomy)
-- [Testing Strategies by Module Type](#testing-strategies-by-module-type)
-- [Test Data Management](#test-data-management)
-- [Summary](#summary)
+- Overview
+- Testing Pyramid for Modular Systems
+- Unit Testing Modules
+- Mocking Module Dependencies
+- Contract Testing
+- Integration Testing
+- Test Doubles Taxonomy
 
 ## Overview
 

@@ -9,18 +9,13 @@ operation: report-requirement-issue
 
 ## Contents
 
-- [When to Use](#when-to-use)
-- [Prerequisites](#prerequisites)
-- [Procedure](#procedure)
-- [Checklist](#checklist)
-- [Examples](#examples)
-- [Issue Details](#issue-details)
-- [Issue Description](#issue-description)
-- [Proposed Alternatives](#proposed-alternatives)
-- [User Decision](#user-decision)
-- [Impact](#impact)
-- [Error Handling](#error-handling)
-- [Related Operations](#related-operations)
+- When to Use
+- Prerequisites
+- Procedure
+- Checklist
+- Examples
+- Issue Details
+- Error Handling
 
 ## When to Use
 

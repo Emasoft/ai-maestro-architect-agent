@@ -8,9 +8,6 @@
 - 4.5 Modules schema
 - 4.6 Exit criteria schema
 - 4.7 Reading and parsing the state file
-- 4.8 State file lifecycle
-
----
 
 ## 4.1 Plan phase state file location and purpose
 

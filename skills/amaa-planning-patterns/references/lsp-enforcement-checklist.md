@@ -4,12 +4,13 @@ Covers all 11 languages supported by Claude Code LSP (December 2025).
 
 ## Table of Contents
 
-1. [Pre-Assignment Checks](#pre-assignment-checks)
-2. [Installation Verification](#installation-verification)
-3. [Remediation Procedures](#remediation-procedures)
-4. [Post-Assignment Verification](#post-assignment-verification)
-5. [Orchestrator Enforcement](#orchestrator-enforcement)
-6. [Troubleshooting Guide](#troubleshooting-guide)
+- Document Structure
+- Quick Reference: Supported Languages
+- Pre-Assignment Checks
+- Installation Verification
+- Remediation Procedures
+- Post-Assignment Verification
+- Orchestrator Enforcement
 
 ## Document Structure
 

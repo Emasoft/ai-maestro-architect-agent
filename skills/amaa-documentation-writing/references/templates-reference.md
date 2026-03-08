@@ -7,11 +7,12 @@ Templates for module specifications, API contracts, and architecture decision re
 ## Table of Contents
 
 - 1. Module Specification Template
-- 2. API Contract Template
-- 3. Architecture Decision Record (ADR) Template
+- Purpose
+- Responsibilities
+- Public Interface
+- Error Handling
+- Examples
 - 4. Input Format Examples
-
----
 
 ## 1. Module Specification Template
 

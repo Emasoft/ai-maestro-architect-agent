@@ -2,13 +2,14 @@
 
 ## Table of Contents
 
-1. [Purpose](#purpose)
-2. [Linking Requirements](#linking-requirements)
-3. [Plan File Naming Convention](#plan-file-naming-convention)
-4. [Automatic Linking](#automatic-linking)
-5. [Progress Synchronization](#progress-synchronization)
-6. [Traceability Matrix](#traceability-matrix)
-7. [Orphan Detection](#orphan-detection)
+- Purpose
+- Linking Requirements
+- Overview
+- Implementation Plan
+- Sub-Plans
+- Plan File Naming Convention
+- Automatic Linking
+
 ## Purpose
 
 Every implementation plan MUST be linked to GitHub issues for traceability and progress tracking.

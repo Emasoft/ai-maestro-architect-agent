@@ -7,11 +7,7 @@
 - 2.4 When to modify existing requirements
 - 2.5 Modify requirement syntax and arguments
 - 2.6 When to remove requirements
-- 2.7 Remove requirement syntax and restrictions
-- 2.8 State file changes after operations
 - 2.9 Common operation examples
-
----
 
 ## 2.1 When to add a new requirement section
 

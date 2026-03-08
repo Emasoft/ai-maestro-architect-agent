@@ -1,18 +1,13 @@
 # Bun Advanced Features Part 4: Browser Builds
 
 ## Table of Contents
-1. [What is CDN and Browser Usage?](#what-is-cdn-and-browser-usage)
-2. [Why Target Browsers and CDNs?](#why-target-browsers-and-cdns)
-3. [Creating a Browser-Compatible Bundle](#creating-a-browser-compatible-bundle)
-4. [Creating Multiple Module Formats](#creating-multiple-module-formats)
-5. [ESM for Modern Browsers](#esm-for-modern-browsers)
-6. [CDN-Ready Package Structure](#cdn-ready-package-structure)
-7. [Import Maps for ESM](#import-maps-for-esm)
-8. [Polyfills and Browser Compatibility](#polyfills-and-browser-compatibility)
-9. [Source Maps for Browser Debugging](#source-maps-for-browser-debugging)
-10. [CDN and Browser Best Practices](#cdn-and-browser-best-practices)
-
----
+- What is CDN and Browser Usage?
+- Why Target Browsers and CDNs?
+- Creating a Browser-Compatible Bundle
+- Creating Multiple Module Formats
+- ESM for Modern Browsers
+- CDN-Ready Package Structure
+- Import Maps for ESM
 
 ## What is CDN and Browser Usage?
 

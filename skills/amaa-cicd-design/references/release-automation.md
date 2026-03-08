@@ -3,16 +3,14 @@
 
 ## Contents
 
-- [Use Cases (Quick Reference)](#use-cases-quick-reference)
-- [Overview](#overview)
-- [Part Files](#part-files)
-- [Release Pipeline Stages](#release-pipeline-stages)
-- [Semantic Versioning](#semantic-versioning)
-- [Version Bumping Automation](#version-bumping-automation)
-- [Changelog Generation](#changelog-generation)
-- [Checklist](#checklist)
+- Use Cases (Quick Reference)
+- Overview
+- Part Files
+- Release Pipeline Stages
+- Semantic Versioning
+- Version Bumping Automation
+- Changelog Generation
 
----
 ## Use Cases (Quick Reference)
 
 - When you need to understand the release workflow stages → [Release Pipeline Stages](#release-pipeline-stages)

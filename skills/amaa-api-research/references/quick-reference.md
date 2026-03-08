@@ -2,43 +2,11 @@
 
 ## Table of Contents
 
-### Research Procedures
-For the step-by-step research workflow, see [research-procedure.md](research-procedure.md):
-- 1. Step 1: Understand Requirements
-- 2. Step 2: Gather Information
-- 3. Step 3: Document Findings
-- 4. Step 4: Report to Orchestrator
+- Research Output Files
+- Research Workflow
+- Communication Formats
+- Extended Examples
 
-### Output Templates
-For all documentation templates, see [output-templates.md](output-templates.md):
-- 1. API Overview Document Template
-- 2. Authentication Guide Template
-- 3. Endpoints Reference Template
-- 4. Integration Guide Template
-- 5. Configuration Template
-
-### Tools Reference
-For available tools and usage, see [tools-reference.md](tools-reference.md):
-- 1. Read Tool - for local files
-- 2. WebFetch Tool - for online documentation
-- 3. WebSearch Tool - for finding resources
-- 4. Write Tool - for documentation output
-- 5. Glob/Grep Tools - for finding existing code
-
-### Research Scenarios
-For common research patterns, see [research-scenarios.md](research-scenarios.md):
-- 1. Scenario 1: Research REST API
-- 2. Scenario 2: Research Python Library
-- 3. Scenario 3: Research Cloud Service API
-- 4. Scenario 4: Research GraphQL API
-
-### Collaboration Patterns
-For interaction with other agents, see [collaboration-patterns.md](collaboration-patterns.md):
-- 1. Integration with Orchestrator
-- 2. Handling Blockers
-- 3. Handoff Protocol
-- 4. Collaboration with Other Agents
-- 5. Best Practices
 ## Research Output Files
 
 | File | Template | Purpose |

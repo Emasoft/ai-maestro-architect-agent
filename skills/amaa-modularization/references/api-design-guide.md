@@ -9,16 +9,13 @@ description: "Module API design principles and patterns."
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Core API Design Principles](#core-api-design-principles)
-- [API Contract Templates](#api-contract-templates)
-- [Versioning Strategy](#versioning-strategy)
-- [Compatibility Rules](#compatibility-rules)
-- [Data Transfer Objects (DTOs)](#data-transfer-objects-dtos)
-- [Error Handling Contracts](#error-handling-contracts)
-- [API Documentation](#api-documentation)
-- [API Testing](#api-testing)
-- [Summary](#summary)
+- Overview
+- Core API Design Principles
+- API Contract Templates
+- Versioning Strategy
+- Compatibility Rules
+- Data Transfer Objects (DTOs)
+- Error Handling Contracts
 
 ## Overview
 

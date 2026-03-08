@@ -8,24 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Overview](#overview)
-- [User Stories](#user-stories)
-- [Functional Requirements](#functional-requirements)
-- [Non-Functional Requirements](#non-functional-requirements)
-- [User Interface](#user-interface)
-- [Technical Considerations](#technical-considerations)
-- [Testing Strategy](#testing-strategy)
-- [Rollout Plan](#rollout-plan)
-- [Risks and Mitigations](#risks-and-mitigations)
-- [Open Questions](#open-questions)
-- [References](#references)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Overview
+- User Stories
+- Error Handling
+
 ## Purpose
 
 Write a feature specification document that defines user stories, functional requirements, acceptance criteria, and implementation guidance for a new feature.

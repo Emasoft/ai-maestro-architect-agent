@@ -8,24 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Session Summary](#session-summary)
-- [Decisions Made This Session](#decisions-made-this-session)
-- [Patterns Applied This Session](#patterns-applied-this-session)
-- [Constraints Active](#constraints-active)
-- [Open Questions](#open-questions)
-- [Current Work State](#current-work-state)
-- [Files Modified This Session](#files-modified-this-session)
-- [Design Artifacts Summary](#design-artifacts-summary)
-- [Resume Instructions](#resume-instructions)
-- [Handoff Validation](#handoff-validation)
-- [Handoff Document Created](#handoff-document-created)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Session Summary
+- Decisions Made This Session
+- Error Handling
+
 ## Purpose
 
 Create a handoff document that captures complete session context for continuity, enabling a future session (or another agent) to resume work without loss of context.

@@ -8,19 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Core Technologies](#core-technologies)
-- [Infrastructure](#infrastructure)
-- [Development Tools](#development-tools)
-- [External Services](#external-services)
-- [Stack Updated](#stack-updated)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Example](#example)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Core Technologies
+- Example
+- Error Handling
+
 ## Purpose
 
 Record when a technology is selected for the project stack, preserving the choice, version, purpose, and rationale.

@@ -8,19 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Classification Decision](#classification-decision)
-- [Conditions for Validity](#conditions-for-validity)
-- [Implications](#implications)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Example](#example)
-- [Classification Decision](#classification-decision)
-- [Conditions for Validity](#conditions-for-validity)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Example
+- Classification Decision
+- Error Handling
+
 ## Purpose
 
 Classify the experiment result as VERIFIED, UNVERIFIED, or PARTIALLY VERIFIED based on evidence and define the conditions under which each classification applies.

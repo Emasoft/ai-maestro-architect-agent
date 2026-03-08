@@ -8,19 +8,14 @@ workflow-instruction: support
 
 ## Contents
 
-- [Purpose](#purpose)
-- [When to Use](#when-to-use)
-- [Inputs](#inputs)
-- [Procedure](#procedure)
-- [Overview](#overview)
-- [Authentication](#authentication)
-- [Endpoints](#endpoints)
-- [Error Responses](#error-responses)
-- [Rate Limiting](#rate-limiting)
-- [Changelog](#changelog)
-- [Output](#output)
-- [Verification Checklist](#verification-checklist)
-- [Error Handling](#error-handling)
+- Purpose
+- When to Use
+- Inputs
+- Procedure
+- Overview
+- Authentication
+- Error Handling
+
 ## Purpose
 
 Write a comprehensive API contract document that defines endpoint specifications, request/response schemas, authentication, and versioning for internal or external APIs.
