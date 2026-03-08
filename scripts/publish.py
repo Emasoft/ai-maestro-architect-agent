@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import subprocess
 import sys
@@ -291,10 +292,18 @@ Examples:
     # ── Step 1: Clean working tree ──
     print(f"\n{BLUE}═══ Step 1: Check working tree ═══{NC}")
     result = run(["git", "status", "--porcelain"], cwd=root, check=False)
-    if result.stdout.strip():
-        print(f"{RED}✗ Uncommitted changes detected. Commit or stash first.{NC}", file=sys.stderr)
-        print(result.stdout.strip())
-        return 1
+    dirty = result.stdout.strip()
+    if dirty:
+        # Auto-commit uv.lock if it's the only dirty file (uv run modifies it)
+        dirty_files = {line.split()[-1] for line in dirty.splitlines() if line.strip()}
+        if dirty_files == {"uv.lock"}:
+            print(f"{YELLOW}Auto-committing uv.lock (modified by uv run){NC}")
+            run(["git", "add", "uv.lock"], cwd=root)
+            run(["git", "commit", "-m", "chore: update uv.lock"], cwd=root)
+        else:
+            print(f"{RED}✗ Uncommitted changes detected. Commit or stash first.{NC}", file=sys.stderr)
+            print(dirty)
+            return 1
     print(f"{GREEN}✓ Working tree clean{NC}")
 
     # ── Step 2: Tests ──
@@ -353,6 +362,7 @@ Examples:
 
     # ── Step 8: Push ──
     print(f"\n{BLUE}═══ Step 8: Push to origin ═══{NC}")
+    os.environ["CPV_PUBLISH_PIPELINE"] = "1"
     run(["git", "push", "origin", "HEAD"], cwd=root)
     print(f"\n{GREEN}✓ Published v{new_version}{NC}")
 
