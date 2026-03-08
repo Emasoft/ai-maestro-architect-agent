@@ -46,13 +46,13 @@ This skill contains:
 
 > For **RULE 14 enforcement** (preserving user requirements), see [amaa-design-lifecycle/references/rule-14-enforcement.md](../skills/amaa-design-lifecycle/references/rule-14-enforcement.md) (1 When handling user requirements in any workflow, 2 When detecting potential requirement deviations, 3 When a technical constraint conflicts with a requirement, 4 When documenting requirement compliance)
 
-> For **document templates** (Module Spec, API Contract, ADR), see [amaa-documentation-writing/references/templates-reference.md](../skills/amaa-documentation-writing/references/templates-reference.md) (Module Specification Template, API Contract Template, Architecture Decision Record Template, Input Format Examples)
+> For **document templates** (Module Spec, API Contract, ADR), see [amaa-documentation-writing/references/templates-reference.md](../skills/amaa-documentation-writing/references/templates-reference.md) (Module Specification Template, Purpose, Responsibilities, Public Interface, Error Handling, Examples, Input Format Examples)
 
-> For **quality standards** (6 C's criteria), see [amaa-documentation-writing/references/quality-standards.md](../skills/amaa-documentation-writing/references/quality-standards.md) (Documentation Quality Criteria, Must Be 6 C's, Must Include, Must Avoid, Feature Specification Example)
+> For **quality standards** (6 C's criteria), see [amaa-documentation-writing/references/quality-standards.md](../skills/amaa-documentation-writing/references/quality-standards.md) (Documentation Quality Criteria, Feature Specification Example, Executive Summary, User Stories, Functional Requirements, Non-Functional Requirements, Data Model)
 
-> For **writing workflow** (7-step procedure), see [amaa-documentation-writing/references/writing-workflow.md](../skills/amaa-documentation-writing/references/writing-workflow.md) (Step 1: Receive and Parse Assignment, Step 2: Gather Context, Step 3: Create Document Structure, Step 4: Write Core Content, Step 5: Add Cross-References)
+> For **writing workflow** (7-step procedure), see [amaa-documentation-writing/references/writing-workflow.md](../skills/amaa-documentation-writing/references/writing-workflow.md) (Step 1: Receive and Parse Assignment, Step 2: Gather Context, Step 3: Create Document Structure, Step 4: Write Core Content, Step 5: Add Cross-References, Step 6: Quality Check, Step 7: Commit and Report)
 
-> For **agent coordination**, see [amaa-documentation-writing/references/agent-interactions.md](../skills/amaa-documentation-writing/references/agent-interactions.md) (Upstream Agents, Downstream Agents, Peer Agents, Handoff Protocol)
+> For **agent coordination**, see [amaa-documentation-writing/references/agent-interactions.md](../skills/amaa-documentation-writing/references/agent-interactions.md) (Upstream Agents (Receive Input From), Downstream Agents (Provide Output To), Peer Agents (Bidirectional), Handoff Protocol)
 
 ---
 
@@ -79,19 +79,15 @@ Requires: <what-is-needed-to-proceed>
 ## Examples
 
 <example>
-user: We just implemented a new user authentication module. Can you write the documentation for it?
+user: Write documentation for the new user authentication module.
 assistant: [DONE] documentation-writer - Module specification created
 Files: docs/module-specs/authentication.md, docs_dev/requirements/USER_REQUIREMENTS.md
 Word count: 3500 | Examples: 12 | Cross-refs: 8
-
-Created comprehensive module specification for user authentication including purpose statement, API contracts (login/logout/refresh endpoints), data models (User, Session, Token schemas), security considerations (password hashing, JWT validation), error handling strategies, and integration examples. Added cross-references to related modules (user-management, session-store) and updated project glossary with authentication terminology.
 </example>
 
 <example>
-user: The architecture decision to use PostgreSQL over MongoDB needs to be documented. Write an ADR for this.
+user: Write an ADR for the PostgreSQL over MongoDB decision.
 assistant: [DONE] documentation-writer - Architecture Decision Record created
 Files: docs/adrs/ADR-003-postgresql-database.md
 Word count: 1200 | Examples: 4 | Cross-refs: 3
-
-Created Architecture Decision Record documenting the decision to use PostgreSQL 15 as the primary database. Included context (need for relational data with ACID guarantees), decision rationale (strong ACID compliance, JSON support, mature ecosystem), consequences (migration complexity from existing system, operational overhead), alternatives considered (MongoDB for document flexibility, MySQL for familiarity), and trade-offs accepted (performance vs data integrity). Added references to related ADRs for data migration strategy and backup procedures.
 </example>

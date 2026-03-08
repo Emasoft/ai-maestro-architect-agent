@@ -80,7 +80,7 @@ Claim: "Redis caches responses 10x faster than in-memory dict" (TBV)
 
 ## Resources
 
-- [docker-experimentation.md](references/docker-experimentation.md) (Why Docker is Required, Container Structure Template)
-- [multiplicity-rule.md](references/multiplicity-rule.md) (The Multiplicity Process, Iterative Selection Workflow)
-- [output-templates.md](references/output-templates.md) (Experiment Directory Structure, Experimentation Report Template)
-- [quick-reference.md](references/quick-reference.md) (Status Classifications, Implementation vs Experimental Code, Workflow Integration Points)
+- [docker-experimentation.md](references/docker-experimentation.md) (Why Docker is Required, Container Structure Template, docker-compose.yml Template, Container Cleanup Procedure)
+- [multiplicity-rule.md](references/multiplicity-rule.md) (The Multiplicity Process, Example: Implementing a Paper Algorithm, Iterative Selection Workflow)
+- [output-templates.md](references/output-templates.md) (Experiment Directory Structure, Experimentation Report Template, Hypothesis, Candidates Tested, Experimental Setup, Results, Evidence-Based Conclusions)
+- [quick-reference.md](references/quick-reference.md) (Status Classifications, Implementation vs Experimental Code, Workflow Integration Points, IRON RULES Summary, Examples)

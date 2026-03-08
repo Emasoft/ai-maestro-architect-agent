@@ -32,8 +32,8 @@ Copy this checklist and track your progress:
 
 1. Receive and parse documentation assignment
 2. Gather context from existing code and specifications
-3. Create document structure using appropriate template from [templates-reference.md](references/templates-reference.md)
-4. Write core content following [quality standards](references/quality-standards.md)
+3. Create document structure using appropriate template from templates-reference.md
+4. Write core content following quality-standards.md
 5. Add cross-references to related documents
 6. Perform quality check against 6 C's (Complete, Correct, Clear, Consistent, Current, Connected)
 7. Commit document and report completion
@@ -42,17 +42,17 @@ Copy this checklist and track your progress:
 
 | Document | Path | Contents |
 |----------|------|----------|
-| Templates | [templates-reference.md](references/templates-reference.md) | Templates (Module Specification Template, API Contract Template, ADR Template, Input Format Examples) |
-| Quality Standards | [quality-standards.md](references/quality-standards.md) | 6 C's rules (Documentation Quality Criteria, Must Be 6 C's, Must Include, Must Avoid, Feature Specification Example) |
-| Writing Workflow | [writing-workflow.md](references/writing-workflow.md) | Procedure (Step 1: Receive and Parse Assignment, Step 2: Gather Context, Step 3: Create Document Structure) |
-| Operational Guidelines | [operational-guidelines.md](references/operational-guidelines.md) | Ops (When to Create New Documents, When to Update Existing, Document Organization, Version Control, Troubleshooting) |
-| Agent Interactions | [agent-interactions.md](references/agent-interactions.md) | Coordination (Upstream Agents, Downstream Agents, Peer Agents, Handoff Protocol) |
-| Op: Module Spec | [op-write-module-spec.md](references/op-write-module-spec.md) | Detailed module spec writing procedure |
-| Op: API Contract | [op-write-api-contract.md](references/op-write-api-contract.md) | Detailed API contract writing procedure |
-| Op: ADR | [op-write-adr.md](references/op-write-adr.md) | Detailed ADR writing procedure |
-| Op: Feature Spec | [op-write-feature-spec.md](references/op-write-feature-spec.md) | Detailed feature spec writing procedure |
-| Op: Process Doc | [op-write-process-doc.md](references/op-write-process-doc.md) | Detailed process doc writing procedure |
-| Op: Quality Check | [op-quality-check-6c.md](references/op-quality-check-6c.md) | 6 C's quality check procedure |
+| Templates | references/templates-reference.md | Module Specification Template, Purpose, Responsibilities, Public Interface, Error Handling, Examples, Input Format Examples |
+| Quality Standards | references/quality-standards.md | Documentation Quality Criteria, Feature Specification Example, Executive Summary, User Stories, Functional Requirements, Non-Functional Requirements, Data Model |
+| Writing Workflow | references/writing-workflow.md | Step 1: Receive and Parse Assignment, Step 2: Gather Context, Step 3: Create Document Structure, Step 4: Write Core Content, Step 5: Add Cross-References, Step 6: Quality Check, Step 7: Commit and Report |
+| Operational Guidelines | references/operational-guidelines.md | When to Create New Documents, When to Update Existing Documents, Document Organization, Version Control, Troubleshooting |
+| Agent Interactions | references/agent-interactions.md | Upstream Agents (Receive Input From), Downstream Agents (Provide Output To), Peer Agents (Bidirectional), Handoff Protocol |
+| Op: Module Spec | references/op-write-module-spec.md | Purpose, When to Use, Inputs, Procedure, Usage Examples, Error Handling |
+| Op: API Contract | references/op-write-api-contract.md | Purpose, When to Use, Inputs, Procedure, Overview, Authentication, Error Handling |
+| Op: ADR | references/op-write-adr.md | Purpose, When to Use, Inputs, Procedure, Example, Context, Error Handling |
+| Op: Feature Spec | references/op-write-feature-spec.md | Purpose, When to Use, Inputs, Procedure, Overview, User Stories, Error Handling |
+| Op: Process Doc | references/op-write-process-doc.md | Purpose, When to Use, Inputs, Procedure, Overview, Roles and Responsibilities, Error Handling |
+| Op: Quality Check | references/op-quality-check-6c.md | Purpose, When to Use, Inputs, Procedure, Summary, Issues Found, Error Handling |
 
 ## Examples
 

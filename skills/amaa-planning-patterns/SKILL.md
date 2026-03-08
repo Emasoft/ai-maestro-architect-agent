@@ -10,7 +10,7 @@ user-invocable: false
 
 ## Overview
 
-Four sequential planning phases: Architecture Design, Risk Identification, Roadmap Creation, Implementation Planning.
+Four sequential phases: Architecture Design, Risk Identification, Roadmap Creation, Implementation Planning.
 
 ## Prerequisites
 
@@ -27,11 +27,13 @@ Four sequential planning phases: Architecture Design, Risk Identification, Roadm
 6. **Phase 4 - Tasks**: Break milestones into tasks, assign owners, set up tracking
 7. Have stakeholders review and approve outputs
 
+## Checklist
+
 Copy this checklist and track your progress:
-- [ ] Phase 1 - Architecture Design complete
-- [ ] Phase 2 - Risk Identification complete
-- [ ] Phase 3 - Roadmap Creation complete
-- [ ] Phase 4 - Implementation Planning complete
+
+- [ ] Complete architecture design
+- [ ] Identify and assess risks
+- [ ] Create roadmap with milestones
 
 ## Reference Documents
 
@@ -53,37 +55,27 @@ Copy this checklist and track your progress:
 
 ## Examples
 
-```
-input: "Design architecture for a new auth system"
-output:
-  Phase 1: components=[auth-service, user-store, token-cache], flows=[login→auth-service→user-store]
-  Phase 2: [{risk:"rate-limit abuse", impact:HIGH, mitigation:"throttle middleware"}]
-  Phase 3: milestones=[MVP auth, token refresh, MFA], timeline=6w
-  Phase 4: [TASK-1 setup auth-service, TASK-2 integrate user-store, TASK-3 add throttle]
-```
+Example: `"Design auth system"` triggers all four phases sequentially.
 
 ## Error Handling
 
 | Problem | Solution |
 |---------|----------|
-| Architecture too complex | Break into sub-components with single responsibility |
-| Risks overwhelming | Prioritize by impact x probability; focus on CRITICAL |
-| Progress stalls | Check buffer capacity; review dependency graph |
-| Plan became irrelevant | Revisit and update as conditions change |
-| Validation failing | Run `validate_plan.py --verbose`; fix by priority |
+| Architecture too complex | Break into sub-components |
+| Risks overwhelming | Prioritize by impact x probability |
+| Progress stalls | Review dependency graph |
+| Plan irrelevant | Revisit and update |
+| Validation failing | Run `validate_plan.py --verbose` |
 
 ## Output
 
 | Phase | Deliverable |
 |-------|-------------|
-| Architecture Design | Architecture document (components, flows, interfaces) |
-| Risk Identification | Risk register (prioritized risks, mitigations) |
-| Roadmap Creation | Master roadmap (phases, milestones, resources) |
-| Implementation Planning | Task plan (assignments, dependencies, tracking) |
+| Architecture Design | Architecture document |
+| Risk Identification | Risk register |
+| Roadmap Creation | Roadmap document |
+| Implementation Planning | Task plan |
 
 ## Resources
 
-- [step-by-step-procedures.md](./references/step-by-step-procedures.md) - Overview, The Four Phases of Planning, Key Principles, Planning Workflow Summary, What Each Phase Contains, Common Mistakes to Avoid, When to Use Each Phase
-- [planning-scenarios.md](./references/planning-scenarios.md) - Scenario 1: Starting a Brand New Project, Scenario 2: Expanding Existing System, Scenario 3: Replanning a Project in Progress, Scenario 4: Rapid Planning (Under Pressure), Key Concepts, Phase Navigation
-- [enforcement-mechanisms.md](./references/enforcement-mechanisms.md) - Overview of Enforcement, Plan Validation Script (validate_plan.py), Shared Thresholds Module (thresholds.py), Handoff Protocols, Integration Workflow
-- [scripts-reference.md](./references/scripts-reference.md) - Universal Analysis Scripts, Core Planning Scripts, Template Generation Scripts, Analysis Scripts, Task Tracker Scripts
+See Reference Documents table above.

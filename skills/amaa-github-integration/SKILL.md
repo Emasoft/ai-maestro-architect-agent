@@ -90,4 +90,3 @@ python scripts/amaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4
 
 - [troubleshooting.md](references/troubleshooting.md) - gh CLI Errors, Document Errors, Issue Errors, Sync Errors
 - [status-mapping.md](references/status-mapping.md) - Design Status Values, GitHub Label Mapping, Valid Status Transitions, Label Naming Convention, Automated Label Management, Manual Label Operations
-- Related skills: amaa-design-lifecycle, amaa-requirements-analysis

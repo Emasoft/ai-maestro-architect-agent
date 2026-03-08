@@ -10,13 +10,11 @@ user-invocable: false
 
 ## Overview
 
-Guides architects in decomposing systems into well-defined modules with clear boundaries, minimal coupling, and high cohesion. Covers SOLID principle application, boundary identification, API design between modules, dependency management, and validation of modularization quality.
+Guides decomposition into modules with clear boundaries, minimal coupling, and high cohesion. Covers SOLID principles, boundary identification, API design, dependency management, and modularization validation.
 
 ## Prerequisites
 
-- Understanding of the system's functional requirements
-- Access to existing codebase (if refactoring)
-- Knowledge of domain concepts and bounded contexts
+- Project source code available for analysis
 
 ## Instructions
 
@@ -45,24 +43,17 @@ Copy this checklist and track your progress:
 
 | Document | Contents |
 |----------|----------|
-| [SOLID Principles](./references/solid-principles.md) | SRP, ISP, DIP application guidance (Overview, The Five SOLID Principles, Single Responsibility Principle, Open/Closed Principle, Liskov Substitution Principle) |
-| [Boundary Patterns](./references/boundary-patterns.md) | Domain mapping, change vectors, bounded contexts (Overview, Core Principle, Map Domain Concepts, Domain-Driven Design Approach, Entity Relationship Analysis) |
-| [API Design Guide](./references/api-design-guide.md) | Interface design, contracts, versioning (Overview, Core API Design Principles, Minimal Surface Area, Stable Contracts, Clear Semantics) |
-| [Dependency Analysis](./references/dependency-analysis.md) | Dependency graphs, shared code strategies (Overview, The Dependency Problem, What is a Dependency, Why Dependencies Matter, Dependency Direction Rules) |
-| [Strangler Pattern](./references/strangler-pattern.md) | Monolith decomposition approach (Overview, Why Strangler Pattern, The Big Rewrite Problem, Strangler Pattern Benefits, The Strangler Fig Pattern) |
-| [Module Testing](./references/module-testing.md) | Testing strategies for modular systems (Overview, Testing Pyramid for Modular Systems, Unit Testing Modules, Unit Test Definition, Unit Test Example) |
-| [Detailed Procedures](./references/detailed-procedures.md) | Full checklist, examples, troubleshooting (What is a Module?, Why Modularization Matters, Detailed Phase Checklist) |
+| [SOLID Principles](./references/solid-principles.md) | Overview, The Five SOLID Principles, Applying SOLID to Module Boundaries, Validation Checklist, Common Violations and Fixes, Summary |
+| [Boundary Patterns](./references/boundary-patterns.md) | Overview, Core Principle, Step 1: Map Domain Concepts, Step 2: Identify Change Vectors, Step 3: Find Natural Seams, Step 4: Define Bounded Contexts, Step 5: Validate Boundaries |
+| [API Design Guide](./references/api-design-guide.md) | Overview, Core API Design Principles, API Contract Templates, Versioning Strategy, Compatibility Rules, Data Transfer Objects (DTOs), Error Handling Contracts |
+| [Dependency Analysis](./references/dependency-analysis.md) | Overview, The Dependency Problem, Dependency Direction Rules, Visualizing Dependencies, The Shared Code Problem, Circular Dependency Detection and Resolution, Dependency Injection |
+| [Strangler Pattern](./references/strangler-pattern.md) | Overview, Why Strangler Pattern?, The Strangler Fig Pattern, Step-by-Step Monolith Decomposition, Extraction Candidate: [Feature Name], Dealing with Dependencies, Example: Extracting Authentication |
+| [Module Testing](./references/module-testing.md) | Overview, Testing Pyramid for Modular Systems, Unit Testing Modules, Mocking Module Dependencies, Contract Testing, Integration Testing, Test Doubles Taxonomy |
+| [Detailed Procedures](./references/detailed-procedures.md) | What is a Module?, Why Modularization Matters, Detailed Phase Checklist, Examples, Troubleshooting, Next Steps |
 
 ## Examples
 
-```
-Before: UserService (2000 LOC monolith)
-After:  AuthenticationModule, UserProfileModule,
-        RegistrationModule, PermissionsModule,
-        UserReportingModule
-```
-
-See [Detailed Procedures](./references/detailed-procedures.md) for full examples (What is a Module?, Why Modularization Matters, Detailed Phase Checklist).
+`UserService (2000 LOC) → AuthModule, ProfileModule, RegistrationModule, PermissionsModule`
 
 ## Error Handling
 
@@ -85,7 +76,7 @@ See [Detailed Procedures](./references/detailed-procedures.md) for full examples
 
 ## Resources
 
-- [SOLID Principles Reference](./references/solid-principles.md) (Overview, The Five SOLID Principles, Single Responsibility Principle)
-- [Boundary Patterns](./references/boundary-patterns.md) (Overview, Core Principle, Map Domain Concepts)
-- [Strangler Pattern](./references/strangler-pattern.md) (Overview, Why Strangler Pattern, The Strangler Fig Pattern)
-- [Module Testing Guide](./references/module-testing.md) (Overview, Testing Pyramid, Unit Testing Modules)
+- solid-principles.md — Overview, The Five SOLID Principles, Applying SOLID to Module Boundaries, Validation Checklist, Common Violations and Fixes, Summary
+- boundary-patterns.md — Overview, Core Principle, Step 1: Map Domain Concepts, Step 2: Identify Change Vectors, Step 3: Find Natural Seams, Step 4: Define Bounded Contexts, Step 5: Validate Boundaries
+- strangler-pattern.md — Overview, Why Strangler Pattern?, The Strangler Fig Pattern, Step-by-Step Monolith Decomposition, Extraction Candidate: [Feature Name], Dealing with Dependencies, Example: Extracting Authentication
+- module-testing.md — Overview, Testing Pyramid for Modular Systems, Unit Testing Modules, Mocking Module Dependencies, Contract Testing, Integration Testing, Test Doubles Taxonomy

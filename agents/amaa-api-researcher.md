@@ -54,7 +54,7 @@ Documentation: docs_dev/api/[api-name]-*.md (5 files)
 4. `<library>-integration.md` - Step-by-step integration guide
 5. `<library>-config-template.md` - Environment variables, config options
 
-> For detailed templates, see [amaa-api-research/references/output-templates.md](../skills/amaa-api-research/references/output-templates.md) (API Overview Document, Authentication Guide, Endpoints Reference, Integration Guide, Configuration Template)
+> For detailed templates, see [amaa-api-research/references/output-templates.md](../skills/amaa-api-research/references/output-templates.md) (API Overview Document, Description, Official Resources, Capabilities, Limitations, Example Configuration, Prerequisites)
 
 ---
 

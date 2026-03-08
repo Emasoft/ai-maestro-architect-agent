@@ -33,14 +33,9 @@ Design and configure CI/CD pipelines, GitHub Actions workflows, cross-platform b
 
 Copy this checklist and track your progress:
 
-- [ ] Review project requirements and target platforms
-- [ ] Define workflow triggers and select GitHub runners
-- [ ] Configure secret management via `gh` CLI
-- [ ] Set up TDD enforcement with coverage thresholds (>= 80%)
-- [ ] Create multi-platform CI workflow with matrix builds
-- [ ] Set up release automation workflow
-- [ ] Add debug/validation scripts and document setup
-- [ ] Test workflows on all target platforms
+- [ ] Define triggers and runners
+- [ ] Configure secrets and TDD
+- [ ] Create CI and release workflows
 
 ## Reference Documents
 
@@ -60,20 +55,6 @@ Copy this checklist and track your progress:
 | [quick-reference-tables.md](references/quick-reference-tables.md) | GitHub Runners Matrix, Workflow Templates, Required Secrets per Platform, TDD Enforcement Rules, Recommended Pipeline Stages, Debug Scripts, Handoff Protocol, Competency Index |
 | [error-handling-examples.md](references/error-handling-examples.md) | Error Handling, Examples |
 
-## Examples
-
-```yaml
-# Example: Multi-platform CI workflow trigger
-on:
-  push:
-    branches: [main]
-jobs:
-  test:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-```
-
 ## Error Handling
 
 | Issue | Cause | Fix |
@@ -83,7 +64,9 @@ jobs:
 | Secrets unavailable | Scope or name mismatch | Verify exact name, correct scope, fork limits |
 | Deployment timeout | Network or config issues | Increase timeout, check connectivity, verify creds |
 
-See [error-handling-examples.md](references/error-handling-examples.md) for detailed solutions.
+## Examples
+
+Example: `matrix: os: [ubuntu-latest, macos-latest, windows-latest]`
 
 ## Output
 
@@ -96,6 +79,4 @@ See [error-handling-examples.md](references/error-handling-examples.md) for deta
 
 ## Resources
 
-- [GitHub Actions Documentation](https://docs.github.com/en/actions)
-- [GitHub CLI Manual](https://cli.github.com/manual/)
-- [Semantic Versioning](https://semver.org/)
+See Reference Documents table above.
