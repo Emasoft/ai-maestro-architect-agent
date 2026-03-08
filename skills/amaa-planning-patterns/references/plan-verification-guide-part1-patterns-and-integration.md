@@ -4,13 +4,8 @@
 
 1. [Overview](#overview)
 2. [Mapping Verification Patterns to Plan Steps](#mapping-verification-patterns-to-plan-steps)
-   - [Phase Completion Verification](#phase-completion-verification)
-   - [Task Completion Criteria](#task-completion-criteria)
 3. [Verification Checklist Template](#verification-checklist-template)
 4. [Integration with Task Tracker](#integration-with-task-tracker)
-   - [Automatic Status Updates](#automatic-status-updates)
-   - [Verification Script Integration](#verification-script-integration)
-   - [Blocking Verification Failures](#blocking-verification-failures)
 
 ---
 
@@ -20,7 +15,6 @@
 - [Index](plan-verification-guide.md)
 
 ---
-
 ## Overview
 
 This guide explains how to apply verification-patterns to validate plan step completion. Effective verification ensures that each phase of planning and implementation is properly completed before moving to the next step, preventing cascading failures and ensuring quality outcomes.

@@ -2,32 +2,13 @@
 
 ## Table of Contents
 1. [Output Naming](#output-naming)
-   - 1.1 Default Naming Behavior
-   - 1.2 Naming Configuration
-   - 1.3 Naming Placeholders
-   - 1.4 Example: Cache Busting with Hashes
 2. [Error Handling](#error-handling)
-   - 2.1 The result Object
-   - 2.2 Checking Build Success
-   - 2.3 Handling Build Errors
-   - 2.4 Build Artifact Properties
-   - 2.5 Complete Error Handling Pattern
 3. [Troubleshooting](#troubleshooting)
-   - 3.1 Problem: "Module not found" errors
-   - 3.2 Problem: Build succeeds but runtime errors
-   - 3.3 Problem: Code splitting not working
-   - 3.4 Problem: Minification breaking code
-   - 3.5 Problem: Environment variables not replaced
-   - 3.6 Problem: Large bundle size
-   - 3.7 Problem: Source maps not working
-   - 3.8 Problem: Build is slow
 4. [Complete Example](#complete-example-production-build-script)
-   - 4.1 Production Build Script
 
 **See also**: [Part 1: Core Configuration](bun-build-api-part1-core-configuration.md)
 
 ---
-
 ## Output Naming
 
 ### Default Naming Behavior

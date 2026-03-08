@@ -5,22 +5,9 @@
 
 - [Table of Contents](#table-of-contents)
 - [1. Language-Specific Test Commands](#1-language-specific-test-commands)
-  - [1.1 Python Testing with pytest](#11-python-testing-with-pytest)
-  - [1.2 TypeScript/JavaScript Testing with Vitest](#12-typescriptjavascript-testing-with-vitest)
-  - [1.3 Rust Testing with cargo](#13-rust-testing-with-cargo)
-  - [1.4 Swift Testing with XCTest](#14-swift-testing-with-xctest)
-  - [1.5 C#/.NET Testing with xUnit](#15-cnet-testing-with-xunit)
-  - [1.6 Kotlin/JVM Testing with JUnit](#16-kotlinjvm-testing-with-junit)
-  - [1.7 Go Testing](#17-go-testing)
 - [2. Cross-Platform Test Matrix](#2-cross-platform-test-matrix)
-  - [2.1 Core Library Tests (All Platforms)](#21-core-library-tests-all-platforms)
-  - [2.2 Platform-Specific UI Tests](#22-platform-specific-ui-tests)
 - [3. Coverage Configuration](#3-coverage-configuration)
-  - [3.1 Coverage Tools by Language](#31-coverage-tools-by-language)
-  - [3.2 Codecov Integration](#32-codecov-integration)
 - [4. Performance Testing](#4-performance-testing)
-  - [4.1 Benchmark Configurations](#41-benchmark-configurations)
-  - [4.2 Regression Detection](#42-regression-detection)
 - [Test Protocol Checklist](#test-protocol-checklist)
 
 ---
@@ -28,7 +15,6 @@
 Reference for language-specific and cross-platform testing configurations.
 
 ---
-
 ## Table of Contents
 
 - 1. Language-Specific Test Commands

@@ -6,27 +6,12 @@
 - [Use Cases (Quick Reference)](#use-cases-quick-reference)
 - [Overview](#overview)
 - [Part 1: Workflow Basics and Runners](#part-1-workflow-basics-and-runners)
-  - [Workflow Structure](#workflow-structure)
-  - [Runners](#runners)
-  - [Common Actions](#common-actions)
 - [Part 2: Matrix Builds, Secrets, and Conditionals](#part-2-matrix-builds-secrets-and-conditionals)
-  - [Matrix Builds](#matrix-builds)
-  - [Secrets](#secrets)
-  - [Conditional Execution](#conditional-execution)
-  - [Outputs and Dependencies](#outputs-and-dependencies)
 - [Part 3: Reusable Workflows and Releases](#part-3-reusable-workflows-and-releases)
-  - [Reusable Workflows](#reusable-workflows)
-  - [Release Workflow](#release-workflow)
-  - [Publish to Package Registries](#publish-to-package-registries)
-  - [Security Best Practices](#security-best-practices)
 - [Part 4: Debugging and Common Patterns](#part-4-debugging-and-common-patterns)
-  - [Debugging](#debugging)
-  - [Common Patterns](#common-patterns)
-  - [Checklist](#checklist)
 - [Quick Command Reference](#quick-command-reference)
 
 ---
-
 ## Use Cases (Quick Reference)
 
 - When you need to define workflow triggers → [Part 1: Workflow Basics](github-actions-part1-workflow-basics.md)

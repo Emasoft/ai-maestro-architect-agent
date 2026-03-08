@@ -5,20 +5,9 @@
 ## Table of Contents
 
 - [Standalone Executables](#standalone-executables)
-  - [What is a Standalone Executable?](#what-is-a-standalone-executable)
-  - [Why Create Standalone Executables?](#why-create-standalone-executables)
-  - [Creating a Basic Executable](#creating-a-basic-executable)
-  - [Executable with Dependencies](#executable-with-dependencies)
-  - [Cross-Platform Executables](#cross-platform-executables)
-  - [CLI Application Example](#cli-application-example)
-  - [Including Static Assets](#including-static-assets)
-  - [Server Application Example](#server-application-example)
-  - [Executable Best Practices](#executable-best-practices)
-  - [Executable Size Optimization](#executable-size-optimization)
 - [Cross-References](#cross-references)
 
 ---
-
 ## Standalone Executables
 
 ### What is a Standalone Executable?

@@ -4,17 +4,10 @@
 ## Contents
 
 - [Debugging](#debugging)
-  - [Debug Logging](#debug-logging)
-  - [SSH into Runner](#ssh-into-runner)
-  - [Local Testing with act](#local-testing-with-act)
 - [Common Patterns](#common-patterns)
-  - [Monorepo Path Filtering](#monorepo-path-filtering)
-  - [Scheduled Jobs](#scheduled-jobs)
-  - [Manual Workflow with Inputs](#manual-workflow-with-inputs)
 - [Checklist](#checklist)
 
 ---
-
 ## Debugging
 
 ### Debug Logging

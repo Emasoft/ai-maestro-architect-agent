@@ -4,25 +4,13 @@ Complete installation guide for all 11 languages supported by Claude Code LSP.
 
 ## Table of Contents
 1. Core Languages
-   - Python (Pyright)
-   - TypeScript/JavaScript
-   - Go (gopls)
-   - Rust (rust-analyzer)
 2. JVM Languages
-   - Java (jdtls)
-   - Kotlin
 3. Systems Languages
-   - C/C++ (clangd)
-   - C# (OmniSharp)
 4. Web Languages
-   - PHP (Intelephense)
-   - Ruby (Solargraph)
-   - HTML/CSS
 5. Verification
 6. Troubleshooting
 
 ---
-
 ## 1. Core Languages
 
 ### Python (Pyright)

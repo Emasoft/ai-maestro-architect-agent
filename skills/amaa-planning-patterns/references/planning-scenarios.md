@@ -10,11 +10,6 @@ Detailed scenarios for applying planning patterns in different contexts.
 - [Scenario 4: Rapid Planning (Under Pressure)](#scenario-4-rapid-planning-under-pressure)
 - [Key Concepts](#key-concepts)
 - [Phase Navigation](#phase-navigation)
-  - [Architecture Design](#architecture-design)
-  - [Risk Identification](#risk-identification)
-  - [Roadmap Creation](#roadmap-creation)
-  - [Implementation Planning](#implementation-planning)
-
 ## Scenario 1: Starting a Brand New Project
 
 1. Architecture Design + Risk Identification (parallel)

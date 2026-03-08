@@ -4,19 +4,10 @@
 
 1. [What is Architecture Design?](#what-is-architecture-design)
 2. [Architecture Design in Five Steps](#architecture-design-in-five-steps)
-   - [Step 1: Identify System Components](#step-1-identify-system-components)
-   - [Step 2: Define Component Responsibilities](#step-2-define-component-responsibilities)
-   - [Step 3: Map Data Flows](#step-3-map-data-flows)
-   - [Step 4: Identify Component Dependencies](#step-4-identify-component-dependencies)
-   - [Step 5: Define Component Interfaces](#step-5-define-component-interfaces)
 3. [Architecture Design Document Template](#architecture-design-document-template)
 4. [Common Architecture Patterns](#common-architecture-patterns)
-   - [Layered Architecture](#layered-architecture)
-   - [Service-Based Architecture](#service-based-architecture)
-   - [Event-Driven Architecture](#event-driven-architecture)
 5. [Architecture Design Checklist](#architecture-design-checklist)
 6. [Next Steps](#next-steps)
-
 ## What is Architecture Design?
 
 Architecture design is the process of defining the fundamental structure of your system: what components exist, how they connect, what each component does, and how data flows between them.

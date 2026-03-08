@@ -5,17 +5,9 @@
 
 - [Workflow Structure](#workflow-structure)
 - [Runners](#runners)
-  - [GitHub-Hosted Runners](#github-hosted-runners)
-  - [Free Tier Limits](#free-tier-limits)
-  - [Self-Hosted Runners](#self-hosted-runners)
 - [Common Actions](#common-actions)
-  - [Checkout](#checkout)
-  - [Cache](#cache)
-  - [Upload/Download Artifacts](#uploaddownload-artifacts)
-  - [Setup Tools](#setup-tools)
 
 ---
-
 ## Workflow Structure
 
 ```yaml

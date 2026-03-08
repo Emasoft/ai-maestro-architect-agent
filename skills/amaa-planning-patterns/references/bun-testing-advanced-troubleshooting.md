@@ -2,20 +2,7 @@
 
 ## Table of Contents
 1. [Advanced Features](#advanced-features)
-   - 1.1 [Per-Test Timeout](#per-test-timeout)
-   - 1.2 [Test.only - Run Single Test](#testonly---run-single-test)
-   - 1.3 [Test.skip - Skip Test](#testskip---skip-test)
-   - 1.4 [Test.todo - Mark Unimplemented Test](#testtodo---mark-unimplemented-test)
-   - 1.5 [Testing External Services](#testing-external-services)
 2. [Troubleshooting](#troubleshooting)
-   - 2.1 [Tests Not Found](#problem-tests-not-found)
-   - 2.2 [Test Timeout](#problem-test-timeout)
-   - 2.3 [Coverage Not Generated](#problem-coverage-not-generated)
-   - 2.4 [Coverage Report Directory Not Created](#problem-coverage-report-directory-not-created)
-   - 2.5 [Tests Pass Locally, Fail in CI](#problem-tests-pass-locally-fail-in-ci)
-   - 2.6 [Hooks Not Running](#problem-hooks-not-running)
-   - 2.7 [Memory Issues with Large Test Suites](#problem-memory-issues-with-large-test-suites)
-   - 2.8 [Slow External Services in Tests](#problem-slow-external-services-in-tests)
 3. [Summary](#summary)
 
 **Related Files:**
@@ -23,7 +10,6 @@
 - [bun-testing-lifecycle-coverage.md](bun-testing-lifecycle-coverage.md) - Lifecycle hooks, coverage config, CI integration
 
 ---
-
 ## Advanced Features
 
 ### Per-Test Timeout

@@ -6,20 +6,13 @@
 - [Use Cases (Quick Reference)](#use-cases-quick-reference)
 - [Overview](#overview)
 - [Part Files](#part-files)
-  - [Complete Release Workflow](#complete-release-workflow)
-  - [Platform-Specific Publishing](#platform-specific-publishing)
 - [Release Pipeline Stages](#release-pipeline-stages)
 - [Semantic Versioning](#semantic-versioning)
-  - [Version Format](#version-format)
-  - [When to Bump](#when-to-bump)
 - [Version Bumping Automation](#version-bumping-automation)
-  - [Automated Version Bump PR](#automated-version-bump-pr)
 - [Changelog Generation](#changelog-generation)
-  - [Conventional Commits](#conventional-commits)
 - [Checklist](#checklist)
 
 ---
-
 ## Use Cases (Quick Reference)
 
 - When you need to understand the release workflow stages → [Release Pipeline Stages](#release-pipeline-stages)

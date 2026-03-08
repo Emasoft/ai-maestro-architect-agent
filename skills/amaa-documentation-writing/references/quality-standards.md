@@ -7,13 +7,9 @@ Quality criteria and standards for technical documentation.
 ## Table of Contents
 
 - 1. Documentation Quality Criteria
-  - 1.1 Must Be (6 C's)
-  - 1.2 Must Include
-  - 1.3 Must Avoid
 - 2. Feature Specification Example
 
 ---
-
 ## 1. Documentation Quality Criteria
 
 ### 1.1 Must Be (The 6 C's)

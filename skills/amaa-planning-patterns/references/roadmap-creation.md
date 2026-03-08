@@ -4,16 +4,10 @@
 
 1. [What is Roadmap Creation?](#what-is-roadmap-creation)
 2. [Roadmap Creation in Five Steps](#roadmap-creation-in-five-steps)
-   - [Step 1: Define Phases](#step-1-define-phases)
-   - [Step 2: Sequence Phases Based on Dependencies](#step-2-sequence-phases-based-on-dependencies)
-   - [Step 3: Define Milestones and Deliverables](#step-3-define-milestones-and-deliverables)
-   - [Step 4: Allocate Resources and Estimate Effort](#step-4-allocate-resources-and-estimate-effort)
-   - [Step 5: Create the Master Roadmap](#step-5-create-the-master-roadmap)
 3. [Roadmap Communication](#roadmap-communication)
 4. [Common Mistakes in Roadmap Creation](#common-mistakes-in-roadmap-creation)
 5. [Roadmap Checklist](#roadmap-checklist)
 6. [Next Steps](#next-steps)
-
 ## What is Roadmap Creation?
 
 A roadmap is a milestone-based plan that transforms your architecture and risks into a sequence of work phases, milestones, and deliverables. It answers: "What will we build, in what order, with what dependencies, with what resources?"

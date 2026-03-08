@@ -3,26 +3,12 @@
 ## Table of Contents
 
 - 1. Overview of Enforcement
-  - 1.1 Why enforcement matters
-  - 1.2 Three enforcement mechanisms
 - 2. Plan Validation Script (validate_plan.py)
-  - 2.1 What it validates
-  - 2.2 When to use it
-  - 2.3 Usage examples
 - 3. Shared Thresholds Module (thresholds.py)
-  - 3.1 Task complexity thresholds
-  - 3.2 Plan quality thresholds
-  - 3.3 When to reference thresholds
 - 4. Handoff Protocols
-  - 4.1 Required deliverables
-  - 4.2 Minimum information requirements
-  - 4.3 When to use the checklist
 - 5. Integration Workflow
-  - 5.1 Recommended validation sequence
-  - 5.2 Addressing validation failures
 
 ---
-
 ## 1. Overview of Enforcement
 
 ### 1.1 Why Enforcement Matters

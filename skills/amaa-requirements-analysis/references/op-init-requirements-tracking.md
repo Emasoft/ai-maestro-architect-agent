@@ -15,14 +15,8 @@ version: 1.0.0
 - [When to Use](#when-to-use)
 - [Prerequisites](#prerequisites)
 - [Procedure](#procedure)
-  - [Step 1: Verify Project Directory](#step-1-verify-project-directory)
-  - [Step 2: Execute Init Command](#step-2-execute-init-command)
-  - [Step 3: Verify Created Structure](#step-3-verify-created-structure)
 - [Checklist](#checklist)
 - [Examples](#examples)
-  - [Example: Initializing Tracking for New Project](#example-initializing-tracking-for-new-project)
-  - [Example: Created Folder Structure](#example-created-folder-structure)
-  - [Example: Requirement Issue Template](#example-requirement-issue-template)
 - [Issue Details](#issue-details)
 - [Issue Description](#issue-description)
 - [Proposed Alternatives](#proposed-alternatives)
@@ -30,7 +24,6 @@ version: 1.0.0
 - [Impact](#impact)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
-
 ## When to Use
 
 Use this operation when:

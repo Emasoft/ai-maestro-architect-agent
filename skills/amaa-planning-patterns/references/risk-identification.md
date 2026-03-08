@@ -4,15 +4,10 @@
 
 1. [What is Risk Identification?](#what-is-risk-identification)
 2. [Risk Identification in Four Steps](#risk-identification-in-four-steps)
-   - [Step 1: Discover All Risks](#step-1-discover-all-risks)
-   - [Step 2: Assess Impact and Probability](#step-2-assess-impact-and-probability)
-   - [Step 3: Plan Mitigation Strategies](#step-3-plan-mitigation-strategies)
-   - [Step 4: Create Risk Register and Monitoring Plan](#step-4-create-risk-register-and-monitoring-plan)
 3. [Risk Categories](#risk-categories)
 4. [Risk Identification Checklist](#risk-identification-checklist)
 5. [Common Mistakes in Risk Identification](#common-mistakes-in-risk-identification)
 6. [Next Steps](#next-steps)
-
 ## What is Risk Identification?
 
 Risk identification is the process of systematically discovering, analyzing, and planning for obstacles that could prevent successful execution of your plan.

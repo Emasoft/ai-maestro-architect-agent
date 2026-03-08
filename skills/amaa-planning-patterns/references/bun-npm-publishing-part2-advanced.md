@@ -2,42 +2,14 @@
 
 ## Table of Contents
 1. [Beta/Pre-release Channels](#betapre-release-channels)
-   - 1.1 [Dist Tags](#dist-tags)
-   - 1.2 [Publishing to Beta Channel](#publishing-to-beta-channel)
-   - 1.3 [Publishing to Next Channel](#publishing-to-next-channel)
-   - 1.4 [Publishing to Canary Channel](#publishing-to-canary-channel)
-   - 1.5 [Automated Pre-release in CI](#automated-pre-release-in-ci)
-   - 1.6 [Promoting Beta to Latest](#promoting-beta-to-latest)
-   - 1.7 [Viewing and Removing Dist Tags](#viewing-dist-tags)
-   - 1.8 [Best Practices for Pre-releases](#best-practices-for-pre-releases)
 2. [Package.json Publishing Config](#packagejson-publishing-config)
-   - 2.1 [publishConfig](#publishconfig)
-   - 2.2 [files Array](#files-array)
-   - 2.3 [main, module, exports](#main-module-exports)
-   - 2.4 [bin for CLI Tools](#bin-for-cli-tools)
-   - 2.5 [Metadata Fields](#metadata-fields)
-   - 2.6 [engines Constraint](#engines-constraint)
-   - 2.7 [peerDependencies](#peerdependencies)
 3. [Unpublishing and Deprecation](#unpublishing-and-deprecation)
-   - 3.1 [Unpublishing Packages](#unpublishing-packages)
-   - 3.2 [Deprecating Packages](#deprecating-packages)
-   - 3.3 [Un-deprecate](#un-deprecate)
-   - 3.4 [When to Deprecate vs Unpublish](#when-to-deprecate-vs-unpublish)
-   - 3.5 [Best Practices](#best-practices)
 4. [Monorepo Publishing](#monorepo-publishing)
-   - 4.1 [Bun Workspaces](#bun-workspaces)
-   - 4.2 [Publishing from Workspaces](#publishing-from-workspaces)
-   - 4.3 [Changesets (Recommended)](#changesets-recommended)
-   - 4.4 [Lerna (Alternative)](#lerna-alternative)
-   - 4.5 [Versioning Strategies](#versioning-strategies)
-   - 4.6 [Monorepo Publishing Workflow Example](#monorepo-publishing-workflow-example)
-   - 4.7 [Cross-package Dependencies](#cross-package-dependencies)
 5. [Cross-references](#cross-references)
 
 **See also**: [Part 1: Setup & Configuration](./bun-npm-publishing-part1-setup.md)
 
 ---
-
 ## Beta/Pre-release Channels
 
 Publish pre-release versions to test before stable release.

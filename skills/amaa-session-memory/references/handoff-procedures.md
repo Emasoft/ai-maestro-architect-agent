@@ -6,10 +6,6 @@
 - [Handoff Document Types](#handoff-document-types)
 - [Handoff Document Structure](#handoff-document-structure)
 - [Examples](#examples)
-  - [Example 1: Session Start with Existing Context](#example-1-session-start-with-existing-context)
-  - [Example 2: Architecture Decision Made](#example-2-architecture-decision-made)
-  - [Example 3: Handoff Creation for Context Clear](#example-3-handoff-creation-for-context-clear)
-
 ## When to Create Handoff Documents
 
 Create a handoff document when:

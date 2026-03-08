@@ -15,17 +15,11 @@ version: 1.0.0
 - [When to Use](#when-to-use)
 - [Prerequisites](#prerequisites)
 - [Procedure](#procedure)
-  - [Step 1: Verify Document Lacks UUID](#step-1-verify-document-lacks-uuid)
-  - [Step 2: Generate UUID](#step-2-generate-uuid)
-  - [Step 3: Verify UUID Was Added](#step-3-verify-uuid-was-added)
 - [Checklist](#checklist)
 - [Examples](#examples)
-  - [Example: Generate UUID for New Spec](#example-generate-uuid-for-new-spec)
-  - [Example: Different Document Types](#example-different-document-types)
 - [UUID Format](#uuid-format)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
-
 ## When to Use
 
 Trigger this operation when:

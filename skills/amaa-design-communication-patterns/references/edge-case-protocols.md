@@ -5,36 +5,14 @@ This document defines standardized protocols for handling edge cases and failure
 ## Table of Contents
 
 - 1.0 AI Maestro Unavailable
-  - 1.1 Detection Methods
-  - 1.2 Response Workflow
-  - 1.3 Fallback Design Delivery
 - 2.0 GitHub Unavailable
-  - 2.1 Detection Methods
-  - 2.2 Response Workflow
-  - 2.3 Design Document Caching
 - 3.0 Remote Agent Timeout
-  - 3.1 Detection Methods
-  - 3.2 Research Agent Timeout
-  - 3.3 Documentation Agent Timeout
 - 4.0 Requirements Ambiguity
-  - 4.1 Detection Methods
-  - 4.2 Clarification Protocol
-  - 4.3 Assumption Documentation
 - 5.0 API Research Failures
-  - 5.1 API Documentation Unavailable
-  - 5.2 API Deprecated/Changed
-  - 5.3 Rate Limits During Research
 - 6.0 Design Conflicts
-  - 6.1 Conflicting Requirements
-  - 6.2 Technical Constraint Conflicts
-  - 6.3 Stakeholder Disagreements
 - 7.0 Planning Validation Failures
-  - 7.1 Incomplete Module Specifications
-  - 7.2 Circular Dependencies
-  - 7.3 Infeasible Timelines
 
 ---
-
 ## 1.0 AI Maestro Unavailable
 
 ### 1.1 Detection Methods

@@ -4,15 +4,10 @@
 
 1. [What is Implementation Planning?](#what-is-implementation-planning)
 2. [Implementation Planning in Four Steps](#implementation-planning-in-four-steps)
-   - [Step 1: Break Down Milestones into Tasks](#step-1-break-down-milestones-into-tasks)
-   - [Step 2: Create Dependency Network](#step-2-create-dependency-network)
-   - [Step 3: Assign Owners and Create Responsibility Matrix](#step-3-assign-owners-and-create-responsibility-matrix)
-   - [Step 4: Create Daily/Weekly Tracking and Status Reports](#step-4-create-dailyweekly-tracking-and-status-reports)
 3. [Change Management During Implementation](#change-management-during-implementation)
 4. [Implementation Planning Checklist](#implementation-planning-checklist)
 5. [Common Mistakes in Implementation Planning](#common-mistakes-in-implementation-planning)
 6. [Next Steps](#next-steps)
-
 ## What is Implementation Planning?
 
 Implementation planning is the process of breaking down each roadmap phase into specific, actionable tasks that the team will execute. It answers: "Who will do what, by when, with what success criteria?"

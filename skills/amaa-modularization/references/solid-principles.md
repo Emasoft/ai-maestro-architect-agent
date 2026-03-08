@@ -10,21 +10,10 @@ version: 1.0.0
 
 - [Overview](#overview)
 - [The Five SOLID Principles](#the-five-solid-principles)
-  - [1. Single Responsibility Principle (SRP)](#1-single-responsibility-principle-srp)
-  - [2. Open/Closed Principle (OCP)](#2-openclosed-principle-ocp)
-  - [3. Liskov Substitution Principle (LSP)](#3-liskov-substitution-principle-lsp)
-  - [4. Interface Segregation Principle (ISP)](#4-interface-segregation-principle-isp)
-  - [5. Dependency Inversion Principle (DIP)](#5-dependency-inversion-principle-dip)
 - [Applying SOLID to Module Boundaries](#applying-solid-to-module-boundaries)
-  - [Step 1: Identify Responsibilities (SRP)](#step-1-identify-responsibilities-srp)
-  - [Step 2: Design Extension Points (OCP)](#step-2-design-extension-points-ocp)
-  - [Step 3: Define Contracts (LSP)](#step-3-define-contracts-lsp)
-  - [Step 4: Minimize API Surface (ISP)](#step-4-minimize-api-surface-isp)
-  - [Step 5: Invert Dependencies (DIP)](#step-5-invert-dependencies-dip)
 - [Validation Checklist](#validation-checklist)
 - [Common Violations and Fixes](#common-violations-and-fixes)
 - [Summary](#summary)
-
 ## Overview
 
 SOLID principles are five design principles that guide the creation of maintainable, scalable, and modular software systems. When applied to modularization, they help ensure modules are cohesive, loosely coupled, and easy to understand.

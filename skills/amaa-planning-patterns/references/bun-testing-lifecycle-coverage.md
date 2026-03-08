@@ -2,32 +2,15 @@
 
 ## Table of Contents
 1. [Lifecycle Hooks](#lifecycle-hooks)
-   - 1.1 [beforeAll Hook](#beforeall-hook)
-   - 1.2 [afterAll Hook](#afterall-hook)
-   - 1.3 [beforeEach Hook](#beforeeach-hook)
-   - 1.4 [afterEach Hook](#aftereach-hook)
-   - 1.5 [Nested Describe Blocks](#nested-describe-blocks)
 2. [Coverage Configuration](#coverage-configuration)
-   - 2.1 [Basic Coverage](#basic-coverage)
-   - 2.2 [Coverage with Reporter](#coverage-with-reporter)
-   - 2.3 [Multiple Reporters](#multiple-reporters)
-   - 2.4 [Viewing HTML Coverage Report](#viewing-html-coverage-report)
-   - 2.5 [Coverage Thresholds](#coverage-thresholds)
 3. [CI Integration](#ci-integration)
-   - 3.1 [GitHub Actions Example](#github-actions-example)
-   - 3.2 [GitLab CI Example](#gitlab-ci-example)
-   - 3.3 [Jenkins Example](#jenkins-example)
 4. [Package.json Scripts Setup](#packagejson-scripts-setup)
-   - 4.1 [Basic Scripts](#basic-scripts)
-   - 4.2 [Advanced Scripts with Pre/Post Hooks](#advanced-scripts-with-prepost-hooks)
-   - 4.3 [CI-Specific Scripts](#ci-specific-scripts)
 
 **Related Files:**
 - [bun-testing-basics.md](bun-testing-basics.md) - Introduction, syntax, CLI options
 - [bun-testing-advanced-troubleshooting.md](bun-testing-advanced-troubleshooting.md) - Advanced features and troubleshooting
 
 ---
-
 ## Lifecycle Hooks
 
 Lifecycle hooks allow you to run setup and teardown code before and after tests.

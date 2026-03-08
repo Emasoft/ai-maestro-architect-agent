@@ -2,45 +2,16 @@
 
 ## Table of Contents
 1. [Basic Usage](#basic-usage)
-   - 1.1 What is Bun.build()?
-   - 1.2 Minimum Working Example
-   - 1.3 What This Does
 2. [Build Options](#build-options)
-   - 2.1 Complete Options Reference
-   - 2.2 Target Option Details
-   - 2.3 Format Option Details
 3. [Multiple Entry Points](#multiple-entry-points)
-   - 3.1 When to Use Multiple Entry Points
-   - 3.2 Example: Multiple Entry Points
-   - 3.3 Example: Entry Point Naming Control
 4. [Minification Options](#minification-options)
-   - 4.1 Basic Minification
-   - 4.2 Granular Minification Control
-   - 4.3 What Each Minification Option Does
-   - 4.4 When NOT to Minify
 5. [Code Splitting](#code-splitting)
-   - 5.1 What is Code Splitting?
-   - 5.2 Enabling Code Splitting
-   - 5.3 How Code Splitting Works
-   - 5.4 Example: Dynamic Import Pattern
-   - 5.5 Code Splitting Requirements
 6. [Environment Variables](#environment-variables)
-   - 6.1 Inline Environment Variables at Build Time
-   - 6.2 What define Does
-   - 6.3 Example: Before and After
-   - 6.4 Important Rules for define
-   - 6.5 Reading from .env Files
 7. [External Modules](#external-modules)
-   - 7.1 What are External Modules?
-   - 7.2 When to Use external
-   - 7.3 Example: Excluding React from Bundle
-   - 7.4 Example: Library Build with Externals
-   - 7.5 Pattern Matching in external
 
 **See also**: [Part 2: Output, Errors and Troubleshooting](bun-build-api-part2-output-errors.md)
 
 ---
-
 ## Basic Usage
 
 ### What is Bun.build()?

@@ -2,37 +2,14 @@
 
 ## Table of Contents
 1. [OIDC Trusted Publishing](#oidc-trusted-publishing)
-   - 1.1 [Configure npm Package](#step-1-configure-npm-package)
-   - 1.2 [Required Permissions](#step-2-required-permissions)
-   - 1.3 [Registry URL Required](#step-3-registry-url-required)
-   - 1.4 [Use npm for Publishing](#step-4-use-npm-not-bun-for-publishing)
-   - 1.5 [Scoped Packages](#scoped-packages)
-   - 1.6 [Critical Lessons Learned](#critical-lessons-learned)
 2. [Traditional npm Token Publishing](#traditional-npm-token-publishing)
-   - 2.1 [Generate npm Token](#step-1-generate-npm-token)
-   - 2.2 [Add Token to GitHub Secrets](#step-2-add-token-to-github-secrets)
-   - 2.3 [Configure .npmrc in Workflow](#step-3-configure-npmrc-in-workflow)
-   - 2.4 [Publish with npm](#step-4-publish-with-npm)
 3. [Version Management](#version-management)
-   - 3.1 [Semantic Versioning Format](#semantic-versioning-format)
-   - 3.2 [Using npm version Commands](#using-npm-version-commands)
-   - 3.3 [Automated Version Bumping in CI](#automated-version-bumping-in-ci)
-   - 3.4 [Changelog Generation](#changelog-generation)
 4. [Pre-publish Validation](#pre-publish-validation)
-   - 4.1 [prepublishOnly Script](#prepublishonly-script)
-   - 4.2 [Dry Run Publishing](#dry-run-publishing)
-   - 4.3 [Package Validation with npm pack](#package-validation-with-npm-pack)
-   - 4.4 [Common Pre-publish Checklist](#common-pre-publish-checklist)
 5. [Registry Configuration](#registry-configuration)
-   - 5.1 [Default npm Registry](#default-npm-registry)
-   - 5.2 [GitHub Packages Registry](#github-packages-registry)
-   - 5.3 [Private Registry](#private-registry-verdaccio-artifactory-etc)
-   - 5.4 [Multiple Registries](#multiple-registries-in-one-project)
 
 **See also**: [Part 2: Advanced Publishing](./bun-npm-publishing-part2-advanced.md)
 
 ---
-
 ## OIDC Trusted Publishing
 
 ## Step 1: Configure npm Package

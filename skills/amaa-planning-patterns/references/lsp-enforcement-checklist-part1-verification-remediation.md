@@ -5,23 +5,8 @@ Covers pre-assignment checks, installation verification, and remediation procedu
 ## Table of Contents
 1. [Pre-Assignment Checks](#pre-assignment-checks)
 2. [Installation Verification](#installation-verification)
-   - 2.1 Core Languages (Python, TypeScript, Go, Rust)
-   - 2.2 JVM Languages (Java, Kotlin)
-   - 2.3 Systems Languages (C/C++, C#)
-   - 2.4 Web Languages (PHP, Ruby, HTML/CSS)
 3. [Automated Verification](#automated-verification)
 4. [Remediation Procedures](#remediation-procedures)
-   - 4.1 Python (pyright) Remediation
-   - 4.2 TypeScript Remediation
-   - 4.3 Rust (rust-analyzer) Remediation
-   - 4.4 Go (gopls) Remediation
-   - 4.5 Java (jdtls) Remediation
-   - 4.6 Kotlin Remediation
-   - 4.7 C/C++ (clangd) Remediation
-   - 4.8 C# (OmniSharp) Remediation
-   - 4.9 PHP (Intelephense) Remediation
-   - 4.10 Ruby (Solargraph) Remediation
-   - 4.11 HTML/CSS Remediation
 
 **Related Documents:**
 - [Part 2: Remediation](./lsp-enforcement-checklist-part2-remediation.md)
@@ -31,7 +16,6 @@ Covers pre-assignment checks, installation verification, and remediation procedu
 - [Index](./lsp-enforcement-checklist.md)
 
 ---
-
 ## Pre-Assignment Checks
 
 Before assigning work to a remote agent:

@@ -5,18 +5,9 @@
 ### Research Procedures
 For the step-by-step research workflow, see [research-procedure.md](research-procedure.md):
 - 1. Step 1: Understand Requirements
-  - 1.1 Input from Orchestrator
-  - 1.2 Acknowledgment Format
-  - 1.3 Verification Checklist
 - 2. Step 2: Gather Information
-  - 2.1 Sources to Consult (in order)
-  - 2.2 Information Verification Checklist
 - 3. Step 3: Document Findings
-  - 3.1 Document Types to Create
-  - 3.2 Verification Checklist
 - 4. Step 4: Report to Orchestrator
-  - 4.1 Minimal Report Format
-  - 4.2 Verification Checklist
 
 ### Output Templates
 For all documentation templates, see [output-templates.md](output-templates.md):
@@ -48,7 +39,6 @@ For interaction with other agents, see [collaboration-patterns.md](collaboration
 - 3. Handoff Protocol
 - 4. Collaboration with Other Agents
 - 5. Best Practices
-
 ## Research Output Files
 
 | File | Template | Purpose |

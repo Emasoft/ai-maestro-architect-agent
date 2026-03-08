@@ -2,25 +2,9 @@
 
 ## Table of Contents
 1. [Drop Console and Debugger Statements](#drop-console-and-debugger-statements)
-   - 1.1 [What Does "Drop" Mean?](#what-does-drop-mean)
-   - 1.2 [Why Drop Console and Debugger?](#why-drop-console-and-debugger)
-   - 1.3 [Dropping Console Statements](#dropping-console-statements)
-   - 1.4 [Dropping Debugger Statements](#dropping-debugger-statements)
-   - 1.5 [Dropping Both Console and Debugger](#dropping-both-console-and-debugger)
-   - 1.6 [Conditional Dropping Based on Environment](#conditional-dropping-based-on-environment)
-   - 1.7 [Custom Logging Alternative](#custom-logging-alternative)
-   - 1.8 [Drop Best Practices](#drop-best-practices)
 2. [Banner and Footer Injection](#banner-and-footer-injection)
-   - 2.1 [What are Banners and Footers?](#what-are-banners-and-footers)
-   - 2.2 [Banner Injection](#banner-injection)
-   - 2.3 [Footer Injection](#footer-injection)
-   - 2.4 [Banner and Footer Together](#banner-and-footer-together)
-   - 2.5 [Practical Use Cases](#practical-use-cases)
-   - 2.6 [Dynamic Banner/Footer Generation](#dynamic-bannerfooter-generation)
-   - 2.7 [Banner/Footer Best Practices](#bannerfooter-best-practices)
 
 ---
-
 ## Drop Console and Debugger Statements
 
 ### What Does "Drop" Mean?

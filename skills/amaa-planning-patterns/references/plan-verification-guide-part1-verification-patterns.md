@@ -3,11 +3,8 @@
 ## Table of Contents
 
 1. [Mapping Verification Patterns to Plan Steps](#mapping-verification-patterns-to-plan-steps)
-   - [Phase Completion Verification](#phase-completion-verification)
-   - [Task Completion Criteria](#task-completion-criteria)
 
 ---
-
 ## Mapping Verification Patterns to Plan Steps
 
 ### Phase Completion Verification

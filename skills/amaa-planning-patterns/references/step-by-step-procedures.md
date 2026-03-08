@@ -4,16 +4,11 @@
 
 1. [Overview](#overview)
 2. [The Four Phases of Planning](#the-four-phases-of-planning)
-   - [Phase 1: Architecture Design](#phase-1-architecture-design)
-   - [Phase 2: Risk Identification](#phase-2-risk-identification)
-   - [Phase 3: Roadmap Creation](#phase-3-roadmap-creation)
-   - [Phase 4: Implementation Planning](#phase-4-implementation-planning)
 3. [Key Principles](#key-principles)
 4. [Planning Workflow Summary](#planning-workflow-summary)
 5. [What Each Phase Contains](#what-each-phase-contains)
 6. [Common Mistakes to Avoid](#common-mistakes-to-avoid)
 7. [When to Use Each Phase](#when-to-use-each-phase)
-
 ## Overview
 
 Planning is the process of creating a comprehensive roadmap that guides your team from current state to desired future state. This document outlines the sequential phases that constitute professional planning.

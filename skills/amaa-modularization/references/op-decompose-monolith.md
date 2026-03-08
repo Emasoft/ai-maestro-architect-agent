@@ -15,22 +15,13 @@ version: 1.0.0
 - [When to Use](#when-to-use)
 - [Prerequisites](#prerequisites)
 - [Procedure](#procedure)
-  - [Step 1: Understand the Strangler Fig Pattern](#step-1-understand-the-strangler-fig-pattern)
 - [Strangler Fig Stages](#strangler-fig-stages)
-  - [Step 2: Create Extraction Priority List](#step-2-create-extraction-priority-list)
 - [Extraction Priority](#extraction-priority)
-  - [Step 3: Design the Facade/Router](#step-3-design-the-facaderouter)
 - [Facade Routing Configuration](#facade-routing-configuration)
-  - [Step 4: Extract One Module at a Time](#step-4-extract-one-module-at-a-time)
 - [Data Migration Strategy](#data-migration-strategy)
-  - [Option A: Shared Database (Temporary)](#option-a-shared-database-temporary)
-  - [Option B: Data Copy (For Read-Heavy)](#option-b-data-copy-for-read-heavy)
-  - [Option C: Database Split (Clean Break)](#option-c-database-split-clean-break)
 - [Traffic Shift Schedule](#traffic-shift-schedule)
-  - [Step 5: Monitor and Validate](#step-5-monitor-and-validate)
 - [Checklist](#checklist)
 - [Examples](#examples)
-  - [Example: E-Commerce Monolith Decomposition Plan](#example-e-commerce-monolith-decomposition-plan)
 - [Current State](#current-state)
 - [Target State](#target-state)
 - [Phase 1: Foundation (Weeks 1-4)](#phase-1-foundation-weeks-1-4)
@@ -39,7 +30,6 @@ version: 1.0.0
 - [Phase 4-7: Remaining Modules (Weeks 15-30)](#phase-4-7-remaining-modules-weeks-15-30)
 - [Phase 8: Retirement (Weeks 31-32)](#phase-8-retirement-weeks-31-32)
 - [Risk Mitigation](#risk-mitigation)
-  - [Example: Module Extraction Checklist](#example-module-extraction-checklist)
 - [Pre-Extraction](#pre-extraction)
 - [Infrastructure](#infrastructure)
 - [Implementation](#implementation)
@@ -48,7 +38,6 @@ version: 1.0.0
 - [Cleanup](#cleanup)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
-
 ## When to Use
 
 Use this operation when:

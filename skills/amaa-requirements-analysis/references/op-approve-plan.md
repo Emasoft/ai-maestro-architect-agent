@@ -15,17 +15,10 @@ version: 1.0.0
 - [When to Use](#when-to-use)
 - [Prerequisites](#prerequisites)
 - [Procedure](#procedure)
-  - [Step 1: Verify All Prerequisites](#step-1-verify-all-prerequisites)
-  - [Step 2: Execute Approval](#step-2-execute-approval)
-  - [Step 3: Verify Transition](#step-3-verify-transition)
 - [Checklist](#checklist)
 - [Examples](#examples)
-  - [Example: Standard Approval Workflow](#example-standard-approval-workflow)
-  - [Example: Offline Approval (Skip Issues)](#example-offline-approval-skip-issues)
-  - [Example: Failed Approval](#example-failed-approval)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
-
 ## When to Use
 
 Use this operation when:

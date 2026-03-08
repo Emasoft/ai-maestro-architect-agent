@@ -2,25 +2,9 @@
 
 ## Table of Contents
 1. [Code Splitting](#code-splitting)
-   - 1.1 [What is Code Splitting?](#what-is-code-splitting)
-   - 1.2 [Why Use Code Splitting?](#why-use-code-splitting)
-   - 1.3 [How Bun Handles Code Splitting](#how-bun-handles-code-splitting)
-   - 1.4 [Basic Code Splitting Example](#basic-code-splitting-example)
-   - 1.5 [Code Splitting with Named Chunks](#code-splitting-with-named-chunks)
-   - 1.6 [Manual Chunk Configuration](#manual-chunk-configuration)
-   - 1.7 [Code Splitting Best Practices](#code-splitting-best-practices)
 2. [Tree Shaking with Feature Flags](#tree-shaking-with-feature-flags)
-   - 2.1 [What is Tree Shaking?](#what-is-tree-shaking)
-   - 2.2 [What are Feature Flags?](#what-are-feature-flags)
-   - 2.3 [How Bun Implements Tree Shaking](#how-bun-implements-tree-shaking)
-   - 2.4 [Basic Tree Shaking Example](#basic-tree-shaking-example)
-   - 2.5 [Feature Flags with define](#feature-flags-with-define)
-   - 2.6 [Environment-Based Feature Flags](#environment-based-feature-flags)
-   - 2.7 [Side Effects and Tree Shaking](#side-effects-and-tree-shaking)
-   - 2.8 [Tree Shaking Best Practices](#tree-shaking-best-practices)
 
 ---
-
 ## Code Splitting
 
 ### What is Code Splitting?

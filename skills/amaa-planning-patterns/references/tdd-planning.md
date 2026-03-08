@@ -3,27 +3,12 @@
 ## Table of Contents
 
 - 1. TDD Planning Principles
-  - 1.1 Test strategy first - Defining tests before implementation
-  - 1.2 TDD phases in timeline - Including RED-GREEN-REFACTOR in task breakdown
-  - 1.3 Commit pattern - TDD-specific commit messages
 - 2. TDD Phase Planning
-  - 2.1 RED phase planning questions
-  - 2.2 GREEN phase planning questions
-  - 2.3 REFACTOR phase planning questions
 - 3. TDD Task Template Extension
-  - 3.1 Tests to write section
-  - 3.2 Implementation scope section
-  - 3.3 Refactoring candidates section
 - 4. TDD Verification Checklist
-  - 4.1 Pre-completion verification items
 - 5. Integration with Planning Phases
-  - 5.1 TDD in Architecture Design
-  - 5.2 TDD in Risk Identification
-  - 5.3 TDD in Roadmap Creation
-  - 5.4 TDD in Implementation Planning
 
 ---
-
 ## 1. TDD Planning Principles
 
 When planning code implementation tasks, incorporate Test-Driven Development methodology into your planning documents.

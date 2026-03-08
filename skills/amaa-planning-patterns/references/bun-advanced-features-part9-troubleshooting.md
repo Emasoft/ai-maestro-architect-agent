@@ -12,26 +12,9 @@ This document covers edge cases and troubleshooting for Bun's advanced features.
 **File:** [bun-advanced-features-part9-troubleshooting-part1-edge-cases.md](./bun-advanced-features-part9-troubleshooting-part1-edge-cases.md)
 
 - 1.1 Monorepo / Workspaces
-  - Problem: Workspace packages being bundled instead of linked
-  - Solution: Mark workspace packages as external
-  - Pattern-based external matching for large monorepos
-  - Key considerations for workspace external configuration
 - 1.2 Dynamic Imports
-  - Problem: Dynamic imports not creating separate chunks
-  - Solution: Enable splitting and configure chunk naming
-  - Chunk naming patterns ([name], [hash], [dir], [ext])
-  - Custom chunk naming with subdirectory organization
-  - Important notes on ESM format requirement
 - 1.3 Binary / Native Modules
-  - Problem: Native modules causing build errors
-  - Solution: Mark all native modules as external
-  - Common native modules table (better-sqlite3, sharp, canvas, etc.)
-  - Dynamic detection of native modules from package.json
-  - Key points on binary distribution
 - 1.4 JSON Imports
-  - Default behavior: JSON is inlined
-  - Custom loader for JSON-as-string
-  - When to use each approach (table comparison)
 
 ---
 
@@ -39,44 +22,17 @@ This document covers edge cases and troubleshooting for Bun's advanced features.
 **File:** [bun-advanced-features-part9-troubleshooting-part2-troubleshooting.md](./bun-advanced-features-part9-troubleshooting-part2-troubleshooting.md)
 
 - 2.1 Code Splitting Issues
-  - Problem: Chunks not being created
-  - Problem: Shared code duplicated across chunks
-  - Problem: Too many small chunks (manualChunks solution)
 - 2.2 Tree Shaking Issues
-  - Problem: Dead code not being removed
-  - Problem: Feature flag code not removed
-  - Problem: External dependencies not tree-shaken
 - 2.3 Drop Console/Debugger Issues
-  - Problem: Console statements still in output
-  - Problem: Need to keep error logs
 - 2.4 Banner/Footer Issues
-  - Problem: Banner comments removed by minifier
-  - Problem: Banner breaks code
 - 2.5 Standalone Executable Issues
-  - Problem: Executable doesn't run
-  - Problem: Dependencies missing
-  - Problem: Executable too large
 - 2.6 Monorepo/Workspace Issues
-  - Problem: Workspace dependency not found
-  - Problem: Circular dependencies
-  - Problem: Wrong version installed
 - 2.7 Dynamic Import Issues
-  - Problem: Dynamic import fails at runtime
-  - Problem: Chunks not loading in browser
 - 2.8 Native Module Issues
-  - Problem: Native module not found
-  - Problem: Platform mismatch
-  - Problem: Version incompatibility
 - 2.9 JSON Import Issues
-  - Problem: JSON import not working in TypeScript
-  - Problem: JSON becomes huge in bundle
 - 2.10 General Build Issues
-  - Problem: Build hangs indefinitely
-  - Problem: Out of memory
-  - Problem: Source maps not generated
 
 ---
-
 ## Summary
 
 This document series covered advanced Bun features essential for production-ready applications:

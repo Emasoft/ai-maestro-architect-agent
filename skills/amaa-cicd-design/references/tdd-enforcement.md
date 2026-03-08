@@ -6,28 +6,14 @@
 - [Use Cases (Quick Reference)](#use-cases-quick-reference)
 - [Overview](#overview)
 - [Core Principles](#core-principles)
-  - [TDD Pipeline Rules](#tdd-pipeline-rules)
 - [Coverage Requirements](#coverage-requirements)
-  - [Minimum Thresholds](#minimum-thresholds)
-  - [Coverage Configuration](#coverage-configuration)
-    - [Rust (cargo-tarpaulin)](#rust-cargo-tarpaulin)
-    - [Python (pytest-cov)](#python-pytest-cov)
-    - [TypeScript/JavaScript (vitest)](#typescriptjavascript-vitest)
-    - [Go (go test)](#go-go-test)
 - [Complete TDD Workflow](#complete-tdd-workflow)
-  - [Multi-Platform Test Matrix](#multi-platform-test-matrix)
-  - [Branch Protection Rules](#branch-protection-rules)
 - [Test Skipping Policy](#test-skipping-policy)
-  - [When Skipping is Allowed](#when-skipping-is-allowed)
-  - [CI Configuration for Ignored Tests](#ci-configuration-for-ignored-tests)
 - [Mutation Testing](#mutation-testing)
-  - [Why Mutation Testing?](#why-mutation-testing)
-  - [Rust (cargo-mutants)](#rust-cargo-mutants)
 - [Debug Script](#debug-script)
 - [Checklist](#checklist)
 
 ---
-
 ## Use Cases (Quick Reference)
 
 - When you need to understand TDD principles → [Core Principles](#core-principles)

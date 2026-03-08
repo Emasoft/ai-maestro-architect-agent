@@ -4,22 +4,11 @@
 ## Contents
 
 - [Matrix Builds](#matrix-builds)
-  - [Basic Matrix](#basic-matrix)
-  - [Complex Matrix with Include/Exclude](#complex-matrix-with-includeexclude)
 - [Secrets](#secrets)
-  - [Using Secrets](#using-secrets)
-  - [Environment Secrets](#environment-secrets)
-  - [Setting Secrets via CLI](#setting-secrets-via-cli)
 - [Conditional Execution](#conditional-execution)
-  - [Job Conditions](#job-conditions)
-  - [Step Conditions](#step-conditions)
-  - [Conditional Expressions](#conditional-expressions)
 - [Outputs and Dependencies](#outputs-and-dependencies)
-  - [Job Outputs](#job-outputs)
-  - [Step Outputs](#step-outputs)
 
 ---
-
 ## Matrix Builds
 
 ### Basic Matrix

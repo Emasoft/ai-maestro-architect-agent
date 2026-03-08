@@ -8,21 +8,11 @@ parent-skill: amaa-requirements-analysis
 ## Contents
 
 - [Error Handling Details](#error-handling-details)
-  - [State file not found](#1-state-file-not-found-when-running-any-planning-command)
-  - [Approval prerequisites failed](#2-approval-prerequisites-failed-when-running-plan-approval)
-  - [GitHub Issue creation failed](#3-github-issue-creation-failed-during-plan-approval)
 - [Extended Examples](#extended-examples)
-  - [Example 1: Planning a Microservice from Scratch](#example-1-planning-a-microservice-from-scratch)
-  - [Example 2: Iterating on a Plan After Initial Review](#example-2-iterating-on-a-plan-after-initial-review)
-  - [Example 3: Recovering from a Failed Approval](#example-3-recovering-from-a-failed-approval)
 - [Resources](#resources)
-  - [Reference Documents](#reference-documents)
-  - [Related Skills](#related-skills)
-  - [External Dependencies](#external-dependencies)
 - [Command Output Reference](#command-output-reference)
 
 ---
-
 ## Error Handling Details
 
 Common errors encountered during the planning phase and how to resolve them:

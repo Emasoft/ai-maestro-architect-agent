@@ -3,31 +3,12 @@
 ## Table of Contents
 
 - 1. Universal Analysis Scripts
-  - 1.1 dependency_resolver.py - Resolving task dependencies and detecting cycles
-  - 1.2 project_detector.py - Detecting project types and toolchains
-  - 1.3 health_auditor.py - Running project health checks
-  - 1.4 evidence_store.py - Storing and retrieving verification evidence
-  - 1.5 analyzer_scaffold.py - Generating custom analyzer scaffolds
 - 2. Core Planning Scripts
-  - 2.1 planner.py - Step-based planning workflow with decision classification
-  - 2.2 executor.py - 7-phase execution orchestration with JIT prompt injection
 - 3. Template Generation Scripts
-  - 3.1 generate_planning_checklist.py - Creating customized planning checklists
-  - 3.2 generate_risk_register.py - Creating risk register templates
-  - 3.3 generate_roadmap_template.py - Creating milestone-based roadmap templates
 - 4. Analysis Scripts
-  - 4.1 consistency_verifier.py - Verifying plan internal consistency
-  - 4.2 quality_pattern_detector.py - Detecting code quality patterns
-  - 4.3 scoring_framework.py - Multi-criteria scoring system
-  - 4.4 comparison_analyzer.py - Comparing multiple options
-  - 4.5 ab_test_calculator.py - A/B test statistical analysis
-  - 4.6 checklist_validator.py - Validating checklist completion
 - 5. Task Tracker Scripts
-  - 5.1 generate_task_tracker.py - Generating task trackers from plans
-  - 5.2 generate_status_report.py - Generating markdown status reports
 
 ---
-
 ## 1. Universal Analysis Scripts
 
 ### 1.1 dependency_resolver.py

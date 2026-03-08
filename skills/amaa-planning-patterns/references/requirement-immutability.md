@@ -3,18 +3,11 @@
 ## Table of Contents
 
 - 1. Planning Phase Requirement Check
-  - 1.1 Loading USER_REQUIREMENTS.md
-  - 1.2 Requirement Feasibility Analysis
-  - 1.3 Handling Issues Found
 - 2. Plan Structure Requirements
-  - 2.1 Requirement Compliance Table
 - 3. Forbidden Planning Actions
-  - 3.1 Actions that violate requirement immutability
 - 4. Correct Planning Approach
-  - 4.1 Actions that respect requirement immutability
 
 ---
-
 ## 1. Planning Phase Requirement Check
 
 BEFORE creating any implementation plan, complete these steps:

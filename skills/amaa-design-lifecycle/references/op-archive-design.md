@@ -15,16 +15,8 @@ version: 1.0.0
 - [When to Use](#when-to-use)
 - [Prerequisites](#prerequisites)
 - [Procedure](#procedure)
-  - [Step 1: Verify All Requirements Implemented](#step-1-verify-all-requirements-implemented)
-  - [Step 2: Update State to COMPLETED](#step-2-update-state-to-completed)
-  - [Step 3: Create Completion Report](#step-3-create-completion-report)
-  - [Step 4: Archive to Historical Folder](#step-4-archive-to-historical-folder)
-  - [Step 5: Update Design Index](#step-5-update-design-index)
-  - [Step 6: Final State - ARCHIVED](#step-6-final-state-archived)
 - [Checklist](#checklist)
 - [Examples](#examples)
-  - [Example: Archive Authentication Design](#example-archive-authentication-design)
-  - [Example: Completion Report Format](#example-completion-report-format)
 - [Summary](#summary)
 - [Requirements Coverage](#requirements-coverage)
 - [Deviations Summary](#deviations-summary)
@@ -32,7 +24,6 @@ version: 1.0.0
 - [Lessons Learned](#lessons-learned)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
-
 ## When to Use
 
 Use this operation when:

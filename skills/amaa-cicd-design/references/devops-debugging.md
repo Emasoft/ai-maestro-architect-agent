@@ -5,16 +5,8 @@
 
 - [Table of Contents](#table-of-contents)
 - [1. Debug Script Template](#1-debug-script-template)
-  - [1.1 WorkflowDebugger Class Implementation](#11-workflowdebugger-class-implementation)
 - [2. Common Debugging Commands](#2-common-debugging-commands)
-  - [2.1 Syntax Validation with actionlint](#21-syntax-validation-with-actionlint)
-  - [2.2 Local Execution with act](#22-local-execution-with-act)
-  - [2.3 Run Logs and Artifact Management](#23-run-logs-and-artifact-management)
-  - [2.4 Secret Management Commands](#24-secret-management-commands)
 - [3. Troubleshooting Common Issues](#3-troubleshooting-common-issues)
-  - [3.1 Matrix Expansion Failures](#31-matrix-expansion-failures)
-  - [3.2 Secret Exposure Risks](#32-secret-exposure-risks)
-  - [3.3 Runner Availability Issues](#33-runner-availability-issues)
 - [Debug Workflow Checklist](#debug-workflow-checklist)
 
 ---
@@ -22,7 +14,6 @@
 Reference guide for debugging CI/CD pipelines locally and in GitHub Actions.
 
 ---
-
 ## Table of Contents
 
 - 1. Debug Script Template

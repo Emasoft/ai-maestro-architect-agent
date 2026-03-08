@@ -3,24 +3,11 @@
 ## Table of Contents
 
 - 1. gh CLI Errors
-  - 1.1 CLI not found
-  - 1.2 Authentication failed
-  - 1.3 Permission denied
 - 2. Document Errors
-  - 2.1 Document not found
-  - 2.2 No UUID in frontmatter
-  - 2.3 Invalid frontmatter format
 - 3. Issue Errors
-  - 3.1 Issue not found
-  - 3.2 Label creation failed
-  - 3.3 Comment failed
 - 4. Sync Errors
-  - 4.1 No linked issues
-  - 4.2 Status label conflict
-  - 4.3 Batch sync failures
 
 ---
-
 ## 1. gh CLI Errors
 
 ### 1.1 CLI not found

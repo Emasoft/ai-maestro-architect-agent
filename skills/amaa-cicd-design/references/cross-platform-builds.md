@@ -6,23 +6,11 @@
 - [Use Cases (Quick Reference)](#use-cases-quick-reference)
 - [Overview](#overview)
 - [Runner Matrix](#runner-matrix)
-  - [Available GitHub-Hosted Runners](#available-github-hosted-runners)
-  - [Free Tier Minutes](#free-tier-minutes)
 - [Multi-Platform CI Workflow](#multi-platform-ci-workflow)
-  - [Complete Matrix Build](#complete-matrix-build)
-  - [Platform-Specific Jobs](#platform-specific-jobs)
-    - [macOS with Code Signing](#macos-with-code-signing)
-    - [Windows with Code Signing](#windows-with-code-signing)
-    - [Linux with AppImage](#linux-with-appimage)
-    - [Web with WASM](#web-with-wasm)
-    - [Android with Gradle](#android-with-gradle)
 - [Build Optimization](#build-optimization)
-  - [Caching Strategies](#caching-strategies)
-  - [Incremental Builds](#incremental-builds)
 - [Checklist](#checklist)
 
 ---
-
 ## Use Cases (Quick Reference)
 
 - When you need to choose runners for your target platforms → [Runner Matrix](#runner-matrix)

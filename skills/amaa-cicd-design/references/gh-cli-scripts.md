@@ -5,19 +5,9 @@
 
 - [Table of Contents](#table-of-contents)
 - [1. Repository Setup Script](#1-repository-setup-script)
-  - [1.1 Branch Protection Configuration](#11-branch-protection-configuration)
-  - [1.2 Security Settings](#12-security-settings)
-  - [1.3 Merge Settings](#13-merge-settings)
 - [2. GraphQL Queries](#2-graphql-queries)
-  - [2.1 Get Workflow Runs Query](#21-get-workflow-runs-query)
-  - [2.2 Get Repository Environments Query](#22-get-repository-environments-query)
-  - [2.3 Get Pull Request Status Query](#23-get-pull-request-status-query)
 - [3. Workflow Management Scripts](#3-workflow-management-scripts)
-  - [3.1 Batch Workflow Operations](#31-batch-workflow-operations)
-  - [3.2 Artifact Cleanup Script](#32-artifact-cleanup-script)
 - [4. Secret Automation](#4-secret-automation)
-  - [4.1 Bulk Secret Setup](#41-bulk-secret-setup)
-  - [4.2 Secret Rotation Check](#42-secret-rotation-check)
 - [Quick Reference](#quick-reference)
 
 ---
@@ -25,7 +15,6 @@
 Reference scripts for repository configuration and management using GitHub CLI.
 
 ---
-
 ## Table of Contents
 
 - 1. Repository Setup Script

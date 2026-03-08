@@ -8,36 +8,14 @@ This protocol defines standards for creating, validating, and searching design d
 - 2. Required Frontmatter Schema
 - 3. Document Lifecycle
 - 4. Validation Procedures
-  - 4.1 Pre-Save Validation
-  - 4.2 Post-Save Validation
-  - 4.3 Validation Script Usage
 - 5. Search Procedures
-  - 5.1 Search by UUID
-  - 5.2 Search by Type
-  - 5.3 Search by Status
-  - 5.4 Search by Keyword
-  - 5.5 Combined Search
 - 6. GitHub Integration
-  - 6.1 Creating GitHub Issue from Design Document
-  - 6.2 Syncing Status
-  - 6.3 Linking Existing Issue
 - 7. Edge Cases and Error Handling
-  - 7.1 Duplicate UUID
-  - 7.2 Malformed Frontmatter
-  - 7.3 Missing Required Fields
-  - 7.4 Invalid Status Transition
-  - 7.5 GitHub CLI Not Available
-  - 7.6 Empty Search Results
-  - 7.7 Design Folder Not Initialized
 - 8. File Naming Convention
 - 9. Cross-Plugin Protocol
 - 10. Quick Reference
-  - 10.1 Create Document
-  - 10.2 Search Documents
-  - 10.3 Validate Document
 
 ---
-
 
 ## 1. Document UUID Format (GUUID)
 

@@ -4,12 +4,8 @@
 
 1. [Verification Checklist Template](#verification-checklist-template)
 2. [Integration with Task Tracker](#integration-with-task-tracker)
-   - [Automatic Status Updates](#automatic-status-updates)
-   - [Verification Script Integration](#verification-script-integration)
-   - [Blocking Verification Failures](#blocking-verification-failures)
 
 ---
-
 ## Verification Checklist Template
 
 Use this template for every task to ensure consistent verification:

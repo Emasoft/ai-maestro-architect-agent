@@ -4,32 +4,13 @@
 
 1. [Overview](#overview)
 2. [Part 1: Verification Patterns](plan-verification-guide-part1-verification-patterns.md)
-   - Phase Completion Verification
-     - Architecture Phase verification requirements
-     - Risk Phase verification requirements
-     - Roadmap Phase verification requirements
-     - Implementation Phase verification requirements
-   - Task Completion Criteria
-     - Code Task verification requirements
-     - Documentation Task verification requirements
-     - Review Task verification requirements
-     - Deploy Task verification requirements
 3. [Part 2: Checklist Template & Task Tracker Integration](plan-verification-guide-part2-checklist-integration.md)
-   - Verification Checklist Template (copy-paste ready)
-   - Integration with Task Tracker
-     - Automatic Status Updates and transitions
-     - Verification Script Integration (YAML config)
-     - Blocking Verification Failures and unblocking process
 4. [Part 3: Examples](plan-verification-guide-part3-examples.md)
-   - Example 1: Verifying a Code Implementation Task
-   - Example 2: Verifying a Documentation Task
-   - Example 3: Verifying a Multi-Step Task
 5. [Best Practices](#best-practices)
 6. [Troubleshooting](#troubleshooting)
 7. [Related Documentation](#related-documentation)
 
 ---
-
 ## Overview
 
 This guide explains how to apply verification-patterns to validate plan step completion. Effective verification ensures that each phase of planning and implementation is properly completed before moving to the next step, preventing cascading failures and ensuring quality outcomes.

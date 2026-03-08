@@ -3,25 +3,13 @@
 ## Table of Contents
 1. [What is Bun Test Runner](#what-is-bun-test-runner)
 2. [Test Syntax and Structure](#test-syntax-and-structure)
-   - 2.1 [Basic Test File Structure](#basic-test-file-structure)
-   - 2.2 [Test Without describe Block](#test-without-describe-block)
-   - 2.3 [Async Tests](#async-tests)
-   - 2.4 [Common Matchers](#common-matchers)
 3. [CLI Options Reference](#cli-options-reference)
-   - 3.1 [Basic Execution](#basic-execution)
-   - 3.2 [Coverage Mode](#coverage-mode)
-   - 3.3 [Watch Mode](#watch-mode)
-   - 3.4 [Custom Timeout](#custom-timeout)
-   - 3.5 [Reporter Options](#reporter-options)
-   - 3.6 [Specific File or Pattern](#specific-file-or-pattern)
-   - 3.7 [Combined Options](#combined-options)
 
 **Related Files:**
 - [bun-testing-lifecycle-coverage.md](bun-testing-lifecycle-coverage.md) - Lifecycle hooks, coverage config, CI integration
 - [bun-testing-advanced-troubleshooting.md](bun-testing-advanced-troubleshooting.md) - Advanced features and troubleshooting
 
 ---
-
 ## What is Bun Test Runner
 
 **Bun** is a modern JavaScript runtime that includes a built-in test runner. The Bun test runner is designed to be fast, simple, and compatible with Jest-like syntax.

@@ -4,17 +4,11 @@
 
 1. [Purpose](#purpose)
 2. [Linking Requirements](#linking-requirements)
-   - [1. Plan → Issue Link](#1-plan--issue-link)
-   - [2. Issue → Plan Link](#2-issue--plan-link)
-   - [3. Sub-Issues Linking](#3-sub-issues-linking)
 3. [Plan File Naming Convention](#plan-file-naming-convention)
 4. [Automatic Linking](#automatic-linking)
 5. [Progress Synchronization](#progress-synchronization)
-   - [Plan → GitHub](#plan--github)
-   - [GitHub → Plan](#github--plan)
 6. [Traceability Matrix](#traceability-matrix)
 7. [Orphan Detection](#orphan-detection)
-
 ## Purpose
 
 Every implementation plan MUST be linked to GitHub issues for traceability and progress tracking.
