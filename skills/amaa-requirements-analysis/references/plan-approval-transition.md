@@ -31,18 +31,18 @@ Do NOT approve the plan when:
 
 ## 3.2 Prerequisites for plan approval
 
-**Checklist before running approve-plan (set plan_phase_complete: true):**
+**Checklist before approving the plan:**
 
 | Prerequisite | How to Verify | How to Fix |
 |--------------|---------------|------------|
 | USER_REQUIREMENTS.md exists | `ls USER_REQUIREMENTS.md` | Create the file |
-| All sections complete | `check plan status (check_plan_prerequisites.py)` | `/amaa-modify-requirement requirement "Name" --status complete` |
-| All modules have criteria | `check plan status (check_plan_prerequisites.py) --verbose` | `/amaa-modify-requirement module id --criteria "..."` |
-| At least one module defined | `check plan status (check_plan_prerequisites.py)` | `/amaa-add-requirement module "name" --criteria "..."` |
+| All sections complete | `python3 scripts/check_plan_prerequisites.py` | `/amaa-modify-requirement requirement "Name" --status complete` |
+| All modules have criteria | `python3 scripts/check_plan_prerequisites.py --verbose` | `/amaa-modify-requirement module id --criteria "..."` |
+| At least one module defined | `python3 scripts/check_plan_prerequisites.py` | `/amaa-add-requirement module "name" --criteria "..."` |
 
 **Quick verification:**
 ```bash
-check plan status (check_plan_prerequisites.py) --verbose
+python3 scripts/check_plan_prerequisites.py --verbose
 ```
 
 All exit criteria should show checkmarks before approval.
@@ -51,15 +51,13 @@ All exit criteria should show checkmarks before approval.
 
 ## 3.3 Approve plan syntax and options
 
-**Basic syntax:**
-```
-approve-plan (set plan_phase_complete: true)
-```
+**Basic procedure:**
+
+Mark all requirements as complete using `/amaa-modify-requirement`, then set `plan_phase_complete: true` in the state file at `.claude/orchestrator-plan-phase.local.md`.
 
 **Skip GitHub Issue creation:**
-```
-approve-plan (set plan_phase_complete: true) --skip-issues
-```
+
+Set `plan_phase_complete: true` in the state file without creating GitHub Issues. Create issues manually later via `gh` CLI.
 
 **Options:**
 
@@ -77,7 +75,7 @@ python3 "${CLAUDE_PLUGIN_ROOT}/scripts/amaa_approve_plan.py" $ARGUMENTS
 
 ## 3.4 Validation checks performed
 
-The approve-plan (set plan_phase_complete: true) command validates the plan before approval:
+The plan approval process validates the plan before approval:
 
 **Check 1: Requirements file exists**
 - Looks for file specified in `requirements_file` field (default: USER_REQUIREMENTS.md)
@@ -151,7 +149,7 @@ After creation, the issue number (e.g., "#42") is stored in the module's `github
 
 ## 3.6 State file transitions
 
-**Before approve-plan (set plan_phase_complete: true):**
+**Before plan approval:**
 
 Plan state file (`.claude/orchestrator-plan-phase.local.md`):
 ```yaml
@@ -163,7 +161,7 @@ modules:
     github_issue: null
 ```
 
-**After approve-plan (set plan_phase_complete: true):**
+**After plan approval:**
 
 Plan state file (updated):
 ```yaml
@@ -253,7 +251,7 @@ ls .claude/orchestrator-exec-phase.local.md
 
 ```bash
 # Step 1: Verify plan is ready
-check plan status (check_plan_prerequisites.py) --verbose
+python3 scripts/check_plan_prerequisites.py --verbose
 
 # Expected output shows all checkmarks:
 # [x] USER_REQUIREMENTS.md complete
@@ -261,8 +259,7 @@ check plan status (check_plan_prerequisites.py) --verbose
 # [ ] GitHub Issues created for all modules
 # [ ] User approved the plan
 
-# Step 2: Approve the plan
-approve-plan (set plan_phase_complete: true)
+# Step 2: Approve the plan - set plan_phase_complete: true in .claude/orchestrator-plan-phase.local.md
 
 # Expected output:
 # Validating plan...
@@ -300,7 +297,8 @@ approve-plan (set plan_phase_complete: true)
 
 ```bash
 # Approve without creating issues
-approve-plan (set plan_phase_complete: true) --skip-issues
+# Set plan_phase_complete: true in .claude/orchestrator-plan-phase.local.md
+# Skip the GitHub Issue creation step
 
 # Issues can be created manually later via gh CLI
 gh issue create --title "[Module] Auth Core" --body "..." --label "module"
