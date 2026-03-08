@@ -1,6 +1,6 @@
 # npm Publishing with Bun - Part 2: Publishing Patterns
 
-This document covers advanced publishing patterns including pre-releases, package configuration, deprecation, and monorepo publishing.
+Advanced publishing patterns: pre-releases, config, deprecation, monorepo.
 
 ## Table of Contents
 1. [Beta/Pre-release Channels](#betapre-release-channels)

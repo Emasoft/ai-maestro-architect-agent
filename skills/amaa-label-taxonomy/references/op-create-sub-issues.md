@@ -1,11 +1,11 @@
 ---
 name: op-create-sub-issues
 description: Operation procedure for creating component-specific sub-issues from an epic.
-workflow-instruction: "support"
-procedure: "support-skill"
 ---
 
 # Operation: Create Sub-Issues
+
+
 
 
 ## Contents
@@ -27,6 +27,7 @@ procedure: "support-skill"
 - [Sub-Issue Naming Convention](#sub-issue-naming-convention)
 - [Error Handling](#error-handling)
 - [Notes](#notes)
+
 ## Purpose
 
 Break down a complex issue (epic) into smaller, component-specific sub-issues that can be assigned and tracked independently.

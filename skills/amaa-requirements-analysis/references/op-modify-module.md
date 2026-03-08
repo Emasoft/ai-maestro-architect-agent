@@ -1,13 +1,10 @@
 ---
 operation: modify-module
-procedure: proc-route-requirements
-workflow-instruction: Step 6 - Requirements to Architect
-parent-skill: amaa-requirements-analysis
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Modify Module Operation
+
+
 
 
 ## Contents
@@ -19,6 +16,7 @@ version: 1.0.0
 - [Examples](#examples)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

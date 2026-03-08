@@ -1,5 +1,12 @@
 # LSP Installation & Verification
 
+
+## Table of Contents
+
+- Pre-Assignment Checks
+- Installation Verification
+- Automated Verification
+
 This document covers pre-assignment checks and installation verification for all 11 languages supported by Claude Code LSP (December 2025).
 
 ## Pre-Assignment Checks

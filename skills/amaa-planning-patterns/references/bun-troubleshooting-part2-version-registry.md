@@ -1,8 +1,5 @@
 # Bun Troubleshooting: Version & Registry Issues (Part 2)
 
-> **Navigation**: [Index](bun-troubleshooting.md) | [Part 1: CI Publishing](bun-troubleshooting-part1-ci-publishing.md) | [Part 3: Permissions & Tests](bun-troubleshooting-part3-permissions-tests.md)
-
-This section covers version mismatch and registry configuration issues.
 
 ## Table of Contents
 
@@ -10,6 +7,12 @@ This section covers version mismatch and registry configuration issues.
 - [8. Missing registry-url](#8-missing-registry-url)
 
 ---
+
+> **Navigation**: [Index](bun-troubleshooting.md) | [Part 1: CI Publishing](bun-troubleshooting-part1-ci-publishing.md) | [Part 3: Permissions & Tests](bun-troubleshooting-part3-permissions-tests.md)
+
+This section covers version mismatch and registry configuration issues.
+
+
 ## 5. Version Mismatch
 
 ### Problem Description

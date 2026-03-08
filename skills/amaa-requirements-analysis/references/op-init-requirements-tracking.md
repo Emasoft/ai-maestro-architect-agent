@@ -1,13 +1,10 @@
 ---
 operation: init-requirements-tracking
-procedure: proc-route-requirements
-workflow-instruction: Step 6 - Requirements to Architect
-parent-skill: amaa-requirements-analysis
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Initialize Requirements Tracking Operation
+
+
 
 
 ## Contents
@@ -24,6 +21,7 @@ version: 1.0.0
 - [Impact](#impact)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

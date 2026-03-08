@@ -1,13 +1,10 @@
 ---
 operation: plan-implementation
-procedure: proc-create-design
-workflow-instruction: Step 7 - Design Document Creation
-parent-skill: amaa-planning-patterns
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Plan Implementation Tasks
+
+
 
 
 ## Contents
@@ -26,6 +23,7 @@ version: 1.0.0
 - [Task T2.5: Create Login Endpoint](#task-t25-create-login-endpoint)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

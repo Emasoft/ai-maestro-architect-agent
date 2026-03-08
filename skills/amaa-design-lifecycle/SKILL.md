@@ -49,14 +49,14 @@ Copy this checklist and track your progress:
 |-----------|-------------|
 | [procedures.md](references/procedures.md) | Detailed procedures for each lifecycle phase |
 | [design-states.md](references/design-states.md) | State machine with valid transitions |
-| [examples.md](references/examples.md) | Full worked examples (Example 1: Design Real-Time Collaborative Editor, Example 2: Design Stripe Payment Integration) |
+| [examples.md](references/examples.md) | Example 1: Design Real-Time Collaborative Editor, Example 2: Design Stripe Payment Integration, Example 3: Create and Submit Design for Review (Lifecycle), Example 4: Approve and Track Implementation (Lifecycle) |
 | [scripts.md](references/scripts.md) | Automation scripts reference |
-| [rule-14-enforcement.md](references/rule-14-enforcement.md) | RULE 14: User Requirements Are Immutable (1 When handling user requirements in any workflow, 2 When detecting potential requirement deviations) |
-| [judgment-guidelines.md](references/judgment-guidelines.md) | Architecture judgment guidelines (When to research external APIs instead of using existing documentation, When to create an ADR instead of just documenting the decision) |
-| [success-criteria.md](references/success-criteria.md) | Design validation checklist (Overview, Requirements Captured, Architecture Designed, APIs Researched, Modules Specified) |
-| [workflow-checklists.md](references/workflow-checklists.md) | Per-phase workflow checklists (Introduction, Checklist: Requirements Analysis, Checklist: Design Phase, Checklist: Handoff Preparation) |
+| [rule-14-enforcement.md](references/rule-14-enforcement.md) | 1 When handling user requirements in any workflow, 2 When detecting potential requirement deviations, 3 When a technical constraint conflicts with a requirement, 4 When documenting requirement compliance |
+| [judgment-guidelines.md](references/judgment-guidelines.md) | When to research external APIs instead of using existing documentation, When to create an ADR instead of just documenting the decision, When to modularize a system instead of keeping it simple, When to escalate unclear requirements to AMCOS for clarification |
+| [success-criteria.md](references/success-criteria.md) | Overview, Requirements Captured, Architecture Designed, APIs Researched, Modules Specified, Handoff Prepared |
+| [workflow-checklists.md](references/workflow-checklists.md) | Introduction, Checklist: Requirements Analysis, Checklist: Design Phase, Checklist: Handoff Preparation |
 | [adr-templates.md](references/adr-templates.md) | Architecture Decision Record templates |
-| [handoff-format.md](references/handoff-format.md) | Handoff format specification (Overview, Handoff Validation Checklist, Validation Script, Handoff Document Template) |
+| [handoff-format.md](references/handoff-format.md) | Overview, Handoff Validation Checklist, Handoff Document Template, Executive Summary, Design Artifacts, Implementation Sequence, Risks and Mitigations, Success Criteria for AMOA, Open Questions, Notes, Template Field Guide |
 
 ## Examples
 

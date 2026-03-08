@@ -1,5 +1,11 @@
 # Design States
 
+## Table of Contents
+
+- State Definitions
+
+## State Definitions
+
 | State | Description | Transitions |
 |-------|-------------|-------------|
 | DRAFT | Initial creation | -> REVIEW |

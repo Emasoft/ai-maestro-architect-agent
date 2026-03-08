@@ -1,13 +1,10 @@
 ---
 operation: detect-circular-dependencies
-procedure: proc-decompose-design
-workflow-instruction: Step 10 - Design Decomposition
-parent-skill: amaa-modularization
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Detect Circular Dependencies
+
+
 
 
 ## Contents
@@ -29,6 +26,7 @@ version: 1.0.0
 - [Recommended Action Order](#recommended-action-order)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

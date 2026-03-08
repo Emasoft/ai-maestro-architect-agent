@@ -1,13 +1,10 @@
 ---
 operation: submit-design-review
-procedure: proc-submit-design
-workflow-instruction: Step 8 - Design Review Submission
-parent-skill: amaa-design-lifecycle
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Submit Design for Review
+
+
 
 
 ## Contents
@@ -20,6 +17,7 @@ version: 1.0.0
 - [Review Request](#review-request)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

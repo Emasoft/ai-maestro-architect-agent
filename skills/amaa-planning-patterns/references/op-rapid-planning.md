@@ -1,13 +1,10 @@
 ---
 operation: rapid-planning
-procedure: proc-create-design
-workflow-instruction: Step 7 - Design Document Creation
-parent-skill: amaa-planning-patterns
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Rapid Planning Under Pressure
+
+
 
 
 ## Contents
@@ -32,6 +29,7 @@ version: 1.0.0
 - [Rapid Planning Session Agenda](#rapid-planning-session-agenda)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

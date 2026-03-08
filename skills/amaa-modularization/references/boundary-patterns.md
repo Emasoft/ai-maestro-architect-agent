@@ -1,10 +1,11 @@
 ---
 name: boundary-patterns
-description: Techniques and patterns for identifying module boundaries in software systems, including domain analysis, change vector identification, seam finding, and bounded context definition
-version: 1.0.0
+description: "Module boundary identification patterns."
 ---
 
 # Module Boundary Identification Patterns
+
+
 
 ## Table of Contents
 
@@ -19,6 +20,7 @@ version: 1.0.0
 - [Anti-Patterns](#anti-patterns)
 - [Decision Framework](#decision-framework)
 - [Summary](#summary)
+
 ## Overview
 
 Identifying correct module boundaries is critical to successful modularization. This guide provides systematic techniques for finding natural boundaries in your system.

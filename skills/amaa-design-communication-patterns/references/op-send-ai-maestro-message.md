@@ -1,13 +1,10 @@
 ---
 operation: send-ai-maestro-message
-procedure: proc-submit-design
-workflow-instruction: Step 8 - Design Submission
-parent-skill: amaa-design-communication-patterns
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Send AI Maestro Inter-Agent Message
+
+
 
 
 ## Contents
@@ -21,6 +18,7 @@ version: 1.0.0
 - [Priority Levels](#priority-levels)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Trigger this operation when:

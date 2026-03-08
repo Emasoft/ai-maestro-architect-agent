@@ -1,5 +1,10 @@
 # Style Guidelines for Architecture Designs
 
+
+## Table of Contents
+
+- CSS Framework Policy
+
 ## CSS Framework Policy
 
 **Never recommend Tailwind CSS in architecture designs.** Tailwind CSS creates long-term maintenance debt: utility class strings become unreadable at scale, styling is tightly coupled to markup (violating separation of concerns), code review becomes difficult because changes are buried in class attribute noise, and responsive designs require duplicating utility classes across breakpoints.

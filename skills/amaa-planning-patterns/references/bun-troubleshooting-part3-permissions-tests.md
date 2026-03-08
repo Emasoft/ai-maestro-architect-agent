@@ -1,10 +1,5 @@
 # Bun Troubleshooting: Permissions & Tests (Part 3)
 
-> **Navigation**: [Index](bun-troubleshooting.md) | [Part 2: Version & Registry](bun-troubleshooting-part2-version-registry.md) | [Part 4: Browser Bundling](bun-troubleshooting-part4-browser-bundling.md)
-
-This section covers GitHub permissions and test timeout issues.
-
----
 
 ## Table of Contents
 
@@ -12,6 +7,14 @@ This section covers GitHub permissions and test timeout issues.
 - [7. Test Timeouts](#7-test-timeouts)
 
 ---
+
+> **Navigation**: [Index](bun-troubleshooting.md) | [Part 2: Version & Registry](bun-troubleshooting-part2-version-registry.md) | [Part 4: Browser Bundling](bun-troubleshooting-part4-browser-bundling.md)
+
+This section covers GitHub permissions and test timeout issues.
+
+---
+
+
 ## 6. GitHub Release Permissions
 
 ### Problem Description

@@ -1,18 +1,17 @@
 ---
 name: extended-examples-and-resources
-description: Additional planning phase examples, error handling details, and resource links for the amaa-requirements-analysis skill.
-version: 1.0.0
-parent-skill: amaa-requirements-analysis
+description: "Extended examples and resources."
 ---
 
-## Contents
+## Table of Contents
 
-- [Error Handling Details](#error-handling-details)
-- [Extended Examples](#extended-examples)
-- [Resources](#resources)
-- [Command Output Reference](#command-output-reference)
+- Error Handling Details
+- Extended Examples
+- Resources
+- Command Output Reference
 
----
+
+
 ## Error Handling Details
 
 Common errors encountered during the planning phase and how to resolve them:
@@ -37,6 +36,16 @@ Common errors encountered during the planning phase and how to resolve them:
 
 ```bash
 # Initialize planning for a new notification microservice
+
+## Contents
+
+- [Error Handling Details](#error-handling-details)
+- [Extended Examples](#extended-examples)
+- [Resources](#resources)
+- [Command Output Reference](#command-output-reference)
+
+---
+
 /amaa-start-planning "Build a notification microservice supporting email, SMS, and push notifications"
 
 # Define the core modules with acceptance criteria

@@ -1,13 +1,10 @@
 ---
 operation: archive-design
-procedure: proc-handle-feedback
-workflow-instruction: Step 15 - Design Archival
-parent-skill: amaa-design-lifecycle
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Complete and Archive Design
+
+
 
 
 ## Contents
@@ -24,6 +21,7 @@ version: 1.0.0
 - [Lessons Learned](#lessons-learned)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

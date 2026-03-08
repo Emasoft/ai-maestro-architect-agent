@@ -1,5 +1,11 @@
 # Design Lifecycle Scripts
 
+## Table of Contents
+
+- Script Reference
+
+## Script Reference
+
 All scripts are located at `../../scripts/` relative to this skill.
 
 | Script | Purpose | Usage |

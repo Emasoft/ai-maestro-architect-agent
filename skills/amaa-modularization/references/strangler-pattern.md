@@ -1,10 +1,11 @@
 ---
 name: strangler-pattern
-description: Step-by-step guide to breaking up monolithic applications using the Strangler Fig pattern, including incremental migration strategies, routing techniques, and risk mitigation
-version: 1.0.0
+description: "Strangler Fig pattern for monolith migration."
 ---
 
 # Breaking Up Monoliths: The Strangler Fig Pattern
+
+
 
 ## Table of Contents
 
@@ -18,6 +19,7 @@ version: 1.0.0
 - [Strangler Pattern Checklist](#strangler-pattern-checklist)
 - [Example: Extracting Authentication](#example-extracting-authentication)
 - [Summary](#summary)
+
 ## Overview
 
 The Strangler Fig pattern is a technique for incrementally migrating from a monolithic architecture to a modular or microservices architecture. It's named after strangler fig plants that grow around trees, eventually replacing them.

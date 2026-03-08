@@ -1,5 +1,13 @@
 # AMAA Label Taxonomy - Extended Examples
 
+
+## Table of Contents
+
+- Example 1: Adding Component Labels After Architecture Analysis
+- Example 2: Validating Effort Estimate
+- Example 3: Creating Component-Specific Sub-Issues
+- Example 4: Architecture Decision Record (ADR)
+
 ## Example 1: Adding Component Labels After Architecture Analysis
 
 ```bash

@@ -1,11 +1,11 @@
 ---
 name: op-add-component-labels
 description: Operation procedure for adding component labels to an issue after architecture analysis.
-workflow-instruction: "support"
-procedure: "support-skill"
 ---
 
 # Operation: Add Component Labels
+
+
 
 
 ## Contents
@@ -17,6 +17,7 @@ procedure: "support-skill"
 - [Example](#example)
 - [Component Label Reference](#component-label-reference)
 - [Error Handling](#error-handling)
+
 ## Purpose
 
 After completing architecture analysis, apply component labels to an issue to indicate which parts of the system are affected by the work.

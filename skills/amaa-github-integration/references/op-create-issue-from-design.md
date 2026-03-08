@@ -1,13 +1,10 @@
 ---
 operation: create-issue-from-design
-procedure: proc-submit-design
-workflow-instruction: Step 8 - Design Submission
-parent-skill: amaa-github-integration
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Create GitHub Issue from Design Document
+
+
 
 
 ## Contents
@@ -19,6 +16,7 @@ version: 1.0.0
 - [Examples](#examples)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Trigger this operation when:

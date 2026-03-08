@@ -1,10 +1,5 @@
 # Bun Troubleshooting: TypeScript & CSS (Part 5)
 
-> **Navigation**: [Index](bun-troubleshooting.md) | [Part 4: Browser Bundling](bun-troubleshooting-part4-browser-bundling.md) | [Part 6: Sourcemaps](bun-troubleshooting-part6-sourcemaps.md)
-
-This section covers TypeScript declaration generation and CSS bundling issues.
-
----
 
 ## Table of Contents
 
@@ -12,6 +7,14 @@ This section covers TypeScript declaration generation and CSS bundling issues.
 - [10. CSS Bundling](#10-css-bundling)
 
 ---
+
+> **Navigation**: [Index](bun-troubleshooting.md) | [Part 4: Browser Bundling](bun-troubleshooting-part4-browser-bundling.md) | [Part 6: Sourcemaps](bun-troubleshooting-part6-sourcemaps.md)
+
+This section covers TypeScript declaration generation and CSS bundling issues.
+
+---
+
+
 ## 9. TypeScript Declarations
 
 ### Problem Description

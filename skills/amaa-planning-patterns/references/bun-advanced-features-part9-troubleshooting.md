@@ -1,10 +1,5 @@
 # Bun Advanced Features Part 9: Edge Cases and Troubleshooting
 
-## Overview
-
-This document covers edge cases and troubleshooting for Bun's advanced features. Due to the comprehensive nature of this content, it has been split into focused parts.
-
----
 
 ## Table of Contents
 
@@ -33,6 +28,14 @@ This document covers edge cases and troubleshooting for Bun's advanced features.
 - 2.10 General Build Issues
 
 ---
+
+## Overview
+
+This document covers edge cases and troubleshooting for Bun's advanced features. Due to the comprehensive nature of this content, it has been split into focused parts.
+
+---
+
+
 ## Summary
 
 This document series covered advanced Bun features essential for production-ready applications:

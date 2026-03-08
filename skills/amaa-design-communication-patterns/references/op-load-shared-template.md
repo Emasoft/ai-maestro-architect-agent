@@ -1,13 +1,10 @@
 ---
 operation: load-shared-template
-procedure: proc-submit-design
-workflow-instruction: Step 8 - Design Submission
-parent-skill: amaa-design-communication-patterns
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Load and Use Shared Templates
+
+
 
 
 ## Contents
@@ -20,6 +17,7 @@ version: 1.0.0
 - [Template Placeholders](#template-placeholders)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Trigger this operation when:

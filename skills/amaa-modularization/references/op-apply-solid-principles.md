@@ -1,13 +1,10 @@
 ---
 operation: apply-solid-principles
-procedure: proc-create-design
-workflow-instruction: Step 7 - Design Document Creation
-parent-skill: amaa-modularization
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Apply SOLID Principles to Modularization
+
+
 
 
 ## Contents
@@ -23,6 +20,7 @@ version: 1.0.0
 - [Module: OrderModule](#module-ordermodule)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

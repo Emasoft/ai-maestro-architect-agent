@@ -1,13 +1,10 @@
 ---
 operation: generate-design-uuid
-procedure: proc-create-design
-workflow-instruction: Step 7 - Design Document Creation
-parent-skill: amaa-design-lifecycle
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Generate Design UUID
+
+
 
 
 ## Contents
@@ -20,6 +17,7 @@ version: 1.0.0
 - [UUID Format Rules](#uuid-format-rules)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

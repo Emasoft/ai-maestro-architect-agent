@@ -1,8 +1,5 @@
 # Bun Advanced Features
 
-> **Index Document** | This file provides an overview and navigation to all advanced Bun bundler features.
-
-This guide covers advanced Bun bundler features essential for production-ready applications. Each topic is covered in detail in its own reference document.
 
 ## Table of Contents
 
@@ -21,6 +18,11 @@ This guide covers advanced Bun bundler features essential for production-ready a
 - [See Also](#see-also)
 
 ---
+
+> **Index Document** | This file provides an overview and navigation to all advanced Bun bundler features.
+
+This guide covers advanced Bun bundler features essential for production-ready applications. Each topic is covered in detail in its own reference document.
+
 
 ## Quick Reference
 

@@ -1,13 +1,10 @@
 ---
 operation: validate-with-schema
-procedure: proc-submit-design
-workflow-instruction: Step 8 - Design Submission
-parent-skill: amaa-design-communication-patterns
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Validate with Shared Schema
+
+
 
 
 ## Contents
@@ -20,6 +17,7 @@ version: 1.0.0
 - [Required Fields by Schema](#required-fields-by-schema)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Trigger this operation when:

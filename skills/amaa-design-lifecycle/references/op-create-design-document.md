@@ -1,13 +1,10 @@
 ---
 operation: create-design-document
-procedure: proc-create-design
-workflow-instruction: Step 7 - Design Document Creation
-parent-skill: amaa-design-lifecycle
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Create New Design Document
+
+
 
 
 ## Contents
@@ -19,6 +16,7 @@ version: 1.0.0
 - [Examples](#examples)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

@@ -1,10 +1,5 @@
 # Bun Troubleshooting: Browser Bundling (Part 4)
 
-> **Navigation**: [Index](bun-troubleshooting.md) | [Part 3: Permissions & Tests](bun-troubleshooting-part3-permissions-tests.md) | [Part 5: TypeScript & CSS](bun-troubleshooting-part5-typescript-css.md)
-
-This section covers issues when bundling code for browser environments.
-
----
 
 ## Table of Contents
 
@@ -12,6 +7,14 @@ This section covers issues when bundling code for browser environments.
 - [4. Global Name Collision](#4-global-name-collision)
 
 ---
+
+> **Navigation**: [Index](bun-troubleshooting.md) | [Part 3: Permissions & Tests](bun-troubleshooting-part3-permissions-tests.md) | [Part 5: TypeScript & CSS](bun-troubleshooting-part5-typescript-css.md)
+
+This section covers issues when bundling code for browser environments.
+
+---
+
+
 ## 3. Node.js Modules in Browser
 
 ### Problem Description

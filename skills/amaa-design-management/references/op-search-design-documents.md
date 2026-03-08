@@ -1,13 +1,10 @@
 ---
 operation: search-design-documents
-procedure: proc-create-design
-workflow-instruction: Step 7 - Design Document Creation
-parent-skill: amaa-design-management
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Search Design Documents
+
+
 
 
 ## Contents
@@ -20,6 +17,7 @@ version: 1.0.0
 - [Search Result Fields](#search-result-fields)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

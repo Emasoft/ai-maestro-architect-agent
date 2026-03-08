@@ -1,13 +1,10 @@
 ---
 operation: manage-module-dependencies
-procedure: proc-create-design
-workflow-instruction: Step 7 - Design Document Creation
-parent-skill: amaa-modularization
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Manage Module Dependencies
+
+
 
 
 ## Contents
@@ -24,6 +21,7 @@ version: 1.0.0
 - [Allowed Dependencies Matrix](#allowed-dependencies-matrix)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

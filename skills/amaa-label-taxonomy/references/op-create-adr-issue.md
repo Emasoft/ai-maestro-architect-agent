@@ -1,11 +1,11 @@
 ---
 name: op-create-adr-issue
 description: Operation procedure for creating Architecture Decision Record (ADR) issues.
-workflow-instruction: "support"
-procedure: "support-skill"
 ---
 
 # Operation: Create ADR Issue
+
+
 
 
 ## Contents
@@ -32,6 +32,7 @@ procedure: "support-skill"
 - [ADR Status Values](#adr-status-values)
 - [Error Handling](#error-handling)
 - [Notes](#notes)
+
 ## Purpose
 
 Create a GitHub issue to track an Architecture Decision Record (ADR) when significant architectural decisions need documentation and discussion.

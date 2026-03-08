@@ -1,5 +1,11 @@
 # CI/CD Error Handling and Examples
 
+
+## Table of Contents
+
+- Error Handling
+- Examples
+
 ## Error Handling
 
 ### Issue: CI pipeline fails but tests pass locally

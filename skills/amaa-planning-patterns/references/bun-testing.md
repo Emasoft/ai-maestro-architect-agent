@@ -1,5 +1,11 @@
 # Bun Testing Reference Index
 
+
+## Table of Contents
+
+- Parts Overview
+- Quick Reference
+
 This reference is split into three parts for easier navigation and progressive discovery.
 
 ## Parts Overview

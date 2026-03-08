@@ -1,13 +1,10 @@
 ---
 operation: validate-frontmatter
-procedure: proc-create-design
-workflow-instruction: Step 7 - Design Document Creation
-parent-skill: amaa-design-management
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Validate Document Frontmatter
+
+
 
 
 ## Contents
@@ -20,6 +17,7 @@ version: 1.0.0
 - [Validation Rules](#validation-rules)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

@@ -1,13 +1,10 @@
 ---
 operation: verify-gh-cli-auth
-procedure: proc-submit-design
-workflow-instruction: Step 8 - Design Submission
-parent-skill: amaa-github-integration
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Verify gh CLI Authentication
+
+
 
 
 ## Contents
@@ -21,6 +18,7 @@ version: 1.0.0
 - [Required Token Scopes](#required-token-scopes)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Trigger this operation when:

@@ -1,10 +1,11 @@
 ---
 name: api-design-guide
-description: Comprehensive guide for designing module APIs, including principles for minimal surface area, versioning strategies, compatibility rules, and contract templates
-version: 1.0.0
+description: "Module API design principles and patterns."
 ---
 
 # API Design Guide for Module Interfaces
+
+
 
 ## Table of Contents
 
@@ -18,6 +19,7 @@ version: 1.0.0
 - [API Documentation](#api-documentation)
 - [API Testing](#api-testing)
 - [Summary](#summary)
+
 ## Overview
 
 A module's API is its public contract with other modules. Good API design is critical for maintainability, stability, and evolution of modular systems.

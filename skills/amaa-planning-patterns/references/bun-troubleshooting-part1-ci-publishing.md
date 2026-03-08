@@ -1,10 +1,5 @@
 # Bun Troubleshooting: CI/CD Publishing Issues (Part 1)
 
-> **Navigation**: [Index](bun-troubleshooting.md) | [Part 2: Version & Registry](bun-troubleshooting-part2-version-registry.md)
-
-This section covers issues related to CI/CD publishing workflows.
-
----
 
 ## Table of Contents
 
@@ -12,6 +7,14 @@ This section covers issues related to CI/CD publishing workflows.
 - [2. Unpinned Version Issues](#2-unpinned-version-issues)
 
 ---
+
+> **Navigation**: [Index](bun-troubleshooting.md) | [Part 2: Version & Registry](bun-troubleshooting-part2-version-registry.md)
+
+This section covers issues related to CI/CD publishing workflows.
+
+---
+
+
 ## 1. OIDC Authentication Error
 
 ### Problem Description

@@ -1,13 +1,10 @@
 ---
 operation: approve-design
-procedure: proc-approve-design
-workflow-instruction: Step 9 - Design Approval
-parent-skill: amaa-design-lifecycle
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Approve Design
+
+
 
 
 ## Contents
@@ -20,6 +17,7 @@ version: 1.0.0
 - [Approval Record](#approval-record)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

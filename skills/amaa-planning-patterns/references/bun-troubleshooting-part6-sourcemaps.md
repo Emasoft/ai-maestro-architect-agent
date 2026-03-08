@@ -1,14 +1,17 @@
 # Bun Troubleshooting: Sourcemaps (Part 6)
 
-> **Navigation**: [Index](bun-troubleshooting.md) | [Part 5: TypeScript & CSS](bun-troubleshooting-part5-typescript-css.md) | [Part 7: Validation](bun-troubleshooting-part7-validation.md)
-
-This section covers sourcemap configuration and debugging issues.
 
 ## Table of Contents
 
 - [11. Sourcemap Issues](#11-sourcemap-issues)
 
 ---
+
+> **Navigation**: [Index](bun-troubleshooting.md) | [Part 5: TypeScript & CSS](bun-troubleshooting-part5-typescript-css.md) | [Part 7: Validation](bun-troubleshooting-part7-validation.md)
+
+This section covers sourcemap configuration and debugging issues.
+
+
 ## 11. Sourcemap Issues
 
 ### Problem Description

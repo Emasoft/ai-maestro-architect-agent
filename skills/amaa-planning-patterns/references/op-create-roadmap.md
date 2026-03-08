@@ -1,13 +1,10 @@
 ---
 operation: create-roadmap
-procedure: proc-create-design
-workflow-instruction: Step 7 - Design Document Creation
-parent-skill: amaa-planning-patterns
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Create Roadmap
+
+
 
 
 ## Contents
@@ -28,6 +25,7 @@ version: 1.0.0
 - [Total with Buffer: 96 person-days](#total-with-buffer-96-person-days)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

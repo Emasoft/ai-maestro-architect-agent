@@ -40,10 +40,10 @@ Copy this checklist and track your progress:
 
 | Document | Description |
 |----------|-------------|
-| [research-procedure.md](references/research-procedure.md) | Step-by-step research workflow (Understand Requirements, Gather Information, Document Findings, Report to Orchestrator) |
-| [output-templates.md](references/output-templates.md) | All 5 documentation templates (API Overview Document, Authentication Guide, Endpoints Reference, Integration Guide, Configuration Template) |
-| [tools-reference.md](references/tools-reference.md) | Available tools and usage (Read Tool, WebFetch Tool, WebSearch Tool, Write Tool, Glob/Grep Tools) |
-| [research-scenarios.md](references/research-scenarios.md) | REST, Python, Cloud, GraphQL patterns (Scenario 1: Research REST API, Scenario 2: Research Python Library, Scenario 3: Research Cloud Service API) |
+| [research-procedure.md](references/research-procedure.md) | Step 1: Understand Requirements, Step 2: Gather Information, Step 3: Document Findings, Step 4: Report to Orchestrator |
+| [output-templates.md](references/output-templates.md) | API Overview Document, Authentication Guide, Endpoints Reference, Integration Guide, Configuration Template |
+| [tools-reference.md](references/tools-reference.md) | Read Tool, WebFetch Tool, WebSearch Tool, Write Tool, Glob/Grep Tools |
+| [research-scenarios.md](references/research-scenarios.md) | Scenario 1: Research REST API, Scenario 2: Research Python Library, Scenario 3: Research Cloud Service API, Scenario 4: Research GraphQL API |
 | [collaboration-patterns.md](references/collaboration-patterns.md) | Agent interaction and handoff protocols (Integration with Orchestrator, Handling Blockers, Handoff Protocol) |
 | [quick-reference.md](references/quick-reference.md) | TOC, workflow tables, communication formats (Research Procedures, Step 1: Understand Requirements) |
 

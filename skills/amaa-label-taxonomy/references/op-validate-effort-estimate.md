@@ -1,11 +1,11 @@
 ---
 name: op-validate-effort-estimate
-description: Operation procedure for validating and adjusting effort estimates based on architecture analysis.
-workflow-instruction: "support"
-procedure: "support-skill"
+description: "Validate effort estimates."
 ---
 
 # Operation: Validate Effort Estimate
+
+
 
 
 ## Contents
@@ -18,6 +18,7 @@ procedure: "support-skill"
 - [Effort Guidelines](#effort-guidelines)
 - [Error Handling](#error-handling)
 - [Notes](#notes)
+
 ## Purpose
 
 Validate that the issue's effort label matches the actual complexity revealed by architecture analysis. Recommend adjustments if needed.

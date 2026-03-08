@@ -1,13 +1,10 @@
 ---
 operation: sync-status-to-github
-procedure: proc-submit-design
-workflow-instruction: Step 8 - Design Submission
-parent-skill: amaa-github-integration
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Synchronize Design Status to GitHub Issue
+
+
 
 
 ## Contents
@@ -20,6 +17,7 @@ version: 1.0.0
 - [Status to Label Mapping](#status-to-label-mapping)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Trigger this operation when:

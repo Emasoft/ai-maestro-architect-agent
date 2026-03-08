@@ -1,8 +1,5 @@
 # npm Publishing with Bun Projects - Complete Reference
 
-This reference covers all aspects of publishing npm packages from Bun projects. The content is split into two parts for easier navigation.
-
----
 
 ## Table of Contents
 
@@ -14,6 +11,12 @@ This reference covers all aspects of publishing npm packages from Bun projects. 
 - [Cross-references](#cross-references)
 
 ---
+
+This reference covers all aspects of publishing npm packages from Bun projects. The content is split into two parts for easier navigation.
+
+---
+
+
 ## Document Structure
 
 ### [Part 1: Authentication & Setup](./bun-npm-publishing-part1-authentication-setup.md)

@@ -1,10 +1,11 @@
 ---
 name: dependency-analysis
-description: Techniques for analyzing and managing module dependencies, including dependency direction rules, shared code strategies, circular dependency detection, and dependency injection patterns
-version: 1.0.0
+description: "Module dependency analysis techniques."
 ---
 
 # Dependency Analysis and Management
+
+
 
 ## Table of Contents
 
@@ -19,6 +20,7 @@ version: 1.0.0
 - [Dependency Documentation](#dependency-documentation)
 - [Anti-Patterns](#anti-patterns)
 - [Summary](#summary)
+
 ## Overview
 
 Module dependencies determine how modules interact and evolve. Proper dependency management is critical for maintaining modularity, testability, and independent evolution.

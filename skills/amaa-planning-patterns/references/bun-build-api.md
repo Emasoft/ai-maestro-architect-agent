@@ -1,5 +1,11 @@
 # Bun Build API Reference - Index
 
+
+## Table of Contents
+
+- Parts
+- Quick Reference
+
 This reference is split into two parts for easier navigation.
 
 ## Parts

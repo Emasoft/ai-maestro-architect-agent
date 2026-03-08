@@ -1,5 +1,14 @@
 # Design Lifecycle Procedures
 
+
+## Table of Contents
+
+- PROCEDURE 1: Create New Design
+- PROCEDURE 2: Submit for Review
+- PROCEDURE 3: Approve Design
+- PROCEDURE 4: Track Implementation
+- PROCEDURE 5: Complete and Archive
+
 ## PROCEDURE 1: Create New Design
 
 1. Generate design UUID

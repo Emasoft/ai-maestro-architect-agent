@@ -1,6 +1,5 @@
 # LSP Enforcement Checklist - Part 1: Verification & Remediation
 
-Covers pre-assignment checks, installation verification, and remediation procedures for all 11 languages supported by Claude Code LSP (December 2025).
 
 ## Table of Contents
 1. [Pre-Assignment Checks](#pre-assignment-checks)
@@ -16,6 +15,10 @@ Covers pre-assignment checks, installation verification, and remediation procedu
 - [Index](./lsp-enforcement-checklist.md)
 
 ---
+
+Covers pre-assignment checks, installation verification, and remediation procedures for all 11 languages supported by Claude Code LSP (December 2025).
+
+
 ## Pre-Assignment Checks
 
 Before assigning work to a remote agent:

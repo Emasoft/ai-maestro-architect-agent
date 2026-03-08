@@ -1,13 +1,10 @@
 ---
 operation: monitor-github-project
-procedure: proc-submit-design
-workflow-instruction: Step 8 - Design Submission
-parent-skill: amaa-github-integration
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Monitor GitHub Project Kanban Board
+
+
 
 
 ## Contents
@@ -21,6 +18,7 @@ version: 1.0.0
 - [What to Monitor](#what-to-monitor)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Trigger this operation when:

@@ -1,13 +1,10 @@
 ---
 operation: generate-guuid
-procedure: proc-create-design
-workflow-instruction: Step 7 - Design Document Creation
-parent-skill: amaa-design-management
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Generate GUUID
+
+
 
 
 ## Contents
@@ -21,6 +18,7 @@ version: 1.0.0
 - [Overview](#overview)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

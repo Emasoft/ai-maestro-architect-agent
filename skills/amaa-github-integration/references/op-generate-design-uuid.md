@@ -1,13 +1,10 @@
 ---
 operation: generate-design-uuid
-procedure: proc-submit-design
-workflow-instruction: Step 8 - Design Submission
-parent-skill: amaa-github-integration
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Generate UUID for Design Document
+
+
 
 
 ## Contents
@@ -20,6 +17,7 @@ version: 1.0.0
 - [UUID Format](#uuid-format)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Trigger this operation when:

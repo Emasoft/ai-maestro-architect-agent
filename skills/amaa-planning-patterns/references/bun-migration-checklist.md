@@ -1,10 +1,5 @@
 # Bun Migration Checklist
 
-A comprehensive checklist for migrating JavaScript/TypeScript projects to Bun as the main bundler, with npm trusted publishing via GitHub Actions OIDC.
-
-**Based on**: SVG-MATRIX v1.2.0 migration (December 2025), SVG-BBOX v1.1.2 release validation (January 2026)
-
----
 
 ## Table of Contents
 1. Pre-Migration
@@ -14,6 +9,13 @@ A comprehensive checklist for migrating JavaScript/TypeScript projects to Bun as
 5. CI/CD
 6. Publishing
 7. Verification
+
+A comprehensive checklist for migrating JavaScript/TypeScript projects to Bun as the main bundler, with npm trusted publishing via GitHub Actions OIDC.
+
+**Based on**: SVG-MATRIX v1.2.0 migration (December 2025), SVG-BBOX v1.1.2 release validation (January 2026)
+
+---
+
 
 ## Pre-Migration
 - [ ] Install Bun locally

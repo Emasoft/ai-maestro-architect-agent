@@ -1,13 +1,10 @@
 ---
 operation: manage-state-transitions
-procedure: proc-create-design
-workflow-instruction: Step 7 - Design Document Creation
-parent-skill: amaa-design-lifecycle
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Manage Design State Transitions
+
+
 
 
 ## Contents
@@ -21,6 +18,7 @@ version: 1.0.0
 - [State Transition Matrix](#state-transition-matrix)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

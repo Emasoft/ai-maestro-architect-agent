@@ -1,13 +1,10 @@
 ---
 operation: design-module-apis
-procedure: proc-create-design
-workflow-instruction: Step 7 - Design Document Creation
-parent-skill: amaa-modularization
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Design Module APIs
+
+
 
 
 ## Contents
@@ -28,6 +25,7 @@ version: 1.0.0
 - [API Contract: createOrder()](#api-contract-createorder)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

@@ -1,13 +1,10 @@
 ---
 operation: track-implementation
-procedure: proc-handle-feedback
-workflow-instruction: Step 15 - Implementation Tracking
-parent-skill: amaa-design-lifecycle
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Track Implementation
+
+
 
 
 ## Contents
@@ -21,6 +18,7 @@ version: 1.0.0
 - [Requirements Traceability](#requirements-traceability)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

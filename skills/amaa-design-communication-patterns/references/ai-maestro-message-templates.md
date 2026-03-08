@@ -1,6 +1,5 @@
 # AI Maestro Message Templates for AMAA
 
-This document provides all message templates and format examples for the AI Maestro Architect Agent (AMAA) to communicate via AI Maestro using the `agent-messaging` skill.
 
 ## Contents
 
@@ -14,6 +13,9 @@ This document provides all message templates and format examples for the AI Maes
 - **1.8** Escalating to AMCOS when ACK timeout occurs after retry
 
 ---
+
+This document provides all message templates and format examples for the AI Maestro Architect Agent (AMAA) to communicate via AI Maestro using the `agent-messaging` skill.
+
 
 ## 1.1 Sending Acknowledgment When Receiving Design Request from AMCOS
 

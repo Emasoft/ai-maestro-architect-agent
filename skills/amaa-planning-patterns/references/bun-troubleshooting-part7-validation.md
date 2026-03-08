@@ -1,8 +1,5 @@
 # Bun Troubleshooting: Validation Issues (Part 7)
 
-> **Navigation**: [Index](bun-troubleshooting.md) | [Part 6: Sourcemaps](bun-troubleshooting-part6-sourcemaps.md)
-
-This section covers JSON validation, UMD validation, and version banner issues.
 
 ## Table of Contents
 
@@ -12,6 +9,12 @@ This section covers JSON validation, UMD validation, and version banner issues.
 - [Summary](#summary)
 
 ---
+
+> **Navigation**: [Index](bun-troubleshooting.md) | [Part 6: Sourcemaps](bun-troubleshooting-part6-sourcemaps.md)
+
+This section covers JSON validation, UMD validation, and version banner issues.
+
+
 ## 12. JSON Validation Fails on tsconfig.json
 
 ### Problem Description

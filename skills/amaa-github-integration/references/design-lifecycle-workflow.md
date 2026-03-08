@@ -5,6 +5,12 @@ parent-skill: amaa-github-integration
 
 # Design Lifecycle Workflow
 
+
+## Table of Contents
+
+- Steps
+- Full Example
+
 Recommended end-to-end workflow integrating design documents with GitHub issues.
 
 ## Steps

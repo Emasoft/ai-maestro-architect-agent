@@ -45,8 +45,8 @@ Copy this checklist and track your progress:
 | Document | Content |
 |----------|---------|
 | [docker-experimentation.md](references/docker-experimentation.md) | Container setup and templates (Why Docker is Required, Container Structure Template, docker-compose.yml Template, Container Cleanup Procedure) |
-| [researcher-vs-experimenter.md](references/researcher-vs-experimenter.md) | TBV principle and role distinction (The Researcher (What OTHERS say is true), The Experimenter (What I can PROVE is true), The TBV Principle (To Be Verified)) |
-| [experiment-scenarios.md](references/experiment-scenarios.md) | When to invoke the experimenter (Case 1: Post-Research Validation, Case 2: Issue Reproduction in Isolation, Case 3: Architectural Bug Investigation) |
+| [researcher-vs-experimenter.md](references/researcher-vs-experimenter.md) | The Researcher (What OTHERS say is true), The Experimenter (What I can PROVE is true), The TBV Principle (To Be Verified), Workflow Integration: Researcher → Experimenter |
+| [experiment-scenarios.md](references/experiment-scenarios.md) | Case 1: Post-Research Validation, Case 2: Issue Reproduction in Isolation, Case 3: Architectural Bug Investigation, Case 4: New API/Tool Evaluation, Case 5: Fact-Checking Claims (Quick Verification) |
 | [multiplicity-rule.md](references/multiplicity-rule.md) | Evidence-based selection process (The Multiplicity Process, Example: Implementing a Paper Algorithm, Iterative Selection Workflow) |
 | [output-templates.md](references/output-templates.md) | Report and archive templates (Experiment Directory Structure, Experimentation Report Template, Prototype Archive Policy) |
 | [quick-reference.md](references/quick-reference.md) | Status classifications, iron rules, examples |

@@ -1,5 +1,12 @@
 # AI Maestro Message Examples
 
+
+## Table of Contents
+
+- Example 1: Design Request Acknowledgment
+- Example 2: Clarification Request (Blocking)
+- Example 3: Design Completion Report
+
 Concrete JSON examples showing the structure of messages sent through the `agent-messaging` skill.
 
 > **Note**: These structures show conceptual message content. Use the `agent-messaging` skill to send messages — it handles the exact API format automatically.

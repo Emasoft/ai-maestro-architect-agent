@@ -1,5 +1,13 @@
 # Bun GitHub Actions Reference Index
 
+
+## Table of Contents
+
+- Part 1: CI and Publishing
+- Part 2: Advanced Workflows
+- Quick Navigation
+- Related Documents
+
 This document was split into two parts for easier navigation and maintainability.
 
 ## Part 1: CI and Publishing

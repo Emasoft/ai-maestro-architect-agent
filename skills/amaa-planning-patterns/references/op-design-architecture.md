@@ -1,13 +1,10 @@
 ---
 operation: design-architecture
-procedure: proc-create-design
-workflow-instruction: Step 7 - Design Document Creation
-parent-skill: amaa-planning-patterns
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Design System Architecture
+
+
 
 
 ## Contents
@@ -27,6 +24,7 @@ version: 1.0.0
 - [Architectural Pattern: Microservices](#architectural-pattern-microservices)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:

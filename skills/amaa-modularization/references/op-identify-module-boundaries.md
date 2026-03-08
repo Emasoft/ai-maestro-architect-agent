@@ -1,13 +1,10 @@
 ---
 operation: identify-module-boundaries
-procedure: proc-create-design
-workflow-instruction: Step 7 - Design Document Creation
-parent-skill: amaa-modularization
-parent-plugin: ai-maestro-architect-agent
-version: 1.0.0
 ---
 
 # Identify Module Boundaries
+
+
 
 
 ## Contents
@@ -27,6 +24,7 @@ version: 1.0.0
 - [Recommended Module Structure](#recommended-module-structure)
 - [Error Handling](#error-handling)
 - [Related Operations](#related-operations)
+
 ## When to Use
 
 Use this operation when:
