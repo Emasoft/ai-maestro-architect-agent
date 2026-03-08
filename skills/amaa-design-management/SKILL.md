@@ -42,13 +42,13 @@ Copy this checklist and track your progress:
 
 | Document | Description |
 |----------|-------------|
-| [uuid-specification.md](references/uuid-specification.md) | GUUID format and rules (1 UUID Format Definition, 2 Date Component Requirements) |
-| [document-types.md](references/document-types.md) | Document types (1 Type Selection Guide, 2 PDR Documents (pdr/)) |
-| [creating-documents.md](references/creating-documents.md) | Creation workflow (1 Basic Document Creation, 2 Required Arguments) |
-| [searching-documents.md](references/searching-documents.md) | Query and filter (1 UUID Search, 2 Type Filter) |
-| [validating-documents.md](references/validating-documents.md) | Validation rules (1 Single File Validation, 2 Bulk Validation) |
-| [troubleshooting.md](references/troubleshooting.md) | Recovery procedures (1 UUID Generation Issues, 2 Creation Failures) |
-| [quick-reference.md](references/quick-reference.md) | Commands and reference (Quick Reference Commands, Document Status Workflow, Frontmatter Reference) |
+| [uuid-specification.md](references/uuid-specification.md) | 1 UUID Format Definition, 2 Date Component Requirements, 3 Sequence Number Rules, 4 Manual UUID Generation, 5 UUID Validation Rules, 6 UUID Parsing |
+| [document-types.md](references/document-types.md) | 1 Type Selection Guide, 2 PDR Documents (pdr/), 3 Spec Documents (spec/), 4 Feature Documents (feature/), 5 Decision Documents (decision/), 6 Architecture Documents (architecture/), 7 Template Documents (template/), 8 Directory Structure |
+| [creating-documents.md](references/creating-documents.md) | 1 Basic Document Creation, 2 Required Arguments, 3 Optional Fields (author, description), 4 Custom Filenames, 5 Post-Creation Validation, 6 Creation Error Handling, 7 Script Reference |
+| [searching-documents.md](references/searching-documents.md) | 1 UUID Search, 2 Type Filter, 3 Status Filter, 4 Keyword Search, 5 Glob Pattern Search, 6 Combined Filters, 7 Empty Results Handling, 8 Output Formats, 9 Script Reference |
+| [validating-documents.md](references/validating-documents.md) | 1 Single File Validation, 2 Bulk Validation, 3 Understanding Errors, 4 Understanding Warnings, 5 Error Resolution, 6 Required Frontmatter Fields, 7 Script Reference |
+| [troubleshooting.md](references/troubleshooting.md) | 1 UUID Generation Issues, 2 Creation Failures, 3 Search Issues, 4 Frontmatter Parsing Issues, 5 Directory Structure Issues, 6 Permission Issues, 7 Encoding Issues |
+| [quick-reference.md](references/quick-reference.md) | Quick Reference Commands, Document Status Workflow, Frontmatter Reference, Directory Structure, Extended Examples |
 
 ## Examples
 
@@ -68,6 +68,10 @@ python scripts/amaa_design_validate.py --all
 | Validation: malformed frontmatter | Invalid YAML syntax | Fix YAML delimiters (`---`) and field formatting |
 | Files in wrong directory | Manual file placement error | Move file to correct `design/<type>/` subdirectory |
 
+## Resources
+
+- [quick-reference.md](references/quick-reference.md) - Quick Reference Commands, Document Status Workflow, Frontmatter Reference, Directory Structure, Extended Examples
+
 ## Output
 
 | Output | Format | Example |
@@ -75,10 +79,3 @@ python scripts/amaa_design_validate.py --all
 | Created Document | Markdown file with UUID filename | `design/pdr/GUUID-20250129-0001-feature.md` |
 | Search Results | JSON array or ASCII table | `[{"uuid": "GUUID-...", "title": "..."}]` |
 | Validation Report | Error list with file paths and line numbers | `ERROR: doc.md:3 - Missing field 'uuid'` |
-
-## Resources
-
-- [references/quick-reference.md](references/quick-reference.md) - Commands cheat sheet and examples (Quick Reference Commands, Document Status Workflow, Frontmatter Reference, Directory Structure, Extended Examples)
-- [references/uuid-specification.md](references/uuid-specification.md) - GUUID format spec (1 UUID Format Definition, 2 Date Component Requirements)
-- [references/document-types.md](references/document-types.md) - Document type guide (1 Type Selection Guide, 2 PDR Documents (pdr/))
-- [references/troubleshooting.md](references/troubleshooting.md) - Troubleshooting guide (1 UUID Generation Issues, 2 Creation Failures)
