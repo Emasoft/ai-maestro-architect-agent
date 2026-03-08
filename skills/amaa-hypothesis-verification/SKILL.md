@@ -44,12 +44,12 @@ Copy this checklist and track your progress:
 
 | Document | Content |
 |----------|---------|
-| [docker-experimentation.md](references/docker-experimentation.md) | Container setup and templates (Why Docker is Required, Container Structure Template, docker-compose.yml Template, Container Cleanup Procedure) |
-| [researcher-vs-experimenter.md](references/researcher-vs-experimenter.md) | The Researcher (What OTHERS say is true), The Experimenter (What I can PROVE is true), The TBV Principle (To Be Verified), Workflow Integration: Researcher → Experimenter |
-| [experiment-scenarios.md](references/experiment-scenarios.md) | Case 1: Post-Research Validation, Case 2: Issue Reproduction in Isolation, Case 3: Architectural Bug Investigation, Case 4: New API/Tool Evaluation, Case 5: Fact-Checking Claims (Quick Verification) |
-| [multiplicity-rule.md](references/multiplicity-rule.md) | Evidence-based selection process (The Multiplicity Process, Example: Implementing a Paper Algorithm, Iterative Selection Workflow) |
-| [output-templates.md](references/output-templates.md) | Experiment Directory Structure, Experimentation Report Template, Hypothesis, Candidates Tested, Experimental Setup, Results, Evidence-Based Conclusions |
-| [quick-reference.md](references/quick-reference.md) | Status Classifications, Implementation vs Experimental Code, Workflow Integration Points, IRON RULES Summary, Examples |
+| docker-experimentation.md | Container setup and templates |
+| researcher-vs-experimenter.md | TBV principle and workflow |
+| experiment-scenarios.md | Five verification case types |
+| multiplicity-rule.md | Multi-approach selection process |
+| output-templates.md | Report and directory templates |
+| quick-reference.md | Status rules and iron rules |
 
 ## Examples
 
@@ -80,7 +80,7 @@ Claim: "Redis caches responses 10x faster than in-memory dict" (TBV)
 
 ## Resources
 
-- [docker-experimentation.md](references/docker-experimentation.md) (Why Docker is Required, Container Structure Template, docker-compose.yml Template, Container Cleanup Procedure)
-- [multiplicity-rule.md](references/multiplicity-rule.md) (The Multiplicity Process, Example: Implementing a Paper Algorithm, Iterative Selection Workflow)
-- [output-templates.md](references/output-templates.md) (Experiment Directory Structure, Experimentation Report Template, Hypothesis, Candidates Tested, Experimental Setup, Results, Evidence-Based Conclusions)
-- [quick-reference.md](references/quick-reference.md) (Status Classifications, Implementation vs Experimental Code, Workflow Integration Points, IRON RULES Summary, Examples)
+- docker-experimentation.md — Container setup and templates
+- multiplicity-rule.md — Multi-approach selection process
+- output-templates.md — Report and directory templates
+- quick-reference.md — Status rules and iron rules

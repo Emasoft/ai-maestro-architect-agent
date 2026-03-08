@@ -40,19 +40,19 @@ Copy this checklist and track your progress:
 
 ## Reference Documents
 
-| Document | Path | Contents |
-|----------|------|----------|
-| Templates | references/templates-reference.md | Module Specification Template, Purpose, Responsibilities, Public Interface, Error Handling, Examples, Input Format Examples |
-| Quality Standards | references/quality-standards.md | Documentation Quality Criteria, Feature Specification Example, Executive Summary, User Stories, Functional Requirements, Non-Functional Requirements, Data Model |
-| Writing Workflow | references/writing-workflow.md | Step 1: Receive and Parse Assignment, Step 2: Gather Context, Step 3: Create Document Structure, Step 4: Write Core Content, Step 5: Add Cross-References, Step 6: Quality Check, Step 7: Commit and Report |
-| Operational Guidelines | references/operational-guidelines.md | When to Create New Documents, When to Update Existing Documents, Document Organization, Version Control, Troubleshooting |
-| Agent Interactions | references/agent-interactions.md | Upstream Agents (Receive Input From), Downstream Agents (Provide Output To), Peer Agents (Bidirectional), Handoff Protocol |
-| Op: Module Spec | references/op-write-module-spec.md | Purpose, When to Use, Inputs, Procedure, Usage Examples, Error Handling |
-| Op: API Contract | references/op-write-api-contract.md | Purpose, When to Use, Inputs, Procedure, Overview, Authentication, Error Handling |
-| Op: ADR | references/op-write-adr.md | Purpose, When to Use, Inputs, Procedure, Example, Context, Error Handling |
-| Op: Feature Spec | references/op-write-feature-spec.md | Purpose, When to Use, Inputs, Procedure, Overview, User Stories, Error Handling |
-| Op: Process Doc | references/op-write-process-doc.md | Purpose, When to Use, Inputs, Procedure, Overview, Roles and Responsibilities, Error Handling |
-| Op: Quality Check | references/op-quality-check-6c.md | Purpose, When to Use, Inputs, Procedure, Summary, Issues Found, Error Handling |
+| File | Description |
+|------|-------------|
+| templates-reference.md | Document templates and formats |
+| quality-standards.md | Quality criteria and examples |
+| writing-workflow.md | Step-by-step writing process |
+| operational-guidelines.md | Document lifecycle rules |
+| agent-interactions.md | Agent handoff protocols |
+| op-write-module-spec.md | Module spec operation |
+| op-write-api-contract.md | API contract operation |
+| op-write-adr.md | ADR writing operation |
+| op-write-feature-spec.md | Feature spec operation |
+| op-write-process-doc.md | Process doc operation |
+| op-quality-check-6c.md | Quality check operation |
 
 ## Examples
 

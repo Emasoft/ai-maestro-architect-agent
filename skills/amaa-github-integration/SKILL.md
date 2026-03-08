@@ -47,16 +47,16 @@ Copy this checklist and track your progress:
 
 | Document | Description |
 |----------|-------------|
-| [op-create-issue-from-design.md](references/op-create-issue-from-design.md) | When to Use, Prerequisites, Procedure, Checklist, Examples, Error Handling, Related Operations |
-| [op-attach-design-to-issue.md](references/op-attach-design-to-issue.md) | When to Use, Prerequisites, Procedure, Checklist, Examples, Error Handling, Related Operations |
-| [op-sync-status-to-github.md](references/op-sync-status-to-github.md) | When to Use, Prerequisites, Procedure, Checklist, Examples, Status to Label Mapping, Error Handling, Related Operations |
-| [op-monitor-github-project.md](references/op-monitor-github-project.md) | When to Use, Prerequisites, Procedure, [[TIMESTAMP]](#timestamp), Checklist, Examples, What to Monitor, Error Handling, Related Operations |
-| [op-generate-design-uuid.md](references/op-generate-design-uuid.md) | When to Use, Prerequisites, Procedure, Checklist, Examples, UUID Format, Error Handling, Related Operations |
-| [op-verify-gh-cli-auth.md](references/op-verify-gh-cli-auth.md) | When to Use, Prerequisites, Procedure, Checklist, Examples, Installation Commands, Required Token Scopes, Error Handling, Related Operations |
-| [edge-cases.md](references/edge-cases.md) | Edge cases and resolutions (Issue Already Exists, Design Has No UUID, gh CLI Not Available) |
-| [status-mapping.md](references/status-mapping.md) | Design Status Values, GitHub Label Mapping, Valid Status Transitions, Label Naming Convention, Automated Label Management, Manual Label Operations |
-| [troubleshooting.md](references/troubleshooting.md) | gh CLI Errors, Document Errors, Issue Errors, Sync Errors |
-| [design-lifecycle-workflow.md](references/design-lifecycle-workflow.md) | Steps, Full Example |
+| op-create-issue-from-design.md | Create GitHub issue from design |
+| op-attach-design-to-issue.md | Attach design to existing issue |
+| op-sync-status-to-github.md | Sync status labels with GitHub |
+| op-monitor-github-project.md | Monitor project board changes |
+| op-generate-design-uuid.md | Generate UUID for designs |
+| op-verify-gh-cli-auth.md | Verify gh CLI authentication |
+| edge-cases.md | Edge cases and resolutions |
+| status-mapping.md | Status-to-label mapping rules |
+| troubleshooting.md | Error diagnosis and fixes |
+| design-lifecycle-workflow.md | Full design lifecycle steps |
 
 ## Examples
 
@@ -88,5 +88,5 @@ python scripts/amaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4
 
 ## Resources
 
-- [troubleshooting.md](references/troubleshooting.md) - gh CLI Errors, Document Errors, Issue Errors, Sync Errors
-- [status-mapping.md](references/status-mapping.md) - Design Status Values, GitHub Label Mapping, Valid Status Transitions, Label Naming Convention, Automated Label Management, Manual Label Operations
+- troubleshooting.md - Error diagnosis and fixes
+- status-mapping.md - Status-to-label mapping rules

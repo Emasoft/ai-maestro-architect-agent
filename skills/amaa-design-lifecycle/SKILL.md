@@ -47,16 +47,16 @@ Copy this checklist and track your progress:
 
 | Reference | Description |
 |-----------|-------------|
-| [procedures.md](references/procedures.md) | PROCEDURE 1: Create New Design, PROCEDURE 2: Submit for Review, PROCEDURE 3: Approve Design, PROCEDURE 4: Track Implementation, PROCEDURE 5: Complete and Archive |
-| [design-states.md](references/design-states.md) | State Definitions |
-| [examples.md](references/examples.md) | Example 1: Design Real-Time Collaborative Editor, Example 2: Design Stripe Payment Integration, Example 3: Create and Submit Design for Review (Lifecycle), Example 4: Approve and Track Implementation (Lifecycle) |
-| [scripts.md](references/scripts.md) | Script Reference |
-| [rule-14-enforcement.md](references/rule-14-enforcement.md) | 1 When handling user requirements in any workflow, 2 When detecting potential requirement deviations, 3 When a technical constraint conflicts with a requirement, 4 When documenting requirement compliance |
-| [judgment-guidelines.md](references/judgment-guidelines.md) | When to research external APIs instead of using existing documentation, When to create an ADR instead of just documenting the decision, When to modularize a system instead of keeping it simple, When to escalate unclear requirements to AMCOS for clarification |
-| [success-criteria.md](references/success-criteria.md) | Overview, Requirements Captured, Architecture Designed, APIs Researched, Modules Specified, Handoff Prepared |
-| [workflow-checklists.md](references/workflow-checklists.md) | Introduction, Checklist: Requirements Analysis, Checklist: Design Phase, Checklist: Handoff Preparation |
-| [adr-templates.md](references/adr-templates.md) | Standard ADR Template, Context, Decision, Alternatives Considered, Rationale, Consequences, Related Decisions, Notes, Usage Guidelines |
-| [handoff-format.md](references/handoff-format.md) | Overview, Handoff Validation Checklist, Handoff Document Template, Executive Summary, Design Artifacts, Implementation Sequence, Risks and Mitigations, Success Criteria for AMOA, Open Questions, Notes, Template Field Guide |
+| procedures.md | Design lifecycle procedures |
+| design-states.md | State definitions |
+| examples.md | Design and lifecycle examples |
+| scripts.md | Script reference |
+| rule-14-enforcement.md | Requirement compliance enforcement |
+| judgment-guidelines.md | Decision-making guidelines |
+| success-criteria.md | Design success criteria |
+| workflow-checklists.md | Phase checklists |
+| adr-templates.md | ADR template and usage |
+| handoff-format.md | Handoff document template |
 
 ## Examples
 

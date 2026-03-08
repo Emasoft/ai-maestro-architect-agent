@@ -39,19 +39,19 @@ Copy this checklist and track your progress:
 
 | Reference | Purpose |
 |-----------|---------|
-| [step-by-step-procedures.md](./references/step-by-step-procedures.md) | Overview, The Four Phases of Planning, Key Principles, Planning Workflow Summary, What Each Phase Contains, Common Mistakes to Avoid, When to Use Each Phase |
-| [architecture-design.md](./references/architecture-design.md) | What is Architecture Design?, Architecture Design in Five Steps, Architecture Design Document Template, Component Inventory, Component Responsibilities, Data Flow Diagrams, Dependency Graph |
-| [risk-identification.md](./references/risk-identification.md) | What is Risk Identification?, Risk Identification in Four Steps, Risk Categories, Risk Identification Checklist, Common Mistakes in Risk Identification, Next Steps |
-| [roadmap-creation.md](./references/roadmap-creation.md) | What is Roadmap Creation?, Roadmap Creation in Five Steps, Roadmap Communication, Common Mistakes in Roadmap Creation, Roadmap Checklist, Next Steps |
-| [implementation-planning.md](./references/implementation-planning.md) | What is Implementation Planning?, Implementation Planning in Four Steps, Change Management During Implementation, Implementation Planning Checklist, Common Mistakes in Implementation Planning, Next Steps |
-| [planning-checklist.md](./references/planning-checklist.md) | Pre-Planning Checklist, Architecture Design Phase Checklist, Risk Identification Phase Checklist, Roadmap Creation Phase Checklist, Implementation Planning Phase Checklist, Post-Planning Verification Checklist, Quick Reference by Phase |
-| [planning-scenarios.md](./references/planning-scenarios.md) | Scenario 1: Starting a Brand New Project, Scenario 2: Expanding Existing System, Scenario 3: Replanning a Project in Progress, Scenario 4: Rapid Planning (Under Pressure), Key Concepts, Phase Navigation |
-| [enforcement-mechanisms.md](./references/enforcement-mechanisms.md) | Overview of Enforcement, Plan Validation Script (validate_plan.py), Shared Thresholds Module (thresholds.py), Handoff Protocols, Integration Workflow |
-| [scripts-reference.md](./references/scripts-reference.md) | Universal Analysis Scripts, Core Planning Scripts, Template Generation Scripts, Analysis Scripts, Task Tracker Scripts |
-| [tdd-planning.md](./references/tdd-planning.md) | TDD Planning Principles, TDD Phase Planning, TDD Task Template Extension, TDD Verification Checklist, Integration with Planning Phases |
-| [requirement-immutability.md](./references/requirement-immutability.md) | Planning Phase Requirement Check, Plan Structure Requirements, Forbidden Planning Actions, Correct Planning Approach |
-| [plan-verification-guide.md](./references/plan-verification-guide.md) | Overview, Part 1: Verification Patterns, Part 2: Checklist Template & Task Tracker Integration, Part 3: Examples, Best Practices, Troubleshooting, Related Documentation |
-| [plan-file-linking.md](./references/plan-file-linking.md) | Purpose, Linking Requirements, Overview, Implementation Plan, Sub-Plans, Plan File Naming Convention, Automatic Linking |
+| step-by-step-procedures.md | Four phases overview and principles |
+| architecture-design.md | Architecture steps and templates |
+| risk-identification.md | Risk categories and checklist |
+| roadmap-creation.md | Roadmap steps and communication |
+| implementation-planning.md | Implementation steps and change mgmt |
+| planning-checklist.md | All phase checklists combined |
+| planning-scenarios.md | Four common planning scenarios |
+| enforcement-mechanisms.md | Validation scripts and handoffs |
+| scripts-reference.md | Planning and analysis scripts |
+| tdd-planning.md | TDD integration with planning |
+| requirement-immutability.md | Plan structure requirements |
+| plan-verification-guide.md | Verification patterns and examples |
+| plan-file-linking.md | Plan file naming and linking |
 
 ## Examples
 
