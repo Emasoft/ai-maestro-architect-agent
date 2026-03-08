@@ -309,19 +309,19 @@ Examples:
     # ── Step 2: Tests ──
     if not args.skip_tests:
         print(f"\n{BLUE}═══ Step 2: Run tests ═══{NC}")
-        run(["uv", "run", "pytest", "tests/", "-x", "-q", "--tb=short"], cwd=root)
+        run(["python3", "-m", "pytest", "tests/", "-x", "-q", "--tb=short"], cwd=root)
         print(f"{GREEN}✓ All tests passed{NC}")
     else:
         print(f"\n{YELLOW}═══ Step 2: Tests skipped (--skip-tests) ═══{NC}")
 
     # ── Step 3: Lint ──
     print(f"\n{BLUE}═══ Step 3: Lint files ═══{NC}")
-    run(["uv", "run", "python", "scripts/lint_files.py", "."], cwd=root)
+    run(["python3", "scripts/lint_files.py", "."], cwd=root)
     print(f"{GREEN}✓ Linting passed{NC}")
 
     # ── Step 4: Validate ──
     print(f"\n{BLUE}═══ Step 4: Validate plugin (--strict) ═══{NC}")
-    run(["uv", "run", "python", "scripts/validate_plugin.py", ".", "--strict"], cwd=root)
+    run(["python3", "scripts/validate_plugin.py", ".", "--strict"], cwd=root)
     print(f"{GREEN}✓ Plugin validation passed{NC}")
 
     # ── Step 5: Version consistency ──
