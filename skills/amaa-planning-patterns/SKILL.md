@@ -46,12 +46,6 @@ Copy this checklist and track your progress:
 | [implementation-planning.md](./references/implementation-planning.md) | What is Implementation Planning?, Implementation Planning in Four Steps, Change Management During Implementation, Implementation Planning Checklist, Common Mistakes in Implementation Planning, Next Steps |
 | [planning-checklist.md](./references/planning-checklist.md) | Pre-Planning Checklist, Architecture Design Phase Checklist, Risk Identification Phase Checklist, Roadmap Creation Phase Checklist, Implementation Planning Phase Checklist, Post-Planning Verification Checklist, Quick Reference by Phase |
 | [planning-scenarios.md](./references/planning-scenarios.md) | Scenario 1: Starting a Brand New Project, Scenario 2: Expanding Existing System, Scenario 3: Replanning a Project in Progress, Scenario 4: Rapid Planning (Under Pressure), Key Concepts, Phase Navigation |
-| [enforcement-mechanisms.md](./references/enforcement-mechanisms.md) | Overview of Enforcement, Plan Validation Script (validate_plan.py), Shared Thresholds Module (thresholds.py), Handoff Protocols, Integration Workflow |
-| [scripts-reference.md](./references/scripts-reference.md) | Universal Analysis Scripts, Core Planning Scripts, Template Generation Scripts, Analysis Scripts, Task Tracker Scripts |
-| [tdd-planning.md](./references/tdd-planning.md) | TDD Planning Principles, TDD Phase Planning, TDD Task Template Extension, TDD Verification Checklist, Integration with Planning Phases |
-| [requirement-immutability.md](./references/requirement-immutability.md) | Planning Phase Requirement Check, Plan Structure Requirements, Forbidden Planning Actions, Correct Planning Approach |
-| [plan-verification-guide.md](./references/plan-verification-guide.md) | Overview, Part 1: Verification Patterns, Part 2: Checklist Template & Task Tracker Integration, Part 3: Examples, Best Practices, Troubleshooting, Related Documentation |
-| [plan-file-linking.md](./references/plan-file-linking.md) | Purpose, Linking Requirements, Overview, Implementation Plan, Sub-Plans, Plan File Naming Convention, Automatic Linking |
 
 ## Examples
 
@@ -65,7 +59,7 @@ Example: `"Design auth system"` triggers all four phases sequentially.
 | Risks overwhelming | Prioritize by impact x probability |
 | Progress stalls | Review dependency graph |
 | Plan irrelevant | Revisit and update |
-| Validation failing | Run `validate_plan.py --verbose` |
+| Validation failing | See amaa-planning-patterns-ops skill |
 
 ## Output
 

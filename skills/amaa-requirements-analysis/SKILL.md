@@ -48,9 +48,6 @@ Copy this checklist and track your progress:
 | [requirement-management](references/requirement-management.md) | 1 When to add a new requirement section, 2 When to add a new module, 3 Add requirement syntax and arguments, 4 When to modify existing requirements, 5 Modify requirement syntax and arguments, 6 When to remove requirements, 7 Remove requirement syntax and restrictions, 8 State file changes after operations, 9 Common operation examples |
 | [plan-approval-transition](references/plan-approval-transition.md) | 1 When to approve the plan, 2 Prerequisites for plan approval, 3 Approve plan syntax and options, 4 Validation checks performed, 5 GitHub Issue creation process, Module: {module_name}, 8 Approval workflow example |
 | [state-file-format](references/state-file-format.md) | 1 Plan phase state file location and purpose, 2 YAML frontmatter structure, 3 Field definitions and allowed values, 4 Requirements sections schema, 5 Modules schema, 6 Exit criteria schema, 7 Reading and parsing the state file, 8 State file lifecycle |
-| [troubleshooting](references/troubleshooting.md) | 1 When /amaa-start-planning fails, 2 When checking planning status shows errors, 3 When /amaa-add-requirement fails, 4 When /amaa-modify-requirement fails, 5 When /amaa-remove-requirement fails, 6 When plan approval fails, 7 State file corruption recovery, 8 GitHub Issue creation problems, 9 Exit blocking issues |
-| [quick-reference-and-scripts](references/quick-reference-and-scripts.md) | Command Quick Reference, Status Values, Priority Values, Modifiable Fields, Utility Scripts, Complete Planning Workflow Example, Requirement Analysis Scripts |
-| [extended-examples-and-resources](references/extended-examples-and-resources.md) | Error Handling Details, Extended Examples, Resources, Command Output Reference |
 
 ## Examples
 
@@ -71,7 +68,7 @@ Copy this checklist and track your progress:
 
 ## Resources
 
-- [quick-reference-and-scripts](references/quick-reference-and-scripts.md) - Command Quick Reference, Status Values, Priority Values, Modifiable Fields, Utility Scripts, Complete Planning Workflow Example, Requirement Analysis Scripts
+See Reference Documents table above.
 
 ## Output
 

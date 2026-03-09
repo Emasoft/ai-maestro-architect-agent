@@ -44,15 +44,10 @@ All shared resources are reference documentation files located in the `reference
 | [design-document-protocol.md](references/design-document-protocol.md) | Document UUID Format (GUUID), Required Frontmatter Schema, Document Lifecycle, Validation Procedures, Search Procedures, GitHub Integration, Edge Cases and Error Handling, File Naming Convention, Cross-Plugin Protocol, Quick Reference |
 | [proactive-handoff-protocol.md](references/proactive-handoff-protocol.md) | Standard Handoff Format, Automatic Handoff Triggers, Handoff Document Location, Mandatory Handoff Sections, Context, Progress, Current State, Blockers (if any), Next Steps, References, Proactive Writing Rules, Handoff Quality Checklist |
 | [task-completion-checklist.md](references/task-completion-checklist.md) | Before Reporting Task Complete, Verification Loop, Common Traps (Architect-Specific), Completion Report Format, Pre-Completion Checklist for Architects, When to Escalate vs Complete |
-| [edge-case-protocols.md](references/edge-case-protocols.md) | 1.0 AI Maestro Unavailable, Design Delivery (AI Maestro Offline), 2.0 GitHub Unavailable, 3.0 Remote Agent Unresponsive, 4.0 Requirements Ambiguity, 5.0 API Research Failures, 6.0 Design Conflicts |
-| [op-load-shared-template.md](references/op-load-shared-template.md) | When to Use, Prerequisites, Procedure, Checklist, Examples, Template Placeholders, Error Handling, Related Operations |
-| [op-access-shared-constants.md](references/op-access-shared-constants.md) | When to Use, Prerequisites, Procedure, Checklist, Examples, Available Constants, Error Handling, Related Operations |
-| [op-send-ai-maestro-message.md](references/op-send-ai-maestro-message.md) | When to Use, Prerequisites, Procedure, Checklist, Examples, Message Types, Priority Levels, Error Handling, Related Operations |
-| [op-validate-with-schema.md](references/op-validate-with-schema.md) | When to Use, Prerequisites, Procedure, Checklist, Examples, Required Fields by Schema, Error Handling, Related Operations |
 
 ## Examples
 
-Use ai-maestro-message-templates.md for message templates.
+Example: `Use ai-maestro-message-templates.md for standard message formats`
 
 ## Error Handling
 
@@ -68,6 +63,6 @@ Protocol guidance, message templates, decision trees, and checklists as Markdown
 
 ## Resources
 
+- amaa-design-communication-patterns-ops - Edge cases and shared operations
 - amaa-design-lifecycle - Skill lifecycle management
 - amaa-requirements-analysis - Requirements documentation
-- amaa-planning-patterns - Planning and design patterns

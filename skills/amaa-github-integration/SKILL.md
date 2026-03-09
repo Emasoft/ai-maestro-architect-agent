@@ -52,11 +52,6 @@ Copy this checklist and track your progress:
 | [op-sync-status-to-github.md](references/op-sync-status-to-github.md) | When to Use, Prerequisites, Procedure, Checklist, Examples, Status to Label Mapping, Error Handling, Related Operations |
 | [op-monitor-github-project.md](references/op-monitor-github-project.md) | When to Use, Prerequisites, Procedure, [[TIMESTAMP]](#timestamp), Checklist, Examples, What to Monitor, Error Handling, Related Operations |
 | [op-generate-design-uuid.md](references/op-generate-design-uuid.md) | When to Use, Prerequisites, Procedure, Checklist, Examples, UUID Format, Error Handling, Related Operations |
-| [op-verify-gh-cli-auth.md](references/op-verify-gh-cli-auth.md) | When to Use, Prerequisites, Procedure, Checklist, Examples, Installation Commands, Required Token Scopes, Error Handling, Related Operations |
-| [edge-cases.md](references/edge-cases.md) | Edge cases and resolutions (Issue Already Exists, Design Has No UUID, gh CLI Not Available) |
-| [status-mapping.md](references/status-mapping.md) | Design Status Values, GitHub Label Mapping, Valid Status Transitions, Label Naming Convention, Automated Label Management, Manual Label Operations |
-| [troubleshooting.md](references/troubleshooting.md) | gh CLI Errors, Document Errors, Issue Errors, Sync Errors |
-| [design-lifecycle-workflow.md](references/design-lifecycle-workflow.md) | Steps, Full Example |
 
 ## Examples
 
@@ -88,5 +83,4 @@ python scripts/amaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4
 
 ## Resources
 
-- [troubleshooting.md](references/troubleshooting.md) - gh CLI Errors, Document Errors, Issue Errors, Sync Errors
-- [status-mapping.md](references/status-mapping.md) - Design Status Values, GitHub Label Mapping, Valid Status Transitions, Label Naming Convention, Automated Label Management, Manual Label Operations
+See Reference Documents table above.

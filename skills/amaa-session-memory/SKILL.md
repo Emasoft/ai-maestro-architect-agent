@@ -59,23 +59,17 @@ Next action: Resolve OQ-002 (Payment processor selection)
 | Design Index | `docs_dev/design/index.json` |
 | Handoff Documents | `docs_dev/design/handoffs/handoff-{timestamp}.md` |
 
-## References
+## Reference Documents
 
-| Reference | Description |
-|-----------|-------------|
+| Document | Content |
+|----------|---------|
 | [record-keeping-formats.md](references/record-keeping-formats.md) | Requirements Log Format, [TIMESTAMP] - [PROJECT_NAME], Design Artifacts Structure, ADR Template, Context, Decision, Alternatives Considered |
 | [memory-categories-and-triggers.md](references/memory-categories-and-triggers.md) | What to Remember, Memory Storage Location, Memory Retrieval Triggers, Memory Update Triggers |
 | [handoff-procedures.md](references/handoff-procedures.md) | When to Create Handoff Documents, Handoff Document Types, Handoff Document Structure, Examples, Decision, Rationale, Alternatives Considered |
 | [op-load-session-state.md](references/op-load-session-state.md) | Purpose, When to Use, Inputs, Procedure, Current Focus, Example, Error Handling |
 | [op-record-decision.md](references/op-record-decision.md) | Purpose, When to Use, Inputs, Procedure, Example, Status, Error Handling |
 | [op-record-pattern.md](references/op-record-pattern.md) | Purpose, When to Use, Inputs, Procedure, Applied Patterns, Example, Error Handling |
-| [op-record-stack-choice.md](references/op-record-stack-choice.md) | Purpose, When to Use, Inputs, Procedure, Core Technologies, Example, Error Handling |
-| [op-record-constraint.md](references/op-record-constraint.md) | Purpose, When to Use, Inputs, Procedure, Active Constraints, Example, Error Handling |
-| [op-record-open-question.md](references/op-record-open-question.md) | Purpose, When to Use, Inputs, Procedure, Open Questions, Example, Error Handling |
-| [op-create-handoff.md](references/op-create-handoff.md) | Purpose, When to Use, Inputs, Procedure, Session Summary, Decisions Made This Session, Error Handling |
-| [op-resume-from-handoff.md](references/op-resume-from-handoff.md) | Purpose, When to Use, Inputs, Procedure, Open Questions Requiring Attention, Session Resumed from Handoff, Error Handling |
 
 ## Resources
 
-- Session state: `.claude/amaa-session-state.local.md`
-- Design index: `docs_dev/design/index.json`
+See Reference Documents table above.

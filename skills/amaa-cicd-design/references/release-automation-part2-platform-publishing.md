@@ -1,21 +1,15 @@
 # Release Automation: Platform-Specific Publishing
 
 
-## Contents
-
-- [Table of Contents](#table-of-contents)
-- [Platform-Specific Publishing](#platform-specific-publishing)
-- [Debug Script](#debug-script)
-
 ---
 
 > **Parent document**: [release-automation.md](release-automation.md)
 ## Table of Contents
 
-- [Homebrew (macOS)](#homebrew-macos) - When you need to publish to Homebrew tap
-- [Windows Store](#windows-store) - When you need to publish to Microsoft Store
-- [Docker Hub](#docker-hub) - When you need to publish Docker images
-- [Debug Script](#debug-script) - When you need to troubleshoot release pipeline issues
+- [Homebrew](#homebrew-macos) - Publish to Homebrew tap
+- [Windows Store](#windows-store) - Publish to Microsoft Store
+- [Docker Hub](#docker-hub) - Publish Docker images
+- [Debug Script](#debug-script) - Troubleshoot release pipeline issues
 
 ---
 

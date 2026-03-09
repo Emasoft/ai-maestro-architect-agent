@@ -40,19 +40,14 @@ Copy this checklist and track your progress:
 
 ## Reference Documents
 
-| Document | Path | Contents |
-|----------|------|----------|
-| Templates | references/templates-reference.md | Module Specification Template, Purpose, Responsibilities, Public Interface, Error Handling, Examples, Input Format Examples |
-| Quality Standards | references/quality-standards.md | Documentation Quality Criteria, Feature Specification Example, Executive Summary, User Stories, Functional Requirements, Non-Functional Requirements, Data Model |
-| Writing Workflow | references/writing-workflow.md | Step 1: Receive and Parse Assignment, Step 2: Gather Context, Step 3: Create Document Structure, Step 4: Write Core Content, Step 5: Add Cross-References, Step 6: Quality Check, Step 7: Commit and Report |
-| Operational Guidelines | references/operational-guidelines.md | When to Create New Documents, When to Update Existing Documents, Document Organization, Version Control, Troubleshooting |
-| Agent Interactions | references/agent-interactions.md | Upstream Agents (Receive Input From), Downstream Agents (Provide Output To), Peer Agents (Bidirectional), Handoff Protocol |
-| Op: Module Spec | references/op-write-module-spec.md | Purpose, When to Use, Inputs, Procedure, Usage Examples, Error Handling |
-| Op: API Contract | references/op-write-api-contract.md | Purpose, When to Use, Inputs, Procedure, Overview, Authentication, Error Handling |
-| Op: ADR | references/op-write-adr.md | Purpose, When to Use, Inputs, Procedure, Example, Context, Error Handling |
-| Op: Feature Spec | references/op-write-feature-spec.md | Purpose, When to Use, Inputs, Procedure, Overview, User Stories, Error Handling |
-| Op: Process Doc | references/op-write-process-doc.md | Purpose, When to Use, Inputs, Procedure, Overview, Roles and Responsibilities, Error Handling |
-| Op: Quality Check | references/op-quality-check-6c.md | Purpose, When to Use, Inputs, Procedure, Summary, Issues Found, Error Handling |
+| Document | Content |
+|----------|---------|
+| [templates-reference.md](references/templates-reference.md) | Module Specification Template, Purpose, Responsibilities, Public Interface, Error Handling, Examples, Input Format Examples |
+| [quality-standards.md](references/quality-standards.md) | Documentation Quality Criteria, Feature Specification Example, Executive Summary, User Stories, Functional Requirements, Non-Functional Requirements, Data Model |
+| [writing-workflow.md](references/writing-workflow.md) | Step 1: Receive and Parse Assignment, Step 2: Gather Context, Step 3: Create Document Structure, Step 4: Write Core Content, Step 5: Add Cross-References, Step 6: Quality Check, Step 7: Commit and Report |
+| [operational-guidelines.md](references/operational-guidelines.md) | When to Create New Documents, When to Update Existing Documents, Document Organization, Version Control, Troubleshooting |
+| [agent-interactions.md](references/agent-interactions.md) | Upstream Agents (Receive Input From), Downstream Agents (Provide Output To), Peer Agents (Bidirectional), Handoff Protocol |
+| [op-write-module-spec.md](references/op-write-module-spec.md) | Purpose, When to Use, Inputs, Procedure, Usage Examples, Error Handling |
 
 ## Examples
 

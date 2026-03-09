@@ -1,24 +1,13 @@
 # Release Automation: Complete Release Workflow
 
 
-## Contents
-
-- [Table of Contents](#table-of-contents)
-- [Tag-Triggered Release](#tag-triggered-release)
-
 ---
 
 > **Parent document**: [release-automation.md](release-automation.md)
 
 ## Table of Contents
 
-- [Tag-Triggered Release](#tag-triggered-release) - When you need a complete tag-triggered CI/CD release pipeline
-  - [Stage 1: Validate](#stage-1-validate) - Validate tag and extract version
-  - [Stage 2: Test](#stage-2-test) - Run full test suite across platforms
-  - [Stage 3: Build](#stage-3-build) - Build release binaries for all platforms
-  - [Stage 4: Build Installers](#stage-4-build-installers) - Create installers and checksums
-  - [Stage 5: Create Release](#stage-5-create-release) - Create GitHub Release with assets
-  - [Stage 6: Publish](#stage-6-publish) - Publish to package registries (crates.io, npm, PyPI)
+- [Tag-Triggered Release](#tag-triggered-release) - Complete tag-triggered CI/CD release pipeline with validate, test, build, installers, release, and publish stages
 
 ---
 

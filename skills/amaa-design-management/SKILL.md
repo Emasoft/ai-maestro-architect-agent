@@ -46,9 +46,6 @@ Copy this checklist and track your progress:
 | [document-types.md](references/document-types.md) | 1 Type Selection Guide, 2 PDR Documents (pdr/), 3 Spec Documents (spec/), 4 Feature Documents (feature/), 5 Decision Documents (decision/), 6 Architecture Documents (architecture/), 7 Template Documents (template/), 8 Directory Structure |
 | [creating-documents.md](references/creating-documents.md) | 1 Basic Document Creation, 2 Required Arguments, 3 Optional Fields (author, description), 4 Custom Filenames, 5 Post-Creation Validation, 6 Creation Error Handling, 7 Script Reference |
 | [searching-documents.md](references/searching-documents.md) | 1 UUID Search, 2 Type Filter, 3 Status Filter, 4 Keyword Search, 5 Glob Pattern Search, 6 Combined Filters, 7 Empty Results Handling, 8 Output Formats, 9 Script Reference |
-| [validating-documents.md](references/validating-documents.md) | 1 Single File Validation, 2 Bulk Validation, 3 Understanding Errors, 4 Understanding Warnings, 5 Error Resolution, 6 Required Frontmatter Fields, 7 Script Reference |
-| [troubleshooting.md](references/troubleshooting.md) | 1 UUID Generation Issues, 2 Creation Failures, 3 Search Issues, 4 Frontmatter Parsing Issues, 5 Directory Structure Issues, 6 Permission Issues, 7 Encoding Issues |
-| [quick-reference.md](references/quick-reference.md) | Quick Reference Commands, Document Status Workflow, Frontmatter Reference, Directory Structure, Extended Examples |
 
 ## Examples
 
@@ -70,7 +67,7 @@ python scripts/amaa_design_validate.py --all
 
 ## Resources
 
-- [quick-reference.md](references/quick-reference.md) - Quick Reference Commands, Document Status Workflow, Frontmatter Reference, Directory Structure, Extended Examples
+See Reference Documents table above.
 
 ## Output
 

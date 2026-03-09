@@ -46,14 +46,11 @@ Copy this checklist and track your progress:
 | [SOLID Principles](./references/solid-principles.md) | Overview, The Five SOLID Principles, Applying SOLID to Module Boundaries, Validation Checklist, Common Violations and Fixes, Summary |
 | [Boundary Patterns](./references/boundary-patterns.md) | Overview, Core Principle, Step 1: Map Domain Concepts, Step 2: Identify Change Vectors, Step 3: Find Natural Seams, Step 4: Define Bounded Contexts, Step 5: Validate Boundaries |
 | [API Design Guide](./references/api-design-guide.md) | Overview, Core API Design Principles, API Contract Templates, Versioning Strategy, Compatibility Rules, Data Transfer Objects (DTOs), Error Handling Contracts |
-| [Dependency Analysis](./references/dependency-analysis.md) | Overview, The Dependency Problem, Dependency Direction Rules, Visualizing Dependencies, The Shared Code Problem, Circular Dependency Detection and Resolution, Dependency Injection |
-| [Strangler Pattern](./references/strangler-pattern.md) | Overview, Why Strangler Pattern?, The Strangler Fig Pattern, Step-by-Step Monolith Decomposition, Extraction Candidate: [Feature Name], Dealing with Dependencies, Example: Extracting Authentication |
-| [Module Testing](./references/module-testing.md) | Overview, Testing Pyramid for Modular Systems, Unit Testing Modules, Mocking Module Dependencies, Contract Testing, Integration Testing, Test Doubles Taxonomy |
 | [Detailed Procedures](./references/detailed-procedures.md) | What is a Module?, Why Modularization Matters, Detailed Phase Checklist, Examples, Troubleshooting, Next Steps |
 
 ## Examples
 
-`UserService (2000 LOC) → AuthModule, ProfileModule, RegistrationModule, PermissionsModule`
+Example: `UserService (2000 LOC) → AuthModule, ProfileModule, RegistrationModule, PermissionsModule`
 
 ## Error Handling
 
@@ -76,7 +73,4 @@ Copy this checklist and track your progress:
 
 ## Resources
 
-- solid-principles.md — Overview, The Five SOLID Principles, Applying SOLID to Module Boundaries, Validation Checklist, Common Violations and Fixes, Summary
-- boundary-patterns.md — Overview, Core Principle, Step 1: Map Domain Concepts, Step 2: Identify Change Vectors, Step 3: Find Natural Seams, Step 4: Define Bounded Contexts, Step 5: Validate Boundaries
-- strangler-pattern.md — Overview, Why Strangler Pattern?, The Strangler Fig Pattern, Step-by-Step Monolith Decomposition, Extraction Candidate: [Feature Name], Dealing with Dependencies, Example: Extracting Authentication
-- module-testing.md — Overview, Testing Pyramid for Modular Systems, Unit Testing Modules, Mocking Module Dependencies, Contract Testing, Integration Testing, Test Doubles Taxonomy
+See Reference Documents table above.
