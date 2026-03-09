@@ -39,20 +39,20 @@ All shared resources are reference documentation files located in the `reference
 
 | Reference | Description |
 |-----------|-------------|
-| ai-maestro-message-templates.md | Message templates and ACK workflow |
-| message-response-decision-tree.md | Priority triage and response routing |
-| design-document-protocol.md | Document UUID, schema, and lifecycle |
-| proactive-handoff-protocol.md | Handoff format, triggers, and rules |
-| task-completion-checklist.md | Task verification and completion checks |
-| edge-case-protocols.md | Offline, unresponsive, and conflict handling |
-| op-load-shared-template.md | Load shared template procedure |
-| op-access-shared-constants.md | Access shared constants procedure |
-| op-send-ai-maestro-message.md | Send AI Maestro message procedure |
-| op-validate-with-schema.md | Validate with schema procedure |
+| [ai-maestro-message-templates.md](references/ai-maestro-message-templates.md) | 1.1 Sending Acknowledgment When Receiving Design Request from AMCOS, 1.2 Requesting Clarification from AMCOS for Ambiguous Requirements, 1.3 Reporting Design Completion to AMCOS, 1.4 Notifying AMCOS That Handoff Document is Ready for AMOA, 1.5 Reporting Blocker That Prevents Design Progress, 1.6 Verifying ACK Receipt After Sending a Message, Example: Complete Message Send and Verify Workflow |
+| [message-response-decision-tree.md](references/message-response-decision-tree.md) | Step 1: Priority Triage, Step 2: Message Type Routing, Step 3: Response Actions, Step 4: ACK Protocol |
+| [design-document-protocol.md](references/design-document-protocol.md) | Document UUID Format (GUUID), Required Frontmatter Schema, Document Lifecycle, Validation Procedures, Search Procedures, GitHub Integration, Edge Cases and Error Handling, File Naming Convention, Cross-Plugin Protocol, Quick Reference |
+| [proactive-handoff-protocol.md](references/proactive-handoff-protocol.md) | Standard Handoff Format, Automatic Handoff Triggers, Handoff Document Location, Mandatory Handoff Sections, Context, Progress, Current State, Blockers (if any), Next Steps, References, Proactive Writing Rules, Handoff Quality Checklist |
+| [task-completion-checklist.md](references/task-completion-checklist.md) | Before Reporting Task Complete, Verification Loop, Common Traps (Architect-Specific), Completion Report Format, Pre-Completion Checklist for Architects, When to Escalate vs Complete |
+| [edge-case-protocols.md](references/edge-case-protocols.md) | 1.0 AI Maestro Unavailable, Design Delivery (AI Maestro Offline), 2.0 GitHub Unavailable, 3.0 Remote Agent Unresponsive, 4.0 Requirements Ambiguity, 5.0 API Research Failures, 6.0 Design Conflicts |
+| [op-load-shared-template.md](references/op-load-shared-template.md) | When to Use, Prerequisites, Procedure, Checklist, Examples, Template Placeholders, Error Handling, Related Operations |
+| [op-access-shared-constants.md](references/op-access-shared-constants.md) | When to Use, Prerequisites, Procedure, Checklist, Examples, Available Constants, Error Handling, Related Operations |
+| [op-send-ai-maestro-message.md](references/op-send-ai-maestro-message.md) | When to Use, Prerequisites, Procedure, Checklist, Examples, Message Types, Priority Levels, Error Handling, Related Operations |
+| [op-validate-with-schema.md](references/op-validate-with-schema.md) | When to Use, Prerequisites, Procedure, Checklist, Examples, Required Fields by Schema, Error Handling, Related Operations |
 
 ## Examples
 
-Example: Use ai-maestro-message-templates.md for message templates.
+Use ai-maestro-message-templates.md for message templates.
 
 ## Error Handling
 
