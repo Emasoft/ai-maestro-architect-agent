@@ -42,8 +42,8 @@ AMAA recommends component labels during architecture design.
 
 **Task Routing Rules:**
 - **Small tasks**: Pending -> In Progress -> Review -> Completed
-- **Big tasks**: Pending -> In Progress -> Review (AI) -> Review (Human via EAMA) -> Completed
-- **Human Review** is requested via EAMA (Executive Assistant Manager asks user to test/review)
+- **Big tasks**: Pending -> In Progress -> Review (AI) -> Review (Human via AMAMA) -> Completed
+- **Human Review** is requested via AMAMA (AI Maestro Assistant Manager asks user to test/review)
 - Not all tasks go through Human Review -- only significant changes requiring human judgment
 
 ## Type Labels AMAA Clarifies
@@ -150,7 +150,7 @@ gh issue edit $ISSUE_NUMBER --remove-label "type:feature" --add-label "type:epic
 - `assign:*` - Set by AMOA/AMCOS
 - `status:*` - Set by working agent
 - `review:*` - Managed by AMIA
-- `priority:*` - Set by EAMA/AMOA
+- `priority:*` - Set by AMAMA/AMOA
 
 ### AMAA Handoff Labels
 

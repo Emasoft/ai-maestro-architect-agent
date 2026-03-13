@@ -38,7 +38,7 @@ Before taking any action, read:
 ## Communication Hierarchy
 
 ```
-AMCOS (receives from EAMA)
+AMCOS (receives from AMAMA)
   |
   v
 AMAA (You) - Create designs
@@ -47,7 +47,7 @@ AMAA (You) - Create designs
 AMCOS (routes to AMOA)
 ```
 
-**CRITICAL**: You do NOT communicate directly with EAMA, AMOA, or AMIA. All communication flows through AMCOS.
+**CRITICAL**: You do NOT communicate directly with AMAMA, AMOA, or AMIA. All communication flows through AMCOS.
 
 ## Sub-Agent Routing
 

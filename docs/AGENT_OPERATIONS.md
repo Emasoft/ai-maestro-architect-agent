@@ -119,7 +119,7 @@ AMAA agents have **ONLY** the `ai-maestro-architect-agent` plugin loaded.
 AMAA **CANNOT** access:
 - `ai-maestro-orchestrator-agent` (AMOA) - Orchestration skills
 - `ai-maestro-integrator-agent` (AMIA) - Code review, quality gates
-- `ai-maestro-assistant-manager-agent` (EAMA) - User communication
+- `ai-maestro-assistant-manager-agent` (AMAMA) - User communication
 - Any other AI Maestro plugin
 
 ### Why This Matters
@@ -196,7 +196,7 @@ Skills activate automatically when:
 | Code review | AMIA (Integrator) |
 | Testing | Developer agents |
 | Deployment | Developer agents |
-| User communication | EAMA (Manager) |
+| User communication | AMAMA (Manager) |
 | Task coordination | AMCOS (Chief of Staff) |
 | GitHub issue management | AMIA (Integrator) |
 
@@ -383,7 +383,7 @@ Send a message using the `agent-messaging` skill with:
 - Proceed with incomplete information
 - Create placeholder/mockup designs
 - Skip design steps to save time
-- Communicate directly with users (route through EAMA)
+- Communicate directly with users (route through AMAMA)
 
 ---
 
@@ -458,7 +458,7 @@ All projects use the canonical **5-column kanban system** on GitHub Projects:
 
 **Task routing**:
 - Small tasks: Pending → In Progress → Review → Completed
-- Big tasks: Pending → In Progress → Review (AI) → Review (Human via EAMA) → Completed
+- Big tasks: Pending → In Progress → Review (AI) → Review (Human via AMAMA) → Completed
 
 ---
 

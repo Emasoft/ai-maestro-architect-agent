@@ -64,11 +64,11 @@ The Architect Agent handles **design documents, requirements analysis, and archi
 
 ## Workflow
 
-1. Receives requirements from EAMA (Manager)
+1. Receives requirements from AMAMA (Manager)
 2. Analyzes requirements and creates design documents
 3. Breaks work into implementable modules
 4. Creates handoff document for AMOA (Orchestrator)
-5. Reports completion to EAMA (Manager)
+5. Reports completion to AMAMA (Manager)
 
 ## Output Artifacts
 
