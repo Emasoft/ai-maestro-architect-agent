@@ -3,7 +3,7 @@ name: amaa-label-taxonomy-ops
 description: "Use when validating effort estimates, creating sub-issues, or ADR issues. Trigger with label taxonomy ops request."
 context: fork
 user-invocable: false
-agent: amaa-architect-main-agent
+agent: ai-maestro-architect-agent-main-agent
 ---
 
 # AMAA Label Taxonomy (Operations)

@@ -17,7 +17,7 @@ When AMCOS assigns a design task:
 
 ```json
 {
-  "from": "amaa-architect-main-agent",
+  "from": "ai-maestro-architect-agent-main-agent",
   "to": "amcos",
   "subject": "Design Request Acknowledged",
   "priority": "normal",
@@ -34,7 +34,7 @@ When requirements are ambiguous or conflicting:
 
 ```json
 {
-  "from": "amaa-architect-main-agent",
+  "from": "ai-maestro-architect-agent-main-agent",
   "to": "amcos",
   "subject": "Clarification Needed - Payment Gateway Integration",
   "priority": "high",
@@ -51,7 +51,7 @@ When all design artifacts are ready:
 
 ```json
 {
-  "from": "amaa-architect-main-agent",
+  "from": "ai-maestro-architect-agent-main-agent",
   "to": "amcos",
   "subject": "Design Complete - E-Commerce Product Catalog",
   "priority": "normal",

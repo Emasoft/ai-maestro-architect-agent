@@ -3,7 +3,7 @@ name: amaa-design-lifecycle-ops
 description: "Use when applying judgment guidelines, success criteria, or handoff formats. Trigger with lifecycle ops request."
 context: fork
 user-invocable: false
-agent: amaa-architect-main-agent
+agent: ai-maestro-architect-agent-main-agent
 ---
 
 # Design Lifecycle Operations

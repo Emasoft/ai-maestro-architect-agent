@@ -22,7 +22,7 @@ The Architect Agent handles **design documents, requirements analysis, and archi
 
 | Agent | Description |
 |-------|-------------|
-| `amaa-architect-main-agent.md` | Main architect agent |
+| `ai-maestro-architect-agent-main-agent.md` | Main architect agent |
 | `amaa-documentation-writer.md` | Creates technical documentation |
 | `amaa-api-researcher.md` | Researches APIs and integrations |
 | `amaa-modularizer-expert.md` | Breaks work into modules |
@@ -97,7 +97,7 @@ After installing, activate changes without restarting:
 Then start a session with the main agent:
 
 ```bash
-claude --agent amaa-architect-main-agent
+claude --agent ai-maestro-architect-agent-main-agent
 ```
 
 ### Development Only (--plugin-dir)

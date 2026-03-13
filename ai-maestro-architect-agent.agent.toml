@@ -1,0 +1,64 @@
+# AI Maestro Architect Agent — Role-Plugin profile
+# Agent: ai-maestro-architect-agent
+# Generated: 2026-03-13
+
+[agent]
+name = "ai-maestro-architect-agent"
+source = "path"
+path = "agents/ai-maestro-architect-agent-main-agent.md"
+
+[requirements]
+project_type = "library"
+tech_stack = ["markdown", "yaml", "json", "python"]
+
+[skills]
+primary = [
+    "amaa-design-lifecycle",
+    "amaa-design-communication-patterns",
+    "amaa-session-memory",
+    "amaa-github-integration",
+    "amaa-hypothesis-verification",
+    "amaa-design-management",
+    "amaa-label-taxonomy",
+    "amaa-requirements-analysis",
+]
+secondary = [
+    "amaa-api-research",
+    "amaa-cicd-design",
+    "amaa-documentation-writing",
+    "amaa-modularization",
+    "amaa-planning-patterns",
+]
+specialized = [
+    "amaa-api-research-ops",
+    "amaa-cicd-design-ops",
+    "amaa-design-communication-patterns-ops",
+    "amaa-design-lifecycle-ops",
+    "amaa-design-management-ops",
+    "amaa-documentation-writing-ops",
+    "amaa-github-integration-ops",
+    "amaa-hypothesis-verification-ops",
+    "amaa-label-taxonomy-ops",
+    "amaa-modularization-ops",
+    "amaa-planning-patterns-ops",
+    "amaa-requirements-analysis-ops",
+    "amaa-session-memory-ops",
+]
+
+[agents]
+recommended = ["amaa-planner", "amaa-documentation-writer", "amaa-modularizer-expert", "amaa-cicd-designer", "amaa-api-researcher"]
+
+[commands]
+recommended = []
+
+[rules]
+recommended = []
+
+[mcp]
+recommended = []
+
+[hooks]
+recommended = []
+
+[lsp]
+recommended = []

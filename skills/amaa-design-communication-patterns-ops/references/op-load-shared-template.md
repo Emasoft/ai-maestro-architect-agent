@@ -101,7 +101,7 @@ template = load_template("design-document")
 # Fill with data
 document = template.format(
     title="Authentication Service Architecture",
-    author="amaa-architect-main-agent",
+    author="ai-maestro-architect-agent-main-agent",
     date=datetime.now().strftime("%Y-%m-%d"),
     status="draft",
     overview="This document describes the authentication service architecture.",

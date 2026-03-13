@@ -3,7 +3,7 @@ name: amaa-session-memory-ops
 description: "Use when recording stack choices, constraints, or managing handoffs. Trigger with session memory ops request."
 context: fork
 user-invocable: false
-agent: amaa-architect-main-agent
+agent: ai-maestro-architect-agent-main-agent
 ---
 
 # Session Memory Operations

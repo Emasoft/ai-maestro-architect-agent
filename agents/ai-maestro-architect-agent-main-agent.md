@@ -1,5 +1,5 @@
 ---
-name: amaa-architect-main-agent
+name: ai-maestro-architect-agent-main-agent
 description: Architect main agent - design documents, requirements, architecture decisions. Requires AI Maestro installed.
 model: opus
 skills:

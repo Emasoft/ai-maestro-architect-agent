@@ -3,7 +3,7 @@ name: amaa-hypothesis-verification-ops
 description: "Use when applying multiplicity rule or formatting experiment outputs. Trigger with verification ops request."
 context: fork
 user-invocable: false
-agent: amaa-architect-main-agent
+agent: ai-maestro-architect-agent-main-agent
 ---
 
 # Hypothesis Verification Operations

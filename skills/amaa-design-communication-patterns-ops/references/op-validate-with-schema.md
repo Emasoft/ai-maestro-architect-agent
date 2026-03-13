@@ -48,7 +48,7 @@ document = {
     "title": "Auth Service Architecture",
     "uuid": "PROJ-SPEC-20250129-a1b2c3d4",
     "status": "draft",
-    "author": "amaa-architect-main-agent",
+    "author": "ai-maestro-architect-agent-main-agent",
     "type": "SPEC"
 }
 ```

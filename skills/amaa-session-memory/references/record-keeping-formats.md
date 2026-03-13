@@ -189,7 +189,7 @@ docs_dev/design/
 
 **Date:** [YYYY-MM-DD HH:MM:SS]
 **Project:** [PROJECT_NAME]
-**Architect:** amaa-architect-main-agent
+**Architect:** ai-maestro-architect-agent-main-agent
 **Handoff ID:** [UUID]
 
 ## Executive Summary
@@ -344,7 +344,7 @@ Send a message using the `agent-messaging` skill with:
 **Example:**
 ```json
 {
-  "from": "amaa-architect-main-agent",
+  "from": "ai-maestro-architect-agent-main-agent",
   "to": "amcos",
   "subject": "Design Request Acknowledged",
   "priority": "normal",
@@ -370,7 +370,7 @@ Send a message using the `agent-messaging` skill with:
 **Example:**
 ```json
 {
-  "from": "amaa-architect-main-agent",
+  "from": "ai-maestro-architect-agent-main-agent",
   "to": "amcos",
   "subject": "Clarification Needed - Payment Gateway Integration",
   "priority": "high",
@@ -396,7 +396,7 @@ Send a message using the `agent-messaging` skill with:
 **Example:**
 ```json
 {
-  "from": "amaa-architect-main-agent",
+  "from": "ai-maestro-architect-agent-main-agent",
   "to": "amcos",
   "subject": "Design Complete - E-Commerce Product Catalog",
   "priority": "normal",
@@ -422,7 +422,7 @@ Send a message using the `agent-messaging` skill with:
 **Example:**
 ```json
 {
-  "from": "amaa-architect-main-agent",
+  "from": "ai-maestro-architect-agent-main-agent",
   "to": "amcos",
   "subject": "Handoff Ready - Payment Gateway Integration",
   "priority": "normal",
@@ -448,7 +448,7 @@ Send a message using the `agent-messaging` skill with:
 **Example:**
 ```json
 {
-  "from": "amaa-architect-main-agent",
+  "from": "ai-maestro-architect-agent-main-agent",
   "to": "amcos",
   "subject": "BLOCKED - Real-Time Analytics Dashboard",
   "priority": "urgent",

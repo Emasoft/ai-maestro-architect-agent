@@ -2,7 +2,7 @@
 name: amaa-github-integration
 description: Use when syncing designs to GitHub issues or managing project boards. Trigger with GitHub integration or issue sync request.
 context: fork
-agent: amaa-architect-main-agent
+agent: ai-maestro-architect-agent-main-agent
 user-invocable: true
 ---
 

@@ -3,7 +3,7 @@ name: amaa-github-integration-ops
 description: "Use when troubleshooting GitHub integration or managing edge cases. Trigger with GitHub ops request."
 context: fork
 user-invocable: false
-agent: amaa-architect-main-agent
+agent: ai-maestro-architect-agent-main-agent
 ---
 
 # GitHub Integration Operations

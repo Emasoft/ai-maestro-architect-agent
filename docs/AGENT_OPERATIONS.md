@@ -35,7 +35,7 @@ AMCOS spawns AMAA agents using the `ai-maestro-agents-management` skill. The ski
 - **Working Directory**: `~/agents/$SESSION_NAME`
 - **Task**: `Design architecture for <project>`
 - **Plugin**: `ai-maestro-architect-agent`
-- **Agent**: `amaa-architect-main-agent`
+- **Agent**: `ai-maestro-architect-agent-main-agent`
 
 Refer to the `ai-maestro-agents-management` skill for the exact creation procedure.
 
@@ -50,7 +50,7 @@ Refer to the `ai-maestro-agents-management` skill for the exact creation procedu
 | `--chrome` | Enable Chrome DevTools MCP for UI research |
 | `--add-dir /tmp` | Allow temporary file access |
 | `--plugin-dir` | Load ai-maestro-architect-agent plugin |
-| `--agent amaa-architect-main-agent` | Start with the main architect agent |
+| `--agent ai-maestro-architect-agent-main-agent` | Start with the main architect agent |
 
 ### Who Spawns AMAA?
 
@@ -74,7 +74,7 @@ ${CLAUDE_PLUGIN_ROOT}/
 ├── .claude-plugin/
 │   └── plugin.json
 ├── agents/
-│   ├── amaa-architect-main-agent.md
+│   ├── ai-maestro-architect-agent-main-agent.md
 │   ├── amaa-pdr-writer.md
 │   ├── amaa-requirements-analyst.md
 │   ├── amaa-api-researcher.md

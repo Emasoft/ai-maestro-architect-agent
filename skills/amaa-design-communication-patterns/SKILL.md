@@ -2,7 +2,7 @@
 name: amaa-design-communication-patterns
 description: "Use when implementing inter-agent messaging or design document protocols. Trigger with communication pattern or messaging request."
 context: fork
-agent: amaa-architect-main-agent
+agent: ai-maestro-architect-agent-main-agent
 user-invocable: false
 ---
 

@@ -3,7 +3,7 @@ name: amaa-requirements-analysis-ops
 description: "Use when troubleshooting requirements analysis or needing quick reference. Trigger with requirements ops request."
 context: fork
 user-invocable: false
-agent: amaa-architect-main-agent
+agent: ai-maestro-architect-agent-main-agent
 ---
 
 # Requirements Analysis Operations
