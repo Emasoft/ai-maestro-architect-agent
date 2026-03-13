@@ -1,5 +1,7 @@
 # AGENT_OPERATIONS.md - AMAA (AI Maestro Architect Agent)
 
+> **Note**: The authoritative source for role boundaries and governance rules is the `team-governance` skill in the AI Maestro core system.
+
 **SINGLE SOURCE OF TRUTH for Architect Agent Operations**
 
 ---

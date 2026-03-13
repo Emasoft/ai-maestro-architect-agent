@@ -1,5 +1,7 @@
 # Team Registry Specification
 
+> **Note**: The authoritative source for role boundaries and governance rules is the `team-governance` skill in the AI Maestro core system.
+
 **Version**: 1.1.0
 **Last Updated**: 2026-02-07
 
