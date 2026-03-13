@@ -3,7 +3,7 @@ name: amaa-api-research-ops
 description: "Use when needing API research scenarios or collaboration patterns. Trigger with API research ops request."
 context: fork
 user-invocable: false
-agent: amaa-api-researcher
+agent: ai-maestro-architect-agent-main-agent
 ---
 
 # API Researcher Skill (Operations)

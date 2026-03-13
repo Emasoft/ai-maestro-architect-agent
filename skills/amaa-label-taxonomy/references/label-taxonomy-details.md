@@ -3,7 +3,7 @@
 ## Table of Contents
 
 - Component Labels (`component:*`)
-- Kanban Columns (Canonical 8-Column System)
+- Kanban Columns (Canonical 5-Column System)
 - Type Labels AMAA Clarifies
 - Priority Labels (`priority:*`) - Read by AMAA
 - Effort Labels (`effort:*`) - Validated by AMAA
@@ -30,23 +30,20 @@ AMAA recommends component labels during architecture design.
 - Recommend component labels in handoff to AMOA
 - Update component labels when design changes
 
-## Kanban Columns (Canonical 8-Column System)
+## Kanban Columns (Canonical 5-Column System)
 
 | # | Column Code | Display Name | Label | Description |
 |---|-------------|-------------|-------|-------------|
 | 1 | `backlog` | Backlog | `status:backlog` | Entry point for new tasks |
-| 2 | `todo` | Todo | `status:todo` | Ready to start |
-| 3 | `in-progress` | In Progress | `status:in-progress` | Active work |
-| 4 | `ai-review` | AI Review | `status:ai-review` | Integrator agent reviews ALL tasks |
-| 5 | `human-review` | Human Review | `status:human-review` | User reviews BIG tasks only (via EAMA) |
-| 6 | `merge-release` | Merge/Release | `status:merge-release` | Ready to merge |
-| 7 | `done` | Done | `status:done` | Completed |
-| 8 | `blocked` | Blocked | `status:blocked` | Blocked at any stage |
+| 2 | `pending` | Pending | `status:pending` | Ready to start |
+| 3 | `in_progress` | In Progress | `status:in_progress` | Active work |
+| 4 | `review` | Review | `status:review` | Agent or human reviews task |
+| 5 | `completed` | Completed | `status:completed` | Done |
 
 **Task Routing Rules:**
-- **Small tasks**: In Progress -> AI Review -> Merge/Release -> Done
-- **Big tasks**: In Progress -> AI Review -> Human Review -> Merge/Release -> Done
-- **Human Review** is requested via EAMA (Assistant Manager asks user to test/review)
+- **Small tasks**: Pending -> In Progress -> Review -> Completed
+- **Big tasks**: Pending -> In Progress -> Review (AI) -> Review (Human via EAMA) -> Completed
+- **Human Review** is requested via EAMA (Executive Assistant Manager asks user to test/review)
 - Not all tasks go through Human Review -- only significant changes requiring human judgment
 
 ## Type Labels AMAA Clarifies

@@ -44,7 +44,7 @@ Copy this checklist and track your progress:
 
 | Document | Description |
 |----------|-------------|
-| [label-taxonomy-details.md](references/label-taxonomy-details.md) | Component Labels (`component:*`), Kanban Columns (Canonical 8-Column System), Type Labels AMAA Clarifies, Priority Labels (`priority:*`) - Read by AMAA, Effort Labels (`effort:*`) - Validated by AMAA, Architecture-to-Labels Mapping, Architecture Breakdown |
+| [label-taxonomy-details.md](references/label-taxonomy-details.md) | Component Labels (`component:*`), Kanban Columns (Canonical 5-Column System), Type Labels AMAA Clarifies, Priority Labels (`priority:*`) - Read by AMAA, Effort Labels (`effort:*`) - Validated by AMAA, Architecture-to-Labels Mapping, Architecture Breakdown |
 | [examples-extended.md](references/examples-extended.md) | Extended examples with bash commands (Example 1: Adding Component Labels After Architecture Analysis, Example 2: Validating Effort Estimate, Example 3: Creating Component-Specific Sub-Issues, Example 4: Architecture Decision Record (ADR)) |
 | [op-add-component-labels.md](references/op-add-component-labels.md) | Purpose, When to Use, Prerequisites, Procedure, Example, Component Label Reference, Error Handling |
 

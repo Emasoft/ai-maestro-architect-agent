@@ -401,18 +401,15 @@ When AMCOS updates the registry, it sends a notification to all team agents usin
 
 ## Kanban System Reference
 
-All projects use the canonical **8-column kanban system** on GitHub Projects:
+All projects use the canonical **5-column kanban system** on GitHub Projects:
 
 | Column | Code | Label |
 |--------|------|-------|
 | Backlog | `backlog` | `status:backlog` |
-| Todo | `todo` | `status:todo` |
-| In Progress | `in-progress` | `status:in-progress` |
-| AI Review | `ai-review` | `status:ai-review` |
-| Human Review | `human-review` | `status:human-review` |
-| Merge/Release | `merge-release` | `status:merge-release` |
-| Done | `done` | `status:done` |
-| Blocked | `blocked` | `status:blocked` |
+| Pending | `pending` | `status:pending` |
+| In Progress | `in_progress` | `status:in_progress` |
+| Review | `review` | `status:review` |
+| Completed | `completed` | `status:completed` |
 
 For full kanban workflow details, task routing rules, and code format rules, see **FULL_PROJECT_WORKFLOW.md**.
 

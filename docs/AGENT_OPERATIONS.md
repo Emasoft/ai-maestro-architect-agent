@@ -21,7 +21,7 @@ amaa-<project>-<descriptive>
 - **Prefix MUST be `amaa-`** (all lowercase)
 - Project name should be kebab-case
 - Descriptive suffix clarifies the architectural focus
-- Session name chosen by AMCOS (Orchestrator) when spawning AMAA
+- Session name chosen by AMCOS (Chief of Staff) when spawning AMAA
 
 ---
 
@@ -54,7 +54,7 @@ Refer to the `ai-maestro-agents-management` skill for the exact creation procedu
 
 ### Who Spawns AMAA?
 
-**ONLY AMCOS (AI Maestro Orchestrator)** spawns AMAA agents. AMAA cannot self-spawn or spawn other AMAA instances.
+**ONLY AMCOS (Chief of Staff)** spawns AMAA agents. AMAA cannot self-spawn or spawn other AMAA instances.
 
 ---
 
@@ -194,8 +194,8 @@ Skills activate automatically when:
 | Code review | AMIA (Integrator) |
 | Testing | Developer agents |
 | Deployment | Developer agents |
-| User communication | EAMA (Assistant Manager) |
-| Task coordination | AMCOS (Orchestrator) |
+| User communication | EAMA (Manager) |
+| Task coordination | AMCOS (Chief of Staff) |
 | GitHub issue management | AMIA (Integrator) |
 
 ---
@@ -444,22 +444,19 @@ Before sending handoff message, verify:
 
 ## 15. Kanban Column System
 
-All projects use the canonical **8-column kanban system** on GitHub Projects:
+All projects use the canonical **5-column kanban system** on GitHub Projects:
 
 | Column | Code | Label |
 |--------|------|-------|
 | Backlog | `backlog` | `status:backlog` |
-| Todo | `todo` | `status:todo` |
-| In Progress | `in-progress` | `status:in-progress` |
-| AI Review | `ai-review` | `status:ai-review` |
-| Human Review | `human-review` | `status:human-review` |
-| Merge/Release | `merge-release` | `status:merge-release` |
-| Done | `done` | `status:done` |
-| Blocked | `blocked` | `status:blocked` |
+| Pending | `pending` | `status:pending` |
+| In Progress | `in_progress` | `status:in_progress` |
+| Review | `review` | `status:review` |
+| Completed | `completed` | `status:completed` |
 
 **Task routing**:
-- Small tasks: In Progress → AI Review → Merge/Release → Done
-- Big tasks: In Progress → AI Review → Human Review → Merge/Release → Done
+- Small tasks: Pending → In Progress → Review → Completed
+- Big tasks: Pending → In Progress → Review (AI) → Review (Human via EAMA) → Completed
 
 ---
 
@@ -477,7 +474,7 @@ All projects use the canonical **8-column kanban system** on GitHub Projects:
 
 ## 17. Recent Changes (2026-02-07)
 
-- Added 8-column canonical kanban system across all shared docs
+- Added 5-column canonical kanban system across all shared docs
 - Added Unicode compliance check (step 4) to pre-push hook
 - Added `encoding="utf-8"` to all Python file operations
 - Synchronized FULL_PROJECT_WORKFLOW.md, TEAM_REGISTRY_SPECIFICATION.md, ROLE_BOUNDARIES.md across all plugins

@@ -3,7 +3,7 @@ name: amaa-cicd-design-ops
 description: "Use when debugging CI/CD, scripting with GH CLI, or referencing templates. Trigger with CI/CD ops or debugging request."
 context: fork
 user-invocable: false
-agent: amaa-cicd-designer
+agent: ai-maestro-architect-agent-main-agent
 ---
 
 # DevOps Expert Skill (Operations)

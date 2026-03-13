@@ -3,7 +3,7 @@ name: amaa-cicd-design
 description: "Use when designing CI/CD pipelines, GitHub Actions, or release automation. Trigger with CI/CD design request or pipeline task."
 context: fork
 user-invocable: false
-agent: amaa-cicd-designer
+agent: ai-maestro-architect-agent-main-agent
 ---
 
 # DevOps Expert Skill

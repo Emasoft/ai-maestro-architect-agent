@@ -3,7 +3,7 @@ name: amaa-documentation-writing-ops
 description: "Use when writing API contracts, ADRs, feature specs, or quality checks. Trigger with documentation ops request."
 context: fork
 user-invocable: false
-agent: amaa-documentation-writer
+agent: ai-maestro-architect-agent-main-agent
 ---
 
 # Documentation Writer Operations

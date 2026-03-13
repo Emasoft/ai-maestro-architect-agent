@@ -16,7 +16,7 @@ This document defines standardized protocols for handling edge cases and failure
 
 ### 1.1 Detection Methods
 
-The Architect uses AI Maestro to receive requirements from Assistant Manager and deliver designs. Detect unavailability through:
+The Architect uses AI Maestro to receive requirements from EAMA and deliver designs. Detect unavailability through:
 
 | Check | Method | Failure Indicator |
 |-------|--------|-------------------|
@@ -270,7 +270,7 @@ When `amaa-documentation-writer` times out:
 
 2. **Generate clarification questions**:
    ```
-   QUESTIONS FOR USER (via Assistant Manager):
+   QUESTIONS FOR USER (via EAMA):
 
    1. Error Handling:
       a) Should errors fail fast or attempt recovery?
@@ -291,7 +291,7 @@ When `amaa-documentation-writer` times out:
 
 3. **Block design progression** until clarified
 
-4. **Route questions to Assistant Manager** for user communication
+4. **Route questions to EAMA** for user communication
 
 ### 4.3 Assumption Documentation
 
@@ -308,7 +308,7 @@ When user is unavailable and work must proceed:
    - **Assumed**: Fail-fast approach with detailed error messages
    - **Reason**: Most common pattern for developer tools
    - **Risk**: May need refactoring if recovery is required
-   - **To Verify**: Confirm with user via Assistant Manager
+   - **To Verify**: Confirm with user via EAMA
 
    ### Assumption 2: Performance
    - **Assumed**: <5 second response time acceptable
@@ -352,7 +352,7 @@ When user is unavailable and work must proceed:
    - Create minimal viable documentation from observed behavior
    - Mark integration as HIGH RISK
 
-3. **Report to Assistant Manager**:
+3. **Report to EAMA**:
    ```
    API DOCUMENTATION ISSUE
 
@@ -461,7 +461,7 @@ When user is unavailable and work must proceed:
    3. Local logging with async sync (compromise)
    ```
 
-2. **Present options to user** via Assistant Manager
+2. **Present options to user** via EAMA
 
 3. **Block design until resolved**
 
@@ -519,7 +519,7 @@ When user is unavailable and work must proceed:
    - Business factors favor [analysis]
    ```
 
-2. **Do not proceed** - escalate to Assistant Manager
+2. **Do not proceed** - escalate to EAMA
 
 3. **Request clear single decision-maker**
 
@@ -632,7 +632,7 @@ If multiple edge cases compound:
      "blocked_by": [...]
    }
    ```
-3. **Notify Assistant Manager**
+3. **Notify EAMA**
 4. **Wait for user guidance**
 
 Recovery checkpoint: `.claude/recovery/architect-checkpoint-{timestamp}.json`

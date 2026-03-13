@@ -3,7 +3,7 @@ name: amaa-modularization-ops
 description: "Use when analyzing dependencies, planning migration, or testing modules. Trigger with modularization ops request."
 context: fork
 user-invocable: false
-agent: amaa-modularizer-expert
+agent: ai-maestro-architect-agent-main-agent
 ---
 
 # Modularization Operations

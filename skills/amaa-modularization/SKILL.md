@@ -2,7 +2,7 @@
 name: amaa-modularization
 description: "Use when decomposing systems into modules with clear boundaries. Trigger with modularization or module boundary request."
 context: fork
-agent: amaa-modularizer-expert
+agent: ai-maestro-architect-agent-main-agent
 user-invocable: false
 ---
 
