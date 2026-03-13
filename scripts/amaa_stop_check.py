@@ -14,6 +14,7 @@ Exit codes:
 """
 
 import json
+import os
 import re
 import subprocess
 import sys
@@ -194,6 +195,47 @@ def check_github_issues() -> list[str]:
     return blockers
 
 
+def _notify_amcos_blocked_exit(blockers: list[str]) -> None:
+    """Send AMP notification to AMCOS when exit is blocked.
+
+    Best-effort: notification failure does not affect the exit block decision.
+    """
+    # Resolve AMCOS recipient from environment
+    amcos = os.environ.get("AMCOS_SESSION_NAME")
+    if not amcos:
+        return  # No AMCOS configured — skip notification
+
+    # Resolve own identity
+    agent_identity = (
+        os.environ.get("AIMAESTRO_AGENT")
+        or os.environ.get("SESSION_NAME")
+        or "unknown-architect"
+    )
+
+    message = (
+        f"Exit blocked for {agent_identity}: "
+        f"{len(blockers)} incomplete items. "
+        f"Top blockers: {'; '.join(blockers[:3])}"
+    )
+
+    try:
+        subprocess.run(
+            [
+                "amp-send",
+                amcos,
+                f"Exit Blocked — {agent_identity}",
+                message,
+                "--priority", "high",
+                "--type", "notification",
+            ],
+            capture_output=True,
+            text=True,
+            timeout=10,
+        )
+    except (FileNotFoundError, subprocess.TimeoutExpired, Exception):
+        pass  # Best effort — do not block exit further
+
+
 def main() -> None:
     """Main entry point for stop hook."""
     # Read hook input (contains session context) - reserved for future use
@@ -217,6 +259,9 @@ def main() -> None:
     if not all_blockers:
         # All work complete - allow exit
         sys.exit(0)
+
+    # Notify AMCOS about blocked exit via AMP
+    _notify_amcos_blocked_exit(all_blockers)
 
     # Block exit with JSON reason
     output = {

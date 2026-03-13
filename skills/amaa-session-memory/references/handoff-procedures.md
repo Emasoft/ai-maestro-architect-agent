@@ -24,7 +24,7 @@ Create a handoff document when:
 | Type | Purpose | Target |
 |------|---------|--------|
 | `session_continuity` | Continue work in new session | Future AMAA session |
-| `orchestrator_handoff` | Design approved, ready for implementation | AMOA (via AMAMA) |
+| `orchestrator_handoff` | Design approved, ready for implementation | AMOA (via EAMA) |
 | `context_clear` | Save state before context window reset | Future AMAA session |
 
 ## Handoff Document Structure

@@ -35,10 +35,12 @@ Trigger this operation when:
 
 ## Procedure
 
+> **Recipient Resolution**: Session name placeholders (e.g., `<AMCOS_SESSION_NAME>`, `<AMIA_SESSION_NAME>`, `<target-agent-session-name>`) must be resolved dynamically at runtime. Resolve AMCOS via the `AMCOS_SESSION_NAME` environment variable (set by AMCOS at spawn time) or by querying the AI Maestro governance API: `GET /api/governance/teams/{teamId}/members?role=chief-of-staff`. Resolve other agents via their respective env vars or team registry lookup.
+
 ### Step 1: Determine Message Parameters
 
 Identify:
-- **Target agent**: Full session name (e.g., `orchestrator-master`, `helper-agent-generic`)
+- **Target agent**: Full session name (e.g., `<AMCOS_SESSION_NAME>`, `<target-agent-session-name>`)
 - **Message type**: request, response, notification, or handoff
 - **Priority**: urgent, high, normal, or low
 - **Subject**: Brief summary
@@ -76,7 +78,7 @@ Copy this checklist and track your progress:
 ### Example: Notify Orchestrator of Design Completion
 
 Send a message using the `agent-messaging` skill with:
-- **Recipient**: `orchestrator-master`
+- **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `Design Document Completed: Auth Service`
 - **Priority**: `normal`
 - **Content**: `{"type": "notification", "message": "Design document PROJ-SPEC-20250129-a1b2c3d4 completed and ready for review. Location: docs/design/specs/auth-service.md. Status: draft -> review."}`
@@ -85,7 +87,7 @@ Send a message using the `agent-messaging` skill with:
 ### Example: Request Code Review from Integrator
 
 Send a message using the `agent-messaging` skill with:
-- **Recipient**: `amia-integrator-main-agent`
+- **Recipient**: `<AMIA_SESSION_NAME>`
 - **Subject**: `Review Request: Auth Service Design`
 - **Priority**: `high`
 - **Content**: `{"type": "request", "message": "Please review design document at docs/design/specs/auth-service.md. Focus areas: security requirements, API contracts. GitHub issue: #123."}`
@@ -94,7 +96,7 @@ Send a message using the `agent-messaging` skill with:
 ### Example: Handoff Work to Implementation Agent
 
 Send a message using the `agent-messaging` skill with:
-- **Recipient**: `helper-agent-generic`
+- **Recipient**: `<target-agent-session-name>`
 - **Subject**: `Handoff: Implement Auth Service per Design`
 - **Priority**: `normal`
 - **Content**: `{"type": "handoff", "message": "Design approved. Please implement according to docs/design/specs/auth-service.md. Key requirements: 1) OAuth2 flow implementation, 2) JWT token generation, 3) Session management. GitHub issue: #123."}`
@@ -103,7 +105,7 @@ Send a message using the `agent-messaging` skill with:
 ### Example: Urgent Escalation
 
 Send a message using the `agent-messaging` skill with:
-- **Recipient**: `orchestrator-master`
+- **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `URGENT: Design Conflict Detected`
 - **Priority**: `urgent`
 - **Content**: `{"type": "notification", "message": "Conflicting requirements detected between auth-service.md and user-service.md. Cannot proceed without clarification. Blocking issue: Both define conflicting session handling strategies."}`

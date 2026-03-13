@@ -38,7 +38,7 @@ AMAA recommends component labels during architecture design.
 | 2 | `todo` | Todo | `status:todo` | Ready to start |
 | 3 | `in-progress` | In Progress | `status:in-progress` | Active work |
 | 4 | `ai-review` | AI Review | `status:ai-review` | Integrator agent reviews ALL tasks |
-| 5 | `human-review` | Human Review | `status:human-review` | User reviews BIG tasks only (via AMAMA) |
+| 5 | `human-review` | Human Review | `status:human-review` | User reviews BIG tasks only (via EAMA) |
 | 6 | `merge-release` | Merge/Release | `status:merge-release` | Ready to merge |
 | 7 | `done` | Done | `status:done` | Completed |
 | 8 | `blocked` | Blocked | `status:blocked` | Blocked at any stage |
@@ -46,7 +46,7 @@ AMAA recommends component labels during architecture design.
 **Task Routing Rules:**
 - **Small tasks**: In Progress -> AI Review -> Merge/Release -> Done
 - **Big tasks**: In Progress -> AI Review -> Human Review -> Merge/Release -> Done
-- **Human Review** is requested via AMAMA (Assistant Manager asks user to test/review)
+- **Human Review** is requested via EAMA (Assistant Manager asks user to test/review)
 - Not all tasks go through Human Review -- only significant changes requiring human judgment
 
 ## Type Labels AMAA Clarifies
@@ -153,7 +153,7 @@ gh issue edit $ISSUE_NUMBER --remove-label "type:feature" --add-label "type:epic
 - `assign:*` - Set by AMOA/AMCOS
 - `status:*` - Set by working agent
 - `review:*` - Managed by AMIA
-- `priority:*` - Set by AMAMA/AMOA
+- `priority:*` - Set by EAMA/AMOA
 
 ### AMAA Handoff Labels
 

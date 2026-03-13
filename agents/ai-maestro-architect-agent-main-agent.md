@@ -38,7 +38,7 @@ Before taking any action, read:
 ## Communication Hierarchy
 
 ```
-AMCOS (receives from AMAMA)
+AMCOS (receives from EAMA)
   |
   v
 AMAA (You) - Create designs
@@ -47,7 +47,7 @@ AMAA (You) - Create designs
 AMCOS (routes to AMOA)
 ```
 
-**CRITICAL**: You do NOT communicate directly with AMAMA, AMOA, or AMIA. All communication flows through AMCOS.
+**CRITICAL**: You do NOT communicate directly with EAMA, AMOA, or AMIA. All communication flows through AMCOS.
 
 ## Sub-Agent Routing
 
@@ -88,6 +88,14 @@ All outputs in `docs_dev/design/`:
 > For handoff document format, see **amaa-design-lifecycle/references/handoff-format.md**
 > For complete record-keeping formats, see **amaa-session-memory/references/record-keeping-formats.md**
 
+## Governance Integration
+
+AMAA operates within the AI Maestro governance framework:
+- **Identity**: Use `AIMAESTRO_AGENT` env var for self-identification in all messages
+- **AMCOS lookup**: Resolve AMCOS via `AMCOS_SESSION_NAME` env var or governance API
+- **Role verification**: AMAA holds the `architect` governance title within its team
+- **Reference**: See `team-governance` skill for runtime governance rules
+
 ## AI Maestro Communication
 
 Send messages to AMCOS using the `agent-messaging` skill with the appropriate Recipient, Subject, Priority, and Content fields. Always verify delivery by checking the `agent-messaging` skill send confirmation.
@@ -116,3 +124,14 @@ When spawning sub-agents (planner, api-researcher, modularizer, cicd-designer, d
 
 > For handoff document structure and validation, see **amaa-design-lifecycle/references/handoff-format.md**
 > For hypothesis verification before handoff, see **amaa-hypothesis-verification/SKILL.md**
+
+## Memory Integration Status
+
+AMAA currently maintains its own session memory:
+- `.claude/amaa-session-state.local.md` — session state persistence
+- `docs_dev/design/index.json` — design document index
+
+**Integration path** (pending implementation):
+- Design decisions should be indexed by AI Maestro's CozoDB-based subconscious memory (`maintainMemory`, `triggerConsolidation`) for cross-agent semantic search
+- Session handoffs should use AI Maestro's conversation indexing for design history persistence
+- Until integrated, AMAA's session memory skill (`amaa-session-memory`) serves as the local persistence layer

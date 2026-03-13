@@ -11,12 +11,16 @@
 - 1.6 Verifying ACK Receipt After Sending a Message
 - Example: Complete Message Send and Verify Workflow
 
+## Message Templates
+
+> **Recipient Resolution**: All recipient names below (e.g., `<AMCOS_SESSION_NAME>`) must be resolved dynamically at runtime. AMAA discovers its AMCOS via the `AMCOS_SESSION_NAME` environment variable (set by AMCOS at spawn time) or by querying the AI Maestro governance API: `GET /api/governance/teams/{teamId}/members?role=chief-of-staff`.
+
 ## 1.1 Sending Acknowledgment When Receiving Design Request from AMCOS
 
 **Use Case:** AMCOS assigns you a design task via AI Maestro. You must acknowledge receipt and provide an ETA.
 
 Send a message using the `agent-messaging` skill with:
-- **Recipient**: `ecos`
+- **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `Design Request Acknowledged`
 - **Priority**: `normal`
 - **Content**: `{"type": "acknowledgment", "message": "Design request received for [PROJECT_NAME]. Starting requirements analysis. ETA: [ESTIMATED_COMPLETION_TIME]."}`
@@ -37,7 +41,7 @@ Send a message using the `agent-messaging` skill with:
 **Use Case:** User requirements are ambiguous, conflicting, or unclear. You cannot proceed until clarification is received.
 
 Send a message using the `agent-messaging` skill with:
-- **Recipient**: `ecos`
+- **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `Clarification Needed - [PROJECT_NAME]`
 - **Priority**: `high`
 - **Content**: `{"type": "clarification_request", "message": "BLOCKING: Requirement ambiguity detected. Question: [SPECIFIC_QUESTION]. Context: [USER_REQUIREMENT_QUOTE]. Cannot proceed until clarified. Details: docs_dev/design/clarifications/[TIMESTAMP]-[ISSUE].md"}`
@@ -58,7 +62,7 @@ Send a message using the `agent-messaging` skill with:
 **Use Case:** All design artifacts are complete, and handoff document is prepared. You are ready for AMCOS to assign the work to AMOA.
 
 Send a message using the `agent-messaging` skill with:
-- **Recipient**: `ecos`
+- **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `Design Complete - [PROJECT_NAME]`
 - **Priority**: `normal`
 - **Content**: `{"type": "design_complete", "message": "[DONE] Design for [PROJECT_NAME] complete. Architecture: [BRIEF_SUMMARY]. Modules: [MODULE_COUNT]. Risks: [HIGH_COUNT]/[MEDIUM_COUNT]/[LOW_COUNT]. Handoff doc: docs_dev/design/handoff-[UUID].md. Ready for AMOA assignment."}`
@@ -79,7 +83,7 @@ Send a message using the `agent-messaging` skill with:
 **Use Case:** Design artifacts are complete and packaged in a handoff document. You are notifying AMCOS that the handoff is ready for AMOA assignment.
 
 Send a message using the `agent-messaging` skill with:
-- **Recipient**: `ecos`
+- **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `Handoff Ready - [PROJECT_NAME]`
 - **Priority**: `normal`
 - **Content**: `{"type": "handoff", "message": "Design handoff ready for [PROJECT_NAME]. Implementation sequence: [PHASE_1] -> [PHASE_2] -> [PHASE_3]. Critical path: [TOP_3_ITEMS]. All artifacts in docs_dev/design/. Handoff doc: handoff-[UUID].md. Awaiting AMOA assignment from AMCOS."}`
@@ -100,7 +104,7 @@ Send a message using the `agent-messaging` skill with:
 **Use Case:** You cannot proceed due to missing information, infeasible requirement, or external dependency. You must escalate to AMCOS for user decision.
 
 Send a message using the `agent-messaging` skill with:
-- **Recipient**: `ecos`
+- **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `BLOCKED - [PROJECT_NAME]`
 - **Priority**: `urgent`
 - **Content**: `{"type": "blocker", "message": "[BLOCKED] Design for [PROJECT_NAME]. Blocker: [SPECIFIC_ISSUE]. Impact: [IMPACT_DESCRIPTION]. Next: [WHAT_IS_NEEDED]. Details: docs_dev/design/blockers/[TIMESTAMP]-[ISSUE].md. Awaiting user decision."}`
@@ -158,7 +162,7 @@ Send a message using the `agent-messaging` skill with:
 **Use Case:** You sent a message, retried after 30 seconds, and STILL received no ACK after another 30 seconds. You must escalate to AMCOS.
 
 Send a message using the `agent-messaging` skill with:
-- **Recipient**: `ecos`
+- **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `ACK Timeout Escalation`
 - **Priority**: `urgent`
 - **Content**: `{"type": "escalation", "message": "ACK timeout from [TARGET]. Original message: [SUBJECT]. Sent: [TIMESTAMP]. Retry sent: [RETRY_TIMESTAMP]. Blocking operation: [BLOCKED_OPERATION]."}`
@@ -227,7 +231,7 @@ All AI Maestro messages use this JSON structure:
 ## Example: Complete Message Send and Verify Workflow
 
 **Step 1:** Send a design completion message using the `agent-messaging` skill with:
-- **Recipient**: `ecos`
+- **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `Design Complete - User Authentication System`
 - **Priority**: `normal`
 - **Content**: `{"type": "design_complete", "message": "[DONE] Design for User Authentication System complete. Architecture: FastAPI + PostgreSQL + JWT auth + bcrypt hashing. Modules: 3 (auth-service, user-service, session-service). Risks: 0/2/1. Handoff doc: docs_dev/design/handoff-f4e8a9b1.md. Ready for AMOA assignment."}`
@@ -240,7 +244,7 @@ All AI Maestro messages use this JSON structure:
 **Step 4:** If ACK received, proceed with next operation.
 
 **Step 5 (if no ACK):** Retry by sending a message using the `agent-messaging` skill with:
-- **Recipient**: `ecos`
+- **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `[RETRY] Design Complete - User Authentication System`
 - **Priority**: `high`
 - **Content**: `{"type": "retry", "message": "[DONE] Design for User Authentication System complete. Architecture: FastAPI + PostgreSQL + JWT auth + bcrypt hashing. Modules: 3 (auth-service, user-service, session-service). Risks: 0/2/1. Handoff doc: docs_dev/design/handoff-f4e8a9b1.md. Ready for AMOA assignment. (Retry: No ACK received within 30s)"}`
@@ -251,10 +255,10 @@ All AI Maestro messages use this JSON structure:
 **Step 7:** Check your inbox using the `agent-messaging` skill for ACK messages again.
 
 **Step 8 (if still no ACK):** Escalate by sending a message using the `agent-messaging` skill with:
-- **Recipient**: `ecos`
+- **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `ACK Timeout Escalation`
 - **Priority**: `urgent`
-- **Content**: `{"type": "escalation", "message": "ACK timeout from ecos. Original message: Design Complete - User Authentication System. Sent: 2026-02-05 15:00:00. Retry sent: 2026-02-05 15:00:30. Blocking operation: Cannot proceed to next design task without confirmation that handoff was received."}`
+- **Content**: `{"type": "escalation", "message": "ACK timeout from <AMCOS_SESSION_NAME>. Original message: Design Complete - User Authentication System. Sent: 2026-02-05 15:00:00. Retry sent: 2026-02-05 15:00:30. Blocking operation: Cannot proceed to next design task without confirmation that handoff was received."}`
 - **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 Then wait for manual intervention from AMCOS.

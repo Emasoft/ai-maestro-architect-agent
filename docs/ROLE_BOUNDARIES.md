@@ -1,5 +1,7 @@
 # EAMA Role Boundaries
 
+> **Note**: This is a local reference copy. The authoritative source for role boundaries and governance rules is the `team-governance` skill in the AI Maestro core system.
+
 **CRITICAL: This document defines the strict boundaries between agent roles. Violating these boundaries breaks the system architecture.**
 
 ---

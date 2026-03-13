@@ -26,6 +26,7 @@ Dependencies: Python 3.8+, gh CLI (authenticated)
 
 import argparse
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -35,7 +36,7 @@ from pathlib import Path
 from typing import Optional, cast
 
 
-STATUS_LABELS = {
+_DEFAULT_STATUS_LABELS = {
     "draft": "status:draft",
     "review": "status:review",
     "approved": "status:approved",
@@ -46,6 +47,40 @@ STATUS_LABELS = {
     "superseded": "status:superseded",
     "archived": "status:archived",
 }
+
+
+def _load_status_labels() -> dict[str, str]:
+    """Load status labels from config file or use defaults.
+
+    Looks for a JSON config file at:
+    1. AMAA_STATUS_CONFIG env var path
+    2. ${CLAUDE_PLUGIN_ROOT}/scripts/amaa_status_config.json
+    3. Falls back to built-in defaults
+    """
+    # Check env var for config path
+    config_path = os.environ.get("AMAA_STATUS_CONFIG")
+    if config_path:
+        p = Path(config_path)
+        if p.is_file():
+            try:
+                return cast(dict[str, str], json.loads(p.read_text(encoding="utf-8")))
+            except (json.JSONDecodeError, OSError):
+                pass
+
+    # Check plugin root
+    plugin_root = os.environ.get("CLAUDE_PLUGIN_ROOT")
+    if plugin_root:
+        p = Path(plugin_root) / "scripts" / "amaa_status_config.json"
+        if p.is_file():
+            try:
+                return cast(dict[str, str], json.loads(p.read_text(encoding="utf-8")))
+            except (json.JSONDecodeError, OSError):
+                pass
+
+    return dict(_DEFAULT_STATUS_LABELS)
+
+
+STATUS_LABELS = _load_status_labels()
 
 STATUS_DESCRIPTIONS = {
     "draft": "Design is being drafted",
@@ -398,7 +433,7 @@ Examples:
         print(f"Found {len(documents)} documents with linked issues\n")
 
         success_count = 0
-        for doc_path, frontmatter in documents:
+        for _, frontmatter in documents:
             uuid_str = frontmatter.get("uuid", "Unknown")
             status = frontmatter.get("status", "draft")
             issue_numbers = extract_issue_numbers(frontmatter)

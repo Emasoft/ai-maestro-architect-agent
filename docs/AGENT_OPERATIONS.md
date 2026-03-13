@@ -117,7 +117,7 @@ AMAA agents have **ONLY** the `ai-maestro-architect-agent` plugin loaded.
 AMAA **CANNOT** access:
 - `ai-maestro-orchestrator-agent` (AMOA) - Orchestration skills
 - `ai-maestro-integrator-agent` (AMIA) - Code review, quality gates
-- `ai-maestro-assistant-manager-agent` (AMAMA) - User communication
+- `ai-maestro-assistant-manager-agent` (EAMA) - User communication
 - Any other AI Maestro plugin
 
 ### Why This Matters
@@ -132,7 +132,7 @@ AMAA **CANNOT** access:
 AMAA communicates with other roles **ONLY via AI Maestro messaging**:
 
 To report to AMCOS, send a message using the `agent-messaging` skill with:
-- **Recipient**: `orchestrator-master`
+- **Recipient**: Look up AMCOS session name from team registry or `AMCOS_SESSION_NAME` env var
 - **Subject**: `[DONE] Architecture Design`
 - **Priority**: `high`
 - **Content**: `{"type": "report", "message": "[DONE] /path/to/design-doc.md"}`
@@ -194,7 +194,7 @@ Skills activate automatically when:
 | Code review | AMIA (Integrator) |
 | Testing | Developer agents |
 | Deployment | Developer agents |
-| User communication | AMAMA (Assistant Manager) |
+| User communication | EAMA (Assistant Manager) |
 | Task coordination | AMCOS (Orchestrator) |
 | GitHub issue management | AMIA (Integrator) |
 
@@ -211,7 +211,7 @@ AMAA communicates with AMCOS via AI Maestro messages.
 #### Task Completion Report
 
 Send a message using the `agent-messaging` skill with:
-- **Recipient**: `orchestrator-master`
+- **Recipient**: Look up AMCOS session name from team registry or `AMCOS_SESSION_NAME` env var
 - **Subject**: `[DONE] Architecture Design`
 - **Priority**: `high`
 - **Content**: `{"type": "report", "message": "[DONE] /absolute/path/to/output.md"}`
@@ -220,7 +220,7 @@ Send a message using the `agent-messaging` skill with:
 #### Blocking Issue Report
 
 Send a message using the `agent-messaging` skill with:
-- **Recipient**: `orchestrator-master`
+- **Recipient**: Look up AMCOS session name from team registry or `AMCOS_SESSION_NAME` env var
 - **Subject**: `[BLOCKED] Missing Requirements`
 - **Priority**: `urgent`
 - **Content**: `{"type": "blocker", "message": "[BLOCKED] Cannot design API without requirements. Need: <details>"}`
@@ -229,7 +229,7 @@ Send a message using the `agent-messaging` skill with:
 #### Question/Clarification Request
 
 Send a message using the `agent-messaging` skill with:
-- **Recipient**: `orchestrator-master`
+- **Recipient**: Look up AMCOS session name from team registry or `AMCOS_SESSION_NAME` env var
 - **Subject**: `[QUESTION] Database Choice`
 - **Priority**: `normal`
 - **Content**: `{"type": "question", "message": "[QUESTION] Should we use PostgreSQL or MongoDB for <use-case>?"}`
@@ -348,7 +348,7 @@ I have completed the architecture design. The document is located at /path/to/fi
 ### Handoff Message Format
 
 Send a message using the `agent-messaging` skill with:
-- **Recipient**: `orchestrator-master`
+- **Recipient**: Look up AMCOS session name from team registry or `AMCOS_SESSION_NAME` env var
 - **Subject**: `[DONE] Architecture Design Complete`
 - **Priority**: `high`
 - **Content**: `{"type": "handoff", "message": "[DONE] /home/user/agents/$SESSION_NAME/deliverables/PDR-svgbbox.md", "metadata": {"task": "Design architecture for svgbbox", "deliverables": ["/home/user/agents/$SESSION_NAME/deliverables/PDR-svgbbox.md", "/home/user/agents/$SESSION_NAME/diagrams/architecture.mmd"], "status": "complete", "blockers": "none"}}`
@@ -381,7 +381,7 @@ Send a message using the `agent-messaging` skill with:
 - Proceed with incomplete information
 - Create placeholder/mockup designs
 - Skip design steps to save time
-- Communicate directly with users (route through AMAMA)
+- Communicate directly with users (route through EAMA)
 
 ---
 

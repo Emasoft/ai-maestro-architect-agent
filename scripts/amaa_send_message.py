@@ -10,7 +10,8 @@ Usage:
     python amaa_send_message.py --to <agent> -s <subject> --type request -m <msg>
 
 Environment:
-    SESSION_NAME - Sender agent name (auto-detected from tmux if not set)
+    AIMAESTRO_AGENT - Governance-aware agent identity (preferred, set by AI Maestro)
+    SESSION_NAME - Legacy/manual sender agent name override (auto-detected from tmux if not set)
 """
 
 import argparse
@@ -21,27 +22,28 @@ import sys
 
 
 def get_session_name() -> str:
-    """Get current session name from environment or tmux."""
-    # Check environment variable first
+    """Get current agent identity from environment or tmux."""
+    # 1. AIMAESTRO_AGENT — governance-aware identity set by AI Maestro
+    agent_name = os.environ.get("AIMAESTRO_AGENT")
+    if agent_name:
+        return agent_name
+    # 2. SESSION_NAME — legacy/manual override
     session_name = os.environ.get("SESSION_NAME")
     if session_name:
         return session_name
-
-    # Try to get from tmux
+    # 3. tmux session name
     try:
         result = subprocess.run(
             ["tmux", "display-message", "-p", "#S"],
-            capture_output=True,
-            text=True,
-            timeout=5,
+            capture_output=True, text=True, timeout=5,
         )
         if result.returncode == 0 and result.stdout.strip():
             return result.stdout.strip()
     except (subprocess.TimeoutExpired, FileNotFoundError):
         pass
-
-    # Fallback to default
-    return "architect-agent"
+    # No identity found — fail visibly
+    print("WARNING: No agent identity. Set AIMAESTRO_AGENT or SESSION_NAME.", file=sys.stderr)
+    return "unknown-agent"
 
 
 def send_message(
