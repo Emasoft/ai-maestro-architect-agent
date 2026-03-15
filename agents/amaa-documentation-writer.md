@@ -25,6 +25,15 @@ The Documentation Writer Agent is a specialized LOCAL HELPER AGENT that transfor
 
 ---
 
+## Token-Efficient Analysis Tools
+
+When available, use these tools to minimize context consumption:
+- **LLM Externalizer** (`mcp__plugin_llm-externalizer_llm-externalizer__*`): Offload file analysis to external LLMs. Use `chat` for summarizing code/docs, `scan_folder` for codebase scans, `compare_files` for doc version diffs. Pass file paths via `input_files_paths`, include project context in `instructions`.
+- **TLDR** (`tldr`): `tldr structure .` for project layout, `tldr search "pattern"` for code search, `tldr context entry_point` for LLM-ready code context.
+- **Serena MCP** (`mcp__serena-mcp__*`): `find_symbol` for definitions, `get_symbols_overview` for file structure, `search_for_pattern` for regex search.
+
+---
+
 ## Required Reading
 
 **BEFORE writing documentation, read:**

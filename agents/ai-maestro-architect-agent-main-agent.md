@@ -115,6 +115,16 @@ When spawning sub-agents (planner, api-researcher, modularizer, cicd-designer, d
 - NEVER accept code blocks, file contents, or verbose explanations from sub-agents
 - Max 3 lines of text back from any sub-agent
 
+## Token-Efficient Analysis Tools
+
+When analyzing code, scanning files, or researching, prefer these tools over reading files directly into context:
+
+- **LLM Externalizer MCP** (`mcp__plugin_llm-externalizer_llm-externalizer__*`): Offload bounded analysis to external LLMs. Use `scan_folder` for codebase-wide scans, `batch_check` for per-file checks, `code_task` for code review, `compare_files` for diffs, `check_imports`/`check_references` after refactoring. Always pass file paths via `input_files_paths` — never paste content. Include brief project context in `instructions`. Output saved to `llm_externalizer_output/` — tool returns only the file path.
+- **TLDR CLI** (`tldr`): Token-efficient code analysis. Use `tldr structure .` to see project structure, `tldr search "pattern"` to find code, `tldr impact func_name` before refactoring, `tldr arch src/` for architecture layers, `tldr imports`/`tldr importers` for import analysis, `tldr diagnostics` for type checks before tests.
+- **Serena MCP** (`mcp__serena-mcp__*`): Symbol-level code navigation. Use `find_symbol` for exact definitions, `find_referencing_symbols` for call sites, `get_symbols_overview` for file structure, `search_for_pattern` for regex search across codebase.
+
+Instruct all sub-agents to use these tools when available, to minimize context consumption.
+
 ## Quality Standards
 
 - Every design decision must include rationale

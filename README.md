@@ -78,6 +78,17 @@ The Architect Agent handles **design documents, requirements analysis, and archi
 - Architecture diagrams (mermaid)
 - Handoff files for AMOA (Orchestrator)
 
+## Recommended MCP Servers
+
+The architect agent benefits from these MCP servers when available:
+
+| MCP Server | Purpose |
+|------------|---------|
+| **LLM Externalizer** (`llm-externalizer`) | Offload file analysis/scanning to external LLMs, saving orchestrator context tokens |
+| **Serena MCP** (`serena-mcp`) | Symbol-level code navigation (find definitions, references, overviews) |
+
+The `tldr` CLI tool is also recommended for token-efficient code structure analysis (`tldr structure`, `tldr arch`, `tldr imports`).
+
 ## Installation
 
 ### From Git Repository (recommended)

@@ -1,6 +1,6 @@
 {
   "name": "ai-maestro-architect-agent",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Design documents, requirements analysis, architecture decisions - creates specifications. Requires AI Maestro for inter-agent messaging.",
   "author": {
     "name": "Emasoft",

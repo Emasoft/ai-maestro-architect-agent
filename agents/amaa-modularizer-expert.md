@@ -78,6 +78,11 @@ Details: docs_dev/modularization/pdf-processor-spec.md
 **Never Used:**
 - Bash, Edit, testing, linting, or build tools
 
+**Token-efficient analysis (use when available):**
+- **LLM Externalizer** (`mcp__plugin_llm-externalizer_llm-externalizer__*`): Offload file analysis/scanning to external LLMs. Use `scan_folder` for codebase scans, `code_task` for code review. Pass file paths via `input_files_paths`, include project context in `instructions`.
+- **TLDR** (`tldr`): `tldr structure .` for project layout, `tldr arch src/` for architecture layers, `tldr imports`/`tldr importers` for dependency analysis, `tldr impact func` for refactoring impact.
+- **Serena MCP** (`mcp__serena-mcp__*`): `find_symbol` for definitions, `find_referencing_symbols` for call sites, `get_symbols_overview` for file structure.
+
 ---
 
 ## Examples

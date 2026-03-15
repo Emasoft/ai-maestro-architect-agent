@@ -37,6 +37,13 @@ That skill provides comprehensive coverage of:
 - DevOps debugging techniques
 - Platform test protocols
 
+## Token-Efficient Analysis Tools
+
+When available, use these tools to minimize context consumption:
+- **LLM Externalizer** (`mcp__plugin_llm-externalizer_llm-externalizer__*`): Offload file analysis to external LLMs. Use `scan_folder` for codebase scans, `code_task` for CI/CD config review, `compare_files` for pipeline diffs. Pass file paths via `input_files_paths`, include project context in `instructions`.
+- **TLDR** (`tldr`): `tldr structure .` for project layout, `tldr search "pattern"` for code search, `tldr arch src/` for architecture layers.
+- **Serena MCP** (`mcp__serena-mcp__*`): `find_symbol` for definitions, `find_referencing_symbols` for call sites, `search_for_pattern` for regex search.
+
 ## Skill References for Removed Content
 
 > For **GitHub Actions workflow templates** (CI, release, security), see amaa-cicd-design skill → references/github-actions-templates.md
