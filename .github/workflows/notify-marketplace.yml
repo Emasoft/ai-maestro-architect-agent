@@ -1,7 +1,7 @@
 # Notify marketplace repo when this plugin is updated
 # Place this in each plugin repo: .github/workflows/notify-marketplace.yml
 #
-# Sends a repository_dispatch event to 23blocks-OS/ai-maestro-plugins whenever
+# Sends a repository_dispatch event to Emasoft/ai-maestro-plugins whenever
 # this plugin is updated, so the marketplace can re-index it automatically.
 #
 # SETUP INSTRUCTIONS:
@@ -20,7 +20,7 @@
 #    - Click "Add secret"
 #
 # 3. The MARKETPLACE_OWNER and MARKETPLACE_REPO variables below are already configured
-#    to target 23blocks-OS/ai-maestro-plugins.
+#    to target Emasoft/ai-maestro-plugins.
 #
 # IMPORTANT: Do NOT use GITHUB_TOKEN - it lacks permissions to trigger workflows in other repos!
 
@@ -38,7 +38,7 @@ on:
       - 'scripts/**'
 
 env:
-  MARKETPLACE_OWNER: '23blocks-OS'
+  MARKETPLACE_OWNER: 'Emasoft'
   MARKETPLACE_REPO: 'ai-maestro-plugins'
 
 jobs:
