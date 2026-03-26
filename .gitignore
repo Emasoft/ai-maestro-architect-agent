@@ -54,3 +54,12 @@ node_modules/
 # Rust
 target/
 Cargo.lock
+
+# Claude Code
+.claude/
+
+# LLM Externalizer
+llm_externalizer_output/
+
+# TLDR cache
+.tldr/

@@ -178,7 +178,7 @@ winget install GitHub.cli
 
 ## Related Operations
 
-- [op-create-issue-from-design.md](op-create-issue-from-design.md) - Requires gh auth
-- [op-attach-design-to-issue.md](op-attach-design-to-issue.md) - Requires gh auth
-- [op-sync-status-to-github.md](op-sync-status-to-github.md) - Requires gh auth
-- [op-monitor-github-project.md](op-monitor-github-project.md) - Requires gh auth
+- op-create-issue-from-design - Requires gh auth
+- op-attach-design-to-issue - Requires gh auth
+- op-sync-status-to-github - Requires gh auth
+- op-monitor-github-project - Requires gh auth

@@ -386,6 +386,6 @@ python scripts/amaa_design_validate.py design/pdr/my-doc.md
 
 ## See Also
 
-- [UUID Specification](uuid-specification.md) - UUID format details
+- UUID Specification - UUID format details
 - [Validating Documents](validating-documents.md) - Validation error reference
-- [Creating Documents](creating-documents.md) - Proper document creation
+- Creating Documents - Proper document creation

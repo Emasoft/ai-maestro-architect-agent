@@ -81,6 +81,6 @@ Output: docs_dev/design/{requirements,architecture,handoff-<uuid>}.md
 
 ## Resources
 
-- `templates/design-template.md` - Design document template
+- [design-template.md](templates/design-template.md) - Design document template
 - amaa-requirements-analysis - Requirements input skill
 - amaa-planning-patterns - Planning integration skill

@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Pre-push hook: run CPV validation before pushing
+set -euo pipefail
+
+echo "=== Pre-push: Running CPV validation ==="
+
+if command -v uvx &>/dev/null; then
+  uvx --from git+https://github.com/Emasoft/claude-plugins-validation --with pyyaml cpv-validate . --verbose
+  EXIT_CODE=$?
+  if [ "$EXIT_CODE" -le 2 ] && [ "$EXIT_CODE" -ne 0 ]; then
+    echo "BLOCKED: CRITICAL or MAJOR validation issues found."
+    exit 1
+  fi
+else
+  echo "WARNING: uvx not found, skipping CPV validation"
+fi
+
+echo "=== Pre-push validation passed ==="

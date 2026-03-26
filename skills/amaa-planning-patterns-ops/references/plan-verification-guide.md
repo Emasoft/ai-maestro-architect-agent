@@ -115,7 +115,7 @@ Verification is the bridge between planning and execution. Every task in a plan 
 - **[plan-verification-guide-part1-verification-patterns.md](plan-verification-guide-part1-verification-patterns.md)**: Verification patterns for phases and task types
 - **[plan-verification-guide-part2-checklist-integration.md](plan-verification-guide-part2-checklist-integration.md)**: Task tracker integration and checklist template
 - **[plan-file-linking.md](plan-file-linking.md)**: Plan-to-GitHub linking for traceability
-- **[planning-checklist.md](planning-checklist.md)**: Planning phase checklist
+- **planning-checklist**: Planning phase checklist
 
 ---
 

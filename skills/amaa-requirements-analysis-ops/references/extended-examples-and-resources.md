@@ -110,10 +110,10 @@ python3 scripts/check_plan_prerequisites.py --fix-suggestions
 ### Reference Documents
 
 Located in this skill's references directory:
-- [start-planning-procedure.md](start-planning-procedure.md) - Detailed /amaa-start-planning command procedure, prerequisites, and post-initialization steps
-- [requirement-management.md](requirement-management.md) - Complete guide to adding, modifying, and removing requirements and modules
-- [plan-approval-transition.md](plan-approval-transition.md) - Approval validation checks, GitHub Issue creation, and state transitions
-- [state-file-format.md](state-file-format.md) - YAML frontmatter schema, field definitions, and state file lifecycle
+- start-planning-procedure - Detailed /amaa-start-planning command procedure, prerequisites, and post-initialization steps
+- requirement-management - Complete guide to adding, modifying, and removing requirements and modules
+- plan-approval-transition - Approval validation checks, GitHub Issue creation, and state transitions
+- state-file-format - YAML frontmatter schema, field definitions, and state file lifecycle
 - [troubleshooting.md](troubleshooting.md) - Comprehensive troubleshooting for all planning commands and state recovery
 
 ### Related Skills
