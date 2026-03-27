@@ -162,6 +162,8 @@ Maintain local design document repository:
 
 ## 3.0 Remote Agent Unresponsive
 
+> **Governance note**: `amaa-api-researcher` and `amaa-documentation-writer` referenced below are **Claude Code Task subagents** spawned within the ARCHITECT's own session — they are NOT separate AI Maestro agents. Direct messaging to Task subagents is permitted and does not require COS routing. If these were independent AI Maestro agents in another team, messaging would need to route via COS per closed-team governance rules.
+
 ### 3.1 Detection Methods
 
 AI agents collaborate asynchronously and may be hibernated for extended periods. Detection is based on **state**, not elapsed time.
