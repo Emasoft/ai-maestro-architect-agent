@@ -1,6 +1,6 @@
 ---
 name: amaa-design-lifecycle
-description: Use when managing design document states or lifecycle transitions. Trigger with design lifecycle or state transition request.
+description: Use when managing design document states or lifecycle transitions, including project repo setup and inter-agent handoff. Trigger with design lifecycle or state transition request.
 context: fork
 agent: ai-maestro-architect-agent-main-agent
 user-invocable: false
@@ -15,18 +15,25 @@ Manages the complete lifecycle of design documents: creation, review, approval, 
 ## Checklist
 
 Copy this checklist and track your progress:
-- [ ] Receive requirements from AMCOS or user
+- [ ] Receive project requirements from COS or MANAGER
+- [ ] Discover existing repos: `amp-project-repos.sh --team <teamId>`
+- [ ] Clone main repo: `amp-clone-repo.sh <url>`
 - [ ] Research APIs/technologies
 - [ ] Create design documents in `docs_dev/design/`
 - [ ] Generate design UUID and register in index with state DRAFT
+- [ ] Write design document (architecture, components, interfaces)
 - [ ] Complete design and validate checklist
+- [ ] Push design doc to the repo
 - [ ] Submit for review (state: REVIEW)
 - [ ] Address review comments
 - [ ] Update state to APPROVED
+- [ ] Create GitHub issues for each component
 - [ ] Create handoff document for AMOA
+- [ ] Notify orchestrator: `amp-send.sh <orchestrator> "Design Complete"` with repo URL, doc path, N components, M tasks
 - [ ] Report completion to AMCOS
 - [ ] Track implementation progress
 - [ ] Archive when complete (state: ARCHIVED)
+- [ ] (If needed) Create new repo: `amp-create-repo.sh <name> [--org <org>]`
 
 ## Prerequisites
 
@@ -35,13 +42,35 @@ Copy this checklist and track your progress:
 
 ## Instructions
 
-1. Receive requirements from AMCOS or user
-2. Research APIs/technologies and create design documents in `docs_dev/design/`
-3. Generate design UUID and register in index with state DRAFT
-4. Complete design, validate checklist, submit for review (state: REVIEW)
-5. Address review comments, update state to APPROVED
-6. Create handoff document for AMOA, report completion to AMCOS
-7. Track implementation progress, archive when complete (state: ARCHIVED)
+1. Receive project requirements from COS or MANAGER
+2. Discover existing repos: `amp-project-repos.sh --team <teamId>` to understand the project landscape
+3. Clone the main repo: `amp-clone-repo.sh <url>` (or create a new one: `amp-create-repo.sh <name> [--org <org>] [--private] [--description "..."]`)
+4. Research APIs/technologies and create design documents in `docs_dev/design/`
+5. Generate design UUID and register in index with state DRAFT
+6. Write design document covering architecture, components, and interfaces
+7. Push design doc to the repo
+8. Complete design, validate checklist, submit for review (state: REVIEW)
+9. Address review comments, update state to APPROVED
+10. Create GitHub issues for each component (one issue per module/service/interface)
+11. Create handoff document for AMOA
+12. Notify the orchestrator of design completion:
+    ```bash
+    amp-send.sh <orchestrator> "Design Complete" \
+      "Repo: <repo-url>, Doc: <doc-path>, Components: N, Tasks: M"
+    ```
+13. Report completion to AMCOS
+14. Track implementation progress, archive when complete (state: ARCHIVED)
+
+## AI Maestro Project Scripts
+
+These scripts are available from the AI Maestro `scripts/` directory (installed to `~/.local/bin/` on setup):
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `amp-project-repos.sh` | List repositories for the team's project | `amp-project-repos.sh --team <teamId>` |
+| `amp-clone-repo.sh` | Clone a repo into the agent's working directory | `amp-clone-repo.sh <url> [<localName>]` |
+| `amp-create-repo.sh` | Create a new GitHub repo and register it with the team | `amp-create-repo.sh <name> [--org <org>] [--private]` |
+| `amp-send.sh` | Send inter-agent messages (design handoff notifications) | `amp-send.sh <agent> <subject> <message>` |
 
 ## Reference Documents
 
@@ -81,6 +110,6 @@ Output: docs_dev/design/{requirements,architecture,handoff-<uuid>}.md
 
 ## Resources
 
-- [design-template.md](templates/design-template.md) - Design document template
+- `templates/design-template.md` - Design document template
 - amaa-requirements-analysis - Requirements input skill
 - amaa-planning-patterns - Planning integration skill
