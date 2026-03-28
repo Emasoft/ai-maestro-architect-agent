@@ -29,28 +29,31 @@ Trigger this operation when:
 
 - gh CLI installed and authenticated
 - GitHub Project exists and is accessible
-- Knowledge of the project owner and project number
+- Knowledge of the project owner (`$OWNER`) and project number
 - AI Maestro running (for notifications)
+- `AGENT_DIR` set to `~/agents/<persona-name>/`
+
+> **Multi-Repo Rule**: Use `--owner "$OWNER"` for all `gh project` commands. Never hardcode owner names. Use `amp-project-info.sh` to discover project details.
 
 ## Procedure
 
 ### Step 1: List All Project Items
 
 ```bash
-gh project item-list --owner Emasoft --format json
+gh project item-list --owner "$OWNER" --format json
 ```
 
 ### Step 2: Get Specific Project Items with Details
 
 ```bash
-gh project item-list --owner Emasoft --project [PROJECT_NUMBER] --format json | jq '.items[] | {title, status, updatedAt}'
+gh project item-list --owner "$OWNER" --project [PROJECT_NUMBER] --format json | jq '.items[] | {title, status, updatedAt}'
 ```
 
 ### Step 3: Check for Recent Updates
 
 ```bash
 # Items updated in last 5 minutes
-gh project item-list --owner Emasoft --format json | jq --arg cutoff "$(date -v-5M -u +%Y-%m-%dT%H:%M:%SZ)" '.items[] | select(.updatedAt > $cutoff)'
+gh project item-list --owner "$OWNER" --format json | jq --arg cutoff "$(date -v-5M -u +%Y-%m-%dT%H:%M:%SZ)" '.items[] | select(.updatedAt > $cutoff)'
 ```
 
 ### Step 4: On External Change Detection
@@ -100,7 +103,7 @@ Copy this checklist and track your progress:
 
 ```bash
 # Poll for updates
-gh project item-list --owner Emasoft --format json | jq '.items[] | {title, status, updatedAt}'
+gh project item-list --owner "$OWNER" --format json | jq '.items[] | {title, status, updatedAt}'
 
 # Output:
 # {
@@ -124,9 +127,9 @@ gh project item-list --owner Emasoft --format json | jq '.items[] | {title, stat
 #!/bin/bash
 # Run every 5 minutes during active work
 
-LAST_CHECK=$(cat /tmp/gh-project-last-check 2>/dev/null || echo "1970-01-01T00:00:00Z")
+LAST_CHECK=$(cat "$AGENT_DIR/tmp/gh-project-last-check" 2>/dev/null || echo "1970-01-01T00:00:00Z")
 
-UPDATES=$(gh project item-list --owner Emasoft --format json | \
+UPDATES=$(gh project item-list --owner "$OWNER" --format json | \
   jq --arg cutoff "$LAST_CHECK" '[.items[] | select(.updatedAt > $cutoff)]')
 
 if [ "$(echo "$UPDATES" | jq 'length')" -gt 0 ]; then
@@ -135,7 +138,8 @@ if [ "$(echo "$UPDATES" | jq 'length')" -gt 0 ]; then
   # Process updates...
 fi
 
-date -u +%Y-%m-%dT%H:%M:%SZ > /tmp/gh-project-last-check
+mkdir -p "$AGENT_DIR/tmp"
+date -u +%Y-%m-%dT%H:%M:%SZ > "$AGENT_DIR/tmp/gh-project-last-check"
 ```
 
 ## What to Monitor
@@ -152,7 +156,7 @@ date -u +%Y-%m-%dT%H:%M:%SZ > /tmp/gh-project-last-check
 
 | Error | Cause | Resolution |
 |-------|-------|------------|
-| `ERROR: Project not found` | Wrong owner or project number | Verify with `gh project list --owner <owner>` |
+| `ERROR: Project not found` | Wrong owner or project number | Verify with `gh project list --owner "$OWNER"` or use `amp-project-info.sh` |
 | `ERROR: gh CLI not authenticated` | No auth token | Run `gh auth login` |
 | `ERROR: AI Maestro not responding` | Service not running | Start AI Maestro or log change only |
 | `ERROR: jq command not found` | jq not installed | Install via `brew install jq` |

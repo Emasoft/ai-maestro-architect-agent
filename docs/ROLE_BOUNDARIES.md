@@ -177,17 +177,19 @@ AMOA: Sends handoff to agent-456
 
 ---
 
-## Governance Titles
+## Governance Titles (v3 — 4 Titles)
 
-Each agent role maps to a governance title:
+AI Maestro uses 4 governance titles. ALL teams are closed. Each agent belongs to at most ONE team.
 
-| Role | Governance Title | Scope |
-|------|-----------------|-------|
-| AMAMA | Manager | Organization-wide, user-facing |
-| AMCOS | Chief of Staff | Team-scoped, agent lifecycle |
-| AMOA | Member (Orchestrator) | Project-linked, task management |
-| AMIA | Member (Integrator) | Project-linked, code integration |
-| AMAA | Member (Architect) | Project-linked, architecture |
+| Role Plugin | Governance Title | Scope | Kanban Access |
+|-------------|-----------------|-------|---------------|
+| AMAMA | **MANAGER** | Organization-wide, user-facing | Secondary |
+| AMCOS | **CHIEF-OF-STAFF** | Team-scoped, agent lifecycle | Secondary |
+| AMOA | **ORCHESTRATOR** | Project-linked, task management | **Primary manager** |
+| AMIA | MEMBER (Integrator) | Project-linked, code integration | View only |
+| AMAA | MEMBER (Architect) | Project-linked, architecture | View only |
+
+**ORCHESTRATOR** is a governance TITLE (not just a role-plugin specialization). The ORCHESTRATOR is the primary kanban manager. CHIEF-OF-STAFF and MANAGER can manage kanban as secondary managers when the ORCHESTRATOR is absent.
 
 ---
 

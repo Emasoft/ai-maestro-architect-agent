@@ -566,8 +566,6 @@ Track current work state in a session memory file (not part of permanent artifac
     "module-1-database.md"
   ],
   "sub_agents": [
-    // These are Claude Code Task subagents (not AI Maestro agents) — no governance routing required.
-    // Task subagents are spawned within this ARCHITECT session and communicate directly.
     {
       "agent": "amaa-api-researcher",
       "task": "Research Stripe API",

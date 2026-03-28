@@ -73,10 +73,10 @@ Follow the prompts:
 ### Step 4: Verify Repository Access
 
 ```bash
-gh repo view
+gh repo view --repo "$OWNER_REPO"
 ```
 
-Should display current repository information.
+Should display repository information for the target repo.
 
 ## Checklist
 
@@ -86,7 +86,7 @@ Copy this checklist and track your progress:
 - [ ] If not installed, install gh CLI (see Installation section)
 - [ ] Check auth status: `gh auth status`
 - [ ] If not authenticated, run: `gh auth login`
-- [ ] Verify repository access: `gh repo view`
+- [ ] Verify repository access: `gh repo view --repo "$OWNER_REPO"`
 - [ ] Verify token has required scopes: `repo`, `workflow` (optional: `read:org`)
 
 ## Examples

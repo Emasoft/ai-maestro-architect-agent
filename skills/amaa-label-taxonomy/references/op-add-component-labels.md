@@ -31,8 +31,11 @@ After completing architecture analysis, apply component labels to an issue to in
 ## Prerequisites
 
 - GitHub CLI (`gh`) installed and authenticated
+- Target repo identified: `OWNER_REPO=<owner>/<repo>` (use `amp-project-repos.sh`)
 - Issue number to label
 - Completed architecture analysis identifying affected components
+
+> **Multi-Repo Rule**: All `gh` commands below MUST include `--repo "$OWNER_REPO"`.
 
 ## Procedure
 
@@ -56,14 +59,14 @@ Document which components are affected:
 ```bash
 # Check if component labels exist
 for COMP in api ui database auth infra core tests docs; do
-  gh label list --search "component:$COMP" --json name --jq '.[].name'
+  gh label list --repo "$OWNER_REPO" --search "component:$COMP" --json name --jq '.[].name'
 done
 ```
 
 If missing, create them:
 
 ```bash
-gh label create "component:api" --description "API endpoints" --color "0052CC"
+gh label create "component:api" --description "API endpoints" --color "0052CC" --repo "$OWNER_REPO"
 ```
 
 ### Step 3: Add Component Labels to Issue
@@ -72,13 +75,14 @@ gh label create "component:api" --description "API endpoints" --color "0052CC"
 # Add multiple component labels
 gh issue edit $ISSUE_NUMBER \
   --add-label "component:api" \
-  --add-label "component:database"
+  --add-label "component:database" \
+  --repo "$OWNER_REPO"
 ```
 
 ### Step 4: Document Component Breakdown in Comment
 
 ```bash
-gh issue comment $ISSUE_NUMBER --body "## Architecture Analysis
+gh issue comment $ISSUE_NUMBER --repo "$OWNER_REPO" --body "## Architecture Analysis
 
 **Components Affected:**
 - \`component:api\` - New REST endpoints for user authentication
@@ -90,7 +94,7 @@ gh issue comment $ISSUE_NUMBER --body "## Architecture Analysis
 ### Step 5: Verify Labels Applied
 
 ```bash
-gh issue view $ISSUE_NUMBER --json labels --jq '.labels[].name | select(startswith("component:"))'
+gh issue view $ISSUE_NUMBER --repo "$OWNER_REPO" --json labels --jq '.labels[].name | select(startswith("component:"))'
 ```
 
 ## Example
@@ -98,11 +102,13 @@ gh issue view $ISSUE_NUMBER --json labels --jq '.labels[].name | select(startswi
 **Scenario:** Issue #123 requires API endpoint and database schema changes.
 
 ```bash
+OWNER_REPO="myorg/backend-api"  # Always set target repo first
+
 # Step 1: Add component labels based on analysis
-gh issue edit 123 --add-label "component:api" --add-label "component:database"
+gh issue edit 123 --add-label "component:api" --add-label "component:database" --repo "$OWNER_REPO"
 
 # Step 2: Document in comment
-gh issue comment 123 --body "## Architecture Analysis
+gh issue comment 123 --repo "$OWNER_REPO" --body "## Architecture Analysis
 
 **Components Affected:**
 - \`component:api\` - New REST endpoints for authentication flow
@@ -111,7 +117,7 @@ gh issue comment 123 --body "## Architecture Analysis
 **Sub-tasks will be created for each component.**"
 
 # Step 3: Verify
-gh issue view 123 --json labels --jq '.labels[].name'
+gh issue view 123 --repo "$OWNER_REPO" --json labels --jq '.labels[].name'
 # Output includes: component:api, component:database
 ```
 
@@ -132,7 +138,7 @@ gh issue view 123 --json labels --jq '.labels[].name'
 
 | Error | Cause | Solution |
 |-------|-------|----------|
-| Label not found | Component label doesn't exist | Create label with `gh label create` |
+| Label not found | Component label doesn't exist | Create label with `gh label create --repo "$OWNER_REPO"` |
 | Permission denied | No write access | Verify GitHub token scopes |
-| Issue not found | Invalid issue number | Verify with `gh issue list` |
+| Issue not found | Invalid issue number | Verify with `gh issue list --repo "$OWNER_REPO"` |
 | Duplicate label | Already applied | No action needed, continue |

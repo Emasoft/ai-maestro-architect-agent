@@ -27,16 +27,19 @@ Trigger this operation when:
 ## Prerequisites
 
 - gh CLI installed and authenticated
+- Target repo identified: `OWNER_REPO=<owner>/<repo>` (use `amp-project-repos.sh`)
 - Design document exists with valid UUID in frontmatter
 - Target GitHub issue exists
 - Write access to the repository
+
+> **Multi-Repo Rule**: All `gh` commands MUST include `--repo "$OWNER_REPO"`. Determine the target repo BEFORE running any command.
 
 ## Procedure
 
 ### Step 1: Verify the Issue Exists
 
 ```bash
-gh issue view 42
+gh issue view 42 --repo "$OWNER_REPO"
 ```
 
 Confirm the issue number and title match your expectations.
@@ -67,11 +70,11 @@ The script will:
 Copy this checklist and track your progress:
 
 - [ ] Verify gh CLI is authenticated: `gh auth status`
-- [ ] Verify issue exists: `gh issue view <N>`
+- [ ] Verify issue exists: `gh issue view <N> --repo "$OWNER_REPO"`
 - [ ] Record issue title and number for verification
 - [ ] Verify design document has UUID in frontmatter
 - [ ] Attach design: `python scripts/amaa_github_attach_document.py --uuid <UUID> --issue <N>`
-- [ ] Verify comment was posted: `gh issue view <N> --comments`
+- [ ] Verify comment was posted: `gh issue view <N> --comments --repo "$OWNER_REPO"`
 - [ ] Verify labels updated on issue
 - [ ] Verify design frontmatter updated with `related_issues`
 
@@ -111,7 +114,7 @@ This adds a custom header to distinguish from previous attachments.
 
 | Error | Cause | Resolution |
 |-------|-------|------------|
-| `ERROR: Issue #42 not found` | Issue does not exist or wrong number | Verify issue number with `gh issue list` |
+| `ERROR: Issue #42 not found` | Issue does not exist or wrong number | Verify issue number with `gh issue list --repo "$OWNER_REPO"` |
 | `ERROR: Document has no UUID` | Missing frontmatter | Run `amaa_design_uuid.py --file <path> --type SPEC` |
 | `ERROR: gh CLI not authenticated` | No auth token | Run `gh auth login` |
 | `ERROR: Permission denied` | No write access to repo | Request repository write access |

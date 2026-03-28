@@ -27,9 +27,12 @@ Trigger this operation when:
 ## Prerequisites
 
 - gh CLI installed and authenticated
+- Target repo identified: `OWNER_REPO=<owner>/<repo>` (use `amp-project-repos.sh`)
 - Design document has `related_issues` field in frontmatter
 - GitHub issue exists and is accessible
 - Write access to the repository
+
+> **Multi-Repo Rule**: All `gh` commands MUST include `--repo "$OWNER_REPO"`. Determine the target repo BEFORE running any command.
 
 ## Procedure
 
@@ -50,7 +53,7 @@ python scripts/amaa_github_sync_status.py --uuid PROJ-SPEC-20250129-a1b2c3d4
 ### Step 3: Verify Label Changes
 
 ```bash
-gh issue view 42 --json labels
+gh issue view 42 --json labels --repo "$OWNER_REPO"
 ```
 
 ## Checklist

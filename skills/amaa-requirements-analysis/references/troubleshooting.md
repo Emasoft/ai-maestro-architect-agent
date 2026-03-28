@@ -174,7 +174,7 @@ Cause: Module has an associated GitHub Issue.
 Solutions:
 1. Close the GitHub Issue manually first:
    ```bash
-   gh issue close [issue-number]
+   gh issue close [issue-number] --repo "$OWNER_REPO"
    ```
 2. Then remove the module
 3. Or use `--force` to remove without closing issue
@@ -287,7 +287,7 @@ Solutions:
    ```
 2. Verify repository access:
    ```bash
-   gh repo view
+   gh repo view --repo "$OWNER_REPO"
    ```
 3. Retry approval or create issues manually
 

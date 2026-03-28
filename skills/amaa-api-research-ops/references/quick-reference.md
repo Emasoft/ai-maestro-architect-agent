@@ -11,11 +11,11 @@
 
 | File | Template | Purpose |
 |------|----------|---------|
-| `<library>-api-overview.md` | output-templates | High-level API description |
-| `<library>-authentication.md` | output-templates | Auth setup and security |
-| `<library>-endpoints.md` | output-templates | Endpoint reference |
-| `<library>-integration.md` | output-templates | Integration guide |
-| `<library>-config-template.md` | output-templates | Configuration options |
+| `<library>-api-overview.md` | [output-templates.md](output-templates.md) | High-level API description |
+| `<library>-authentication.md` | [output-templates.md](output-templates.md) | Auth setup and security |
+| `<library>-endpoints.md` | [output-templates.md](output-templates.md) | Endpoint reference |
+| `<library>-integration.md` | [output-templates.md](output-templates.md) | Integration guide |
+| `<library>-config-template.md` | [output-templates.md](output-templates.md) | Configuration options |
 
 ## Research Workflow
 

@@ -343,6 +343,6 @@ python scripts/amaa_design_validate.py --all --design-dir /path/to/design
 
 ## See Also
 
-- Creating Documents - Create documents with valid frontmatter
-- UUID Specification - UUID format requirements
+- [Creating Documents](creating-documents.md) - Create documents with valid frontmatter
+- [UUID Specification](uuid-specification.md) - UUID format requirements
 - [Troubleshooting](troubleshooting.md) - Common validation issues

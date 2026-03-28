@@ -128,7 +128,7 @@ claude --plugin-dir ./ai-maestro-architect-agent
 
 ## Platform Requirements
 
-- **Sync script**: Cross-platform Python script. Requires `gh` CLI authenticated.
+- **Sync script** (`scripts/sync_cpv_scripts.py`): Cross-platform Python script. Requires `gh` CLI authenticated.
 - **Python scripts**: Cross-platform. Use `uv run --with pyyaml python <script>` or `python3 <script>`.
 
 ## Validation

@@ -15,8 +15,10 @@ Link design documents to GitHub issues for complete traceability. Create issues 
 ## Prerequisites
 
 - gh CLI installed and authenticated (`gh auth status`)
-- Current directory within a GitHub repository
+- Target repo identified: `REPO_PATH=$AGENT_DIR/repos/<repo-name>` and `OWNER_REPO=<owner>/<repo>`
 - Design documents with valid UUID in frontmatter
+
+> **Multi-Repo Rule**: All `gh` commands MUST include `--repo "$OWNER_REPO"`. All `git` commands MUST use `git -C "$REPO_PATH"`. Never assume the current directory is the correct repo.
 
 ## Instructions
 

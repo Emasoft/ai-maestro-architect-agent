@@ -160,51 +160,53 @@ Adds a comment like:
 
 ### Create All Labels
 
+> **Multi-Repo Rule**: All `gh` commands MUST include `--repo "$OWNER_REPO"`. Set `OWNER_REPO=<owner>/<repo>` before running any command.
+
 ```bash
 # Design category
-gh label create "design" --color "0052CC" --description "Design documents"
-gh label create "design:spec" --color "1D76DB" --description "Specification"
-gh label create "design:plan" --color "5319E7" --description "Planning document"
-gh label create "design:adr" --color "B60205" --description "Architecture Decision Record"
+gh label create "design" --color "0052CC" --description "Design documents" --repo "$OWNER_REPO"
+gh label create "design:spec" --color "1D76DB" --description "Specification" --repo "$OWNER_REPO"
+gh label create "design:plan" --color "5319E7" --description "Planning document" --repo "$OWNER_REPO"
+gh label create "design:adr" --color "B60205" --description "Architecture Decision Record" --repo "$OWNER_REPO"
 
 # Status category
-gh label create "status:draft" --color "FBCA04" --description "Draft"
-gh label create "status:review" --color "C5DEF5" --description "Under review"
-gh label create "status:approved" --color "0E8A16" --description "Approved"
-gh label create "status:implementing" --color "006B75" --description "Implementing"
-gh label create "status:implemented" --color "0E8A16" --description "Implemented"
-gh label create "status:completed" --color "0E8A16" --description "Completed"
-gh label create "status:deprecated" --color "D93F0B" --description "Deprecated"
-gh label create "status:superseded" --color "D93F0B" --description "Superseded"
-gh label create "status:archived" --color "5319E7" --description "Archived"
+gh label create "status:draft" --color "FBCA04" --description "Draft" --repo "$OWNER_REPO"
+gh label create "status:review" --color "C5DEF5" --description "Under review" --repo "$OWNER_REPO"
+gh label create "status:approved" --color "0E8A16" --description "Approved" --repo "$OWNER_REPO"
+gh label create "status:implementing" --color "006B75" --description "Implementing" --repo "$OWNER_REPO"
+gh label create "status:implemented" --color "0E8A16" --description "Implemented" --repo "$OWNER_REPO"
+gh label create "status:completed" --color "0E8A16" --description "Completed" --repo "$OWNER_REPO"
+gh label create "status:deprecated" --color "D93F0B" --description "Deprecated" --repo "$OWNER_REPO"
+gh label create "status:superseded" --color "D93F0B" --description "Superseded" --repo "$OWNER_REPO"
+gh label create "status:archived" --color "5319E7" --description "Archived" --repo "$OWNER_REPO"
 ```
 
 ### List Labels
 
 ```bash
-gh label list
+gh label list --repo "$OWNER_REPO"
 ```
 
 ### Update Label
 
 ```bash
-gh label edit "status:draft" --color "FFA500" --description "Work in progress"
+gh label edit "status:draft" --color "FFA500" --description "Work in progress" --repo "$OWNER_REPO"
 ```
 
 ### Delete Label
 
 ```bash
-gh label delete "status:old" --yes
+gh label delete "status:old" --yes --repo "$OWNER_REPO"
 ```
 
 ### Add Label to Issue
 
 ```bash
-gh issue edit 42 --add-label "status:approved"
+gh issue edit 42 --add-label "status:approved" --repo "$OWNER_REPO"
 ```
 
 ### Remove Label from Issue
 
 ```bash
-gh issue edit 42 --remove-label "status:draft"
+gh issue edit 42 --remove-label "status:draft" --repo "$OWNER_REPO"
 ```

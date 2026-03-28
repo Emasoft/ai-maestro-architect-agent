@@ -32,18 +32,21 @@ Break down a complex issue (epic) into smaller, component-specific sub-issues th
 
 - GitHub CLI (`gh`) installed and authenticated
 - Parent issue number
+- Target repo identified: `OWNER_REPO=<owner>/<repo>` (use `amp-project-repos.sh`)
 - Completed architecture breakdown identifying sub-tasks
 - Component labels defined in repository
+
+> **Multi-Repo Rule**: All `gh` commands below MUST include `--repo "$OWNER_REPO"`. Determine the target repo BEFORE running any command.
 
 ## Procedure
 
 ### Step 1: Verify Parent Issue is Epic
 
 ```bash
-IS_EPIC=$(gh issue view $PARENT_ISSUE --json labels --jq '.labels[].name | select(. == "type:epic")')
+IS_EPIC=$(gh issue view $PARENT_ISSUE --repo "$OWNER_REPO" --json labels --jq '.labels[].name | select(. == "type:epic")')
 if [ -z "$IS_EPIC" ]; then
   # Mark as epic if complex
-  gh issue edit $PARENT_ISSUE --add-label "type:epic"
+  gh issue edit $PARENT_ISSUE --add-label "type:epic" --repo "$OWNER_REPO"
 fi
 ```
 
@@ -61,6 +64,7 @@ For each distinct component/task:
 
 ```bash
 gh issue create \
+  --repo "$OWNER_REPO" \
   --title "[$PARENT_ISSUE] $SUB_TASK_TITLE" \
   --body "Part of #$PARENT_ISSUE
 
@@ -84,7 +88,7 @@ Closes part of #$PARENT_ISSUE" \
 Update parent issue with links:
 
 ```bash
-gh issue comment $PARENT_ISSUE --body "## Sub-Issues Created
+gh issue comment $PARENT_ISSUE --repo "$OWNER_REPO" --body "## Sub-Issues Created
 
 This epic has been decomposed into:
 - #$SUB_ISSUE_1 - API endpoints
@@ -98,14 +102,14 @@ All sub-issues must be completed before this epic can be closed."
 
 ```bash
 # Parent stays in backlog until sub-issues start
-gh issue edit $PARENT_ISSUE --add-label "status:backlog"
+gh issue edit $PARENT_ISSUE --add-label "status:backlog" --repo "$OWNER_REPO"
 ```
 
 ### Step 6: Verify Sub-Issues Created
 
 ```bash
 # Search for linked issues
-gh issue list --search "in:body #$PARENT_ISSUE"
+gh issue list --search "in:body #$PARENT_ISSUE" --repo "$OWNER_REPO"
 ```
 
 ## Example
@@ -114,9 +118,11 @@ gh issue list --search "in:body #$PARENT_ISSUE"
 
 ```bash
 PARENT=123
+OWNER_REPO="myorg/backend-api"  # Always set target repo first
 
 # Create API sub-issue
 gh issue create \
+  --repo "$OWNER_REPO" \
   --title "[#123] API endpoints for user authentication" \
   --body "Part of #123
 
@@ -140,6 +146,7 @@ Closes part of #123" \
 
 # Create Database sub-issue
 gh issue create \
+  --repo "$OWNER_REPO" \
   --title "[#123] Database schema for user storage" \
   --body "Part of #123
 
@@ -161,7 +168,7 @@ Closes part of #123" \
   --label "effort:s"
 
 # Update parent with links
-gh issue comment 123 --body "## Sub-Issues Created
+gh issue comment 123 --repo "$OWNER_REPO" --body "## Sub-Issues Created
 
 This epic has been decomposed into:
 - #124 - API endpoints for user authentication

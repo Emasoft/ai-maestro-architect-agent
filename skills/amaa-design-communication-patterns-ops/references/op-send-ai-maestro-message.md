@@ -142,5 +142,5 @@ Send a message using the `agent-messaging` skill with:
 ## Related Operations
 
 - [op-access-shared-constants.md](op-access-shared-constants.md) - PRIORITY_LEVELS and MESSAGE_TYPES constants
-- ai-maestro-message-templates - Full message template reference
-- message-response-decision-tree - How to handle responses
+- [ai-maestro-message-templates.md](ai-maestro-message-templates.md) - Full message template reference
+- [message-response-decision-tree.md](message-response-decision-tree.md) - How to handle responses

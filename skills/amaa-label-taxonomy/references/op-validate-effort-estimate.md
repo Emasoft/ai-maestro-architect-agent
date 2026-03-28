@@ -31,15 +31,18 @@ Validate that the issue's effort label matches the actual complexity revealed by
 ## Prerequisites
 
 - GitHub CLI (`gh`) installed and authenticated
+- Target repo identified: `OWNER_REPO=<owner>/<repo>` (use `amp-project-repos.sh`)
 - Issue number to validate
 - Completed architecture analysis with component count
+
+> **Multi-Repo Rule**: All `gh` commands below MUST include `--repo "$OWNER_REPO"`.
 
 ## Procedure
 
 ### Step 1: Check Current Effort Label
 
 ```bash
-CURRENT_EFFORT=$(gh issue view $ISSUE_NUMBER --json labels --jq '.labels[].name | select(startswith("effort:"))')
+CURRENT_EFFORT=$(gh issue view $ISSUE_NUMBER --repo "$OWNER_REPO" --json labels --jq '.labels[].name | select(startswith("effort:"))')
 echo "Current effort: $CURRENT_EFFORT"
 ```
 
@@ -70,7 +73,7 @@ fi
 ### Step 4: Document Recommendation in Comment
 
 ```bash
-gh issue comment $ISSUE_NUMBER --body "## Effort Validation
+gh issue comment $ISSUE_NUMBER --repo "$OWNER_REPO" --body "## Effort Validation
 
 **Current:** \`$CURRENT_EFFORT\`
 **Recommended:** \`$RECOMMENDED_EFFORT\`
@@ -86,13 +89,13 @@ This complexity suggests \`$RECOMMENDED_EFFORT\` is more appropriate."
 ### Step 5: Update Effort Label (if change needed)
 
 ```bash
-gh issue edit $ISSUE_NUMBER --remove-label "$CURRENT_EFFORT" --add-label "$RECOMMENDED_EFFORT"
+gh issue edit $ISSUE_NUMBER --remove-label "$CURRENT_EFFORT" --add-label "$RECOMMENDED_EFFORT" --repo "$OWNER_REPO"
 ```
 
 ### Step 6: Verify Update
 
 ```bash
-gh issue view $ISSUE_NUMBER --json labels --jq '.labels[].name | select(startswith("effort:"))'
+gh issue view $ISSUE_NUMBER --repo "$OWNER_REPO" --json labels --jq '.labels[].name | select(startswith("effort:"))'
 ```
 
 ## Example
@@ -100,13 +103,15 @@ gh issue view $ISSUE_NUMBER --json labels --jq '.labels[].name | select(startswi
 **Scenario:** Issue #123 labeled `effort:s` but architecture reveals 3 components.
 
 ```bash
+OWNER_REPO="myorg/backend-api"  # Always set target repo first
+
 # Step 1: Check current effort
-CURRENT=$(gh issue view 123 --json labels --jq '.labels[].name | select(startswith("effort:"))')
+CURRENT=$(gh issue view 123 --repo "$OWNER_REPO" --json labels --jq '.labels[].name | select(startswith("effort:"))')
 echo "Current: $CURRENT"
 # Output: effort:s
 
 # Step 2: Comment with recommendation
-gh issue comment 123 --body "## Effort Validation
+gh issue comment 123 --repo "$OWNER_REPO" --body "## Effort Validation
 
 **Current:** \`effort:s\`
 **Recommended:** \`effort:m\`
@@ -114,10 +119,10 @@ gh issue comment 123 --body "## Effort Validation
 **Rationale:** Architecture analysis suggests effort:m due to 3 components affected (API, DB, Auth). Original estimate was for single-component change."
 
 # Step 3: Update effort
-gh issue edit 123 --remove-label "effort:s" --add-label "effort:m"
+gh issue edit 123 --remove-label "effort:s" --add-label "effort:m" --repo "$OWNER_REPO"
 
 # Step 4: Verify
-gh issue view 123 --json labels --jq '.labels[].name | select(startswith("effort:"))'
+gh issue view 123 --repo "$OWNER_REPO" --json labels --jq '.labels[].name | select(startswith("effort:"))'
 # Output: effort:m
 ```
 
@@ -140,6 +145,6 @@ gh issue view 123 --json labels --jq '.labels[].name | select(startswith("effort
 
 ## Notes
 
-- AMAA recommends effort changes but AMOA has final authority
+- AMAA recommends effort changes but the ORCHESTRATOR has final authority
 - Document all rationale in issue comments for transparency
 - Consider both technical complexity and unknowns/risks

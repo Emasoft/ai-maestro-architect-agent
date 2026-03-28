@@ -32,8 +32,11 @@ Create a GitHub issue to track an Architecture Decision Record (ADR) when signif
 ## Prerequisites
 
 - GitHub CLI (`gh`) installed and authenticated
+- Target repo identified: `OWNER_REPO=<owner>/<repo>` (use `amp-project-repos.sh`)
 - Decision context and options identified
 - Understanding of project's ADR numbering scheme
+
+> **Multi-Repo Rule**: All `gh` commands below MUST include `--repo "$OWNER_REPO"`. Determine the target repo BEFORE running any command.
 
 ## Procedure
 
@@ -41,7 +44,7 @@ Create a GitHub issue to track an Architecture Decision Record (ADR) when signif
 
 ```bash
 # Find highest existing ADR number
-LAST_ADR=$(gh issue list --search "ADR-" --json title --jq '[.[].title | capture("ADR-(?<num>[0-9]+)") | .num | tonumber] | max')
+LAST_ADR=$(gh issue list --repo "$OWNER_REPO" --search "ADR-" --json title --jq '[.[].title | capture("ADR-(?<num>[0-9]+)") | .num | tonumber] | max')
 NEXT_ADR=$((LAST_ADR + 1))
 echo "Next ADR: ADR-$(printf '%03d' $NEXT_ADR)"
 ```
@@ -61,6 +64,7 @@ ADR structure:
 ADR_NUMBER=$(printf '%03d' $NEXT_ADR)
 
 gh issue create \
+  --repo "$OWNER_REPO" \
   --title "[ADR-$ADR_NUMBER] $DECISION_TITLE" \
   --body "# ADR-$ADR_NUMBER: $DECISION_TITLE
 
@@ -112,7 +116,7 @@ $DECISION_STATEMENT
 
 ```bash
 # Comment on related implementation issue
-gh issue comment $RELATED_ISSUE --body "Related ADR: #$ADR_ISSUE_NUMBER
+gh issue comment $RELATED_ISSUE --repo "$OWNER_REPO" --body "Related ADR: #$ADR_ISSUE_NUMBER
 
 This implementation depends on the decision documented in [ADR-$ADR_NUMBER]."
 ```
@@ -120,7 +124,7 @@ This implementation depends on the decision documented in [ADR-$ADR_NUMBER]."
 ### Step 5: Verify ADR Created
 
 ```bash
-gh issue view $ADR_ISSUE_NUMBER
+gh issue view $ADR_ISSUE_NUMBER --repo "$OWNER_REPO"
 ```
 
 ## Example
@@ -128,13 +132,17 @@ gh issue view $ADR_ISSUE_NUMBER
 **Scenario:** Create ADR for choosing between PostgreSQL and MongoDB for user storage.
 
 ```bash
+# Step 0: Set target repo
+OWNER_REPO="myorg/backend-api"
+
 # Step 1: Find next ADR number
-LAST_ADR=$(gh issue list --search "ADR-" --json title --jq '[.[].title | capture("ADR-(?<num>[0-9]+)") | .num | tonumber] | max // 0')
+LAST_ADR=$(gh issue list --repo "$OWNER_REPO" --search "ADR-" --json title --jq '[.[].title | capture("ADR-(?<num>[0-9]+)") | .num | tonumber] | max // 0')
 NEXT_ADR=$((LAST_ADR + 1))
 ADR_NUMBER=$(printf '%03d' $NEXT_ADR)
 
 # Step 2: Create ADR issue
 gh issue create \
+  --repo "$OWNER_REPO" \
   --title "[ADR-$ADR_NUMBER] PostgreSQL vs MongoDB for user storage" \
   --body "# ADR-$ADR_NUMBER: PostgreSQL vs MongoDB for user storage
 
@@ -194,7 +202,7 @@ Use PostgreSQL for user storage.
   --label "priority:high"
 
 # Link to epic
-gh issue comment 123 --body "Related ADR: #$NEW_ADR_ISSUE
+gh issue comment 123 --repo "$OWNER_REPO" --body "Related ADR: #$NEW_ADR_ISSUE
 
 Database choice documented in ADR-$ADR_NUMBER."
 ```

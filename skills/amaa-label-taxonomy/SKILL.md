@@ -52,17 +52,20 @@ Copy this checklist and track your progress:
 
 ```bash
 # After architecture analysis of issue #123 (API + DB changes, effort upgrade)
-gh issue edit 123 --add-label "component:api" --add-label "component:database"
-gh issue edit 123 --remove-label "effort:s" --add-label "effort:m"
+# NOTE: Always specify --repo to target the correct repository
+gh issue edit 123 --add-label "component:api" --add-label "component:database" --repo "$OWNER/$REPO"
+gh issue edit 123 --remove-label "effort:s" --add-label "effort:m" --repo "$OWNER/$REPO"
 ```
+
+> **Multi-Repo Rule**: All `gh issue` commands MUST include `--repo "$OWNER/$REPO"`. Use `amp-project-repos.sh --team <teamId>` to identify the target repo first.
 
 ## Error Handling
 
 | Error | Cause | Solution |
 |-------|-------|----------|
-| `label not found` | Label does not exist | Create via `gh label create` |
+| `label not found` | Label does not exist | Create via `gh label create --repo "$OWNER/$REPO"` |
 | `permission denied` | No write access | Verify GitHub token scopes |
-| `issue not found` | Invalid issue number | Check with `gh issue list` |
+| `issue not found` | Invalid issue number | Check with `gh issue list --repo "$OWNER/$REPO"` |
 
 ## Output
 

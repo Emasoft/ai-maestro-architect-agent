@@ -42,7 +42,9 @@ Copy this checklist and track your progress:
 
 ## Examples
 
-Example: `gh issue edit 123 --remove-label "effort:s" --add-label "effort:m"` after architecture reveals higher complexity.
+Example: `gh issue edit 123 --remove-label "effort:s" --add-label "effort:m" --repo "$OWNER/$REPO"` after architecture reveals higher complexity.
+
+> **Multi-Repo Rule**: All `gh` commands MUST include `--repo "$OWNER/$REPO"`. Determine the target repo BEFORE running any gh command.
 
 ## Error Handling
 

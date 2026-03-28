@@ -91,42 +91,42 @@ Provide:
 ## Competency Index
 
 ### GitHub Actions Workflows
-- Workflow triggers -> github-actions (section: Workflow Structure)
-- Runner selection -> github-actions (section: Runners)
-- Matrix builds -> github-actions (section: Matrix Builds)
-- Secrets usage -> github-actions (section: Secrets)
-- Conditional execution -> github-actions (section: Conditional Execution)
-- Data passing between jobs -> github-actions (section: Outputs and Dependencies)
-- Reusable workflows -> github-actions (section: Reusable Workflows)
-- Release workflows -> github-actions (section: Release Workflow)
-- Debugging -> github-actions (section: Debugging)
+- Workflow triggers -> [github-actions.md](github-actions.md) (section: Workflow Structure)
+- Runner selection -> [github-actions.md](github-actions.md) (section: Runners)
+- Matrix builds -> [github-actions.md](github-actions.md) (section: Matrix Builds)
+- Secrets usage -> [github-actions.md](github-actions.md) (section: Secrets)
+- Conditional execution -> [github-actions.md](github-actions.md) (section: Conditional Execution)
+- Data passing between jobs -> [github-actions.md](github-actions.md) (section: Outputs and Dependencies)
+- Reusable workflows -> [github-actions.md](github-actions.md) (section: Reusable Workflows)
+- Release workflows -> [github-actions.md](github-actions.md) (section: Release Workflow)
+- Debugging -> [github-actions.md](github-actions.md) (section: Debugging)
 
 ### Cross-Platform Build Automation
-- Runner selection -> cross-platform-builds (section: Runner Matrix)
-- Free tier limits -> cross-platform-builds (section: Free Tier Minutes)
-- Multi-platform CI -> cross-platform-builds (section: Multi-Platform CI Workflow)
-- Matrix configuration -> cross-platform-builds (section: Complete Matrix Build)
-- Platform-specific steps -> cross-platform-builds (section: Platform-Specific Jobs)
+- Runner selection -> [cross-platform-builds.md](cross-platform-builds.md) (section: Runner Matrix)
+- Free tier limits -> [cross-platform-builds.md](cross-platform-builds.md) (section: Free Tier Minutes)
+- Multi-platform CI -> [cross-platform-builds.md](cross-platform-builds.md) (section: Multi-Platform CI Workflow)
+- Matrix configuration -> [cross-platform-builds.md](cross-platform-builds.md) (section: Complete Matrix Build)
+- Platform-specific steps -> [cross-platform-builds.md](cross-platform-builds.md) (section: Platform-Specific Jobs)
 
 ### Secret Management
-- Secret hierarchy -> secret-management (section: Secret Hierarchy)
-- Creating secrets via CLI -> secret-management (section: Creating Secrets)
-- Secrets in workflows -> secret-management (section: Using Secrets in Workflows)
-- Environment secrets -> secret-management (section: Environment Secrets)
+- Secret hierarchy -> [secret-management.md](secret-management.md) (section: Secret Hierarchy)
+- Creating secrets via CLI -> [secret-management.md](secret-management.md) (section: Creating Secrets)
+- Secrets in workflows -> [secret-management.md](secret-management.md) (section: Using Secrets in Workflows)
+- Environment secrets -> [secret-management.md](secret-management.md) (section: Environment Secrets)
 
 ### TDD Enforcement
-- Core principles -> tdd-enforcement (section: Core Principles)
-- Coverage thresholds -> tdd-enforcement (section: Coverage Requirements)
-- Python coverage -> tdd-enforcement (section: Python pytest-cov)
-- Rust coverage -> tdd-enforcement (section: Rust cargo-tarpaulin)
-- TypeScript/JS coverage -> tdd-enforcement (section: TypeScript/JavaScript vitest)
-- Go coverage -> tdd-enforcement (section: Go go test)
-- Branch protection -> tdd-enforcement (section: Branch Protection Rules)
+- Core principles -> [tdd-enforcement.md](tdd-enforcement.md) (section: Core Principles)
+- Coverage thresholds -> [tdd-enforcement.md](tdd-enforcement.md) (section: Coverage Requirements)
+- Python coverage -> [tdd-enforcement.md](tdd-enforcement.md) (section: Python pytest-cov)
+- Rust coverage -> [tdd-enforcement.md](tdd-enforcement.md) (section: Rust cargo-tarpaulin)
+- TypeScript/JS coverage -> [tdd-enforcement.md](tdd-enforcement.md) (section: TypeScript/JavaScript vitest)
+- Go coverage -> [tdd-enforcement.md](tdd-enforcement.md) (section: Go go test)
+- Branch protection -> [tdd-enforcement.md](tdd-enforcement.md) (section: Branch Protection Rules)
 
 ### Release Automation
-- Pipeline stages -> release-automation (section: Release Pipeline Stages)
-- Semantic versioning -> release-automation (section: Semantic Versioning)
-- Version bumping -> release-automation (section: Version Bumping Automation)
-- Changelog generation -> release-automation (section: Changelog Generation)
-- Complete workflow -> release-automation-part1-complete-workflow
-- Platform publishing -> release-automation-part2-platform-publishing
+- Pipeline stages -> [release-automation.md](release-automation.md) (section: Release Pipeline Stages)
+- Semantic versioning -> [release-automation.md](release-automation.md) (section: Semantic Versioning)
+- Version bumping -> [release-automation.md](release-automation.md) (section: Version Bumping Automation)
+- Changelog generation -> [release-automation.md](release-automation.md) (section: Changelog Generation)
+- Complete workflow -> [release-automation-part1-complete-workflow.md](release-automation-part1-complete-workflow.md)
+- Platform publishing -> [release-automation-part2-platform-publishing.md](release-automation-part2-platform-publishing.md)

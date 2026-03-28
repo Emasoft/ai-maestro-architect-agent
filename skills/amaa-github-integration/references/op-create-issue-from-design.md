@@ -27,9 +27,11 @@ Trigger this operation when:
 ## Prerequisites
 
 - gh CLI installed and authenticated (`gh auth status` returns success)
-- Current directory within a GitHub repository
+- Target repo identified: `OWNER_REPO=<owner>/<repo>` and `REPO_PATH=$AGENT_DIR/repos/<repo-name>` (use `amp-project-repos.sh`)
 - Design document exists with valid UUID in frontmatter
 - Write access to the repository
+
+> **Multi-Repo Rule**: All `gh` commands MUST include `--repo "$OWNER_REPO"`. All `git` commands MUST use `git -C "$REPO_PATH"`. Determine the target repo BEFORE running any command.
 
 ## Procedure
 

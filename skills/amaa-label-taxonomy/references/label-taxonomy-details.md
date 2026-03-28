@@ -109,17 +109,18 @@ When AMAA breaks down a feature:
 ### When Completing Architecture
 
 ```bash
-# Add component labels based on analysis
-gh issue edit $ISSUE_NUMBER --add-label "component:api" --add-label "component:database"
+# Add component labels based on analysis (always specify --repo)
+gh issue edit $ISSUE_NUMBER --add-label "component:api" --add-label "component:database" --repo "$OWNER_REPO"
 
 # If effort estimate needs adjustment
-gh issue edit $ISSUE_NUMBER --remove-label "effort:s" --add-label "effort:m"
+gh issue edit $ISSUE_NUMBER --remove-label "effort:s" --add-label "effort:m" --repo "$OWNER_REPO"
 ```
 
 ### When Creating Sub-Issues
 
 ```bash
 gh issue create \
+  --repo "$OWNER_REPO" \
   --title "[$PARENT_ID] API changes for $FEATURE" \
   --body "Part of #$PARENT_ISSUE" \
   --label "type:feature" \
@@ -130,7 +131,7 @@ gh issue create \
 ### When Design Changes Scope
 
 ```bash
-gh issue edit $ISSUE_NUMBER --remove-label "type:feature" --add-label "type:epic"
+gh issue edit $ISSUE_NUMBER --remove-label "type:feature" --add-label "type:epic" --repo "$OWNER_REPO"
 ```
 
 ## Quick Reference
@@ -147,14 +148,14 @@ gh issue edit $ISSUE_NUMBER --remove-label "type:feature" --add-label "type:epic
 
 ### Labels AMAA Never Sets
 
-- `assign:*` - Set by AMOA/AMCOS
+- `assign:*` - Set by ORCHESTRATOR/CHIEF-OF-STAFF
 - `status:*` - Set by working agent
-- `review:*` - Managed by AMIA
-- `priority:*` - Set by AMAMA/AMOA
+- `review:*` - Managed by integrator
+- `priority:*` - Set by MANAGER/ORCHESTRATOR
 
 ### AMAA Handoff Labels
 
-When handing off design to AMOA, AMAA should ensure:
+When handing off design to ORCHESTRATOR, AMAA should ensure:
 1. All `component:*` labels are set
 2. `effort:*` is validated
 3. Sub-issues created if `type:epic`
@@ -165,6 +166,7 @@ When creating Architecture Decision Records:
 
 ```bash
 gh issue create \
+  --repo "$OWNER_REPO" \
   --title "[ADR-001] Database choice for user storage" \
   --body "Architecture decision record..." \
   --label "type:docs" \

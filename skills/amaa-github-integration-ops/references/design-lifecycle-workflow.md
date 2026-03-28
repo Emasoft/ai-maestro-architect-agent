@@ -46,7 +46,7 @@ python scripts/amaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
 ```bash
 python scripts/amaa_design_transition.py --uuid PROJ-SPEC-... --status completed
 python scripts/amaa_github_sync_status.py --uuid PROJ-SPEC-... --comment
-gh issue close <issue-number> --comment "Design implemented"
+gh issue close <issue-number> --comment "Design implemented" --repo "$OWNER_REPO"
 ```
 
 ## Full Example

@@ -163,29 +163,31 @@ curl -s https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo ba
 ### 2.3 Run Logs and Artifact Management
 
 ```bash
+# NOTE: All gh run commands should include --repo "$OWNER_REPO"
+
 # View workflow run logs
-gh run view --log
+gh run view --log --repo "$OWNER_REPO"
 
 # View specific job logs
-gh run view <run-id> --job <job-id> --log
+gh run view <run-id> --job <job-id> --log --repo "$OWNER_REPO"
 
 # Re-run failed workflow
-gh run rerun <run-id> --failed
+gh run rerun <run-id> --failed --repo "$OWNER_REPO"
 
 # Re-run all jobs
-gh run rerun <run-id>
+gh run rerun <run-id> --repo "$OWNER_REPO"
 
 # Download workflow artifacts
-gh run download <run-id>
+gh run download <run-id> --repo "$OWNER_REPO"
 
 # Download specific artifact
-gh run download <run-id> --name <artifact-name>
+gh run download <run-id> --name <artifact-name> --repo "$OWNER_REPO"
 
 # List workflow runs
-gh run list --workflow ci.yml
+gh run list --workflow ci.yml --repo "$OWNER_REPO"
 
 # Watch workflow in progress
-gh run watch <run-id>
+gh run watch <run-id> --repo "$OWNER_REPO"
 ```
 
 ### 2.4 Secret Management Commands

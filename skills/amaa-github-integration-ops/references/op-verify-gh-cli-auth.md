@@ -73,10 +73,10 @@ Follow the prompts:
 ### Step 4: Verify Repository Access
 
 ```bash
-gh repo view
+gh repo view --repo "$OWNER_REPO"
 ```
 
-Should display current repository information.
+Should display repository information for the target repo.
 
 ## Checklist
 
@@ -86,7 +86,7 @@ Copy this checklist and track your progress:
 - [ ] If not installed, install gh CLI (see Installation section)
 - [ ] Check auth status: `gh auth status`
 - [ ] If not authenticated, run: `gh auth login`
-- [ ] Verify repository access: `gh repo view`
+- [ ] Verify repository access: `gh repo view --repo "$OWNER_REPO"`
 - [ ] Verify token has required scopes: `repo`, `workflow` (optional: `read:org`)
 
 ## Examples
@@ -178,7 +178,7 @@ winget install GitHub.cli
 
 ## Related Operations
 
-- op-create-issue-from-design - Requires gh auth
-- op-attach-design-to-issue - Requires gh auth
-- op-sync-status-to-github - Requires gh auth
-- op-monitor-github-project - Requires gh auth
+- [op-create-issue-from-design.md](op-create-issue-from-design.md) - Requires gh auth
+- [op-attach-design-to-issue.md](op-attach-design-to-issue.md) - Requires gh auth
+- [op-sync-status-to-github.md](op-sync-status-to-github.md) - Requires gh auth
+- [op-monitor-github-project.md](op-monitor-github-project.md) - Requires gh auth

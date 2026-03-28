@@ -80,7 +80,7 @@ When creating a plan, automatically:
 1. Add plan reference to GitHub issue comment:
 
 ```bash
-gh issue comment 42 --body "Implementation plan created: docs/plans/GH-42-user-auth.md"
+gh issue comment 42 --repo "$OWNER_REPO" --body "Implementation plan created: docs/plans/GH-42-user-auth.md"
 ```
 
 2. Add issue reference to plan header
@@ -88,7 +88,7 @@ gh issue comment 42 --body "Implementation plan created: docs/plans/GH-42-user-a
 3. Create checklist in issue from plan steps:
 
 ```bash
-gh issue edit 42 --body "$(cat <<'EOF'
+gh issue edit 42 --repo "$OWNER_REPO" --body "$(cat <<'EOF'
 ## Implementation Checklist
 
 - [ ] Step 1: Write tests
@@ -106,10 +106,10 @@ EOF
 When plan step completes:
 ```bash
 # Update issue checklist
-gh issue edit 42 --body "$(sed 's/- \[ \] Step 1/- [x] Step 1/' current_body.md)"
+gh issue edit 42 --repo "$OWNER_REPO" --body "$(sed 's/- \[ \] Step 1/- [x] Step 1/' current_body.md)"
 
 # Add progress comment
-gh issue comment 42 --body "Completed: Step 1 - Tests written"
+gh issue comment 42 --repo "$OWNER_REPO" --body "Completed: Step 1 - Tests written"
 ```
 
 ### GitHub → Plan
@@ -143,7 +143,7 @@ Check for:
 # Find orphan plans
 for plan in docs/plans/GH-*.md; do
   issue=$(echo $plan | grep -oP 'GH-\d+')
-  if ! gh issue view ${issue#GH-} &>/dev/null; then
+  if ! gh issue view ${issue#GH-} --repo "$OWNER_REPO" &>/dev/null; then
     echo "ORPHAN: $plan"
   fi
 done

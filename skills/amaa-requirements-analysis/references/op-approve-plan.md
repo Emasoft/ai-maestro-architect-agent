@@ -142,8 +142,8 @@ python3 ${CLAUDE_PLUGIN_ROOT}/scripts/check_plan_prerequisites.py
 # Creating Orchestration Phase state file...
 # ...
 
-# Create issues manually later
-gh issue create --title "[Module] Auth Core" --body "..." --label "module,priority-high"
+# Create issues manually later (always specify --repo)
+gh issue create --repo "$OWNER_REPO" --title "[Module] Auth Core" --body "..." --label "module,priority-high"
 ```
 
 ### Example: Failed Approval

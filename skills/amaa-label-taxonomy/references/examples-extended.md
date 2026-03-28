@@ -1,5 +1,6 @@
 # AMAA Label Taxonomy - Extended Examples
 
+> **Multi-Repo Rule**: All `gh` commands MUST include `--repo "$OWNER_REPO"`. Set `OWNER_REPO=<owner>/<repo>` before running any command.
 
 ## Table of Contents
 
@@ -13,7 +14,7 @@
 ```bash
 # Scenario: Issue #123 requires API endpoint and database schema changes
 # Action: Add component labels based on architecture breakdown
-gh issue edit 123 --add-label "component:api" --add-label "component:database"
+gh issue edit 123 --add-label "component:api" --add-label "component:database" --repo "$OWNER_REPO"
 # Result: Issue now tagged with all affected components
 ```
 
@@ -22,8 +23,8 @@ gh issue edit 123 --add-label "component:api" --add-label "component:database"
 ```bash
 # Scenario: Issue #123 labeled effort:s but architecture reveals 3 components
 # Action: Recommend effort upgrade
-gh issue comment 123 --body "Architecture analysis suggests effort:m (3 components: API, DB, Auth)"
-gh issue edit 123 --remove-label "effort:s" --add-label "effort:m"
+gh issue comment 123 --repo "$OWNER_REPO" --body "Architecture analysis suggests effort:m (3 components: API, DB, Auth)"
+gh issue edit 123 --remove-label "effort:s" --add-label "effort:m" --repo "$OWNER_REPO"
 # Result: Effort estimate now matches architecture complexity
 ```
 
@@ -33,6 +34,7 @@ gh issue edit 123 --remove-label "effort:s" --add-label "effort:m"
 # Scenario: Issue #123 is complex, needs breakdown
 # Action: Create sub-issues for each component
 gh issue create \
+  --repo "$OWNER_REPO" \
   --title "[#123] API endpoints for user authentication" \
   --body "Part of #123 - Implements REST API for auth flow" \
   --label "type:feature" \
@@ -49,6 +51,7 @@ gh issue create \
 # Scenario: Major architecture decision needs documentation
 # Action: Create ADR issue with appropriate labels
 gh issue create \
+  --repo "$OWNER_REPO" \
   --title "[ADR-005] PostgreSQL vs MongoDB for user storage" \
   --body "Evaluating database options..." \
   --label "type:docs" \

@@ -136,7 +136,7 @@ Implementation of the {module_name} module as part of plan {plan_id}.
 
 **GitHub CLI command used:**
 ```bash
-gh issue create --title "[Module] {name}" --body "{body}" --label "module,priority-{priority},status-todo"
+gh issue create --repo "$OWNER_REPO" --title "[Module] {name}" --body "{body}" --label "module,priority-{priority},status-todo"
 ```
 
 **Issue number storage:**
@@ -297,6 +297,6 @@ python3 scripts/check_plan_prerequisites.py --verbose
 # Set plan_phase_complete: true in .claude/orchestrator-plan-phase.local.md
 # Skip the GitHub Issue creation step
 
-# Issues can be created manually later via gh CLI
-gh issue create --title "[Module] Auth Core" --body "..." --label "module"
+# Issues can be created manually later via gh CLI (always specify --repo)
+gh issue create --repo "$OWNER_REPO" --title "[Module] Auth Core" --body "..." --label "module"
 ```

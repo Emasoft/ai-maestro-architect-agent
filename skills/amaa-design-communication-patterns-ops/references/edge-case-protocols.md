@@ -113,7 +113,7 @@ Orchestrator should pick up handoff file and begin module assignment.
 1. **Cache any GitHub data needed**:
    ```bash
    mkdir -p .claude/cache/github
-   gh issue list --json number,title,body,labels > .claude/cache/github/issues.json
+   gh issue list --repo "$OWNER_REPO" --json number,title,body,labels > .claude/cache/github/issues.json
    echo "$(date -Iseconds)" > .claude/cache/github/cached_at
    ```
 
@@ -161,8 +161,6 @@ Maintain local design document repository:
 ---
 
 ## 3.0 Remote Agent Unresponsive
-
-> **Governance note**: `amaa-api-researcher` and `amaa-documentation-writer` referenced below are **Claude Code Task subagents** spawned within the ARCHITECT's own session — they are NOT separate AI Maestro agents. Direct messaging to Task subagents is permitted and does not require COS routing. If these were independent AI Maestro agents in another team, messaging would need to route via COS per closed-team governance rules.
 
 ### 3.1 Detection Methods
 
