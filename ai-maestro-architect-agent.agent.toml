@@ -6,6 +6,8 @@
 name = "ai-maestro-architect-agent"
 source = "path"
 path = "agents/ai-maestro-architect-agent-main-agent.md"
+compatible-titles = ["ARCHITECT"]
+compatible-clients = ["claude-code"]
 
 [requirements]
 project_type = "library"
