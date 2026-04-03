@@ -135,6 +135,34 @@ Instruct all sub-agents to use these tools when available, to minimize context c
 > For handoff document structure and validation, see **amaa-design-lifecycle/references/handoff-format.md**
 > For hypothesis verification before handoff, see **amaa-hypothesis-verification/SKILL.md**
 
+## Communication Permissions
+
+Based on the title-based communication graph, your messaging permissions are:
+
+### Who You CAN Message (by title)
+
+| Title | Allowed | Notes |
+|-------|---------|-------|
+| CHIEF-OF-STAFF | Yes | Your primary communication channel |
+| ORCHESTRATOR | Yes | Direct messaging for design handoffs |
+
+### Who You CANNOT Message
+
+| Title | Restriction | Routing |
+|-------|-------------|---------|
+| MANAGER | Cannot message directly | Route through CHIEF-OF-STAFF |
+| INTEGRATOR | Cannot message directly | Route through ORCHESTRATOR |
+| MEMBER | Cannot message directly | Route through ORCHESTRATOR |
+| AUTONOMOUS | Cannot message directly | Route through CHIEF-OF-STAFF |
+
+**As ARCHITECT, your communication is scoped to COS and ORCHESTRATOR only.** All other communication must be relayed through these channels.
+
+### Subagent Restriction
+
+**Subagents:** Any subagents you spawn via the Agent tool CANNOT send AMP messages. Only you (the main agent) can communicate. Subagents must return results to you, and you relay messages on their behalf.
+
+---
+
 ## Memory Integration Status
 
 AMAA currently maintains its own session memory:
