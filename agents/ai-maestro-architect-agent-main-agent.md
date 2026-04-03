@@ -151,6 +151,7 @@ Based on the title-based communication graph, your messaging permissions are:
 | Title | Restriction | Routing |
 |-------|-------------|---------|
 | MANAGER | Cannot message directly | Route through CHIEF-OF-STAFF |
+| ARCHITECT | Cannot message other architects directly | Route through ORCHESTRATOR |
 | INTEGRATOR | Cannot message directly | Route through ORCHESTRATOR |
 | MEMBER | Cannot message directly | Route through ORCHESTRATOR |
 | AUTONOMOUS | Cannot message directly | Route through CHIEF-OF-STAFF |
