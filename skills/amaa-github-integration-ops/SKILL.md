@@ -1,6 +1,6 @@
 ---
 name: amaa-github-integration-ops
-description: "Use when troubleshooting GitHub integration or managing edge cases. Trigger with GitHub ops request."
+description: "Use when troubleshooting GitHub integration or managing edge cases. Trigger with GitHub ops request. Loaded by ai-maestro-architect-agent-main-agent"
 context: fork
 user-invocable: false
 agent: ai-maestro-architect-agent-main-agent

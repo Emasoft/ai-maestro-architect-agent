@@ -1,6 +1,6 @@
 ---
 name: amaa-api-research-ops
-description: "Use when needing API research scenarios or collaboration patterns. Trigger with API research ops request."
+description: "Use when needing API research scenarios or collaboration patterns. Trigger with API research ops request. Loaded by ai-maestro-architect-agent-main-agent"
 context: fork
 user-invocable: false
 agent: ai-maestro-architect-agent-main-agent

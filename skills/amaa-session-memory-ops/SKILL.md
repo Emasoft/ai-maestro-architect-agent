@@ -1,6 +1,6 @@
 ---
 name: amaa-session-memory-ops
-description: "Use when recording stack choices, constraints, or managing handoffs. Trigger with session memory ops request."
+description: "Use when recording stack choices, constraints, or managing handoffs. Trigger with session memory ops request. Loaded by ai-maestro-architect-agent-main-agent"
 context: fork
 user-invocable: false
 agent: ai-maestro-architect-agent-main-agent

@@ -1,6 +1,6 @@
 ---
 name: amaa-api-research
-description: "Use when researching external APIs, libraries, and services. Trigger with API research request or library investigation task."
+description: "Use when researching external APIs, libraries, and services. Trigger with API research request or library investigation task. Loaded by ai-maestro-architect-agent-main-agent"
 context: fork
 agent: ai-maestro-architect-agent-main-agent
 user-invocable: false

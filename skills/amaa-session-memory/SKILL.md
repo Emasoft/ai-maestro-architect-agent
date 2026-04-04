@@ -1,6 +1,6 @@
 ---
 name: amaa-session-memory
-description: "Use when persisting decisions, patterns, and constraints across sessions. Trigger with session memory or handoff request."
+description: "Use when persisting decisions, patterns, and constraints across sessions. Trigger with session memory or handoff request. Loaded by ai-maestro-architect-agent-main-agent"
 context: fork
 user-invocable: false
 agent: ai-maestro-architect-agent-main-agent

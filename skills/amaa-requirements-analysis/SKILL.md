@@ -1,6 +1,6 @@
 ---
 name: amaa-requirements-analysis
-description: "Use when managing requirements, initializing plans, or approving transitions. Trigger with requirements analysis or plan initialization request."
+description: "Use when managing requirements, initializing plans, or approving transitions. Trigger with requirements analysis or plan initialization request. Loaded by ai-maestro-architect-agent-main-agent"
 agent: ai-maestro-architect-agent-main-agent
 user-invocable: false
 context: fork

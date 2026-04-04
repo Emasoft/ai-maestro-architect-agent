@@ -1,6 +1,6 @@
 ---
 name: amaa-hypothesis-verification-ops
-description: "Use when applying multiplicity rule or formatting experiment outputs. Trigger with verification ops request."
+description: "Use when applying multiplicity rule or formatting experiment outputs. Trigger with verification ops request. Loaded by ai-maestro-architect-agent-main-agent"
 context: fork
 user-invocable: false
 agent: ai-maestro-architect-agent-main-agent

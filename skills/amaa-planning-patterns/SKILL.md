@@ -1,6 +1,6 @@
 ---
 name: amaa-planning-patterns
-description: "Use when designing architectures, identifying risks, creating roadmaps, or breaking work into tasks. Trigger with planning or architecture design request."
+description: "Use when designing architectures, identifying risks, creating roadmaps, or breaking work into tasks. Trigger with planning or architecture design request. Loaded by ai-maestro-architect-agent-main-agent"
 context: fork
 agent: ai-maestro-architect-agent-main-agent
 user-invocable: false

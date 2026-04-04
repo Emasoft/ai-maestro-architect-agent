@@ -1,6 +1,6 @@
 ---
 name: amaa-label-taxonomy-ops
-description: "Use when validating effort estimates, creating sub-issues, or ADR issues. Trigger with label taxonomy ops request."
+description: "Use when validating effort estimates, creating sub-issues, or ADR issues. Trigger with label taxonomy ops request. Loaded by ai-maestro-architect-agent-main-agent"
 context: fork
 user-invocable: false
 agent: ai-maestro-architect-agent-main-agent

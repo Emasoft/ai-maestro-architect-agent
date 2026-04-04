@@ -1,6 +1,6 @@
 ---
 name: amaa-modularization-ops
-description: "Use when analyzing dependencies, planning migration, or testing modules. Trigger with modularization ops request."
+description: "Use when analyzing dependencies, planning migration, or testing modules. Trigger with modularization ops request. Loaded by ai-maestro-architect-agent-main-agent"
 context: fork
 user-invocable: false
 agent: ai-maestro-architect-agent-main-agent

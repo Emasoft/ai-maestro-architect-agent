@@ -1,6 +1,6 @@
 ---
 name: amaa-design-lifecycle-ops
-description: "Use when applying judgment guidelines, success criteria, or handoff formats. Trigger with lifecycle ops request."
+description: "Use when applying judgment guidelines, success criteria, or handoff formats. Trigger with lifecycle ops request. Loaded by ai-maestro-architect-agent-main-agent"
 context: fork
 user-invocable: false
 agent: ai-maestro-architect-agent-main-agent
