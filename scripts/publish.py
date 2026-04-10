@@ -1,19 +1,33 @@
 #!/usr/bin/env python3
-"""Smart publish pipeline: auto-detect → test → lint → validate → consistency → bump → commit → push.
+"""Strict publish pipeline: auto-detect → test → lint → validate → consistency → bump → commit → push.
 
 Auto-detects plugin name, version, marketplace, git root, and plugin root.
 Handles subfolder plugins where git root != plugin root.
+
+**NO SKIP POLICY (enforced):**
+Every validation step (tests, lint, CPV --strict validate, version consistency)
+MUST pass with zero errors before the version bump, commit, and push are
+allowed. There are NO flags, environment variables, or configuration options
+to bypass any validation step. If a step fails, the pipeline exits with the
+failing step's exit code and no git state is changed.
+
+This is a deliberate design choice. Do NOT add `--skip-*` flags, `FORCE=1`
+overrides, or any other escape hatch — validation skipping caused a 2.5.1
+release to ship without CPV strict signoff in the past. If a validation step
+is wrong for the current release, fix the validator or fix the code, do not
+bypass the check.
 
 Usage:
   uv run python scripts/publish.py --patch            # bump patch and publish
   uv run python scripts/publish.py --minor            # bump minor and publish
   uv run python scripts/publish.py --major            # bump major and publish
-  uv run python scripts/publish.py --patch --dry-run   # preview only
-  uv run python scripts/publish.py --patch --skip-tests # skip pytest step
+  uv run python scripts/publish.py --patch --dry-run  # run every validation
+                                                      # step then stop before
+                                                      # bump/commit/push
 
 Exit codes:
-    0 - Success
-    1 - Any step failed (fail-fast)
+    0 - Success (every step passed with 0 errors)
+    1 - Any step failed (fail-fast, no partial state)
 """
 
 from __future__ import annotations
@@ -24,6 +38,8 @@ import os
 import re
 import subprocess
 import sys
+from dataclasses import dataclass, field
+from enum import Enum
 from pathlib import Path
 
 # ── ANSI colors ──────────────────────────────────────────────────────────────
@@ -149,6 +165,611 @@ def detect_default_branch(git_root: Path) -> str:
         capture_output=True, text=True, timeout=10,
     )
     return "main" if result.returncode == 0 else "master"
+
+
+# ── Language-agnostic project detection ─────────────────────────────────────
+#
+# Supports: python, nodejs (js/ts), rust, go, bash, claude-plugin.
+# A repo can be multiple kinds simultaneously — e.g. an ai-maestro plugin repo
+# is both `claude-plugin` (has .claude-plugin/plugin.json) AND `python` (has
+# pyproject.toml with pytest as a dev dependency). The detection returns the
+# primary kind + a list of secondary kinds so the dispatcher can run every
+# applicable step.
+#
+# Auto-detection rules (primary kind priority, highest first):
+#   1. claude-plugin   — .claude-plugin/plugin.json at repo root
+#   2. rust            — Cargo.toml with [package] section
+#   3. go              — go.mod with a `module` directive
+#   4. nodejs          — package.json with name+version
+#   5. python          — pyproject.toml with [project] section
+#   6. bash            — install.sh OR any *.sh under scripts/ with no other config
+#   7. unknown         — none of the above
+
+class ProjectKind(str, Enum):
+    CLAUDE_PLUGIN = "claude-plugin"
+    PYTHON = "python"
+    NODEJS = "nodejs"
+    RUST = "rust"
+    GO = "go"
+    BASH = "bash"
+    UNKNOWN = "unknown"
+
+
+@dataclass
+class ProjectInfo:
+    """Auto-detected project metadata. `kind` is the primary language/ecosystem;
+    `also` lists co-existing kinds (e.g. a claude-plugin repo with pyproject.toml)."""
+    root: Path
+    kind: ProjectKind
+    name: str
+    version: str
+    description: str = ""
+    also: list[ProjectKind] = field(default_factory=list)
+
+    @property
+    def all_kinds(self) -> list[ProjectKind]:
+        """Primary + secondary kinds, deduplicated."""
+        seen: list[ProjectKind] = [self.kind]
+        for k in self.also:
+            if k not in seen:
+                seen.append(k)
+        return seen
+
+    def has_kind(self, kind: ProjectKind) -> bool:
+        return kind in self.all_kinds
+
+
+def _has_claude_plugin(root: Path) -> bool:
+    return (root / ".claude-plugin" / "plugin.json").exists()
+
+
+def _has_rust(root: Path) -> bool:
+    cargo = root / "Cargo.toml"
+    if not cargo.exists():
+        return False
+    try:
+        return "[package]" in cargo.read_text(encoding="utf-8")
+    except Exception:
+        return False
+
+
+def _has_go(root: Path) -> bool:
+    gomod = root / "go.mod"
+    if not gomod.exists():
+        return False
+    try:
+        return gomod.read_text(encoding="utf-8").lstrip().startswith("module ")
+    except Exception:
+        return False
+
+
+def _has_nodejs(root: Path) -> bool:
+    pj = root / "package.json"
+    if not pj.exists():
+        return False
+    try:
+        data = json.loads(pj.read_text(encoding="utf-8"))
+        return isinstance(data, dict) and "name" in data
+    except Exception:
+        return False
+
+
+def _has_python(root: Path) -> bool:
+    pp = root / "pyproject.toml"
+    if not pp.exists():
+        return False
+    try:
+        content = pp.read_text(encoding="utf-8")
+        return "[project]" in content or "[tool.poetry]" in content
+    except Exception:
+        return False
+
+
+def _has_bash(root: Path) -> bool:
+    """Heuristic: has install.sh or any *.sh under scripts/."""
+    if (root / "install.sh").exists():
+        return True
+    scripts = root / "scripts"
+    if scripts.is_dir() and any(scripts.glob("*.sh")):
+        return True
+    return False
+
+
+def detect_project(root: Path) -> ProjectInfo:
+    """Auto-detect project type and metadata from root config files."""
+    kinds: list[ProjectKind] = []
+    if _has_claude_plugin(root):
+        kinds.append(ProjectKind.CLAUDE_PLUGIN)
+    if _has_rust(root):
+        kinds.append(ProjectKind.RUST)
+    if _has_go(root):
+        kinds.append(ProjectKind.GO)
+    if _has_nodejs(root):
+        kinds.append(ProjectKind.NODEJS)
+    if _has_python(root):
+        kinds.append(ProjectKind.PYTHON)
+    if _has_bash(root) and not kinds:
+        kinds.append(ProjectKind.BASH)
+    if not kinds:
+        kinds.append(ProjectKind.UNKNOWN)
+
+    primary = kinds[0]
+    name, version, desc = _read_project_metadata(root, primary)
+    # For claude-plugin, also read pyproject to confirm python ecosystem
+    # without changing the primary kind.
+    if primary == ProjectKind.CLAUDE_PLUGIN and _has_python(root) and ProjectKind.PYTHON not in kinds:
+        kinds.append(ProjectKind.PYTHON)
+    if primary == ProjectKind.CLAUDE_PLUGIN and _has_bash(root) and ProjectKind.BASH not in kinds:
+        kinds.append(ProjectKind.BASH)
+
+    return ProjectInfo(
+        root=root,
+        kind=primary,
+        name=name,
+        version=version,
+        description=desc,
+        also=[k for k in kinds if k != primary],
+    )
+
+
+def _read_project_metadata(root: Path, kind: ProjectKind) -> tuple[str, str, str]:
+    """Return (name, version, description) for the given project kind.
+    Unknown fields default to empty strings."""
+    if kind == ProjectKind.CLAUDE_PLUGIN:
+        pj = root / ".claude-plugin" / "plugin.json"
+        try:
+            d = json.loads(pj.read_text(encoding="utf-8"))
+            return (
+                str(d.get("name", "unknown")),
+                str(d.get("version", "0.0.0")),
+                str(d.get("description", "")),
+            )
+        except Exception:
+            return ("unknown", "0.0.0", "")
+
+    if kind == ProjectKind.NODEJS:
+        pj = root / "package.json"
+        try:
+            d = json.loads(pj.read_text(encoding="utf-8"))
+            return (
+                str(d.get("name", "unknown")),
+                str(d.get("version", "0.0.0")),
+                str(d.get("description", "")),
+            )
+        except Exception:
+            return ("unknown", "0.0.0", "")
+
+    if kind == ProjectKind.PYTHON:
+        pp = root / "pyproject.toml"
+        try:
+            content = pp.read_text(encoding="utf-8")
+            name = _toml_str(content, "project", "name") or _toml_str(content, "tool.poetry", "name") or "unknown"
+            ver = _toml_str(content, "project", "version") or _toml_str(content, "tool.poetry", "version") or "0.0.0"
+            desc = _toml_str(content, "project", "description") or _toml_str(content, "tool.poetry", "description") or ""
+            return (name, ver, desc)
+        except Exception:
+            return ("unknown", "0.0.0", "")
+
+    if kind == ProjectKind.RUST:
+        cargo = root / "Cargo.toml"
+        try:
+            content = cargo.read_text(encoding="utf-8")
+            name = _toml_str(content, "package", "name") or "unknown"
+            ver = _toml_str(content, "package", "version") or "0.0.0"
+            desc = _toml_str(content, "package", "description") or ""
+            return (name, ver, desc)
+        except Exception:
+            return ("unknown", "0.0.0", "")
+
+    if kind == ProjectKind.GO:
+        gomod = root / "go.mod"
+        try:
+            content = gomod.read_text(encoding="utf-8")
+            m = re.search(r"^module\s+(\S+)", content, re.MULTILINE)
+            name = m.group(1).split("/")[-1] if m else "unknown"
+            # Go modules version via git tags; read latest vX.Y.Z tag if present
+            return (name, _git_latest_semver_tag(root), "")
+        except Exception:
+            return ("unknown", "0.0.0", "")
+
+    if kind == ProjectKind.BASH:
+        # Fallback: use the git repo directory name and the latest semver tag
+        return (root.name, _git_latest_semver_tag(root), "")
+
+    return ("unknown", "0.0.0", "")
+
+
+def _toml_str(content: str, section: str, key: str) -> str | None:
+    """Very small TOML string extractor — tolerates our own plugin repos without
+    pulling in a full tomllib dependency (tomllib is stdlib on 3.11+ so we can
+    actually use it, but this helper works on any Python)."""
+    try:
+        import tomllib  # type: ignore[attr-defined]
+        data = tomllib.loads(content)
+        cursor: object = data
+        for part in section.split("."):
+            if isinstance(cursor, dict):
+                cursor = cursor.get(part, {})
+            else:
+                return None
+        if isinstance(cursor, dict):
+            v = cursor.get(key)
+            if isinstance(v, str):
+                return v
+        return None
+    except Exception:
+        # Fallback regex (best-effort) for Python < 3.11
+        pattern = rf'^\s*{re.escape(key)}\s*=\s*["\']([^"\']+)["\']'
+        for m in re.finditer(pattern, content, re.MULTILINE):
+            return m.group(1)
+        return None
+
+
+def _git_latest_semver_tag(root: Path) -> str:
+    """Return the latest vX.Y.Z git tag, or 0.0.0 if none."""
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(root), "tag", "--list", "v[0-9]*.[0-9]*.[0-9]*", "--sort=-version:refname"],
+            capture_output=True, text=True, timeout=10,
+        )
+        for line in result.stdout.splitlines():
+            line = line.strip().lstrip("v")
+            if re.match(r"^\d+\.\d+\.\d+$", line):
+                return line
+    except Exception:
+        pass
+    return "0.0.0"
+
+
+# ── Per-language test / lint / bump dispatchers ─────────────────────────────
+
+
+def language_test_step(info: ProjectInfo) -> None:
+    """Run every applicable language's test suite. Mandatory — any failure
+    propagates via run()'s sys.exit. A no-op is only allowed if no test
+    infrastructure exists for any detected language."""
+    ran_any = False
+
+    # Python (both claude-plugin repos with pyproject AND pure python repos)
+    if info.has_kind(ProjectKind.PYTHON) or info.kind == ProjectKind.CLAUDE_PLUGIN:
+        tests_dir = info.root / "tests"
+        if tests_dir.exists() and any(tests_dir.rglob("test_*.py")):
+            run(
+                ["uv", "run", "--with", "pytest", "pytest", "tests/", "-x", "-q", "--tb=short"],
+                cwd=info.root,
+            )
+            ran_any = True
+            print(f"{GREEN}ok Python tests passed{NC}")
+
+    if info.has_kind(ProjectKind.NODEJS):
+        pj = info.root / "package.json"
+        try:
+            data = json.loads(pj.read_text(encoding="utf-8"))
+            scripts = data.get("scripts", {}) if isinstance(data, dict) else {}
+            if "test" in scripts:
+                # Prefer pnpm → yarn → npm based on lockfile
+                if (info.root / "pnpm-lock.yaml").exists():
+                    run(["pnpm", "test"], cwd=info.root)
+                elif (info.root / "yarn.lock").exists():
+                    run(["yarn", "test"], cwd=info.root)
+                else:
+                    run(["npm", "test"], cwd=info.root)
+                ran_any = True
+                print(f"{GREEN}ok Node.js tests passed{NC}")
+        except Exception:
+            pass
+
+    if info.has_kind(ProjectKind.RUST):
+        run(["cargo", "test"], cwd=info.root)
+        ran_any = True
+        print(f"{GREEN}ok Rust tests passed{NC}")
+
+    if info.has_kind(ProjectKind.GO):
+        run(["go", "test", "./..."], cwd=info.root)
+        ran_any = True
+        print(f"{GREEN}ok Go tests passed{NC}")
+
+    if info.has_kind(ProjectKind.BASH):
+        bats_dir = info.root / "tests"
+        if bats_dir.exists() and any(bats_dir.rglob("*.bats")):
+            run(["bats", "tests/"], cwd=info.root)
+            ran_any = True
+            print(f"{GREEN}ok Bats tests passed{NC}")
+
+    if not ran_any:
+        print(
+            f"{YELLOW}! No tests found for any detected ecosystem "
+            f"({', '.join(k.value for k in info.all_kinds)}). Step is a "
+            f"no-op but this project SHOULD grow a test suite — consider "
+            f"adding one before the next version.{NC}"
+        )
+
+
+def language_lint_step(info: ProjectInfo) -> None:
+    """Run every applicable language's native linter. Any failure exits."""
+    if info.has_kind(ProjectKind.PYTHON) or info.kind == ProjectKind.CLAUDE_PLUGIN:
+        # Ruff is the project's canonical Python linter (declared in dev deps)
+        if (info.root / "pyproject.toml").exists():
+            run(["uv", "run", "--with", "ruff", "ruff", "check", "."], cwd=info.root)
+            print(f"{GREEN}ok ruff passed{NC}")
+
+    if info.has_kind(ProjectKind.NODEJS):
+        pj = info.root / "package.json"
+        try:
+            data = json.loads(pj.read_text(encoding="utf-8"))
+            scripts = data.get("scripts", {}) if isinstance(data, dict) else {}
+            if "lint" in scripts:
+                if (info.root / "pnpm-lock.yaml").exists():
+                    run(["pnpm", "run", "lint"], cwd=info.root)
+                elif (info.root / "yarn.lock").exists():
+                    run(["yarn", "lint"], cwd=info.root)
+                else:
+                    run(["npm", "run", "lint"], cwd=info.root)
+                print(f"{GREEN}ok Node.js lint passed{NC}")
+        except Exception:
+            pass
+
+    if info.has_kind(ProjectKind.RUST):
+        run(["cargo", "clippy", "--", "-D", "warnings"], cwd=info.root)
+        print(f"{GREEN}ok cargo clippy passed{NC}")
+
+    if info.has_kind(ProjectKind.GO):
+        run(["go", "vet", "./..."], cwd=info.root)
+        print(f"{GREEN}ok go vet passed{NC}")
+
+    if info.has_kind(ProjectKind.BASH):
+        # ShellCheck every shell script under scripts/
+        scripts = info.root / "scripts"
+        if scripts.is_dir():
+            shell_files = sorted(scripts.rglob("*.sh"))
+            if shell_files:
+                run(["shellcheck", *[str(p) for p in shell_files]], cwd=info.root)
+                print(f"{GREEN}ok shellcheck passed{NC}")
+
+
+def language_bump_version(info: ProjectInfo, new_version: str) -> list[tuple[bool, str]]:
+    """Bump version in every applicable config file for the detected kinds.
+    Returns a list of (ok, message) tuples."""
+    results: list[tuple[bool, str]] = []
+
+    if info.has_kind(ProjectKind.CLAUDE_PLUGIN):
+        results.append(update_plugin_json(info.root, new_version))
+
+    if info.has_kind(ProjectKind.PYTHON):
+        results.append(update_pyproject_toml(info.root, new_version))
+        results.extend(update_python_versions(info.root, new_version))
+
+    if info.has_kind(ProjectKind.NODEJS):
+        results.append(_update_package_json(info.root, new_version))
+
+    if info.has_kind(ProjectKind.RUST):
+        results.append(_update_cargo_toml(info.root, new_version))
+
+    # GO uses git tags — handled at push time, no file update.
+    # BASH has no version file — handled at git-tag time.
+
+    return results
+
+
+def _update_package_json(root: Path, new_version: str) -> tuple[bool, str]:
+    path = root / "package.json"
+    if not path.exists():
+        return True, "package.json not found (skipped)"
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        old = data.get("version", "unknown")
+        data["version"] = new_version
+        path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+        return True, f"package.json: {old} -> {new_version}"
+    except Exception as e:
+        return False, f"package.json error: {e}"
+
+
+def _update_cargo_toml(root: Path, new_version: str) -> tuple[bool, str]:
+    path = root / "Cargo.toml"
+    if not path.exists():
+        return True, "Cargo.toml not found (skipped)"
+    try:
+        content = path.read_text(encoding="utf-8")
+        # Only update the [package] version, not [dependencies]
+        lines = content.splitlines(keepends=True)
+        out = []
+        in_package = False
+        old = None
+        for line in lines:
+            s = line.strip()
+            if s.startswith("[") and s.endswith("]"):
+                in_package = (s == "[package]")
+            if in_package:
+                m = re.match(r'^(version\s*=\s*")(\d+\.\d+\.\d+)(".*)$', line)
+                if m:
+                    old = m.group(2)
+                    out.append(f"{m.group(1)}{new_version}{m.group(3)}\n")
+                    continue
+            out.append(line)
+        if old is None:
+            return True, "Cargo.toml has no [package] version (skipped)"
+        path.write_text("".join(out), encoding="utf-8")
+        return True, f"Cargo.toml: {old} -> {new_version}"
+    except Exception as e:
+        return False, f"Cargo.toml error: {e}"
+
+
+# ── git-cliff integration (mandatory changelog + release notes) ─────────────
+#
+# Every version bump MUST produce an updated CHANGELOG.md via git-cliff AND
+# a release notes file that can be attached to the GitHub release. If
+# git-cliff isn't installed, the pipeline fails with clear install
+# instructions — this is a hard requirement, not a soft-skip.
+
+def ensure_git_cliff_available() -> None:
+    """Fail fast if git-cliff is not on PATH."""
+    result = subprocess.run(["git-cliff", "--version"], capture_output=True, text=True)
+    if result.returncode != 0:
+        print(
+            f"{RED}✗ git-cliff is not installed.{NC}\n"
+            f"  Install with one of:\n"
+            f"    cargo install git-cliff\n"
+            f"    brew install git-cliff\n"
+            f"    npm install -g git-cliff\n"
+            f"  See https://git-cliff.org/docs/installation/ for details.\n"
+            f"  git-cliff is MANDATORY for strict publishing. NO bypass.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+
+def ensure_cliff_config(root: Path) -> None:
+    """Create a default cliff.toml if the repo doesn't have one.
+    The default config follows conventional-commits grouping."""
+    cliff_toml = root / "cliff.toml"
+    if cliff_toml.exists():
+        return
+    default = '''# git-cliff config — auto-generated by publish.py
+# https://git-cliff.org/docs/configuration
+
+[changelog]
+header = """
+# Changelog
+
+All notable changes to this project will be documented in this file.
+"""
+body = """
+{% if version %}\
+    ## [{{ version | trim_start_matches(pat=\"v\") }}] - {{ timestamp | date(format=\"%Y-%m-%d\") }}
+{% else %}\
+    ## [Unreleased]
+{% endif %}\
+{% for group, commits in commits | group_by(attribute=\"group\") %}
+    ### {{ group | upper_first }}
+    {% for commit in commits %}
+        - {% if commit.breaking %}[**breaking**] {% endif %}{{ commit.message | upper_first }}\
+    {% endfor %}
+{% endfor %}\n
+"""
+trim = true
+footer = ""
+
+[git]
+conventional_commits = true
+filter_unconventional = true
+split_commits = false
+commit_parsers = [
+  { message = "^feat", group = "Features" },
+  { message = "^fix", group = "Bug Fixes" },
+  { message = "^doc", group = "Documentation" },
+  { message = "^docs", group = "Documentation" },
+  { message = "^perf", group = "Performance" },
+  { message = "^refactor", group = "Refactor" },
+  { message = "^style", group = "Styling" },
+  { message = "^test", group = "Tests" },
+  { message = "^chore\\\\(release\\\\): prepare for", skip = true },
+  { message = "^chore", group = "Miscellaneous" },
+  { message = "^security", group = "Security" },
+  { body = ".*security", group = "Security" },
+]
+protect_breaking_commits = false
+filter_commits = false
+tag_pattern = "v[0-9].*"
+skip_tags = "v0.0.0"
+ignore_tags = ""
+topo_order = false
+sort_commits = "oldest"
+'''
+    cliff_toml.write_text(default, encoding="utf-8")
+    print(f"{YELLOW}! Created default cliff.toml at {cliff_toml}{NC}")
+
+
+def run_git_cliff(root: Path, new_version: str) -> str:
+    """Run git-cliff to update CHANGELOG.md and extract release notes for the
+    new version. Returns the release notes body (used for the GitHub release).
+    Fails the pipeline on any git-cliff error.
+
+    Behavior:
+      - If CHANGELOG.md exists: PREPEND the new unreleased entry to the top
+        (preserves hand-written historical entries and detailed context).
+      - If CHANGELOG.md does not exist: generate a fresh full changelog from
+        git history (--output).
+      - Release notes (latest-only, header stripped) are extracted separately
+        and written to .git-cliff-release-notes.md so a subsequent
+        `gh release create --notes-file` can consume them.
+    """
+    changelog = root / "CHANGELOG.md"
+
+    if changelog.exists():
+        # Safely add only the NEW unreleased section to the top of the
+        # existing file. --prepend is additive, never destructive.
+        run(
+            [
+                "git-cliff",
+                "--tag", f"v{new_version}",
+                "--unreleased",
+                "--prepend", "CHANGELOG.md",
+            ],
+            cwd=root,
+        )
+        print(f"{GREEN}ok CHANGELOG.md updated (prepended new v{new_version} entry){NC}")
+    else:
+        # Fresh generation — full history from the beginning of the repo.
+        run(
+            [
+                "git-cliff",
+                "--tag", f"v{new_version}",
+                "--output", "CHANGELOG.md",
+            ],
+            cwd=root,
+        )
+        print(f"{GREEN}ok CHANGELOG.md created from full git history{NC}")
+
+    # Extract the latest-only body for the GitHub release notes. We use
+    # `--strip header` to drop the repo header so only the version section
+    # is left, and `--unreleased` so it's the entry that corresponds to the
+    # new tag (which git-cliff treats as unreleased until the tag actually
+    # exists in git).
+    result = subprocess.run(
+        [
+            "git-cliff",
+            "--tag", f"v{new_version}",
+            "--unreleased",
+            "--strip", "header",
+        ],
+        cwd=root, capture_output=True, text=True, timeout=60,
+    )
+    if result.returncode != 0:
+        print(
+            f"{RED}✗ git-cliff release-notes extraction failed "
+            f"(exit {result.returncode}):{NC}\n{result.stderr}",
+            file=sys.stderr,
+        )
+        sys.exit(result.returncode)
+    notes = result.stdout.strip()
+    # Write notes to a dedicated file for later use (gh release create --notes-file).
+    # This file is gitignored via publish.py itself adding it to .gitignore on
+    # first run — see ensure_cliff_gitignore below.
+    notes_path = root / ".git-cliff-release-notes.md"
+    notes_path.write_text(notes + "\n", encoding="utf-8")
+    return notes
+
+
+def ensure_cliff_gitignore(root: Path) -> None:
+    """Add the release-notes scratch file to .gitignore if not already there.
+    The CHANGELOG.md file IS committed, but the scratch release notes file
+    is just a publish-time artifact."""
+    gitignore = root / ".gitignore"
+    marker = ".git-cliff-release-notes.md"
+    if gitignore.exists():
+        content = gitignore.read_text(encoding="utf-8")
+        if marker in content:
+            return
+        if not content.endswith("\n"):
+            content += "\n"
+        content += f"\n# git-cliff scratch — ephemeral release notes between bump and push\n{marker}\n"
+        gitignore.write_text(content, encoding="utf-8")
+    else:
+        gitignore.write_text(
+            f"# git-cliff scratch — ephemeral release notes between bump and push\n{marker}\n",
+            encoding="utf-8",
+        )
 
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
@@ -369,29 +990,147 @@ def do_bump(plugin_root: Path, new_version: str, dry_run: bool = False) -> bool:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Smart publish pipeline: auto-detect -> test -> lint -> validate -> bump -> commit -> push",
+        description=(
+            "Strict publish pipeline: auto-detect -> test -> lint -> "
+            "CPV strict validate -> consistency -> bump -> commit -> push. "
+            "NO validation steps can be skipped. Every check must pass with "
+            "zero errors before the release is published."
+        ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
   %(prog)s --patch              # 1.0.0 -> 1.0.1, commit, push
   %(prog)s --minor              # 1.0.0 -> 1.1.0, commit, push
   %(prog)s --major              # 1.0.0 -> 2.0.0, commit, push
-  %(prog)s --patch --dry-run    # preview only, no changes
-  %(prog)s --patch --skip-tests # skip pytest step
+  %(prog)s --patch --dry-run    # run every validation step fully, then
+                                # stop before bump/commit/push
         """,
     )
     bump_group = parser.add_mutually_exclusive_group(required=True)
     bump_group.add_argument("--major", action="store_true", help="Bump major version")
     bump_group.add_argument("--minor", action="store_true", help="Bump minor version")
     bump_group.add_argument("--patch", action="store_true", help="Bump patch version")
-    parser.add_argument("--dry-run", action="store_true", help="Preview without making changes")
-    parser.add_argument("--skip-tests", action="store_true", help="Skip pytest step")
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help=(
+            "Run every validation step fully, then stop before the version "
+            "bump, commit, and push. Does NOT skip any check."
+        ),
+    )
     args = parser.parse_args()
+
+    # ── Self-integrity check ──
+    # Scan this script's own source for forbidden bypass patterns. If someone
+    # re-introduces a --skip-* flag, an `if SKIP_...:` branch, a `try/except:
+    # pass` around a validation call, or commented-out `# run([...lint...])`,
+    # this check fails before the pipeline runs. Makes the no-skip policy
+    # self-enforcing against future edits.
+    try:
+        source = Path(__file__).read_text(encoding="utf-8")
+    except Exception as err:
+        print(f"{RED}✗ Self-integrity check: cannot read own source: {err}{NC}", file=sys.stderr)
+        return 1
+
+    forbidden_source_patterns = [
+        ("--skip-tests",       "bypass flag"),
+        ("--skip-lint",        "bypass flag"),
+        ("--skip-validate",    "bypass flag"),
+        ("--skip-checks",      "bypass flag"),
+        ("--skip-validation",  "bypass flag"),
+        ("--no-validate",      "bypass flag"),
+        ("--force-publish",    "bypass flag"),
+        ("--bypass",           "bypass flag"),
+        ("skip_tests",         "skip variable"),
+        ("skip_lint",          "skip variable"),
+        ("skip_validate",      "skip variable"),
+        ("skip_validation",    "skip variable"),
+    ]
+    # Allow forbidden strings INSIDE the two authorized lists (this one and
+    # the env-var blocklist above) — those are the allowlists themselves.
+    # Everywhere else they're forbidden.
+    lines = source.splitlines()
+    in_forbidden_env_block = False
+    in_forbidden_source_block = False
+    for idx, line in enumerate(lines, start=1):
+        stripped = line.strip()
+        if "forbidden_bypass_env_vars = [" in stripped:
+            in_forbidden_env_block = True
+            continue
+        if "forbidden_source_patterns = [" in stripped:
+            in_forbidden_source_block = True
+            continue
+        if in_forbidden_env_block:
+            if stripped.startswith("]"):
+                in_forbidden_env_block = False
+            continue
+        if in_forbidden_source_block:
+            if stripped.startswith("]"):
+                in_forbidden_source_block = False
+            continue
+        # docstring / comment lines that warn about bypasses are allowed
+        # when they explicitly forbid the pattern (contain "NO", "MUST NOT",
+        # "do not", "forbidden", "bypass" etc.)
+        stripped_lower = stripped.lower()
+        is_prohibition_comment = (
+            stripped.startswith("#")
+            or stripped.startswith('"""')
+            or stripped.startswith("'''")
+            or '"""' in stripped
+        ) and any(kw in stripped_lower for kw in (
+            "no skip", "no bypass", "must not", "do not", "forbidden",
+            "rejected", "forbids", "no-skip", "no-bypass", "no escape",
+            "cannot be skipped", "caused a 2.5.1", "no flag",
+        ))
+        if is_prohibition_comment:
+            continue
+        for pattern, kind in forbidden_source_patterns:
+            if pattern in line:
+                print(
+                    f"{RED}✗ Self-integrity check: forbidden {kind} "
+                    f"'{pattern}' found at line {idx}:{NC}\n"
+                    f"  {line}\n"
+                    f"  Strict publish forbids validation bypasses. Remove the "
+                    f"pattern or move it into the authorized blocklist with a "
+                    f"clear prohibition comment.",
+                    file=sys.stderr,
+                )
+                return 1
+
+    # ── Reject any bypass attempt via environment variables ──
+    # This is a deliberate belt-and-suspenders check: even if someone adds a
+    # skip flag in the future by editing this script, these env var bypasses
+    # stay rejected. There is no escape hatch.
+    forbidden_bypass_env_vars = [
+        "SKIP_TESTS",
+        "SKIP_LINT",
+        "SKIP_VALIDATE",
+        "SKIP_CHECKS",
+        "SKIP_VALIDATION",
+        "PUBLISH_SKIP",
+        "PUBLISH_FORCE",
+        "CPV_SKIP",
+        "CPV_NO_STRICT",
+        "FORCE_PUBLISH",
+        "NO_VALIDATION",
+        "BYPASS_VALIDATION",
+    ]
+    for var in forbidden_bypass_env_vars:
+        if os.environ.get(var):
+            print(
+                f"{RED}✗ Validation bypass attempt rejected: environment "
+                f"variable '{var}' is set.{NC}\n"
+                f"  Strict publish has NO skip options. If a validation step "
+                f"is wrong, fix the validator or fix the code. Do not bypass "
+                f"the check. Unset {var} and retry.",
+                file=sys.stderr,
+            )
+            return 1
 
     bump_type = "major" if args.major else "minor" if args.minor else "patch"
 
     # ── Step 0: Auto-detect everything ──
-    print(f"\n{BLUE}{BOLD}=== Smart Publish Pipeline ==={NC}")
+    print(f"\n{BLUE}{BOLD}=== Strict Publish Pipeline (no-skip policy) ==={NC}")
     git_root = detect_git_root()
     plugin_root = detect_plugin_root()
     plugin_info = detect_plugin_info(plugin_root)
@@ -427,36 +1166,57 @@ Examples:
             return 1
     print(f"{GREEN}ok Working tree clean{NC}")
 
-    # ── Step 2: Tests ──
-    if not args.skip_tests:
-        tests_dir = plugin_root / "tests"
-        if tests_dir.exists() and any(tests_dir.rglob("test_*.py")):
-            print(f"\n{BLUE}=== Step 2: Run tests ==={NC}")
-            run(["python3", "-m", "pytest", "tests/", "-x", "-q", "--tb=short"], cwd=plugin_root)
-            print(f"{GREEN}ok All tests passed{NC}")
-        else:
-            print(f"\n{YELLOW}=== Step 2: Tests skipped (no tests/ directory or test files) ==={NC}")
+    # ── Step 1.5: Language-agnostic project detection ──
+    info = detect_project(plugin_root)
+    kinds_str = info.kind.value + (
+        f" (+ {', '.join(k.value for k in info.also)})" if info.also else ""
+    )
+    print(f"  Detected project kind: {BOLD}{kinds_str}{NC}")
+    print(f"  Detected project name: {info.name}")
+    print(f"  Detected version:      {info.version}")
+
+    # ── Step 2: Tests (MANDATORY per-language, no skip) ──
+    # Runs every applicable language's native test suite. Any failure exits.
+    # A no-op is only allowed if no test infrastructure exists for any
+    # detected ecosystem.
+    print(f"\n{BLUE}=== Step 2: Language-native tests (mandatory) ==={NC}")
+    language_test_step(info)
+
+    # ── Step 3: Language-native lint (MANDATORY, zero errors) ──
+    # ruff for Python, cargo clippy for Rust, go vet for Go, package.json
+    # `lint` script for Node, shellcheck for bash. Any failure exits.
+    print(f"\n{BLUE}=== Step 3: Language-native lint (mandatory) ==={NC}")
+    language_lint_step(info)
+
+    # ── Step 4: CPV lint — applies when the repo is a claude-plugin ──
+    # cpv-remote-validate lint runs markdownlint/ruff/mypy/yamllint/toml
+    # across the whole tree. Any non-zero exit fails the pipeline. NO bypass.
+    if info.has_kind(ProjectKind.CLAUDE_PLUGIN):
+        print(f"\n{BLUE}=== Step 4: CPV lint (mandatory for claude plugins) ==={NC}")
+        run([
+            "uvx", "--from", "git+https://github.com/Emasoft/claude-plugins-validation",
+            "--with", "pyyaml", "cpv-remote-validate", "lint", str(plugin_root),
+        ], cwd=git_root)
+        print(f"{GREEN}ok CPV lint passed with zero errors{NC}")
     else:
-        print(f"\n{YELLOW}=== Step 2: Tests skipped (--skip-tests) ==={NC}")
+        print(f"\n{YELLOW}=== Step 4: CPV lint — skipped (not a claude plugin){NC}")
 
-    # ── Step 3: Lint via CPV remote launcher ──
-    print(f"\n{BLUE}=== Step 3: Lint files (via cpv-remote-validate) ==={NC}")
-    run([
-        "uvx", "--from", "git+https://github.com/Emasoft/claude-plugins-validation",
-        "--with", "pyyaml", "cpv-remote-validate", "lint", str(plugin_root),
-    ], cwd=git_root)
-    print(f"{GREEN}ok Linting passed{NC}")
+    # ── Step 5: CPV strict plugin validation ──
+    # Runs the full plugin validator in --strict mode. NO bypass. NO skip.
+    # If the strict ruleset flags something, fix the plugin — do not lower
+    # the strictness or work around the validator.
+    if info.has_kind(ProjectKind.CLAUDE_PLUGIN):
+        print(f"\n{BLUE}=== Step 5: CPV strict validate plugin (mandatory) ==={NC}")
+        run([
+            "uvx", "--from", "git+https://github.com/Emasoft/claude-plugins-validation",
+            "--with", "pyyaml", "cpv-remote-validate", "plugin", str(plugin_root), "--strict",
+        ], cwd=git_root)
+        print(f"{GREEN}ok CPV strict validation passed{NC}")
+    else:
+        print(f"\n{YELLOW}=== Step 5: CPV strict validate — skipped (not a claude plugin){NC}")
 
-    # ── Step 4: Full CPV validation via remote launcher (--strict) ──
-    print(f"\n{BLUE}=== Step 4: CPV Validate plugin (--strict) ==={NC}")
-    run([
-        "uvx", "--from", "git+https://github.com/Emasoft/claude-plugins-validation",
-        "--with", "pyyaml", "cpv-remote-validate", "plugin", str(plugin_root), "--strict",
-    ], cwd=git_root)
-    print(f"{GREEN}ok CPV validation passed (--strict){NC}")
-
-    # ── Step 5: Version consistency ──
-    print(f"\n{BLUE}=== Step 5: Check version consistency ==={NC}")
+    # ── Step 6: Version consistency ──
+    print(f"\n{BLUE}=== Step 6: Check version consistency ==={NC}")
     ok, msg = check_version_consistency(plugin_root)
     print(f"  {msg}")
     if not ok:
@@ -464,38 +1224,135 @@ Examples:
         return 1
     print(f"{GREEN}ok Version consistency OK{NC}")
 
-    # ── Step 6: Bump version ──
-    current = get_current_version(plugin_root)
-    if current is None:
-        print(f"{RED}x Cannot read current version from plugin.json{NC}", file=sys.stderr)
+    # ── Step 7: git-cliff availability pre-check ──
+    # git-cliff is mandatory because every release MUST produce a CHANGELOG
+    # entry and release notes. Pre-check here so failures happen BEFORE any
+    # file mutation.
+    print(f"\n{BLUE}=== Step 7: git-cliff availability check (mandatory) ==={NC}")
+    ensure_git_cliff_available()
+    print(f"{GREEN}ok git-cliff is installed{NC}")
+
+    # ── Step 8: Compute new version ──
+    current = info.version
+    if not parse_semver(current):
+        print(f"{RED}x Current version '{current}' is not valid semver{NC}", file=sys.stderr)
         return 1
 
     new_version = bump_semver(current, bump_type)
     if new_version is None:
-        print(f"{RED}x Current version '{current}' is not valid semver{NC}", file=sys.stderr)
+        print(f"{RED}x bump_semver failed for '{current}' ({bump_type}){NC}", file=sys.stderr)
         return 1
 
-    print(f"\n{BLUE}=== Step 6: Bump version ({bump_type}: {current} -> {new_version}) ==={NC}")
-    if not do_bump(plugin_root, new_version, dry_run=args.dry_run):
-        print(f"{RED}x Version bump failed{NC}", file=sys.stderr)
-        return 1
-    print(f"{GREEN}ok Version bumped to {new_version}{NC}")
+    # ── Step 9: Bump version in every applicable config file ──
+    print(f"\n{BLUE}=== Step 9: Bump version ({bump_type}: {current} -> {new_version}) ==={NC}")
+    if args.dry_run:
+        print(f"  [DRY-RUN] Would bump {info.name} to {new_version} across: {', '.join(k.value for k in info.all_kinds)}")
+    else:
+        bump_results = language_bump_version(info, new_version)
+        errors = 0
+        for ok_row, row_msg in bump_results:
+            marker = f"{GREEN}[OK]{NC}" if ok_row else f"{RED}[ERROR]{NC}"
+            print(f"  {marker} {row_msg}")
+            if not ok_row:
+                errors += 1
+        if errors > 0:
+            print(f"{RED}x Version bump failed ({errors} error(s)){NC}", file=sys.stderr)
+            return 1
+        print(f"{GREEN}ok Version bumped to {new_version}{NC}")
+
+    # ── Step 10: Generate / prepend CHANGELOG.md via git-cliff ──
+    # Also extract release notes for the GitHub release.
+    print(f"\n{BLUE}=== Step 10: git-cliff changelog + release notes ==={NC}")
+    if args.dry_run:
+        print(f"  [DRY-RUN] Would run git-cliff for v{new_version}")
+        release_notes = ""
+    else:
+        ensure_cliff_config(plugin_root)
+        ensure_cliff_gitignore(git_root)
+        release_notes = run_git_cliff(plugin_root, new_version)
+        print(f"  Release notes preview ({len(release_notes)} chars):")
+        for line in release_notes.splitlines()[:10]:
+            print(f"    {line}")
+        if len(release_notes.splitlines()) > 10:
+            print(f"    ... ({len(release_notes.splitlines()) - 10} more lines)")
 
     if args.dry_run:
         print(f"\n{GREEN}ok Dry run complete -- no changes made.{NC}")
         return 0
 
-    # ── Step 7: Commit ──
-    print(f"\n{BLUE}=== Step 7: Commit version bump ==={NC}")
-    run(["git", "add", "-A"], cwd=git_root)
+    # ── Step 11: Commit version bump + CHANGELOG ──
+    print(f"\n{BLUE}=== Step 11: Commit version bump + CHANGELOG ==={NC}")
+    # Stage only the known-modified files — NEVER `git add -A` (could pick up
+    # secrets or scratch files).
+    staged: list[str] = []
+    for candidate in (
+        ".claude-plugin/plugin.json",
+        "pyproject.toml",
+        "package.json",
+        "Cargo.toml",
+        "CHANGELOG.md",
+        "cliff.toml",
+        ".gitignore",
+    ):
+        p = plugin_root / candidate
+        if p.exists():
+            staged.append(candidate)
+    # Also stage any Python files whose __version__ was updated
+    for candidate in (plugin_root / ".").rglob("*.py"):
+        rel = candidate.relative_to(plugin_root)
+        if any(part.startswith(".") or part in ("node_modules", "__pycache__", "dist", "build", ".git") for part in rel.parts):
+            continue
+        try:
+            content = candidate.read_text(encoding="utf-8")
+            if re.search(r'^__version__\s*=\s*["\']' + re.escape(new_version) + r'["\']', content, re.MULTILINE):
+                staged.append(str(rel))
+        except Exception:
+            pass
+    if staged:
+        run(["git", "add", *staged], cwd=git_root)
     run(["git", "commit", "-m", f"chore: bump version to {new_version}"], cwd=git_root)
     print(f"{GREEN}ok Committed v{new_version}{NC}")
 
-    # ── Step 8: Push ──
-    print(f"\n{BLUE}=== Step 8: Push to origin/{default_branch} ==={NC}")
+    # ── Step 12: Tag the release (annotated, with release notes as tag body) ──
+    print(f"\n{BLUE}=== Step 12: Create annotated tag v{new_version} ==={NC}")
+    tag_body = release_notes if release_notes else f"Release v{new_version}"
+    run(["git", "tag", "-a", f"v{new_version}", "-m", tag_body], cwd=git_root)
+    print(f"{GREEN}ok Tagged v{new_version}{NC}")
+
+    # ── Step 13: Push commit + tag to origin ──
+    print(f"\n{BLUE}=== Step 13: Push commit + tag to origin/{default_branch} ==={NC}")
     os.environ["CPV_PUBLISH_PIPELINE"] = "1"
     run(["git", "push", "origin", "HEAD"], cwd=git_root)
-    print(f"\n{GREEN}ok Published v{new_version} ({plugin_info['name']}){NC}")
+    run(["git", "push", "origin", f"v{new_version}"], cwd=git_root)
+    print(f"\n{GREEN}ok Published v{new_version} ({info.name}){NC}")
+
+    # ── Step 14: Create GitHub release with notes (best-effort) ──
+    # If gh CLI is available AND authenticated, create a GitHub release and
+    # attach the cliff-extracted notes. If gh is unavailable, this is a
+    # warning (not a hard failure) — the tag is already pushed and the
+    # release notes are in CHANGELOG.md + .git-cliff-release-notes.md.
+    print(f"\n{BLUE}=== Step 14: Create GitHub release (best-effort) ==={NC}")
+    gh_check = subprocess.run(["gh", "--version"], capture_output=True, text=True)
+    if gh_check.returncode == 0:
+        notes_file = plugin_root / ".git-cliff-release-notes.md"
+        if notes_file.exists():
+            gh_result = subprocess.run(
+                ["gh", "release", "create", f"v{new_version}",
+                 "--title", f"v{new_version}",
+                 "--notes-file", str(notes_file)],
+                cwd=git_root, capture_output=True, text=True, timeout=60,
+            )
+            if gh_result.returncode == 0:
+                print(f"{GREEN}ok GitHub release v{new_version} created{NC}")
+            else:
+                print(
+                    f"{YELLOW}! gh release create failed (non-fatal — tag is already pushed):{NC}\n"
+                    f"  {gh_result.stderr.strip()}"
+                )
+        else:
+            print(f"{YELLOW}! No release notes file — skipping GitHub release{NC}")
+    else:
+        print(f"{YELLOW}! gh CLI not installed — skipping GitHub release (tag is pushed){NC}")
 
     return 0
 
