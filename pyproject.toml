@@ -1,6 +1,6 @@
 [project]
 name = "ai-maestro-architect-agent"
-version = "2.4.5"
+version = "2.4.6"
 description = "Design documents, requirements analysis, architecture decisions - creates specifications."
 requires-python = ">=3.10"
 license = "MIT"

@@ -1,7 +1,7 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-    ## [2.4.5] - 2026-04-10
+    ## [2.4.6] - 2026-04-10
 
 ### Miscellaneous
 
@@ -9,6 +9,6 @@ All notable changes to this project will be documented in this file.
 
 ### Ci
 
-- Pre-push hook + publish.py strict push sentinel + uv.lock auto-sync    
+- Pre-push hook uses process ancestry instead of env var    
 
 
