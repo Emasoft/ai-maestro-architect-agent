@@ -681,51 +681,39 @@ sort_commits = "oldest"
 
 
 def run_git_cliff(root: Path, new_version: str) -> str:
-    """Run git-cliff to update CHANGELOG.md and extract release notes for the
-    new version. Returns the release notes body (used for the GitHub release).
-    Fails the pipeline on any git-cliff error.
+    """Run git-cliff to (re)generate CHANGELOG.md and extract release notes.
 
-    Behavior:
-      - If CHANGELOG.md exists: PREPEND the new unreleased entry to the top
-        (preserves hand-written historical entries and detailed context).
-      - If CHANGELOG.md does not exist: generate a fresh full changelog from
-        git history (--output).
-      - Release notes (latest-only, header stripped) are extracted separately
-        and written to .git-cliff-release-notes.md so a subsequent
-        `gh release create --notes-file` can consume them.
+    Uses the `--bump --unreleased --tag vX.Y.Z -o CHANGELOG.md` pattern to
+    regenerate the full changelog file in one call. This matches the
+    upstream git-cliff recommended pipeline and handles both fresh-generation
+    and update cases uniformly — git-cliff walks the full tag history from
+    the start of the repo and produces the complete CHANGELOG.md with the
+    new version section at the top.
+
+    Release notes (latest-only, header stripped) are extracted in a second
+    call and written to .git-cliff-release-notes.md so a subsequent
+    `gh release create --notes-file` can consume them.
+
+    Any git-cliff error exits the pipeline.
     """
-    changelog = root / "CHANGELOG.md"
+    # 1. Generate / regenerate CHANGELOG.md with the new version at the top.
+    run(
+        [
+            "git-cliff",
+            "--bump",
+            "--unreleased",
+            "--tag", f"v{new_version}",
+            "-o", "CHANGELOG.md",
+        ],
+        cwd=root,
+    )
+    print(f"{GREEN}ok CHANGELOG.md generated for v{new_version}{NC}")
 
-    if changelog.exists():
-        # Safely add only the NEW unreleased section to the top of the
-        # existing file. --prepend is additive, never destructive.
-        run(
-            [
-                "git-cliff",
-                "--tag", f"v{new_version}",
-                "--unreleased",
-                "--prepend", "CHANGELOG.md",
-            ],
-            cwd=root,
-        )
-        print(f"{GREEN}ok CHANGELOG.md updated (prepended new v{new_version} entry){NC}")
-    else:
-        # Fresh generation — full history from the beginning of the repo.
-        run(
-            [
-                "git-cliff",
-                "--tag", f"v{new_version}",
-                "--output", "CHANGELOG.md",
-            ],
-            cwd=root,
-        )
-        print(f"{GREEN}ok CHANGELOG.md created from full git history{NC}")
-
-    # Extract the latest-only body for the GitHub release notes. We use
-    # `--strip header` to drop the repo header so only the version section
-    # is left, and `--unreleased` so it's the entry that corresponds to the
-    # new tag (which git-cliff treats as unreleased until the tag actually
-    # exists in git).
+    # 2. Extract the latest-only body for the GitHub release notes. We use
+    #    `--strip header` to drop the repo header so only the version section
+    #    is left, and `--unreleased` so it's the entry that corresponds to
+    #    the new tag (which git-cliff treats as unreleased until the tag
+    #    actually exists in git).
     result = subprocess.run(
         [
             "git-cliff",
@@ -743,9 +731,6 @@ def run_git_cliff(root: Path, new_version: str) -> str:
         )
         sys.exit(result.returncode)
     notes = result.stdout.strip()
-    # Write notes to a dedicated file for later use (gh release create --notes-file).
-    # This file is gitignored via publish.py itself adding it to .gitignore on
-    # first run — see ensure_cliff_gitignore below.
     notes_path = root / ".git-cliff-release-notes.md"
     notes_path.write_text(notes + "\n", encoding="utf-8")
     return notes
@@ -1260,17 +1245,18 @@ Examples:
             return 1
         print(f"{GREEN}ok Version bumped to {new_version}{NC}")
 
-    # ── Step 10: Generate / prepend CHANGELOG.md via git-cliff ──
-    # Also extract release notes for the GitHub release.
-    print(f"\n{BLUE}=== Step 10: git-cliff changelog + release notes ==={NC}")
+    # ── Step 10: Generate CHANGELOG.md + release notes via git-cliff ──
+    # Uses `git cliff --bump --unreleased --tag vX.Y.Z -o CHANGELOG.md` to
+    # regenerate the full changelog file with the new version section at the
+    # top. Also extracts the release notes for the GitHub release.
+    print(f"\n{BLUE}=== Step 10: git-cliff — changelog + release notes ==={NC}")
     if args.dry_run:
         print(f"  [DRY-RUN] Would run git-cliff for v{new_version}")
-        release_notes = ""
     else:
         ensure_cliff_config(plugin_root)
         ensure_cliff_gitignore(git_root)
         release_notes = run_git_cliff(plugin_root, new_version)
-        print(f"  Release notes preview ({len(release_notes)} chars):")
+        print(f"  Release notes ({len(release_notes)} chars):")
         for line in release_notes.splitlines()[:10]:
             print(f"    {line}")
         if len(release_notes.splitlines()) > 10:
@@ -1285,7 +1271,7 @@ Examples:
     # Stage only the known-modified files — NEVER `git add -A` (could pick up
     # secrets or scratch files).
     staged: list[str] = []
-    for candidate in (
+    for name in (
         ".claude-plugin/plugin.json",
         "pyproject.toml",
         "package.json",
@@ -1294,30 +1280,34 @@ Examples:
         "cliff.toml",
         ".gitignore",
     ):
-        p = plugin_root / candidate
-        if p.exists():
-            staged.append(candidate)
-    # Also stage any Python files whose __version__ was updated
-    for candidate in (plugin_root / ".").rglob("*.py"):
-        rel = candidate.relative_to(plugin_root)
-        if any(part.startswith(".") or part in ("node_modules", "__pycache__", "dist", "build", ".git") for part in rel.parts):
+        if (plugin_root / name).exists():
+            staged.append(name)
+    # Also stage any Python files whose __version__ was updated. Strict typing:
+    # iterate Path objects in py_path, then convert to str for staging.
+    for py_path in plugin_root.rglob("*.py"):
+        rel_path = py_path.relative_to(plugin_root)
+        if any(part.startswith(".") or part in ("node_modules", "__pycache__", "dist", "build", ".git") for part in rel_path.parts):
             continue
         try:
-            content = candidate.read_text(encoding="utf-8")
-            if re.search(r'^__version__\s*=\s*["\']' + re.escape(new_version) + r'["\']', content, re.MULTILINE):
-                staged.append(str(rel))
+            py_content = py_path.read_text(encoding="utf-8")
+            if re.search(r'^__version__\s*=\s*["\']' + re.escape(new_version) + r'["\']', py_content, re.MULTILINE):
+                staged.append(str(rel_path))
         except Exception:
             pass
     if staged:
         run(["git", "add", *staged], cwd=git_root)
-    run(["git", "commit", "-m", f"chore: bump version to {new_version}"], cwd=git_root)
-    print(f"{GREEN}ok Committed v{new_version}{NC}")
+    run(["git", "commit", "-m", f"chore(release): v{new_version}"], cwd=git_root)
+    print(f"{GREEN}ok Committed v{new_version} (bump + CHANGELOG){NC}")
 
-    # ── Step 12: Tag the release (annotated, with release notes as tag body) ──
+    # ── Step 12: Create annotated tag with the release notes as body ──
     print(f"\n{BLUE}=== Step 12: Create annotated tag v{new_version} ==={NC}")
-    tag_body = release_notes if release_notes else f"Release v{new_version}"
-    run(["git", "tag", "-a", f"v{new_version}", "-m", tag_body], cwd=git_root)
-    print(f"{GREEN}ok Tagged v{new_version}{NC}")
+    notes_path = plugin_root / ".git-cliff-release-notes.md"
+    if notes_path.exists():
+        final_notes = notes_path.read_text(encoding="utf-8").strip()
+    else:
+        final_notes = f"Release v{new_version}"
+    run(["git", "tag", "-a", f"v{new_version}", "-m", final_notes], cwd=git_root)
+    print(f"{GREEN}ok Tagged v{new_version} (annotated, body = release notes){NC}")
 
     # ── Step 13: Push commit + tag to origin ──
     print(f"\n{BLUE}=== Step 13: Push commit + tag to origin/{default_branch} ==={NC}")
@@ -1326,33 +1316,48 @@ Examples:
     run(["git", "push", "origin", f"v{new_version}"], cwd=git_root)
     print(f"\n{GREEN}ok Published v{new_version} ({info.name}){NC}")
 
-    # ── Step 14: Create GitHub release with notes (best-effort) ──
-    # If gh CLI is available AND authenticated, create a GitHub release and
-    # attach the cliff-extracted notes. If gh is unavailable, this is a
-    # warning (not a hard failure) — the tag is already pushed and the
-    # release notes are in CHANGELOG.md + .git-cliff-release-notes.md.
-    print(f"\n{BLUE}=== Step 14: Create GitHub release (best-effort) ==={NC}")
+    # ── Step 14: Create GitHub release with release notes (MANDATORY) ──
+    # Every push MUST create a corresponding GitHub release so Claude Code's
+    # plugin update check sees a new version available. If gh CLI is
+    # missing or unauthenticated, the pipeline fails — no silent-skip.
+    print(f"\n{BLUE}=== Step 14: Create GitHub release (mandatory) ==={NC}")
     gh_check = subprocess.run(["gh", "--version"], capture_output=True, text=True)
-    if gh_check.returncode == 0:
-        notes_file = plugin_root / ".git-cliff-release-notes.md"
-        if notes_file.exists():
-            gh_result = subprocess.run(
-                ["gh", "release", "create", f"v{new_version}",
-                 "--title", f"v{new_version}",
-                 "--notes-file", str(notes_file)],
-                cwd=git_root, capture_output=True, text=True, timeout=60,
-            )
-            if gh_result.returncode == 0:
-                print(f"{GREEN}ok GitHub release v{new_version} created{NC}")
-            else:
-                print(
-                    f"{YELLOW}! gh release create failed (non-fatal — tag is already pushed):{NC}\n"
-                    f"  {gh_result.stderr.strip()}"
-                )
-        else:
-            print(f"{YELLOW}! No release notes file — skipping GitHub release{NC}")
-    else:
-        print(f"{YELLOW}! gh CLI not installed — skipping GitHub release (tag is pushed){NC}")
+    if gh_check.returncode != 0:
+        print(
+            f"{RED}✗ gh CLI is not installed or not on PATH.{NC}\n"
+            f"  Install with: brew install gh\n"
+            f"  Then run: gh auth login\n"
+            f"  gh is MANDATORY — every push must create a GitHub release so\n"
+            f"  Claude Code's plugin update detector sees a new version.",
+            file=sys.stderr,
+        )
+        return 1
+    notes_file = plugin_root / ".git-cliff-release-notes.md"
+    if not notes_file.exists():
+        print(
+            f"{RED}✗ Release notes file missing: {notes_file}{NC}",
+            file=sys.stderr,
+        )
+        return 1
+    gh_result = subprocess.run(
+        ["gh", "release", "create", f"v{new_version}",
+         "--title", f"v{new_version}",
+         "--notes-file", str(notes_file)],
+        cwd=git_root, capture_output=True, text=True, timeout=120,
+    )
+    if gh_result.returncode != 0:
+        print(
+            f"{RED}✗ gh release create failed (exit {gh_result.returncode}):{NC}\n"
+            f"  stdout: {gh_result.stdout.strip()}\n"
+            f"  stderr: {gh_result.stderr.strip()}\n"
+            f"  The tag IS pushed, but the GitHub release was NOT created.\n"
+            f"  Fix the underlying issue and run:\n"
+            f"    gh release create v{new_version} --title v{new_version} --notes-file {notes_file}",
+            file=sys.stderr,
+        )
+        return 1
+    print(f"{GREEN}ok GitHub release v{new_version} created{NC}")
+    print(f"  {gh_result.stdout.strip()}")
 
     return 0
 
