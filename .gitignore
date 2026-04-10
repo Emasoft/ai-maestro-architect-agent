@@ -66,3 +66,6 @@ llm_externalizer_output/
 
 # SERENA MCP state (local project metadata, not published)
 .serena/
+
+# git-cliff scratch — ephemeral release notes between bump and push
+.git-cliff-release-notes.md
