@@ -1,34 +1,19 @@
-# Notify marketplace repo when this plugin is updated
-# Place this in each plugin repo: .github/workflows/notify-marketplace.yml
+# .github/workflows/notify-marketplace.yml
+# Plugin-side notifier: tells the marketplace repo to refresh this plugin
+# whenever plugin files change on the default branch.
 #
-# Sends a repository_dispatch event to Emasoft/ai-maestro-plugins whenever
-# this plugin is updated, so the marketplace can re-index it automatically.
-#
-# SETUP INSTRUCTIONS:
-# 1. Create a Personal Access Token (PAT):
-#    - Go to GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
-#    - Click "Generate new token (classic)"
-#    - Give it a descriptive name like "Plugin Marketplace Notification"
-#    - Select scope: 'repo' (Full control of private repositories)
-#    - Click "Generate token" and COPY the token (you won't see it again!)
-#
-# 2. Add the PAT as a secret to THIS plugin repository:
-#    - Go to your plugin repo → Settings → Secrets and variables → Actions
-#    - Click "New repository secret"
-#    - Name: MARKETPLACE_DISPATCH_TOKEN
-#    - Value: paste the PAT you copied in step 1
-#    - Click "Add secret"
-#
-# 3. The MARKETPLACE_OWNER and MARKETPLACE_REPO variables below are already configured
-#    to target Emasoft/ai-maestro-plugins.
-#
-# IMPORTANT: Do NOT use GITHUB_TOKEN - it lacks permissions to trigger workflows in other repos!
+# SETUP:
+#   1. Create a PAT with 'repo' scope owned by a marketplace admin.
+#   2. Add it as repo secret MARKETPLACE_PAT on THIS plugin repo:
+#      gh secret set MARKETPLACE_PAT --repo Emasoft/ai-maestro-architect-agent --body "$MARKETPLACE_PAT"
+#   3. The marketplace repo (Emasoft/ai-maestro-plugins) also needs the same secret:
+#      gh secret set MARKETPLACE_PAT --repo Emasoft/ai-maestro-plugins --body "$MARKETPLACE_PAT"
 
 name: Notify Marketplace
 
 on:
   push:
-    branches: [main, master]
+    branches: [main]
     paths:
       - '.claude-plugin/plugin.json'
       - 'hooks/**'
@@ -41,41 +26,48 @@ env:
   MARKETPLACE_OWNER: 'Emasoft'
   MARKETPLACE_REPO: 'ai-maestro-plugins'
 
+permissions:
+  contents: read
+
 jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout plugin
         uses: actions/checkout@v4
 
-      - name: Extract version from plugin.json
+      - name: Extract plugin name and version
         id: plugin
         run: |
-          echo "name=${{ github.event.repository.name }}" >> $GITHUB_OUTPUT
-          echo "ref=${{ github.sha }}" >> $GITHUB_OUTPUT
-          VERSION=$(jq -r '.version' .claude-plugin/plugin.json)
-          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          set -euo pipefail
+          NAME=$(python3 -c "import json; print(json.load(open('.claude-plugin/plugin.json'))['name'])")
+          VERSION=$(python3 -c "import json; print(json.load(open('.claude-plugin/plugin.json'))['version'])")
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "ref=${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
 
-      - name: Trigger marketplace update
-        uses: peter-evans/repository-dispatch@v3
+      - name: Dispatch plugin-updated to marketplace
+        uses: peter-evans/repository-dispatch@v4
         with:
-          token: ${{ secrets.MARKETPLACE_DISPATCH_TOKEN }}
+          token: ${{ secrets.MARKETPLACE_PAT }}
           repository: ${{ env.MARKETPLACE_OWNER }}/${{ env.MARKETPLACE_REPO }}
-          event-type: plugin-version-update
+          event-type: plugin-updated
           client-payload: |
             {
-              "plugin_name": "${{ steps.plugin.outputs.name }}",
+              "plugin": "${{ steps.plugin.outputs.name }}",
               "version": "${{ steps.plugin.outputs.version }}",
               "ref": "${{ steps.plugin.outputs.ref }}",
+              "source_repo": "${{ github.repository }}",
               "triggered_by": "${{ github.actor }}"
             }
 
-      - name: Summary
+      - name: Job summary
         run: |
-          echo "## Marketplace Notification" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Triggered update in ${{ env.MARKETPLACE_OWNER }}/${{ env.MARKETPLACE_REPO }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- Plugin: ${{ steps.plugin.outputs.name }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Version: ${{ steps.plugin.outputs.version }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Commit: ${{ steps.plugin.outputs.ref }}" >> $GITHUB_STEP_SUMMARY
+          {
+            echo "## Marketplace Notification"
+            echo ""
+            echo "- Plugin: ${{ steps.plugin.outputs.name }}"
+            echo "- Version: ${{ steps.plugin.outputs.version }}"
+            echo "- Ref: ${{ steps.plugin.outputs.ref }}"
+            echo "- Target: ${{ env.MARKETPLACE_OWNER }}/${{ env.MARKETPLACE_REPO }}"
+          } >> "$GITHUB_STEP_SUMMARY"
