@@ -16,8 +16,8 @@ Arguments:
 # WHY: Future annotations enable forward references and modern type hint syntax
 from __future__ import annotations
 
-import sys
 import argparse
+import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Any

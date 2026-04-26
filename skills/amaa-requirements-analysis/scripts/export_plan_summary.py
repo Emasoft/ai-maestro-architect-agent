@@ -4,8 +4,8 @@ import argparse
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-
 from typing import Any
+
 
 def _parse_yaml_value(val: str) -> Any:
     """Parse a simple YAML scalar value (no external dependency)."""

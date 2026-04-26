@@ -11,16 +11,18 @@ Validates that plan files meet all requirements:
 Exits with non-zero code if validation fails.
 """
 
-import sys
-import re
 import argparse
+import re
+import sys
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
-from dataclasses import dataclass, field
 
 SKILLS_DIR = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(SKILLS_DIR / "shared"))
-from cross_platform import atomic_write_json  # type: ignore[import-not-found]  # noqa: E402
+from cross_platform import (
+    atomic_write_json,  # type: ignore[import-not-found]  # noqa: E402
+)
 from thresholds import (  # type: ignore[import-not-found]  # noqa: E402
     PLANNING,
     TASK_COMPLEXITY,

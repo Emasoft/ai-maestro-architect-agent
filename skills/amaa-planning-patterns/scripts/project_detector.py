@@ -17,11 +17,13 @@ import argparse
 import json
 import sys
 from pathlib import Path
-from typing import Dict, List, Set, Any
+from typing import Any, Dict, List, Set
 
 SKILLS_DIR = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(SKILLS_DIR / "shared"))
-from cross_platform import atomic_write_json  # type: ignore[import-not-found]  # noqa: E402
+from cross_platform import (
+    atomic_write_json,  # type: ignore[import-not-found]  # noqa: E402
+)
 
 
 class ProjectDetector:

@@ -24,7 +24,9 @@ from pathlib import Path
 # WHY: Dynamic path insertion allows importing shared utilities from skill directory
 SKILLS_DIR = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(SKILLS_DIR / "shared"))
-from cross_platform import atomic_write_text  # type: ignore[import-not-found]  # noqa: E402
+from cross_platform import (
+    atomic_write_text,  # type: ignore[import-not-found]  # noqa: E402
+)
 
 
 def verify_output_file(output_path: Path) -> bool:

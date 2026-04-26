@@ -35,7 +35,6 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional, cast
 
-
 _DEFAULT_STATUS_LABELS = {
     "draft": "status:draft",
     "review": "status:review",

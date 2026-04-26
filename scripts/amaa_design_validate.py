@@ -19,7 +19,6 @@ import re
 import sys
 from pathlib import Path
 
-
 # Required frontmatter fields that must be present in every design document
 REQUIRED_FIELDS = ["uuid", "title", "status", "created", "updated"]
 

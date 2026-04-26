@@ -34,7 +34,6 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
-
 # Valid document types as defined in the SKILL.md specification
 VALID_TYPES = ("pdr", "spec", "feature", "decision", "architecture", "template")
 

@@ -17,7 +17,6 @@ import argparse
 import sys
 from pathlib import Path
 
-
 # ---------------------------------------------------------------------------
 # Configuration definition (mirrors eslint.config.js structure)
 # ---------------------------------------------------------------------------

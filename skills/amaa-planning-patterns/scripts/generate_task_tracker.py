@@ -27,11 +27,11 @@ Arguments:
     --help: Show this help message
 """
 
-import sys
 import argparse
 import csv
 import io
 import re
+import sys
 from collections import deque
 from datetime import datetime
 from pathlib import Path
@@ -39,7 +39,10 @@ from typing import Any, Dict, List, Optional
 
 SKILLS_DIR = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(SKILLS_DIR / "shared"))
-from cross_platform import atomic_write_json, atomic_write_text  # type: ignore[import-not-found]  # noqa: E402
+from cross_platform import (  # type: ignore[import-not-found]  # noqa: E402
+    atomic_write_json,
+    atomic_write_text,
+)
 
 
 class Task:

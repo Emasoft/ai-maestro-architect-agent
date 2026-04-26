@@ -14,7 +14,6 @@ import sys
 import time
 from pathlib import Path
 
-
 DIST_DIR = Path("./dist")
 SRC_DIR = Path("./src")
 ENTRY_POINT = SRC_DIR / "index.js"
@@ -85,7 +84,11 @@ def watch(is_dev: bool) -> None:
 
 
 def _watch_with_watchdog(is_dev: bool) -> None:
-    from watchdog.events import FileSystemEventHandler, FileModifiedEvent, FileCreatedEvent  # type: ignore[import]
+    from watchdog.events import (  # type: ignore[import]
+        FileCreatedEvent,
+        FileModifiedEvent,
+        FileSystemEventHandler,
+    )
     from watchdog.observers import Observer  # type: ignore[import]
 
     class RebuildHandler(FileSystemEventHandler):

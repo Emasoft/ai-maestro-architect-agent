@@ -17,7 +17,10 @@ from typing import Any
 
 SKILLS_DIR = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(SKILLS_DIR / "shared"))
-from cross_platform import atomic_write_json, run_command  # type: ignore[import-not-found]  # noqa: E402
+from cross_platform import (  # type: ignore[import-not-found]  # noqa: E402
+    atomic_write_json,
+    run_command,
+)
 from thresholds import TIMEOUTS  # type: ignore[import-not-found]  # noqa: E402
 
 

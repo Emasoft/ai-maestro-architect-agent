@@ -11,16 +11,18 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
 from typing import Any, cast
-from collections import defaultdict
 
 SKILLS_DIR = Path(__file__).parent.parent.parent
 # WHY: Insert shared directory into path to enable importing cross_platform module
 # which provides atomic_write_text for crash-safe file operations
 sys.path.insert(0, str(SKILLS_DIR / "shared"))
-from cross_platform import atomic_write_text  # type: ignore[import-not-found]  # noqa: E402
+from cross_platform import (
+    atomic_write_text,  # type: ignore[import-not-found]  # noqa: E402
+)
 
 
 def load_tracker_json(tracker_path: Path) -> dict[str, Any]:
