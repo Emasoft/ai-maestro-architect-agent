@@ -15,8 +15,8 @@ from typing import Dict
 SKILLS_DIR = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(SKILLS_DIR / "shared"))
 
-from cross_platform import (
-    atomic_write_text,  # type: ignore[import-not-found]  # noqa: E402
+from cross_platform import (  # noqa: E402
+    atomic_write_text,  # type: ignore[import-not-found]
 )
 
 
