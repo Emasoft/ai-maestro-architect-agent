@@ -2,9 +2,9 @@
 """Cross-platform utility functions for architect-agent scripts."""
 
 import json
+import shutil
 import subprocess
 import tempfile
-import shutil
 from pathlib import Path
 from typing import Any
 
