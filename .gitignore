@@ -29,8 +29,12 @@ Thumbs.db
 
 # Dev folders (NEVER PUBLISH - development artifacts only)
 # Wildcard pattern catches all: docs_dev, scripts_dev, tests_dev, samples_dev,
-# examples_dev, downloads_dev, libs_dev, builds_dev, etc.
+# examples_dev, downloads_dev, libs_dev, builds_dev, reports_dev, etc.
 *_dev/
+
+# Agent / skill / tool reports (private — paths, internal notes, may include
+# secrets that leaked into logs). See ~/.claude/rules/agent-reports-location.md
+/reports/
 
 # Environment & secrets
 .env
