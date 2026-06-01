@@ -11,6 +11,7 @@ skills:
   - amaa-design-management
   - amaa-label-taxonomy
   - amaa-requirements-analysis
+  - amaa-prrd-trdd-kanban
 ---
 
 # Architect Main Agent
