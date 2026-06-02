@@ -9,154 +9,94 @@ metadata:
 
 ## Overview
 
-This is the ARCHITECT's role-specific layer of the PRRD / TRDD /
-Kanban model. For universal mechanics, see `prrd-trdd-kanban` in
-`ai-maestro-plugin`.
+The ARCHITECT (AMAA) layer of the PRRD / TRDD / Kanban model. ARCH
+owns the **design column** — the only column with a 1→N (split) and
+N→1 (group) topology. A proto-TRDD comes in from ORCH; one or more
+fully-designed TRDDs land in `dispatch`. For universal mechanics, see
+the `prrd-trdd-kanban` skill in `ai-maestro-plugin`.
 
-## Approval discipline
+ARCH is **exempt** (no MANAGER approval) for all within-team design
+work: pass-through, split, group, setting design frontmatter.
+**Non-exempt** (request approval): force-`superseded` outside a normal
+split, editing TRDDs already past design.
 
-Check the **prrd-trdd-kanban** universal skill's `exempt-operations.md`
-reference (bundled in ai-maestro-plugin) BEFORE triggering any transition. ARCH's
-**exempt** transitions (no MANAGER approval): all within-team design
-column work — `design → dispatch` pass-through, 1→N split, N→1
-group, setting frontmatter during initial design (`task-type`,
-`test-requirements`, `audit-requirements`, `review-requirements`,
-`release-via`, NPT/EHT children). ARCH's **non-exempt** (request
-MANAGER approval): force-`superseded` outside of a normal design
-split, modifying TRDDs already past the design column, architectural
-decisions that affect cross-team boundaries.
+## Prerequisites
 
-ARCHITECT owns the **design column** — the only column with a 1→N
-(split) and N→1 (group) topology. A proto-TRDD comes in; one or more
-fully-designed TRDDs come out. The output TRDDs land in `dispatch`
-ready for assignment.
+- The universal `prrd-trdd-kanban` skill in `ai-maestro-plugin` is
+  available (mechanics, transition numbers, exempt-operations list).
+- The project PRRD exists and `design/tasks/` is present.
+- A proto-TRDD sits in the `design` column awaiting ARCH.
 
-## Columns ARCH owns
+## Instructions
 
-| Column | Ownership detail |
-|---|---|
-| `design` | ARCH receives proto-TRDDs from ORCH. Shapes them: fills frontmatter, writes the body, sets acceptance criteria, decides task-type / test-requirements / audit-requirements / release-via, identifies NPT and EHT children. |
+1. Read the proto-TRDD body (the paraphrased user request).
+2. Set `task-type:` (`feature` / `bugfix` / `refactor` / `docs` /
+   `infra` / `security` / `artifact` / `spike` / `audit`).
+3. Set `severity:` and `effort:` from judgment.
+4. Set `release-via:` (`publish` for tools/packages, `deploy` for
+   services, `none` for internal-only).
+5. Set `test-requirements:`, `audit-requirements:`,
+   `review-requirements:` (which test/scan/review types are mandatory).
+6. If artifact-producing, set `artifact-kinds:`; set `runtime-targets:`
+   (platforms that must pass) and `impacts:` (install / dependencies /
+   config / migration / public-api / ci-pipeline).
+7. Identify **NPT children** — prerequisites that must complete BEFORE
+   the parent's `dev`. Author each as a separate TRDD; link via `npt:`.
+8. Identify **EHT children** — consequence-handling tasks that must
+   complete BEFORE the parent's `complete`. Link via `eht:`.
+9. Decide topology: **pass-through** (#4 `design → dispatch`), **1→N
+   split** (#5 parent → `superseded`, N children to `dispatch`), or
+   **N→1 group** (one combined TRDD supersedes the inputs).
+10. Write the body: `## STATE` (if multi-session), `## Acceptance
+    criteria` (testable bullets), `## Design notes`, `## Out of scope`;
+    cite rules in `relevant-rules:`.
+11. Move on: pass-through sets `column: dispatch`, `assignee: null`,
+    bumps `updated:`. On split/group, mark the parent/inputs
+    `column: superseded` with `superseded-by: [<child-refs>]`.
 
-## Transitions ARCH triggers
+## Output
 
-- **#4** `design → dispatch` — pass-through, no decomposition needed
-- **#5** `design → superseded` — split: original retired, N child TRDDs created
-- **#5b** `(new) → dispatch` — child TRDDs born from a split or group
+- A fully-designed TRDD: complete frontmatter (task-type, severity,
+  effort, release-via, the three requirement sets, runtime-targets,
+  impacts, npt/eht, relevant-rules) plus the prose body.
+- On a split/group: N child TRDDs (fresh UUID + timestamp,
+  `parent-trdd:`/`supersedes:`, own requirements) and the superseded
+  parent/inputs.
+- An AMP message to ORCH **via COS**: "TRDD-<id> designed; ready for
+  dispatch" (or "split into <N>: <refs>" / "grouped into <ref>").
+- New/edited TRDD files staged and committed.
 
-## PRRD authority
+## Error Handling
 
-ARCHITECT may **propose** PRRD changes (typically silver) when a
-recurring design constraint should become formal:
+- **Ambiguous scope** — do not guess. Ask ORCH for clarification via
+  COS before designing.
+- **Too big for one TRDD** — split it 1→N rather than shipping an
+  oversized proto-TRDD downstream.
+- **Recurring design constraint** — when a pattern recurs across N
+  TRDDs, or a library/boundary choice should be project-wide, file a
+  PRRD proposal (`prrd-edit.py propose silver ... --routed-via
+  cos-<team>`) instead of re-deciding per TRDD.
+- **Edit past design / force-supersede outside a split** — non-exempt;
+  request MANAGER approval first.
 
-```bash
-prrd-edit.py propose silver "<text>" \
-            --target <N or null for new rule> \
-            --proposed-by architect-<team> \
-            --routed-via cos-<team>
-```
+## Examples
 
-Common scenarios for ARCH-originated proposals:
-- A pattern recurred across N TRDDs and should become a rule
-- A library / dependency / framework choice should be project-wide
-- A boundary between modules should be enforced
+**1→N split.** Proto-TRDD "add OAuth + audit logging" holds two
+independent jobs. ARCH authors two children (each with fresh UUID,
+`supersedes: [<parent>]`, own test/audit requirements), sets the
+parent `column: superseded`, `superseded-by: [<both>]`, commits, and
+AMPs ORCH via COS: "TRDD-7a1 split into 2: <c1>, <c2>".
 
-## Per-column checklists
-
-### Shaping a proto-TRDD (design column, single output)
-
-- [ ] Read the proto-TRDD's body — paraphrase of user request
-- [ ] Identify `task-type:` (`feature` / `bugfix` / `refactor` /
-      `docs` / `infra` / `security` / `artifact` / `spike` / `audit`)
-- [ ] Set `severity:` and `effort:` based on judgment
-- [ ] Determine `release-via:` (`publish` for tools/packages,
-      `deploy` for services, `none` for internal-only)
-- [ ] Identify `test-requirements:` (which test types are mandatory)
-- [ ] Identify `audit-requirements:` (security scan? adversarial scan?)
-- [ ] Identify `review-requirements:` (human-review? code-review?
-      design-review?)
-- [ ] If artifact-producing, set `artifact-kinds:` (`icon` /`sound` /
-      `html` / `animation` etc.)
-- [ ] Identify `runtime-targets:` (which platforms must pass)
-- [ ] Identify `impacts:` (does this change install / dependencies /
-      config / migration / public-api / ci-pipeline?)
-- [ ] Identify NPT children: prerequisites that must complete BEFORE
-      `dev` can proceed. Author each as a separate TRDD; link via `npt:`
-- [ ] Identify EHT children: consequence-handling tasks that must
-      complete BEFORE `complete`. Author each as a separate TRDD;
-      link via `eht:`
-- [ ] Write the body:
-      - `## STATE` block (mandatory if multi-session)
-      - `## Acceptance criteria` — bulleted list of testable items
-      - `## Design notes` — rationale, alternatives considered
-      - `## Out of scope` — explicit non-goals
-- [ ] Cite relevant PRRD rules in `relevant-rules:`
-- [ ] Edit `column: dispatch`, `assignee: null`, bump `updated:`
-- [ ] AMP-send to ORCH (via COS): "TRDD-<id> designed; ready for dispatch"
-
-### Splitting a proto-TRDD (1 → N)
-
-- [ ] Read the proto-TRDD; identify N independent sub-tasks
-- [ ] For each sub-task, author a new TRDD with:
-      - fresh UUID and timestamp
-      - `parent-trdd: <T_parent.short_ref>`
-      - `supersedes: [<T_parent.short_ref>]`
-      - `column: dispatch` (or `design` if it needs further design)
-      - own task-type, test-requirements, etc.
-- [ ] Update the parent TRDD:
-      - `column: superseded`
-      - `superseded-by: [<all-child-refs>]`
-- [ ] Stage + commit all new files + parent edit:
-      `git add design/tasks/TRDD-*; git commit -m "design: split
-      TRDD-<parent> into <N>"`
-- [ ] AMP-send to ORCH (via COS): "TRDD-<parent> split into <N>:
-      <child-refs>"
-
-### Grouping (N → 1)
-
-- [ ] Identify the N proto-TRDDs being merged
-- [ ] Author the new combined TRDD:
-      - fresh UUID and timestamp
-      - `supersedes: [<all-input-refs>]`
-      - merged frontmatter (test-requirements = union of inputs, etc.)
-      - body explains the rationale for grouping
-- [ ] For each input TRDD:
-      - `column: superseded`
-      - `superseded-by: [<combined-ref>]`
-- [ ] Stage + commit
-- [ ] AMP-send to ORCH (via COS): "TRDDs <input-refs> grouped into
-      <combined-ref>"
-
-### Citing PRRD rules
-
-When designing, ALWAYS consult the PRRD for relevant constraints:
-
-```bash
-findprrd.py --grep "<keyword>"     # find rules touching a topic
-get-prrd.py --list                 # browse all rules
-get-prrd.py --cite <N.v>           # quote the rule in the body
-```
-
-Cite in:
-- `relevant-rules:` frontmatter (bare numbers, pinned versions allowed)
-- Body prose (`PRRD G64.134 — Use AID auth ...`)
-
-A TRDD with empty `relevant-rules:` is a TRDD claiming to be
-unconstrained by any rule. Possible but worth verifying.
-
-## NPT vs EHT discipline
-
-| Concept | Purpose | Position in parent's pipeline | Example |
-|---|---|---|---|
-| **NPT** | Prerequisite | Must complete BEFORE parent's `dev` | "Refactor auth module" needs NPT "Update auth schema first" |
-| **EHT** | Effects handling | Must complete BEFORE parent's `complete` | "Refactor auth module" needs EHT "Update all callers", "Update docs" |
-
-ARCHITECT decides both lists during design. NPTs are usually
-authored at the same time as the parent. EHTs may be authored later
-(during `dev`) when consequences are clearer.
+**Setting requirements (pass-through).** Proto-TRDD "fix login race"
+→ `task-type: bugfix`, `severity: high`, `release-via: deploy`,
+`test-requirements: [unit, integration]`, `review-requirements:
+[code-review]`. ARCH writes acceptance criteria, sets
+`column: dispatch`, `assignee: null`, commits.
 
 ## Resources
 
-- Universal skill: `prrd-trdd-kanban`
-- Existing design skills: `amaa-design-management`, `amaa-design-lifecycle`,
-  `amaa-design-communication-patterns`
-- ARCHITECT persona: `agents/ai-maestro-architect-agent-main-agent.md`
+For the full Kanban mechanics, transition numbers, and the exempt /
+non-exempt boundary, consult the universal `prrd-trdd-kanban` skill in
+`ai-maestro-plugin`, and within it the `trdd-frontmatter-schema.md`
+reference (every field ARCH sets) and the `exempt-operations.md`
+reference (transitions that skip MANAGER approval).
