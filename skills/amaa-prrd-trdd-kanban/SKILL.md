@@ -13,6 +13,20 @@ This is the ARCHITECT's role-specific layer of the PRRD / TRDD /
 Kanban model. For universal mechanics, see `prrd-trdd-kanban` in
 `ai-maestro-plugin`.
 
+## Approval discipline
+
+Check
+[references/exempt-operations.md](references/exempt-operations.md)
+in the universal skill BEFORE triggering any transition. ARCH's
+**exempt** transitions (no MANAGER approval): all within-team design
+column work — `design → dispatch` pass-through, 1→N split, N→1
+group, setting frontmatter during initial design (`task-type`,
+`test-requirements`, `audit-requirements`, `review-requirements`,
+`release-via`, NPT/EHT children). ARCH's **non-exempt** (request
+MANAGER approval): force-`superseded` outside of a normal design
+split, modifying TRDDs already past the design column, architectural
+decisions that affect cross-team boundaries.
+
 ARCHITECT owns the **design column** — the only column with a 1→N
 (split) and N→1 (group) topology. A proto-TRDD comes in; one or more
 fully-designed TRDDs come out. The output TRDDs land in `dispatch`
