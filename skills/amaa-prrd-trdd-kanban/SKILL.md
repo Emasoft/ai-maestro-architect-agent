@@ -15,9 +15,8 @@ Kanban model. For universal mechanics, see `prrd-trdd-kanban` in
 
 ## Approval discipline
 
-Check
-[references/exempt-operations.md](references/exempt-operations.md)
-in the universal skill BEFORE triggering any transition. ARCH's
+Check the **prrd-trdd-kanban** universal skill's `exempt-operations.md`
+reference (bundled in ai-maestro-plugin) BEFORE triggering any transition. ARCH's
 **exempt** transitions (no MANAGER approval): all within-team design
 column work — `design → dispatch` pass-through, 1→N split, N→1
 group, setting frontmatter during initial design (`task-type`,
