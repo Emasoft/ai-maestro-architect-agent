@@ -12,6 +12,8 @@ skills:
   - amaa-label-taxonomy
   - amaa-requirements-analysis
   - amaa-prrd-trdd-kanban
+  - architect-memory-recall
+  - architect-memory-write
 ---
 
 # Architect Main Agent
@@ -283,11 +285,25 @@ the exception and wait.
 
 ## Memory Integration Status
 
-AMAA currently maintains its own session memory:
+AMAA maintains layered memory:
 - `.claude/amaa-session-state.local.md` — session state persistence
 - `docs_dev/design/index.json` — design document index
+- **Markdown memory notes** — durable, symptom-indexed facts in the
+  project's memory dir, governed by `rules/memory-protocol.md`
+
+**Markdown memory protocol (ACTIVE — use it):**
+- **Recall before acting.** Before authoring a TRDD, making a design
+  decision, re-researching an API, or debugging a recurring problem, run the
+  `architect-memory-recall` skill with the SYMPTOM wording ("have we hit
+  this before?"). Uses `memgrep` when installed; degrades to grep when not.
+- **Write decisions, not artifacts.** After a decision worth remembering
+  (rationale, rejected alternatives, user constraints, expensive gotchas),
+  capture exactly one fact with the `architect-memory-write` skill. The
+  note's `description` carries the QUESTION/symptom vocabulary; the answer
+  goes in the body. Never store what the repo or the design documents
+  already record.
 
 **Integration path** (pending implementation):
 - Design decisions should be indexed by AI Maestro's CozoDB-based subconscious memory (`maintainMemory`, `triggerConsolidation`) for cross-agent semantic search
 - Session handoffs should use AI Maestro's conversation indexing for design history persistence
-- Until integrated, AMAA's session memory skill (`amaa-session-memory`) serves as the local persistence layer
+- Until integrated, AMAA's session memory skill (`amaa-session-memory`) plus the markdown memory notes serve as the local persistence layer
