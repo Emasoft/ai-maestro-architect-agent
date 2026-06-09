@@ -175,7 +175,7 @@ def check_github_issues() -> list[str]:
             ],
             capture_output=True,
             text=True,
-            timeout=10,
+            timeout=3,
         )
         if result.returncode == 0 and result.stdout.strip():
             issues = json.loads(result.stdout)
@@ -230,7 +230,7 @@ def _notify_amcos_blocked_exit(blockers: list[str]) -> None:
             ],
             capture_output=True,
             text=True,
-            timeout=10,
+            timeout=1,
         )
     except (FileNotFoundError, subprocess.TimeoutExpired, Exception):
         pass  # Best effort — do not block exit further
@@ -259,6 +259,41 @@ def main() -> None:
     if not all_blockers:
         # All work complete - allow exit
         sys.exit(0)
+
+    # Per-session block counter.
+    # Why: Claude Code v2.1.143 auto-kills Stop hooks after 8 consecutive blocks
+    # in a single session. Without a self-limiting cap the user would see "exit
+    # blocked" 8 times in a row before the platform safeguard fires — bad UX
+    # and surrenders graceful handling to the platform. The cap (default 3,
+    # override via CLAUDE_CODE_STOP_HOOK_BLOCK_CAP) yields gracefully after
+    # giving the user a few chances to address the blockers.
+    session_id = os.environ.get("CLAUDE_CODE_SESSION_ID", "default")
+    try:
+        cap = int(os.environ.get("CLAUDE_CODE_STOP_HOOK_BLOCK_CAP", "3"))
+    except ValueError:
+        cap = 3
+
+    state_dir = project_root / ".claude" / "state"
+    counter_file = state_dir / f"amaa-stop-block-count-{session_id}.txt"
+    try:
+        count = int(counter_file.read_text().strip()) if counter_file.exists() else 0
+    except (ValueError, OSError):
+        count = 0
+
+    if count >= cap:
+        # Cap reached — yield gracefully so the platform's 8-block auto-kill
+        # never fires. Reset the counter so the next session starts fresh.
+        try:
+            counter_file.unlink()
+        except OSError:
+            pass
+        sys.exit(0)
+
+    try:
+        state_dir.mkdir(parents=True, exist_ok=True)
+        counter_file.write_text(str(count + 1))
+    except OSError:
+        pass  # Counter persistence is best-effort; do not block on FS errors.
 
     # Notify AMCOS about blocked exit via AMP
     _notify_amcos_blocked_exit(all_blockers)

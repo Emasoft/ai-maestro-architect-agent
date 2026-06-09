@@ -1,6 +1,6 @@
 # Architect Agent (amaa-)
 
-**Version**: 2.1.0
+**Version**: 2.4.8
 
 ## Overview
 
