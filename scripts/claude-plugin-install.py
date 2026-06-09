@@ -2748,7 +2748,7 @@ HELP_EPILOG = f"""\
   # Update a plugin from a local directory
   claude-plugin-install --update ./my-plugin/ my-marketplace
 
-  # Overwrite an existing plugin (skip confirmation)
+  # Overwrite an existing plugin (non-interactive, no prompt shown)
   claude-plugin-install my-plugin.tar.gz my-marketplace --force
 
   # Validate before distributing

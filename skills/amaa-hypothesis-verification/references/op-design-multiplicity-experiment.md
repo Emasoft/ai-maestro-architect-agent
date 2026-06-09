@@ -225,9 +225,12 @@ if __name__ == '__main__':
     }
 
     all_results = []
-    all_results.extend(run_approach('A (Control)', approach_a, params))
-    all_results.extend(run_approach('B (Claimed)', approach_b, params))
-    all_results.extend(run_approach('C (Alternative)', approach_c, params))
+    results_a = run_approach('A (Control)', approach_a, params)
+    results_b = run_approach('B (Claimed)', approach_b, params)
+    results_c = run_approach('C (Alternative)', approach_c, params)
+    all_results.extend(results_a)
+    all_results.extend(results_b)
+    all_results.extend(results_c)
 
     # Save results
     with open('results/experiment_results.json', 'w') as f:

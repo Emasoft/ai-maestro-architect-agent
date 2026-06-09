@@ -157,7 +157,9 @@ act -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-latest
 
 # Install act
 brew install act  # macOS
-curl -s https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash  # Linux
+# Linux — download the installer, review it, then run it (no pipe-to-shell):
+curl -s https://raw.githubusercontent.com/nektos/act/master/install.sh -o act-install.sh
+bash act-install.sh
 ```
 
 ### 2.3 Run Logs and Artifact Management

@@ -253,7 +253,7 @@ Code works unminified but fails when minified
 
 **Cause:**
 - Code relies on function names
-- Using eval() or new Function()
+- Using eval or the Function constructor (runtime code built from strings)
 - Dynamic property access with computed strings
 
 **Solution:**

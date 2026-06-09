@@ -317,7 +317,7 @@ jobs:
 **Common npm registries**:
 - npm.js: `https://registry.npmjs.org`
 - GitHub Packages: `https://npm.pkg.github.com`
-- GitLab: `https://gitlab.com/api/v4/packages/npm`
+- GitLab: `https://gitlab.com/api/v4/projects/<project-id>/packages/npm/` (per-project endpoint; the bare instance-level URL returns 404)
 - Azure Artifacts: `https://pkgs.dev.azure.com/<organization>/_packaging/<feed>/npm/registry/`
 
 ### Setting Up NPM_TOKEN Secret

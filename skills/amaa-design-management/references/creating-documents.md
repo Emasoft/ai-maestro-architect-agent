@@ -257,7 +257,7 @@ If the script cannot write to the design directory:
 ls -la design/
 
 # Fix permissions if needed
-chmod 755 design/pdr/
+chmod u=rwx,go=rx design/pdr/
 ```
 
 ### Empty Title

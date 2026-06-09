@@ -299,8 +299,9 @@ Example: uv run python scripts/check_version_consistency.py --verbose
             print("[ERROR] Version mismatch detected!")
             print(f"  Found {len(unique)} different versions: {', '.join(sorted(unique))}")
             print()
-            print("To fix, run:")
-            print("  python scripts/bump_version.py --set <version>")
+            print("To fix, edit the lagging file(s) to the canonical version by hand,")
+            print("or cut a release (publish.py re-syncs every version source):")
+            print("  uv run python scripts/publish.py --patch")
 
     return 0 if is_consistent else 1
 

@@ -336,7 +336,8 @@ pipeline {
   stages {
     stage('Install') {
       steps {
-        sh 'curl -fsSL https://bun.sh/install | bash'
+        sh 'curl -fsSL https://bun.sh/install -o bun-install.sh'
+        sh 'bash bun-install.sh'
         sh 'bun install'
       }
     }

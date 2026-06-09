@@ -1,5 +1,10 @@
 # Architect Agent (amaa-)
 
+Claude Code role-plugin for the AI Maestro multi-agent ecosystem: the
+**ARCHITECT (AMAA)** persona that turns requirements into reviewed,
+implementable design documents — requirements analysis, API research,
+architecture decisions, module breakdowns, and handoff packages.
+
 **Version**: 2.4.8
 
 ## Overview
@@ -119,6 +124,31 @@ claude --agent ai-maestro-architect-agent-main-agent
 claude --plugin-dir ./ai-maestro-architect-agent
 ```
 
+## Usage
+
+Start a session as the architect:
+
+```bash
+claude --agent ai-maestro-architect-agent-main-agent
+```
+
+Then drive the planning workflow with the slash commands:
+
+```bash
+/amaa-start-planning Build a REST API for inventory management
+/amaa-add-requirement REQ "User authentication" --criteria "JWT-based login" --priority high
+/amaa-modify-requirement REQ R-001 --status approved
+/amaa-remove-requirement REQ R-002
+```
+
+The agent produces design documents under `docs_dev/design/`, registers
+each one in the design index with a UUID, walks it through the
+DRAFT → REVIEW → APPROVED → IMPLEMENTING → COMPLETED → ARCHIVED lifecycle,
+and prepares handoff packages for the Orchestrator (AMOA). The `Stop` hook
+blocks session exit while draft designs, pending tasks, orphan
+requirements, or open architect-assigned GitHub issues remain (capped at 3
+blocks per session via `CLAUDE_CODE_STOP_HOOK_BLOCK_CAP`).
+
 ## Non-Standard Directories
 
 | Directory | Purpose |
@@ -133,6 +163,9 @@ claude --plugin-dir ./ai-maestro-architect-agent
 
 ## Validation
 
+Whole-plugin validation uses the remote CPV validator (always current,
+never vendored):
+
 ```bash
-python3 scripts/validate_plugin.py . --strict --verbose
+uvx cpv-remote-validate plugin . --strict
 ```

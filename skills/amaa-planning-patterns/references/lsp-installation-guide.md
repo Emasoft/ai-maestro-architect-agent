@@ -91,7 +91,8 @@ brew install jdtls
 **Linux (Ubuntu/Debian):**
 ```bash
 # Via SDKMAN
-curl -s "https://get.sdkman.io" | bash
+curl -s "https://get.sdkman.io" -o sdkman-install.sh
+bash sdkman-install.sh
 sdk install java 21-tem
 # Then download jdtls from Eclipse
 ```
@@ -134,7 +135,7 @@ npm install -g kotlin-language-server
 **macOS:**
 ```bash
 brew install llvm
-# Add to PATH: export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+# Add /opt/homebrew/opt/llvm/bin to the FRONT of your PATH (in your shell profile)
 ```
 
 **Linux (Ubuntu/Debian):**

@@ -201,9 +201,9 @@ If using this prototype as a basis for production code:
 
 ## Related Resources
 
-- [Original Experiment Report](docs/EXPERIMENT_REPORT.md)
-- [Related Prototype](../other-prototype/)
-- [External Reference](url)
+- <Markdown link to the original experiment report, e.g. docs/EXPERIMENT_REPORT.md>
+- <Markdown link to any related prototype directory>
+- <Markdown link to external references, if any>
 
 ---
 

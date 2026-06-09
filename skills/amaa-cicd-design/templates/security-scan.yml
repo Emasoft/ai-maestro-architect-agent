@@ -112,7 +112,9 @@ jobs:
           fetch-depth: 0
 
       - name: TruffleHog scan
-        uses: trufflesecurity/trufflehog@main
+        # Pinned to full commit SHA (v3.95.5) — third-party actions must never
+        # float on @main (tag-rewriting / supply-chain attack surface, RC-31).
+        uses: trufflesecurity/trufflehog@d411fff7b8879a62509f3fa98c07f247ac089a51 # v3.95.5
         with:
           path: ./
           base: ${{ github.event.repository.default_branch }}
@@ -172,7 +174,8 @@ jobs:
   #       run: docker build -t app:scan .
   #
   #     - name: Run Trivy
-  #       uses: aquasecurity/trivy-action@master
+  #       # Pinned to full commit SHA (v0.36.0) — never float on @master (RC-31).
+  #       uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
   #       with:
   #         image-ref: 'app:scan'
   #         format: 'sarif'

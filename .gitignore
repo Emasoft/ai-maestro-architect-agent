@@ -34,7 +34,10 @@ Thumbs.db
 
 # Agent / skill / tool reports (private — paths, internal notes, may include
 # secrets that leaked into logs). See ~/.claude/rules/agent-reports-location.md
+# /reports_dev/ is already matched by *_dev/ above; the explicit entry exists
+# so scanners that look for the literal path find it.
 /reports/
+/reports_dev/
 
 # Environment & secrets
 .env

@@ -29,10 +29,15 @@ publish-homebrew:
       env:
         HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.HOMEBREW_TOKEN }}
       run: |
+        TARBALL_URL="https://github.com/${{ github.repository }}/archive/v${{ needs.validate.outputs.version }}.tar.gz"
+        # Download the tarball, then hash the local file (do not pipe the
+        # download straight into the hasher)
+        curl -sL "$TARBALL_URL" -o release.tar.gz
+        SHA256="$(sha256sum release.tar.gz | cut -d' ' -f1)"
         brew tap myorg/tap
         brew bump-formula-pr myorg/tap/myapp \
-          --url "https://github.com/${{ github.repository }}/archive/v${{ needs.validate.outputs.version }}.tar.gz" \
-          --sha256 "$(curl -sL https://github.com/${{ github.repository }}/archive/v${{ needs.validate.outputs.version }}.tar.gz | sha256sum | cut -d' ' -f1)"
+          --url "$TARBALL_URL" \
+          --sha256 "$SHA256"
 ```
 
 ### Windows Store

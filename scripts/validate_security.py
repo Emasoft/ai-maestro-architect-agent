@@ -80,8 +80,8 @@ EVAL_PATTERNS = [
     (re.compile(r"\beval\s+"), "eval command detected"),
     (re.compile(r"\bexec\s+"), "exec command detected"),
     # Python-specific
-    (re.compile(r"\beval\s*\("), "Python eval() detected"),
-    (re.compile(r"\bexec\s*\("), "Python exec() detected"),
+    (re.compile(r"\beval\s*\("), "Python eval call detected"),
+    (re.compile(r"\bexec\s*\("), "Python exec call detected"),
     (re.compile(r"\bcompile\s*\([^)]*\bexec\b"), "Python compile() with exec mode"),
     # JavaScript-specific
     (re.compile(r"\bFunction\s*\("), "JavaScript Function constructor (eval-like)"),
@@ -645,7 +645,7 @@ Security Checks Performed:
   2. Path traversal blocking (../, absolute paths)
   3. Secret detection (API keys, private keys, tokens)
   4. Hardcoded user path detection (/Users/xxx/, /home/xxx/)
-  5. Dangerous file detection (.env, credentials.json)
+  5. Dangerous file detection (environment files, credential JSON)
   6. Script permission check (executable, shebang, world-writable)
   7. Plugin-wide recursive scan of all text files
 

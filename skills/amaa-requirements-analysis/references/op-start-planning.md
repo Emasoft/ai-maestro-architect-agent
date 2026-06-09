@@ -120,7 +120,7 @@ ls -la .claude/orchestrator-plan-phase.local.md
 
 | Error | Cause | Resolution |
 |-------|-------|------------|
-| State file already exists | Plan Phase active | Check the plan state file at `.claude/orchestrator-plan-phase.local.md` to resume or delete file with user approval |
+| State file already exists | Plan Phase active | Check the plan state file at `.claude/orchestrator-plan-phase.local.md` to resume, or reset it with user approval |
 | Goal is empty | No goal provided | Provide goal as positional argument or with --goal flag |
 | Permission denied | Cannot write to .claude/ | Ensure write access to project directory |
 | Script not found | Plugin not loaded | Verify plugin is enabled with `/plugins` |

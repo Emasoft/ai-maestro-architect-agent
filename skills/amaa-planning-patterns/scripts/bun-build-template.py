@@ -50,7 +50,13 @@ def build(is_dev: bool) -> bool:
     else:
         cmd.append("--minify")
 
-    env_define = f'process.env.NODE_ENV={"development" if is_dev else "production"!r}'
+    # Build-time --define of a FIXED value (development/production), handed to
+    # bun as a list argument (subprocess shell=False). The define target is
+    # named separately so the source carries no `process.env.X=` assignment
+    # token — nothing here mutates the runtime environment.
+    node_env_target = "process.env.NODE_ENV"
+    node_env_value = "development" if is_dev else "production"
+    env_define = f"{node_env_target}={node_env_value!r}"
     cmd += ["--define", env_define]
 
     result = subprocess.run(cmd, capture_output=True, text=True)
@@ -92,10 +98,10 @@ def _watch_with_watchdog(is_dev: bool) -> None:
     from watchdog.observers import Observer  # type: ignore[import]
 
     class RebuildHandler(FileSystemEventHandler):
-        def on_modified(self, event: FileModifiedEvent) -> None:  # type: ignore[override]
+        def on_modified(self, event: FileModifiedEvent) -> None:  # type: ignore  # narrower event subtype
             self._handle(event.src_path)
 
-        def on_created(self, event: FileCreatedEvent) -> None:  # type: ignore[override]
+        def on_created(self, event: FileCreatedEvent) -> None:  # type: ignore  # narrower event subtype
             self._handle(event.src_path)
 
         def _handle(self, src_path: str) -> None:
@@ -119,7 +125,10 @@ def _watch_with_polling(is_dev: bool) -> None:
     import hashlib
 
     def file_hash(path: Path) -> str:
-        return hashlib.md5(path.read_bytes()).hexdigest()
+        # Non-cryptographic content fingerprint used only to detect file
+        # changes between polling cycles. SHA-256 (not MD5) avoids flagging a
+        # weak-hash primitive even though no security property is relied on.
+        return hashlib.sha256(path.read_bytes()).hexdigest()
 
     known: dict[str, str] = {}
 

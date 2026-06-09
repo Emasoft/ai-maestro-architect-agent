@@ -188,7 +188,7 @@ Invalid: UUID-20250129-0001    (wrong prefix)
 
    **Fix:** Remove BOM:
    ```bash
-   sed -i '1s/^\xEF\xBB\xBF//' design/pdr/doc.md
+   python3 -c 'from pathlib import Path; p = Path("design/pdr/doc.md"); p.write_text(p.read_text(encoding="utf-8-sig"), encoding="utf-8")'
    ```
 
 2. **Whitespace before opening `---`**

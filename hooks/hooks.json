@@ -1,6 +1,5 @@
 {
-  "description": "Architect Agent hooks",
-  "_note": "Hook data is passed via stdin as JSON. Scripts read from stdin, not env vars.",
+  "description": "Architect Agent hooks. Hook data is passed via stdin as JSON - scripts read from stdin, not env vars.",
   "hooks": {
     "Stop": [
       {

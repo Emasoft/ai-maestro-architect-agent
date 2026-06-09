@@ -365,7 +365,10 @@ build-web:
         targets: wasm32-unknown-unknown
 
     - name: Install wasm-pack
-      run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+      run: |
+        # Download the installer, then run it (avoid piping a remote script into a shell)
+        curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSfo wasm-pack-init.sh
+        sh wasm-pack-init.sh
 
     - name: Setup Node.js
       uses: actions/setup-node@v4

@@ -17,7 +17,8 @@ PIPELINE COMPONENTS:
    - post-merge: Changelog after merge
 
 2. Validation Scripts
-   - validate_plugin.py, validate_skill.py, validate_hook.py, etc.
+   - validate_skill.py, validate_hook.py, etc. Whole-plugin validation is
+     remote: `uvx cpv-remote-validate plugin . --strict` (no local copy).
 
 3. CI/CD Templates
    - GitHub Actions workflow for validation on PR/push
@@ -253,8 +254,9 @@ if __name__ == "__main__":
 PRE_PUSH_HOOK = '''#!/usr/bin/env python3
 """pre-push hook: Lint and validate before pushing.
 
-Thin wrapper that delegates to scripts/lint_files.py and
-scripts/validate_plugin.py — the single source of truth.
+Thin wrapper that delegates to scripts/lint_files.py and the remote CPV
+validator (`uvx cpv-remote-validate plugin . --strict`) — falling back to a
+local legacy validator only if one exists in this checkout.
 """
 
 import os
@@ -334,14 +336,27 @@ def main() -> int:
             print(f"{RED}Linting failed — push blocked{NC}")
             overall = 1
 
-    # Step 2: Plugin validation
+    # Step 2: Plugin validation — prefer the remote CPV validator (always
+    # current, never vendored); fall back to a local validate_plugin.py only
+    # when this checkout actually ships one.
+    import shutil as _shutil
     validate_script = os.path.join(scripts_dir, "validate_plugin.py")
     if os.path.isfile(validate_script):
-        print(f"{BOLD}Running plugin validation...{NC}")
+        print(f"{BOLD}Running plugin validation (local validator)...{NC}")
         result = subprocess.run([python, validate_script, repo_root, "--verbose"])
         if result.returncode != 0:
             print(f"{RED}Validation failed — push blocked{NC}")
             overall = max(overall, result.returncode)
+    elif _shutil.which("uvx"):
+        print(f"{BOLD}Running plugin validation (remote CPV)...{NC}")
+        result = subprocess.run(
+            ["uvx", "cpv-remote-validate", "plugin", repo_root, "--strict"]
+        )
+        if result.returncode != 0:
+            print(f"{RED}Validation failed — push blocked{NC}")
+            overall = max(overall, result.returncode)
+    else:
+        print(f"{YELLOW}WARNING: no validator available (uvx not installed) — skipping validation{NC}")
 
     if overall == 0:
         print(f"{GREEN}{BOLD}All checks passed — push allowed{NC}")
@@ -541,13 +556,9 @@ jobs:
       - name: Find validator
         id: find-validator
         run: |
-          if [ -f "scripts/validate_plugin.py" ]; then
-            echo "validator=scripts/validate_plugin.py" >> $GITHUB_OUTPUT
-          elif [ -f "claude-plugins-validation/scripts/validate_plugin.py" ]; then
-            echo "validator=claude-plugins-validation/scripts/validate_plugin.py" >> $GITHUB_OUTPUT
-          else
-            echo "validator=" >> $GITHUB_OUTPUT
-          fi
+          # Whole-plugin validation is remote (always current, never
+          # vendored): uvx fetches the canonical CPV validator.
+          echo "validator=uvx cpv-remote-validate plugin . --strict" >> $GITHUB_OUTPUT
 
       - name: Lint all source files (read-only)
         run: python3 scripts/lint_files.py .
@@ -556,7 +567,7 @@ jobs:
         if: steps.find-validator.outputs.validator != ''
         run: |
           set +e
-          python3 ${{ steps.find-validator.outputs.validator }} . --verbose
+          ${{ steps.find-validator.outputs.validator }}
           exit_code=$?
           set -e
           # Exit codes: 0=pass, 1=critical, 2=major, 3=minor

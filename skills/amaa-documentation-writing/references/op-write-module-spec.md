@@ -185,8 +185,8 @@ result = instance.method()
 
 ## Related Modules
 
-- [Related Module 1](related-module-1.md)
-- [Related Module 2](related-module-2.md)
+- <Markdown link to related module spec 1>
+- <Markdown link to related module spec 2>
 ```
 
 ### Step 3: Apply Quality Check (6 C's)

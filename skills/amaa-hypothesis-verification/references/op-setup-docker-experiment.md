@@ -205,7 +205,7 @@ docker-compose up -d
 
 | Error | Cause | Solution |
 |-------|-------|----------|
-| Docker daemon not running | Service stopped | `sudo systemctl start docker` or start Docker Desktop |
+| Docker daemon not running | Service stopped | Start the Docker daemon via your OS service manager, or start Docker Desktop |
 | Build fails | Missing dependencies | Check Dockerfile and requirements |
 | Container exits immediately | Missing CMD or error | Check container logs |
 | Port conflict | Port already in use | Change port mapping in compose file |

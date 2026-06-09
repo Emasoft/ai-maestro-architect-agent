@@ -14,7 +14,7 @@ Usage:
     python3 amaa_design_transition.py [options]
 
 Options:
-    --force         Skip confirmation prompt
+    --force         Proceed without prompting (non-interactive mode)
     --dry-run       Show what would be done without executing
     --keep-private  Don't delete .design/ after transition
     -h, --help      Show this help
@@ -265,7 +265,7 @@ def main() -> int:
         description="Transition design docs from .design/ to docs/design/",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    parser.add_argument("--force", action="store_true", help="Skip confirmation prompt")
+    parser.add_argument("--force", action="store_true", help="Proceed without prompting (non-interactive mode)")
     parser.add_argument(
         "--dry-run",
         action="store_true",

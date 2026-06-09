@@ -9,8 +9,13 @@
 ## Platform Installation
 
 ### macOS/Linux
+
+Download the installer, review it, then run it (do not pipe a remote script
+straight into a shell):
+
 ```bash
-curl -fsSL https://bun.com/install | bash
+curl -fsSLo bun-install.sh https://bun.com/install
+bash bun-install.sh
 ```
 
 ### Windows
@@ -62,7 +67,7 @@ Always pin bun version in CI:
 
 **Solution**:
 - Ensure you have `unzip` installed: `sudo apt-get install unzip` (Debian/Ubuntu) or `sudo yum install unzip` (RHEL/CentOS)
-- Check kernel version: `uname -r` (must be 5.6 or higher)
+- Check kernel version with uname -r (must be 5.6 or higher)
 - Try installing with sudo if permission denied: `curl -fsSL https://bun.com/install | sudo bash`
 
 ### Bun Command Not Found After Installation

@@ -82,5 +82,14 @@ Output: docs_dev/design/{requirements,architecture,handoff-<uuid>}.md
 ## Resources
 
 - [design-template.md](templates/design-template.md) - Design document template
+  - Table of Contents
+  - 1. Overview
+  - 2. Requirements
+  - 3. Design
+  - 4. Implementation Plan
+  - 5. Testing Strategy
+  - 6. Review History
+  - 7. Change Log
+  - Completeness Checklist
 - amaa-requirements-analysis - Requirements input skill
 - amaa-planning-patterns - Planning integration skill
