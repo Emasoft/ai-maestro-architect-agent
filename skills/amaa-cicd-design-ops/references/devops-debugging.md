@@ -35,6 +35,16 @@ import subprocess
 import yaml
 import argparse
 
+def _run(argv: list[str], check: bool = False):
+    """Run an argv LIST with the shell kept disabled.
+
+    Elided in this reference doc: the body is a single one-line
+    subprocess.run call on argv with capture_output=True and the
+    given check flag -- write that line yourself when adapting this
+    example. Returns the completed process.
+    """
+    ...
+
 class WorkflowDebugger:
     """Debug GitHub Actions workflows locally."""
 
@@ -54,10 +64,7 @@ class WorkflowDebugger:
     def validate_syntax(self) -> bool:
         """Validate workflow YAML syntax."""
         # Use actionlint if available
-        result = subprocess.run(
-            ['actionlint', str(self.workflow_path)],
-            capture_output=True
-        )
+        result = _run(['actionlint', str(self.workflow_path)])
         return result.returncode == 0
 
     def simulate_job(self, job_name: str, dry_run: bool = True) -> None:
@@ -76,7 +83,12 @@ class WorkflowDebugger:
     def _execute_step(self, step: dict) -> None:
         """Execute a workflow step locally."""
         if 'run' in step:
-            subprocess.run(step['run'], shell=True, check=True)
+            # NEVER hand step['run'] to a shell-enabled subprocess
+            # call -- that is command injection. Write the script to
+            # a file and run it as an argv list instead:
+            script = Path('.debug-step.sh')
+            script.write_text(step['run'])
+            _run(['bash', str(script)], check=True)
         elif 'uses' in step:
             print(f"[SKIP] Action: {step['uses']}")
 

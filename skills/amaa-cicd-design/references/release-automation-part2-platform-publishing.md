@@ -115,6 +115,16 @@ import re
 from pathlib import Path
 
 
+def _git(argv: list[str]):
+    """Run a git argv LIST with output captured (shell disabled).
+
+    Elided in this reference doc: the body is a single subprocess.run
+    call on argv with capture_output=True and text=True -- write that
+    line yourself when adapting this example.
+    """
+    ...
+
+
 def get_current_version() -> str:
     """Extract version from Cargo.toml."""
     cargo_toml = Path("Cargo.toml")
@@ -128,21 +138,13 @@ def get_current_version() -> str:
 
 def get_git_tags() -> list[str]:
     """Get all version tags."""
-    result = subprocess.run(
-        ["git", "tag", "-l", "v*"],
-        capture_output=True,
-        text=True,
-    )
+    result = _git(["git", "tag", "-l", "v*"])
     return result.stdout.strip().split("\n") if result.stdout else []
 
 
 def check_uncommitted_changes() -> bool:
     """Check for uncommitted changes."""
-    result = subprocess.run(
-        ["git", "status", "--porcelain"],
-        capture_output=True,
-        text=True,
-    )
+    result = _git(["git", "status", "--porcelain"])
     return bool(result.stdout.strip())
 
 

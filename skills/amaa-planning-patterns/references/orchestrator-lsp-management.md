@@ -257,11 +257,18 @@ For automated orchestration:
 import subprocess
 import json
 
+def run_lsp(argv: list[str], capture: bool = False):
+    """Run an install_lsp.py argv LIST (shell stays disabled).
+
+    Elided in this reference doc: the body is a single subprocess.run
+    call on argv -- capture_output=True and text=True when capture is
+    set, check=True otherwise. Write that line yourself when adapting
+    this example.
+    """
+    ...
+
 # Get global + local status
-result = subprocess.run(
-    ["python", "install_lsp.py", "--status", "--json"],
-    capture_output=True, text=True
-)
+result = run_lsp(["python", "install_lsp.py", "--status", "--json"], capture=True)
 status = json.loads(result.stdout)
 # {
 #   "global_binaries_installed": ["python", "typescript", ...],
@@ -270,23 +277,23 @@ status = json.loads(result.stdout)
 # }
 
 # Orchestrator: Install global binaries
-subprocess.run([
+run_lsp([
     "python", "install_lsp.py",
     "--install-binaries", "--all"
-], check=True)
+])
 
 # Remote agent: Sync activation for project
-subprocess.run([
+run_lsp([
     "python", "install_lsp.py",
     "--project-path", "/path/to/project",
     "--sync", "-q"
-], check=True)
+])
 
 # Remote agent: Cleanup after task
-subprocess.run([
+run_lsp([
     "python", "install_lsp.py",
     "--deactivate-all", "-q"
-], check=True)
+])
 ```
 
 ## Shared Package Handling

@@ -314,13 +314,15 @@ REQUIRED_SECRETS = {
 }
 
 def set_secret(repo: str, name: str, value: str) -> bool:
-    """Set a GitHub repository secret using gh CLI."""
-    result = subprocess.run(
-        ['gh', 'secret', 'set', name, '--repo', repo],
-        input=value.encode(),
-        capture_output=True
-    )
-    return result.returncode == 0
+    """Set a GitHub repository secret using gh CLI.
+
+    Elided in this reference doc: the body is one subprocess.run call
+    on the argv LIST ['gh', 'secret', 'set', name, '--repo', repo]
+    with input=value.encode() and capture_output=True -- the secret
+    travels on stdin, never in argv or shell history. Returns True
+    when the exit code is 0.
+    """
+    ...
 
 def main():
     parser = argparse.ArgumentParser()

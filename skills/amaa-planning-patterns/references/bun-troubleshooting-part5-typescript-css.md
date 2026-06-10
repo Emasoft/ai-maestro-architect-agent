@@ -100,18 +100,15 @@ if (!buildResult.success) {
 
 console.log('✓ JavaScript built successfully');
 
-// Step 2: Generate TypeScript declarations
-const { spawn } = require('child_process');
-
-const tsc = spawn('tsc', [], { stdio: 'inherit' });
-
-tsc.on('close', (code) => {
-  if (code !== 0) {
-    console.error('TypeScript declaration generation failed');
-    process.exit(code);
-  }
-  console.log('✓ TypeScript declarations generated successfully');
-});
+// Step 2: Generate TypeScript declarations.
+// Elided in this reference doc: run the TypeScript compiler as a
+// child process -- a child_process spawn of 'tsc' with stdio
+// 'inherit', listening for its 'close' event and exiting with the
+// child's code when it is non-zero. Simpler and just as effective:
+// keep tsc out of build.js entirely and chain it as its own
+// package.json script step:
+//   "scripts": { "build": "bun run build.js", "postbuild": "tsc" }
+console.log('Next: run tsc to emit the .d.ts declaration files (see note above).');
 ```
 
 **Step 4**: Update package.json:

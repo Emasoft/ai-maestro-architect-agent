@@ -444,13 +444,14 @@ def analyze_test_results(test_output: str) -> dict:
 
 
 def run_tests_verbose() -> tuple[int, str]:
-    """Run tests with verbose output."""
-    result = subprocess.run(
-        ["cargo", "test", "--", "--nocapture"],
-        capture_output=True,
-        text=True,
-    )
-    return result.returncode, result.stdout + result.stderr
+    """Run tests with verbose output.
+
+    Elided in this reference doc: the body is one subprocess.run call
+    on the argv LIST ["cargo", "test", "--", "--nocapture"] with
+    capture_output=True and text=True; it returns the tuple
+    (returncode, stdout + stderr).
+    """
+    ...
 
 
 def main():

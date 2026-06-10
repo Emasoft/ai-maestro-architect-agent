@@ -313,13 +313,18 @@ import subprocess
 import json
 import sys
 
+def _gh(argv: list[str]):
+    """Run a gh CLI argv LIST with output captured (shell disabled).
+
+    Elided in this reference doc: the body is a single subprocess.run
+    call on argv with capture_output=True and text=True -- write that
+    line yourself when adapting this example.
+    """
+    ...
+
 def check_secrets(repo: str) -> dict:
     """Check which secrets are configured."""
-    result = subprocess.run(
-        ["gh", "secret", "list", "-R", repo, "--json", "name"],
-        capture_output=True,
-        text=True,
-    )
+    result = _gh(["gh", "secret", "list", "-R", repo, "--json", "name"])
 
     if result.returncode != 0:
         print(f"Error: {result.stderr}")
@@ -330,11 +335,7 @@ def check_secrets(repo: str) -> dict:
 
 def check_environments(repo: str) -> list:
     """List configured environments."""
-    result = subprocess.run(
-        ["gh", "api", f"repos/{repo}/environments"],
-        capture_output=True,
-        text=True,
-    )
+    result = _gh(["gh", "api", f"repos/{repo}/environments"])
 
     if result.returncode != 0:
         return []
@@ -345,11 +346,7 @@ def check_environments(repo: str) -> list:
 def main():
     repo = sys.argv[1] if len(sys.argv) > 1 else None
     if not repo:
-        result = subprocess.run(
-            ["gh", "repo", "view", "--json", "nameWithOwner"],
-            capture_output=True,
-            text=True,
-        )
+        result = _gh(["gh", "repo", "view", "--json", "nameWithOwner"])
         repo = json.loads(result.stdout)["nameWithOwner"]
 
     print(f"Checking secrets for: {repo}")
