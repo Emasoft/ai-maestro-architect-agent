@@ -5,7 +5,7 @@ Claude Code role-plugin for the AI Maestro multi-agent ecosystem: the
 implementable design documents — requirements analysis, API research,
 architecture decisions, module breakdowns, and handoff packages.
 
-**Version**: 2.6.0
+**Version**: 2.7.0
 
 ## Overview
 
@@ -160,8 +160,11 @@ blocks per session via `CLAUDE_CODE_STOP_HOOK_BLOCK_CAP`).
 
 | Directory | Purpose |
 |-----------|---------|
-| `scripts/git-hooks/` | Pre-push validation hook. Install: `python3 scripts/setup_git_hooks.py` |
 | `lib/` | Shared constants, templates, and schemas used across skills and agents |
+
+The pre-push gate is installed automatically by `scripts/publish.py` (it writes
+`.githooks/pre-push` and activates `core.hooksPath`); plugin validation runs only
+via the remote CPV launcher (`uvx cpv-remote-validate`), not vendored locally.
 
 ## Platform Requirements
 

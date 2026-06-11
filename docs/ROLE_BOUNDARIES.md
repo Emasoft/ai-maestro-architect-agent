@@ -252,6 +252,6 @@ Each agent role maps to a governance title:
 
 ---
 
-**Document Version**: 2.6.0
+**Document Version**: 2.7.0
 **Last Updated**: 2026-06-11
 **Author**: AMCOS Plugin Development

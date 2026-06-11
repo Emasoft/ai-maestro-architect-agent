@@ -18,9 +18,91 @@ Usage:
 
 from __future__ import annotations
 
+import fnmatch
+import re
 from pathlib import Path
 
-from cpv_validation_common import is_path_gitignored, parse_gitignore
+
+def parse_gitignore(gitignore_path: Path) -> list[str]:
+    """Parse a .gitignore file and return its patterns (comments/blanks stripped).
+
+    Inlined from the former cpv_validation_common helper so this plugin no longer
+    vendors a local copy of the CPV validation library — plugin validation now
+    runs only via the remote CPV launcher (uvx cpv-remote-validate). This small
+    gitignore helper stays local because publish.py's version-bump file walk uses
+    it, independent of plugin validation.
+    """
+    patterns: list[str] = []
+    try:
+        with open(gitignore_path, encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith("#"):
+                    continue
+                patterns.append(line)
+    except (OSError, UnicodeDecodeError):
+        pass
+    return patterns
+
+
+def is_path_gitignored(rel_path: str, patterns: list[str]) -> bool:
+    """Return True if a relative path matches any gitignore pattern.
+
+    Inlined from the former cpv_validation_common helper (see parse_gitignore).
+    """
+    rel_path = rel_path.replace("\\", "/")
+    path_parts = rel_path.split("/")
+
+    for pattern in patterns:
+        # Negation (!) — un-ignore a previously matched path.
+        if pattern.startswith("!"):
+            neg_pattern = pattern[1:]
+            if fnmatch.fnmatch(rel_path, neg_pattern) or fnmatch.fnmatch(str(Path(rel_path).name), neg_pattern):
+                return False
+            continue
+
+        # Directory-only patterns end with /.
+        if pattern.endswith("/"):
+            pattern = pattern[:-1]
+
+        # Anchored patterns start with /.
+        is_anchored = pattern.startswith("/")
+        if is_anchored:
+            pattern = pattern[1:]
+
+        # ** recursive matching.
+        if "**" in pattern:
+            if pattern.startswith("**/"):
+                suffix = pattern[3:]
+                if (
+                    fnmatch.fnmatch(rel_path, suffix)
+                    or fnmatch.fnmatch(rel_path, f"*/{suffix}")
+                    or f"/{suffix}" in f"/{rel_path}"
+                ):
+                    return True
+                continue
+            elif pattern.endswith("/**"):
+                prefix = pattern[:-3]
+                if rel_path.startswith(prefix + "/") or rel_path == prefix:
+                    return True
+                continue
+            else:
+                regex = pattern.replace(".", r"\.").replace("**", ".*").replace("*", "[^/]*").replace("?", "[^/]")
+                if re.match(regex + "$", rel_path):
+                    return True
+                continue
+
+        if is_anchored:
+            if fnmatch.fnmatch(rel_path, pattern):
+                return True
+        else:
+            if fnmatch.fnmatch(rel_path, pattern):
+                return True
+            for part in path_parts:
+                if fnmatch.fnmatch(part, pattern):
+                    return True
+
+    return False
 
 
 class GitignoreFilter:

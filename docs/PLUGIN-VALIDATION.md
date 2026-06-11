@@ -99,32 +99,39 @@ test failure later.
 
 ## 3. The SECURITY Gates Concept
 
-Security validation runs **before any allowlists** — the principle is that a
-plugin must prove it carries no exploitable content *first*, and only then are
-known-safe exceptions applied. The dedicated module is
-`scripts/validate_security.py`, which implements a recursive, plugin-wide scan
-with these checks:
+Security validation runs as part of the remote CPV gate
+(`cpv-remote-validate plugin . --strict`). This plugin does **not** vendor a
+local security scanner — security, like every other validation, runs **only via
+the CPV plugin**. The CPV security gate scans the whole tree for:
 
-1. **Injection detection** — command substitution, variable expansion, and
-   `eval`-style patterns.
-2. **Path-traversal blocking** — `../`, absolute paths, Windows-style paths.
-3. **Secret detection** — AWS keys, private keys, API tokens.
-4. **Hardcoded user-path detection** — `/Users/xxx/`, `/home/xxx/` leaks.
-5. **Dangerous-file detection** — `.env`, `credentials.json`, and similar.
-6. **Script-permission check** — executable bit, shebang presence,
-   world-writable files.
-7. **Plugin-wide recursive scan** — applies the above across the whole tree.
+1. **Injection** — command substitution, `eval`/`exec` of strings, `shell=True`.
+2. **Path traversal** — `../`, absolute paths, Windows-style paths.
+3. **Secrets** — AWS keys, private keys, API tokens.
+4. **Hardcoded user-path leaks** — `/Users/xxx/`, `/home/xxx/`.
+5. **Dangerous files** — `.env`, `credentials.json`, and similar.
 
-The scanner is allowlist-aware: genuine example usernames and known example
-secrets are recognized so they do not produce false positives. Because the
-security scan runs ahead of the allowlist stage, an injection pattern or a real
-leaked secret is a hard stop — it must be removed (or, for a committed live
-secret, rotated and purged from history), never suppressed by relaxing a rule.
+**No exempt, no allowlist for real threats — devitalize or remove.** A security
+finding is cleared exactly one of two ways, never by suppression:
 
-The `pre-push` git hook (`scripts/git-hooks/pre-push`, installed via
-`python3 scripts/setup_git_hooks.py`) runs validation locally before a push so
-that a security or structure regression is caught on the developer's machine
-rather than in CI.
+- **Devitalize** — if the flagged text is a benign *needle* (a detector
+  signature, a documentation example, a regex pattern), rewrite it into a shape
+  the scanner proves inert: a raw-string signature, a fenced non-executable
+  example, data instead of code. The threat's executable shape is neutralized;
+  nothing is added to an exceptions list.
+- **Remove** — if it is genuine execution-class code or a real leaked secret,
+  delete it. A live committed secret means rotate **and** purge git history.
+
+The exempt/allowlist mechanism — adding an item to a "known-safe" exceptions
+list so the scanner ignores it — is deliberately **not used**. An allowlist of
+exempted items was found to be trivially exploitable: a malicious actor simply
+names a payload to match an exempted entry and the scanner waves it through.
+There is no rule-suppression and no exempt list here; the only outcomes are
+*devitalize* or *remove*.
+
+The local pre-push gate is installed automatically by `publish.py` — it writes
+`.githooks/pre-push` from an inline template and sets `core.hooksPath`. Every
+push is forced through `publish.py`, which runs the remote CPV `--strict` gate,
+so a security or structure regression is caught before it can reach the remote.
 
 ---
 
@@ -158,22 +165,24 @@ General rules:
 Before publishing a new version of this plugin, verify every item:
 
 - [ ] **Version bumped consistently** — `.claude-plugin/plugin.json`,
-      `pyproject.toml`, and the `README.md` version line all agree
-      (`scripts/check_version_consistency.py` checks this).
+      `pyproject.toml`, and the `README.md` version line all agree (publish.py's
+      built-in version-consistency step checks plugin.json / pyproject /
+      `__version__`).
 - [ ] **CPV strict pass** — `uvx cpv-remote-validate plugin . --strict` reports
       zero CRITICAL / MAJOR / MINOR / NIT.
 - [ ] **WARNINGs reviewed** — each remaining CPV WARNING is either fixed or
       consciously accepted.
 - [ ] **Tests green** —
       `uv run --with pytest --with pyyaml python -m pytest tests/ -q` exits 0.
-- [ ] **Type-check + lint clean** — `ruff check` and `mypy` pass on `scripts/`
-      and `tests/`.
-- [ ] **Security scan clean** — `validate_security.py` reports no injection,
-      no secrets, no hardcoded user paths, no dangerous files.
+- [ ] **Type-check + lint clean** — `ruff check` passes on `scripts/` and
+      `tests/`.
+- [ ] **Security scan clean** — the CPV `--strict` gate's security scan reports
+      no injection, no secrets, no hardcoded user paths, no dangerous files. Any
+      finding is devitalized or removed — never exempted.
 - [ ] **No `[TBD]` / placeholders** — docs and skills are complete.
 - [ ] **CHANGELOG updated** — the new version's entry describes what changed.
-- [ ] **Pre-push hook installed** — `python3 scripts/setup_git_hooks.py` has
-      been run so the local gate fires before push.
+- [ ] **Pre-push hook active** — `publish.py` installs `.githooks/pre-push`
+      automatically and forces every push through itself.
 
 Only when every box is checked is the plugin ready to publish. A green
 `--strict` CPV run plus a green test suite plus a clean security scan is the
