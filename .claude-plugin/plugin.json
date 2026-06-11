@@ -1,6 +1,6 @@
 {
   "name": "ai-maestro-architect-agent",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "description": "Design documents, requirements analysis, architecture decisions - creates specifications. Requires AI Maestro for inter-agent messaging.",
   "author": {
     "name": "Emasoft",
@@ -9,6 +9,8 @@
   "repository": "https://github.com/Emasoft/ai-maestro-architect-agent",
   "license": "MIT",
   "dependencies": [
-    { "name": "ai-maestro-plugin" }
+    {
+      "name": "ai-maestro-plugin"
+    }
   ]
 }
