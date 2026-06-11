@@ -83,3 +83,5 @@ output: /docs/api-contracts/users-api.md (endpoints, request/response schemas, e
 ## Resources
 
 See **Reference Documents** table above for all reference files and their contents.
+
+- **amaa-documentation-writing-ops** - operations and troubleshooting quick-reference companion to this skill (loaded on demand for runtime ops/debugging).

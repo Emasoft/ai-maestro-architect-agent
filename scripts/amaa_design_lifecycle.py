@@ -8,6 +8,9 @@ Uses amaa_design_search.py to find documents.
 Lifecycle States:
     draft -> review -> approved -> implemented -> deprecated
                    |-> superseded (when replaced by newer version)
+    implemented -> review  (redesign loop: a design flaw surfaced mid-dev is
+                            relayed by ORCH to ARCH, who pulls the design back
+                            to review to revise it before implementation resumes)
 
 Usage:
     # Update status
@@ -48,7 +51,12 @@ VALID_TRANSITIONS = {
     "draft": {"review", "deprecated"},
     "review": {"draft", "approved", "deprecated"},
     "approved": {"implemented", "deprecated", "superseded"},
-    "implemented": {"deprecated", "superseded"},
+    # "review" here is the redesign-loop re-entry edge: when a design flaw
+    # surfaces mid-dev (comprehension handshake / in-dev dialog / pre-PR gate)
+    # and ORCH relays it to ARCH, the design returns to review for revision
+    # instead of the team improvising around the flaw. Without it the machine
+    # is a one-way street and surfaced design problems have nowhere to go.
+    "implemented": {"review", "deprecated", "superseded"},
     "deprecated": set(),  # Terminal state
     "superseded": set(),  # Terminal state
     "archived": set(),  # Terminal state

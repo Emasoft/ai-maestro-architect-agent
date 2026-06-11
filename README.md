@@ -5,7 +5,7 @@ Claude Code role-plugin for the AI Maestro multi-agent ecosystem: the
 implementable design documents — requirements analysis, API research,
 architecture decisions, module breakdowns, and handoff packages.
 
-**Version**: 2.4.8
+**Version**: 2.6.0
 
 ## Overview
 
@@ -71,11 +71,16 @@ The Architect Agent handles **design documents, requirements analysis, and archi
 
 ## Workflow
 
-1. Receives requirements from AMAMA (Manager)
+1. Receives requirements from AMCOS (Chief of Staff — the team boundary)
 2. Analyzes requirements and creates design documents
 3. Breaks work into implementable modules
 4. Creates handoff document for AMOA (Orchestrator)
-5. Reports completion to AMAMA (Manager)
+5. Reports completion to AMCOS (Chief of Staff)
+
+> Per the R6 v3 communication graph, the ARCHITECT is a team-internal role: work
+> intake and completion reporting flow through AMCOS (the Chief of Staff guards
+> the team boundary); the MANAGER (AMAMA) reaches the team only via AMCOS. A
+> direct AMAA→AMOA edge exists for design handoffs.
 
 ## Output Artifacts
 

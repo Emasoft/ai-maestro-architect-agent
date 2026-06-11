@@ -1,5 +1,22 @@
 # AMAMA Role Boundaries
 
+> **⚠️ SECONDARY ECOSYSTEM-OVERVIEW DOC — NOT AUTHORITATIVE FOR COMMUNICATION**
+>
+> This file is a high-level overview of how the AI Maestro roles relate to
+> each other. It is **NOT** the authoritative source for the ARCHITECT's
+> communication model. The authoritative communication model is **R6 v3**,
+> defined in:
+> - `agents/ai-maestro-architect-agent-main-agent.md` (the **Communication
+>   Permissions** section), and
+> - the rules under `~/.claude/rules/`.
+>
+> **On any conflict, those sources win over this document.** In particular,
+> under R6 v3 the ARCHITECT (AMAA) is **team-internal**: all intake and
+> completion reporting flow through **AMCOS (Chief of Staff)** at the team
+> boundary; **MANAGER (AMAMA) reaches team-internal agents ONLY via AMCOS**;
+> there is a direct **AMAA → AMOA** edge for design handoffs; and ARCHITECT
+> peers route via the **ORCHESTRATOR (AMOA)**.
+
 > **Note**: This is a local reference copy. The authoritative source for role boundaries and governance rules is the `team-governance` skill in the AI Maestro core system.
 
 **CRITICAL: This document defines the strict boundaries between agent roles. Violating these boundaries breaks the system architecture.**
@@ -7,6 +24,10 @@
 ---
 
 ## Role Hierarchy
+
+Under **R6 v3**, MANAGER (AMAMA) does **not** reach the team-internal
+agents (AMOA, AMIA, AMAA) directly — every message crosses the team
+boundary through **AMCOS (Chief of Staff)**:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -21,19 +42,40 @@
 │              - Approves AMCOS requests                           │
 │              - Supervises all operations                         │
 └──────────────────────────┬──────────────────────────────────────┘
-                           │
-         ┌─────────────────┼─────────────────┐
+                           │  (MANAGER ⇄ team-internal agents
+                           │   ONLY via AMCOS — the team boundary)
+                           ▼
+              ┌─────────────────────────┐
+              │          AMCOS          │
+              │     Chief of Staff      │
+              │      TEAM-SCOPED        │
+              │     (one per team)      │
+              │  = the team boundary    │
+              └────────────┬────────────┘
+                           │  (intake + completion reporting
+         ┌─────────────────┼─────────────────┐  for every team-internal agent)
          │                 │                 │
          ▼                 ▼                 ▼
 ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
-│      AMCOS      │ │      AMOA       │ │      AMIA       │
-│ Chief of Staff  │ │  Orchestrator   │ │   Integrator    │
+│      AMOA       │ │      AMIA       │ │      AMAA       │
+│  Orchestrator   │ │   Integrator    │ │   Architect     │
 │                 │ │                 │ │                 │
-│ TEAM-SCOPED     │ │ PROJECT-        │ │ PROJECT-        │
-│                 │ │ LINKED          │ │ LINKED          │
-│ (one per team)  │ │ (one per proj)  │ │ (one per proj)  │
-└─────────────────┘ └─────────────────┘ └─────────────────┘
+│ PROJECT-        │ │ PROJECT-        │ │ PROJECT-        │
+│ LINKED          │ │ LINKED          │ │ LINKED          │
+│ (one per proj)  │ │ (one per proj)  │ │ (one per proj)  │
+└────────┬────────┘ └─────────────────┘ └────────┬────────┘
+         │                                       │
+         │   ◄───── direct AMAA → AMOA ──────────┘
+         │          design-handoff edge
+         ▼
+   (ARCHITECT peers route via the ORCHESTRATOR)
 ```
+
+**Team-internal routing (R6 v3):** AMAA, AMOA, and AMIA are
+**team-internal**. Their intake and completion reporting flow through
+**AMCOS** at the team boundary. The one exception edge is the direct
+**AMAA → AMOA** handoff for delivering a finished design; ARCHITECT
+peers route via the **ORCHESTRATOR (AMOA)**.
 
 ---
 
@@ -60,7 +102,10 @@
 
 ### AMCOS Scope:
 - **Team-scoped**: One AMCOS per team manages agents within the team
-- **Team-agnostic**: Creates teams but doesn't manage their work
+- **Team boundary (R6 v3)**: AMCOS is the communication boundary for the
+  team — MANAGER (AMAMA) reaches the team-internal agents (AMOA, AMIA,
+  AMAA) **only via AMCOS**, and those agents' intake and completion
+  reporting flow back out through AMCOS
 - **Infrastructure-focused**: Ensures agents exist and are configured
 
 ---
@@ -207,6 +252,6 @@ Each agent role maps to a governance title:
 
 ---
 
-**Document Version**: 2.0.0
-**Last Updated**: 2026-03-13
+**Document Version**: 2.6.0
+**Last Updated**: 2026-06-11
 **Author**: AMCOS Plugin Development

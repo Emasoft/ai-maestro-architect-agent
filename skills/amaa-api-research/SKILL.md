@@ -84,3 +84,5 @@ Output: stripe-api-overview.md, stripe-authentication.md,
 ## Resources
 
 See Reference Documents table above.
+
+- **amaa-api-research-ops** - operations and troubleshooting quick-reference companion to this skill (loaded on demand for runtime ops/debugging).

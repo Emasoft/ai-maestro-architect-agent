@@ -10,7 +10,7 @@ user-invocable: false
 
 ## Overview
 
-Manages the complete lifecycle of design documents: creation, review, approval, implementation tracking, and archival. Enforces valid state transitions (DRAFT->REVIEW->APPROVED->IMPLEMENTING->COMPLETED->ARCHIVED) and generates handoff documents for implementers.
+Manages the complete lifecycle of design documents: creation, review, approval, implementation tracking, and archival. Enforces valid state transitions (DRAFT->REVIEW->APPROVED->IMPLEMENTING->COMPLETED->ARCHIVED) plus the redesign-loop re-entry edge `IMPLEMENTING->REVIEW` (so a design flaw surfaced mid-dev can be pulled back and revised), and generates handoff documents for implementers.
 
 ## Checklist
 
@@ -26,6 +26,7 @@ Copy this checklist and track your progress:
 - [ ] Create handoff document for AMOA
 - [ ] Report completion to AMCOS
 - [ ] Track implementation progress
+- [ ] If a design flaw surfaces mid-dev (relayed by ORCH): run the redesign loop (IMPLEMENTING->REVIEW), revise or split/group, re-approve
 - [ ] Archive when complete (state: ARCHIVED)
 
 ## Prerequisites
@@ -48,7 +49,9 @@ Copy this checklist and track your progress:
 | Reference | Description |
 |-----------|-------------|
 | [procedures.md](references/procedures.md) | PROCEDURE 1: Create New Design, PROCEDURE 2: Submit for Review, PROCEDURE 3: Approve Design, PROCEDURE 4: Track Implementation, PROCEDURE 5: Complete and Archive |
-| [design-states.md](references/design-states.md) | State Definitions |
+| [design-states.md](references/design-states.md) | State Definitions + the redesign loop (mid-dev re-entry) |
+| [op-manage-state-transitions.md](references/op-manage-state-transitions.md) | When to Use, Prerequisites, Procedure, State Transition Rules, Checklist, Examples, Error Handling |
+| [op-accept-redesign-request.md](references/op-accept-redesign-request.md) | When to Use, Prerequisites, Procedure, Checklist, Related Operations, Related Templates |
 | [examples.md](references/examples.md) | Example 1: Design Real-Time Collaborative Editor, Example 2: Design Stripe Payment Integration, Example 3: Create and Submit Design for Review (Lifecycle), Example 4: Approve and Track Implementation (Lifecycle) |
 | [scripts.md](references/scripts.md) | Script Reference |
 | [rule-14-enforcement.md](references/rule-14-enforcement.md) | 1 When handling user requirements in any workflow, 2 When detecting potential requirement deviations, 3 When a technical constraint conflicts with a requirement, 4 When documenting requirement compliance |
@@ -66,7 +69,7 @@ Output: docs_dev/design/{requirements,architecture,handoff-<uuid>}.md
 
 | Error | Solution |
 |-------|----------|
-| Invalid state transition | Follow valid path: DRAFT->REVIEW->APPROVED->IMPLEMENTING->COMPLETED->ARCHIVED |
+| Invalid state transition | Follow valid path: DRAFT->REVIEW->APPROVED->IMPLEMENTING->COMPLETED->ARCHIVED, plus the redesign re-entry IMPLEMENTING->REVIEW |
 | Missing UUID | Generate UUID before registration |
 | Index conflict | Use unique timestamp-based UUIDs |
 | Unresolved review comments | Resolve all comments before approval |
@@ -91,5 +94,18 @@ Output: docs_dev/design/{requirements,architecture,handoff-<uuid>}.md
   - 6. Review History
   - 7. Change Log
   - Completeness Checklist
+- [dialog-loop-comprehension-handshake.md](templates/dialog-loop-comprehension-handshake.md) - Loop A: ORCH⇄MEMBER task-comprehension handshake before coding starts
+  - ORCH → MEMBER (question set)
+  - MEMBER → ORCH (answers)
+  - Resolution
+- [dialog-loop-in-dev-issue.md](templates/dialog-loop-in-dev-issue.md) - Loop B: MEMBER⇄ORCH in-dev issue dialog (design flaw → ARCH redesign loop)
+  - MEMBER → ORCH (issue report)
+  - ORCH routing
+  - Resolution
+- [dialog-loop-pre-pr-gate.md](templates/dialog-loop-pre-pr-gate.md) - Loop C: MEMBER⇄ORCH pre-PR gate before notifying INT
+  - MEMBER → ORCH (readiness claim)
+  - ORCH decision
+  - Resolution
 - amaa-requirements-analysis - Requirements input skill
 - amaa-planning-patterns - Planning integration skill
+- amaa-design-lifecycle-ops - Operations and troubleshooting quick-reference companion to this skill (loaded on demand for runtime ops/debugging)

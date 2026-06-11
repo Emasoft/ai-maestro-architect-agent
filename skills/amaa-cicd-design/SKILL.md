@@ -74,3 +74,5 @@ Example: `matrix: os: [ubuntu-latest, macos-latest, windows-latest]`
 ## Resources
 
 See Reference Documents table above.
+
+- **amaa-cicd-design-ops** - operations and troubleshooting quick-reference companion to this skill (loaded on demand for runtime ops/debugging).

@@ -39,8 +39,9 @@ Design documents follow this state machine:
 
 ```
 DRAFT → REVIEW → APPROVED → IMPLEMENTING → COMPLETED → ARCHIVED
-         ↓
-        DRAFT (revision)
+         ↑ ↓                     │
+         │ DRAFT (revision)      │
+         └──── REVIEW ◄──────────┘  (mid-dev redesign loop)
 ```
 
 **State Definitions:**
@@ -50,9 +51,17 @@ DRAFT → REVIEW → APPROVED → IMPLEMENTING → COMPLETED → ARCHIVED
 | DRAFT | Initial creation, work in progress | REVIEW |
 | REVIEW | Under review by stakeholders | APPROVED, DRAFT |
 | APPROVED | Ready for implementation | IMPLEMENTING |
-| IMPLEMENTING | Being implemented | COMPLETED |
+| IMPLEMENTING | Being implemented | COMPLETED, REVIEW |
 | COMPLETED | Fully implemented | ARCHIVED |
 | ARCHIVED | Historical reference (terminal) | None |
+
+**The redesign loop (`IMPLEMENTING → REVIEW`)** is the re-entry edge that makes
+mid-dev redesign possible. When a design flaw surfaces *after* implementation
+starts — through the task-comprehension handshake, the in-dev issue dialog, or
+the pre-PR gate — ORCH relays it to ARCH (R6 v3 direct edge), and ARCH pulls the
+design back to REVIEW to revise it (or split/group it into new TRDDs) rather than
+letting the team improvise around the flaw. Without this edge the dialog loops
+have nowhere to route a surfaced design problem.
 
 ### Step 2: Check Current State
 
@@ -144,6 +153,26 @@ python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition IMPLEMENTING
 python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition COMPLETED
 ```
 
+### IMPLEMENTING to REVIEW (Redesign loop)
+
+**When to use:** A design flaw surfaced *after* implementation started — raised
+by a MEMBER during the task-comprehension handshake, the in-dev issue dialog, or
+the pre-PR gate, and relayed to ARCH by ORCH. The design must be revised before
+implementation can correctly continue.
+
+**Prerequisites:**
+- ARCH has confirmed the surfaced issue is a genuine design flaw (not an
+  implementation question answerable in the dialog without a state change).
+- The redesign intent is recorded (which requirement/assumption was wrong).
+
+**On re-entry, ARCH either:**
+- revises this design in place (then REVIEW → APPROVED → IMPLEMENTING again), or
+- splits/groups it into new TRDDs (this design may become `superseded`).
+
+```bash
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition REVIEW
+```
+
 ### COMPLETED to ARCHIVED
 
 **Prerequisites:**
@@ -212,6 +241,22 @@ python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --tran
 # Output: State transitioned: DRAFT -> REVIEW
 ```
 
+### Example: Mid-dev Redesign (the redesign loop)
+
+```bash
+# Design is IMPLEMENTING; a MEMBER surfaced a design flaw via ORCH
+python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --action check-state
+# Output: Current state: IMPLEMENTING
+
+# Pull the design back to REVIEW to redesign
+python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition REVIEW
+# Output: State transitioned: IMPLEMENTING -> REVIEW (redesign loop)
+
+# Revise the design, re-approve, resume implementation
+python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition APPROVED
+python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition IMPLEMENTING
+```
+
 ### Example: Invalid Transition Error
 
 ```bash
@@ -229,9 +274,11 @@ python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --tran
 | DRAFT | - | YES | NO | NO | NO | NO |
 | REVIEW | YES | - | YES | NO | NO | NO |
 | APPROVED | NO | NO | - | YES | NO | NO |
-| IMPLEMENTING | NO | NO | NO | - | YES | NO |
+| IMPLEMENTING | NO | YES | NO | - | YES | NO |
 | COMPLETED | NO | NO | NO | NO | - | YES |
 | ARCHIVED | NO | NO | NO | NO | NO | - |
+
+`IMPLEMENTING → REVIEW` is the redesign-loop re-entry edge (see the rule above).
 
 ## Error Handling
 
@@ -249,4 +296,5 @@ python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --tran
 - [op-submit-design-review.md](op-submit-design-review.md) - DRAFT to REVIEW
 - [op-approve-design.md](op-approve-design.md) - REVIEW to APPROVED
 - [op-track-implementation.md](op-track-implementation.md) - APPROVED to IMPLEMENTING
+- [op-accept-redesign-request.md](op-accept-redesign-request.md) - IMPLEMENTING to REVIEW (redesign loop)
 - [op-archive-design.md](op-archive-design.md) - COMPLETED to ARCHIVED

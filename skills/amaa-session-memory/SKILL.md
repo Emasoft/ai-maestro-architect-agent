@@ -73,3 +73,5 @@ Next action: Resolve OQ-002 (Payment processor selection)
 ## Resources
 
 See Reference Documents table above.
+
+- **amaa-session-memory-ops** - operations and troubleshooting quick-reference companion to this skill (loaded on demand for runtime ops/debugging).

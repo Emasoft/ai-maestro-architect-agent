@@ -76,4 +76,5 @@ gh issue edit 123 --remove-label "effort:s" --add-label "effort:m"
 
 - **AGENT_OPERATIONS.md** - AMAA role definition
 - **amaa-modularization** - Module breakdown procedures
+- **amaa-label-taxonomy-ops** - Operations and troubleshooting quick-reference companion to this skill (loaded on demand for runtime ops/debugging)
 - **references/** - Detailed taxonomy tables, commands, and examples

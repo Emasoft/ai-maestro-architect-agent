@@ -74,3 +74,5 @@ Example: `UserService (2000 LOC) → AuthModule, ProfileModule, RegistrationModu
 ## Resources
 
 See Reference Documents table above.
+
+- **amaa-modularization-ops** - operations and troubleshooting quick-reference companion to this skill (loaded on demand for runtime ops/debugging).

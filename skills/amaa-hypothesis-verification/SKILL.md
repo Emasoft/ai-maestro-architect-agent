@@ -78,3 +78,5 @@ Claim: "Redis caches responses 10x faster than in-memory dict" (TBV)
 ## Resources
 
 See Reference Documents table above.
+
+- **amaa-hypothesis-verification-ops** - operations and troubleshooting quick-reference companion to this skill (loaded on demand for runtime ops/debugging).

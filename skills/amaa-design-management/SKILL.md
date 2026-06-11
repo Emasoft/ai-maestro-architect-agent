@@ -69,6 +69,8 @@ python scripts/amaa_design_validate.py --all
 
 See Reference Documents table above.
 
+- **amaa-design-management-ops** - operations and troubleshooting quick-reference companion to this skill (loaded on demand for runtime ops/debugging).
+
 ## Output
 
 | Output | Format | Example |

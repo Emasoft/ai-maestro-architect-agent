@@ -14,10 +14,13 @@ amaa-<project>-<descriptive>
 ```
 
 ### Examples
-- `amaa-svgbbox-architect` - Architecture work for svgbbox project
-- `amaa-design-lead` - General design leadership
-- `amaa-pdftools-api-designer` - API design for pdftools project
-- `amaa-infrastructure-planner` - Infrastructure architecture
+- `amaa-checkout-architect` - Architecture work for the checkout project
+- `amaa-billing-architect` - Architecture work for the billing project
+- `amaa-payments-architect` - Architecture work for the payments project
+- `amaa-infra-architect` - Infrastructure architecture work
+
+The convention is `amaa-<project>-<descriptive>`; pick a short
+project slug and an architecture-focused descriptive suffix.
 
 ### Rules
 - **Prefix MUST be `amaa-`** (all lowercase)
@@ -66,8 +69,8 @@ Refer to the `ai-maestro-agents-management` skill for the exact creation procedu
 
 | Variable | Points To | Example |
 |----------|-----------|---------|
-| `${CLAUDE_PLUGIN_ROOT}` | ai-maestro-architect-agent plugin root | `~/agents/amaa-project/...ai-maestro-architect-agent/` |
-| `${CLAUDE_PROJECT_DIR}` | AMAA working directory | `~/agents/amaa-project-architect/` |
+| `${CLAUDE_PLUGIN_ROOT}` | ai-maestro-architect-agent plugin root | `~/agents/<project>/...ai-maestro-architect-agent/` |
+| `${CLAUDE_PROJECT_DIR}` | AMAA working directory | `~/agents/<project>/` |
 
 ### Plugin Structure
 
@@ -77,16 +80,20 @@ ${CLAUDE_PLUGIN_ROOT}/
 │   └── plugin.json
 ├── agents/
 │   ├── ai-maestro-architect-agent-main-agent.md
-│   ├── amaa-pdr-writer.md
-│   ├── amaa-requirements-analyst.md
 │   ├── amaa-api-researcher.md
-│   └── amaa-ci-pipeline-designer.md
+│   ├── amaa-cicd-designer.md
+│   ├── amaa-documentation-writer.md
+│   ├── amaa-modularizer-expert.md
+│   └── amaa-planner.md
 ├── skills/
 │   ├── amaa-design-lifecycle/
 │   ├── amaa-requirements-analysis/
-│   ├── amaa-pdr-writing/
+│   ├── amaa-documentation-writing/
 │   ├── amaa-api-research/
-│   └── amaa-ci-pipeline-design/
+│   ├── amaa-cicd-design/
+│   ├── amaa-modularization/
+│   ├── amaa-planning-patterns/
+│   └── amaa-prrd-trdd-kanban/
 ├── hooks/
 │   └── hooks.json
 ├── scripts/
@@ -150,9 +157,9 @@ To report to AMCOS, send a message using the `agent-messaging` skill with:
 ```
 amaa-design-lifecycle
 amaa-requirements-analysis
-amaa-pdr-writing
+amaa-documentation-writing
 amaa-api-research
-amaa-ci-pipeline-design
+amaa-cicd-design
 ```
 
 **WRONG** - Do NOT use file paths:
@@ -323,9 +330,9 @@ I have completed the architecture design. The document is located at /path/to/fi
 |-------|----------|--------|
 | **amaa-design-lifecycle** | Starting new design, need design process | Design phase checklist, milestones |
 | **amaa-requirements-analysis** | Gathering/documenting requirements | Requirements document |
-| **amaa-pdr-writing** | Creating Preliminary Design Review doc | PDR.md |
+| **amaa-documentation-writing** | Creating design docs, PDR, technical specs | PDR.md, SPEC.md |
 | **amaa-api-research** | Need to choose external API/library | API comparison, recommendations |
-| **amaa-ci-pipeline-design** | Designing CI/CD workflow | Pipeline config, workflow diagram |
+| **amaa-cicd-design** | Designing CI/CD workflow | Pipeline config, workflow diagram |
 
 ### Skill Activation Pattern
 
@@ -501,7 +508,7 @@ All projects use the canonical **5-column kanban system** on GitHub Projects:
 | **AMAA Architecture** | `${CLAUDE_PLUGIN_ROOT}/docs/AMAA-ARCHITECTURE.md` | Plugin design philosophy |
 | **Plugin Validation** | `${CLAUDE_PLUGIN_ROOT}/docs/PLUGIN-VALIDATION.md` | Validation procedures |
 | **Skill: Design Lifecycle** | `${CLAUDE_PLUGIN_ROOT}/skills/amaa-design-lifecycle/` | Design process guide |
-| **Skill: PDR Writing** | `${CLAUDE_PLUGIN_ROOT}/skills/amaa-pdr-writing/` | PDR creation guide |
+| **Skill: Documentation Writing** | `${CLAUDE_PLUGIN_ROOT}/skills/amaa-documentation-writing/` | Design doc / PDR creation guide |
 
 ---
 

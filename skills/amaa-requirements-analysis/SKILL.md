@@ -70,6 +70,8 @@ Copy this checklist and track your progress:
 
 See Reference Documents table above.
 
+- **amaa-requirements-analysis-ops** - operations and troubleshooting quick-reference companion to this skill (loaded on demand for runtime ops/debugging).
+
 ## Output
 
 | Command | Output |

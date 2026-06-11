@@ -7,5 +7,8 @@
     "email": "713559+Emasoft@users.noreply.github.com"
   },
   "repository": "https://github.com/Emasoft/ai-maestro-architect-agent",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": [
+    { "name": "ai-maestro-plugin" }
+  ]
 }

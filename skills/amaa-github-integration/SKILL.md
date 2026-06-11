@@ -84,3 +84,5 @@ python scripts/amaa_github_issue_create.py --uuid PROJ-SPEC-20250129-a1b2c3d4
 ## Resources
 
 See Reference Documents table above.
+
+- **amaa-github-integration-ops** - operations and troubleshooting quick-reference companion to this skill (loaded on demand for runtime ops/debugging).

@@ -1,9 +1,20 @@
 # Full Project Workflow: From Requirements to Delivery
 
-**Version**: 2.0.0
-**Last Updated**: 2026-03-13
+**Version**: 2.6.0
+**Last Updated**: 2026-06-11
 
-> **Note**: This is a local reference copy. The authoritative source for role boundaries and governance rules is the `team-governance` skill in the AI Maestro core system.
+> **Canonical source (read on any conflict):** the authoritative communication
+> model is **R6 v3** as encoded in this plugin's main agent
+> (`agents/ai-maestro-architect-agent-main-agent.md` → *Communication
+> Permissions*) and `~/.claude/rules/`; the authoritative task-pipeline model is
+> the **v2 `column:` schema** in `skills/amaa-prrd-trdd-kanban/SKILL.md` (and the
+> universal `prrd-trdd-kanban` skill in `ai-maestro-plugin`). This document is a
+> secondary ecosystem overview — where it disagrees with those, **they win.**
+>
+> **R6 v3 in one line:** the ARCHITECT is a *team-internal* role. Work intake and
+> completion reporting flow through **AMCOS** (the Chief of Staff guards the team
+> boundary); the MANAGER (AMAMA) reaches team-internal agents **only via AMCOS**.
+> A direct AMAA→AMOA edge exists for design handoffs.
 
 This document describes the complete workflow for how the AI Maestro agent system handles a project from initial requirements to delivery. All agents must understand this workflow to coordinate effectively.
 
@@ -26,18 +37,18 @@ AMCOS (Chief of Staff)                                        │
   │ 4. Creates/assigns agents                                │
   │ 5. Notifies AMAMA: team ready                            │
   ▼                                                          │
-AMAMA ────────────────────────────────────────────────────►  │
+AMCOS ────────────────────────────────────────────────────►  │
   │                                                          │
-  │ 6. Sends requirements to AMAA                            │
+  │ 6. Routes requirements to AMAA (team-internal)           │
   ▼                                                          │
 AMAA (Architect)                                              │
   │                                                          │
   │ 7. Creates design document                               │
-  │ 8. Sends design to AMAMA                                 │
+  │ 8. Reports design ready to AMCOS                         │
   ▼                                                          │
-AMAMA ◄──── USER APPROVAL ────────────────────────────────►  │
+AMCOS ──► AMAMA ◄──── USER APPROVAL ──────────────────────►  │
   │                                                          │
-  │ 9. Sends approved design to AMOA                         │
+  │ 9. Approved design handed to AMOA (AMAA→AMOA direct)     │
   ▼                                                          │
 AMOA (Orchestrator)                                           │
   │                                                          │
@@ -67,29 +78,36 @@ AMOA ◄────────────────────────
 
 ## Kanban Column System
 
-All projects use a **5-column kanban system** aligned with AI Maestro's task statuses. Every agent must understand these columns and use the canonical code format consistently.
+> **Canonical model = the v2 `column:` pipeline.** The authoritative task
+> pipeline is the TRDD **v2 `column:` schema** documented in
+> `skills/amaa-prrd-trdd-kanban/SKILL.md` and the universal `prrd-trdd-kanban`
+> skill in `ai-maestro-plugin`. The legacy "5-column" board
+> (Backlog/Pending/In Progress/Review/Completed) is **superseded** — do not use
+> it. Per-team column sets are **configurable** (Emasoft/ai-maestro#2, open at
+> time of writing); until that lands, use the v2 pipeline below.
 
-### Canonical Columns
+### The v2 column pipeline
 
-| # | Column | Code Format | Label | Description |
-|---|--------|-------------|-------|-------------|
-| 1 | Backlog | `backlog` | `status:backlog` | Entry point for all new issues |
-| 2 | Pending | `pending` | `status:pending` | Ready to start, awaiting assignment |
-| 3 | In Progress | `in_progress` | `status:in_progress` | Active work by assigned agent |
-| 4 | Review | `review` | `status:review` | Under review (AI or human) |
-| 5 | Completed | `completed` | `status:completed` | Completed and merged |
+```
+backburner → todo → design → dispatch → dev → testing → ai_review
+   → (human_review) → complete → publish | deploy → published | live
+```
 
-### Task Routing
+Plus the orthogonal exception columns: `blocked` (RED — has a non-empty
+`blocked-by:`), `failed` (retryable, stays open), and `superseded` (replaced by
+split/group children).
 
-- **Standard flow**: Backlog → Pending → In Progress → Review → Completed
-- **Blocked items**: Set `status:blocked` label on any issue; return to previous column when unblocked
-- **Review**: Covers both AI review (AMIA) and human review (via AMAMA → user)
+**The ARCHITECT owns exactly one column — `design`** — the only column with 1→N
+(split) and N→1 (group) topology. A proto-TRDD lands in `design`; ARCH shapes it
+into one or more fully-designed TRDDs that move to `dispatch`. ARCH does not own
+any other column (single-writer-per-domain).
 
 ### Code Format Rules
 
-- **Always use underscores**: `in_progress` (NOT dashes, to match AI Maestro API)
-- **Labels use `status:` prefix**: `status:in_progress`, `status:review`
-- **Display names use title case**: "In Progress", "Review", "Completed"
+- **Column values are bare kebab-case** in TRDD frontmatter: `column: design`,
+  `column: ai_review` (underscores within a name, never dashes).
+- See `~/.claude/rules/trdd-design-tasks.md` for the full column enum, the
+  transition matrix, and the NPT/EHT relationships.
 
 ---
 
@@ -153,21 +171,24 @@ All projects use a **5-column kanban system** aligned with AI Maestro's task sta
 ### Phase 2: Design and Planning
 
 #### Step 6: Requirements to Architect
-**Actor**: AMAMA (Manager)
+**Actor**: AMAMA (Manager) → AMCOS (Chief of Staff)
 **Action**:
-- Send the requirements to the Architect agent (AMAA)
+- Manager hands the requirements to **AMCOS**, who routes them to the Architect
+  (AMAA) — the team boundary. Per R6 v3 the Manager does NOT message AMAA
+  directly; AMCOS is the team gateway.
 - Expand the requirements with more details
 - Include the list of team member names in the requirements
 - Assign to the Architect the task of developing the design document
 
 **Communication**:
 - GitHub: Create issue with requirements, assign label for AMAA
-- AI Maestro: Message to AMAA with full requirements and team roster
+- AI Maestro: AMAMA → AMCOS → AMAA with full requirements and team roster
 
 #### Step 7: Design Document Creation
 **Actor**: AMAA (Architect)
 **Action**:
-- Receive the task (on the kanban) to convert requirements into a full design document
+- Receive the task (on the kanban, in the `design` column) to convert
+  requirements into a full design document
 - Create design document with:
   - System architecture
   - Module specifications
@@ -177,16 +198,17 @@ All projects use a **5-column kanban system** aligned with AI Maestro's task sta
 
 **Communication**:
 - GitHub: Update issue with progress
-- AI Maestro: Progress updates to AMAMA
+- AI Maestro: Progress updates to **AMCOS** (not AMAMA — team-internal reporting)
 
 #### Step 8: Design Submission
 **Actor**: AMAA (Architect)
 **Action**:
-- Send the completed design document back to the Manager
+- Report the completed design document ready, **back through AMCOS**
 
 **Communication**:
 - GitHub: Attach design document to issue, mark ready for review
-- AI Maestro: Notification to AMAMA that design is ready
+- AI Maestro: Notification to **AMCOS** that design is ready (AMCOS relays up to
+  AMAMA for the USER-approval step)
 
 #### Step 9: Design Approval
 **Actor**: AMAMA (Manager) + USER
