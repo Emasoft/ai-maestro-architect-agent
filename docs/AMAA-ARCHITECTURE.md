@@ -86,9 +86,12 @@ The 14 base skills are: `amaa-api-research`, `amaa-cicd-design`,
 `amaa-github-integration`, `amaa-hypothesis-verification`,
 `amaa-label-taxonomy`, `amaa-modularization`, `amaa-planning-patterns`,
 `amaa-prrd-trdd-kanban`, `amaa-requirements-analysis`, `amaa-session-memory` —
-each with its `-ops` twin. Two further skills, `architect-memory-recall` and
-`architect-memory-write`, give AMAA a durable, symptom-indexed markdown memory
-(recall before acting; write decisions, not artifacts).
+each with its `-ops` twin. Durable, symptom-indexed memory is provided by the
+**global janitor-hosted memory system** (the user-level `ai-maestro-janitor`
+plugin: the `/janitor-memory-recall`, `/janitor-memory-write`, and
+`/janitor-memory-update` skills plus the `~/.claude/rules/markdown-memory-recall.md`
+rule) — recall before acting; write decisions, not artifacts. AMAA ships no
+per-plugin memory skills; the proactive-use contract lives in `CLAUDE.md`.
 
 Deeper material that even an `-ops` skill would bloat lives one level further
 down in each skill's `references/` and `templates/` directories, linked from

@@ -10,7 +10,8 @@
   "license": "MIT",
   "dependencies": [
     {
-      "name": "ai-maestro-plugin"
+      "name": "ai-maestro-plugin",
+      "version": "^2.7.0"
     }
   ]
 }

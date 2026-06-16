@@ -60,8 +60,12 @@ The Architect Agent handles **design documents, requirements analysis, and archi
 | `amaa-label-taxonomy` | Label and tagging patterns |
 | `amaa-modularization` | Module decomposition patterns |
 | `amaa-session-memory` | Session context persistence |
-| `architect-memory-recall` | Symptom-ranked recall over markdown memory notes (memgrep with grep fallback) |
-| `architect-memory-write` | Capture one durable, symptom-indexed memory note + index line |
+
+> **Durable memory** is provided by the **global janitor-hosted memory system**
+> (the user-level `ai-maestro-janitor` plugin) — the `/janitor-memory-recall`,
+> `/janitor-memory-write`, and `/janitor-memory-update` skills plus the
+> `~/.claude/rules/markdown-memory-recall.md` rule. AMAA ships **no per-plugin
+> memory skills**; see [`CLAUDE.md`](CLAUDE.md) for the proactive-use contract.
 
 ### Hooks
 

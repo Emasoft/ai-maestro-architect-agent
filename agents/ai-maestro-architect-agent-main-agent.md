@@ -12,8 +12,6 @@ skills:
   - amaa-label-taxonomy
   - amaa-requirements-analysis
   - amaa-prrd-trdd-kanban
-  - architect-memory-recall
-  - architect-memory-write
 ---
 
 # Architect Main Agent
@@ -345,27 +343,29 @@ clobbering each other's work.
 
 ---
 
-## Memory Integration Status
+## Memory Protocol
 
-AMAA maintains layered memory:
-- `.claude/amaa-session-state.local.md` — session state persistence
-- `docs_dev/design/index.json` — design document index
-- **Markdown memory notes** — durable, symptom-indexed facts in the
-  project's memory dir, governed by `rules/memory-protocol.md`
+This plugin uses the **GLOBAL janitor-hosted memory system** — the user-level
+`ai-maestro-janitor` plugin provides `/janitor-memory-recall`,
+`/janitor-memory-write`, `/janitor-memory-update`; the protocol + recall law live
+in `~/.claude/rules/markdown-memory-recall.md`; the full PROACTIVE-USE contract,
+the 3 scopes, and the zsh-safe array-form recall command are in
+[`CLAUDE.md`](../CLAUDE.md). AMAA ships **no per-plugin memory skills**.
+(`amaa-session-memory`, `.claude/amaa-session-state.local.md`, and
+`docs_dev/design/index.json` are the session-state + design-artifact layers — NOT
+the durable memory layer.)
 
-**Markdown memory protocol (ACTIVE — use it):**
-- **Recall before acting.** Before authoring a TRDD, making a design
-  decision, re-researching an API, or debugging a recurring problem, run the
-  `architect-memory-recall` skill with the SYMPTOM wording ("have we hit
-  this before?"). Uses `memgrep` when installed; degrades to grep when not.
-- **Write decisions, not artifacts.** After a decision worth remembering
-  (rationale, rejected alternatives, user constraints, expensive gotchas),
-  capture exactly one fact with the `architect-memory-write` skill. The
-  note's `description` carries the QUESTION/symptom vocabulary; the answer
-  goes in the body. Never store what the repo or the design documents
-  already record.
-
-**Integration path** (pending implementation):
-- Design decisions should be indexed by AI Maestro's CozoDB-based subconscious memory (`maintainMemory`, `triggerConsolidation`) for cross-agent semantic search
-- Session handoffs should use AI Maestro's conversation indexing for design history persistence
-- Until integrated, AMAA's session memory skill (`amaa-session-memory`) plus the markdown memory notes serve as the local persistence layer
+- **RECALL before acting** — before a TRDD, a design decision, re-researching an
+  API, or debugging a recurring problem, run `/janitor-memory-recall` with the
+  SYMPTOM ("have we hit this before? did the user state a preference?"), across
+  all 3 scopes. Unprompted.
+- **WRITE decisions, not artifacts** — capture rationale, rejected alternatives,
+  user-stated constraints, surprising API conclusions, and expensive gotchas via
+  `/janitor-memory-write` / `/janitor-memory-update` (`description` indexed by the
+  QUESTION). Never store what the repo or `docs_dev/design/` already records.
+- **MAINTAIN the project wikimem** — keep the PROJECT-scope pages
+  (`.claude/project/memory/`, git-tracked) current for every dev.
+- **SCOPE ROUTING** — machine-private → LOCAL · project-shared (no secrets) →
+  PROJECT · cross-project → USER · UNSURE → LOCAL.
+- **PROPAGATE** — include this recall/write directive in every sub-agent prompt;
+  memory discipline is inherited, not assumed.
