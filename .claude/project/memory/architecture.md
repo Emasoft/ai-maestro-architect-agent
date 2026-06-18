@@ -2,7 +2,7 @@
 name: architecture
 description: "how does ai-maestro-architect-agent (AMAA) work — the ARCHITECT role plugin: overview, the main parts (agents, skills, design pipeline, hooks), where the key pieces live"
 ocd: 2026-06-16
-lmd: 2026-06-16
+lmd: 2026-06-18
 metadata:
   node_type: memory
   type: project
@@ -21,7 +21,7 @@ ai-maestro-architect-agent (AMAA) is the **ARCHITECT** role plugin of the AI Mae
 - Memory: AMAA uses the GLOBAL janitor memory system (see the project `CLAUDE.md` "## Memory"); it ships NO per-plugin memory-recall/write skills.
 
 ## Applies to
-- (component/aspect pages radiate here as written — wire the reciprocal `## Governed by` on each)
+- [[decouple-api-to-cli]] — skills call the frozen CLI verbs (`amp-*`, `aimaestro-*.sh`), never raw `/api/*` routes.
 
 ## See also
 - (lateral links to other functionality hubs, once they exist)

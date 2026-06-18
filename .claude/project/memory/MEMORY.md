@@ -6,3 +6,4 @@ Recall surfaces these pages by symptom; the protocol lives in
 line per page — each a markdown link from the page title to its file.
 
 - [architecture](architecture.md) — how AMAA works: the ARCHITECT-role overview + the parts map (agents, skills, design pipeline, hooks).
+- [decouple-api-to-cli](decouple-api-to-cli.md) — skills must call the frozen CLI verbs, not raw `/api/*` routes; the `/api` → CLI verb mapping (e.g. recipient/chief-of-staff resolution).
