@@ -273,7 +273,7 @@ TRDDs already in `design/tasks/` before this rule are grandfathered as
   MANAGER. You never message MANAGER directly.
 - **Tier 3 — USER (MANAGER relays).** GOLDEN PRRD changes, rule promote/demote,
   and irreversible / owner-identity / shared-credential actions — MANAGER
-  escalates to USER and relays the decision back down through AMCOS to you.
+  escalates to the MAESTRO and relays the decision back down through AMCOS to you.
 - **When unsure which tier applies, escalate one tier — conservative beats
   sorry.**
 - **NEVER self-approve a Tier-2 or Tier-3 task.** Self-authorization is a

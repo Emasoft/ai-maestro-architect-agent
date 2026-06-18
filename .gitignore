@@ -73,6 +73,9 @@ Cargo.lock
 # ...but NOT the regeneratable memgrep sqlite index (cache, not knowledge).
 .claude/project/memory/.memgrep/
 
+# Janitor per-project state/logs (regeneratable — see ~/.claude/rules/janitor-footprint.md)
+/.janitor/
+
 # LLM Externalizer
 llm_externalizer_output/
 

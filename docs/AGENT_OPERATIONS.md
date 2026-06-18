@@ -390,7 +390,7 @@ Send a message using the `agent-messaging` skill with:
 - Proceed with incomplete information
 - Create placeholder/mockup designs
 - Skip design steps to save time
-- Communicate directly with users (route through AMAMA)
+- Communicate directly with users — user-directed surfacing routes via AMCOS → MANAGER → the MAESTRO, never a direct agent↔user channel (R6 reply-only)
 
 ---
 

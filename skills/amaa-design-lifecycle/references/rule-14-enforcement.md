@@ -29,7 +29,7 @@ A requirement deviation occurs when:
 **Action on deviation detected:**
 1. STOP the current task
 2. Document the deviation in a Requirement Issue Report
-3. Escalate to AMCOS (or directly to the user if AMCOS is unavailable)
+3. Escalate to AMCOS (which relays to the MANAGER / MAESTRO as needed); never contact the user directly (R6)
 4. BLOCK progress on the affected requirement until user decides
 
 ## 1.3 When Technical Constraints Conflict

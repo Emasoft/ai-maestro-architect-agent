@@ -34,7 +34,7 @@ What AMAA deliberately does **NOT** do is just as important as what it does:
 | Code review / quality gates | AMIA (Integrator) |
 | Task assignment / kanban | AMOA (Orchestrator) |
 | Agent lifecycle / team config | AMCOS (Chief of Staff) |
-| User communication | AMAMA (Manager) |
+| User communication | via the MANAGER → MAESTRO; non-MAESTRO users use their own ASSISTANT (R37/R39) |
 
 This narrow charter is what keeps the plugin small and its outputs trustworthy.
 A design AMAA hands off carries no `[TBD]` markers, no placeholders, and a

@@ -15,7 +15,7 @@ Manages the complete lifecycle of design documents: creation, review, approval, 
 ## Checklist
 
 Copy this checklist and track your progress:
-- [ ] Receive requirements from AMCOS or user
+- [ ] Receive requirements via AMCOS (the team boundary)
 - [ ] Research APIs/technologies
 - [ ] Create design documents in `docs_dev/design/`
 - [ ] Generate design UUID and register in index with state DRAFT
@@ -36,7 +36,7 @@ Copy this checklist and track your progress:
 
 ## Instructions
 
-1. Receive requirements from AMCOS or user
+1. Receive requirements via AMCOS (the team boundary)
 2. Research APIs/technologies and create design documents in `docs_dev/design/`
 3. Generate design UUID and register in index with state DRAFT
 4. Complete design, validate checklist, submit for review (state: REVIEW)

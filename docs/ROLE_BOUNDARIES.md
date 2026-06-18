@@ -31,7 +31,7 @@ boundary through **AMCOS (Chief of Staff)**:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                          USER                                    │
+│                           MAESTRO                               │
 └──────────────────────────┬──────────────────────────────────────┘
                            │
                            ▼
@@ -82,15 +82,15 @@ peers route via the **ORCHESTRATOR (AMOA)**.
 ## AMCOS (Chief of Staff) - Responsibilities
 
 ### AMCOS CAN:
-- ✅ Create agents (with AMAMA approval)
-- ✅ Terminate agents (with AMAMA approval)
-- ✅ Hibernate/wake agents (with AMAMA approval)
+- ✅ Create agents under a MANAGER team-creation mandate (R30 — no per-agent approval)
+- ✅ Terminate agents within its own team (R29/R30 mandate scope)
+- ✅ Hibernate/wake agents within its own team
 - ✅ Configure agents with skills and plugins
 - ✅ Assign agents to project teams
 - ✅ Handle handoff protocols between agents
 - ✅ Monitor agent health and availability
-- ✅ Replace failed agents (with AMAMA approval)
-- ✅ Report agent performance to AMAMA
+- ✅ Replace failed base members to keep the 5-member base intact (R30/R31 — within mandate)
+- ✅ Report agent performance up through the team boundary to the MANAGER
 
 ### AMCOS CANNOT:
 - ❌ Create projects (AMAMA only)
@@ -98,7 +98,7 @@ peers route via the **ORCHESTRATOR (AMOA)**.
 - ❌ Manage GitHub Project kanban (AMOA only)
 - ❌ Make architectural decisions (AMAA only)
 - ❌ Perform code review (AMIA only)
-- ❌ Communicate directly with user (AMAMA only)
+- ❌ Communicate directly with users (users interact via their own ASSISTANT agent — R38/R39)
 
 ### AMCOS Scope:
 - **Team-scoped**: One AMCOS per team manages agents within the team
@@ -138,19 +138,22 @@ peers route via the **ORCHESTRATOR (AMOA)**.
 
 ### AMAMA CAN:
 - ✅ Create projects
-- ✅ Approve/reject AMCOS requests (agent create/terminate/etc.)
-- ✅ Communicate with user
+- ✅ Create and delete teams on its own authority — team creation auto-creates the COS + 5 base members (R29.1)
+- ✅ Grant the COS a team-creation mandate to populate the team with extra MEMBER agents (R29.2 / R30)
+- ✅ Create and delete AUTONOMOUS and MAINTAINER agents on its own authority (R29.3)
+- ✅ Serve the MAESTRO and relay MAESTRO-directed decisions (R37.1)
 - ✅ Set strategic direction
 - ✅ Override any agent decision
 - ✅ Grant autonomous operation directives
 
 ### AMAMA CANNOT:
-- ❌ Create agents directly (delegates to AMCOS)
+- ❌ Create individual extra MEMBER agents itself — the COS builds those out under the mandate; the MANAGER's team creation only auto-provisions the COS + 5 base members (R29/R30)
 - ❌ Assign tasks directly (delegates to AMOA)
+- ❌ Change its own identity, or obey any user other than the MAESTRO (R26 / R37.1)
 
 ### AMAMA Scope:
 - **Organization-wide**: Oversees all projects and agents
-- **User-facing**: Only agent that talks to user
+- **MAESTRO-facing**: serves the MAESTRO; non-MAESTRO users interact through their own ASSISTANT agent (R38/R39), never via a direct agent↔user channel
 - **Decision authority**: Final approval on all significant operations
 
 ---
@@ -166,10 +169,9 @@ AMOA: "I need a frontend developer agent for Project X"
 AMCOS: Receives request, prepares agent specification
   │
   ▼
-AMCOS → AMAMA: "Request approval to spawn frontend-dev for Project X"
-  │
-  ▼
-AMAMA: Approves (or rejects with reason)
+AMCOS: Confirms the request is within its MANAGER team-creation mandate
+       (an extra MEMBER agent; the 5-member base stays intact — R30.2).
+       Only a request BEYOND the mandate needs a fresh MANAGER mandate (R30.1)
   │
   ▼
 AMCOS: Creates agent, configures skills, assigns to Project X team
@@ -203,10 +205,8 @@ Agent: Receives task, begins work
 AMCOS: Detects agent-123 is unresponsive (terminal failure)
   │
   ▼
-AMCOS → AMAMA: "Request approval to replace agent-123"
-  │
-  ▼
-AMAMA: Approves
+AMCOS: Replacing a failed base member is within the team-creation mandate
+       and is required to keep the 5-member base present (R30 / R31)
   │
   ▼
 AMCOS: Creates replacement agent-456, configures it
@@ -241,17 +241,19 @@ Each agent role maps to a governance title:
 | Responsibility | AMAMA | AMCOS | AMOA | AMIA | AMAA |
 |----------------|------|------|-----|-----|-----|
 | Create projects | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Create agents | Approves | ✅ | Requests | ❌ | ❌ |
+| Create agents | Team + 5 base (R29) | ✅ under mandate (R30) | Requests | ❌ | ❌ |
 | Configure agents | ❌ | ✅ | ❌ | ❌ | ❌ |
 | Assign agents to teams | ❌ | ✅ | ❌ | ❌ | ❌ |
 | Assign tasks | ❌ | ❌ | ✅ | ❌ | ❌ |
 | Manage kanban | ❌ | ❌ | ✅ | ❌ | ❌ |
 | Code review | ❌ | ❌ | ❌ | ✅ | ❌ |
 | Architecture | ❌ | ❌ | ❌ | ❌ | ✅ |
-| Talk to user | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Serve the MAESTRO (user-facing via ASSISTANT model, R37/R39) | ✅ | ❌ | ❌ | ❌ | ❌ |
 
 ---
 
-**Document Version**: 2.7.0
-**Last Updated**: 2026-06-11
+**Document Version**: 2.8.0
+**Last Updated**: 2026-06-19
 **Author**: AMCOS Plugin Development
+
+> Governance model updated to R26–R40 (GOVERNANCE-RULES.md v4.0.2): MANAGER team-lifecycle authority (R29), COS mandate + invariant 5-member base (R30/R31), and the MAESTRO apex + ASSISTANT user model (R37/R39). This secondary overview defers to R6 v3 and the canonical governance rules on any conflict.

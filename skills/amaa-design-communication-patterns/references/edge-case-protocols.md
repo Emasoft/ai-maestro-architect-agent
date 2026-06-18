@@ -16,7 +16,7 @@ This document defines standardized protocols for handling edge cases and failure
 
 ### 1.1 Detection Methods
 
-The Architect uses AI Maestro to receive requirements from AMAMA and deliver designs. Detect unavailability through:
+The Architect uses AI Maestro to receive requirements via AMCOS and deliver designs. Detect unavailability through:
 
 | Check | Method | Failure Indicator |
 |-------|--------|-------------------|
@@ -137,7 +137,7 @@ Orchestrator should pick up handoff file and begin module assignment.
    EOF
    ```
 
-4. **Notify user**:
+4. **Notify the user (via AMCOS)**:
    ```
    WARNING: GitHub is unavailable.
    - Design work continues locally
@@ -272,7 +272,7 @@ When `amaa-documentation-writer` times out:
 
 2. **Generate clarification questions**:
    ```
-   QUESTIONS FOR USER (via AMAMA):
+   QUESTIONS FOR USER (via AMCOS):
 
    1. Error Handling:
       a) Should errors fail fast or attempt recovery?
@@ -293,7 +293,7 @@ When `amaa-documentation-writer` times out:
 
 3. **Block design progression** until clarified
 
-4. **Route questions to AMAMA** for user communication
+4. **Route questions via AMCOS** (relayed to the MANAGER / MAESTRO for user communication)
 
 ### 4.3 Assumption Documentation
 
@@ -310,7 +310,7 @@ When user is unavailable and work must proceed:
    - **Assumed**: Fail-fast approach with detailed error messages
    - **Reason**: Most common pattern for developer tools
    - **Risk**: May need refactoring if recovery is required
-   - **To Verify**: Confirm with user via AMAMA
+   - **To Verify**: Confirm with the user via AMCOS
 
    ### Assumption 2: Performance
    - **Assumed**: <5 second response time acceptable
@@ -354,7 +354,7 @@ When user is unavailable and work must proceed:
    - Create minimal viable documentation from observed behavior
    - Mark integration as HIGH RISK
 
-3. **Report to AMAMA**:
+3. **Report via AMCOS to the MANAGER**:
    ```
    API DOCUMENTATION ISSUE
 
@@ -420,7 +420,7 @@ When user is unavailable and work must proceed:
    - Queue remaining research
    - Proceed with available information
 
-3. **Notify user of delay**:
+3. **Notify the user of delay (via AMCOS)**:
    ```
    RESEARCH DELAY: API Rate Limit
 
@@ -463,7 +463,7 @@ When user is unavailable and work must proceed:
    3. Local logging with async sync (compromise)
    ```
 
-2. **Present options to user** via AMAMA
+2. **Present options to the user** via AMCOS
 
 3. **Block design until resolved**
 
@@ -521,7 +521,7 @@ When user is unavailable and work must proceed:
    - Business factors favor [analysis]
    ```
 
-2. **Do not proceed** - escalate to AMAMA
+2. **Do not proceed** - escalate via AMCOS to the MANAGER
 
 3. **Request clear single decision-maker**
 
@@ -634,7 +634,7 @@ If multiple edge cases compound:
      "blocked_by": [...]
    }
    ```
-3. **Notify AMAMA**
+3. **Notify the MANAGER via AMCOS**
 4. **Wait for user guidance**
 
 Recovery checkpoint: `.claude/recovery/architect-checkpoint-{timestamp}.json`

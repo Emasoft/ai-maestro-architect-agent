@@ -69,7 +69,7 @@ AMIA (Integrator)                                             │
   ▼                                                          │
 AMOA ◄────────────────────────────────────────────────────►  │
   │                                                          │
-  │ 18. Reports to AMAMA                                     │
+  │ 18. Reports up via AMCOS                                 │
   │ 19. Assigns next tasks                                   │
   └──────────────────────────────────────────────────────────┘
 ```
@@ -211,11 +211,11 @@ any other column (single-writer-per-domain).
   AMAMA for the USER-approval step)
 
 #### Step 9: Design Approval
-**Actor**: AMAMA (Manager) + USER
+**Actor**: AMAMA (Manager) + MAESTRO
 **Action**:
 - Manager examines the design document
-- Manager asks for approval from the User
-- If User approves: design is sent to the Orchestrator
+- Manager asks for approval from the MAESTRO
+- If the MAESTRO approves: design is sent to the Orchestrator
 - If User rejects: design goes back to Architect with feedback
 
 **Communication**:
@@ -390,20 +390,20 @@ any other column (single-writer-per-domain).
 - When Integrator reports successful PR merge, move task to `ai-review` column
   - If AI review passes for small tasks: move to `merge-release`, then `done`
   - If AI review passes for big tasks: move to `human-review` first, then `merge-release`, then `done`
-  - Report to Manager (AMAMA) for approval
+  - Report completion to AMCOS, which relays to the MANAGER for approval
   - If Manager approves: assign new task to the agent that finished
   - Keep implementer agents always working, never idle
 
 **Communication**:
 - GitHub: Update project item status through kanban columns
-- AI Maestro: Completion report to AMAMA
+- AI Maestro: Completion report to AMCOS (relayed to AMAMA)
 - AI Maestro: New task assignment to agent
 
 #### Step 24: Iteration
 **Action**:
 - This cycle iterates until all tasks are complete
 - Each successful merge triggers:
-  - Report to Manager
+  - Report completion via AMCOS to the MANAGER
   - New task assignment to available agent
 
 ---
@@ -414,9 +414,9 @@ any other column (single-writer-per-domain).
 |------|-----|---------|---------|
 | AMAMA | AMCOS | AI Maestro | Requirements, team requests |
 | AMCOS | AMAMA | AI Maestro | Team proposals, status updates |
-| AMAMA | AMAA | GitHub + AI Maestro | Requirements, design requests |
-| AMAA | AMAMA | GitHub + AI Maestro | Design documents |
-| AMAMA | AMOA | GitHub + AI Maestro | Approved designs |
+| AMAMA (via AMCOS) | AMAA | GitHub + AI Maestro | Requirements, design requests |
+| AMAA | AMOA | GitHub + AI Maestro | Design documents (direct design-handoff edge) |
+| AMAMA (via AMCOS) | AMOA | GitHub + AI Maestro | Approved designs |
 | AMOA | Agents | GitHub + AI Maestro | Task assignments |
 | Agents | AMOA | AI Maestro | Status updates, questions |
 | AMOA | AMAA | AI Maestro | Design change requests |
