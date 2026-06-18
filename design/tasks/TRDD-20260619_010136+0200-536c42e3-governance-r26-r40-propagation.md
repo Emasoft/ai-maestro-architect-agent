@@ -1,9 +1,9 @@
 ---
 trdd-id: 536c42e3-2a21-4d9f-8b6f-c746f3755780
 title: Propagate governance R26–R40 into AMAA persona + SCEN, and apply the R6-v3/R29-R30/ruling-1 audit fixes (#17)
-column: dev
+column: complete
 created: 2026-06-19T01:01:36+0200
-updated: 2026-06-19T01:32:19+0200
+updated: 2026-06-19T01:43:15+0200
 current-owner: ai-maestro-architect-agent
 assignee: ai-maestro-architect-agent
 priority: 2
@@ -35,7 +35,9 @@ external-refs: ["github.com/Emasoft/ai-maestro-architect-agent/issues/17", "gith
 
 **PHASE 1 — DONE (shipping in this release).** All audit fixes applied across 12 files (ROLE_BOUNDARIES M2+m5c; FULL_PROJECT_WORKFLOW M3+A1+m5b; edge-case ×2 twins M4+m5e; session-memory handoffs ×3 M4; AGENT_OPERATIONS A2; AMAA-ARCHITECTURE+SKILL m7; rule-14 m5d; main-agent m5a). CPV `--strict` clean (0/0/0/0). Literal Tier-3 `USER` ladder tokens preserved (caveat honored). 3 out-of-scope "Human Review via AMAMA" instances (AGENT_OPERATIONS:468, label-taxonomy:45-46) LEFT as-is (legit MANAGER human-review relay, R6.6) — flagged to MANAGER on #17 for confirmation.
 
-**NEXT ACTION (Phase 2):** Internalize R26–R40 into `agents/ai-maestro-architect-agent-main-agent.md` (persona currently cites only R6). Add a governance section citing R26/R27/R28/R32/R37/R39 (highest-impact for ARCHITECT). Then CREATE `tests/scenarios/SCEN-*.scen.md` from scratch asserting the governance behaviors (identity-immutable, never-sudo, AID-3-check, route-via-AMCOS, apex-MAESTRO, ASSISTANT-user-model). CPV `--strict` + `publish.py` + confirm on #17 + #37.
+**PHASE 2 — DONE (shipping in this release).** Persona `agents/ai-maestro-architect-agent-main-agent.md` now internalizes R26–R40 (new "Foundational governance rules R26–R40" block under Governance Integration: R26 identity-immutable, R27 self-install-via-core-skills, R28 AID 3-check, R32 never-sudo, R23 frozen-CLI, R36/R37 apex-MAESTRO, R38/R39 ASSISTANT-user model, R29/R30/R31 base-member) + fixed a residual "governance API" → frozen-CLI ref. Created `tests/scenarios/governance-scenarios.md` (SCEN-A01–A10) modeled on the MANAGER gold standard. CPV `--strict` clean (0/0/0/0; cleared a false-positive `skill/subagent` MAJOR by rewording the slash-list to prose).
+
+**STATUS: COMPLETE.** Both phases shipped (Phase 1 = v2.9.0; Phase 2 = this release). Only open thread: the 3 "Human Review via AMAMA" relay lines flagged to the MANAGER on #17 (left as legit R6.6 human-review relay pending the MANAGER's call). No further AMAA action until the MANAGER responds.
 
 **Load-bearing caveats:**
 - ruling-1: change ONLY the apex-authority-sense `USER`→`MAESTRO`; the literal PRRD "Tier 3 — USER approval" ladder token stays `USER` (it is the tier label, borderline-exempt per the audit).
