@@ -13,7 +13,7 @@
 
 ## Message Templates
 
-> **Recipient Resolution**: All recipient names below (e.g., `<AMCOS_SESSION_NAME>`) must be resolved dynamically at runtime. AMAA discovers its AMCOS via the `AMCOS_SESSION_NAME` environment variable (set by AMCOS at spawn time) or by querying the AI Maestro governance API: `GET /api/governance/teams/{teamId}/members?role=chief-of-staff`.
+> **Recipient Resolution**: All recipient names below (e.g., `<AMCOS_SESSION_NAME>`) must be resolved dynamically at runtime. AMAA discovers its AMCOS via the `AMCOS_SESSION_NAME` environment variable (set by AMCOS at spawn time) or via the frozen AI Maestro CLI `amp-team-members --team <teamId>` (lists each member with its governance title/role — pick the chief-of-staff).
 
 ## 1.1 Sending Acknowledgment When Receiving Design Request from AMCOS
 

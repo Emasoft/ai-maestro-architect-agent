@@ -35,7 +35,7 @@ Trigger this operation when:
 
 ## Procedure
 
-> **Recipient Resolution**: Session name placeholders (e.g., `<AMCOS_SESSION_NAME>`, `<AMIA_SESSION_NAME>`, `<target-agent-session-name>`) must be resolved dynamically at runtime. Resolve AMCOS via the `AMCOS_SESSION_NAME` environment variable (set by AMCOS at spawn time) or by querying the AI Maestro governance API: `GET /api/governance/teams/{teamId}/members?role=chief-of-staff`. Resolve other agents via their respective env vars or team registry lookup.
+> **Recipient Resolution**: Session name placeholders (e.g., `<AMCOS_SESSION_NAME>`, `<AMIA_SESSION_NAME>`, `<target-agent-session-name>`) must be resolved dynamically at runtime. Resolve AMCOS via the `AMCOS_SESSION_NAME` environment variable (set by AMCOS at spawn time) or via the frozen AI Maestro CLI `amp-team-members --team <teamId>` (lists each member with its governance title/role — pick the chief-of-staff). Resolve other agents via their respective env vars or `amp-team-members` lookup.
 
 ### Step 1: Determine Message Parameters
 
@@ -134,7 +134,7 @@ Send a message using the `agent-messaging` skill with:
 | Error | Cause | Resolution |
 |-------|-------|------------|
 | `Connection refused` | AI Maestro not running | Start AI Maestro service |
-| `404 Not Found` | Wrong endpoint | Use `/api/messages` |
+| `404 Not Found` | Wrong endpoint | Send via the `agent-messaging` skill (`amp-send`), not a raw REST route |
 | `400 Bad Request` | Malformed JSON | Check JSON syntax |
 | `422 Invalid agent` | Target agent not registered | Verify agent session name |
 | `500 Server Error` | AI Maestro internal error | Check AI Maestro logs |
