@@ -1,10 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-    ## [2.8.0] - 2026-06-16
+    ## [2.8.1] - 2026-06-18
 
-### Features
+### Bug Fixes
 
-- Adopt global janitor-hosted memory system (#15)    
+- Repoint executable /api/ skill refs to frozen CLI verbs (#16)    
 
 
