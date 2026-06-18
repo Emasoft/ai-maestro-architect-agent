@@ -1,10 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-    ## [2.9.0] - 2026-06-18
+    ## [2.10.0] - 2026-06-18
 
-### Bug Fixes
+### Features
 
-- Apply R6-v3 / R29-R30 / ruling-1 audit fixes (#17 Phase 1)    
+- Internalize R26–R40 in persona + add SCEN suite (#17 Phase 2)    
 
 
