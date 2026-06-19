@@ -1,10 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-    ## [2.10.0] - 2026-06-18
+    ## [2.10.1] - 2026-06-19
 
-### Features
+### Bug Fixes
 
-- Internalize R26–R40 in persona + add SCEN suite (#17 Phase 2)    
+- Name MAESTRO as apex in amaa-api-researcher escalation (#21)    
 
 
