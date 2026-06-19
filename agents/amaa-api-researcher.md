@@ -109,7 +109,7 @@ Documentation: docs_dev/api/[api-name]-*.md (5 files)
 **Quick Rule:**
 - If user specifies "use library X", research library X
 - NEVER substitute alternatives without user approval
-- If library X has issues: DOCUMENT, escalate to user, WAIT for decision
+- If library X has issues: DOCUMENT, escalate via AMAA to the MAESTRO, WAIT for decision
 - Include "Requirement Compliance Check" section in all reports
 
 ---
