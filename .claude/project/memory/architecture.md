@@ -2,7 +2,7 @@
 name: architecture
 description: "how does ai-maestro-architect-agent (AMAA) work — the ARCHITECT role plugin: overview, the main parts (agents, skills, design pipeline, hooks), where the key pieces live"
 ocd: 2026-06-16
-lmd: 2026-06-18
+lmd: 2026-06-20
 metadata:
   node_type: memory
   type: project
@@ -13,7 +13,7 @@ metadata:
 ai-maestro-architect-agent (AMAA) is the **ARCHITECT** role plugin of the AI Maestro fleet: one architect per project, owning technical architecture design, requirements analysis, API research, the design-document lifecycle, and complete implementation handoffs to the orchestrator. It does not write production code — it produces specifications and design artifacts.
 
 ## Parts map
-- **agents/** — the main agent (`ai-maestro-architect-agent-main-agent`) + LOCAL HELPER sub-agents (documentation-writer, modularizer-expert, planner, api-researcher, cicd-designer). Sub-agents are AMP-restricted (only the main agent messages other agents).
+- **agents/** — the main agent (`ai-maestro-architect-agent-main-agent`) + LOCAL HELPER sub-agents (documentation-writer, modularizer-expert, planner, api-researcher, cicd-designer). Sub-agents are AMP-restricted (only the main agent messages other agents). Each agent's `model:` is a **deliberate alias** (`opus`; `sonnet` for the cheaper planner) — not a pinned deprecated model ID.[^1]
 - **skills/** — the `amaa-*` capability skills: design-lifecycle, design-management, requirements-analysis, planning-patterns, cicd-design, hypothesis-verification, github-integration, session-memory (transcript/session restore — distinct from the wiki memory). The design state machine + redesign loop live in `scripts/amaa_design_lifecycle.py`.
 - **design/** — the 3-pillars artifacts: `requirements/PRRD.md` (project rules) + the 4 kanban zones `tasks/ proposals/ refused/ archived/`.
 - **hooks/** — a `Stop` hook (`scripts/amaa_stop_check.py`) that blocks exit until design work is complete (modern `args` exec form).
@@ -27,3 +27,4 @@ ai-maestro-architect-agent (AMAA) is the **ARCHITECT** role plugin of the AI Mae
 - (lateral links to other functionality hubs, once they exist)
 
 ## Notes and lessons learned
+[^1]: [ocd:2026-06-20 lmd:2026-06-20] Claude Code changelog audit (through **2.1.183**) vs this plugin (2026-06-20): **NO required update.** The 6 agent `model:` fields are bare aliases (`opus` ×5, `sonnet` ×1) that auto-resolve to the current generation — NOT pinned deprecated IDs — so the 2.1.183 "deprecated/auto-updated model" warning (which targets pinned *old* IDs in agent frontmatter) does not apply, and a "CPV best-practice: omit `model:`" or "changelog update" pass must NOT strip them: doing so would silently change each sub-agent's model tier (the planner is on `sonnet` on purpose, for cheaper planning). Also verified current: `hooks/hooks.json` is the modern Stop-only `args`-exec form whose `amaa_stop_check.py` reads stdin JSON (the live hook contract); no `.mcp.json` is shipped (MCP-config changelog items N/A). Every other plugin-relevant changelog item is ADDITIVE/optional, not breaking — candidate future enhancements (not adopted): Stop/SubagentStop `hookSpecificOutput.additionalContext` (2.1.x), skill/command `disallowed-tools` frontmatter, the `MessageDisplay` hook event, `plugin.json` `defaultEnabled`. Lesson: a "read the changelog and update the plugin" request usually resolves to a VERIFICATION (most CC entries are runtime/TUI fixes); audit `model:`-frontmatter / `hooks.json` shape / `.mcp.json` against the relevant subset and report "current" rather than inventing churn.
