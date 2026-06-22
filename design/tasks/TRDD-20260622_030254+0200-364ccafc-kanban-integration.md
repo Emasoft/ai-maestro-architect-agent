@@ -113,12 +113,12 @@ Both are nice-to-haves with working architect-side fallbacks → they do NOT blo
 - Update `amaa-design-lifecycle` + the architecture wikimem to document the new epic-creation step.
 - Tests for the epic-creation + progress-query ops (mock-free against a live test team where possible; otherwise contract tests on the command construction).
 
-## Phased plan (≤5 files/phase)
-- **Phase 0 (NPT):** round-trip-verify persistence. Gate everything else on it.
-- **Phase 1:** Part 2 (handoff template `aimaestro_task_id`) + Part 4 (verify/cleanup dynamic recipient) — lowest-risk, no server dependency.
-- **Phase 2:** Part 1 (epic + children creation op in the design-lifecycle).
-- **Phase 3:** Part 3 (progress-query op) + the two ai-maestro Method-1 follow-up issues.
-- **Phase 4:** tests + docs/wikimem (EHT), then publish.
+## Phased plan (≤5 files/phase) — concrete (2026-06-22)
+- **Phase 0 (NPT) — DEPLOYMENT-TIME, not runnable here:** live round-trip verify of `parentTask`/`npt`/`eht` persistence. This dev session has no AMP agent binding, so a real AMCOS-spawned architect+team verifies it. Gates Parts 1/3 LIVE use, NOT the build.
+- **Phase 1 — ✅ DONE:** Part 2 (handoff `aimaestro_task_id`, consistent across all template copies) + Part 4 (dynamic recipient, already done).
+- **Phase 2 — Part 1 epic-creation (DOABLE HERE, build NEXT):** author `op-create-kanban-epic.md` in `skills/amaa-design-communication-patterns-ops/references/` **and** its twin `skills/amaa-design-communication-patterns/references/` (both skills carry each op-*). Match the op-* format: `---\noperation: create-kanban-epic\n---` + sections *When to Use / Prerequisites / Procedure / Checklist / Examples / Error Handling* (template: `op-send-ai-maestro-message.md`). Procedure: `EPIC=$(amp-kanban-create-task "Design: <proj>" --task-type epic --labels design,epic --description "<doc relpath> — <summary>" | jq -r '.id // .task.id')` → first-level children via `--parent "$EPIC"`. Wire into the design-lifecycle COMPLETE step (`amaa-design-lifecycle` PROCEDURE 5 in `references/procedures.md`): create the epic BEFORE the handoff and feed its id to Part 2's `aimaestro_task_id`.
+- **Phase 3 — Part 3 progress-query:** author `op-query-kanban-progress.md` (+ twin, same format): `amp-kanban-list` → `jq '[.[] | select(.parentTask=="<epicId>")]'` (client-side filter; `--parent` server-filter is the upstream nice-to-have). + file the 2 ai-maestro CLI Method-1 follow-ups (`--attachments` on create, `--parent` on list).
+- **Phase 4 — tests + docs + ship:** contract tests asserting the BUILT command strings (no live server); update the architecture wikimem; then publish + file the orchestrator read-side Method-1 issue (EHT).
 
 ## Affected files
 - `skills/amaa-design-communication-patterns{,-ops}/references/ai-maestro-message-templates.md`, `op-send-ai-maestro-message.md`
