@@ -29,13 +29,13 @@
 
 1. Verify all review comments resolved
 2. Update state to APPROVED
-3. Create implementation tasks
-4. Notify implementers
+3. Create implementation tasks — incl. the AI-Maestro kanban `epic` + first-level children (see op-create-kanban-epic); capture the epic id
+4. Notify implementers — the design-handoff message carries the epic id as `aimaestro_task_id` (see op-send-ai-maestro-message / ai-maestro-message-templates §1.3–1.4)
 5. Link to GitHub Issues
 
 ## PROCEDURE 4: Track Implementation
 
-1. Monitor implementation progress
+1. Monitor implementation progress — query the epic's child tasks across the 14-stage pipeline (see op-query-kanban-progress)
 2. Update design if changes needed
 3. Maintain requirements traceability
 4. Document deviations
