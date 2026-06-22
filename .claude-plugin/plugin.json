@@ -13,5 +13,15 @@
       "name": "ai-maestro-plugin",
       "version": "^2.7.0"
     }
-  ]
+  ],
+  "cpv": {
+    "pipeline_profile": "remote-validation",
+    "pipeline": {
+      "intentional_divergence": [
+        ".markdownlint.json",
+        "cliff.toml",
+        ".github/workflows/release.yml"
+      ]
+    }
+  }
 }
