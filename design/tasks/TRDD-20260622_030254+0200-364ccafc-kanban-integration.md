@@ -3,7 +3,7 @@ trdd-id: 364ccafc-fc24-4e60-8915-fd1478ff60f3
 title: AI Maestro Kanban Integration — architect creates the epic + child task tree from a design doc
 column: dev
 created: 2026-06-22T03:02:54+0200
-updated: 2026-06-22T11:00:35+0200
+updated: 2026-06-22T11:04:53+0200
 current-owner: amaa
 assignee: amaa
 priority: 3
@@ -28,7 +28,7 @@ runtime-targets: [macos, linux]
 impacts: [public-api]
 attempts: 0
 last-test-result: not-run
-external-refs: ["github.com/Emasoft/ai-maestro-architect-agent/issues/7", "github.com/Emasoft/ai-maestro/issues/43"]
+external-refs: ["github.com/Emasoft/ai-maestro-architect-agent/issues/7", "github.com/Emasoft/ai-maestro/issues/43", "github.com/Emasoft/ai-maestro/issues/46"]
 ---
 
 # TRDD-364ccafc — AI Maestro Kanban Integration (architect#7)
@@ -57,9 +57,11 @@ external-refs: ["github.com/Emasoft/ai-maestro-architect-agent/issues/7", "githu
 
 **INTEGRATION DONE (2026-06-22):** wired into `amaa-design-lifecycle/references/procedures.md` — PROCEDURE 3 (Approve) step 3 creates the kanban epic+children (op-create-kanban-epic), step 4's handoff carries `aimaestro_task_id`; PROCEDURE 4 (Track) step 1 queries progress (op-query-kanban-progress). [CORRECTED: the hook is PROCEDURE 3/4 — approve→handoff→track — NOT PROCEDURE 5 (complete+archive, which is post-implementation). My earlier "PROCEDURE 5" was wrong; verified by reading procedures.md.]
 
-**NEXT ACTION (Phase 4, doable HERE):** (a) a lightweight anti-drift test — assert the ops' documented `amp-kanban-create-task`/`amp-kanban-list` flags exist in the deployed verbs' `--help` (catches doc↔verb drift; the ops are markdown, so there is no code to unit-test, and the live round-trip is deployment-time); (b) update the architecture wikimem with the kanban-integration; (c) file the 2 ai-maestro CLI Method-1 follow-ups (`--attachments` on create, `--parent` on list). DEPLOYMENT-time / post-ship: LIVE round-trip (Phase 0), orchestrator read-side issue, optional secondary-copy consolidation.
+**ARCHITECT-SIDE COMPLETE (2026-06-22).** Phase 4 done: (b) wikimem updated (architecture.md kanban bullet + `[^3]`); (c) the 2 CLI gaps noted on **ai-maestro#43** (comment 4766624637) — NOT a new issue, and the agent-identity blocker is already tracked as **ai-maestro#46**. (a) skipped as a poor fit — the ops are markdown + the verbs are external binaries, so there is no in-repo unit to test; correctness rests on the verified commands + the deployment-time round-trip.
 
-**Phase 0 (round-trip persistence NPT) — DEFERRED (not blocking Phase 1), 2026-06-22.** Server is UP (HTTP 401 = auth-gated, `localhost:23000`), BUT `amp-kanban-list` errors `Multiple AMP agents found — use --id <uuid>`: this host has DOZENS of registered agents (all display as `ai-maestro@emasoft.aimaestro.local`, plus `scen018-*`/`scen020-*` scenario-test leftovers), so the architect's OWN uuid + team can't be cleanly resolved for a NON-POLLUTING round-trip. **ROOT CAUSE (verified read-only 2026-06-22):** this session has NO AMP agent binding — no `$AID`/`$AMP_*` env var, no `AMP_CONFIG` config.json, `~/.ai-maestro/` empty. It is a DEV session working ON the plugin, NOT a registered fleet architect agent with a team; the host's many `…aimaestro.local` agents are other sessions / scenario-tests. **Implication:** the LIVE round-trip + Parts 1/3 LIVE operation cannot run from this dev session at all — they are **DEPLOYMENT-time** (a real AMCOS-spawned architect agent + team verifies them). **What IS doable here (so Phase 2 is NOT blocked):** author the ops (the exact CLI command construction) + **contract-test the command strings** (assert the right `amp-kanban-create-task …` / `amp-kanban-list …` invocation is built — no live server needed). Risk the round-trip guards is LOW: the 2026-06-21 F3 relaxed the relationship-field Zod to accept live `PVTI_`/`TRDD-` ids, so `parentTask`/`npt`/`eht` are wired through persistence. Phase 0 gates Parts 1 + 3 **LIVE use** only — NOT Phase 1, NOT the op-authoring + contract-tests.
+**REMAINING — all deployment-time / post-ship (NOT architect-side):** the LIVE round-trip persistence verification (Phase 0, blocked by **ai-maestro#46** agent-identity); publish (when the fleet wants it — partial-feature value is low until the field is actually populated + deployed); the cross-plugin orchestrator read-side Method-1 issue (post-publish); optional secondary-copy template consolidation.
+
+**Phase 0 (round-trip persistence NPT) — DEFERRED (not blocking Phase 1), 2026-06-22.** Server is UP (HTTP 401 = auth-gated, `localhost:23000`), BUT `amp-kanban-list` errors `Multiple AMP agents found — use --id <uuid>`: this host has DOZENS of registered agents (all display as `ai-maestro@emasoft.aimaestro.local`, plus `scen018-*`/`scen020-*` scenario-test leftovers), so the architect's OWN uuid + team can't be cleanly resolved for a NON-POLLUTING round-trip. **ROOT CAUSE (verified read-only 2026-06-22):** this session has NO AMP agent binding — no `$AID`/`$AMP_*` env var, no `AMP_CONFIG` config.json, `~/.ai-maestro/` empty. It is a DEV session working ON the plugin, NOT a registered fleet architect agent with a team; the host's many `…aimaestro.local` agents are other sessions / scenario-tests. This exact blocker is tracked fleet-wide as **ai-maestro#46** ("AMP sessions cannot self-resolve identity (~35 agents, one host identity)"). **Implication:** the LIVE round-trip + Parts 1/3 LIVE operation cannot run from this dev session at all — they are **DEPLOYMENT-time** (a real AMCOS-spawned architect agent + team verifies them). **What IS doable here (so Phase 2 is NOT blocked):** author the ops (the exact CLI command construction) + **contract-test the command strings** (assert the right `amp-kanban-create-task …` / `amp-kanban-list …` invocation is built — no live server needed). Risk the round-trip guards is LOW: the 2026-06-21 F3 relaxed the relationship-field Zod to accept live `PVTI_`/`TRDD-` ids, so `parentTask`/`npt`/`eht` are wired through persistence. Phase 0 gates Parts 1 + 3 **LIVE use** only — NOT Phase 1, NOT the op-authoring + contract-tests.
 
 **Load-bearing facts:**
 - The architect's design-handoff lives in the `amaa-design-communication-patterns` skill (+ its `-ops` twin) — `ai-maestro-message-templates.md` (templates) + `op-send-ai-maestro-message.md` (the send op, already dynamic-recipient).
