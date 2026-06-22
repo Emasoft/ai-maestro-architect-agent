@@ -3,7 +3,7 @@ trdd-id: 364ccafc-fc24-4e60-8915-fd1478ff60f3
 title: AI Maestro Kanban Integration — architect creates the epic + child task tree from a design doc
 column: dev
 created: 2026-06-22T03:02:54+0200
-updated: 2026-06-22T10:19:03+0200
+updated: 2026-06-22T10:34:07+0200
 current-owner: amaa
 assignee: amaa
 priority: 3
@@ -49,11 +49,11 @@ external-refs: ["github.com/Emasoft/ai-maestro-architect-agent/issues/7", "githu
 - **Part 4 (dynamic orchestrator lookup):** LARGELY ALREADY DONE. `op-send-ai-maestro-message.md` already resolves recipients via `amp-team-members --team <teamId>` (pick the chief-of-staff / orchestrator by governance title). The `ecos`/`orchestrator-master` grep hits live in UNRELATED files (planning-patterns publishing docs, label-taxonomy ADR op, infra scripts) — NOT the handoff path. → VERIFY those are not live recipients; clean any stray ones.
 
 **PHASE 1 PROGRESS (2026-06-22):**
-- **Part 2 — STARTED.** `aimaestro_task_id` added as an additive, backward-compatible top-level key to the CANONICAL handoff templates (§1.3 design_complete + §1.4 handoff) in `skills/amaa-design-communication-patterns/references/ai-maestro-message-templates.md`. Example value `PVTI_…` (a live github-project id, per F3).
+- **Part 2 — DONE (architect-side).** `aimaestro_task_id` added as an additive, backward-compatible top-level key, now CONSISTENT across ALL copies: canonical templates (§1.3 + §1.4), the examples file, and session-memory `record-keeping-formats.md` — every JSON block re-validated (parses). op-send references the canonical (no change). Example value `PVTI_…` (a live github-project id, per F3). The cross-plugin read-side (AMOA must READ the field) remains an EHT.
 - **Part 4 — DONE (verify-only).** No hardcoded `ecos`/`orchestrator-master` recipient exists in the design-comms skills; dynamic `amp-team-members --team` resolution is already present in the skill + `-ops` + the templates file. No code change needed.
-- **Template duplication (verified, refined):** op-send (×2, skill + `-ops`) REFERENCES the canonical templates file (line 145 "Full message template reference"), so **Part 2 is FUNCTIONAL** through that pointer — those are NOT duplicates. The only true content-copies of the §1.3/§1.4 template are TWO: `ai-maestro-message-examples.md` (a design_complete example, line 59) and session-memory `record-keeping-formats.md` (a near-verbatim §1.3+§1.4 copy, lines 393/419). Both still show the pre-field template; canonical (`ai-maestro-message-templates.md`) is authoritative + has the field.
+- **Template duplication (verified, refined):** op-send (×2, skill + `-ops`) REFERENCES the canonical templates file (line 145 "Full message template reference"), so **Part 2 is FUNCTIONAL** through that pointer — those are NOT duplicates. The only true content-copies of the §1.3/§1.4 template are TWO: `ai-maestro-message-examples.md` (a design_complete example, line 59) and session-memory `record-keeping-formats.md` (a near-verbatim §1.3+§1.4 copy, lines 393/419). Both now carry the field too (propagated 2026-06-22, all JSON re-validated); canonical (`ai-maestro-message-templates.md`) remains authoritative.
 
-**NEXT ACTION:** resolve the duplication — EITHER propagate `aimaestro_task_id` to the other 4 copies for consistency, OR (preferred) consolidate the 5 copies to ONE canonical template + references (the EHT below). Then Phase 2 (the epic-creation op) once Phase 0 (persistence round-trip) is unblocked.
+**NEXT ACTION (Part 2 done + consistent):** remaining architect#7 work is Phase-0-gated or cross-plugin — (a) resolve the Phase-0 agent-identity (find THIS session's architect uuid + team among the many registered agents) to run the persistence round-trip → unblocks Phase 2 (the epic-creation op); (b) file the orchestrator read-side issue (Method-1 on `ai-maestro-orchestrator-agent`) so AMOA reads `aimaestro_task_id`. Optional cleanup: replace the 2 secondary copies' inline template with pointers to canonical (true one-source-of-truth).
 
 **Phase 0 (round-trip persistence NPT) — DEFERRED (not blocking Phase 1), 2026-06-22.** Server is UP (HTTP 401 = auth-gated, `localhost:23000`), BUT `amp-kanban-list` errors `Multiple AMP agents found — use --id <uuid>`: this host has DOZENS of registered agents (all display as `ai-maestro@emasoft.aimaestro.local`, plus `scen018-*`/`scen020-*` scenario-test leftovers), so the architect's OWN uuid + team can't be cleanly resolved for a NON-POLLUTING round-trip. Resolve identity FIRST (a current-session `$AID`, or a clean single-agent / dedicated test-team context) before creating any verification tasks. Risk is LOWER than first framed: the 2026-06-21 persistence landing's **F3 relaxed the relationship-field Zod (uuid → bounded-string) to accept live `PVTI_`/`TRDD-` ids**, i.e. `parentTask`/`npt`/`eht` ARE wired through the persistence path — Phase 0 would CONFIRM, not discover. Phase 0 gates Parts 1 + 3 (create/query) only, NOT Phase 1.
 
@@ -109,7 +109,7 @@ Both are nice-to-haves with working architect-side fallbacks → they do NOT blo
 
 ## EHT (effects handling — post-conditions)
 - **Cross-plugin read-side (orchestrator/AMOA):** the architect SENDS `aimaestro_task_id`; AMOA must READ it to attach its child breakdown under the epic. Architect cannot edit the orchestrator plugin (Method-1 boundary) → file an issue on `ai-maestro-orchestrator-agent` (its #7-equivalent) once the architect side ships.
-- **Resolve the 2 secondary template copies:** `ai-maestro-message-examples.md` (line 59) + session-memory `record-keeping-formats.md` (lines 393/419) inline-duplicate the §1.3/§1.4 content. EITHER add `aimaestro_task_id` to both for consistency OR (preferred, one-source-of-truth) replace their inline copy with a pointer to the canonical templates file (as op-send already does). Low criticality — canonical is authoritative + op-send references it.
+- **(DONE by propagation 2026-06-22)** the 2 secondary copies (`ai-maestro-message-examples.md` + session-memory `record-keeping-formats.md`) now carry `aimaestro_task_id`, consistent with canonical. OPTIONAL future cleanup: replace their inline template with a pointer to the canonical templates file (true one-source-of-truth, as op-send already does) — low priority.
 - Update `amaa-design-lifecycle` + the architecture wikimem to document the new epic-creation step.
 - Tests for the epic-creation + progress-query ops (mock-free against a live test team where possible; otherwise contract tests on the command construction).
 

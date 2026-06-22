@@ -57,6 +57,7 @@ When all design artifacts are ready:
   "priority": "normal",
   "content": {
     "type": "design_complete",
+    "aimaestro_task_id": "PVTI_laDOABcd1234",
     "message": "[DONE] Design for E-Commerce Product Catalog complete. Architecture: REST API + PostgreSQL + Redis cache + React frontend. Modules: 5 (product-service, inventory-service, search-service, cart-service, frontend). Risks: 1/3/2. Handoff doc: docs_dev/design/handoff-a7f8b2d4.md. Ready for AMOA assignment."
   }
 }
