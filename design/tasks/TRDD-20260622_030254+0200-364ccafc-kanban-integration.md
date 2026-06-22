@@ -51,7 +51,7 @@ external-refs: ["github.com/Emasoft/ai-maestro-architect-agent/issues/7", "githu
 **PHASE 1 PROGRESS (2026-06-22):**
 - **Part 2 — STARTED.** `aimaestro_task_id` added as an additive, backward-compatible top-level key to the CANONICAL handoff templates (§1.3 design_complete + §1.4 handoff) in `skills/amaa-design-communication-patterns/references/ai-maestro-message-templates.md`. Example value `PVTI_…` (a live github-project id, per F3).
 - **Part 4 — DONE (verify-only).** No hardcoded `ecos`/`orchestrator-master` recipient exists in the design-comms skills; dynamic `amp-team-members --team` resolution is already present in the skill + `-ops` + the templates file. No code change needed.
-- **DISCOVERED — single-source-of-truth smell:** the design_complete/handoff content template is DUPLICATED across 5 files (`ai-maestro-message-templates.md` ✓done, `op-send-ai-maestro-message.md` ×2 (skill + `-ops`), `ai-maestro-message-examples.md`, session-memory `record-keeping-formats.md`). Only the canonical one carries `aimaestro_task_id` so far.
+- **Template duplication (verified, refined):** op-send (×2, skill + `-ops`) REFERENCES the canonical templates file (line 145 "Full message template reference"), so **Part 2 is FUNCTIONAL** through that pointer — those are NOT duplicates. The only true content-copies of the §1.3/§1.4 template are TWO: `ai-maestro-message-examples.md` (a design_complete example, line 59) and session-memory `record-keeping-formats.md` (a near-verbatim §1.3+§1.4 copy, lines 393/419). Both still show the pre-field template; canonical (`ai-maestro-message-templates.md`) is authoritative + has the field.
 
 **NEXT ACTION:** resolve the duplication — EITHER propagate `aimaestro_task_id` to the other 4 copies for consistency, OR (preferred) consolidate the 5 copies to ONE canonical template + references (the EHT below). Then Phase 2 (the epic-creation op) once Phase 0 (persistence round-trip) is unblocked.
 
@@ -109,7 +109,7 @@ Both are nice-to-haves with working architect-side fallbacks → they do NOT blo
 
 ## EHT (effects handling — post-conditions)
 - **Cross-plugin read-side (orchestrator/AMOA):** the architect SENDS `aimaestro_task_id`; AMOA must READ it to attach its child breakdown under the epic. Architect cannot edit the orchestrator plugin (Method-1 boundary) → file an issue on `ai-maestro-orchestrator-agent` (its #7-equivalent) once the architect side ships.
-- **Consolidate the 5-way duplicated handoff template** to ONE canonical source (`ai-maestro-message-templates.md`) + pointers from the rest (`op-send-ai-maestro-message.md` ×2, `ai-maestro-message-examples.md`, session-memory `record-keeping-formats.md`). Until consolidated, keep `aimaestro_task_id` in sync across all 5 copies (added 2026-06-22 to the canonical one only).
+- **Resolve the 2 secondary template copies:** `ai-maestro-message-examples.md` (line 59) + session-memory `record-keeping-formats.md` (lines 393/419) inline-duplicate the §1.3/§1.4 content. EITHER add `aimaestro_task_id` to both for consistency OR (preferred, one-source-of-truth) replace their inline copy with a pointer to the canonical templates file (as op-send already does). Low criticality — canonical is authoritative + op-send references it.
 - Update `amaa-design-lifecycle` + the architecture wikimem to document the new epic-creation step.
 - Tests for the epic-creation + progress-query ops (mock-free against a live test team where possible; otherwise contract tests on the command construction).
 
