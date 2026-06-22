@@ -65,14 +65,16 @@ Send a message using the `agent-messaging` skill with:
 - **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `Design Complete - [PROJECT_NAME]`
 - **Priority**: `normal`
-- **Content**: `{"type": "design_complete", "message": "[DONE] Design for [PROJECT_NAME] complete. Architecture: [BRIEF_SUMMARY]. Modules: [MODULE_COUNT]. Risks: [HIGH_COUNT]/[MEDIUM_COUNT]/[LOW_COUNT]. Handoff doc: docs_dev/design/handoff-[UUID].md. Ready for AMOA assignment."}`
+- **Content**: `{"type": "design_complete", "aimaestro_task_id": "[EPIC_TASK_ID]", "message": "[DONE] Design for [PROJECT_NAME] complete. Architecture: [BRIEF_SUMMARY]. Modules: [MODULE_COUNT]. Risks: [HIGH_COUNT]/[MEDIUM_COUNT]/[LOW_COUNT]. Handoff doc: docs_dev/design/handoff-[UUID].md. AI-Maestro epic: [EPIC_TASK_ID]. Ready for AMOA assignment."}`
+- **`aimaestro_task_id`**: the UUID of the `epic` task this design created on the AI-Maestro kanban. The architect creates it on design completion via `amp-kanban-create-task --task-type epic` (full op + first-level child breakdown tracked in TRDD-364ccafc, pending Phase 0 persistence verification). It links design doc → AI-Maestro epic → the orchestrator's child tasks. Omit the key (and the "AI-Maestro epic:" clause) when AI-Maestro is not in use. Additive + optional — a recipient that doesn't read it is unaffected.
 - **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 **Example Content:**
 ```json
 {
   "type": "design_complete",
-  "message": "[DONE] Design for E-Commerce Product Catalog complete. Architecture: REST API + PostgreSQL + Redis cache + React frontend. Modules: 5 (product-service, inventory-service, search-service, cart-service, frontend). Risks: 1/3/2. Handoff doc: docs_dev/design/handoff-a7f8b2d4.md. Ready for AMOA assignment."
+  "aimaestro_task_id": "PVTI_laDOABcd1234",
+  "message": "[DONE] Design for E-Commerce Product Catalog complete. Architecture: REST API + PostgreSQL + Redis cache + React frontend. Modules: 5 (product-service, inventory-service, search-service, cart-service, frontend). Risks: 1/3/2. Handoff doc: docs_dev/design/handoff-a7f8b2d4.md. AI-Maestro epic: PVTI_laDOABcd1234. Ready for AMOA assignment."
 }
 ```
 
@@ -86,14 +88,16 @@ Send a message using the `agent-messaging` skill with:
 - **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `Handoff Ready - [PROJECT_NAME]`
 - **Priority**: `normal`
-- **Content**: `{"type": "handoff", "message": "Design handoff ready for [PROJECT_NAME]. Implementation sequence: [PHASE_1] -> [PHASE_2] -> [PHASE_3]. Critical path: [TOP_3_ITEMS]. All artifacts in docs_dev/design/. Handoff doc: handoff-[UUID].md. Awaiting AMOA assignment from AMCOS."}`
+- **Content**: `{"type": "handoff", "aimaestro_task_id": "[EPIC_TASK_ID]", "message": "Design handoff ready for [PROJECT_NAME]. Implementation sequence: [PHASE_1] -> [PHASE_2] -> [PHASE_3]. Critical path: [TOP_3_ITEMS]. All artifacts in docs_dev/design/. Handoff doc: handoff-[UUID].md. AI-Maestro epic: [EPIC_TASK_ID]. Awaiting AMOA assignment from AMCOS."}`
+- **`aimaestro_task_id`**: same AI-Maestro epic UUID as §1.3 (optional/additive — the same epic created on design completion). Lets AMOA attach its child breakdown under the architect's epic.
 - **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 **Example Content:**
 ```json
 {
   "type": "handoff",
-  "message": "Design handoff ready for Payment Gateway Integration. Implementation sequence: Phase 1 (Database schema + Payment model) -> Phase 2 (Stripe API integration) -> Phase 3 (Webhook handlers + retry logic) -> Phase 4 (Frontend payment form). Critical path: Stripe API credentials, webhook endpoint setup, PCI compliance review. All artifacts in docs_dev/design/. Handoff doc: handoff-c3e9f1a8.md. Awaiting AMOA assignment from AMCOS."
+  "aimaestro_task_id": "PVTI_laDOABcd1234",
+  "message": "Design handoff ready for Payment Gateway Integration. Implementation sequence: Phase 1 (Database schema + Payment model) -> Phase 2 (Stripe API integration) -> Phase 3 (Webhook handlers + retry logic) -> Phase 4 (Frontend payment form). Critical path: Stripe API credentials, webhook endpoint setup, PCI compliance review. All artifacts in docs_dev/design/. AI-Maestro epic: PVTI_laDOABcd1234. Awaiting AMOA assignment from AMCOS."
 }
 ```
 

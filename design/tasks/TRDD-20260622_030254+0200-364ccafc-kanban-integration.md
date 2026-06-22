@@ -3,7 +3,7 @@ trdd-id: 364ccafc-fc24-4e60-8915-fd1478ff60f3
 title: AI Maestro Kanban Integration — architect creates the epic + child task tree from a design doc
 column: dev
 created: 2026-06-22T03:02:54+0200
-updated: 2026-06-22T03:02:54+0200
+updated: 2026-06-22T10:19:03+0200
 current-owner: amaa
 assignee: amaa
 priority: 3
@@ -48,7 +48,14 @@ external-refs: ["github.com/Emasoft/ai-maestro-architect-agent/issues/7", "githu
 - **Part 3 (progress query):** DOABLE via workaround. `amp-kanban-list` emits the full task JSON (`jq '.'`); filter client-side on `parentTask == <epicId>`. GAP: no `--parent` server filter. (Residual CLI gap #2.)
 - **Part 4 (dynamic orchestrator lookup):** LARGELY ALREADY DONE. `op-send-ai-maestro-message.md` already resolves recipients via `amp-team-members --team <teamId>` (pick the chief-of-staff / orchestrator by governance title). The `ecos`/`orchestrator-master` grep hits live in UNRELATED files (planning-patterns publishing docs, label-taxonomy ADR op, infra scripts) — NOT the handoff path. → VERIFY those are not live recipients; clean any stray ones.
 
-**NEXT ACTION (Phase 0 — the NPT, do FIRST):** end-to-end round-trip — create an `epic` + a `--parent` child via the deployed verb against a live test team, then `amp-kanban-list` and confirm `parentTask` (and `npt`/`eht`) actually PERSIST in the read-back. Rationale: "verb accepts the flag" ≠ "the field persists" (the [^3] trap in the kanban-contract memory note — evidence fields once 200-OK'd while silently dropped). **If the AI-Maestro server is not reachable / no test team exists, this NPT is BLOCKED — flag it and do NOT build the breakdown logic on unverified persistence.**
+**PHASE 1 PROGRESS (2026-06-22):**
+- **Part 2 — STARTED.** `aimaestro_task_id` added as an additive, backward-compatible top-level key to the CANONICAL handoff templates (§1.3 design_complete + §1.4 handoff) in `skills/amaa-design-communication-patterns/references/ai-maestro-message-templates.md`. Example value `PVTI_…` (a live github-project id, per F3).
+- **Part 4 — DONE (verify-only).** No hardcoded `ecos`/`orchestrator-master` recipient exists in the design-comms skills; dynamic `amp-team-members --team` resolution is already present in the skill + `-ops` + the templates file. No code change needed.
+- **DISCOVERED — single-source-of-truth smell:** the design_complete/handoff content template is DUPLICATED across 5 files (`ai-maestro-message-templates.md` ✓done, `op-send-ai-maestro-message.md` ×2 (skill + `-ops`), `ai-maestro-message-examples.md`, session-memory `record-keeping-formats.md`). Only the canonical one carries `aimaestro_task_id` so far.
+
+**NEXT ACTION:** resolve the duplication — EITHER propagate `aimaestro_task_id` to the other 4 copies for consistency, OR (preferred) consolidate the 5 copies to ONE canonical template + references (the EHT below). Then Phase 2 (the epic-creation op) once Phase 0 (persistence round-trip) is unblocked.
+
+**Phase 0 (round-trip persistence NPT) — DEFERRED (not blocking Phase 1), 2026-06-22.** Server is UP (HTTP 401 = auth-gated, `localhost:23000`), BUT `amp-kanban-list` errors `Multiple AMP agents found — use --id <uuid>`: this host has DOZENS of registered agents (all display as `ai-maestro@emasoft.aimaestro.local`, plus `scen018-*`/`scen020-*` scenario-test leftovers), so the architect's OWN uuid + team can't be cleanly resolved for a NON-POLLUTING round-trip. Resolve identity FIRST (a current-session `$AID`, or a clean single-agent / dedicated test-team context) before creating any verification tasks. Risk is LOWER than first framed: the 2026-06-21 persistence landing's **F3 relaxed the relationship-field Zod (uuid → bounded-string) to accept live `PVTI_`/`TRDD-` ids**, i.e. `parentTask`/`npt`/`eht` ARE wired through the persistence path — Phase 0 would CONFIRM, not discover. Phase 0 gates Parts 1 + 3 (create/query) only, NOT Phase 1.
 
 **Load-bearing facts:**
 - The architect's design-handoff lives in the `amaa-design-communication-patterns` skill (+ its `-ops` twin) — `ai-maestro-message-templates.md` (templates) + `op-send-ai-maestro-message.md` (the send op, already dynamic-recipient).
@@ -101,6 +108,8 @@ Both are nice-to-haves with working architect-side fallbacks → they do NOT blo
 - **Round-trip persistence verification** of `parentTask`/`npt`/`eht` (create→read-back), per the [^3] "accepts ≠ persists" trap. Blocked if no live server/test team — then flag and pause Part 1/3 build.
 
 ## EHT (effects handling — post-conditions)
+- **Cross-plugin read-side (orchestrator/AMOA):** the architect SENDS `aimaestro_task_id`; AMOA must READ it to attach its child breakdown under the epic. Architect cannot edit the orchestrator plugin (Method-1 boundary) → file an issue on `ai-maestro-orchestrator-agent` (its #7-equivalent) once the architect side ships.
+- **Consolidate the 5-way duplicated handoff template** to ONE canonical source (`ai-maestro-message-templates.md`) + pointers from the rest (`op-send-ai-maestro-message.md` ×2, `ai-maestro-message-examples.md`, session-memory `record-keeping-formats.md`). Until consolidated, keep `aimaestro_task_id` in sync across all 5 copies (added 2026-06-22 to the canonical one only).
 - Update `amaa-design-lifecycle` + the architecture wikimem to document the new epic-creation step.
 - Tests for the epic-creation + progress-query ops (mock-free against a live test team where possible; otherwise contract tests on the command construction).
 
