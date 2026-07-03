@@ -1,9 +1,11 @@
 ---
 trdd-id: 364ccafc-fc24-4e60-8915-fd1478ff60f3
 title: AI Maestro Kanban Integration — architect creates the epic + child task tree from a design doc
-column: dev
+column: published
 created: 2026-06-22T03:02:54+0200
-updated: 2026-06-22T11:04:53+0200
+updated: 2026-07-02T15:52:13+0200
+published-version: 2.11.0
+published-at: 2026-07-02T15:52:13+0200
 current-owner: amaa
 assignee: amaa
 priority: 3

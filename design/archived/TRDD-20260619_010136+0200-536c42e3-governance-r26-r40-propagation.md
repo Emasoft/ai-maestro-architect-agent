@@ -1,9 +1,11 @@
 ---
 trdd-id: 536c42e3-2a21-4d9f-8b6f-c746f3755780
 title: Propagate governance R26–R40 into AMAA persona + SCEN, and apply the R6-v3/R29-R30/ruling-1 audit fixes (#17)
-column: complete
+column: published
 created: 2026-06-19T01:01:36+0200
-updated: 2026-06-19T01:43:15+0200
+updated: 2026-07-02T15:52:13+0200
+published-version: 2.11.0
+published-at: 2026-07-02T15:52:13+0200
 current-owner: ai-maestro-architect-agent
 assignee: ai-maestro-architect-agent
 priority: 2
