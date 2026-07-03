@@ -40,10 +40,10 @@ Run the prerequisites check script:
 python3 ${CLAUDE_PLUGIN_ROOT}/scripts/check_plan_prerequisites.py
 ```
 
-Or inspect the plan state file directly:
-```bash
-cat .claude/orchestrator-plan-phase.local.md
-```
+Or inspect the plan state file directly using the Read tool (or
+`ctx_read` with mode=map for an overview first) — never `cat` it whole
+into context:
+`.claude/orchestrator-plan-phase.local.md`
 
 ### Step 2: Review Output Sections
 

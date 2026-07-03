@@ -59,9 +59,9 @@ python3 scripts/amaa_requirement_analysis.py report \
 
 ### Step 3: Review Generated Report
 
-```bash
-cat docs_dev/requirements/issues/REQ-001-issue.md
-```
+Open the generated report with the Read tool (or `ctx_read` with
+mode=map for an overview first) instead of dumping the whole file:
+`docs_dev/requirements/issues/REQ-001-issue.md`
 
 ### Step 4: Present to User
 

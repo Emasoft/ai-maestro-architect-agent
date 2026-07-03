@@ -147,7 +147,7 @@ After (Modules):
 
 | Issue | Cause | Solution |
 |-------|-------|----------|
-| Circular dependency detected | Modules depend on each other bidirectionally | Use `tldr arch` to visualize layers, extract shared interface to utility module, apply Dependency Inversion Principle |
+| Circular dependency detected | Modules depend on each other bidirectionally | Use `tldr structure` to visualize layers, extract shared interface to utility module, apply Dependency Inversion Principle |
 | Module boundaries unclear | Insufficient domain analysis or overlapping responsibilities | Review `boundary-patterns.md`, map domain concepts again, identify change vectors, redefine bounded contexts |
 | Cannot test module in isolation | Hidden dependencies or tight coupling | Apply Dependency Injection, create interface abstractions, use mocking framework for dependencies |
 | API breaking consumer modules | Missing versioning strategy or backward compatibility | Implement semantic versioning, add deprecation warnings before removal, maintain parallel versions during transition |

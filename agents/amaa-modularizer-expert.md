@@ -1,6 +1,5 @@
 ---
 name: amaa-modularizer-expert
-model: opus
 description: Decomposes monolithic code into modular, reusable components. Requires AI Maestro installed.
 skills:
   - amaa-session-memory
@@ -100,7 +99,7 @@ Details: docs_dev/modularization/pdf-processor-spec.md
 
 **Token-efficient analysis (use when available):**
 - **LLM Externalizer** (`mcp__plugin_llm-externalizer_llm-externalizer__*`): Offload file analysis/scanning to external LLMs. Use `scan_folder` for codebase scans, `code_task` for code review. Pass file paths via `input_files_paths`, include project context in `instructions`.
-- **TLDR** (`tldr`): `tldr structure .` for project layout, `tldr arch src/` for architecture layers, `tldr imports`/`tldr importers` for dependency analysis, `tldr impact func` for refactoring impact.
+- **TLDR** (`tldr`): `tldr structure .` for project layout, `tldr structure src/` for architecture layers, `tldr references <symbol> <file>`/`tldr impact <name> <path>` for dependency analysis, `tldr impact func` for refactoring impact.
 - **Serena MCP** (`mcp__serena-mcp__*`): `find_symbol` for definitions, `find_referencing_symbols` for call sites, `get_symbols_overview` for file structure.
 
 ---

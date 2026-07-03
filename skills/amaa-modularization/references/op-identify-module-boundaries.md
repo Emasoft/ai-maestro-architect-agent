@@ -106,13 +106,13 @@ Look for existing patterns that suggest boundaries.
 
 ```bash
 # Analyze code structure
-tldr arch src/
+tldr structure src/
 
 # Find high-level groupings
 ls -la src/
 
 # Analyze import patterns
-tldr importers module_name src/
+tldr impact module_name src/
 ```
 
 ### Step 4: Define Bounded Contexts

@@ -40,13 +40,13 @@ Analyze all imports and dependencies in the codebase.
 
 ```bash
 # Using tldr to analyze architecture layers
-tldr arch src/
+tldr structure src/
 
 # Analyze imports for a specific file
-tldr imports src/modules/order/service.ts
+tldr references OrderService src/modules/order/service.ts
 
 # Find all files that import a module
-tldr importers "OrderService" src/
+tldr impact "OrderService" src/
 ```
 
 **Manual Analysis:**

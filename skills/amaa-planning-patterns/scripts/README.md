@@ -268,10 +268,9 @@ Each script has inline documentation and can be read to understand:
 - All available options
 - Usage examples
 
-```bash
-# View script source
-cat scripts/generate_planning_checklist.py
-```
+Open the script directly to inspect it (use the Read tool, or `ctx_read`
+with mode=map for an overview first) rather than dumping the whole file:
+`scripts/generate_planning_checklist.py`
 
 ## Contributing
 

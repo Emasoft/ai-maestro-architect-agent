@@ -42,7 +42,7 @@ Map all dependencies between modules.
 
 ```bash
 # Use tldr to analyze architecture
-tldr arch src/
+tldr structure src/
 
 # Or manually document dependencies
 ```
@@ -89,7 +89,7 @@ Check for modules that depend on each other.
 **Detection Methods:**
 ```bash
 # Using tldr
-tldr arch src/ | grep -i circular
+tldr structure src/
 
 # Manual check: if A depends on B and B depends on A = circular
 ```

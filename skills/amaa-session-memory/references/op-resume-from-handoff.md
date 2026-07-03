@@ -221,16 +221,18 @@ Ready to continue design work.
 ## Quick Resume Commands
 
 ```bash
-# Find and display latest handoff
-cat $(ls -t docs_dev/design/handoffs/*.md | head -1)
+# Find the latest handoff path, then open it with the Read tool (or
+# `ctx_read` mode=map for an overview) — handoff files are unbounded,
+# never `cat` them whole into context
+ls -t docs_dev/design/handoffs/*.md | head -1
 
-# Check design index status
-cat docs_dev/design/index.json | jq '{
+# Check design index status (jq reads the file directly, no cat needed)
+jq '{
   decisions: .decisions | length,
   patterns: .patterns | length,
   constraints: .constraints | length,
   open_questions: .open_questions | length
-}'
+}' docs_dev/design/index.json
 
 # List open questions
 grep -A 5 "^### OQ-" docs_dev/design/open-questions.md | grep "OPEN"

@@ -1,6 +1,5 @@
 ---
 name: amaa-planner
-model: sonnet
 description: Creates implementation plans from requirements with step-by-step breakdown. Requires AI Maestro installed.
 skills:
   - amaa-session-memory
@@ -69,7 +68,7 @@ You are the Technical Planner, responsible for creating detailed implementation 
 
 **Token-efficient analysis (use when available):**
 - **LLM Externalizer** (`mcp__plugin_llm-externalizer_llm-externalizer__*`): Offload file analysis/scanning to external LLMs. Use `scan_folder` for codebase scans, `code_task` for code review. Pass file paths via `input_files_paths`, include project context in `instructions`.
-- **TLDR** (`tldr`): `tldr structure .` for project layout, `tldr search "pattern"` for code search, `tldr arch src/` for architecture analysis, `tldr impact func` before refactoring.
+- **TLDR** (`tldr`): `tldr structure .` for project layout, `tldr search "pattern"` for code search, `tldr structure src/` for architecture analysis, `tldr impact func` before refactoring.
 - **Serena MCP** (`mcp__serena-mcp__*`): `find_symbol` for definitions, `find_referencing_symbols` for call sites, `get_symbols_overview` for file structure.
 
 ## Output Format

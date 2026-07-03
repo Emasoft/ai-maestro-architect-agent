@@ -51,9 +51,9 @@ python3 scripts/amaa_requirement_analysis.py validate \
 
 ### Step 3: Review Validation Report
 
-```bash
-cat docs_dev/requirements/validations/validation-YYYYMMDD-HHMMSS.md
-```
+Open the report with the Read tool (or `ctx_read` with mode=map for an
+overview first) — it can be long, so avoid `cat`-ing it whole:
+`docs_dev/requirements/validations/validation-YYYYMMDD-HHMMSS.md`
 
 ### Step 4: Address Gaps
 
