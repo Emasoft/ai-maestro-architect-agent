@@ -35,7 +35,8 @@ jobs:
         run: |
           echo "=== CPV Plugin Validation (--strict) ==="
           set +e
-          uvx --from git+https://github.com/Emasoft/claude-plugins-validation \
+          # CPV PINNED @v2.153.1 — bump in lockstep with publish.py (BUMP PROTOCOL) + release.yml.
+          uvx --from git+https://github.com/Emasoft/claude-plugins-validation@v2.153.1 \
               --with pyyaml \
               cpv-remote-validate plugin . --strict --verbose --report validation-report.md
           EXIT_CODE=$?
