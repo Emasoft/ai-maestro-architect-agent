@@ -602,9 +602,16 @@ def language_test_step(info: ProjectInfo) -> None:
 def language_lint_step(info: ProjectInfo) -> None:
     """Run every applicable language's native linter. Any failure exits."""
     if info.has_kind(ProjectKind.PYTHON) or info.kind == ProjectKind.CLAUDE_PLUGIN:
-        # Ruff is the project's canonical Python linter (declared in dev deps)
+        # Ruff is the project's canonical Python linter. PIN the version:
+        # `--with ruff` (unpinned) pulls the latest ruff each run, so a new ruff
+        # release silently expands the DEFAULT rule set and fails this gate on
+        # byte-identical, previously-clean code. Observed 2026-07-24: ruff 0.16.0
+        # flagged 341 defaults that 0.15.20 (current at the v2.11.0 clean publish,
+        # 2026-07-02) does not. An unpinned linter is a non-deterministic gate, not
+        # a stronger one — same supply-chain class the janitor fixed by pinning CPV.
+        # Bump deliberately via the ruff-0.16 adoption TRDD, never by drift.
         if (info.root / "pyproject.toml").exists():
-            run(["uv", "run", "--with", "ruff", "ruff", "check", "."], cwd=info.root)
+            run(["uv", "run", "--with", "ruff==0.15.20", "ruff", "check", "."], cwd=info.root)
             print(f"{GREEN}ok ruff passed{NC}")
 
     if info.has_kind(ProjectKind.NODEJS):
