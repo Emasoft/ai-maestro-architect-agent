@@ -1,24 +1,21 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-    ## [2.11.0] - 2026-07-02
+    ## [2.11.1] - 2026-07-24
+
+### Bug Fixes
+
+- Pin ruff==0.15.20 to stop unpinned-linter drift    
+- Resolve ruff SIM102/PLW1510/S110/BLE001 in amaa_stop_check    
+- Pin CPV @v2.153.1 at all 4 gate sites to stop validator drift    
 
 ### Documentation
 
-- Record CPV remote-validation profile + intentional_divergence guardrail    
-- Add TRDD-364ccafc — AI Maestro kanban integration design (architect#7)    
-- Refine template-duplication finding (TRDD-364ccafc)    
-- Phase-0 root cause — dev session has no AMP agent binding (TRDD-364ccafc)    
-- Concrete executable Phase-2 plan (TRDD-364ccafc)    
-- Document the kanban-integration capability (TRDD-364ccafc)    
-- Architect#7 architect-side COMPLETE (TRDD-364ccafc)    
+- Archive 364ccafc + 536c42e3 as published in v2.11.0    
+- Mark 364ccafc + 536c42e3 published in v2.11.0    
 
-### Features
+### Performance
 
-- Add aimaestro_task_id to design-handoff templates (TRDD-364ccafc, architect#7 Part 2)    
-- Propagate aimaestro_task_id to secondary template copies (TRDD-364ccafc)    
-- Add op-create-kanban-epic operation (TRDD-364ccafc, architect#7 Part 1)    
-- Add op-query-kanban-progress operation (TRDD-364ccafc, architect#7 Part 3)    
-- Wire kanban ops into the design-lifecycle (TRDD-364ccafc, architect#7)    
+- Fix cache-warmth pins, broken tldr cmds, unbounded cat recipes    
 
 
