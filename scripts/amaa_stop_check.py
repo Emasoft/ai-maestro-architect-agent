@@ -141,13 +141,15 @@ def check_orphan_requirements(project_root: Path) -> list[str]:
             )
             for req_id in req_ids:
                 normalized = req_id.lower().replace("-", "")
+                # Report only when the requirement has NO design-doc reference:
+                # neither a design file nor an inline "design for <id>" mention.
+                # Merged from two nested `if`s (ruff SIM102) — identical condition.
                 if (
                     normalized not in design_files
                     and f"design-{normalized}" not in design_files
+                    and f"design for {req_id}" not in content.lower()
                 ):
-                    # Only report if there's no design doc reference in the same file
-                    if f"design for {req_id}" not in content.lower():
-                        blockers.append(f"Requirement without design: {req_id}")
+                    blockers.append(f"Requirement without design: {req_id}")
         except (OSError, UnicodeDecodeError):
             continue
 
@@ -176,6 +178,7 @@ def check_github_issues() -> list[str]:
             capture_output=True,
             text=True,
             timeout=3,
+            check=False,  # returncode is inspected manually below (ruff PLW1510)
         )
         if result.returncode == 0 and result.stdout.strip():
             issues = json.loads(result.stdout)
@@ -231,9 +234,15 @@ def _notify_amcos_blocked_exit(blockers: list[str]) -> None:
             capture_output=True,
             text=True,
             timeout=1,
+            check=False,  # best-effort notify; failure is ignored below (ruff PLW1510)
         )
-    except (FileNotFoundError, subprocess.TimeoutExpired, Exception):
-        pass  # Best effort — do not block exit further
+    except (OSError, subprocess.SubprocessError):
+        # Best effort: amp-send may be missing, slow, or fail at the OS level.
+        # Catch the subprocess/OS failure domain (ruff BLE001 — not a blind
+        # `except Exception`, which would also swallow real logic bugs) and
+        # `return` rather than `pass` (ruff S110) so a Stop hook is never blocked
+        # by a failed optional notification.
+        return
 
 
 def main() -> None:
