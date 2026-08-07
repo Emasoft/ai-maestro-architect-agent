@@ -3,7 +3,7 @@ trdd-id: TYB3Q1NJ
 title: Rule request — RP-MODEL-01 describes a fleet uniformity that does not exist
 column: proposal
 created: 2026-08-07T19:27:20+0200
-updated: 2026-08-07T19:41:05+0200
+updated: 2026-08-07T19:52:00+0200
 current-owner: ai-maestro-architect-agent
 task-type: infra
 scope: project
@@ -51,11 +51,24 @@ which is the same source the SPEC cites for its own "VERIFIED on disk" claim:
 | `ai-maestro-programmer-agent` | 1.4.7 | **(no key)** |
 | `ai-maestro-maintainer-agent` | 1.7.21 | **`inherit`** |
 | `ai-maestro-autonomous-agent` | 1.5.5 | **`sonnet`** |
-| `ai-maestro-integrator-agent` | — | **NOT INSTALLED — unverified** |
+| `ai-maestro-integrator-agent` | v1.3.7 | `opus` |
 
-**Four conventions across 7 plugins. Three match RP-MODEL-01; four do not.**
+Integrator is not installed on this host, so it was read from its repo — at the
+**released tag `v1.3.7`**, not only at HEAD, so it sits in the same
+provenance class (a shipped release) as the other seven. Both readings agree.
+
+**Four conventions across all 8 plugins. Exactly HALF follow RP-MODEL-01:**
+
+| `model:` | plugins | n |
+|---|---|---|
+| `opus` | assistant-manager, chief-of-staff, orchestrator, integrator | **4** |
+| *(no key)* | **architect**, programmer | 2 |
+| `inherit` | maintainer | 1 |
+| `sonnet` | autonomous | 1 |
+
 AMAA is not an outlier — it is one of a pair with `ai-maestro-programmer-agent`,
-and there are two further variants beyond that pair.
+and there are two further variants beyond that pair. **A rule that holds for 50% of
+its subjects is not a description with exceptions.**
 
 ### The decisive case: the spec contradicts itself
 
@@ -93,8 +106,8 @@ the correct call independently of how this is ruled.
    explicitly, which is semantically "no pin" but syntactically a pin. Any ruling
    should say whether that spelling is endorsed, tolerated, or wrong — otherwise
    the next audit re-opens this.
-4. **Integrator is unverified.** 7 of 8. Whoever rules should confirm the 8th
-   rather than assume it matches any group.
+4. **The distribution is complete — 8 of 8, no open plugin.** Nothing here rests
+   on an unchecked assumption about a missing plugin.
 5. **Drift vs inaccuracy is undetermined.** The SPEC's disk survey is dated
    2026-07-22; these readings are ~2 weeks later. Either the SPEC was inaccurate
    then or the plugins drifted since. The ruling needs only the CURRENT state, but
@@ -116,8 +129,27 @@ the correct call independently of how this is ruled.
    dispatch. Largest disk change, but it is the only option that removes the
    SPEC-vs-CA-04 conflict at its root rather than carving an exception.
 
-AMAA has no preference. What it cannot do is keep shipping against a rule that is
-false as written while a validator enforces the opposite.
+### The three are NOT equivalent — the asymmetry, stated rather than hidden
+
+Presenting these as three equals would misrepresent them, so:
+
+- **(1) is the only one that costs nothing** — no plugin changes, and the false
+  universal stops being false the moment the text is amended. But it **leaves the
+  SPEC-vs-CA-04 conflict standing** for anyone who later chooses to pin.
+- **(3) is the only one that removes that conflict at its root** rather than
+  carving an exemption around it — but it has the largest blast radius, touching
+  6 of 8 plugins.
+- **(2) has the narrowest justification.** It requires an affirmative decision
+  that AUTONOMOUS should run Opus 5, which is a runtime-cost and
+  context-window choice nobody has yet made on the merits, *and* it still needs a
+  CA-04 exemption. It is the only option that changes a plugin's actual behaviour
+  rather than only its declarations.
+
+AMAA implements whichever is ruled and takes no side between cheapest **(1)** and
+most complete **(3)**; it flags only that **(2)** carries a behavioural decision the
+other two do not, and should not be chosen by default merely because it preserves
+the rule's current wording. What AMAA cannot do is keep shipping against a rule
+that is false as written while a validator enforces the opposite.
 
 ## Provenance
 
@@ -134,6 +166,13 @@ premise, and it was re-verified here before this rewrite.
   to MANAGER via AMCOS. Not authorized to execute; awaiting a ruling.
 - 2026-08-07T19:41:05+0200 — REFRAMED before reaching an approver. Original card
   asked "should AMAA comply?"; a fleet-wide check showed RP-MODEL-01's universal is
-  false (4 of 7 installed plugins do not follow it, including the SPEC's own
-  mandatory AUTONOMOUS plugin). The question is now whether the rule should exist,
-  and in what form. No approver saw the superseded framing.
+  false, including for the SPEC's own mandatory AUTONOMOUS plugin. The question is
+  now whether the rule should exist, and in what form. No approver saw the
+  superseded framing.
+- 2026-08-07T19:52:00+0200 — Distribution COMPLETED to 8 of 8. Integrator read at
+  released tag v1.3.7 (`opus`), closing the last open point and matching the
+  provenance class of the other seven. Final split 4 / 2 / 1 / 1 — exactly half the
+  fleet follows the rule. Superseded intermediate reading: "3 of 7" and "integrator
+  unverified". Also added an explicit statement of the asymmetry between the three
+  resolutions, replacing a claim of no preference that was falsely neutral about a
+  real difference in cost and blast radius.
