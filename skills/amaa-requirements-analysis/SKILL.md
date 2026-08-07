@@ -4,6 +4,7 @@ description: "Use when managing requirements, initializing plans, or approving t
 agent: ai-maestro-architect-agent-main-agent
 user-invocable: false
 context: fork
+background: false
 ---
 
 # Requirements Analysis Skill

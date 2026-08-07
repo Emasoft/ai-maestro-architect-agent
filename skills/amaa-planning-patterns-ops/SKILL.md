@@ -2,6 +2,7 @@
 name: amaa-planning-patterns-ops
 description: "Use when enforcing plans, verifying requirements, or linking to GitHub. Trigger with planning ops request. Loaded by ai-maestro-architect-agent-main-agent"
 context: fork
+background: false
 user-invocable: false
 agent: ai-maestro-architect-agent-main-agent
 ---

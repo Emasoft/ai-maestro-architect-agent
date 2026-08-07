@@ -2,6 +2,7 @@
 name: amaa-design-management-ops
 description: "Use when validating design documents or troubleshooting issues. Trigger with design management ops request. Loaded by ai-maestro-architect-agent-main-agent"
 context: fork
+background: false
 user-invocable: false
 agent: ai-maestro-architect-agent-main-agent
 ---

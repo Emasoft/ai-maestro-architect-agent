@@ -2,6 +2,7 @@
 name: amaa-design-communication-patterns
 description: "Use when implementing inter-agent messaging or design document protocols. Trigger with communication pattern or messaging request. Loaded by ai-maestro-architect-agent-main-agent"
 context: fork
+background: false
 agent: ai-maestro-architect-agent-main-agent
 user-invocable: false
 ---
@@ -44,6 +45,7 @@ All shared resources are reference documentation files located in the `reference
 | [design-document-protocol.md](references/design-document-protocol.md) | Document UUID Format (GUUID), Required Frontmatter Schema, Document Lifecycle, Validation Procedures, Search Procedures, GitHub Integration, Edge Cases and Error Handling, File Naming Convention, Cross-Plugin Protocol, Quick Reference |
 | [proactive-handoff-protocol.md](references/proactive-handoff-protocol.md) | Standard Handoff Format, Automatic Handoff Triggers, Handoff Document Location, Mandatory Handoff Sections, Context, Progress, Current State, Blockers (if any), Next Steps, References, Proactive Writing Rules, Handoff Quality Checklist |
 | [task-completion-checklist.md](references/task-completion-checklist.md) | Before Reporting Task Complete, Verification Loop, Common Traps (Architect-Specific), Completion Report Format, Pre-Completion Checklist for Architects, When to Escalate vs Complete |
+| [native-cross-session-channel.md](references/native-cross-session-channel.md) | The native cross-session channel vs AMP, What actually changed and when, What the platform does NOT give you, R42.3 is false as written, AMAA's policy (outbound AMP-only, inbound-untrusted), Cross-agent terminal verbs, Anti-patterns |
 
 ## Examples
 

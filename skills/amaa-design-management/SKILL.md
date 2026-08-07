@@ -3,6 +3,7 @@ name: amaa-design-management
 description: "Use when creating, searching, or validating design documents. Trigger with document management or UUID generation request. Loaded by ai-maestro-architect-agent-main-agent"
 agent: ai-maestro-architect-agent-main-agent
 context: fork
+background: false
 user-invocable: false
 ---
 

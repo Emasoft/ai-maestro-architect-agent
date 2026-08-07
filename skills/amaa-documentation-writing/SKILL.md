@@ -2,6 +2,7 @@
 name: amaa-documentation-writing
 description: "Use when writing module specs, API contracts, ADRs, or feature docs. Trigger with documentation writing or spec creation request. Loaded by ai-maestro-architect-agent-main-agent"
 context: fork
+background: false
 agent: ai-maestro-architect-agent-main-agent
 user-invocable: false
 ---

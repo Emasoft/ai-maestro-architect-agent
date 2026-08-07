@@ -2,6 +2,7 @@
 name: amaa-design-lifecycle
 description: "Use when managing design document states or lifecycle transitions. Trigger with design lifecycle or state transition request. Loaded by ai-maestro-architect-agent-main-agent"
 context: fork
+background: false
 agent: ai-maestro-architect-agent-main-agent
 user-invocable: false
 ---

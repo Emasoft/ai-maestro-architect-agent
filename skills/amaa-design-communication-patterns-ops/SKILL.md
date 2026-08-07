@@ -2,6 +2,7 @@
 name: amaa-design-communication-patterns-ops
 description: "Use when handling edge cases or shared operations in architect communication. Trigger with communication ops request. Loaded by ai-maestro-architect-agent-main-agent"
 context: fork
+background: false
 user-invocable: false
 agent: ai-maestro-architect-agent-main-agent
 ---
