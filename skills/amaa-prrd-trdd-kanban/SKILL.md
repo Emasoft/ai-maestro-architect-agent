@@ -12,8 +12,16 @@ metadata:
 The ARCHITECT (AMAA) layer of the PRRD / TRDD / Kanban model. ARCH
 owns the **design column** — the only column with a 1→N (split) and
 N→1 (group) topology. A proto-TRDD comes in from ORCH; one or more
-fully-designed TRDDs land in `dispatch`. For universal mechanics, see
-the `prrd-trdd-kanban` skill in `ai-maestro-plugin`.
+fully-designed TRDDs land in `dispatch`.
+
+**This skill is the ARCHITECT judgment layer only — it owns no mechanics.**
+Every pillar operation goes through the core `ama-*` skills in
+`ai-maestro-plugin`: `ama-kanban-render` (see the board), `ama-trdd-find`
+(search), `ama-trdd-write` (author), `ama-trdd-update` (edit fields),
+`ama-trdd-transition` (move a card), `ama-prrd-get` / `ama-prrd-find` (read
+rules), `ama-prrd-propose` (propose a rule), `ama-proposal-approvals`
+(approve/refuse). What lives *here* is the split / group / pass-through
+decision, which no core skill can make for you.
 
 ARCH **self-mandates** all within-team design work — pass-through,
 split, group, setting design frontmatter — writing
@@ -32,8 +40,8 @@ touch, never in a mass rewrite. A file carries exactly one of the two.
 
 ## Prerequisites
 
-- The universal `prrd-trdd-kanban` skill in `ai-maestro-plugin` is
-  available (mechanics, transition numbers, exempt-operations list).
+- The core `ama-*` skills from `ai-maestro-plugin` are available — they carry
+  the mechanics, the 17-column transition rules, and the approval vocabulary.
 - The project PRRD exists and `design/tasks/` is present.
 - A proto-TRDD sits in the `design` column awaiting ARCH.
 
@@ -124,8 +132,13 @@ AMPs ORCH via COS: "TRDD-7a1 split into 2: <c1>, <c2>".
 
 ## Resources
 
-For the full Kanban mechanics, transition numbers, and the exempt /
-non-exempt boundary, consult the universal `prrd-trdd-kanban` skill in
-`ai-maestro-plugin`, and within it the `trdd-frontmatter-schema.md`
-reference (every field ARCH sets) and the `exempt-operations.md`
-reference (transitions that skip MANAGER approval).
+For the full kanban mechanics, the 17-column transition rules, and the
+approval vocabulary, use the core `ama-*` skills in `ai-maestro-plugin`
+(`ama-kanban-render`, `ama-trdd-write`/`-update`/`-transition`/`-find`,
+`ama-prrd-get`/`-find`/`-propose`, `ama-proposal-approvals`).
+
+> **Superseded reference, recorded so it is not re-added:** this skill used to
+> point at a single universal `prrd-trdd-kanban` skill in `ai-maestro-plugin`.
+> Core replaced it with the granular `ama-*` skills above, so that name now
+> resolves to nothing — a pointer to a skill that does not exist reads as
+> "mechanics are handled elsewhere" and silently leaves them handled nowhere.
