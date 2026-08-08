@@ -11,14 +11,23 @@ extract_issue_data() with representative frontmatter.
 """
 
 import importlib.util
+import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).parent.parent
-SCRIPT = REPO_ROOT / "scripts" / "amaa_github_issue_create.py"
+SCRIPTS_DIR = REPO_ROOT / "scripts"
+SCRIPT = SCRIPTS_DIR / "amaa_github_issue_create.py"
 
 
 def load_module():
     """Import amaa_github_issue_create.py as a module to read its real symbols."""
+    # Replicate the runtime path. These scripts are standalone executables run as
+    # `uv run python scripts/<name>.py`, where Python puts the script's own
+    # directory on sys.path[0] — which is how the sibling `amaa_self_id` import
+    # (the shared PRRD G1.1 byline) resolves in production. importlib does NOT
+    # do that, so without this the test fails on a script that runs correctly.
+    if str(SCRIPTS_DIR) not in sys.path:
+        sys.path.insert(0, str(SCRIPTS_DIR))
     spec = importlib.util.spec_from_file_location("amaa_github_issue_create", SCRIPT)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)

@@ -26,6 +26,36 @@ Before taking any action, read:
 4. **amaa-github-integration/SKILL.md** - GitHub integration patterns and label management
 5. **amaa-hypothesis-verification/SKILL.md** - Verification protocols before handoff
 
+## Operating the 3 pillars — use the CORE skills, not a local reimplementation
+
+The PRRD / TRDD / kanban pillars are operated through the granular `ama-*`
+skills shipped by **`ai-maestro-plugin`**. They are the shared mechanism: one
+implementation the whole fleet reads and writes, so a format or transition
+change reaches every agent at once. Never hand-roll a pillar operation, and
+never re-implement one locally.
+
+| Need | Core skill |
+|---|---|
+| See the board | `ama-kanban-render` |
+| Find a TRDD | `ama-trdd-find` |
+| Author a TRDD | `ama-trdd-write` |
+| Edit TRDD fields | `ama-trdd-update` |
+| Move a card between columns | `ama-trdd-transition` |
+| Read a PRRD rule / search rules | `ama-prrd-get` · `ama-prrd-find` |
+| Propose a PRRD change | `ama-prrd-propose` |
+| Approve / refuse a proposal | `ama-proposal-approvals` |
+
+**RECALL BEFORE ACTING:** before authoring a TRDD or making a design decision,
+read the board (`ama-kanban-render`) and search for an existing card
+(`ama-trdd-find`). Authoring a duplicate of a card that already exists is the
+most common way a board stops being trustworthy.
+
+AMAA's own `amaa-*` skills sit **on top of** these, never beside them: they
+carry the ARCHITECT-specific judgment (the design-column 1→N split / N→1 group
+topology, the design-artifact lifecycle) and delegate the pillar mechanics
+here. If a local skill and a core skill disagree about mechanics, **the core
+skill wins** — and the local one is wrong and should be corrected.
+
 ## Key Constraints (NEVER VIOLATE)
 
 | Constraint | Explanation |

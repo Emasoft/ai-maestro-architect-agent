@@ -33,6 +33,8 @@ import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
+
+from amaa_self_id import with_self_id
 from typing import Optional, cast
 
 _DEFAULT_STATUS_LABELS = {
@@ -326,7 +328,9 @@ def sync_status_to_issue(
 
     if add_comment:
         status_desc = STATUS_DESCRIPTIONS.get(status, status)
-        comment = f"""## Design Status Update
+        # PRRD G1.1: this comment is posted under the shared owner gh identity,
+        # so without the self-id line it reads as a human's comment.
+        comment = with_self_id(f"""## Design Status Update
 
 **Status**: `{status}`
 **Description**: {status_desc}
@@ -334,7 +338,7 @@ def sync_status_to_issue(
 **Updated**: {datetime.now().strftime("%Y-%m-%d %H:%M")}
 
 ---
-*Synchronized from design document*"""
+*Synchronized from design document*""")
 
         result = subprocess.run(
             ["gh", "issue", "comment", str(issue_number), "--body", comment],

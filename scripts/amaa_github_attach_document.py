@@ -28,6 +28,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
+from amaa_self_id import SELF_ID_LINE
+
 
 def check_gh_cli() -> bool:
     """Check if gh CLI is available and authenticated."""
@@ -156,6 +158,10 @@ def format_document_comment(frontmatter: dict, body: str, header: str) -> str:
     author = frontmatter.get("author", "Unknown")
 
     comment_parts = [
+        # PRRD G1.1 — posted under the shared owner gh identity, so the byline
+        # is what distinguishes this from a human's comment.
+        SELF_ID_LINE,
+        "",
         f"## {header}",
         "",
         f"### {title}",

@@ -29,15 +29,11 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
-# PRRD G1.1: every issue/PR/comment body created by an AI Maestro agent MUST
-# begin with a one-line self-identification, because all agents share the single
-# human-owner gh CLI identity (the owner's auth). Without it, an issue this
-# script opens is indistinguishable from one a human or another agent wrote.
-# This is the architect agent's self-id line; it is prepended to every issue body.
-SELF_ID_LINE = (
-    "_Posted by the Claude developing the **ai-maestro-architect-agent** "
-    "(via the shared @owner gh auth)._"
-)
+# PRRD G1.1 — imported, never redefined here. The line previously inlined at
+# this spot carried a bare `@owner`, which GitHub renders as a MENTION and pages
+# a real account on every issue this script opens. One definition, one place to
+# get it right: scripts/amaa_self_id.py.
+from amaa_self_id import SELF_ID_LINE
 
 
 def check_gh_cli() -> bool:
