@@ -1,10 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-    ## [2.14.1] - 2026-08-08
+    ## [2.14.2] - 2026-08-08
 
-### Bug Fixes
+### Documentation
 
-- Repoint amaa-prrd-trdd-kanban at the core ama-* skills    
+- Record the ratified AMAA->AMOA intra-team edge (hub ruling)    
 
 
