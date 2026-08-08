@@ -1,11 +1,14 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-    ## [2.13.2] - 2026-08-08
+    ## [2.14.0] - 2026-08-08
 
-### Documentation
+### Bug Fixes
 
-- State the 17 columns, STATE-block authority, and the seeded read-only rules    
-- Close TRDD-RQETHEMJ at published    
+- G1.1 byline on every GitHub post, core ama-* wiring, sub-agent pillars blocks    
+
+### Styling
+
+- Sort the amaa_self_id import (CPV ruff I001)    
 
 
