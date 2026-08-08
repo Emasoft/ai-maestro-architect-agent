@@ -1,9 +1,9 @@
 ---
 trdd-id: RQETHEMJ
 title: Mint the dependency-resolver tag on every release
-column: planned
+column: published
 created: 2026-08-08T12:22:14+0200
-updated: 2026-08-08T12:22:14+0200
+updated: 2026-08-08T12:30:59+0200
 current-owner: ai-maestro-architect-agent
 task-type: infra
 scope: project
@@ -18,7 +18,7 @@ npt: []
 eht: []
 relevant-rules: []
 external-refs: [architect#25, TRDD-JT3U4ZVM]
-implementation-commits: []
+implementation-commits: [53c043c457f964d626884d947fe0e34e058bc74a]
 ---
 
 # Mint the dependency-resolver tag on every release
@@ -106,8 +106,11 @@ a hand-run push.
 - [x] Hard-fail on the `"unknown"` sentinel and on illegal ref characters
 - [x] Variable named `dep_tag` (CPV `RC-DEP-TAG-PIPELINE` predicate)
 - [x] No pre-push hook bypass
-- [ ] Verified on origin with the check that cannot lie:
-      `git ls-remote --tags origin | grep -- "--v"`
+- [x] Verified on origin with the check that cannot lie:
+      `git ls-remote --tags origin | grep -- "--v"` →
+      `ba0900f4b301  refs/tags/ai-maestro-architect-agent--v2.13.1`, and
+      `GET /git/ref/tags/ai-maestro-architect-agent--v2.13.1` resolves. Both
+      CI gates green; architect#25 closed with the evidence.
 
 ## Verification
 
