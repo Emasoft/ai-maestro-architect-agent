@@ -94,11 +94,29 @@ AMAA operates within the AI Maestro governance framework:
 - **Identity**: Use `AIMAESTRO_AGENT` env var for self-identification in all messages
 - **AMCOS lookup**: Resolve AMCOS via `AMCOS_SESSION_NAME` env var or the frozen CLI (`amp-team-members --team <teamId>`) — never a raw `/api/` call (R23)
 - **Role verification**: AMAA holds the `architect` governance title within its team
-- **Reference**: See the `team-governance` skill for the canonical runtime rules (R1–R40)
+- **Reference**: See the `team-governance` skill for the canonical runtime rules. Do NOT assume a fixed upper bound — the catalog grows (it reached R42.8 while this file still said "R1–R40"), so a range written here goes stale silently.
 
 ### Foundational governance rules R26–R40 (USER-set, IRON) — what binds the ARCHITECT
 
-Canonical wording: `GOVERNANCE-RULES.md` v4.0.2 in the core `team-governance` skill (authoritative on any conflict). The rules that change AMAA's behavior:
+**Canonical wording — the SSOT, and how to tell if this section is stale.** The
+catalog of record is `docs/GOVERNANCE-RULES.md` on ref `governance-rules` of
+`Emasoft/ai-maestro` (**v5.3.3, blob `a13bed73fa9e`** at last read). It is
+authoritative on any conflict; the summaries below are a *paraphrase* and WILL
+drift.
+
+Check staleness with the per-FILE **blob** sha, never the branch commit sha —
+`3-pillars-spec.md` clause `3P-VER-05` forbids the commit sha because it moves on
+unrelated commits, so you refetch an identical document and record "current":
+
+```
+gh api "repos/Emasoft/ai-maestro/contents/docs/GOVERNANCE-RULES.md?ref=governance-rules" --jq .sha
+```
+
+If that sha differs from the one above, treat every summary in this section as
+unverified and read the rows. This is not hypothetical: the version pointer here
+read `v4.0.2` while the catalog was at `v5.3.3`, and a sibling document twice
+shipped a wrong copy of one rule's text — once into a published release. **The
+rules that change AMAA's behavior:**
 
 - **R26 — identity is immutable to self.** Never change your own TITLE, role-plugin, NAME, or AID. Only the MAESTRO, the MANAGER, or your OWN-team COS (AMCOS) may — NAME/AID only on a security compromise.
 - **R27 — self-install only via core skills.** To add an extension (a skill, a subagent, a hook, or an MCP server) for yourself, first get your OWN COS's (AMCOS's) approval, then install through the core `ai-maestro-plugin` skills (never the client CLI directly); the server CPV-scans before installing.
