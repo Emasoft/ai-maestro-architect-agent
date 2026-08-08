@@ -1,10 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-    ## [2.12.5] - 2026-08-08
+    ## [2.13.0] - 2026-08-08
 
-### Bug Fixes
+### Features
 
-- Main-agent cited GOVERNANCE-RULES v4.0.2 while the catalog is at v5.3.3    
+- Bring AMAA's choice trees onto the async-approval model (TRDD-K4Y86M6G)    
 
 
