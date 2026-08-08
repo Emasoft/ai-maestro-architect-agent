@@ -1,10 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-    ## [2.12.4] - 2026-08-08
+    ## [2.12.5] - 2026-08-08
 
 ### Bug Fixes
 
-- Stamp staleness with the per-FILE BLOB sha — the commit sha is FORBIDDEN    
+- Main-agent cited GOVERNANCE-RULES v4.0.2 while the catalog is at v5.3.3    
 
 
