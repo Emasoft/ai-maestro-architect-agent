@@ -107,3 +107,53 @@ class TestEverySiteActuallyUsesIt:
                     continue  # code spans are inert; comments are never posted
                 hit = re.search(r"(?<![\w`/])@[A-Za-z][\w-]{2,}", line)
                 assert not hit, f"{name}:{i} carries a bare mention {hit.group(0)!r}: {line.strip()!r}"
+
+
+# Prose that agents COPY into GitHub bodies. A byline template lives here, and the
+# `@owner` that shipped in the script constant was copied FROM this layer — so
+# guarding only the scripts leaves the source intact and every future agent
+# re-derives the bug from the document.
+PROSE_SCANNED = [
+    "design/requirements/PRRD.md",
+    "docs/GOVERNANCE-RULES.md",
+    "docs/AGENT_OPERATIONS.md",
+]
+
+
+def _strip_code_spans(line: str) -> str:
+    """Remove `...` spans — inert on GitHub, so a mention inside one pages nobody.
+
+    Coarse line-level skipping (what the script scan uses) is wrong for prose: a
+    markdown line routinely mixes a code span with real text, so skipping the whole
+    line would hide a live mention sitting beside an inert one.
+    """
+    return re.sub(r"`[^`]*`", "", line)
+
+
+class TestProseTemplatesCarryNoMention:
+    """architect#24 follow-up: the same defect class, one file over.
+
+    A byline in a governance document is a TEMPLATE — it is pasted verbatim as
+    finished prose, so backticks protect it where it sits and not where it is used.
+    Canon (governance-spec blob b1ffe5998966; GOVERNANCE-RULES R22.2, marked
+    Explicit USER) is `<owner>`, carrying no `@` deliberately.
+    """
+
+    def test_no_bare_mention_in_prose_agents_copy_from(self):
+        for rel in PROSE_SCANNED:
+            path = REPO_ROOT / rel
+            if not path.is_file():
+                continue  # optional doc; absence is not a defect
+            for i, raw in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+                line = _strip_code_spans(raw)
+                hit = re.search(r"(?<![\w`/])@[A-Za-z][\w-]{2,}", line)
+                assert not hit, (
+                    f"{rel}:{i} carries a bare mention {hit.group(0)!r} outside a code span — "
+                    f"it pages a real account when copied. Use <owner>. Line: {raw.strip()[:120]!r}"
+                )
+
+    def test_the_prrd_byline_matches_ratified_canon(self):
+        """Pins the exact repaired form, so a stale copy cannot drift back in."""
+        prrd = (REPO_ROOT / "design" / "requirements" / "PRRD.md").read_text(encoding="utf-8")
+        assert "via the shared <owner> gh auth" in prrd, "PRRD byline is not the ratified <owner> form"
+        assert "@owner" not in prrd, "the stale @owner byline is back in the PRRD"

@@ -128,17 +128,26 @@ AMAA operates within the AI Maestro governance framework:
 
 ### Foundational governance rules R26–R40 (USER-set, IRON) — what binds the ARCHITECT
 
-**Canonical wording — the SSOT, and how to tell if this section is stale.** The
-catalog of record is `docs/GOVERNANCE-RULES.md` on ref `governance-rules` of
-`Emasoft/ai-maestro` (**v5.3.3, blob `a13bed73fa9e`** at last read). It is
-authoritative on any conflict; the summaries below are a *paraphrase* and WILL
-drift.
+**Canonical wording — the SSOT, and how to tell if this section is stale.** Two
+documents, and they are NOT interchangeable (ruled 2026-08-08):
+
+| Document | Standing |
+|---|---|
+| `design/specs/governance-spec.md` (blob `b1ffe5998966` at last read) | **NORMATIVE** — the granular renderings are the rule as it binds you |
+| `docs/GOVERNANCE-RULES.md` (**v5.3.3**, blob `a13bed73fa9e`) | **PROVENANCE** — the catalog of record: who ratified what, when, and why |
+
+Both on ref `governance-rules` of `Emasoft/ai-maestro`. Read the **spec** to learn
+what a rule requires; read the **catalog** to learn where it came from. Citing only
+the catalog is how a normative clause gets missed — it is the document that records
+decisions, not the one that states obligations. The summaries below are a
+*paraphrase* of both and WILL drift.
 
 Check staleness with the per-FILE **blob** sha, never the branch commit sha —
 `3-pillars-spec.md` clause `3P-VER-05` forbids the commit sha because it moves on
 unrelated commits, so you refetch an identical document and record "current":
 
 ```
+gh api "repos/Emasoft/ai-maestro/contents/design/specs/governance-spec.md?ref=governance-rules" --jq .sha
 gh api "repos/Emasoft/ai-maestro/contents/docs/GOVERNANCE-RULES.md?ref=governance-rules" --jq .sha
 ```
 
