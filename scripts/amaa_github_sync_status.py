@@ -33,9 +33,9 @@ import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
+from typing import Optional, cast
 
 from amaa_self_id import with_self_id
-from typing import Optional, cast
 
 _DEFAULT_STATUS_LABELS = {
     "draft": "status:draft",
