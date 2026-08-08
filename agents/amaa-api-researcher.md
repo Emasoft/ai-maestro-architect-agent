@@ -110,7 +110,7 @@ Documentation: docs_dev/api/[api-name]-*.md (5 files)
 **Quick Rule:**
 - If user specifies "use library X", research library X
 - NEVER substitute alternatives without user approval
-- If library X has issues: DOCUMENT, escalate via AMAA to the MAESTRO, WAIT for decision
+- If library X has issues: DOCUMENT, escalate via AMAA to the MAESTRO, then **continue with the rest of the research** — report the blocked item and keep going. Never idle waiting for the decision (D1 never-block); the escalation is filed, not attended.
 - Include "Requirement Compliance Check" section in all reports
 
 ---

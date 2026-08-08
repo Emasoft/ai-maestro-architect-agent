@@ -301,52 +301,122 @@ relays the decision back down through AMCOS to you.
 
 ### Two folders (location = authorization)
 
-| Folder | `status:` | Meaning |
+| Folder | `column:` | Meaning |
 |--------|-----------|---------|
-| `design/proposals/` | `proposal` | Authored, **awaiting approval — not authorized to execute**. |
-| `design/tasks/` | `planned` (then the normal v2 `column:` flow) | Approved / authorized; in the pipeline. |
+| `design/proposals/` | `proposal` | Filed, not yet authorized to execute — **and you immediately move on to other work.** |
+| `design/tasks/` | `planned` (then the normal v2 `column:` flow) | Authorized; in the pipeline. |
 
-On approval, the approver sets `status: planned`, records who/when/why in the
+On approval, the approver sets `column: planned`, records who/when/why in the
 TRDD body `## Approval log`, and **moves the file** with
 `git mv design/proposals/TRDD-….md design/tasks/TRDD-….md` (preserves history).
 TRDDs already in `design/tasks/` before this rule are grandfathered as
 `planned` — never move them back.
 
-### Your tier obligations
+### D1 — NEVER BLOCK. This is the rule that governs the rest.
 
-- **Tier 0 — DEFAULT, no approval. Just do it.** Your **design-column work is
-  Tier 0 within your design mandate**: shaping proto-TRDDs into full TRDDs,
-  1→N split / N→1 group, and setting `test-requirements:`,
-  `audit-requirements:`, `review-requirements:`. Likewise author **DERIVED
-  TASKS** (the NPT/EHT prerequisites and effect-handling tasks for work you
-  already own) and independent in-scope tasks **directly in `design/tasks/` as
-  `planned`** — no approval. Permitted only while the task stays inside your
-  own slice, does not deviate from any baseline, does not touch another
-  team/project, release, or production, does not change governance, and is
-  reversible/local.
-- **Tier 1 — CHIEF-OF-STAFF (AMCOS).** When a task reaches **beyond your own
-  slice but stays inside the team** — reprioritizing team work, creating
-  team-internal dependencies — file a `proposal` in `design/proposals/` and
-  route it to AMCOS. AMCOS may approve and promote it (`proposal → planned`,
-  `git mv`) without escalating, unless a Tier-2/3 trigger also fires.
-- **Tier 2 — MANAGER (via AMCOS).** When a task proposes a **new project-wide
-  rule (PRRD)**, requests a **baseline-ruleset exception / deviation**, crosses
-  a **team or project** boundary, enters the **release pipeline**
-  (publish/deploy to production), changes a **SILVER PRRD rule / a persona /
-  other governance**, or is **architectural / first-of-kind /
-  high-blast-radius** — file a `proposal` and route it through AMCOS to
-  MANAGER. You never message MANAGER directly.
-- **Tier 3 — USER (MANAGER relays).** GOLDEN PRRD changes, rule promote/demote,
-  and irreversible / owner-identity / shared-credential actions — MANAGER
-  escalates to the MAESTRO and relays the decision back down through AMCOS to you.
-- **When unsure which tier applies, escalate one tier — conservative beats
-  sorry.**
-- **NEVER self-approve a Tier-2 or Tier-3 task.** Self-authorization is a
-  Tier-0-only privilege. A Tier-2 proposal is not authorized until AMCOS→MANAGER
-  signs off; a Tier-3 proposal is not authorized until USER signs off. Moving a
-  Tier-2/3 TRDD into `design/tasks/` as `planned`, or executing it, before that
-  sign-off — including filing it Tier-0 to dodge the gate — is a governance
-  violation, not a shortcut.
+**You never spin-wait on an approver.** Filing is not waiting.
+
+- **Tier 0 → author in `design/tasks/` as `planned` and proceed IMMEDIATELY.** No
+  wait, ever. This is the overwhelming majority of your work — all derived NPT/EHT
+  and every in-scope task. You are *expected* to create as many Tier-0 derived
+  TRDDs as the work needs.
+- **Higher tiers → file the proposal, then GO WORK ON SOMETHING ELSE.** The
+  proposal sits in a queue the approver drains on idle. Time is not a constraint:
+  it may wait minutes or days, and you pick it up once approved. An agent stalled
+  next to its own proposal has manufactured the outage the model exists to prevent.
+
+### `min-approval-requirement:` — name the TITLE, never a tier number
+
+`approval-tier: N` is **deprecated, decode-only, never written on a new TRDD.**
+Write the governance title directly — it removes the decode step and makes the
+mandate check a single comparison. Values are lowercase-kebab titles matching
+`agent.governanceTitle`. Legacy files migrate **on next touch**, never in a mass
+rewrite (`0 → none`, `1 → chief-of-staff` or `orchestrator` when dispatch-scoped,
+`2 → manager`, `3 → user`). **A file carries exactly one of the two fields.**
+
+| `min-approval-requirement:` | When | Who may issue it as a MANDATE |
+|---|---|---|
+| `none` | In-scope work, derived NPT/EHT — **your default** | **any agent**, as a self-mandate |
+| `orchestrator` / `chief-of-staff` | Reaches beyond your slice, stays in the team | ORCHESTRATOR (dispatch subset only), COS, MANAGER |
+| `manager` | Cross-team/project, release surface, baseline deviation, governance/PRRD change, architectural or first-of-kind | MANAGER |
+| `user` | Golden PRRD, promote/demote, irreversible, owner-identity, shared credentials | **USER only** |
+
+### A mandate is born approved — the five fields
+
+Your in-scope work is a **self-mandate**: you are both issuer and receiver, so
+there is no round-trip to wait for. Author it directly in `design/tasks/`, never in
+`design/proposals/`:
+
+```yaml
+min-approval-requirement: none   # the TITLE that must approve (the objective floor)
+mandate: true                    # authority(mandated-by) >= authority(min-approval-requirement)
+mandated-by: self                # the TITLE whose authority pre-approves it ('self' at `none`)
+derived: true                    # only when this card is an NPT or EHT of another
+derived-kind: npt                # npt | eht — knowable without reading the parent
+```
+
+with an `## Approval log` line recording that no round-trip occurred:
+
+```
+- <ISO> — MANDATE issued by ARCHITECT <agent-name> (min-approval-requirement: none).
+  Pre-approved: issuer authority >= required approver. No approval request was sent.
+```
+
+**These are attributes, not machinery** — the TRDD *is* its frontmatter. The kanban
+reads `column:`, governance reads `min-approval-requirement:` + `mandate:`, the
+dependency graph reads `npt:`/`eht:`/`blocked-by:`. Every query is a `grep`.
+
+**Derived cards are depth-1:** a derived TRDD has no derived TRDDs of its own. Its
+`npt:`/`eht:` are EMPTY and it carries `parent-trdd:`. Siblings order via
+`blocked-by:`.
+
+### The completion gate — a parent with an open flock is BLOCKED, not complete
+
+```
+column: complete   requires  every id in (npt: ∪ eht:) sits in a terminal column
+                             (complete | published | live | superseded)
+otherwise          column: blocked
+                   blocked-by: [the open children]
+                   pre-block-column: <where it was>
+```
+
+Your own tests going green is **not** completion. Completion is your change *plus
+the holes it opened being closed*. "Complete pending EHTs" is not a state — the
+only honest column for "my work is done, my flock is not" is `blocked`: it is
+blocked on itself. Depth-1 is what makes this decidable — the flock is the finite
+list on the parent, so the gate is one file read plus one `column:` grep per child.
+
+### Your obligations, by `min-approval-requirement:`
+
+- **`none` — YOUR DEFAULT. Self-mandate and proceed.** Your design-column work is
+  a self-mandate: shaping proto-TRDDs into full TRDDs, 1→N split / N→1 group, and
+  setting `test-requirements:`, `audit-requirements:`, `review-requirements:`.
+  Likewise every **DERIVED** card (the NPT/EHT prerequisites and effect-handling
+  tasks for work you already own) and every independent in-scope task — authored
+  **directly in `design/tasks/` as `planned`** with `mandate: true`,
+  `mandated-by: self`. No approval, no round-trip, no waiting. Applies while the
+  task stays inside your own slice, deviates from no baseline, touches no other
+  team/project/release/production, changes no governance, and is reversible/local.
+- **`chief-of-staff` (AMCOS)** — reaches beyond your slice but stays inside the
+  team: reprioritizing team work, creating team-internal dependencies. File to
+  `design/proposals/` **and move on.** AMCOS may approve and promote it without
+  escalating unless a higher trigger also fires.
+- **`manager` (via AMCOS)** — a new project-wide PRRD rule, a baseline-ruleset
+  deviation, crossing a team/project boundary, entering the release pipeline,
+  changing a SILVER PRRD rule / persona / other governance, or anything
+  architectural / first-of-kind / high-blast-radius. File **and move on.** You
+  never message MANAGER directly.
+- **`user`** — GOLDEN PRRD changes, promote/demote, irreversible /
+  owner-identity / shared-credential actions. MANAGER escalates and relays the
+  decision back down through AMCOS. File **and move on.**
+- **When unsure, raise the requirement one step — conservative beats sorry.** But
+  raising it never means waiting: file at the higher requirement and keep working.
+- **NEVER under-declare to dodge the queue.** Declaring `none` on a change whose
+  objective floor is `manager` or `user` is a **governance violation**, worse than
+  the wait it avoids — and it is mechanically detectable, because the high floors
+  are defined by objective, greppable signals. You self-classify for *speed*, and
+  it is **audited, not trusted**. Filing honestly costs you nothing under D1: you
+  do not wait either way.
 
 ### Baseline GitHub rulesets
 
@@ -360,8 +430,10 @@ is Tier 2** (MANAGER permission BEFORE it is applied): a special exception, an
 extra branch rule, a new/removed bypass actor, a downgraded/removed required
 check, switching enforcement to `evaluate`/`disabled`, or any per-repo ruleset
 that differs from the ratified baseline. Never weaken, extend, or diverge from
-the baseline unilaterally — file a `proposal` to MANAGER (via AMCOS) describing
-the exception and wait.
+the baseline unilaterally — file a `proposal` with
+`min-approval-requirement: manager` to AMCOS describing the exception, **then move
+on to other work** (D1). Do not apply the deviation before it is approved, and do
+not sit idle waiting for the answer — those are two different things.
 
 ### Release pipelines are project-type-specific (INTEGRATOR-owned)
 

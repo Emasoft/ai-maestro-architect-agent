@@ -50,7 +50,7 @@ Example: `Research REST API - WebSearch for docs, WebFetch API reference, docume
 | Issue | Fix |
 |-------|-----|
 | Scenario mismatch | Re-evaluate API type and switch scenario |
-| Orchestrator unresponsive | Use [BLOCKED] format and wait |
+| Orchestrator unresponsive | Report in [BLOCKED] format, then continue other in-scope research — never idle waiting (D1 never-block) |
 
 ## Output
 

@@ -15,10 +15,20 @@ N→1 (group) topology. A proto-TRDD comes in from ORCH; one or more
 fully-designed TRDDs land in `dispatch`. For universal mechanics, see
 the `prrd-trdd-kanban` skill in `ai-maestro-plugin`.
 
-ARCH is **exempt** (no MANAGER approval) for all within-team design
-work: pass-through, split, group, setting design frontmatter.
-**Non-exempt** (request approval): force-`superseded` outside a normal
-split, editing TRDDs already past design.
+ARCH **self-mandates** all within-team design work — pass-through,
+split, group, setting design frontmatter — writing
+`min-approval-requirement: none`, `mandate: true`, `mandated-by: self`
+and proceeding immediately. No approval round-trip exists to wait for.
+
+Higher requirements (`chief-of-staff` / `manager` / `user`) apply to
+force-`superseded` outside a normal split, editing TRDDs already past
+design, and anything crossing a team/project, release, baseline or
+governance boundary. **File those to `design/proposals/` and MOVE ON**
+— D1 never-block: you do not spin-wait on an approver, ever.
+
+`approval-tier: N` is **deprecated, decode-only, never written on a new
+TRDD**; name the governance title instead. Legacy files migrate on next
+touch, never in a mass rewrite. A file carries exactly one of the two.
 
 ## Prerequisites
 
@@ -40,10 +50,27 @@ split, editing TRDDs already past design.
 6. If artifact-producing, set `artifact-kinds:`; set `runtime-targets:`
    (platforms that must pass) and `impacts:` (install / dependencies /
    config / migration / public-api / ci-pipeline).
+6b. Set the **approval fields** on every TRDD you author:
+    `min-approval-requirement:` (the governance title — `none` for
+    in-scope design work), and when you are issuing it on your own
+    authority, `mandate: true` + `mandated-by: self`. Record the
+    no-round-trip line in `## Approval log`. Never write
+    `approval-tier:`.
 7. Identify **NPT children** — prerequisites that must complete BEFORE
    the parent's `dev`. Author each as a separate TRDD; link via `npt:`.
+   Each child is **depth-1**: `derived: true`, `derived-kind: npt`,
+   `parent-trdd:` set, and its own `npt:`/`eht:` EMPTY. Siblings order
+   via `blocked-by:`.
 8. Identify **EHT children** — consequence-handling tasks that must
-   complete BEFORE the parent's `complete`. Link via `eht:`.
+   complete BEFORE the parent's `complete`. Link via `eht:`; same
+   depth-1 field set with `derived-kind: eht`.
+8b. **Completion gate.** The parent reaches `column: complete` only when
+    every id in `npt:` ∪ `eht:` sits in a terminal column
+    (`complete`/`published`/`live`/`superseded`). Otherwise it is
+    `blocked`, with `blocked-by:` naming the open children and
+    `pre-block-column:` recording where it was. "Complete pending EHTs"
+    is not a state — the parent's own tests going green is not
+    completion.
 9. Decide topology: **pass-through** (#4 `design → dispatch`), **1→N
    split** (#5 parent → `superseded`, N children to `dispatch`), or
    **N→1 group** (one combined TRDD supersedes the inputs).
@@ -58,7 +85,9 @@ split, editing TRDDs already past design.
 
 - A fully-designed TRDD: complete frontmatter (task-type, severity,
   effort, release-via, the three requirement sets, runtime-targets,
-  impacts, npt/eht, relevant-rules) plus the prose body.
+  impacts, npt/eht, relevant-rules, **min-approval-requirement +
+  mandate/mandated-by**) plus the prose body and an `## Approval log`
+  line recording the mandate (or the filed request).
 - On a split/group: N child TRDDs (fresh UUID + timestamp,
   `parent-trdd:`/`supersedes:`, own requirements) and the superseded
   parent/inputs.

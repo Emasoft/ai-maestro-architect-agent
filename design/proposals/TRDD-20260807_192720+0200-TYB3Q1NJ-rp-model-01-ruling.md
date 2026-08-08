@@ -7,7 +7,8 @@ updated: 2026-08-08T08:45:00+0200
 current-owner: ai-maestro-architect-agent
 task-type: infra
 scope: project
-approval-tier: 2
+min-approval-requirement: manager
+mandate: false
 relevant-rules: []
 npt: []
 eht: []
