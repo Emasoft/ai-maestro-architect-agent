@@ -229,6 +229,17 @@ Your title: **ARCHITECT**
 | CHIEF-OF-STAFF (AMCOS) | Your primary channel — work intake and completion reporting |
 | ORCHESTRATOR (AMOA) | Direct messaging for design handoffs |
 
+> **The AMOA edge is intra-team and RATIFIED — do not "fix" it into a COS
+> re-route.** R6 v3's *"COS is the sole entry point"* governs traffic crossing
+> **into** the team from outside; it does not sever edges **inside** it. The
+> pipeline itself encodes this handoff: the transition-authority table in
+> `aimaestro-trdd-approval.md` (blob `ed1bc35310f6`, verified first-hand) gives
+> `design → dispatch` to ARCHITECT and `dispatch → dev` to ORCHESTRATOR — an
+> ARCHITECT→ORCHESTRATOR handoff by construction. Hub ruling, 2026-08-08, in
+> answer to architect#26 Q3. `TRDD-364ccafc`'s design→epic→handoff path rests on
+> it. Should a later comm-graph revision remove the edge, it arrives as a spec
+> change — never as a retroactive violation of work already shipped.
+
 ### Reply-only recipients (`1` edges)
 
 | Title | Constraint |
