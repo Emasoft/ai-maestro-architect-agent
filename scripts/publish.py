@@ -519,6 +519,46 @@ def _toml_str(content: str, section: str, key: str) -> str | None:
         return None
 
 
+def dependency_resolver_tag(plugin_name: str, version: str) -> str:
+    """Return the `{plugin-name}--v{version}` tag Claude Code's resolver reads.
+
+    Version constraints in a plugin's `dependencies` resolve against git tags,
+    but Claude Code filters the tag list to those starting with
+    `{plugin-name}--v` — a bare `v{version}` tag matches that filter zero times.
+    A repo tagged only `v2.8.0` therefore reports "has no git tag satisfying
+    >=2.7.0 <3.0.0-0" to every consumer that pins a range on it, even though the
+    release exists. Kept as a named function so the format is asserted by tests
+    rather than embedded in an f-string at the call site (architect#25).
+    """
+    if not plugin_name:
+        raise ValueError("plugin_name is required to build the resolver tag")
+    # HARD-FAIL on the sentinel. `_read_project_metadata` swallows a malformed
+    # or missing plugin.json and returns "unknown", which is truthy — so an
+    # emptiness check alone would let a release mint and atomically push
+    # `unknown--v{version}`. That tag matches no resolver, and the damage lands
+    # in someone ELSE's install while this repo's CI stays green. Refuse to
+    # guess a name (architect#25).
+    if plugin_name == "unknown":
+        raise ValueError(
+            "cannot derive the dependency-resolver tag: plugin name is the "
+            "'unknown' sentinel, meaning .claude-plugin/plugin.json is missing "
+            "or unreadable. Fix the manifest — a guessed name ships a tag no "
+            "consumer can resolve."
+        )
+    if not version:
+        raise ValueError("version is required to build the resolver tag")
+    if version.startswith("v"):
+        raise ValueError(
+            f"version must be bare semver without a leading 'v', got {version!r} — "
+            "the 'v' belongs to the tag format, not the version field"
+        )
+    # A name with git-illegal ref characters yields a tag `git tag` rejects mid
+    # release, after the version bump and CHANGELOG are already committed.
+    if re.search(r"[\s~^:?*\[\\]", plugin_name):
+        raise ValueError(f"plugin name is not a valid git ref component: {plugin_name!r}")
+    return f"{plugin_name}--v{version}"
+
+
 def _git_latest_semver_tag(root: Path) -> str:
     """Return the latest vX.Y.Z git tag, or 0.0.0 if none."""
     try:
@@ -1462,25 +1502,46 @@ Examples:
     run(["git", "commit", "-m", f"chore(release): v{new_version}"], cwd=git_root)
     print(f"{GREEN}ok Committed v{new_version} (bump + CHANGELOG){NC}")
 
-    # ── Step 12: Create annotated tag with the release notes as body ──
-    print(f"\n{BLUE}=== Step 12: Create annotated tag v{new_version} ==={NC}")
+    # ── Step 12: Create BOTH release tags ──
+    # Two tags, two different consumers, and they are not interchangeable:
+    #   v{version}          — GitHub Releases + the marketplace notify chain
+    #   {name}--v{version}  — the ONLY form Claude Code's dependency resolver reads
+    # Claude Code lists tags and filters to those starting with `{plugin-name}--v`
+    # (docs: "Constrain plugin dependency versions", CC v2.1.110). A repo tagged
+    # only `v2.8.0` matches that filter zero times, so every plugin that pins a
+    # version range on this one fails with "has no git tag satisfying ...".
+    # The tags coexist; dropping the version pin instead would be treating a
+    # spec requirement we never met as an upstream bug (architect#25).
+    print(f"\n{BLUE}=== Step 12: Create annotated tags v{new_version} + resolver tag ==={NC}")
     notes_path = plugin_root / ".git-cliff-release-notes.md"
     if notes_path.exists():
         final_notes = notes_path.read_text(encoding="utf-8").strip()
     else:
         final_notes = f"Release v{new_version}"
+    dep_tag = dependency_resolver_tag(info.name, new_version)
     run(["git", "tag", "-a", f"v{new_version}", "-m", final_notes], cwd=git_root)
     print(f"{GREEN}ok Tagged v{new_version} (annotated, body = release notes){NC}")
+    # Created with git directly, NOT `claude plugin tag <tag>` — that CLI's
+    # positional argument is a PATH, not a tag name, so passing a tag there
+    # silently does nothing (architect#25).
+    run(["git", "tag", "-a", dep_tag, "-m", f"Dependency-resolver tag for v{new_version}"], cwd=git_root)
+    print(f"{GREEN}ok Tagged {dep_tag} (dependency resolver){NC}")
 
     # ── Step 13: Push commit + tag to origin ──
     # The pre-push hook verifies its caller via PROCESS ANCESTRY: it walks
     # the PID tree and looks for a `python.*scripts/publish.py` ancestor.
     # Because this process IS scripts/publish.py, the hook will find it and
     # allow the push. No env var needed — process trees can't be spoofed.
-    print(f"\n{BLUE}=== Step 13: Push commit + tag to origin/{default_branch} ==={NC}")
-    run(["git", "push", "origin", "HEAD"], cwd=git_root)
-    run(["git", "push", "origin", f"v{new_version}"], cwd=git_root)
-    print(f"\n{GREEN}ok Published v{new_version} ({info.name}){NC}")
+    print(f"\n{BLUE}=== Step 13: Push commit + both tags to origin/{default_branch} ==={NC}")
+    # --atomic so the commit and BOTH tags land together or not at all. A
+    # partial push that lands v{version} without {name}--v{version} publishes a
+    # release the dependency resolver cannot see, which is the exact failure
+    # this step exists to prevent.
+    run(
+        ["git", "push", "--atomic", "origin", "HEAD", f"v{new_version}", dep_tag],
+        cwd=git_root,
+    )
+    print(f"\n{GREEN}ok Published v{new_version} ({info.name}) — tags: v{new_version}, {dep_tag}{NC}")
 
     # ── Step 14: Create GitHub release with release notes (MANDATORY) ──
     # Every push MUST create a corresponding GitHub release so Claude Code's
