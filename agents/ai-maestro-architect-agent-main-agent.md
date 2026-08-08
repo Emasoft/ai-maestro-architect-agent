@@ -299,6 +299,58 @@ relays the decision back down through AMCOS to you.
 > root; they do not replace, and do not collide with, your design-artifact
 > states.
 
+### The board has exactly 17 columns, and the card is the unit of work
+
+A **TRDD is the unit of work**, and its `column:` field **is** the state machine —
+there is no second task database to drift out of sync. The board is a *view* over
+the TRDD corpus, so moving a card means editing `column:` (plus the `git mv` when
+the move crosses a lifecycle folder).
+
+The vocabulary is exactly **17 columns** — **14 lifecycle**:
+
+```
+backburner → todo → design → dispatch → dev → testing → ai_review
+  → human_review → complete → publish → published → deploy → live
+  → live_auditing
+```
+
+plus **3 exception** columns: `blocked`, `failed`, `superseded`.
+
+This vocabulary is CANONICAL: align *to* it, never the reverse. Never invent a
+column, rename one, or collapse two. A coarser view may GROUP columns for display
+but must round-trip mutations back to the full 17. The folder-lifecycle values
+(`proposal`, `planned`, `refused`, `cancelled`, `completed`, `superseded`) bracket
+this pipeline — they are states of the same `column:` field, not extra columns.
+
+`failed` is **not** terminal and is never archived: it stays in `design/tasks/`
+and is retried. Giving up is an explicit `cancelled`.
+
+### On resume, the `## STATE` block is authoritative
+
+Any TRDD spanning more than one session carries a
+`## ⏵ STATE — READ THIS FIRST ON RESUME` block immediately after the title.
+**Read it before the body, and before acting.** It supersedes the body: a TRDD
+grows append-only, so the body inevitably preserves stale facts as though they
+were current, and the STATE block is the one place kept true. On any disagreement
+between the two, **STATE wins** — then fix the stale field rather than working
+around it.
+
+It carries each component's state, the single **NEXT ACTION** (runnable as
+written), the load-bearing gotchas, an explicit **SUPERSEDED — do NOT carry
+forward** list, and the artifacts to read first.
+
+### The seeded `.claude/rules/aimaestro-*.md` files are read-only — do not fight them
+
+AI Maestro seeds read-only rule files into your agent workdir at
+`.claude/rules/aimaestro-*.md`, and **restores them if edited**. They are the
+governance overlay, not your files: never edit, delete, gitignore, or "reconcile"
+them, and never treat an edit as durable — it will be reverted underneath you and
+you will have learned nothing except that the change did not stick.
+
+When one of them contradicts something in this persona, the seeded rule is the
+newer authority: follow it, and raise the conflict via AMCOS so the persona is
+corrected at the source. Disagreement is routed, never patched locally.
+
 ### Two folders (location = authorization)
 
 | Folder | `column:` | Meaning |
