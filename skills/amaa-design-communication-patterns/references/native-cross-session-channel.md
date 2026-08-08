@@ -185,8 +185,8 @@ decision can be an exception verb. Reason from that line; it has held through ev
 revision of the rule.
 
 **The list itself is churning and any copy of it goes stale.** As of
-`docs/GOVERNANCE-RULES.md` v5.3.3, ref `governance-rules`, tip `6ef0644`
-(2026-08-08T08:23Z), the exception verbs are **`block-state`, `read-prompt` and
+`docs/GOVERNANCE-RULES.md` v5.3.3 on ref `governance-rules`, **blob
+`a13bed73fa9e`**, the exception verbs are **`block-state`, `read-prompt` and
 `answer` ONLY**. `block-state` is in the set because it carries no caller decision
 and is the pane-authoritative DETECTION read that makes constraint (a)'s
 "blocked-only" trigger checkable at all — the hook's chat-state carried
@@ -201,6 +201,26 @@ so naming it documents the ratified implementation rather than widening it.
 > version of it twice, once into a published release. **Always name the ref, fetch
 > the row, and read it — never a summary, including this one and including the
 > rule's own earlier text.**
+>
+> **Check staleness with the per-FILE BLOB sha, never the branch commit sha.**
+> `3-pillars-spec.md` clause `3P-VER-05` makes this normative and forbids the commit
+> sha, because it **fails in the dangerous direction**: it moves on every unrelated
+> commit, so a consumer polls, sees movement, refetches, gets a byte-identical
+> document, and records "checked, current" — manufacturing confidence instead of
+> supplying information. It also stays *green* when a sibling file moved under a
+> stable tip. An earlier version of this document stamped a commit sha, which is
+> exactly the forbidden form.
+>
+> ```
+> gh api "repos/Emasoft/ai-maestro/contents/docs/GOVERNANCE-RULES.md?ref=governance-rules" --jq .sha
+> ```
+>
+> A blob sha changes **iff** those bytes change. For AMAA the fingerprint set is
+> `docs/GOVERNANCE-RULES.md`, `design/specs/role-plugins-spec.md` (blob
+> `7757c76f75fc` — the spec that binds a ROLE plugin's on-disk shape),
+> `design/specs/3-pillars-spec.md` (`e18556ecc06d`), and the five
+> `rules/aimaestro/` overlays — **the overlays carry no version field at all**, so
+> `spec-version` can never detect an overlay-only edit.
 
 **AMAA holds none of it, and THAT is the fact to rely on — it has not moved once.**
 Constraint (c) is title-scoped and *exhaustive*: MANAGER — any agent on the host
