@@ -1,9 +1,9 @@
 ---
 trdd-id: K4Y86M6G
 title: Bring AMAA's choice trees onto the async-approval model
-column: planned
+column: completed
 created: 2026-08-08T12:07:55+0200
-updated: 2026-08-08T12:07:55+0200
+updated: 2026-08-08T15:23:02+0200
 current-owner: ai-maestro-architect-agent
 task-type: docs
 scope: project
@@ -15,7 +15,7 @@ npt: []
 eht: []
 relevant-rules: []
 external-refs: [TRDD-O16UGID8]
-implementation-commits: []
+implementation-commits: [ce40b21ba063b294704f3c7ff7cf46411a2d19d8]
 ---
 
 # Bring AMAA's choice trees onto the async-approval model
@@ -107,3 +107,14 @@ is distinguishable from a query that searched nothing.
   (min-approval-requirement: none). Pre-approved: issuer authority >= required
   approver. No approval request was sent. In-scope docs work on AMAA's own tree,
   reversible, no baseline deviation, no other project touched.
+- 2026-08-08T15:23:02+0200 — COMPLETED by ARCHITECT ai-maestro-architect-agent.
+  All acceptance criteria checked; shipped in v2.13.0 (`ce40b21`); closure record
+  sent and acknowledged by the hub, which archived its parent `TRDD-O16UGID8` as
+  `completed` after reading my 9 stall-language grep hits individually (7 are the
+  D1 doctrine's own phrasing, 2 legitimately gated).
+
+  **This card was late to close, and that is the lesson.** The work finished and
+  shipped hours before the column said so, leaving it asserting `planned` —
+  indistinguishable on the board from a card nobody had started. A done card that
+  stays open is worse than an unstarted one, because it hides the truth in the one
+  view anyone consults. Close in the same session the work lands.

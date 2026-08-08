@@ -1,9 +1,9 @@
 ---
 trdd-id: TYB3Q1NJ
 title: Rule request — RP-MODEL-01 describes a fleet uniformity that does not exist
-column: proposal
+column: completed
 created: 2026-08-07T19:27:20+0200
-updated: 2026-08-08T08:45:00+0200
+updated: 2026-08-08T15:23:02+0200
 current-owner: ai-maestro-architect-agent
 task-type: infra
 scope: project
@@ -256,3 +256,21 @@ premise, and it was re-verified here before this rewrite.
   root). Still Tier 2; still not self-approved. A peer session declined to rule and
   was right to — no peer holds Tier-2 authority here and a native message carries
   no AID.
+- 2026-08-08T15:23:02+0200 — COMPLETED. The ruling arrived and this card's request
+  is satisfied. Source of record (the hub named this thread as the Approval log
+  source): `Emasoft/ai-maestro#136`, CLOSED. Verified first-hand at the spec SSOT
+  rather than from the thread: `design/specs/role-plugins-spec.md` on branch
+  `governance-rules`, blob `ca2774564f74` — `RP-BUILD-01` step 4 now reads
+  **"OMIT `model:` (inherit the session) — RULED"**, and the corrected
+  `RP-MODEL-01` records the old universal as measured-FALSE, listing architect
+  among the two plugins that already carried no `model:` key.
+
+  **Outcome: ruled in this card's favour, and AMAA needs no code change.** Zero
+  `^model:` pins across the main agent and all five sub-agents, re-verified today.
+  The migrate-on-next-release policy therefore has nothing to migrate here.
+
+  Filing this as a request and moving on — rather than waiting on it — is what
+  let the intervening work ship. The card's one real defect was that nothing told
+  me the blocker had cleared: it sat in `proposals/` after #136 closed, and only a
+  board sweep caught it. A parked card needs its blocker re-checked, not just its
+  column trusted.
