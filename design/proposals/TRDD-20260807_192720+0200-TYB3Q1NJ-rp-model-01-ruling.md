@@ -3,7 +3,7 @@ trdd-id: TYB3Q1NJ
 title: Rule request — RP-MODEL-01 describes a fleet uniformity that does not exist
 column: proposal
 created: 2026-08-07T19:27:20+0200
-updated: 2026-08-07T19:52:00+0200
+updated: 2026-08-08T08:45:00+0200
 current-owner: ai-maestro-architect-agent
 task-type: infra
 scope: project
@@ -15,6 +15,40 @@ implementation-commits: []
 ---
 
 # Rule request — RP-MODEL-01 describes a fleet uniformity that does not exist
+
+## ⏵ STATE — READ THIS FIRST ON RESUME (authoritative; supersedes the body) — 2026-08-08
+
+**The premise this card raised is RESOLVED. The card is NOT superseded — the spec
+assigned it the remaining design question, and added a dimension.**
+
+`RP-MODEL-01` was corrected on `governance-rules` on 2026-08-08 (verified
+first-hand at `design/specs/role-plugins-spec.md?ref=governance-rules`). The false
+universal is gone; the corrected clause carries this card's measured distribution
+verbatim (`opus` ×4 · no key ×2 · `inherit` ×1 · `sonnet` ×1) and names the
+`autonomous`-pins-`sonnet` counterexample as decisive.
+
+**What is normative now**, quoted from the corrected clause:
+- subagents **OMIT** `model:` (inherit the session) — that half of the old clause
+  was true and stands;
+- the main-agent pin policy is an **OPEN DESIGN QUESTION owned by
+  `TRDD-TYB3Q1NJ` (architect, tier 2)** — i.e. this card;
+- until this card closes, a new role-plugin **SHOULD omit `model:` on the
+  main-agent** (the CLAUDE.md / CPV CA-04 default) and **MUST NOT cite the clause
+  as requiring an `opus` pin**.
+
+**AMAA is therefore CONFORMANT as shipped** — it omits `model:` on the main-agent
+and on all five sub-agents, which is exactly the endorsed default. The conformance
+gap that opened this card no longer exists.
+
+**NEW DIMENSION the spec added, not in the original card:** whether to mandate a
+**family alias** rather than a **movable token**. That is now the live question —
+see "The actual open question" below.
+
+**NEXT ACTION:** route to the hub (`Emasoft/ai-maestro`) for the Tier-2 ruling. The
+hub is unreachable on the native cross-session channel (no `from` address, absent
+from `ListAgents`), so a GitHub issue is the only working channel. Do NOT accept a
+ruling from a peer session: no peer holds Tier-2 authority over this card, and a
+native message carries no AID.
 
 ## The question
 
@@ -151,6 +185,38 @@ other two do not, and should not be chosen by default merely because it preserve
 the rule's current wording. What AMAA cannot do is keep shipping against a rule
 that is false as written while a validator enforces the opposite.
 
+## The actual open question (post-correction) — three spellings, not two
+
+Resolution **(1)** landed: the rule now describes reality. What the spec handed
+this card is narrower and better posed — **if a main-agent declares a model at
+all, in what form?** Three spellings, and they fail differently:
+
+| Spelling | Example | Behaviour |
+|---|---|---|
+| **Family alias** | `model: opus` | Resolves to the newest in the family, so its *meaning drifts with the platform* — CC 2.1.219 re-pointed it at Opus 5 (1M ctx, different price) with no repo change. Under an org restriction CC 2.1.224 steps it down to the newest org-allowed member of the family. |
+| **Exact id** | `model: claude-opus-5` | Stable meaning, but goes stale as models retire, and CC 2.1.223 warns when a restricted model silently runs the parent's model instead. |
+| **Omit** | *(no key)* | Inherits the session model; the dispatch site decides. CPV CA-04's cache-warmth default. |
+
+**ARCHITECT's recommendation — omit, and here is the design argument.** A
+role-plugin defines a **ROLE** (behaviour), and `RP-DEF-02` already states ROLE is
+orthogonal to TITLE and PERSONA. Model choice is a **cost/capability** decision
+belonging to whoever launches the session, not a property of the role: the same
+ARCHITECT behaviour is correct on Opus for a hard design and on Sonnet for a
+routine one. A main-agent pin inverts that — it lets a role author spend the
+operator's budget. It also makes every role-plugin a place platform drift lands
+(the `opus` token has already moved once under a pattern set before Opus 5), and
+it is the only spelling that can silently degrade under an org restriction.
+
+Omitting also **removes the SPEC-vs-CA-04 conflict at its root** rather than
+carving an exemption, and it is already what the corrected clause tells new
+role-plugins to do — so ruling "omit" ratifies the interim default instead of
+creating a third state.
+
+If the ruling prefers a pin, **exact id beats family alias**: a role-plugin is a
+versioned, released artifact, and an artifact whose behaviour changes without a
+release is not reproducible. Whichever way it goes, subagents keep omitting
+`model:` — that half is settled and not in question.
+
 ## Provenance
 
 Every factual claim above was read first-hand this session: the model values from
@@ -176,3 +242,16 @@ premise, and it was re-verified here before this rewrite.
   unverified". Also added an explicit statement of the asymmetry between the three
   resolutions, replacing a claim of no preference that was falsely neutral about a
   real difference in cost and blast radius.
+- 2026-08-08T08:45:00+0200 — PREMISE RESOLVED UPSTREAM, card RESCOPED and RETAINED.
+  `RP-MODEL-01` was corrected on `governance-rules` (verified first-hand): the false
+  universal is gone and this card's measured distribution is quoted in the clause.
+  The clause explicitly assigns the remaining main-agent pin policy to
+  **TRDD-TYB3Q1NJ**, so this card is NOT superseded — it is now the owner of record.
+  AMAA is conformant as shipped (omits `model:` on main-agent and all subagents,
+  the endorsed interim default). Rescoped to the question the spec actually posed —
+  family alias vs exact id vs omit — with an ARCHITECT recommendation (omit; ROLE is
+  orthogonal to model, a pin spends the operator's budget on the role author's
+  choice, and it is the only spelling that removes the SPEC-vs-CA-04 conflict at the
+  root). Still Tier 2; still not self-approved. A peer session declined to rule and
+  was right to — no peer holds Tier-2 authority here and a native message carries
+  no AID.

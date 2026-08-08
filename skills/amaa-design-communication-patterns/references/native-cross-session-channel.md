@@ -177,19 +177,39 @@ TRDD-AODXPI5E)`. It is the single carve-out: a **MANAGER** or **CHIEF-OF-STAFF**
 may UNBLOCK an agent stalled on a permission / `AskUserQuestion` prompt, in
 realtime, via the frozen `aimaestro-session.sh`.
 
-**The exception verbs are `read-prompt` and `answer` ONLY.** `inject`, `slash` and
-`queue` are explicitly **not** exception verbs — they deliver an arbitrary command,
-so they express the CALLER's decision and stay SELF-ONLY for every title; the
-server 403s them cross-agent. `block-state` is not named as an exception verb
-either. Read the ratified row itself, never a summary of it — this rule has been
-mis-summarised in both directions, including by its own earlier text (spec 2.4.1
-corrected a version that wrongly named `inject` and `queue` as exception verbs).
+**The stable part is the DIVIDING LINE, not the list: CALLER DECISION, not
+read-vs-write.** A verb that delivers an arbitrary command carries a decision the
+*caller* made, so it stays SELF-ONLY for every title and the server 403s it
+cross-agent — that is `inject`, `slash` and `queue`. A verb that carries no caller
+decision can be an exception verb. Reason from that line; it has held through every
+revision of the rule.
 
-**AMAA holds none of it.** Constraint (c) is title-scoped and *exhaustive*:
-MANAGER — any agent on the host except an ASSISTANT; COS — its own team only, same
-exclusion; **every other title: none**. AMAA is neither, so all six verbs remain
-forbidden to AMAA against every agent. The ratified rule changes AMAA's
-*provenance*, not AMAA's *conduct*.
+**The list itself is churning and any copy of it goes stale.** As of
+`docs/GOVERNANCE-RULES.md` v5.3.3, ref `governance-rules`, tip `6ef0644`
+(2026-08-08T08:23Z), the exception verbs are **`block-state`, `read-prompt` and
+`answer` ONLY**. `block-state` is in the set because it carries no caller decision
+and is the pane-authoritative DETECTION read that makes constraint (a)'s
+"blocked-only" trigger checkable at all — the hook's chat-state carried
+`AskUserQuestion` in 0 of 419 surveyed files, so a caller limited to `read-prompt`
+reads `null` and the one prompt shape that blocks an agent indefinitely is
+invisible. The server had always gated it under the same `unblock-prompt` action,
+so naming it documents the ratified implementation rather than widening it.
+
+> **Do not trust the list above — re-read the row.** That set changed **three times
+> in 24 hours** (v2.4.1 dropped `inject`/`queue`; v5.3.2 omitted `block-state`;
+> v5.3.3 restored it twelve minutes later), and this document has carried a wrong
+> version of it twice, once into a published release. **Always name the ref, fetch
+> the row, and read it — never a summary, including this one and including the
+> rule's own earlier text.**
+
+**AMAA holds none of it, and THAT is the fact to rely on — it has not moved once.**
+Constraint (c) is title-scoped and *exhaustive*: MANAGER — any agent on the host
+except an ASSISTANT; COS — its own team only, same exclusion; **every other title:
+none**. AMAA is neither, so **every** cross-agent terminal verb stays forbidden to
+AMAA against every agent, no matter which way the exception list is revised next.
+Through three revisions of that list, AMAA's position never changed. Revisions to
+R42.8 change AMAA's *provenance*, never AMAA's *conduct* — so if a future reading
+disagrees with the list above, it still cannot licence AMAA to use any of them.
 
 **AMAA cooperates as the TARGET.** A stalled AMAA is precisely what the carve-out
 exists to rescue — the trigger is (a) blocked-only, and an unblock interrupts
