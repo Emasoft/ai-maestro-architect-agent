@@ -29,10 +29,32 @@ MAIN_AGENT = REPO_ROOT / "agents" / "ai-maestro-architect-agent-main-agent.md"
 SUB_AGENTS = sorted((REPO_ROOT / "agents").glob("amaa-*.md"))
 
 
+def _select_unique(text: str, anchor: str, what: str) -> int:
+    """Return the offset of `anchor`, refusing to guess when it is ambiguous.
+
+    NOT `str.find`. A first-match selector picks whichever occurrence comes first,
+    which may be a true-but-irrelevant one — a cross-reference in prose rather than
+    the section itself — and the guard then passes or fails for reasons unrelated
+    to the invariant it tests. Credit: ai-maestro-chief-of-staff on ai-maestro#131,
+    who hit this three times in one day (a selector anchored on the first
+    `out.summary(` chose a WARN early-exit whose window could never contain the
+    text under test, reddening a correct file).
+
+    Ambiguity fails LOUDLY here instead of silently resolving to the wrong slice.
+    """
+    hits = [m.start() for m in re.finditer(re.escape(anchor), text)]
+    assert hits, f"the persona has no {what} (anchor {anchor!r} not found)"
+    assert len(hits) == 1, (
+        f"{anchor!r} appears {len(hits)}x — the slice for {what} would be chosen by "
+        "position rather than by property. Disambiguate the anchor or select on a "
+        "property of the section itself; do not let a guard pick by first match."
+    )
+    return hits[0]
+
+
 def _comm_section(text: str) -> str:
     """The Communication Permissions section — where the send decision is made."""
-    start = text.find("## Communication Permissions")
-    assert start != -1, "the persona has no Communication Permissions section"
+    start = _select_unique(text, "## Communication Permissions", "Communication Permissions section")
     nxt = text.find("\n## ", start + 1)
     return text[start:] if nxt == -1 else text[start:nxt]
 
@@ -100,12 +122,18 @@ def _inbound_bullet(persona: str) -> str:
     inbound rule and assert nothing. The earlier fix succeeding is exactly what
     would make the unscoped guard incapable of failing.
     """
-    marker = "**Inbound discipline**"
-    start = persona.find(marker)
-    assert start != -1, "the persona has no **Inbound discipline** bullet"
+    start = _select_unique(persona, "**Inbound discipline**", "Inbound discipline bullet")
     rest = persona[start:]
     nxt = re.search(r"\n#{1,3} ", rest)
-    return rest[: nxt.start()] if nxt else rest
+    bullet = rest[: nxt.start()] if nxt else rest
+    # Select by a PROPERTY of the thing under test, not merely by position: the
+    # real bullet enumerates channels, so a slice that carries no channel-1 marker
+    # is the wrong slice however it was found.
+    assert "amp-inbox" in bullet, (
+        "the selected slice does not carry channel 1 — the anchor matched something "
+        "other than the inbound bullet (a cross-reference in prose, most likely)"
+    )
+    return bullet
 
 
 class TestInboundDisciplineEnumeratesEveryChannel:
