@@ -91,6 +91,71 @@ class TestTheEnforcementClaimIsScopedToItsTransport:
         )
 
 
+def _inbound_bullet(persona: str) -> str:
+    """The Inbound discipline bullet ONLY — never the whole persona.
+
+    The slice is the load-bearing part. `SendMessage` already appears elsewhere
+    in this persona (the send-side transport table added for ai-maestro#131), so
+    a whole-file `assert "SendMessage" in persona` would pass against an AMP-only
+    inbound rule and assert nothing. The earlier fix succeeding is exactly what
+    would make the unscoped guard incapable of failing.
+    """
+    marker = "**Inbound discipline**"
+    start = persona.find(marker)
+    assert start != -1, "the persona has no **Inbound discipline** bullet"
+    rest = persona[start:]
+    nxt = re.search(r"\n#{1,3} ", rest)
+    return rest[: nxt.start()] if nxt else rest
+
+
+class TestInboundDisciplineEnumeratesEveryChannel:
+    """A missed receive produces a SUCCESSFUL-LOOKING wake (ai-maestro#131).
+
+    Drain AMP, find it empty, report the inbox clear, resume self-chosen work —
+    while live directives wait on two unpolled channels. Silence on a channel you
+    never read is indistinguishable from absence, so nothing surfaces it.
+    """
+
+    def test_channel_1_amp_is_named(self):
+        assert "amp-inbox" in _inbound_bullet(MAIN_AGENT.read_text(encoding="utf-8"))
+
+    def test_channel_2_direct_session_is_named_and_marked_unpollable(self):
+        bullet = _inbound_bullet(MAIN_AGENT.read_text(encoding="utf-8"))
+        assert "SendMessage" in bullet or "cross-session-message" in bullet, (
+            "channel 2 is unnamed in the inbound bullet"
+        )
+        assert re.search(r"(?i)never\b[^.]{0,60}in\s+`?amp-inbox", bullet), (
+            "the bullet does not say channel 2 never appears in amp-inbox — a reader "
+            "drains AMP and believes they have seen everything"
+        )
+
+    def test_channel_3_github_threads_is_named(self):
+        bullet = _inbound_bullet(MAIN_AGENT.read_text(encoding="utf-8"))
+        assert re.search(r"(?i)gh issue list", bullet), "channel 3 is unnamed in the inbound bullet"
+
+    def test_states_the_no_single_channel_rule(self):
+        bullet = _inbound_bullet(MAIN_AGENT.read_text(encoding="utf-8"))
+        assert re.search(r"(?i)never call the inbox clear on the strength of one channel", bullet)
+
+    def test_blocked_does_not_license_not_checking(self):
+        """This agent stalled ~15 heartbeats on 'blocked, stopping' with mail waiting."""
+        bullet = _inbound_bullet(MAIN_AGENT.read_text(encoding="utf-8"))
+        assert re.search(r"(?i)stopping\s+WORK, never stopping\s*\n?CHECKING", bullet), (
+            "the bullet does not separate 'stop working' from 'stop checking' — the "
+            "exact conflation that left a directive unread for four days"
+        )
+
+    def test_the_slice_is_a_strict_subset_of_the_persona(self):
+        """If the slice ever widened to the file, every assertion above would go vacuous."""
+        persona = MAIN_AGENT.read_text(encoding="utf-8")
+        bullet = _inbound_bullet(persona)
+        assert len(bullet) < len(persona), "the inbound slice widened to the whole persona"
+        assert "## Communication Permissions" not in bullet, (
+            "the slice leaked into Communication Permissions, where SendMessage appears "
+            "for send-side reasons — the guard would then pass on unrelated text"
+        )
+
+
 class TestSubAgentsCarryTheProhibition:
     """Sub-agents have no AMP identity; the native channel is the only way they could send."""
 
