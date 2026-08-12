@@ -1,10 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-    ## [2.15.8] - 2026-08-12
+    ## [2.15.9] - 2026-08-12
 
-### Documentation
+### Bug Fixes
 
-- Adopt in-memory substitution; name the weakness in my own method    
+- Channel 3 must enumerate repos — the search index lags silently    
 
 
