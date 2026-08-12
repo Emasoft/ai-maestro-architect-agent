@@ -63,8 +63,13 @@ to encounter it:
 | literal — `.find("## X")` | YES | yes |
 | module constant — `H = "## X"` … `.find(H)` | YES | yes |
 | function-local — `m = "## X"` inside a def | YES | yes |
-| runtime-built — f-string, concatenation, read from disk | **NO** | — |
-| parameter — anchor passed into the helper | **NO** | — |
+| runtime-built — f-string, concatenation, read from disk | **NO** | yes — pinned UNCAUGHT |
+| parameter — anchor passed into the helper | **NO** | yes — pinned UNCAUGHT |
+
+The last two are asserted *uncaught*, so the table fails in **both** directions:
+extending coverage breaks the pin and forces this table to be updated with it. A
+blind spot recorded only in prose is indistinguishable from one nobody thought
+of, and it goes stale silently the moment reality moves.
 
 **Still a net, not a proof.** The last two rows need evaluating rather than
 parsing. Collecting names across scopes can in principle mis-resolve a name
@@ -216,3 +221,38 @@ def test_the_detector_catches_both_anchor_shapes(tmp_path):
         encoding="utf-8",
     )
     assert not _offenders_in(legit), f"false-positived on correct code: {_offenders_in(legit)}"
+
+
+def test_the_uncovered_shapes_are_pinned_as_uncovered(tmp_path):
+    """The miss list must fail in BOTH directions, not just the covered half.
+
+    Credit: ai-maestro-chief-of-staff on ai-maestro#131. A blind spot documented
+    only in prose is indistinguishable from one nobody thought of, and if someone
+    later extends coverage the docstring goes stale *silently* — passing quietly
+    beside a table that now lies. Asserting the misses means the table breaks when
+    reality moves in either direction, and whoever extends coverage is told to
+    update it.
+
+    These asserts are NOT a wish that the shapes stay uncovered. They pin the
+    CURRENT boundary. Extending the resolver is welcome — it just has to come with
+    updating this test and the table together.
+    """
+    runtime_built = tmp_path / "test_seed_runtime.py"
+    runtime_built.write_text(
+        "level = 2\n"
+        'start = text.find(f"{\'#\' * level} Communication Permissions")\n',
+        encoding="utf-8",
+    )
+    assert not _offenders_in(runtime_built), (
+        "the RUNTIME-BUILT shape is now caught — good, but the docstring table and "
+        "this pin must be updated together, or the table starts lying"
+    )
+
+    parameterised = tmp_path / "test_seed_param.py"
+    parameterised.write_text(
+        "def _slice(persona, anchor):\n    return persona.find(anchor)\n",
+        encoding="utf-8",
+    )
+    assert not _offenders_in(parameterised), (
+        "the PARAMETERISED shape is now caught — update the docstring table and this pin"
+    )
