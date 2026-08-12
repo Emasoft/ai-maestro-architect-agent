@@ -1,10 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-    ## [2.15.12] - 2026-08-12
+    ## [2.15.13] - 2026-08-12
 
-### Bug Fixes
+### Tests
 
-- Bump prrd-version + updated — the same silent mutation, one level up    
+- Guard the container stamp against git, not against its writer    
 
 
