@@ -24,6 +24,8 @@ Each fact is asserted SEPARATELY and at the decision point, because:
 import re
 from pathlib import Path
 
+import pytest
+
 REPO_ROOT = Path(__file__).parent.parent
 MAIN_AGENT = REPO_ROOT / "agents" / "ai-maestro-architect-agent-main-agent.md"
 SUB_AGENTS = sorted((REPO_ROOT / "agents").glob("amaa-*.md"))
@@ -61,6 +63,67 @@ def _comm_section(text: str) -> str:
 
 def test_main_agent_exists():
     assert MAIN_AGENT.is_file(), f"{MAIN_AGENT} not found"
+
+
+class TestSelectUniqueRefusesOnBothAxes:
+    """Arity has TWO failure modes and each needs its own predicate (ai-maestro#131).
+
+    CORE's finding, which broke the shape enumeration the rest of us had converged
+    on: a vacuous **absent-anchor** slice is a *superset* of the real section, so a
+    positive "does the slice carry X" assertion passes on it. Content checks cannot
+    substitute for arity checks — **the discriminator for arity is arity.**
+
+    Both branches here were correct by construction rather than by anticipation
+    (`assert hits` then `len(hits) == 1`), and both were pinned by NOTHING until
+    these controls existed. That is "a control you ran is not a control you have"
+    landing a second time, on the very property the finding was about.
+
+    The two tests are deliberately SEPARATE. One test holding both assertions
+    reports less: it reddens for either weakening under a single name, so it cannot
+    tell you which axis broke.
+
+    **Independence verified by simulation, and the result is subtler than expected.**
+    Weakening each predicate reds exactly one control:
+
+        absence removed -> absent control RED (message becomes "appears 0x")
+        arity removed   -> duplicate control RED (nothing raises at all)
+
+    But note WHY the absent control discriminates: `len(hits) == 1` already refuses
+    0 hits, so deleting `assert hits` does not change *whether* it refuses — only
+    the DIAGNOSIS. The absence assertion is redundant for refusal and load-bearing
+    for the message, which is exactly the kind of line a later editor removes as
+    dead weight. It survives only because this control matches on the message text
+    rather than merely on "did it raise".
+
+    (Simulated at data level, never by editing this file in place: a size-preserving
+    predicate swap can leave Python serving stale bytecode and hand you a verdict
+    the source no longer supports — see test_guard_selector_convention.)
+    """
+
+    def test_refuses_an_ABSENT_anchor(self):
+        with pytest.raises(AssertionError, match="not found"):
+            _select_unique("no anchor anywhere in this text", "## Missing", "a section")
+
+    def test_refuses_a_DUPLICATED_anchor(self):
+        text = "see ## Comms below\n\n## Comms\nbody\n"
+        with pytest.raises(AssertionError, match="appears 2"):
+            _select_unique(text, "## Comms", "a section")
+
+    def test_accepts_a_UNIQUE_anchor(self):
+        """Without this the pair could be satisfied by a function that always raises."""
+        assert _select_unique("intro\n## Comms\nbody\n", "## Comms", "a section") == 6
+
+    def test_the_absence_diagnosis_does_not_describe_ambiguity(self):
+        """A wrong diagnosis sends the reader hunting a duplicate that does not exist.
+
+        The COS's absent case reported "occurs 0 times — refusing to guess which is
+        the real section", which describes the *other* axis.
+        """
+        with pytest.raises(AssertionError) as exc:
+            _select_unique("nothing here", "## Missing", "a section")
+        msg = str(exc.value)
+        assert "not found" in msg
+        assert "guess" not in msg, "the absence message borrows the ambiguity wording"
 
 
 class TestTheEnforcementClaimIsScopedToItsTransport:
