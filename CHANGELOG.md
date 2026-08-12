@@ -1,10 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-    ## [2.15.1] - 2026-08-11
+    ## [2.15.2] - 2026-08-12
 
 ### Tests
 
-- Select guard slices by property, never by first match    
+- Enforce "no section selection by first match" as a suite-wide convention    
 
 
