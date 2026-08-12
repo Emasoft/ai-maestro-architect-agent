@@ -52,11 +52,24 @@ indirection than the one that actually bit:
 That is the reusable lesson: a fix verified on the tree that produced it can be
 vacuous on the next tree while looking like an upgrade. Re-measure after adopting.
 
-**Still a net, not a proof.** Runtime-built anchors (f-strings, concatenation,
-values read from disk) and parameters remain invisible — going further means
-evaluating rather than parsing. Collecting names across scopes can in principle
-mis-resolve a name reused in two functions; that produces a loud false positive,
-never a silent miss, which is the correct direction for a net to fail in.
+**The miss list names SHAPES, not trees.** Both of us first described our gap in
+terms of what our own tree happened to contain — "module-level constants",
+"variable anchors" — and each description was true locally and too narrow to
+protect the other. Enumerating every shape makes the gap visible without having
+to encounter it:
+
+| Anchor shape | Covered? | Seeded control? |
+|---|---|---|
+| literal — `.find("## X")` | YES | yes |
+| module constant — `H = "## X"` … `.find(H)` | YES | yes |
+| function-local — `m = "## X"` inside a def | YES | yes |
+| runtime-built — f-string, concatenation, read from disk | **NO** | — |
+| parameter — anchor passed into the helper | **NO** | — |
+
+**Still a net, not a proof.** The last two rows need evaluating rather than
+parsing. Collecting names across scopes can in principle mis-resolve a name
+reused in two functions; that produces a loud false positive, never a silent
+miss, which is the correct direction for a net to fail in.
 """
 
 import ast
@@ -171,16 +184,29 @@ def test_the_detector_catches_both_anchor_shapes(tmp_path):
     literal.write_text('start = text.find("## Communication Permissions")\n', encoding="utf-8")
     assert _offenders_in(literal), "missed the LITERAL anchor shape"
 
-    constant = tmp_path / "test_seed_constant.py"
-    constant.write_text(
+    module_const = tmp_path / "test_seed_module_const.py"
+    module_const.write_text(
         'INBOUND_HEADING = "### Inbound discipline"\n'
         "start = persona.index(INBOUND_HEADING)\n",
         encoding="utf-8",
     )
-    assert _offenders_in(constant), (
-        "missed the CONSTANT anchor shape — the exact form that would make this guard "
-        "vacuous on a tree that names its headings"
+    assert _offenders_in(module_const), (
+        "missed the MODULE-CONSTANT anchor shape — the form that made this guard "
+        "vacuous on the COS's tree while passing green on mine"
     )
+
+    # The shape that bit ME, and which the module-level-only resolver missed. The
+    # code handles it now, but nothing proved that until this control existed:
+    # fixing the resolver and not seeding its shape is the same class of gap the
+    # whole thread is about.
+    func_local = tmp_path / "test_seed_func_local.py"
+    func_local.write_text(
+        "def _slice(persona):\n"
+        '    marker = "**Inbound discipline**"\n'
+        "    return persona.find(marker)\n",
+        encoding="utf-8",
+    )
+    assert _offenders_in(func_local), "missed the FUNCTION-LOCAL anchor shape"
 
     legit = tmp_path / "test_seed_legit.py"
     legit.write_text(
