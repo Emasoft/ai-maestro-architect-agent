@@ -1,6 +1,6 @@
 ---
-prrd-version: 1.1
-updated: 2026-06-11T11:41:33+0200
+prrd-version: 1.2
+updated: 2026-08-12T14:31:57+0200
 project: ai-maestro-architect-agent
 project-id: autonomous
 canonical-source: design/requirements/PRRD.md
