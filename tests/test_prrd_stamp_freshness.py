@@ -30,7 +30,7 @@ Here that is git. And the argument is stronger for AMAA than for CORE: this
 repo has NO `prrd-edit.py` at all, so hand-editing is not a bypass of the
 maintaining writer — it is the only writer there is.
 
-Two arms, because the stamp can lie in two different tenses:
+Three arms, because the stamp can lie in three different ways:
 
   * COMMITTED — `updated:` must not trail the newest commit touching the file.
     Catches the defect for every future reader and every clone.
@@ -38,6 +38,35 @@ Two arms, because the stamp can lie in two different tenses:
     This is the arm that reds at AUTHORING time, which is when the defect was
     actually introduced (the file was dirty, the stamp said June, and it was
     committed anyway).
+  * COVERAGE — when the file is dirty, its mtime must not be meaningfully NEWER
+    than `updated:`. See below; this one closes a hole the first two share.
+
+The third arm exists because CORE seeded the two-arm design and found a case
+neither of us had named (ai-maestro#145), reproduced here against this module
+before it was believed:
+
+    stale stamp + dirty file  -> both arms red    (the 52-day case)
+    fresh stamp + body edited -> both arms GREEN  <- the residue
+
+Bump at 09:00, edit the body at 16:00, forget to re-bump: the stamp is seven
+hours old, the clock agrees it is recent, and nothing reds. That is the ORDINARY
+shape of the defect on an active day — the 52-day version was the pathological
+one that any clock-based arm catches.
+
+The fix is to ask a different question. A clock witness answers "how OLD is the
+stamp"; mtime answers "when were the BYTES last written", which is the question
+that was actually being dodged. Scoping it to dirty files disposes of the usual
+objection to mtime (a clone or checkout rewrites it) — those produce a CLEAN
+file, where this arm does not apply.
+
+WHAT IS STILL NOT COVERED, stated plainly because a guard whose docstring
+overclaims is worse than a known-weak guard: once the bad edit is COMMITTED, a
+same-day stale stamp is invisible to all three arms — the committed arm tolerates
+a day, and mtime no longer means anything. Only a content digest (the stamp
+asserting WHICH BYTES it covers) closes that, and it is not implemented here: it
+costs a stored hash, a normalisation decision, and a re-hash discipline that is
+itself a new invariant with a new bypass. Recorded as the known open case rather
+than papered over with a fourth arm that would not close it either.
 """
 
 import re
@@ -54,6 +83,13 @@ PRRD = REPO_ROOT / "design" / "requirements" / "PRRD.md"
 # rewrites committer dates. Tight enough that 52 days is loud, loose enough
 # that honest workflows never red.
 MAX_LAG = timedelta(days=1)
+
+# How far the bytes may be written AFTER the stamp claims to describe them.
+# Absorbs the honest ordering (compute the ISO string, then save a moment later)
+# without absorbing the defect (stamp this morning, keep editing this afternoon).
+# Deliberately minutes, not hours: the whole point of this arm is to catch the
+# same-session forget that the day-scale MAX_LAG cannot see.
+MTIME_TOLERANCE = timedelta(minutes=5)
 
 
 def _field(text: str, name: str) -> str | None:
@@ -89,6 +125,29 @@ def stamp_lag(
         "a clean file with no commit has no witness — skip, do not judge"
     )
     return witness - updated
+
+
+def stamp_predates_the_bytes(
+    updated: datetime,
+    mtime: datetime,
+    dirty: bool,
+    tolerance: timedelta = MTIME_TOLERANCE,
+) -> bool:
+    """Were the bytes written meaningfully AFTER the stamp claimed to cover them?
+
+    Only meaningful while the file is dirty. On a CLEAN file mtime records when
+    git last materialised the file (clone, checkout, stash pop), which has no
+    relationship to when its content was authored — asking there would red on
+    every fresh clone, which is how a guard gets deleted rather than fixed.
+
+    Note this reds DURING a long edit, before the author has stamped. That is
+    correct and matches PRRD §0's documented order ("Edit first. Bump
+    `prrd-version:`. Update `updated:`."): mid-edit the stamp genuinely does not
+    cover the bytes, and the red clears on the final stamp before the commit.
+    """
+    if not dirty:
+        return False
+    return mtime > updated + tolerance
 
 
 # --------------------------------------------------------------------------
@@ -155,6 +214,27 @@ def test_stamp_is_not_behind_its_git_witness():
     )
 
 
+def test_stamp_covers_the_bytes_currently_on_disk():
+    """The residue arm: a stamp bumped earlier than the edit it claims to cover."""
+    if _git("rev-parse", "--is-inside-work-tree") != "true":
+        pytest.skip("not a git work tree — cannot tell dirty from clean")
+
+    rel = PRRD.relative_to(REPO_ROOT).as_posix()
+    if not _git("status", "--porcelain", "--", rel):
+        pytest.skip("PRRD.md is clean — mtime records checkout time, not authorship")
+
+    updated_raw = _field(PRRD.read_text(encoding="utf-8"), "updated")
+    assert updated_raw is not None, "PRRD.md has no `updated:` field to check"
+    updated = datetime.fromisoformat(updated_raw)
+    mtime = datetime.fromtimestamp(PRRD.stat().st_mtime, tz=timezone.utc)
+
+    assert not stamp_predates_the_bytes(updated, mtime, dirty=True), (
+        f"PRRD.md was written at {mtime.isoformat()} but `updated:` claims "
+        f"{updated_raw} — the stamp does not cover the bytes now on disk. "
+        "Bump `prrd-version:` and set `updated:` as the LAST edit before committing."
+    )
+
+
 # --------------------------------------------------------------------------
 # Controls. A guard nobody has seen red is a guess about the future.
 # --------------------------------------------------------------------------
@@ -209,3 +289,55 @@ class TestThePredicateActuallyBites:
         fresh = self.NOW - timedelta(minutes=3)
         old_commit = datetime.fromisoformat("2026-06-11T11:42:00+02:00")
         assert stamp_lag(fresh, old_commit, dirty=True, now=self.NOW) <= MAX_LAG
+
+
+class TestTheCoverageArmClosesWhatTheClockArmsCannotSee:
+    """The residue CORE seeded on ai-maestro#145, reproduced here before believing it.
+
+    The first two arms both ask a TIME question. This class pins the case where
+    both give the right answer to the wrong question: the stamp is genuinely
+    recent AND genuinely does not describe the file.
+    """
+
+    NOW = datetime(2026, 8, 12, 16, 0, 0, tzinfo=timezone.utc)
+
+    def test_the_clock_arms_are_demonstrably_blind_here(self):
+        """Precondition. If this ever fails, the coverage arm has become redundant."""
+        bumped_this_morning = self.NOW - timedelta(hours=7)
+        old_commit = datetime.fromisoformat("2026-06-11T11:42:00+02:00")
+        assert (
+            stamp_lag(bumped_this_morning, old_commit, dirty=True, now=self.NOW)
+            <= MAX_LAG
+        )
+        assert (
+            stamp_lag(bumped_this_morning, old_commit, dirty=False, now=self.NOW)
+            <= MAX_LAG
+        )
+
+    def test_coverage_arm_reds_on_bump_this_morning_edit_this_afternoon(self):
+        bumped_this_morning = self.NOW - timedelta(hours=7)
+        assert (
+            stamp_predates_the_bytes(bumped_this_morning, self.NOW, dirty=True) is True
+        )
+
+    def test_coverage_arm_greens_when_the_stamp_and_the_edit_are_one_action(self):
+        """Must NOT red on the honest workflow, or it gets deleted rather than fixed."""
+        stamped = self.NOW - timedelta(seconds=40)  # compute ISO, then save
+        assert stamp_predates_the_bytes(stamped, self.NOW, dirty=True) is False
+
+    def test_coverage_arm_is_inert_on_a_clean_file(self):
+        """A fresh clone has ancient stamps and brand-new mtimes on every file."""
+        ancient = datetime.fromisoformat("2026-06-11T11:41:33+02:00")
+        assert stamp_predates_the_bytes(ancient, self.NOW, dirty=False) is False
+
+    def test_tolerance_boundary_is_exclusive_on_both_sides(self):
+        base = self.NOW
+        assert (
+            stamp_predates_the_bytes(base, base + MTIME_TOLERANCE, dirty=True) is False
+        )
+        assert (
+            stamp_predates_the_bytes(
+                base, base + MTIME_TOLERANCE + timedelta(seconds=1), dirty=True
+            )
+            is True
+        )
