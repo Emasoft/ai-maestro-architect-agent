@@ -104,6 +104,30 @@ preserve if this file is ever refactored to import its fixtures.
 that `spec_from_file_location`s the guard, say — I used exactly that shape for an
 ad-hoc measurement earlier), then either change the file SIZE or clear
 `__pycache__` between runs. An operator swap alone does not.
+
+**Better than mitigating it — remove the class.** CORE's technique (ai-maestro#131):
+substitute the *callable in memory*, never the source on disk.
+
+    m = <module loaded via spec_from_file_location>
+    m._helper = weakened_version        # swap the object; the file is untouched
+
+There is no `.pyc` to go stale because there is no edit. It also closes a hazard
+none of us had named: an in-place edit has a **crash window**. If the run aborts
+between the weaken and the restore — exception, timeout, interrupted session —
+the weakened predicate is left sitting in the working tree, one character long,
+in a file whose tests still pass (that was the point of weakening it), and the
+next thing that happens is a commit. *The apparatus that proves the proof was
+real can write a defect into the tree it was auditing.* In-memory substitution
+cannot leave residue.
+
+**My own measurements avoided both hazards for a WEAKER reason, and it is worth
+naming rather than claiming immunity.** I simulated by writing a standalone
+reimplementation of the predicate in a throwaway script — so nothing on disk was
+ever mutated, and no module was imported. That dodges staleness and the crash
+window, but it tests **a copy, not the thing**: a reimplementation silently drifts
+the moment the real helper changes, and then measures a function that no longer
+exists. CORE's substitution keeps the real module and swaps one callable, which
+is strictly better. Prefer it.
 """
 
 import ast

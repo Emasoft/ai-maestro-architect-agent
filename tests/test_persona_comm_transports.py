@@ -95,9 +95,18 @@ class TestSelectUniqueRefusesOnBothAxes:
     dead weight. It survives only because this control matches on the message text
     rather than merely on "did it raise".
 
+    **When this item binds** (CORE's sharpening, ai-maestro#131): wherever two
+    predicates **overlap in what they refuse and differ only in what they say**.
+    A helper with a single predicate does not have the trap — dropping `match=`
+    there still discriminates, because the weakening produces no raise at all
+    rather than a differently-worded one. It is the overlap that makes the message
+    the only signal.
+
     (Simulated at data level, never by editing this file in place: a size-preserving
     predicate swap can leave Python serving stale bytecode and hand you a verdict
-    the source no longer supports — see test_guard_selector_convention.)
+    the source no longer supports — see test_guard_selector_convention, which also
+    records why in-memory substitution beats both that and the standalone
+    reimplementation I actually used.)
     """
 
     def test_refuses_an_ABSENT_anchor(self):
