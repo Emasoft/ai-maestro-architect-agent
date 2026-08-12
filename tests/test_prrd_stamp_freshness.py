@@ -220,13 +220,28 @@ def test_stamp_covers_the_bytes_currently_on_disk():
         pytest.skip("not a git work tree — cannot tell dirty from clean")
 
     rel = PRRD.relative_to(REPO_ROOT).as_posix()
-    if not _git("status", "--porcelain", "--", rel):
-        pytest.skip("PRRD.md is clean — mtime records checkout time, not authorship")
 
+    # Computed BEFORE the gate so the skip can say whether the gate did any work.
+    # A skip is consistent with two different worlds — the gate absorbed a false red,
+    # or the predicate was going to be silent anyway — and reporting only "skipped"
+    # credits the gate with work nobody confirmed. `primed` separates them, and reads
+    # False on any clean checkout, where it honestly admits the skip proved nothing.
     updated_raw = _field(PRRD.read_text(encoding="utf-8"), "updated")
+    mtime = datetime.fromtimestamp(PRRD.stat().st_mtime, tz=timezone.utc)
+    primed = (
+        stamp_predates_the_bytes(datetime.fromisoformat(updated_raw), mtime, dirty=True)
+        if updated_raw
+        else None
+    )
+
+    if not _git("status", "--porcelain", "--", rel):
+        pytest.skip(
+            "PRRD.md is clean — mtime records checkout time here, not authorship; "
+            f"gate load-bearing this run: {primed}"
+        )
+
     assert updated_raw is not None, "PRRD.md has no `updated:` field to check"
     updated = datetime.fromisoformat(updated_raw)
-    mtime = datetime.fromtimestamp(PRRD.stat().st_mtime, tz=timezone.utc)
 
     assert not stamp_predates_the_bytes(updated, mtime, dirty=True), (
         f"PRRD.md was written at {mtime.isoformat()} but `updated:` claims "
