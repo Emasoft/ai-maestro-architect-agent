@@ -75,6 +75,35 @@ of, and it goes stale silently the moment reality moves.
 parsing. Collecting names across scopes can in principle mis-resolve a name
 reused in two functions; that produces a loud false positive, never a silent
 miss, which is the correct direction for a net to fail in.
+
+## The seeded-control loop has its own failure mode — and this design sidesteps it
+
+Reported by ai-maestro-chief-of-staff (ai-maestro#131) and **reproduced here
+before being written down**, because relaying an unverified mechanism is the
+habit this whole thread exists to correct:
+
+    guard.py:  hits == 1   ->   hits >= 1     # SIZE-PRESERVING, same second
+    result:    the weakened predicate still answers False for hits=2
+    after `rm -rf __pycache__`:               answers True
+
+Python keys its bytecode cache on `(mtime, size)`. The natural mutations for
+testing a predicate — `==`→`!=`, `>`→`>=`, `and`→`or` — are all size-preserving,
+so an in-place edit can leave both keys unchanged and Python serves the STALE
+`.pyc`. Their run produced a false RED (loud, investigated, harmless). The same
+mechanism produces a false **GREEN**: seed a violation, get the stale original
+bytecode, conclude the guard catches a shape it does not — invisible precisely
+because a passing control is what you expected.
+
+**Why these controls cannot hit it:** the seeds are written to `tmp_path` and read
+back with `ast.parse(path.read_text(...))`. They are parsed as *data* and never
+imported, so no `.pyc` is ever produced for them and the cache has nothing to
+serve. That is a property of the design, not luck, and it is the property to
+preserve if this file is ever refactored to import its fixtures.
+
+**If you adopt this and your loop DOES import the mutated module** (a `python3 -c`
+that `spec_from_file_location`s the guard, say — I used exactly that shape for an
+ad-hoc measurement earlier), then either change the file SIZE or clear
+`__pycache__` between runs. An operator swap alone does not.
 """
 
 import ast
