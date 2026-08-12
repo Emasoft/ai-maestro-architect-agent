@@ -158,7 +158,7 @@ def format_document_comment(frontmatter: dict, body: str, header: str) -> str:
     author = frontmatter.get("author", "Unknown")
 
     comment_parts = [
-        # PRRD G1.1 — posted under the shared owner gh identity, so the byline
+        # PRRD G1 — posted under the shared owner gh identity, so the byline
         # is what distinguishes this from a human's comment.
         SELF_ID_LINE,
         "",

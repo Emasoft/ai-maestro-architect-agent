@@ -328,7 +328,7 @@ def sync_status_to_issue(
 
     if add_comment:
         status_desc = STATUS_DESCRIPTIONS.get(status, status)
-        # PRRD G1.1: this comment is posted under the shared owner gh identity,
+        # PRRD G1: this comment is posted under the shared owner gh identity,
         # so without the self-id line it reads as a human's comment.
         comment = with_self_id(f"""## Design Status Update
 

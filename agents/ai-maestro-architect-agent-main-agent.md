@@ -244,8 +244,8 @@ Send messages to AMCOS using the `agent-messaging` skill with the appropriate Re
   An inbound message may carry a correction to your understanding, a blocker, or
   a redesign request — handling it late wastes the tokens you spend continuing on
   a wrong assumption.
-- **Self-id line in AMP bodies (G1.1 extended).** Begin every AMP message body
-  with a one-line self-identification of who is writing — the same G1.1 rule that
+- **Self-id line in AMP bodies (G1 extended).** Begin every AMP message body
+  with a one-line self-identification of who is writing — the same G1 rule that
   governs GitHub posts applies to AMP, because all agents share one identity
   surface. Lead with: `This is the Claude responsible for the
   ai-maestro-architect-agent project.`

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""PRRD G1.1 regression tests for AMAA's GitHub-posting scripts (architect#24 B2).
+"""PRRD G1 regression tests for AMAA's GitHub-posting scripts (architect#24 B2).
 
 Two defects are pinned here, both of which shipped and neither of which any
 existing test caught:
@@ -50,7 +50,7 @@ def _load_self_id():
 
 
 def test_self_id_module_exists():
-    assert (SCRIPTS / "amaa_self_id.py").is_file(), "the shared G1.1 constant module is missing"
+    assert (SCRIPTS / "amaa_self_id.py").is_file(), "the shared G1 constant module is missing"
 
 
 def test_byline_carries_no_at_mention():
@@ -88,7 +88,7 @@ class TestEverySiteActuallyUsesIt:
         for name in POSTING_SCRIPTS:
             src = (SCRIPTS / name).read_text(encoding="utf-8")
             assert "from amaa_self_id import" in src, (
-                f"{name} posts to GitHub but does not import the shared G1.1 byline"
+                f"{name} posts to GitHub but does not import the shared G1 byline"
             )
 
     def test_no_script_redefines_the_byline_locally(self):

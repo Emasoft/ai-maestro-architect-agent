@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""The single source of truth for AMAA's GitHub self-identification line (PRRD G1.1).
+"""The single source of truth for AMAA's GitHub self-identification line (PRRD G1).
 
 Every issue, PR, comment, or review body an AI Maestro agent posts MUST begin
 with a one-line self-identification, because every agent in the fleet shares the
@@ -30,13 +30,13 @@ SELF_ID_LINE = (
     "(the ARCHITECT role; via the shared owner gh auth)._"
 )
 
-# Commit trailer counterpart (PRRD G1.1): identifies the authoring plugin on
+# Commit trailer counterpart (PRRD G1): identifies the authoring plugin on
 # commits, where the shared git identity has the same ambiguity as the gh one.
 AGENT_TRAILER = "Agent: ai-maestro-architect-agent"
 
 
 def with_self_id(body: str) -> str:
-    """Prepend the G1.1 self-id line to a GitHub body, exactly once.
+    """Prepend the G1 self-id line to a GitHub body, exactly once.
 
     Idempotent on purpose: call sites compose bodies from several helpers, and a
     doubled byline is a visible defect on a public post that no test would fail

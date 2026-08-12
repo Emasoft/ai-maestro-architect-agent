@@ -29,7 +29,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
-# PRRD G1.1 — imported, never redefined here. The line previously inlined at
+# PRRD G1 — imported, never redefined here. The line previously inlined at
 # this spot carried a bare `@owner`, which GitHub renders as a MENTION and pages
 # a real account on every issue this script opens. One definition, one place to
 # get it right: scripts/amaa_self_id.py.
@@ -140,7 +140,7 @@ def extract_issue_data(frontmatter: dict, body: str, doc_path: Path) -> dict:
     status = frontmatter.get("status", "draft")
 
     description_parts = [
-        # G1.1 self-id line MUST be the first line of every issue body.
+        # G1 self-id line MUST be the first line of every issue body.
         SELF_ID_LINE,
         "",
         f"## Design Document: {title}",
