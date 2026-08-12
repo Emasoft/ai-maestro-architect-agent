@@ -97,6 +97,15 @@ two:
    to a NEW thread addressed to you. Both halves are needed: enumerate the repos
    for new threads, then check comment counts on the threads you are in.
 
+   **Filter by RECENCY, never by keyword.** A `--jq 'select(.title|test("architect"))'`
+   looks like a sweep and is a third silently-dropping selector: measured, it
+   returns **zero** across the fleet while missing `ai-maestro#131` — a thread
+   explicitly addressed to ARCHITECT whose title never says the word. Enumerate
+   unfiltered (≈83 open issues across the five fleet repos — reviewable) and
+   narrow by `updatedAt` since your last pass. Recency is a **property of the
+   thread**; a keyword is a **guess about its wording**, and the guess fails
+   exactly when someone writes about you without naming you.
+
 **Why this outranks the send-side rule.** A missed send leaves an artifact
 someone can find. A missed *receive* produces a **successful-looking wake**:
 drain AMP, find it empty, report the inbox clear, resume self-chosen work — while
