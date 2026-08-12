@@ -34,19 +34,32 @@ Either half alone is weaker — uniqueness still silently picks a unique-but-wro
 anchor, and a content check alone still picks by position when the anchor repeats.
 
 **Measured coverage, stated because a guard's blind spot is worth more than its
-hit rate.** Run against this repo's own pre-fix commit (5a12a5b), it catches
-**one of the two** selectors that were live there:
+hit rate.** Against this repo's own pre-fix commit (5a12a5b): **2 of 2**.
 
-  - CAUGHT  `text.find("## Communication Permissions")` — literal anchor.
-  - MISSED  `marker = "**Inbound discipline**"` … `persona.find(marker)` — the
-    anchor is a VARIABLE, so a source-level pattern cannot see it.
+  - `text.find("## Communication Permissions")` — literal anchor.
+  - `marker = "**Inbound discipline**"` … `persona.find(marker)` — resolved.
 
-So this is a net, not a proof. It catches the common inline shape and will not
-catch an indirected one; a reviewer still has to look. Widening it to resolve
-variables would mean parsing rather than matching, and a pattern that silently
-misses a case is safer than one that pretends to cover it.
+An earlier regex version scored 1 of 2 (it could not see through a variable).
+Two rounds of correction got here, and each round's fix was aimed at a different
+indirection than the one that actually bit:
+
+  - The COS resolved **module-level** constants — matching *their* miss
+    (`HEADING = "..."` at module scope), measured 2 of 2 on their tree.
+  - Adopted unmodified it still scored 1 of 2 on mine, because *my* miss was
+    **function-local**. So resolution here covers any `NAME = "literal"` binding
+    in the file, whichever scope it sits in.
+
+That is the reusable lesson: a fix verified on the tree that produced it can be
+vacuous on the next tree while looking like an upgrade. Re-measure after adopting.
+
+**Still a net, not a proof.** Runtime-built anchors (f-strings, concatenation,
+values read from disk) and parameters remain invisible — going further means
+evaluating rather than parsing. Collecting names across scopes can in principle
+mis-resolve a name reused in two functions; that produces a loud false positive,
+never a silent miss, which is the correct direction for a net to fail in.
 """
 
+import ast
 import re
 from pathlib import Path
 
@@ -70,6 +83,64 @@ FIRST_MATCH_SECTION_SELECT = re.compile(
 )
 
 
+def _is_section_anchor(s: str) -> bool:
+    """A NAMED markdown section: a heading marker plus an actual title."""
+    return bool(re.search(r"\#\#|\*\*", s)) and bool(re.search(r"\w{2}", s))
+
+
+def _offenders_in(path: Path) -> list[str]:
+    """Report `.find`/`.index` calls whose anchor names a markdown section.
+
+    Uses `ast` rather than a source regex so a **module-level constant** anchor is
+    resolved before matching. Credit: ai-maestro-chief-of-staff on ai-maestro#131.
+    My earlier regex version scored 1 of 2 on my own tree and would have scored
+    **0 of 2 on theirs**, where every selector is `HEADING = "..."` then
+    `.index(HEADING)` — a guard incapable of catching the pattern it was written
+    for, shipping green. That is this issue's own failure mode reproduced inside
+    its own fix, and it was only visible because they published the miss list.
+    """
+    try:
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+    except SyntaxError:  # a syntactically broken test file fails elsewhere, loudly
+        return []
+
+    # Every `NAME = "literal"` binding in the file, module-level OR function-local.
+    # The COS's version resolved module-level only, which matched THEIR miss
+    # (`HEADING = "..."` at module scope). Re-measured on my own pre-fix commit it
+    # still scored 1 of 2, because MY miss was function-local:
+    #     marker = "**Inbound discipline**"   # inside the helper
+    #     start = persona.find(marker)
+    # Same class, different indirection — so adopting their fix unmodified would
+    # have left my actual historical miss uncaught while looking like an upgrade.
+    # Collecting all scopes can in principle mis-resolve a name reused across
+    # functions; that yields a loud false positive, never a silent miss, which is
+    # the right direction for a net.
+    consts: dict[str, str] = {}
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Assign) and isinstance(node.value, ast.Constant):
+            if isinstance(node.value.value, str):
+                for tgt in node.targets:
+                    if isinstance(tgt, ast.Name):
+                        consts[tgt.id] = node.value.value
+
+    out: list[str] = []
+    for node in ast.walk(tree):
+        if not (isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)):
+            continue
+        if node.func.attr not in ("find", "index") or not node.args:
+            continue
+        arg = node.args[0]
+        if isinstance(arg, ast.Constant) and isinstance(arg.value, str):
+            anchor, how = arg.value, "literal"
+        elif isinstance(arg, ast.Name) and arg.id in consts:
+            anchor, how = consts[arg.id], f"via {arg.id}"
+        else:
+            continue  # runtime-built or parameterised — invisible to static analysis
+        if _is_section_anchor(anchor):
+            out.append(f"{path.name}:{node.lineno} selects {anchor!r} ({how}) by first match")
+    return out
+
+
 def _test_files() -> list[Path]:
     return sorted(p for p in TESTS_DIR.glob("test_*.py") if p.name != SELF)
 
@@ -82,13 +153,7 @@ def test_there_are_test_files_to_scan():
 def test_no_markdown_section_is_selected_by_first_match():
     offenders: list[str] = []
     for path in _test_files():
-        for i, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
-            stripped = line.lstrip()
-            if stripped.startswith("#"):
-                continue  # a comment describing the anti-pattern is not the anti-pattern
-            m = FIRST_MATCH_SECTION_SELECT.search(line)
-            if m:
-                offenders.append(f"{path.name}:{i} selects {m.group('anchor')!r} by first match")
+        offenders.extend(_offenders_in(path))
     assert not offenders, (
         "markdown sections must be selected via _select_unique() (refuse on ambiguity + "
         "assert the slice carries a real-section marker), never by first match:\n  "
@@ -96,25 +161,32 @@ def test_no_markdown_section_is_selected_by_first_match():
     )
 
 
-def test_the_detector_actually_catches_the_shape():
+def test_the_detector_catches_both_anchor_shapes(tmp_path):
     """A convention guard nobody has falsified is a decoration.
 
-    Verified against the exact pre-fix forms from this repo's own history, and
-    against the legitimate uses it must NOT flag.
+    Three controls, the middle one added because the COS measured my regex version
+    at 0 of 2 on their tree — every anchor there was a module-level constant.
     """
-    caught = [
-        'start = text.find("## Communication Permissions")',
-        'start = persona.index("**Inbound discipline**")',
-        "  s = doc.find('### **Inbound discipline** — three channels')",
-    ]
-    for line in caught:
-        assert FIRST_MATCH_SECTION_SELECT.search(line), f"detector missed the anti-pattern: {line!r}"
+    literal = tmp_path / "test_seed_literal.py"
+    literal.write_text('start = text.find("## Communication Permissions")\n', encoding="utf-8")
+    assert _offenders_in(literal), "missed the LITERAL anchor shape"
 
-    ignored = [
-        'end = text.index("\\n---", 4)',  # frontmatter terminator — correct by definition
-        'match = re.search(r"^uuid:\\s*(.+)$", content, re.MULTILINE)',  # field lookup
-        'assert argv[argv.index("--priority") + 1] == "high"',  # argv position
-        'nxt = text.find("\\n## ", start + 1)',  # section END, after a property-selected start
-    ]
-    for line in ignored:
-        assert not FIRST_MATCH_SECTION_SELECT.search(line), f"detector false-positived on: {line!r}"
+    constant = tmp_path / "test_seed_constant.py"
+    constant.write_text(
+        'INBOUND_HEADING = "### Inbound discipline"\n'
+        "start = persona.index(INBOUND_HEADING)\n",
+        encoding="utf-8",
+    )
+    assert _offenders_in(constant), (
+        "missed the CONSTANT anchor shape — the exact form that would make this guard "
+        "vacuous on a tree that names its headings"
+    )
+
+    legit = tmp_path / "test_seed_legit.py"
+    legit.write_text(
+        'end = text.index("\\n---", 4)\n'  # frontmatter terminator — correct by definition
+        'nxt = text.find("\\n## ", start + 1)\n'  # section END after a property-selected start
+        'p = argv.index("--priority")\n',  # argv position
+        encoding="utf-8",
+    )
+    assert not _offenders_in(legit), f"false-positived on correct code: {_offenders_in(legit)}"
