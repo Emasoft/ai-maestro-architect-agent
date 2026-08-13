@@ -37,7 +37,9 @@ POSTING_SCRIPTS = [
 
 
 def _load_self_id():
-    spec = importlib.util.spec_from_file_location("amaa_self_id", SCRIPTS / "amaa_self_id.py")
+    spec = importlib.util.spec_from_file_location(
+        "amaa_self_id", SCRIPTS / "amaa_self_id.py"
+    )
     assert spec and spec.loader
     module = importlib.util.module_from_spec(spec)
     sys.modules[spec.name] = module
@@ -50,7 +52,9 @@ def _load_self_id():
 
 
 def test_self_id_module_exists():
-    assert (SCRIPTS / "amaa_self_id.py").is_file(), "the shared G1 constant module is missing"
+    assert (SCRIPTS / "amaa_self_id.py").is_file(), (
+        "the shared G1 constant module is missing"
+    )
 
 
 def test_byline_carries_no_at_mention():
@@ -65,7 +69,9 @@ def test_byline_carries_no_at_mention():
 def test_byline_identifies_the_plugin():
     mod = _load_self_id()
     assert "ai-maestro-architect-agent" in mod.SELF_ID_LINE
-    assert mod.SELF_ID_LINE.startswith("_Posted by"), "byline must be recognisable at a glance"
+    assert mod.SELF_ID_LINE.startswith("_Posted by"), (
+        "byline must be recognisable at a glance"
+    )
 
 
 def test_with_self_id_is_idempotent():
@@ -102,11 +108,15 @@ class TestEverySiteActuallyUsesIt:
     def test_no_posting_script_contains_a_bare_at_mention(self):
         """Catches an `@name` reintroduced anywhere in a posted body, not just the byline."""
         for name in POSTING_SCRIPTS:
-            for i, line in enumerate((SCRIPTS / name).read_text(encoding="utf-8").splitlines(), 1):
+            for i, line in enumerate(
+                (SCRIPTS / name).read_text(encoding="utf-8").splitlines(), 1
+            ):
                 if "`" in line or line.lstrip().startswith("#"):
                     continue  # code spans are inert; comments are never posted
                 hit = re.search(r"(?<![\w`/])@[A-Za-z][\w-]{2,}", line)
-                assert not hit, f"{name}:{i} carries a bare mention {hit.group(0)!r}: {line.strip()!r}"
+                assert not hit, (
+                    f"{name}:{i} carries a bare mention {hit.group(0)!r}: {line.strip()!r}"
+                )
 
 
 # Prose that agents COPY into GitHub bodies. A byline template lives here, and the
@@ -118,6 +128,21 @@ PROSE_SCANNED = [
     "docs/GOVERNANCE-RULES.md",
     "docs/AGENT_OPERATIONS.md",
 ]
+
+# The collocation lifted from G1's OPERATIVE sentence — long enough to be
+# rule-unique, short enough that rewording the surrounding prose does not red.
+BYLINE_CANON = "via the shared <owner> gh auth"
+
+
+def sole_occurrence(text: str, phrase: str) -> bool:
+    """Is `phrase` anchored to ONE place in `text`?
+
+    The discriminator `in` cannot express (ai-maestro#131): a phrase occurring
+    twice is anchored to the DOCUMENT, not to the rule, so deleting the rule
+    leaves the other copy holding the guard up. Pure, so the controls below can
+    drive it with the duplicate case that does not exist on disk.
+    """
+    return text.count(phrase) == 1
 
 
 def _strip_code_spans(line: str) -> str:
@@ -153,7 +178,69 @@ class TestProseTemplatesCarryNoMention:
                 )
 
     def test_the_prrd_byline_matches_ratified_canon(self):
-        """Pins the exact repaired form, so a stale copy cannot drift back in."""
-        prrd = (REPO_ROOT / "design" / "requirements" / "PRRD.md").read_text(encoding="utf-8")
-        assert "via the shared <owner> gh auth" in prrd, "PRRD byline is not the ratified <owner> form"
+        """Pins the exact repaired form, so a stale copy cannot drift back in.
+
+        Asserts a COUNT, not membership (ai-maestro#131). `in` cannot tell "the
+        rule is present" from "something quoting the rule is present" — so the
+        day a rationale paragraph quotes the byline while explaining it, an
+        `in` guard survives the rule's deletion and holds itself up on the
+        commentary. That is not hypothetical here: this PRRD documents its own
+        conventions, which is exactly the document class where prose quotes the
+        rule it explains.
+
+        Today the phrase occurs once, so `in` would pass for the right reason —
+        by accident of state, not by construction, and nothing would report the
+        day that stopped being true.
+        """
+        prrd = (REPO_ROOT / "design" / "requirements" / "PRRD.md").read_text(
+            encoding="utf-8"
+        )
+        occurrences = prrd.count(BYLINE_CANON)
+        assert occurrences == 1, (
+            f"expected the ratified byline exactly once in the PRRD, found {occurrences}. "
+            + (
+                "Zero means the rule is gone or reworded — restore it or update this guard."
+                if occurrences == 0
+                else "More than one means the guard is no longer anchored to the RULE: "
+                "deleting the rule would leave the other copy passing this test. "
+                "Lengthen the pinned phrase until it is rule-unique."
+            )
+        )
         assert "@owner" not in prrd, "the stale @owner byline is back in the PRRD"
+
+
+class TestTheCountDiscriminatorBites:
+    """Seeded both directions, because `in` and `count == 1` agree on today's file.
+
+    A change that cannot be shown to alter any outcome is indistinguishable from
+    no change at all — and this one is invisible against the current PRRD, which
+    is exactly why it needs the duplicate case driven explicitly.
+    """
+
+    RULE = f"- **G1.2** — … begin the body with a one-line self-id ({BYLINE_CANON})."
+    RATIONALE = (
+        f"The byline is written `{BYLINE_CANON}` deliberately, carrying no at-sign."
+    )
+
+    def test_membership_survives_the_rule_deletion_but_the_count_does_not(self):
+        """The whole point: on a document that quotes its own rule, `in` is vacuous."""
+        both = f"{self.RULE}\n\n{self.RATIONALE}\n"
+        rule_deleted = f"{self.RATIONALE}\n"  # only the commentary is left
+
+        assert BYLINE_CANON in rule_deleted, (
+            "precondition: `in` cannot see this deletion — if that ever changes, "
+            "the count discriminator has become redundant"
+        )
+        assert sole_occurrence(both, BYLINE_CANON) is False, (
+            "two copies means the guard is anchored to the document, not the rule"
+        )
+        assert sole_occurrence(rule_deleted, BYLINE_CANON) is True, (
+            "one copy left after deleting the rule — the count is not a silver bullet "
+            "either; it detects the DUPLICATE, which is the state that makes deletion invisible"
+        )
+
+    def test_sole_occurrence_reds_on_absence(self):
+        assert sole_occurrence("no byline anywhere", BYLINE_CANON) is False
+
+    def test_sole_occurrence_greens_on_exactly_one(self):
+        assert sole_occurrence(self.RULE, BYLINE_CANON) is True
