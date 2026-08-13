@@ -134,6 +134,24 @@ PROSE_SCANNED = [
 BYLINE_CANON = "via the shared <owner> gh auth"
 
 
+def _prose(text: str) -> str:
+    """Collapse runs of whitespace AND blockquote markers to single spaces.
+
+    Markdown wraps at ~88 columns, so a rationale sentence quoting the byline
+    splits it across a newline — and a raw count then reports 1 on a document
+    where the phrase occurs twice, which is the uniqueness check failing at the
+    job it exists to do. Blockquote `>` prefixes break a quote the same way when
+    it spans two `>` lines.
+
+    MUST be applied to BOTH sides of the comparison. Collapsing only the
+    haystack is a defect, not a shortcut: this needle contains `<owner>`, so a
+    normalized haystack holds `<owner gh auth` while a raw needle still asks for
+    `<owner> gh auth` — count 0, reported as "the rule is gone", pointing the
+    reader at restoring a rule that is sitting right there.
+    """
+    return re.sub(r"[\s>]+", " ", text.lower()).strip()
+
+
 def sole_occurrence(text: str, phrase: str) -> bool:
     """Is `phrase` anchored to ONE place in `text`?
 
@@ -142,7 +160,12 @@ def sole_occurrence(text: str, phrase: str) -> bool:
     leaves the other copy holding the guard up. Pure, so the controls below can
     drive it with the duplicate case that does not exist on disk.
     """
-    return text.count(phrase) == 1
+    return occurrences(text, phrase) == 1
+
+
+def occurrences(text: str, phrase: str) -> int:
+    """Count `phrase` in `text`, immune to wrapping. Both sides normalized."""
+    return _prose(text).count(_prose(phrase))
 
 
 def _strip_code_spans(line: str) -> str:
@@ -195,12 +218,12 @@ class TestProseTemplatesCarryNoMention:
         prrd = (REPO_ROOT / "design" / "requirements" / "PRRD.md").read_text(
             encoding="utf-8"
         )
-        occurrences = prrd.count(BYLINE_CANON)
-        assert occurrences == 1, (
-            f"expected the ratified byline exactly once in the PRRD, found {occurrences}. "
+        found = occurrences(prrd, BYLINE_CANON)
+        assert found == 1, (
+            f"expected the ratified byline exactly once in the PRRD, found {found}. "
             + (
                 "Zero means the rule is gone or reworded — restore it or update this guard."
-                if occurrences == 0
+                if found == 0
                 else "More than one means the guard is no longer anchored to the RULE: "
                 "deleting the rule would leave the other copy passing this test. "
                 "Lengthen the pinned phrase until it is rule-unique."
@@ -244,3 +267,52 @@ class TestTheCountDiscriminatorBites:
 
     def test_sole_occurrence_greens_on_exactly_one(self):
         assert sole_occurrence(self.RULE, BYLINE_CANON) is True
+
+
+class TestNormalizationIsSymmetric:
+    """Both halves of ai-maestro#131's follow-up, driven on synthetic input.
+
+    The live PRRD exercises NEITHER property — its one occurrence is unwrapped
+    and there is no second copy — so a helper validated only against it would be
+    observed exclusively on inputs that cannot fail. These drive the failures.
+    """
+
+    RULE = f"- **G1.2** — … begin the body with a one-line self-id ({BYLINE_CANON})."
+
+    WRAPPED = (
+        "- **G1.2** — … the byline (via the shared <owner> gh auth).\n\n"
+        "> Rationale: the template reads via the shared <owner>\n"
+        "> gh auth deliberately, carrying no at-sign.\n"
+    )
+
+    def test_a_raw_count_is_blind_to_a_wrapped_duplicate(self):
+        """The defect: markdown wraps, so the second copy is different bytes."""
+        assert self.WRAPPED.count(BYLINE_CANON) == 1, (
+            "precondition: a raw count sees only one copy here — if this ever "
+            "changes, the normalization below has become unnecessary"
+        )
+        assert occurrences(self.WRAPPED, BYLINE_CANON) == 2, (
+            "normalized counting must see both copies, including the one split "
+            "across a newline and a blockquote marker"
+        )
+
+    def test_normalizing_only_the_haystack_reports_a_false_absence(self):
+        """Why `_prose` must be applied to the needle too.
+
+        This phrase contains `<owner>`. Collapsing `>` in the haystack alone
+        leaves `<owner gh auth` there while the raw needle still asks for
+        `<owner> gh auth` — zero matches, reported as "the rule is gone", which
+        sends the reader to restore a rule that is present.
+        """
+        one_sided = _prose(self.RULE).count(BYLINE_CANON)
+        assert one_sided == 0, "precondition: the asymmetric comparison finds nothing"
+        assert occurrences(self.RULE, BYLINE_CANON) == 1, (
+            "symmetric normalization must find the byline that is plainly there"
+        )
+
+    def test_the_live_prrd_still_counts_one_under_normalization(self):
+        """A fix that changed the live answer would be a different bug."""
+        prrd = (REPO_ROOT / "design" / "requirements" / "PRRD.md").read_text(
+            encoding="utf-8"
+        )
+        assert occurrences(prrd, BYLINE_CANON) == 1
