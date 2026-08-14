@@ -3,7 +3,7 @@ trdd-id: DMIRQOCD
 title: Adopt current ruff and CPV deliberately then bump the gate pins
 column: todo
 created: 2026-07-24T16:28:59+0200
-updated: 2026-08-14T10:08:17+0200
+updated: 2026-08-14T10:22:17+0200
 current-owner: ai-maestro-architect-agent
 task-type: infra
 scope: project
@@ -226,12 +226,72 @@ implementation-commits: []
   about a version. Cheapest signal: run the CPV lint locally immediately after
   committing (a′) and before touching any code. Do not assume either way.
 
-- **NEXT ACTION (supersedes all above):** (a′) add the corrected family-based
-  `[tool.ruff] select` with `E4/E7/E9` — NOT bare `E` — then immediately run BOTH
-  gates (native ruff and CPV Step 4 lint) to see whether they agree; (b) only
-  then apply the safe autofixes as one mechanical commit; (c) the 107 per-call
-  in three buckets; (d) the tail; (e′) move the pin into `uv.lock` and switch
-  Step 3 to `uv run ruff check .`.
+- **2026-08-14 — MEASURED THE CORRECTED PLAN BEFORE WRITING IT, AND IT FAILED
+  TOO. The card's PREMISE is wrong: a `select` cannot do the job this card
+  assigned it.** Third correction; recorded in full because each trap was only
+  visible by measuring, and each looked right on paper.
+
+  **The real default set, read from ruff itself (`--show-settings`, no config
+  file present anywhere, so these ARE the defaults):**
+
+  ```
+  ruff 0.16.3 default-ENABLED rules:   413   (of 969 rules it knows)
+  distinct prefixes:                    38   PYI 47, UP 42, F 39, RUF 36,
+                                             PLE 33, B 29, SIM 21, PLW 20, …
+  of those 413, rules that FIRE here:   31
+  ```
+
+  So **Trap 1 was far worse than recorded above**: freezing "today's 31 rules"
+  drops **382 rules — 92 % of the gate** — while presenting in review as a
+  status-quo pin. The earlier entry said it dropped pyflakes; it drops nearly
+  everything, and pyflakes was merely the most valuable casualty.
+
+  **And selecting by PREFIX does not reproduce the defaults either**, because
+  the default set is a *subset* of each family. Measured on the candidate
+  family list (`F,E4,E7,E9,UP,BLE,S,PLW,TRY,DTZ,EXE,SIM,RUF,C4,FURB,PIE,PLR,
+  ISC,PLC`):
+
+  ```
+  ruff defaults today                       349 findings
+  candidate family select                  1012 findings      (+663)
+    S101   299  assert used                 <- every assert in the test suite
+    S607    48  partial executable path     <- in a plugin whose JOB is
+    S603    46  subprocess call                shelling out
+    PLR0912/0915/0911/0913/0917  91         <- complexity metrics
+    PLR2004 47 · TRY003 30 · RUF005 31 · …
+  ```
+
+  The entry above claimed family `S` "encodes an existing policy". It does not:
+  it encodes 299 test asserts and 94 blanket subprocess warnings that state no
+  policy this project holds.
+
+- **CONCLUSION — the version lock is the determinism instrument, not `select`.**
+  The three options are exhaustive and all but one fail: a `select` NARROWER
+  than defaults silently guts the gate; BROADER floods it; and one that exactly
+  reproduces defaults is a 413-entry list that must be regenerated on every ruff
+  release — unmaintainable, and redundant with a version pin that already does
+  it. **This card's founding premise ("curate a stable `select` so the set can't
+  silently expand again") is therefore retired.** What actually prevents the
+  0.16.0 incident recurring is pinning the ruff VERSION — which is what the
+  existing `ruff==0.15.20` pin was already doing correctly. The pin was never
+  the problem; its being a hardcoded string rather than a lockfile entry was.
+
+- **NEXT ACTION (supersedes all above):** (a″) do **NOT** add a `select`. Move
+  the pin from the hardcoded `--with ruff==0.15.20` in `publish.py` Step 3 into
+  a locked dev dependency (`uv.lock`), so upgrades become deliberate `uv lock`
+  bumps whose new findings are reviewed at bump time — that is also where "I
+  stop learning about new defect classes" is answered. (b) Then adopt current
+  ruff at that lock and apply only the safe autofixes, one commit. (c) The 107
+  fail-fast findings per call, in the three buckets. (d) The 98 tail. (e) Any
+  rule OUTSIDE the defaults that this project genuinely wants is added later,
+  one at a time via `extend-select`, each measured before adoption — with
+  `[tool.ruff.lint.per-file-ignores]` for tests if `S101` is ever among them.
+
+- **N — never adopt a rule family without measuring it first.** Three plans in a
+  row (freeze-the-31, families, families-with-`E4/E7/E9`) each looked correct
+  when written and each moved the gate by hundreds of findings in one direction
+  or the other. `--statistics` shows what FIRES, never what is ENFORCED; only
+  `--show-settings` answers the second question.
 
 - **Durable artifacts:** the pin comments in `publish.py` (Step 4/5) and the two
   workflows are the load-bearing BUMP PROTOCOL; the CPV FP issue is the upstream
