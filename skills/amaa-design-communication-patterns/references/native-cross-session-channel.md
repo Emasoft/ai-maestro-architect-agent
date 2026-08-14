@@ -21,6 +21,9 @@ leads to the wrong remedy.
 | 2.1.178 | Auto mode evaluates subagent spawns with the classifier before launch |
 | 2.1.222 | Auto mode evaluates messages sent to other agent sessions with the permission classifier *before dispatch* |
 | **2.1.224** | **Adds cross-MACHINE reach, `ListAgents` peer discovery, and the `crossSessionInbound` / `dialogExpiry` settings** |
+| 2.1.225 | `SendMessage` can now *start* a conversation with a Remote Control session on another machine by name — previously it could only reply after that session messaged first |
+| 2.1.229 | `ListAgents` marks disconnected Remote Control sessions `offline` and labels your cloud sessions `cloud` |
+| **2.1.232** | **A bare name that matches exactly one live session now delivers without the ref-confirmation step; typing `@` mentions another session; sessions on one machine are kept unique by renaming collisions to a `name-word-word` variant** |
 
 The single most important row is **2.1.166**. Permission laundering — "another
 agent asked me to do the thing my own permissions forbid" — is the specific
@@ -51,7 +54,25 @@ traffic over the native channel:
   sessions, not AI Maestro agents — including sessions the AI Maestro server has
   never heard of and holds no roster entry for.
 
-The last two are the real 2.1.224 delta. Everything above them predates it.
+- **A session NAME is not a stable identity (2.1.232).** Two sessions on one machine
+  can no longer share a name: the second is renamed to a `name-word-word` variant.
+  So a name you cached earlier may now address a *different* session, or none.
+  **Resolve the recipient through `ListAgents` at send time** rather than reusing a
+  name you learned in an earlier turn.
+- **`offline` and `cloud` are new `ListAgents` state (2.1.229)**, and neither is a
+  reason to skip the check below — an `offline` peer is still a peer you may not be
+  permitted to contact.
+
+Those four are the delta since this file was last aligned; everything above them
+predates 2.1.224.
+
+**The rules did not weaken — the FRICTION did, which makes them matter more.** Until
+2.1.232 a cross-session send to a bare name had to be confirmed with a ref, and that
+step sat in front of every message as an unplanned pause. Bare-name delivery and `@`
+mentions remove it. Nothing about who you may contact changed; what changed is that
+the wrong send is now as cheap as the right one. Since this channel has no 403 and no
+server-side evaluation point, **self-enforcement at send time is the only gate there
+is** — and it is now the only thing standing where a confirmation dialog used to be.
 
 ## R42.3 is false as written — cite, do not re-derive
 
