@@ -1,14 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-    ## [2.15.23] - 2026-08-14
+    ## [2.15.24] - 2026-08-14
 
 ### Bug Fixes
 
-- @name is a send, and a fork is the subagent no agent-file rule reaches    
-
-### Documentation
-
-- Record that the placeholder held under CC 2.1.232    
+- Move the @name rule into the main persona — a reference cannot reach a fork    
 
 
