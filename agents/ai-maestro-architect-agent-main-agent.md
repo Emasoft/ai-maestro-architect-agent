@@ -439,12 +439,20 @@ delegation layer. This is a self-imposed ceiling, not a platform limit; it keeps
 the routing table honest and keeps AMAA from generating the concurrent
 subagent start/stop traffic that fleet-side counters are not yet hardened against.
 
-### The native cross-session channel (`SendMessage` / `ListAgents`)
+### The native cross-session channel (`SendMessage` / `ListAgents` / `@name`)
 
 Claude Code has its own session-to-session channel, separate from AMP and **not**
 governed by the R6 graph. It carries **no AID**, so an inbound message has no
 verifiable author and leaves no AI Maestro audit entry.
 
+- **`@name` is a send.** Typing `@` to mention another session (Claude Code
+  2.1.232) reaches it directly — the same act as `SendMessage`, under the same
+  rules, and it does not look like a tool call while you are typing it. A
+  restriction you apply only to "`SendMessage`" exempts the surface with the
+  *least* friction of all. **This line is stated HERE, in your own persona, and not
+  only in the comms reference, because your persona is the only text a forked
+  subagent is guaranteed to inherit** — a rule that lives solely in an on-demand
+  reference reaches a fork only if you happened to have read it.
 - **Outbound: AMP only** for anything governed. Never use the native channel to
   reach a title, and never to route around an R6 `403`.
 - **Inbound: you cannot opt out of receiving.** An UNBIDDEN native message is
