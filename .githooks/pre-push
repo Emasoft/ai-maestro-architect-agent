@@ -30,8 +30,16 @@ find_publish_ancestor() {
         # Rejects:   bash -c "touch scripts/publish.py && git push"
         #            git push
         #            any shell where publish.py is not the actual interpreter target
+        # ONE alternative, deliberately. A second `*python*/scripts/publish.py*`
+        # was here and was DEAD: the leading `*` already spans the slash, so
+        # `*scripts/publish.py*` matches every command the slashed form would,
+        # and shellcheck flagged it (SC2221/SC2222 — "always overrides a later
+        # one" / "never matches"). Removing it accepts and rejects exactly what
+        # it did before — the surviving pattern is the strict superset — so this
+        # does not widen or narrow the gate. Do not "restore" the slashed form:
+        # it can only ever be unreachable.
         case "${cmd}" in
-            *python*scripts/publish.py*|*python*/scripts/publish.py*)
+            *python*scripts/publish.py*)
                 return 0
                 ;;
         esac
