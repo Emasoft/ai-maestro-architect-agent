@@ -1,10 +1,14 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-    ## [2.15.22] - 2026-08-14
+    ## [2.15.23] - 2026-08-14
 
-### Performance
+### Bug Fixes
 
-- Stop paying 547 lines of unused skill preloads per invocation    
+- @name is a send, and a fork is the subagent no agent-file rule reaches    
+
+### Documentation
+
+- Record that the placeholder held under CC 2.1.232    
 
 
