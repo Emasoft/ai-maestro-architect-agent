@@ -1,15 +1,15 @@
 ---
 trdd-id: JKBVDN7G
 title: Align AMAA with Claude Code 2.1.225 through 2.1.232
-column: dev
+column: complete
 created: 2026-08-14T12:58:17+0200
-updated: 2026-08-14T12:58:17+0200
+updated: 2026-08-14T13:08:26+0200
 current-owner: ai-maestro-architect-agent
 task-type: infra
 scope: project
 approval-tier: 0
 relevant-rules: []
-implementation-commits: []
+implementation-commits: [84a0e1c]
 ---
 
 ## ⏵ STATE — READ THIS FIRST ON RESUME (authoritative; supersedes the body) — 2026-08-14
@@ -112,9 +112,68 @@ are new observable state the doc does not mention.
 - **Do NOT edit `~/.claude/rules/`** — different project, cross-project rule.
 - **Do NOT re-open decisions settled in `TRDD-M3RV5THO`**; it is archived and frozen.
 
-## NEXT ACTION
+## 2026-08-14 — DONE. Landed in `84a0e1c`; gate green.
 
-Resolve GAP A's open question. Advisor consulted 2026-08-14 on exactly this
-(whether "non-teammate" covers a plugin's own bundled sub-agents, the right shape
-of guard, and whether GAP B is load-bearing or documentation drift) — verify its
-answer against the tool contract before acting on it.
+- **GAP A's open question is RESOLVED EMPIRICALLY, and the evidence pre-dated the
+  question.** I did not need to build a probe: **two Agent-tool spawns earlier in
+  this same session** (the advisor consults) each returned an agent id immediately
+  plus a later task-notification, with **no background flag passed**. That is the
+  flipped default, observed on this machine, on this version, before the question
+  was asked. So "non-teammate" does cover a plugin's own bundled sub-agents here.
+  Recorded because the temptation was to settle it by parsing the adjective.
+- **The fix shape is per-call explicitness**, not a restatement: the protocol now
+  says to pass `run_in_background: false` at the spawn site, and says *why* — the
+  same discipline that made the 26 fork skills a non-event when this default moved.
+- **A THIRD item was found that this card had missed entirely:** 2.1.232 also turned
+  `subagent_type: "fork"` on by default, and a fork **inherits the full parent
+  conversation**. AMAA's docs said nothing about it. This is security-relevant, not
+  merely cost: `main-agent.md` already establishes that inbound native-channel
+  messages carry no AID and no verifiable author, so a fork copies unauthenticated
+  content into an agent that never evaluated it — turning a message the main agent
+  merely READ into instructions a second agent may ACT on. Explicit stance added.
+- **GAP B** — comms version table extended with 2.1.225 / 2.1.229 / 2.1.232, plus the
+  name-instability rule (a session name is no longer a stable identity; resolve via
+  `ListAgents` at send time) and the friction argument: the rules did not weaken, the
+  ref-confirmation step in front of a send disappeared, and this channel has no 403.
+
+### The guard, and why it is not a keyword check
+
+`tests/test_delegation_protocol_claims.py` (6 tests). It asserts SHORT COLLOCATIONS
+lifted from each operative sentence, whitespace-collapsed on BOTH sides — **not** the
+presence of a distinctive term. Memory
+`a-doc-guard-that-asserts-a-mention-cannot-see-a-stale-claim` records that exact trap
+hit **3× in one week on Claude Code changelog syncs**, each time with the token still
+present and the sentence around it false; a rule's own rationale repeats its
+vocabulary, so a term check survives deleting the rule. Recalling that before writing
+the test is what stopped me shipping the weaker guard.
+
+**Falsified for real, not asserted:** removing the operative sentence failed the
+matching test by name; restoring it went green; no residue left in the tree. The
+docstring states the limit — it catches DELETION, not weakening in place
+(`do not` → `prefer not to` keeps the collocation and stays green).
+
+## Acceptance criteria — final
+
+- [x] GAP A resolved from evidence, not the changelog adjective (see above).
+- [x] Protocol states actual behaviour; guard exists so the NEXT flip reds a test.
+- [x] GAP B: current addressing semantics + self-enforcement restated.
+- [x] `publish.py --patch --dry-run` green: **404 passed / 3 skipped** (was 398),
+      ruff clean, CPV lint 0 errors, CPV strict `CRITICAL=0 MAJOR=0 MINOR=0 NIT=0`.
+      `WARNING=15` is UNCHANGED — these edits added none; those 15 are the 10
+      preload warnings owned by `TRDD-SGW7EITB` plus the 5 documented in `DMIRQOCD`.
+- [~] **PARTIALLY met, stated rather than checked off:** two classes of claim in
+      these edits rest on the USER-supplied changelog and were NOT independently
+      verified on this machine — (i) that a fork inherits the full parent
+      conversation (I did not spawn a fork subagent to observe inheritance), and
+      (ii) the 2.1.225 / 2.1.229 row contents (Remote Control by-name reach,
+      `offline` / `cloud` labels). They are documented as platform behaviour on the
+      changelog's authority, which is legitimate, but they are not the same grade of
+      evidence as GAP A's direct observation. Anyone extending this should know
+      which claims are observed and which are cited.
+
+## Not changed, deliberately
+
+The 26 fork skills. All declare `background: false`, so the 2.1.232 flip could not
+reach them — the previous alignment's guard worked exactly as designed. Editing them
+would spend that guard's credibility for nothing, and fork-skill uniformity is
+`TRDD-ZT5TP8YO`'s scope, whose trap section forbids loosening the test.
