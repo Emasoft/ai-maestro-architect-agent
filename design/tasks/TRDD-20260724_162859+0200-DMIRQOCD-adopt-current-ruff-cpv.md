@@ -3,7 +3,7 @@ trdd-id: DMIRQOCD
 title: Adopt current ruff and CPV deliberately then bump the gate pins
 column: todo
 created: 2026-07-24T16:28:59+0200
-updated: 2026-08-14T01:31:00+0200
+updated: 2026-08-14T09:38:03+0200
 current-owner: ai-maestro-architect-agent
 task-type: infra
 scope: project
@@ -93,9 +93,67 @@ implementation-commits: []
   regenerate the hook, re-run `cpv-remote-validate plugin . --strict` at v5.4.0 to
   confirm `MINOR=0`, and only then bump all four CPV pins in lockstep. Step (3)
   (ruff) remains separate and untouched.
+- **2026-08-14 — STEPS (1) AND (2) ARE DONE.** The NEXT ACTION above is spent and
+  is superseded by the one below. Landed: `678ec92` (dead pre-push alternative
+  removed, hook regenerated — re-ran the gate, `MINOR=0 exit=0`) and `40bc113`
+  (all four CPV pins 2.153.1 → v5.4.0 in lockstep, all three distinct invocations
+  verified). Only step (3) remains, and it is now the whole card.
+
+- **2026-08-14 — STEP (3) SCOPED. The blocking unknown is removed: the finding set
+  is censused, and it is three populations, not one pile.** Ran current ruff
+  (**0.16.3**) tree-wide: **349 findings across 31 distinct rules**, 151 auto-fixable.
+  The card previously carried only the total (~341), which is not a decision input —
+  a bare count cannot tell you whether the work is mechanical or judgment.
+
+  ```
+  population                        n     rules                          nature
+  ─────────────────────────────── ───   ────────────────────────────   ──────────────
+  PEP-585/604 modernization       127   UP006 70, UP045 40, UP035 14,  auto-fix, no
+                                        UP024/032/034 3                 semantic risk
+  FAIL-FAST VIOLATIONS            107   PLW1510 49, BLE001 47,         REAL defects
+                                        S110 10, TRY004 1               (see below)
+  stale suppressions               17   RUF100                          auto-fix, and
+                                                                        worth having
+  everything else                  98   DTZ005 29, EXE001 17, SIM102   mixed; the
+                                        13, RUF012 7, + 20 tail rules   judgment tail
+  ```
+
+- **The 107 are not lint noise — they are my own standing rules, violated.** The
+  global directive is fail-fast: *"No error handling — let failures propagate. No
+  fallbacks, workarounds, bypasses or tricks."* `BLE001` (blind `except:`), `S110`
+  (`try/except: pass`) and `PLW1510` (`subprocess.run` with no `check=`, so a
+  non-zero exit passes silently) are exactly the swallowed-failure shapes that rule
+  forbids. So step (3) is not cosmetic adoption; it is the first tree-wide
+  measurement of how far this codebase has drifted from its own error policy, and
+  that population deserves reading, not `--fix`.
+
+- **Root cause of the version-sensitivity is now confirmed empirically:** there is
+  **no `[tool.ruff]` section in `pyproject.toml` at all**. The tree runs whatever
+  ruff's DEFAULT set happens to be, which is why a minor release moved the count on
+  byte-identical code and why pinning was the only available brake. Curating an
+  explicit `select` is therefore the actual fix, not a preference — it converts an
+  upstream default-set change from a silent gate break into a deliberate opt-in.
+
+- **NEXT ACTION (supersedes the one above):** step (3), in this order, each landing
+  separately so a regression is bisectable — (a) add an explicit `[tool.ruff]`
+  `select` to `pyproject.toml` pinning today's rule set by NAME, so the set cannot
+  silently expand again; (b) apply the 127 modernization + 17 RUF100 fixes with
+  `--fix` (mechanical, reviewable as one diff, no behaviour change); (c) read the
+  **107 fail-fast findings individually** — each is either a real swallowed failure
+  to fix or a deliberate exception needing a `# noqa` WITH a reason comment; do NOT
+  bulk-suppress them, that would launder the exact defect the rule exists to catch;
+  (d) triage the 98-finding tail; (e) only then bump the native pin off
+  `ruff==0.15.20`. Consult the advisor before (a) — it is a config decision that
+  touches every Python file in the tree.
+
+- **N — do NOT `--fix` the whole tree in one pass.** 151 are auto-fixable and 107
+  are defects; a single `--fix` run mixes a no-op modernization diff with nothing
+  at all from the population that matters, while making the remaining diff harder
+  to read. (a)/(b) and (c) are separate commits for that reason.
+
 - **Durable artifacts:** the pin comments in `publish.py` (Step 4/5) and the two
   workflows are the load-bearing BUMP PROTOCOL; the CPV FP issue is the upstream
-  tracker.
+  tracker. As of this entry the CPV half of this card is CLOSED — only ruff remains.
 
 ## Context
 
