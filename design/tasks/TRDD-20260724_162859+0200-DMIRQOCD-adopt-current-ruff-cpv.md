@@ -1,9 +1,9 @@
 ---
 trdd-id: DMIRQOCD
 title: Adopt current ruff and CPV deliberately then bump the gate pins
-column: backburner
+column: todo
 created: 2026-07-24T16:28:59+0200
-updated: 2026-07-24T16:28:59+0200
+updated: 2026-08-14T01:12:00+0200
 current-owner: ai-maestro-architect-agent
 task-type: infra
 scope: project
@@ -37,7 +37,20 @@ implementation-commits: []
   (3) separately, adopt a chosen ruff and address its findings (curate a stable
   `[tool.ruff]` select so the set can't silently expand again), then bump the
   native pin. Each is its own verify-before-bump.
-- **SUPERSEDED — do NOT carry forward:** nothing yet.
+- **SUPERSEDED — do NOT carry forward:** the CPV wait. The blocker named above —
+  the `skillaudit:filesystem FS_WRITE` false-positive on install-doc PROSE — is
+  **CLOSED**: CPV issue #177, fixed in **CPV v3.19.0**, closed 2026-07-25T03:37,
+  i.e. the day after this card was written. The fix routed `.md` through the
+  existing `_shell_match_lacks_write_intent` predicate that `.sh` already used.
+  So step (1) is no longer waiting on anyone.
+- **2026-08-14 — unparked (`backburner` → `todo`).** This card sat deferred for
+  ~20 days against a dependency that had already resolved, because nothing
+  re-checked it. Recorded here rather than silently: a card parked on an external
+  dependency is only honestly parked while that dependency is open.
+- **Note for whoever takes step (1):** the pins are on CPV **2.153.1** and the fix
+  landed in **3.19.0** — a MAJOR jump, not a patch. Verify at the new tag before
+  bumping all four sites in lockstep; do not assume the only behavioural delta is
+  the FP that was fixed. Steps (2) and (3) are unchanged and still independent.
 - **Durable artifacts:** the pin comments in `publish.py` (Step 4/5) and the two
   workflows are the load-bearing BUMP PROTOCOL; the CPV FP issue is the upstream
   tracker.
