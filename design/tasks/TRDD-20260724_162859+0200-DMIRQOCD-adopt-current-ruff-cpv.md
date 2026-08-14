@@ -3,7 +3,7 @@ trdd-id: DMIRQOCD
 title: Adopt current ruff and CPV deliberately then bump the gate pins
 column: todo
 created: 2026-07-24T16:28:59+0200
-updated: 2026-08-14T09:38:03+0200
+updated: 2026-08-14T10:08:17+0200
 current-owner: ai-maestro-architect-agent
 task-type: infra
 scope: project
@@ -150,6 +150,88 @@ implementation-commits: []
   are defects; a single `--fix` run mixes a no-op modernization diff with nothing
   at all from the population that matters, while making the remaining diff harder
   to read. (a)/(b) and (c) are separate commits for that reason.
+
+- **2026-08-14 — ADVISOR CONSULTED, AND THE PLAN ABOVE IS WRONG IN BOTH
+  DIRECTIONS. Step (a) as written would have WEAKENED the gate.** Verified
+  first-hand, not taken on the advisor's word (and the verification also refuted
+  half of the advisor's own fix).
+
+  **Trap 1 — `select`-ing "today's 31 rules" silently drops pyflakes.**
+  `ruff check --statistics` lists only rules that FIRE. Rules that are currently
+  **clean** emit nothing, so they never appear in the census — and `F`
+  (undefined-name, unused-import) is clean here, therefore absent from the 31.
+  Freezing the 31 would have removed the single highest-value regression catcher
+  in the set while looking like a status-quo pin.
+
+  ```
+  positive control, DEFAULT rules, file with a bad import + undefined name:
+    F401 [*] `os` imported but unused
+    F821      Undefined name `undefined_name`        <- defaults DO include F
+  F/E codes present in this tree's 349-finding census:   0   <- because clean
+  ```
+
+  **Trap 2 — the obvious fix (select whole FAMILIES) detonates it the other
+  way.** Ruff's default `E` is the **`E4`/`E7`/`E9` subset**, not all of `E`;
+  line length is a formatter's job and is deliberately excluded:
+
+  ```
+  ruff check . --select F,E   ->  489  E501  line-too-long
+  ```
+
+  So a literal `select = ["F", "E", …]` adds **489 findings on top of the 349**.
+  Neither the naive freeze nor the naive family select is correct.
+
+- **CORRECTED SHAPE for (a′):** select by FAMILY (so new upstream rules in a
+  chosen family still arrive and are reviewed at a deliberate bump), but spell
+  the `E` entry as ruff's default subset — `E4`, `E7`, `E9` — rather than bare
+  `E`, and adopt `E501` only as a separate, deliberate decision with a
+  `line-length` set. Families to carry, each because it encodes an existing
+  policy rather than a taste: `F` (correctness), `E4/E7/E9`, `UP` (the tree is
+  `requires-python >=3.10`), and `BLE`/`S`/`PLW`/`TRY` — which are the fail-fast
+  rule expressed as lint.
+
+- **`select` alone does NOT buy determinism** — ruff adds rules *within* a
+  selected family and changes existing rule behaviour between releases. So (e)
+  is not "unpin": the pin MOVES from a hardcoded `--with ruff==0.15.20` string
+  to a locked dev dependency (`uv.lock`), and `publish.py` Step 3 becomes
+  `uv run ruff check .`. Upgrades then become deliberate `uv lock` bumps whose
+  new findings get reviewed — which is also the answer to "an explicit select
+  means I stop learning about new defect classes": you learn at each bump.
+
+- **ORDERING CORRECTION — (a′) must precede (b).** `RUF100 unused-noqa` is
+  computed against the ACTIVE rule set. Run the 17 RUF100 autofixes under the
+  OLD config and any `# noqa` covering a rule the new config drops is deleted as
+  "unused" — silently discarding suppressions before the final rule set exists.
+  Autofix only under the final config.
+
+- **PLW1510 (49 sites) IS NOT MECHANICALLY SAFE — proven in this repo.**
+  `scripts/publish.py::detect_default_branch` inspects `returncode` twice, and
+  the second call treats failure AS the answer:
+
+  ```python
+  result = subprocess.run([... "rev-parse", "--verify", "origin/main"], ...)
+  return "main" if result.returncode == 0 else "master"
+  ```
+
+  `check=True` there raises instead of falling back, breaking publishes on every
+  master-only repo. Triage the 49 into three buckets, per call: **returncode is
+  inspected** → explicit `check=False` (the inspection IS the fail-fast handling,
+  and being explicit is what silences the rule honestly); **result unused and a
+  failure would be fatal** → `check=True`; **call sits inside an `except`** → fix
+  jointly with its BLE001 site, since they are one defect.
+
+- **UNVERIFIED, and must be tested early:** whether CPV Step 4's bundled ruff
+  (`cpv-remote-validate lint`, `publish.py:1381`) picks up this repo's
+  `[tool.ruff]`. If it does, one config governs BOTH gates and they can disagree
+  about a version. Cheapest signal: run the CPV lint locally immediately after
+  committing (a′) and before touching any code. Do not assume either way.
+
+- **NEXT ACTION (supersedes all above):** (a′) add the corrected family-based
+  `[tool.ruff] select` with `E4/E7/E9` — NOT bare `E` — then immediately run BOTH
+  gates (native ruff and CPV Step 4 lint) to see whether they agree; (b) only
+  then apply the safe autofixes as one mechanical commit; (c) the 107 per-call
+  in three buckets; (d) the tail; (e′) move the pin into `uv.lock` and switch
+  Step 3 to `uv run ruff check .`.
 
 - **Durable artifacts:** the pin comments in `publish.py` (Step 4/5) and the two
   workflows are the load-bearing BUMP PROTOCOL; the CPV FP issue is the upstream
