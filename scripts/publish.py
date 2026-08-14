@@ -1372,13 +1372,14 @@ Examples:
     # across the whole tree. Any non-zero exit fails the pipeline. NO bypass.
     if info.has_kind(ProjectKind.CLAUDE_PLUGIN):
         print(f"\n{BLUE}=== Step 4: CPV lint (mandatory for claude plugins) ==={NC}")
-        # CPV is PINNED (@v2.153.1) — see the BUMP PROTOCOL note on Step 5. An
+        # CPV is PINNED (@v5.4.0) — see the BUMP PROTOCOL note on Step 5. An
         # unpinned `git+…` resolves CPV's moving default branch, so a new CPV
         # release silently changes this gate on unchanged code (observed
         # 2026-07-24: HEAD flagged 2 FS_WRITE prose false-positives that v2.153.1
-        # does not). Pinning restores a deterministic gate; it does NOT weaken it.
+        # did not — fixed upstream in CPV v3.19.0, which is why the pin could
+        # move). Pinning restores a deterministic gate; it does NOT weaken it.
         run([
-            "uvx", "--from", "git+https://github.com/Emasoft/claude-plugins-validation@v2.153.1",
+            "uvx", "--from", "git+https://github.com/Emasoft/claude-plugins-validation@v5.4.0",
             "--with", "pyyaml", "cpv-remote-validate", "lint", str(plugin_root),
         ], cwd=git_root)
         print(f"{GREEN}ok CPV lint passed with zero errors{NC}")
@@ -1391,15 +1392,19 @@ Examples:
     # the strictness or work around the validator.
     if info.has_kind(ProjectKind.CLAUDE_PLUGIN):
         print(f"\n{BLUE}=== Step 5: CPV strict validate plugin (mandatory) ==={NC}")
-        # CPV is PINNED (@v2.153.1). BUMP PROTOCOL: this pin lives at FOUR sites —
+        # CPV is PINNED (@v5.4.0). BUMP PROTOCOL: this pin lives at FOUR sites —
         # scripts/publish.py (Step 4 lint + this Step 5 plugin gate),
         # .github/workflows/release.yml, .github/workflows/validate.yml. Bump ALL
         # FOUR together (a subset pin is a hole CI walks through) and ONLY after
-        # `cpv-remote-validate plugin . --strict` is verified clean at the new
-        # tag. A deliberate, greppable bump beats silent drift onto a moving
-        # branch. Same supply-chain fix the janitor applied to its own CPV pin.
+        # EVERY distinct invocation is verified clean at the new tag — there are
+        # THREE, not one: `lint <root>`, `plugin . --strict`, and validate.yml's
+        # `plugin . --strict --verbose --report <file>`. Verifying only the
+        # `--strict` form leaves two of the four sites unevidenced (2026-08-14:
+        # caught exactly that on the 2.153.1 → 5.4.0 bump). A deliberate,
+        # greppable bump beats silent drift onto a moving branch. Same
+        # supply-chain fix the janitor applied to its own CPV pin.
         run([
-            "uvx", "--from", "git+https://github.com/Emasoft/claude-plugins-validation@v2.153.1",
+            "uvx", "--from", "git+https://github.com/Emasoft/claude-plugins-validation@v5.4.0",
             "--with", "pyyaml", "cpv-remote-validate", "plugin", str(plugin_root), "--strict",
         ], cwd=git_root)
         print(f"{GREEN}ok CPV strict validation passed{NC}")

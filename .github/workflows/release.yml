@@ -36,8 +36,8 @@ jobs:
       - name: CPV strict validation gate (post-hoc safety net)
         run: |
           set +e
-          # CPV PINNED @v2.153.1 — bump in lockstep with publish.py (BUMP PROTOCOL) + validate.yml.
-          uvx --from git+https://github.com/Emasoft/claude-plugins-validation@v2.153.1 \
+          # CPV PINNED @v5.4.0 — bump in lockstep with publish.py (BUMP PROTOCOL) + validate.yml.
+          uvx --from git+https://github.com/Emasoft/claude-plugins-validation@v5.4.0 \
             --with pyyaml \
             cpv-remote-validate plugin . --strict
           EXIT_CODE=$?
