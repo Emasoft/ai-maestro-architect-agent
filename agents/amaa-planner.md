@@ -2,7 +2,6 @@
 name: amaa-planner
 description: Creates implementation plans from requirements with step-by-step breakdown. Requires AI Maestro installed.
 skills:
-  - amaa-session-memory
   - amaa-planning-patterns
 ---
 

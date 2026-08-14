@@ -8,7 +8,6 @@ skills:
   - amaa-github-integration
   - amaa-hypothesis-verification
   - amaa-design-management
-  - amaa-label-taxonomy
   - amaa-requirements-analysis
   - amaa-prrd-trdd-kanban
 ---
@@ -25,6 +24,18 @@ Before taking any action, read:
 3. **amaa-session-memory/SKILL.md** - Record-keeping, logs, design artifacts organization
 4. **amaa-github-integration/SKILL.md** - GitHub integration patterns and label management
 5. **amaa-hypothesis-verification/SKILL.md** - Verification protocols before handoff
+6. **amaa-requirements-analysis/SKILL.md** - Managing requirements, initializing plans, approving transitions
+7. **amaa-design-management/SKILL.md** - Creating, searching and validating design documents; UUID generation
+8. **amaa-prrd-trdd-kanban/SKILL.md** - Your role in the PRRD / TRDD / kanban workflow: shaping a proto-TRDD, the split/group/pass-through decision, and authoring the verification and delivery fields
+
+Items 6-8 are preloaded like the rest, and this list is what makes that
+justified: a skill injected into every invocation but named nowhere is paid for
+on every turn and routed to on none. Anything you do NOT need on most
+invocations does not belong in `skills:` at all — reach it with the `Skill` tool
+when the work actually calls for it. **`amaa-label-taxonomy` is the worked
+example**: the GitHub label vocabulary matters only while you are actually
+managing labels, so it is loaded on demand from `amaa-github-integration`'s
+workflow rather than carried in every context.
 
 ## Operating the 3 pillars — use the CORE skills, not a local reimplementation
 

@@ -2,7 +2,6 @@
 name: amaa-modularizer-expert
 description: Decomposes monolithic code into modular, reusable components. Requires AI Maestro installed.
 skills:
-  - amaa-session-memory
   - amaa-modularization
 ---
 

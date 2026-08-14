@@ -2,7 +2,6 @@
 name: amaa-cicd-designer
 description: Designs CI/CD pipelines, GitHub Actions, and deployment architecture. Requires AI Maestro installed.
 skills:
-  - amaa-session-memory
   - amaa-cicd-design
 ---
 

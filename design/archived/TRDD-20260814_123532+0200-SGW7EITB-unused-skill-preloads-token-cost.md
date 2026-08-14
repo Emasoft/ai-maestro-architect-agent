@@ -1,9 +1,9 @@
 ---
 trdd-id: SGW7EITB
 title: Remove or route the 10 unused skill preloads that are paid on every agent invocation
-column: todo
+column: complete
 created: 2026-08-14T12:35:32+0200
-updated: 2026-08-14T12:54:02+0200
+updated: 2026-08-14T13:26:22+0200
 current-owner: ai-maestro-architect-agent
 task-type: refactor
 scope: project
@@ -156,13 +156,72 @@ about that component.
 
   ~387 lines are currently injected on every invocation for these four.
 
-## NEXT ACTION
+## 2026-08-14 — DONE. All 10 decided and applied; preload WARNINGs 10 → 0.
 
-Decide (1)/(2)/(3) per skill on the frequency criterion above, starting with
-`amaa-label-taxonomy` (clearest option-2 case: a real capability that is only needed
-when the agent is actually managing labels). Apply, then re-run
-`cpv-remote-validate plugin . --strict` and confirm these WARNINGs drop to 0 without
-any agent losing a capability.
+**The defect had a sharper shape than "the body never mentions it":** the main agent
+carries an explicit **`## Required Reading`** list, and it named exactly the 5 skills
+that had literal mentions while the frontmatter preloaded **9**. The frontmatter and
+the Required Reading list simply disagreed. That reframing is what made the
+route-vs-drop calls decidable instead of a matter of taste.
+
+```
+agent / skill                        call  evidence
+main-agent  amaa-prrd-trdd-kanban    (1)   0 literal / 53 topic — core, constant
+main-agent  amaa-requirements-analys (1)   0 / 16 — "You analyze requirements" is the role
+main-agent  amaa-design-management   (1)   DESIGN AUTHORITY: creates/owns design docs
+main-agent  amaa-label-taxonomy      (2)   0 / 2 — episodic, only while managing labels
+planner     amaa-session-memory      (2)   0 / 1
+cicd-designer      amaa-session-mem  (2)   0 / 0
+documentation-wr   amaa-session-mem  (2)   0 / 1
+modularizer-exp    amaa-session-mem  (2)   0 / 0
+api-researcher     amaa-session-mem  (2)   0 / 0
+api-researcher     amaa-planning-pat (2)   0 / 0
+```
+
+The three `(1)` calls were added to **Required Reading** — a real routing entry that
+tells the agent when to use each, not a token mention. The seven `(2)` calls were
+dropped from `skills:`.
+
+- **`amaa-session-memory` was the copy-paste default this card predicted, and the
+  skill itself proves it.** Its description reads *"Loaded by
+  ai-maestro-architect-agent-**main-agent**"* — it never claimed the sub-agents.
+  Five of them preloaded it anyway, all with **zero** literal mentions and ~zero
+  topic hits. Those five are single-turn bounded workers told to "do your bounded
+  unit of work and return"; cross-session context restoration is not their job.
+  **Dropping it made the skill's own declaration true rather than false.**
+- **A coupling that nearly bit:** CPV requires a non-user-invocable skill to declare
+  `Loaded by <agent>` **or** `Used by <agent>`. `amaa-label-taxonomy` said "Loaded
+  by …main-agent", so dropping its preload would have made that claim false. CPV
+  accepts both spellings and the distinction is exactly the one at issue —
+  preloaded = *loaded by*, on-demand = *used by* — so its description now reads
+  "**Used on demand by** …". `amaa-session-memory` and `amaa-planning-patterns`
+  needed no such edit: both name the main agent, which still preloads and routes to
+  them.
+- **`amaa-planner` KEPT `amaa-planning-patterns`** — CPV flagged planner only for
+  session-memory, and the body does route to planning-patterns (1 mention).
+  Verified rather than swept up with its neighbours.
+
+**Measured effect — removed from per-invocation context:**
+
+```
+amaa-session-memory     78 lines x 5 agents = 390
+amaa-label-taxonomy     81 lines x 1 agent  =  81
+amaa-planning-patterns  76 lines x 1 agent  =  76
+                                       TOTAL 547 lines, on every invocation
+```
+
+## Acceptance criteria — final
+
+- [x] All 10 (agent, skill) pairs classified with the reason recorded, decided by
+      reading each body — not by pattern (see the table; `amaa-planner` is the case
+      that would have been mis-swept by pattern).
+- [x] `cpv-remote-validate plugin . --strict`: preload WARNINGs **0** (was 10).
+- [x] No agent LOSES a capability — verified directly: **none of the 6 agents
+      declares a `tools:` restriction**, so all inherit `Skill` and can load any
+      dropped skill on demand.
+- [x] Remaining CPV WARNING count accounted for: **5** (was 15). Those 5 are exactly
+      the ones `TRDD-DMIRQOCD` documents as expected/by-design; none is new.
+- [x] Full suite **404 passed / 3 skipped**, ruff clean.
 
 **N — a skill dropped from `skills:` must remain reachable.** This agent declares no
 `tools:` restriction, so it inherits `Skill` and option (2) is safe here. VERIFY that
