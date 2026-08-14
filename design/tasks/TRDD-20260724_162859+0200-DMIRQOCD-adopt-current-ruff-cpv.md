@@ -3,7 +3,7 @@ trdd-id: DMIRQOCD
 title: Adopt current ruff and CPV deliberately then bump the gate pins
 column: todo
 created: 2026-07-24T16:28:59+0200
-updated: 2026-08-14T10:22:17+0200
+updated: 2026-08-14T10:36:59+0200
 current-owner: ai-maestro-architect-agent
 task-type: infra
 scope: project
@@ -292,6 +292,64 @@ implementation-commits: []
   when written and each moved the gate by hundreds of findings in one direction
   or the other. `--statistics` shows what FIRES, never what is ENFORCED; only
   `--show-settings` answers the second question.
+
+- **2026-08-14 — MEASURED THE GATE ITSELF. Two more facts that reframe the whole
+  card, and a landmine in the (a″) written directly above.**
+
+  **Fact 1 — the gate is GREEN today, and "adopting current ruff" is not a
+  version bump, it is opting into 358 additional rules.**
+
+  ```
+  ruff 0.15.20  (what publish.py:662 actually pins):   55 rules enforced -> All checks passed
+  ruff 0.16.3   (what "adopt current" means):         413 rules enforced -> 349 findings
+  ```
+
+  That 55 → 413 IS the 0.16.0 default broadening this card was filed about — a
+  7.5× expansion of the enforced set. The card's title says "adopt current ruff";
+  the honest description is "opt into 358 rules this project has never enforced".
+  Every finding count recorded earlier on this card was measured under 0.16.3 and
+  therefore describes the PROPOSED gate, never the current one.
+
+  **Fact 2 — LANDMINE: `uv run ruff` does not resolve to a project dependency at
+  all. It resolves to the machine's Homebrew install.**
+
+  ```
+  ruff in uv.lock:         NO
+  ruff in .venv/bin:       NO
+  ruff in pyproject.toml:  NO   (optional-dependencies dev = ["pyyaml"] only)
+  ruff on PATH:            YES -> /opt/homebrew/bin/ruff   (0.15.21)
+  uv run ruff --version:        0.15.21   <- the Homebrew one
+  ```
+
+  So the (a″) step written above — "switch Step 3 to `uv run ruff check .`" —
+  would have made the RELEASE GATE depend on whatever ruff each developer
+  happens to have brewed, and resolve differently (or not at all) in CI where no
+  Homebrew ruff exists. That is strictly worse than what it replaces, and it
+  would have been invisible locally because the machine's 0.15.21 also reports
+  "All checks passed".
+
+- **The existing pin is CORRECT and must not be "fixed".** `uv run --with
+  ruff==0.15.20` is already hermetic: uv fetches exactly that version into an
+  ephemeral environment regardless of what is installed on the machine. It is
+  deterministic, CI-safe, and machine-independent. The only thing a lockfile
+  would add is centralising the version string — a marginal gain that the naive
+  form of the change actively inverts.
+
+- **NEXT ACTION (supersedes (a″)):** the pin move is now OPTIONAL and, if done at
+  all, is ordered — ruff must be DECLARED (`[project.optional-dependencies] dev`
+  or a `[dependency-groups] dev`) and `uv lock` run FIRST; only then may the
+  invocation change, and it must name the group explicitly so it can never fall
+  through to PATH. Changing the invocation before declaring the dependency is
+  the bug. The substantive remaining work is unchanged and independent of this:
+  the 349 findings under 0.16.3 (127 autofix + 107 fail-fast per-call + 17
+  RUF100 + 98 tail), which is a decision to enforce 358 new rules and should be
+  taken as that, not as a version bump.
+
+- **N — a hermetic pin is not a smell.** Three of the four traps on this card
+  came from treating an explicit, working constraint as debt to be modernised.
+  `--with ruff==X` looks hardcoded and is in fact the strongest guarantee in the
+  file. Verify what a construct DOES before replacing it with the idiom it
+  resembles.
 
 - **Durable artifacts:** the pin comments in `publish.py` (Step 4/5) and the two
   workflows are the load-bearing BUMP PROTOCOL; the CPV FP issue is the upstream
