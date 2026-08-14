@@ -3,7 +3,7 @@ trdd-id: DMIRQOCD
 title: Adopt current ruff and CPV deliberately then bump the gate pins
 column: todo
 created: 2026-07-24T16:28:59+0200
-updated: 2026-08-14T10:36:59+0200
+updated: 2026-08-14T10:50:58+0200
 current-owner: ai-maestro-architect-agent
 task-type: infra
 scope: project
@@ -350,6 +350,39 @@ implementation-commits: []
   `--with ruff==X` looks hardcoded and is in fact the strongest guarantee in the
   file. Verify what a construct DOES before replacing it with the idiom it
   resembles.
+
+- **2026-08-14 — the UNVERIFIED item above is now CLOSED, and the answer does not
+  change the finding.** The gap was real: this card measured ONE lint gate
+  (native ruff, Step 3) and generalised to "the gate". There are TWO. If CPV's
+  bundled ruff were newer, Step 4 could already have been enforcing rules this
+  card claims the project has never enforced. Ran it:
+
+  ```
+  cpv-remote-validate lint .        (CPV v5.4.0, the Step 4 gate)
+    Detected languages: json, markdown, python, shell, toml, yaml
+    [PYTHON] 69 file(s)
+    Summary: CRITICAL=0, MAJOR=0, MINOR=0, WARNING=0, INFO=0, PASSED=7    exit=0
+  ```
+
+  Python IS linted (69 files) and reports **zero** findings. A 0.16.x rule set
+  would have surfaced ~349 on this same tree — CPV's own `--strict` run does
+  report tool findings as MINOR (that is how the two shellcheck SC2221/SC2222
+  hits arrived), so the zero is a real pass, not a silent skip.
+
+  **Conclusion: BOTH gates are green, and neither is enforcing the 0.16.3 set.**
+  The earlier "gate is green at 55 rules" entry is confirmed and now complete
+  rather than partial. Adopting 0.16.3 remains a decision to enforce 358 rules
+  that no gate in this repo enforces today.
+
+- **STATUS — this card is now BLOCKED on a decision that is not the owner's
+  agent's to take.** Everything mechanical is done or has been shown to be
+  unnecessary. What remains is a policy question — *should AMAA enforce 358
+  additional rules?* — plus its consequence, a behaviour change at 49
+  `subprocess.run` sites whose danger is proven by this repo's own
+  `detect_default_branch`. Both gates are green today, so there is no
+  time pressure and nothing is degrading while this waits. Do NOT let a future
+  session read "todo" as licence to start applying findings: the finding counts
+  on this card describe a gate that does not exist yet.
 
 - **Durable artifacts:** the pin comments in `publish.py` (Step 4/5) and the two
   workflows are the load-bearing BUMP PROTOCOL; the CPV FP issue is the upstream
