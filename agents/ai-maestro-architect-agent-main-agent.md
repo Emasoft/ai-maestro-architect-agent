@@ -420,6 +420,16 @@ second agent may *act on*. Use the default (a fresh sub-agent with an explicit
 prompt); if a fork is ever genuinely needed, it is a design decision that belongs in
 a TRDD, not a spawn-site choice.
 
+**And a fork is the one subagent your sub-agent restrictions cannot reach.** Each of
+the five bundled sub-agents carries its own communication restriction in its own
+agent file. A fork has **no agent file** — so it inherits neither that text nor any
+`tools:` line, and instead inherits *your* conversation. The only prohibition that
+binds a fork is therefore one written where you can read it: **here, in the spawning
+agent's own persona.** That is why this rule lives in this file rather than being
+delegated to the sub-agent definitions, and it is the general form — any restriction
+meant to survive forking must sit in the parent's context, because that is the only
+thing a fork is guaranteed to carry.
+
 **Delegation stays ONE layer deep.** Claude Code 2.1.219 raised the default
 subagent nesting depth to 3 (2.1.217 had disabled nesting; 2.1.224 removed the
 per-session spawn cap, concurrency still caps at 20). AMAA does **not** use that

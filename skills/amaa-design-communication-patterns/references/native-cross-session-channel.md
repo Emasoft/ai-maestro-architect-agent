@@ -66,6 +66,12 @@ traffic over the native channel:
 Those four are the delta since this file was last aligned; everything above them
 predates 2.1.224.
 
+**`@name` IS a send.** Typing `@` to mention another session (2.1.232) reaches that
+session directly — it is the same act as `SendMessage`, governed by the same graph,
+and it does not look like a tool call while you are typing it. Every rule on this
+page binds it. A restriction written only against "`SendMessage`" reads as complete
+and silently exempts the surface that has the least friction of all.
+
 **The rules did not weaken — the FRICTION did, which makes them matter more.** Until
 2.1.232 a cross-session send to a bare name had to be confirmed with a ref, and that
 step sat in front of every message as an unplanned pause. Bare-name delivery and `@`
