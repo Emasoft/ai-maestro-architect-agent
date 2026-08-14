@@ -92,7 +92,12 @@ step that previously sat in front of a send. So the same rule now guards a cheap
 action, which makes stating it *more* load-bearing, not less. `offline`/`cloud`
 are new observable state the doc does not mention.
 
-## Acceptance criteria
+## Acceptance criteria (AS PLANNED — superseded; see "Acceptance criteria — final" below)
+
+> These boxes are left UNCHECKED deliberately: this is the plan as written before the
+> work, kept for comparison. The authoritative result is the **final** block further
+> down, which records one criterion as only PARTIALLY met. Do not read the unchecked
+> boxes here as outstanding work on a `complete` card.
 
 - [ ] GAP A's open question resolved from evidence (tool contract / empirical
       check), NOT from the changelog adjective alone — and the resolution recorded.
