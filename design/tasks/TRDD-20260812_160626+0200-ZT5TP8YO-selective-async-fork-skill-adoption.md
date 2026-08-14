@@ -3,7 +3,7 @@ trdd-id: ZT5TP8YO
 title: Adopt async fork skills selectively rather than banning them wholesale
 column: backburner
 created: 2026-08-12T16:06:26+0200
-updated: 2026-08-12T16:06:26+0200
+updated: 2026-08-14T13:36:47+0200
 current-owner: amaa-session
 task-type: feature
 scope: project
@@ -43,6 +43,35 @@ because auditing 26 callers for async-safety was out of that card's scope.
 So the present state is *explicit and consistent*, which is strictly better than
 the implicit state it replaced — and it is also almost certainly wrong for some
 subset of those 26.
+
+### 2026-08-14 — the placeholder EARNED its keep, and a surface distinction to not lose
+
+Claude Code **2.1.232** turned subagent forking on by default. **Nothing here
+moved**, because all 26 skills declare `background: false` rather than inheriting
+it. That is the first live test of the uniformity this card calls a placeholder,
+and it passed: the value of declaring explicitly is now measured, not argued.
+
+**Do not conflate the two fork surfaces — I had to separate them today and the
+naming actively invites the mistake:**
+
+```
+fork SKILLS      `context: fork` in a SKILL's frontmatter   default flipped in 2.1.218
+                 -> THIS card's subject; guarded by `background:` on all 26
+
+fork SUBAGENTS   `subagent_type: "fork"` on an Agent spawn  default flipped in 2.1.232
+                 -> NOT this card. Handled in TRDD-JKBVDN7G, which added a stance
+                    against forking the bundled sub-agents because a fork inherits
+                    the parent's full conversation, including unauthenticated
+                    inbound native-channel content.
+```
+
+A changelog line naming "forking" may be about either one. Check which mechanism it
+touches before concluding this card is affected — `JKBVDN7G` nearly mis-scoped on
+exactly that ambiguity.
+
+**This does not resolve the card.** The open question is unchanged: whether some
+subset of the 26 *should* be async. 2.1.232 supplies evidence that explicitness is
+the right posture, not evidence about which value each skill should hold.
 
 ## What this card must decide
 
