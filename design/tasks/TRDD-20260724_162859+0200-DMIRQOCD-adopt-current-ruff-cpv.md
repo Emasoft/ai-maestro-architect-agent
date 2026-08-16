@@ -3,7 +3,7 @@ trdd-id: DMIRQOCD
 title: Adopt current ruff and CPV deliberately then bump the gate pins
 column: todo
 created: 2026-07-24T16:28:59+0200
-updated: 2026-08-14T10:50:58+0200
+updated: 2026-08-16T16:44:07+0200
 current-owner: ai-maestro-architect-agent
 task-type: infra
 scope: project
@@ -383,6 +383,89 @@ implementation-commits: []
   time pressure and nothing is degrading while this waits. Do NOT let a future
   session read "todo" as licence to start applying findings: the finding counts
   on this card describe a gate that does not exist yet.
+
+- **2026-08-16 — DECIDED AND UNBLOCKED. The policy question is answered: NO, do not
+  adopt 0.16.3. The card's remaining value survives that refusal and is now costed.**
+  Authority: the USER granted decide-for-yourself on condition of verified facts plus
+  consulting the hub. Hub consulted (the `/Users/emanuelesabetta/ai-maestro` repo's
+  Claude — **not** the MANAGER agent; it cannot grant Tier-2/3 and said so). Its
+  ruling: ruff is **per-repo, mine**. It grepped `rules/`, `docs/GOVERNANCE-RULES.md`
+  and `~/.claude/rules/` for a fleet lint policy — **none exists**; the 3 hits are the
+  substring inside "T-r-u-f-f-leHog" ×2 and an aside in `never_use_sed.md`. So nothing
+  external constrains this either way.
+
+  **DECISION 1 — the version stays pinned at `ruff==0.15.20`. Reject "adopt current".**
+  Both gates are green, nothing is degrading, and this card already proved the pin is
+  hermetic while its proposed replacement was not. Adopting 0.16.3 buys 358 rules this
+  project never chose, ~242 of which (127 modernization + 98 tail + 17 RUF100) are
+  taste, not policy. YAGNI: a gate that is green and deterministic is finished.
+
+  **DECISION 2 — take the 107 fail-fast findings anyway, via `extend-select`, at the
+  CURRENT pin.** The card retired `select` (which REPLACES the defaults and was measured
+  wrong three times). `extend-select` ADDS to them, so none of the three traps apply —
+  the 413-rule default set is untouched, and only the named rules are added. The card
+  already reserved this exact instrument at (e) above.
+
+  **MEASURED at the pinned version before deciding, per this card's own N-rule** (report:
+  gitignored `reports/ruff-extend-select-measurement/`):
+
+  ```
+  uv run --with ruff==0.15.20 ruff check .                                -> All checks passed
+  ... --extend-select BLE001,S110,PLW1510,TRY004                          -> 107 findings
+  rules known to 0.15.20:  4 of 4      interaction/spillover: none (only these 4 codes fire)
+  ```
+
+  **The 107 reproduce EXACTLY under 0.15.20** (BLE001 47, PLW1510 49, S110 10, TRY004 1)
+  — identical to the 0.16.3 census. That is the load-bearing result: **the fail-fast
+  population was never the reason to upgrade.** Every previous entry on this card
+  measured it under 0.16.3 and so entangled it with the 358-rule question; it was
+  reachable at the pin the whole time. 31 files, and `scripts/publish.py` alone carries
+  45 of the 107.
+
+  **PLW1510 triage, all 49 sites classified by reading each call site:**
+
+  ```
+  RETURNCODE-INSPECTED  42   the inspection IS the fail-fast handling -> explicit check=False
+  IN-EXCEPT              0
+  FATAL                  0
+  UNSURE                 7   returncode never read, result.stdout used unconditionally
+  ```
+
+  The landmine control passed: `publish.py::detect_default_branch` (sites 277/285) came
+  out RETURNCODE-INSPECTED, and I verified both `return`s by hand rather than trusting
+  the classifier. `check=True` there would still break publishes on master-only repos.
+
+  **The 7 UNSURE are the real defects in this population, and they are a single repeated
+  shape** — e.g. `amaa_design_export.py:43` (verified by hand): `subprocess.run(...)` then
+  `return result.stdout.strip()`, so a failed child yields `""` and the caller reads it as
+  "no results". Duplicated verbatim in `amaa_design_lifecycle.py:70` and
+  `amaa_design_version.py:34`. One defect, three copies — fix at the shared shape, not
+  per-caller.
+
+- **NEXT ACTION (supersedes all above):** phased, each phase its own commit so a
+  regression is bisectable, and `extend-select` lands LAST as a ratchet — adding it
+  first would turn the release gate red for the whole burn-down.
+  1. `scripts/publish.py` alone (45 of 107, the gate's own file).
+  2. The 42 RETURNCODE-INSPECTED sites → explicit `check=False`. **Runtime no-op**
+     (`check=False` IS subprocess.run's default), so this is annotation, not behaviour
+     change: it silences PLW1510 honestly and documents that the following
+     `returncode` read is the handling.
+  3. The 7 UNSURE + the 47 BLE001 + 10 S110 + 1 TRY004 — judgment, per site. A
+     deliberate exception gets `# noqa` WITH a reason. Do NOT bulk-suppress: that
+     launders the exact defect the rule exists to catch.
+  4. Only when `--extend-select BLE001,S110,PLW1510,TRY004` reports zero, add those
+     four to a `[tool.ruff.lint] extend-select` in `pyproject.toml` and to the Step 3
+     invocation, so the policy can never drift back unmeasured.
+
+- **N — `extend-select` is not the retired `select`, and the distinction is the whole
+  decision.** `select` REPLACES ruff's defaults (narrower guts the gate by 92 %, broader
+  floods it by +663); `extend-select` leaves the 413 defaults intact and adds named
+  rules. The card retired one and reserved the other; conflating them would re-run all
+  three traps.
+
+- **N — a lint gate must not be added before its debt is paid.** Landing step 4 first
+  makes every publish fail until 107 findings are resolved. The ratchet goes on last,
+  when it costs nothing and only prevents regression.
 
 - **Durable artifacts:** the pin comments in `publish.py` (Step 4/5) and the two
   workflows are the load-bearing BUMP PROTOCOL; the CPV FP issue is the upstream
