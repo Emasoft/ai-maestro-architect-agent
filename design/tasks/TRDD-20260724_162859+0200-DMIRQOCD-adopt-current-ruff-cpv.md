@@ -3,7 +3,7 @@ trdd-id: DMIRQOCD
 title: Adopt current ruff and CPV deliberately then bump the gate pins
 column: todo
 created: 2026-07-24T16:28:59+0200
-updated: 2026-08-16T16:44:07+0200
+updated: 2026-08-16T16:59:36+0200
 current-owner: ai-maestro-architect-agent
 task-type: infra
 scope: project
@@ -466,6 +466,33 @@ implementation-commits: []
 - **N — a lint gate must not be added before its debt is paid.** Landing step 4 first
   makes every publish fail until 107 findings are resolved. The ratchet goes on last,
   when it costs nothing and only prevents regression.
+
+- **2026-08-16 — PHASE 1a LANDED, then the burn-down PAUSED. Both facts recorded here so
+  the card does not read as active work.**
+  - **Landed:** `aa118ea` — the 10 RETURNCODE-INSPECTED `subprocess.run` sites in
+    `scripts/publish.py` now state `check=False` explicitly. Runtime no-op (that IS the
+    default); it says the following `returncode` read is the handling. Each site verified
+    by reading its successor lines before editing. Measured after: default rule set (the
+    live Step 3 gate) **All checks passed**; `--extend-select PLW1510` on that file
+    **11 → 1**, the 1 being line 573, the known real defect held back for step 3.
+  - A guardrail comment was added at `run()` (~line 950): that wrapper has its OWN `check`
+    parameter, so the inner `check=False` invites a "fix" to `check=check` — which would
+    raise before the child's stdout/stderr are printed and swallow the diagnostic output
+    the wrapper exists to show. The param is honoured at the exit branch instead.
+  - **PAUSED, and by an external instruction, not by a blocker:** the USER's fleet
+    programme **TRDD-BRRJK57P** (hub repo `/Users/emanuelesabetta/ai-maestro`, relayed
+    2026-08-16 ~16:55) put every plugin session into a **discovery-only** phase — *fix
+    NOTHING; a fix during discovery destroys the evidence the remediation plan is built
+    from.* Steps 2–4 of the NEXT ACTION are therefore not started. This is a pause, not a
+    block: there is no `blocked-by:` to name, because nothing is preventing the work
+    except an instruction to sequence it later.
+  - **This card's remaining work is now ALSO an input to that programme's axis 4.** The
+    hub's framing: rather than answer "should we adopt 358 rules", report what the 107
+    findings ACTUALLY are — real defect vs style, with `file:line`. That split is being
+    produced under BRRJK57P and will land in `reports/plugin-self-audit/`. The real
+    defects become their own TRDDs in that programme's Phase 2 **whether or not this
+    project ever adopts the linter** — which is the right decoupling and retires the last
+    reason this card had to be answered as a yes/no on adoption.
 
 - **Durable artifacts:** the pin comments in `publish.py` (Step 4/5) and the two
   workflows are the load-bearing BUMP PROTOCOL; the CPV FP issue is the upstream
