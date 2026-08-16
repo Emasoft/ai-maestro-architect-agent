@@ -198,7 +198,7 @@ def detect_git_root() -> Path:
     """Find the git repository root (handles subfolder plugins)."""
     result = subprocess.run(
         ["git", "rev-parse", "--show-toplevel"],
-        capture_output=True, text=True, timeout=10,
+        capture_output=True, text=True, timeout=10, check=False,
     )
     if result.returncode != 0:
         print(f"{RED}✗ Not inside a git repository{NC}", file=sys.stderr)
@@ -245,7 +245,7 @@ def detect_marketplace(git_root: Path) -> dict:
     # Parse git remote URL
     result = subprocess.run(
         ["git", "-C", str(git_root), "remote", "get-url", "origin"],
-        capture_output=True, text=True, timeout=10,
+        capture_output=True, text=True, timeout=10, check=False,
     )
     if result.returncode == 0:
         url = result.stdout.strip()
@@ -276,7 +276,7 @@ def detect_default_branch(git_root: Path) -> str:
     """Detect the default branch (main or master)."""
     result = subprocess.run(
         ["git", "-C", str(git_root), "symbolic-ref", "refs/remotes/origin/HEAD"],
-        capture_output=True, text=True, timeout=10,
+        capture_output=True, text=True, timeout=10, check=False,
     )
     if result.returncode == 0:
         # refs/remotes/origin/main -> main
@@ -284,7 +284,7 @@ def detect_default_branch(git_root: Path) -> str:
     # Fallback: check if main exists
     result = subprocess.run(
         ["git", "-C", str(git_root), "rev-parse", "--verify", "origin/main"],
-        capture_output=True, text=True, timeout=10,
+        capture_output=True, text=True, timeout=10, check=False,
     )
     return "main" if result.returncode == 0 else "master"
 
@@ -745,7 +745,7 @@ def _sync_uv_lock(root: Path) -> tuple[bool, str]:
         return True, "pyproject.toml not found (uv.lock cannot be synced)"
     result = subprocess.run(
         ["uv", "lock"],
-        cwd=root, capture_output=True, text=True, timeout=300,
+        cwd=root, capture_output=True, text=True, timeout=300, check=False,
     )
     if result.returncode != 0:
         return False, f"uv lock failed (exit {result.returncode}): {result.stderr.strip()}"
@@ -791,7 +791,7 @@ def _update_cargo_toml(root: Path, new_version: str) -> tuple[bool, str]:
 
 def ensure_git_cliff_available() -> None:
     """Fail fast if git-cliff is not on PATH."""
-    result = subprocess.run(["git-cliff", "--version"], capture_output=True, text=True)
+    result = subprocess.run(["git-cliff", "--version"], capture_output=True, text=True, check=False)
     if result.returncode != 0:
         print(
             f"{RED}✗ git-cliff is not installed.{NC}\n"
@@ -908,7 +908,7 @@ def run_git_cliff(root: Path, new_version: str) -> str:
             "--unreleased",
             "--strip", "header",
         ],
-        cwd=root, capture_output=True, text=True, timeout=60,
+        cwd=root, capture_output=True, text=True, timeout=60, check=False,
     )
     if result.returncode != 0:
         print(
@@ -950,7 +950,11 @@ def ensure_cliff_gitignore(root: Path) -> None:
 def run(cmd: list[str], cwd: Path, *, check: bool = True) -> subprocess.CompletedProcess[str]:
     """Run a command, print it, stream output, and fail fast on error."""
     print(f"  $ {' '.join(cmd)}")
-    result = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, timeout=600)
+    # check=False is deliberate and NOT the same as this function's `check` param:
+    # subprocess must not raise here, so the child's stdout/stderr get printed below
+    # before we exit with its code. Passing check=check would raise on failure and
+    # swallow that output. The `check` param is honoured at the exit branch instead.
+    result = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, timeout=600, check=False)
     if result.stdout.strip():
         print(result.stdout.strip())
     if result.stderr.strip():
@@ -1561,7 +1565,7 @@ Examples:
     # plugin update check sees a new version available. If gh CLI is
     # missing or unauthenticated, the pipeline fails — no silent-skip.
     print(f"\n{BLUE}=== Step 14: Create GitHub release (mandatory) ==={NC}")
-    gh_check = subprocess.run(["gh", "--version"], capture_output=True, text=True)
+    gh_check = subprocess.run(["gh", "--version"], capture_output=True, text=True, check=False)
     if gh_check.returncode != 0:
         print(
             f"{RED}✗ gh CLI is not installed or not on PATH.{NC}\n"
@@ -1583,7 +1587,7 @@ Examples:
         ["gh", "release", "create", f"v{new_version}",
          "--title", f"v{new_version}",
          "--notes-file", str(notes_file)],
-        cwd=git_root, capture_output=True, text=True, timeout=120,
+        cwd=git_root, capture_output=True, text=True, timeout=120, check=False,
     )
     if gh_result.returncode != 0:
         print(
