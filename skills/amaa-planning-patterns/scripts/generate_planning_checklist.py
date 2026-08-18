@@ -3,7 +3,7 @@
 Generate a customized planning checklist for a project.
 
 Usage:
-    python generate-planning-checklist.py --project "MyProject" --phases 4 --output checklist.md
+    python generate_planning_checklist.py --project "MyProject" --phases 4 --output checklist.md
 
 Arguments:
     --project: Project name (required)
@@ -21,9 +21,10 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-# WHY: Dynamic path insertion allows importing shared utilities from skill directory
-SKILLS_DIR = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(SKILLS_DIR / "shared"))
+# WHY: the shared helpers live at repo-root lib/ — skills/shared never existed
+# (TRDD-WDM195GD); parents[3] of this file is the plugin root.
+LIB_DIR = Path(__file__).resolve().parents[3] / "lib"
+sys.path.insert(0, str(LIB_DIR))
 from cross_platform import (  # noqa: E402
     atomic_write_text,  # type: ignore[import-not-found]
 )
@@ -247,8 +248,8 @@ def main() -> None:
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python generate-planning-checklist.py --project "MyProject"
-  python generate-planning-checklist.py --project "MyProject" --phases 5 --output my-checklist.md
+  python generate_planning_checklist.py --project "MyProject"
+  python generate_planning_checklist.py --project "MyProject" --phases 5 --output my-checklist.md
         """,
     )
 

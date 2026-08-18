@@ -18,9 +18,6 @@ import sys
 from pathlib import Path
 from typing import Any
 
-SKILLS_DIR = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(SKILLS_DIR / "shared"))
-
 
 def get_plan_format() -> str:
     """Read the plan format template from resources."""

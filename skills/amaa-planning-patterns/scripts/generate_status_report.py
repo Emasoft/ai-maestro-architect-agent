@@ -16,10 +16,10 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, cast
 
-SKILLS_DIR = Path(__file__).parent.parent.parent
-# WHY: Insert shared directory into path to enable importing cross_platform module
-# which provides atomic_write_text for crash-safe file operations
-sys.path.insert(0, str(SKILLS_DIR / "shared"))
+# WHY: the shared helpers live at repo-root lib/ — skills/shared never existed
+# (TRDD-WDM195GD); parents[3] of this file is the plugin root.
+LIB_DIR = Path(__file__).resolve().parents[3] / "lib"
+sys.path.insert(0, str(LIB_DIR))
 from cross_platform import (  # noqa: E402
     atomic_write_text,  # type: ignore[import-not-found]
 )

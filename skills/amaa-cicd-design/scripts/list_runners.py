@@ -3,11 +3,11 @@
 List available GitHub Actions runners and their specifications.
 
 Usage:
-    python list-runners.py [--self-hosted] [--repo OWNER/REPO]
+    python list_runners.py [--self-hosted] [--repo OWNER/REPO]
 
 Examples:
-    python list-runners.py              # List GitHub-hosted runners
-    python list-runners.py --self-hosted # List self-hosted runners
+    python list_runners.py              # List GitHub-hosted runners
+    python list_runners.py --self-hosted # List self-hosted runners
 """
 
 from __future__ import annotations

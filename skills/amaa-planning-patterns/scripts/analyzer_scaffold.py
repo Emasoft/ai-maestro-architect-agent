@@ -12,8 +12,10 @@ from pathlib import Path
 from textwrap import dedent
 from typing import Dict
 
-SKILLS_DIR = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(SKILLS_DIR / "shared"))
+# WHY: the shared helpers live at repo-root lib/ — skills/shared never existed
+# (TRDD-WDM195GD); parents[3] of this file is the plugin root.
+LIB_DIR = Path(__file__).resolve().parents[3] / "lib"
+sys.path.insert(0, str(LIB_DIR))
 
 from cross_platform import (  # noqa: E402
     atomic_write_text,  # type: ignore[import-not-found]
@@ -244,13 +246,33 @@ WHY: Provides automated analysis for {self.category} concerns, enabling
 
 import argparse
 import json
+import shutil
 import sys
+import tempfile
 from pathlib import Path
 from typing import Dict, Any, Optional
 
-SKILLS_DIR = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(SKILLS_DIR / 'shared'))
-from cross_platform import atomic_write_json, atomic_write_text
+# Inlined from the plugin's lib/cross_platform.py so this generated file is standalone (TRDD-WDM195GD)
+def atomic_write_json(path: Path, data: Any, indent: int = 2) -> None:
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.NamedTemporaryFile(
+        mode="w", dir=path.parent, suffix=".tmp", delete=False
+    ) as tmp:
+        json.dump(data, tmp, indent=indent)
+        tmp_path = Path(tmp.name)
+    shutil.move(str(tmp_path), str(path))
+
+
+def atomic_write_text(path: Path, content: str) -> None:
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.NamedTemporaryFile(
+        mode="w", dir=path.parent, suffix=".tmp", delete=False
+    ) as tmp:
+        tmp.write(content)
+        tmp_path = Path(tmp.name)
+    shutil.move(str(tmp_path), str(path))
 
 
 class {self.class_name}:

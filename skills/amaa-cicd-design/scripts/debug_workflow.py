@@ -4,11 +4,11 @@ Debug script for GitHub Actions workflows.
 Simulates workflow execution locally and identifies issues.
 
 Usage:
-    python debug-workflow.py [workflow-file] [--job JOB_NAME] [--verbose]
+    python debug_workflow.py [workflow-file] [--job JOB_NAME] [--verbose]
 
 Examples:
-    python debug-workflow.py .github/workflows/ci.yml
-    python debug-workflow.py .github/workflows/release.yml --job build
+    python debug_workflow.py .github/workflows/ci.yml
+    python debug_workflow.py .github/workflows/release.yml --job build
 """
 
 from __future__ import annotations

@@ -3,8 +3,8 @@
 Generate an empty risk register template.
 
 Usage:
-    python generate-risk-register.py --template markdown --output risks.md
-    python generate-risk-register.py --template csv --risks 25 --output risks.csv
+    python generate_risk_register.py --template markdown --output risks.md
+    python generate_risk_register.py --template csv --risks 25 --output risks.csv
 
 Arguments:
     --template: Format (markdown, csv, json) (default: markdown)
@@ -22,8 +22,10 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-SKILLS_DIR = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(SKILLS_DIR / "shared"))
+# WHY: the shared helpers live at repo-root lib/ — skills/shared never existed
+# (TRDD-WDM195GD); parents[3] of this file is the plugin root.
+LIB_DIR = Path(__file__).resolve().parents[3] / "lib"
+sys.path.insert(0, str(LIB_DIR))
 from cross_platform import (  # type: ignore[import-not-found]  # noqa: E402
     atomic_write_json,
     atomic_write_text,
@@ -199,10 +201,10 @@ def main() -> None:
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python generate-risk-register.py
-  python generate-risk-register.py --template markdown --risks 30 --output risks.md
-  python generate-risk-register.py --template csv --output project-risks.csv
-  python generate-risk-register.py --template json --risks 20
+  python generate_risk_register.py
+  python generate_risk_register.py --template markdown --risks 30 --output risks.md
+  python generate_risk_register.py --template csv --output project-risks.csv
+  python generate_risk_register.py --template json --risks 20
         """,
     )
 

@@ -10,13 +10,13 @@ FAIL-FAST APPROACH: No error handling - exits immediately on any error.
 
 Usage:
     # Generate from scratch
-    python generate-task-tracker.py --phases 4 --tasks-per-phase 8 --output tasks.csv
+    python generate_task_tracker.py --phases 4 --tasks-per-phase 8 --output tasks.csv
 
     # Parse from existing plan
-    python generate-task-tracker.py --from-plan plans/GH-123-feature.md --output tracker.json
+    python generate_task_tracker.py --from-plan plans/GH-123-feature.md --output tracker.json
 
     # Validate plan structure only
-    python generate-task-tracker.py --from-plan plans/GH-123-feature.md --validate
+    python generate_task_tracker.py --from-plan plans/GH-123-feature.md --validate
 
 Arguments:
     --phases: Number of phases for template generation
@@ -37,8 +37,10 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-SKILLS_DIR = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(SKILLS_DIR / "shared"))
+# WHY: the shared helpers live at repo-root lib/ — skills/shared never existed
+# (TRDD-WDM195GD); parents[3] of this file is the plugin root.
+LIB_DIR = Path(__file__).resolve().parents[3] / "lib"
+sys.path.insert(0, str(LIB_DIR))
 from cross_platform import (  # type: ignore[import-not-found]  # noqa: E402
     atomic_write_json,
     atomic_write_text,
@@ -457,16 +459,16 @@ def main() -> None:
         epilog="""
 Examples:
   # Generate empty template
-  python generate-task-tracker.py --phases 4 --tasks-per-phase 8 --output tasks.csv
+  python generate_task_tracker.py --phases 4 --tasks-per-phase 8 --output tasks.csv
 
   # Parse from existing plan
-  python generate-task-tracker.py --from-plan plans/GH-123-feature.md --output tracker.json
+  python generate_task_tracker.py --from-plan plans/GH-123-feature.md --output tracker.json
 
   # Validate plan structure
-  python generate-task-tracker.py --from-plan plans/GH-123-feature.md --validate
+  python generate_task_tracker.py --from-plan plans/GH-123-feature.md --validate
 
   # Generate with default settings
-  python generate-task-tracker.py --output my-tasks.csv
+  python generate_task_tracker.py --output my-tasks.csv
         """,
     )
 

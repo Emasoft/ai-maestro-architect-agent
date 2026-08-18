@@ -4,12 +4,12 @@ Setup GitHub repository secrets for CI/CD.
 Interactive script to configure required secrets.
 
 Usage:
-    python setup-secrets.py [--repo OWNER/REPO] [--env ENVIRONMENT]
+    python setup_secrets.py [--repo OWNER/REPO] [--env ENVIRONMENT]
 
 Examples:
-    python setup-secrets.py                    # Current repo
-    python setup-secrets.py --repo myorg/myapp # Specific repo
-    python setup-secrets.py --env production   # Environment secrets
+    python setup_secrets.py                    # Current repo
+    python setup_secrets.py --repo myorg/myapp # Specific repo
+    python setup_secrets.py --env production   # Environment secrets
 """
 
 from __future__ import annotations

@@ -3,11 +3,11 @@
 Validate GitHub Actions workflow YAML files.
 
 Usage:
-    python validate-yaml.py [path]
+    python validate_yaml.py [path]
 
 Examples:
-    python validate-yaml.py                           # Validate all workflows
-    python validate-yaml.py .github/workflows/ci.yml  # Validate specific file
+    python validate_yaml.py                           # Validate all workflows
+    python validate_yaml.py .github/workflows/ci.yml  # Validate specific file
 """
 
 from __future__ import annotations
