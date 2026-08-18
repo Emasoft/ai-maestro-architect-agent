@@ -28,19 +28,19 @@ Use this operation when:
 
 ## Prerequisites
 
-- Design document is in APPROVED or IMPLEMENTING state
+- Design document is in APPROVED or IMPLEMENTED state
 - Implementation tasks have been created and linked
 - Access to GitHub Issues or task tracking system
 - Understanding of the design's module breakdown
 
 ## Procedure
 
-### Step 1: Update State to IMPLEMENTING
+### Step 1: Update State to IMPLEMENTED
 
 When implementation begins, transition the design state:
 
 ```bash
-python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition IMPLEMENTING
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition IMPLEMENTED
 ```
 
 ### Step 2: Monitor Implementation Progress
@@ -104,7 +104,7 @@ python scripts/amaa_design_lifecycle.py --uuid <UUID> --action generate-report
 
 Copy this checklist and track your progress:
 
-- [ ] Transition state to IMPLEMENTING when work begins
+- [ ] Transition state to IMPLEMENTED when work begins
 - [ ] Monitor task completion progress weekly
 - [ ] Document any design deviations immediately
 - [ ] Update requirements traceability matrix
@@ -119,8 +119,8 @@ Copy this checklist and track your progress:
 
 ```bash
 # Step 1: Begin implementation
-python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --transition IMPLEMENTING
-# Output: State transitioned: APPROVED -> IMPLEMENTING
+python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --transition IMPLEMENTED
+# Output: State transitioned: APPROVED -> IMPLEMENTED
 
 # Step 2: Check progress (weekly)
 python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action check-progress
@@ -186,7 +186,7 @@ python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --act
 
 | Error | Cause | Resolution |
 |-------|-------|------------|
-| Invalid state transition | Design not in APPROVED state | Must be APPROVED before IMPLEMENTING |
+| Invalid state transition | Design not in APPROVED state | Must be APPROVED before IMPLEMENTED |
 | Progress check failed | No linked tasks found | Create and link implementation tasks first |
 | Traceability update failed | Invalid requirement ID | Verify requirement exists in requirements document |
 | Deviation not recorded | Missing required fields | Provide description, reason, and section |

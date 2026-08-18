@@ -38,24 +38,38 @@ Use this operation when:
 Design documents follow this state machine:
 
 ```
-DRAFT → REVIEW → APPROVED → IMPLEMENTING → COMPLETED → ARCHIVED
-         ↑ ↓                     │
-         │ DRAFT (revision)      │
-         └──── REVIEW ◄──────────┘  (mid-dev redesign loop)
+DRAFT → REVIEW → APPROVED → IMPLEMENTED
+  │        │         │           │
+  ▼        ▼         ▼           ▼
+DEPRECATED (terminal, from DRAFT/REVIEW/APPROVED/IMPLEMENTED)
+                      │           │
+                      ▼           ▼
+              SUPERSEDED (terminal, from APPROVED/IMPLEMENTED)
+
+REVIEW ◄──────────────────────────┘  (mid-dev redesign loop: IMPLEMENTED → REVIEW)
+
+IMPLEMENTED / DEPRECATED / SUPERSEDED ──(archive subcommand)──► ARCHIVED (terminal)
 ```
 
 **State Definitions:**
 
 | State | Description | Allowed Transitions |
 |-------|-------------|---------------------|
-| DRAFT | Initial creation, work in progress | REVIEW |
-| REVIEW | Under review by stakeholders | APPROVED, DRAFT |
-| APPROVED | Ready for implementation | IMPLEMENTING |
-| IMPLEMENTING | Being implemented | COMPLETED, REVIEW |
-| COMPLETED | Fully implemented | ARCHIVED |
+| DRAFT | Initial creation, work in progress | REVIEW, DEPRECATED |
+| REVIEW | Under review by stakeholders | DRAFT, APPROVED, DEPRECATED |
+| APPROVED | Ready for implementation | IMPLEMENTED, DEPRECATED, SUPERSEDED |
+| IMPLEMENTED | Fully implemented | REVIEW (redesign loop), DEPRECATED, SUPERSEDED |
+| DEPRECATED | No longer relevant (terminal) | None |
+| SUPERSEDED | Replaced by another design (terminal) | None |
 | ARCHIVED | Historical reference (terminal) | None |
 
-**The redesign loop (`IMPLEMENTING → REVIEW`)** is the re-entry edge that makes
+**ARCHIVED is reached only via the `archive` subcommand** (`amaa_design_lifecycle.py
+archive`), never via `--transition`, and only from IMPLEMENTED, DEPRECATED, or
+SUPERSEDED (or `--force` to override). It has no edge in the transition table above
+because it is not part of the ordinary transition machine — the archive subcommand
+is its own guarded entry point that also moves the file.
+
+**The redesign loop (`IMPLEMENTED → REVIEW`)** is the re-entry edge that makes
 mid-dev redesign possible. When a design flaw surfaces *after* implementation
 starts — through the task-comprehension handshake, the in-dev issue dialog, or
 the pre-PR gate — ORCH relays it to ARCH (R6 v3 direct edge), and ARCH pulls the
@@ -132,28 +146,18 @@ python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition APPROVED
 python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition DRAFT
 ```
 
-### APPROVED to IMPLEMENTING
+### APPROVED to IMPLEMENTED
 
 **Prerequisites:**
 - Implementation tasks created
 - Resources allocated
+- All requirements implemented, testing passed
 
 ```bash
-python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition IMPLEMENTING
+python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition IMPLEMENTED
 ```
 
-### IMPLEMENTING to COMPLETED
-
-**Prerequisites:**
-- All tasks complete
-- All requirements implemented
-- Testing passed
-
-```bash
-python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition COMPLETED
-```
-
-### IMPLEMENTING to REVIEW (Redesign loop)
+### IMPLEMENTED to REVIEW (Redesign loop)
 
 **When to use:** A design flaw surfaced *after* implementation started — raised
 by a MEMBER during the task-comprehension handshake, the in-dev issue dialog, or
@@ -166,21 +170,23 @@ implementation can correctly continue.
 - The redesign intent is recorded (which requirement/assumption was wrong).
 
 **On re-entry, ARCH either:**
-- revises this design in place (then REVIEW → APPROVED → IMPLEMENTING again), or
-- splits/groups it into new TRDDs (this design may become `superseded`).
+- revises this design in place (then REVIEW → APPROVED → IMPLEMENTED again), or
+- splits/groups it into new TRDDs (this design may become `SUPERSEDED`).
 
 ```bash
 python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition REVIEW
 ```
 
-### COMPLETED to ARCHIVED
+### IMPLEMENTED to ARCHIVED (archive subcommand)
 
 **Prerequisites:**
 - Completion report generated
 - Stakeholders notified
+- Only reachable via the `archive` subcommand — not `--transition` — from
+  IMPLEMENTED, DEPRECATED, or SUPERSEDED (or `--force` to override)
 
 ```bash
-python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition ARCHIVED
+python scripts/amaa_design_lifecycle.py archive --uuid <UUID>
 ```
 
 ## Checklist
@@ -213,16 +219,12 @@ python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --tran
 # Output: State transitioned: REVIEW -> APPROVED
 
 # Begin implementation
-python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition IMPLEMENTING
-# Output: State transitioned: APPROVED -> IMPLEMENTING
+python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition IMPLEMENTED
+# Output: State transitioned: APPROVED -> IMPLEMENTED
 
-# Implementation complete
-python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition COMPLETED
-# Output: State transitioned: IMPLEMENTING -> COMPLETED
-
-# Archive for history
-python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition ARCHIVED
-# Output: State transitioned: COMPLETED -> ARCHIVED (terminal state)
+# Archive for history (archive subcommand, not --transition)
+python scripts/amaa_design_lifecycle.py archive --uuid design-api-20260130-abc123
+# Output: State transitioned: IMPLEMENTED -> ARCHIVED (terminal state)
 ```
 
 ### Example: Revision After Review
@@ -244,17 +246,17 @@ python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --tran
 ### Example: Mid-dev Redesign (the redesign loop)
 
 ```bash
-# Design is IMPLEMENTING; a MEMBER surfaced a design flaw via ORCH
+# Design is IMPLEMENTED; a MEMBER surfaced a design flaw via ORCH
 python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --action check-state
-# Output: Current state: IMPLEMENTING
+# Output: Current state: IMPLEMENTED
 
 # Pull the design back to REVIEW to redesign
 python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition REVIEW
-# Output: State transitioned: IMPLEMENTING -> REVIEW (redesign loop)
+# Output: State transitioned: IMPLEMENTED -> REVIEW (redesign loop)
 
 # Revise the design, re-approve, resume implementation
 python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition APPROVED
-python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition IMPLEMENTING
+python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --transition IMPLEMENTED
 ```
 
 ### Example: Invalid Transition Error
@@ -269,16 +271,19 @@ python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --tran
 
 ## State Transition Matrix
 
-| From State | To DRAFT | To REVIEW | To APPROVED | To IMPLEMENTING | To COMPLETED | To ARCHIVED |
-|------------|----------|-----------|-------------|-----------------|--------------|-------------|
-| DRAFT | - | YES | NO | NO | NO | NO |
-| REVIEW | YES | - | YES | NO | NO | NO |
-| APPROVED | NO | NO | - | YES | NO | NO |
-| IMPLEMENTING | NO | YES | NO | - | YES | NO |
-| COMPLETED | NO | NO | NO | NO | - | YES |
-| ARCHIVED | NO | NO | NO | NO | NO | - |
+| From State | To DRAFT | To REVIEW | To APPROVED | To IMPLEMENTED | To DEPRECATED | To SUPERSEDED | To ARCHIVED |
+|------------|----------|-----------|-------------|-----------------|----------------|----------------|-------------|
+| DRAFT | - | YES | NO | NO | YES | NO | NO |
+| REVIEW | YES | - | YES | NO | YES | NO | NO |
+| APPROVED | NO | NO | - | YES | YES | YES | NO |
+| IMPLEMENTED | NO | YES | NO | - | YES | YES | archive-only |
+| DEPRECATED | NO | NO | NO | NO | - | NO | archive-only |
+| SUPERSEDED | NO | NO | NO | NO | NO | - | archive-only |
+| ARCHIVED | NO | NO | NO | NO | NO | NO | - |
 
-`IMPLEMENTING → REVIEW` is the redesign-loop re-entry edge (see the rule above).
+`IMPLEMENTED → REVIEW` is the redesign-loop re-entry edge (see the rule above).
+`archive-only` means the transition is reachable exclusively through the
+`archive` subcommand (or `--force`), never through `--transition`.
 
 ## Error Handling
 
@@ -295,6 +300,6 @@ python scripts/amaa_design_lifecycle.py --uuid design-api-20260130-abc123 --tran
 - [op-create-design-document.md](op-create-design-document.md) - Initial DRAFT state
 - [op-submit-design-review.md](op-submit-design-review.md) - DRAFT to REVIEW
 - [op-approve-design.md](op-approve-design.md) - REVIEW to APPROVED
-- [op-track-implementation.md](op-track-implementation.md) - APPROVED to IMPLEMENTING
-- [op-accept-redesign-request.md](op-accept-redesign-request.md) - IMPLEMENTING to REVIEW (redesign loop)
-- [op-archive-design.md](op-archive-design.md) - COMPLETED to ARCHIVED
+- [op-track-implementation.md](op-track-implementation.md) - APPROVED to IMPLEMENTED
+- [op-accept-redesign-request.md](op-accept-redesign-request.md) - IMPLEMENTED to REVIEW (redesign loop)
+- [op-archive-design.md](op-archive-design.md) - IMPLEMENTED/DEPRECATED/SUPERSEDED to ARCHIVED

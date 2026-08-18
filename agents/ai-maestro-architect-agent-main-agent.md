@@ -495,7 +495,7 @@ relays the decision back down through AMCOS to you.
 
 > **This is NOT the same as your design-document lifecycle.** Your own design
 > artifacts (in `docs_dev/design/` and `docs/design/`) run the
-> DRAFT → REVIEW → APPROVED → IMPLEMENTING → COMPLETED → ARCHIVED state
+> DRAFT → REVIEW → APPROVED → IMPLEMENTED → ARCHIVED state
 > machine — that is a *different gate*. The two folders and tiers below govern
 > the **project-wide per-TRDD** `proposal → planned` approval at the project
 > root; they do not replace, and do not collide with, your design-artifact

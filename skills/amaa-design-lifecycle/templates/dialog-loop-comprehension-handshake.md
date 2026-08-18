@@ -48,7 +48,7 @@ The MEMBER MUST answer every question before coding starts.
 - **Implementation-level open items** → ORCH answers directly; loop closes.
 - **Design-level open item (a TRDD/design assumption is wrong or unbuildable)**
   → ORCH relays to ARCH. ARCH classifies and, if it's a genuine design flaw,
-  drives the `IMPLEMENTING → REVIEW` redesign loop (revise the TRDD or author
+  drives the `IMPLEMENTED → REVIEW` redesign loop (revise the TRDD or author
   new ones via split/group). The MEMBER does NOT improvise around it and does
   NOT start until the design is corrected and re-approved.
 

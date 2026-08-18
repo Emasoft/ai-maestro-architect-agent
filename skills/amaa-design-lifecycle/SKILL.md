@@ -11,7 +11,7 @@ user-invocable: false
 
 ## Overview
 
-Manages the complete lifecycle of design documents: creation, review, approval, implementation tracking, and archival. Enforces valid state transitions (DRAFT->REVIEW->APPROVED->IMPLEMENTING->COMPLETED->ARCHIVED) plus the redesign-loop re-entry edge `IMPLEMENTING->REVIEW` (so a design flaw surfaced mid-dev can be pulled back and revised), and generates handoff documents for implementers.
+Manages the complete lifecycle of design documents: creation, review, approval, implementation tracking, and archival. Enforces valid state transitions (DRAFT->REVIEW->APPROVED->IMPLEMENTED->ARCHIVED, plus DEPRECATED/SUPERSEDED as terminal off-ramps) plus the redesign-loop re-entry edge `IMPLEMENTED->REVIEW` (so a design flaw surfaced mid-dev can be pulled back and revised), and generates handoff documents for implementers.
 
 ## Checklist
 
@@ -27,7 +27,7 @@ Copy this checklist and track your progress:
 - [ ] Create handoff document for AMOA
 - [ ] Report completion to AMCOS
 - [ ] Track implementation progress
-- [ ] If a design flaw surfaces mid-dev (relayed by ORCH): run the redesign loop (IMPLEMENTING->REVIEW), revise or split/group, re-approve
+- [ ] If a design flaw surfaces mid-dev (relayed by ORCH): run the redesign loop (IMPLEMENTED->REVIEW), revise or split/group, re-approve
 - [ ] Archive when complete (state: ARCHIVED)
 
 ## Prerequisites
@@ -70,7 +70,7 @@ Output: docs_dev/design/{requirements,architecture,handoff-<uuid>}.md
 
 | Error | Solution |
 |-------|----------|
-| Invalid state transition | Follow valid path: DRAFT->REVIEW->APPROVED->IMPLEMENTING->COMPLETED->ARCHIVED, plus the redesign re-entry IMPLEMENTING->REVIEW |
+| Invalid state transition | Follow valid path: DRAFT->REVIEW->APPROVED->IMPLEMENTED->ARCHIVED (archive subcommand from IMPLEMENTED/DEPRECATED/SUPERSEDED), plus the redesign re-entry IMPLEMENTED->REVIEW |
 | Missing UUID | Generate UUID before registration |
 | Index conflict | Use unique timestamp-based UUIDs |
 | Unresolved review comments | Resolve all comments before approval |

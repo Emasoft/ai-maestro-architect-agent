@@ -19,7 +19,7 @@ A MEMBER surfaced a design problem *after* implementation started — through on
 of the three dialog loops (task-comprehension handshake, in-dev issue dialog, or
 pre-PR gate) — and ORCH relayed it to ARCH. Use this operation to decide what to
 do with the surfaced issue and, when it is a genuine design flaw, to drive the
-`IMPLEMENTING → REVIEW` redesign loop.
+`IMPLEMENTED → REVIEW` redesign loop.
 
 This is the ARCHITECT's half of the loop. The MEMBER never edits the design and
 never improvises around the flaw; the issue comes to ARCH and ARCH owns the
@@ -27,7 +27,7 @@ design surface (single-writer-per-domain).
 
 ## Prerequisites
 
-- The design document is currently in `IMPLEMENTING` (or `approved`).
+- The design document is currently in `IMPLEMENTED` (or `approved`).
 - ORCH has relayed a concrete description of the surfaced issue (which
   requirement, assumption, interface, or sequencing step is wrong), per R6 v3
   (within-team ORCH↔ARCH is a direct edge; MANAGER is not in this loop).
@@ -40,7 +40,7 @@ design surface (single-writer-per-domain).
 |---|---|---|
 | **Implementation question** | The design is sound; the MEMBER needs clarification on *how* | Answer in the dialog. **No state change.** |
 | **Genuine design flaw** | A requirement/assumption/interface in the design is wrong or unbuildable | Drive the redesign loop (Step 2). |
-| **Scope gap** | The design is correct but incomplete — a prerequisite (NPT) or effect (EHT) was missed | Author the missing TRDD(s); the parent may stay `IMPLEMENTING` if unblocked, else re-enter REVIEW. |
+| **Scope gap** | The design is correct but incomplete — a prerequisite (NPT) or effect (EHT) was missed | Author the missing TRDD(s); the parent may stay `IMPLEMENTED` if unblocked, else re-enter REVIEW. |
 
 Only a genuine design flaw (or a scope gap that invalidates the current design)
 re-enters REVIEW. Do not bounce the design to REVIEW for a question you can
@@ -50,7 +50,7 @@ answer in one message.
 
 ```bash
 python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition REVIEW
-# Output: State transitioned: IMPLEMENTING -> REVIEW (redesign loop)
+# Output: State transitioned: IMPLEMENTED -> REVIEW (redesign loop)
 ```
 
 Record in the design body WHY it re-entered REVIEW (which assumption was wrong)
@@ -59,7 +59,7 @@ so the revision history is auditable.
 ### Step 3: Revise in place OR split/group into new TRDDs
 
 - **Revise in place** when the flaw is local: edit the design, then
-  REVIEW → APPROVED → IMPLEMENTING again. Implementation resumes against the
+  REVIEW → APPROVED → IMPLEMENTED again. Implementation resumes against the
   corrected design.
 - **Split/group** when the flaw means the work should be re-decomposed: author
   the new TRDD(s) (1→N split or N→1 group per the TRDD rules), set this design's
@@ -82,7 +82,7 @@ signals the redesign is complete.
 
 ## Related Operations
 
-- [op-manage-state-transitions.md](op-manage-state-transitions.md) - the `IMPLEMENTING → REVIEW` edge
+- [op-manage-state-transitions.md](op-manage-state-transitions.md) - the `IMPLEMENTED → REVIEW` edge
 - [op-submit-design-review.md](op-submit-design-review.md) - REVIEW mechanics
 - [op-approve-design.md](op-approve-design.md) - re-approval after revision
 

@@ -36,7 +36,7 @@ MEMBER open the PR / notify INT.
 |---|---|---|
 | **Cleared** | criteria met, tests green, effects handled | MEMBER opens PR / notifies INT (`dev → testing`) |
 | **Not yet** | a criterion unmet, tests failing, an EHT open | MEMBER returns to `dev`; loop B (in-dev issue) if blocked |
-| **Design concern** | the "done" work reveals the design was wrong | ORCH relays to ARCH → redesign loop (`IMPLEMENTING → REVIEW`) |
+| **Design concern** | the "done" work reveals the design was wrong | ORCH relays to ARCH → redesign loop (`IMPLEMENTED → REVIEW`) |
 
 ## Resolution
 

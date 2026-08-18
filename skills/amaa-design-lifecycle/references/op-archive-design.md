@@ -27,7 +27,7 @@ Use this operation when:
 
 ## Prerequisites
 
-- Design document is in IMPLEMENTING or COMPLETED state
+- Design document is in IMPLEMENTED, DEPRECATED, or SUPERSEDED state
 - All implementation tasks are complete
 - Verification testing has passed
 - No outstanding deviations require resolution
@@ -47,15 +47,7 @@ This checks:
 - All tasks are marked complete
 - No blocking issues remain
 
-### Step 2: Update State to COMPLETED
-
-Transition the design from IMPLEMENTING to COMPLETED:
-
-```bash
-python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition COMPLETED
-```
-
-### Step 3: Create Completion Report
+### Step 2: Create Completion Report
 
 Generate a final report documenting the implementation:
 
@@ -69,12 +61,13 @@ The report includes:
 - Implementation timeline
 - Lessons learned
 
-### Step 4: Archive to Historical Folder
+### Step 3: Archive to Historical Folder
 
-Move the design document to the archive:
+The `archive` subcommand is the only way to reach ARCHIVED — never `--transition`.
+It transitions the state and moves the document in one step:
 
 ```bash
-python scripts/amaa_design_lifecycle.py --uuid <UUID> --action archive
+python scripts/amaa_design_lifecycle.py archive --uuid <UUID> --reason "Implementation complete"
 ```
 
 This:
@@ -82,15 +75,7 @@ This:
 - Updates the design index with archived status
 - Preserves all history and metadata
 
-### Step 5: Update Design Index
-
-Ensure the design index reflects the archived status:
-
-```bash
-python scripts/amaa_design_lifecycle.py --uuid <UUID> --transition ARCHIVED
-```
-
-### Step 6: Final State - ARCHIVED
+### Step 4: Final State - ARCHIVED
 
 The design is now in terminal ARCHIVED state. It serves as:
 - Historical reference
@@ -104,12 +89,9 @@ Copy this checklist and track your progress:
 - [ ] Verify all requirements are implemented
 - [ ] Confirm all tasks are complete
 - [ ] Run final verification: `--action verify-completion`
-- [ ] Transition to COMPLETED state
 - [ ] Generate completion report
 - [ ] Review completion report with stakeholders
-- [ ] Archive design document to `completed/` folder
-- [ ] Transition to ARCHIVED state
-- [ ] Update design index
+- [ ] Archive design document via the `archive` subcommand (moves to `completed/` and transitions to ARCHIVED)
 - [ ] Notify stakeholders of completion
 
 ## Examples
@@ -124,23 +106,16 @@ python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --act
 # Requirements: 4/4 implemented (100%)
 # Tasks: 4/4 complete (100%)
 # Deviations: 2 documented and approved
-# Status: READY FOR COMPLETION
+# Status: READY FOR ARCHIVAL
 
-# Step 2: Transition to COMPLETED
-python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --transition COMPLETED
-# Output: State transitioned: IMPLEMENTING -> COMPLETED
-
-# Step 3: Create completion report
+# Step 2: Create completion report
 python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action create-completion-report
 # Output: Completion report saved to docs_dev/design/completed/design-auth-20260130-abc123-report.md
 
-# Step 4: Archive
-python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --action archive
-# Output: Design archived to docs_dev/design/completed/design-auth-20260130-abc123.md
-
-# Step 5: Final state
-python scripts/amaa_design_lifecycle.py --uuid design-auth-20260130-abc123 --transition ARCHIVED
-# Output: State transitioned: COMPLETED -> ARCHIVED (terminal state)
+# Step 3: Archive (the archive subcommand — only reachable from IMPLEMENTED/DEPRECATED/SUPERSEDED)
+python scripts/amaa_design_lifecycle.py archive --uuid design-auth-20260130-abc123 --reason "Implementation complete"
+# Output: State transitioned: IMPLEMENTED -> ARCHIVED (terminal state)
+# Design archived to docs_dev/design/completed/design-auth-20260130-abc123.md
 ```
 
 ### Example: Completion Report Format
@@ -197,7 +172,7 @@ Total Duration: 21 days
 |-------|-------|------------|
 | Verification failed | Outstanding requirements | Complete all requirements before archival |
 | Incomplete tasks | Tasks still in progress | Finish all implementation tasks |
-| Invalid state transition | Design not in IMPLEMENTING state | Must be IMPLEMENTING before COMPLETED |
+| Invalid state transition | Design not in IMPLEMENTED/DEPRECATED/SUPERSEDED state | Must reach IMPLEMENTED (or DEPRECATED/SUPERSEDED) before archiving |
 | Archive failed | Permission denied | Check write access to completed/ directory |
 | Report generation failed | Missing data | Ensure all tracking data is present |
 

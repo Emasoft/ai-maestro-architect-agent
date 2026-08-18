@@ -16,7 +16,7 @@ operation: query-kanban-progress
 
 ## When to Use
 
-Trigger this operation when the architect wants to SEE how the orchestrator (AMOA) broke down a design epic and track implementation progress — read-only visibility into an epic's child tasks across the 14-stage pipeline. Use it after handing off a design (with its `aimaestro_task_id` epic), during IMPLEMENTING / tracking, or before a redesign decision.
+Trigger this operation when the architect wants to SEE how the orchestrator (AMOA) broke down a design epic and track implementation progress — read-only visibility into an epic's child tasks across the 14-stage pipeline. Use it after handing off a design (with its `aimaestro_task_id` epic), while the design is IMPLEMENTED / under tracking, or before a redesign decision.
 
 This is READ-ONLY: it never creates, moves, or closes tasks.
 

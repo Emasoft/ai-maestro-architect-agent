@@ -41,9 +41,10 @@ _DEFAULT_STATUS_LABELS = {
     "draft": "status:draft",
     "review": "status:review",
     "approved": "status:approved",
-    "implementing": "status:implementing",
+    # WHY: only the states amaa_design_lifecycle.VALID_STATUSES can produce are
+    # mapped — the phantom "implementing"/"completed" states existed in docs
+    # only, never in the machine, so their labels were unreachable (TRDD-QW4ISL8Z).
     "implemented": "status:implemented",
-    "completed": "status:completed",
     "deprecated": "status:deprecated",
     "superseded": "status:superseded",
     "archived": "status:archived",
@@ -87,9 +88,7 @@ STATUS_DESCRIPTIONS = {
     "draft": "Design is being drafted",
     "review": "Design is under review",
     "approved": "Design has been approved for implementation",
-    "implementing": "Design is being implemented",
     "implemented": "Design implementation is complete",
-    "completed": "Design lifecycle is complete",
     "deprecated": "Design has been deprecated",
     "superseded": "Design has been superseded by a newer version",
     "archived": "Design has been archived",

@@ -33,7 +33,7 @@ COS at the team boundary).
 
 | Issue type | ORCH routes to | Then |
 |---|---|---|
-| **Design flaw** (a TRDD/design assumption is wrong) | **ARCH** | ARCH runs [op-accept-redesign-request.md](../references/op-accept-redesign-request.md); may trigger `IMPLEMENTING → REVIEW` |
+| **Design flaw** (a TRDD/design assumption is wrong) | **ARCH** | ARCH runs [op-accept-redesign-request.md](../references/op-accept-redesign-request.md); may trigger `IMPLEMENTED → REVIEW` |
 | **CI / merge / pipeline** | **INT** | INT advises or fixes the pipeline; MEMBER resumes |
 | **Ambiguity** (design is fine, wording unclear) | answer directly | loop closes, MEMBER resumes |
 | **Blocker** (needs an NPT) | author/dispatch the NPT | MEMBER waits or context-switches |

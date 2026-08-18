@@ -11,14 +11,15 @@
 |-------|-------------|-------------|
 | DRAFT | Initial creation | -> REVIEW |
 | REVIEW | Under review | -> APPROVED / -> DRAFT |
-| APPROVED | Ready for implementation | -> IMPLEMENTING |
-| IMPLEMENTING | Being implemented | -> COMPLETED / -> REVIEW (mid-dev redesign) |
-| COMPLETED | Fully implemented | -> ARCHIVED |
-| ARCHIVED | Historical reference | (terminal) |
+| APPROVED | Ready for implementation | -> IMPLEMENTED / -> DEPRECATED / -> SUPERSEDED |
+| IMPLEMENTED | Fully implemented | -> REVIEW (mid-dev redesign) / -> DEPRECATED / -> SUPERSEDED |
+| DEPRECATED | No longer relevant | (terminal) |
+| SUPERSEDED | Replaced by another design | (terminal) |
+| ARCHIVED | Historical reference (reached only via the `archive` subcommand, from IMPLEMENTED/DEPRECATED/SUPERSEDED) | (terminal) |
 
 ## The redesign loop (mid-dev re-entry)
 
-`IMPLEMENTING -> REVIEW` is the **redesign loop**. It exists so that when a
+`IMPLEMENTED -> REVIEW` is the **redesign loop**. It exists so that when a
 design flaw surfaces *after* implementation has started — during the
 task-comprehension handshake, the in-dev issue dialog, or the pre-PR gate —
 the ARCHITECT can pull the design back into REVIEW, revise it (or split/group

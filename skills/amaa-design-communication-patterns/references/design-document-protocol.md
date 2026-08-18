@@ -67,7 +67,7 @@ author: orchestrator-agent
 | `uuid` | string | GUUID in format `{TYPE}-{YYYYMMDD}-{NNNN}` |
 | `title` | string | Human-readable title |
 | `type` | enum | requirement, specification, architecture, handoff, memory, decision |
-| `status` | enum | DRAFT, REVIEW, APPROVED, IMPLEMENTING, COMPLETED, ARCHIVED |
+| `status` | enum | DRAFT, REVIEW, APPROVED, IMPLEMENTED, DEPRECATED, SUPERSEDED, ARCHIVED |
 | `created` | ISO8601 | Creation timestamp |
 | `updated` | ISO8601 | Last update timestamp |
 | `author` | string | Creating agent identifier |
@@ -87,28 +87,30 @@ author: orchestrator-agent
 ## 3. Document Lifecycle
 
 ```
-┌─────────┐     ┌─────────┐     ┌──────────┐     ┌──────────────┐
-│  DRAFT  │────▶│ REVIEW  │────▶│ APPROVED │────▶│ IMPLEMENTING │
-└─────────┘     └─────────┘     └──────────┘     └──────────────┘
-                    │                                    │
-                    │                                    ▼
-                    │                            ┌───────────┐
-                    └───────────────────────────▶│ COMPLETED │
-                                                 └───────────┘
-                                                       │
-                                                       ▼
-                                                 ┌──────────┐
-                                                 │ ARCHIVED │
-                                                 └──────────┘
+┌─────────┐     ┌─────────┐     ┌──────────┐     ┌─────────────┐
+│  DRAFT  │────▶│ REVIEW  │────▶│ APPROVED │────▶│ IMPLEMENTED │
+└─────────┘     └─────────┘     └──────────┘     └─────────────┘
+     │               │               │                  │  ▲
+     ▼               ▼               ▼                  │  │ (redesign loop)
+┌────────────┐  ┌────────────┐  ┌────────────┐          │  │
+│ DEPRECATED │  │ DEPRECATED │  │ DEPRECATED │           │  │
+└────────────┘  └────────────┘  │ SUPERSEDED │           │  │
+                                 └────────────┘           ▼  │
+                                                       REVIEW
+IMPLEMENTED / DEPRECATED / SUPERSEDED ──(archive subcommand)──▶ ARCHIVED
 ```
 
 **Transition Rules:**
 - DRAFT → REVIEW: Document is complete enough for review
+- DRAFT → DEPRECATED: No longer relevant (terminal)
 - REVIEW → APPROVED: Stakeholder approval received
 - REVIEW → DRAFT: Revisions needed
-- APPROVED → IMPLEMENTING: Work has begun
-- IMPLEMENTING → COMPLETED: All work finished
-- COMPLETED → ARCHIVED: Document is historical reference
+- REVIEW → DEPRECATED: No longer relevant (terminal)
+- APPROVED → IMPLEMENTED: Work has finished
+- APPROVED → DEPRECATED / SUPERSEDED: Abandoned or replaced (terminal)
+- IMPLEMENTED → REVIEW: Redesign loop (a design flaw surfaced mid-dev)
+- IMPLEMENTED → DEPRECATED / SUPERSEDED: Abandoned or replaced (terminal)
+- IMPLEMENTED / DEPRECATED / SUPERSEDED → ARCHIVED: Only via the `archive` subcommand (never `--transition`)
 
 ## 4. Validation Procedures
 
@@ -163,7 +165,7 @@ uv run python scripts/amaa_design_search.py --type handoff
 
 ```bash
 uv run python scripts/amaa_design_search.py --status APPROVED
-uv run python scripts/amaa_design_search.py --status IMPLEMENTING
+uv run python scripts/amaa_design_search.py --status IMPLEMENTED
 ```
 
 ### 5.4 Search by Keyword
@@ -196,7 +198,7 @@ When document status changes:
 1. Update `status` field in frontmatter
 2. Update `updated` timestamp
 3. If linked to GitHub issue, update issue labels
-4. If status is COMPLETED, close GitHub issue
+4. If status is ARCHIVED, close GitHub issue
 
 ### 6.3 Linking Existing Issue
 
@@ -294,7 +296,7 @@ When handing off documents between plugins:
 4. **Receiver** searches for handoff by UUID
 5. **Receiver** validates handoff document
 6. **Receiver** reads all referenced documents
-7. **Receiver** updates handoff status to IMPLEMENTING
+7. **Receiver** updates handoff status to IMPLEMENTED
 8. **Receiver** proceeds with work
 
 ## 10. Quick Reference

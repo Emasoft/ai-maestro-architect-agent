@@ -11,6 +11,8 @@ Lifecycle States:
     implemented -> review  (redesign loop: a design flaw surfaced mid-dev is
                             relayed by ORCH to ARCH, who pulls the design back
                             to review to revise it before implementation resumes)
+    archived is reached ONLY via the `archive` subcommand, and only from
+    implemented/deprecated/superseded (or --force) — see ARCHIVE_ALLOWED_FROM.
 
 Usage:
     # Update status
@@ -61,6 +63,12 @@ VALID_TRANSITIONS = {
     "superseded": set(),  # Terminal state
     "archived": set(),  # Terminal state
 }
+
+# WHY: `archived` deliberately has no edge in VALID_TRANSITIONS — it is entered
+# only through the `archive` subcommand (which also MOVES the file). This set is
+# that subcommand's guard; without it the archive path wrote `status: archived`
+# with no check at all, bypassing the state machine (TRDD-QW4ISL8Z).
+ARCHIVE_ALLOWED_FROM = {"implemented", "deprecated", "superseded"}
 
 
 def run_search_script(args: list[str], project_root: Path) -> str:
@@ -165,8 +173,11 @@ def archive_document(
     project_root: Path,
     reason: str = "",
     superseded_by: str | None = None,
+    force: bool = False,
 ) -> bool:
     """Archive a document by moving to archive directory.
+
+    Only sanctioned from ARCHIVE_ALLOWED_FROM states (or with force=True).
 
     Returns True if successful.
     """
@@ -176,6 +187,20 @@ def archive_document(
     doc_path = find_document(uuid_str, project_root)
     if not doc_path or not doc_path.exists():
         print(f"ERROR: Document not found: {uuid_str}", file=sys.stderr)
+        return False
+
+    current_status = get_document_status(doc_path)
+    # WHY: a None status means the frontmatter could not even be read — archiving
+    # an unreadable/malformed doc must be an explicit --force, never a silent
+    # default, or the first malformed doc silently bypasses the whole guard.
+    if not force and current_status not in ARCHIVE_ALLOWED_FROM:
+        shown = current_status or "unreadable"
+        print(f"ERROR: Cannot archive from status '{shown}'", file=sys.stderr)
+        print(
+            f"Archivable from: {', '.join(sorted(ARCHIVE_ALLOWED_FROM))}",
+            file=sys.stderr,
+        )
+        print("Use --force to override", file=sys.stderr)
         return False
 
     # Create archive directory
@@ -332,7 +357,7 @@ def cmd_archive(args) -> int:
     return (
         0
         if archive_document(
-            args.uuid, args.project_root, args.reason, args.superseded_by
+            args.uuid, args.project_root, args.reason, args.superseded_by, args.force
         )
         else 1
     )
@@ -357,6 +382,8 @@ def main() -> int:
 Lifecycle States:
   draft -> review -> approved -> implemented -> deprecated
                  \\-> superseded
+  implemented -> review   (redesign loop)
+  archive subcommand: implemented/deprecated/superseded -> archived (or --force)
 
 Examples:
   # Update status
@@ -392,6 +419,12 @@ Examples:
     archive_parser.add_argument("--uuid", "-u", required=True)
     archive_parser.add_argument("--reason", "-r", default="")
     archive_parser.add_argument("--superseded-by", help="UUID of replacing document")
+    archive_parser.add_argument(
+        "--force",
+        "-f",
+        action="store_true",
+        help="Archive from a non-sanctioned or unreadable status",
+    )
 
     # supersede command
     supersede_parser = subparsers.add_parser(

@@ -154,7 +154,7 @@ Then drive the planning workflow with the slash commands:
 
 The agent produces design documents under `docs_dev/design/`, registers
 each one in the design index with a UUID, walks it through the
-DRAFT → REVIEW → APPROVED → IMPLEMENTING → COMPLETED → ARCHIVED lifecycle,
+DRAFT → REVIEW → APPROVED → IMPLEMENTED → ARCHIVED lifecycle,
 and prepares handoff packages for the Orchestrator (AMOA). The `Stop` hook
 blocks session exit while draft designs, pending tasks, orphan
 requirements, or open architect-assigned GitHub issues remain (capped at 3
