@@ -1,9 +1,9 @@
 ---
 trdd-id: SGW7EITB
 title: Remove or route the 10 unused skill preloads that are paid on every agent invocation
-column: complete
+column: completed
 created: 2026-08-14T12:35:32+0200
-updated: 2026-08-14T13:26:22+0200
+updated: 2026-08-18T19:54:10+0200
 current-owner: ai-maestro-architect-agent
 task-type: refactor
 scope: project

@@ -1,9 +1,9 @@
 ---
 trdd-id: JKBVDN7G
 title: Align AMAA with Claude Code 2.1.225 through 2.1.232
-column: complete
+column: completed
 created: 2026-08-14T12:58:17+0200
-updated: 2026-08-14T13:08:26+0200
+updated: 2026-08-18T19:54:10+0200
 current-owner: ai-maestro-architect-agent
 task-type: infra
 scope: project
