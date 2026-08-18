@@ -3,7 +3,7 @@ trdd-id: DMIRQOCD
 title: Adopt current ruff and CPV deliberately then bump the gate pins
 column: todo
 created: 2026-07-24T16:28:59+0200
-updated: 2026-08-16T16:59:36+0200
+updated: 2026-08-18T19:54:10+0200
 current-owner: ai-maestro-architect-agent
 task-type: infra
 scope: project
@@ -493,6 +493,17 @@ implementation-commits: []
     defects become their own TRDDs in that programme's Phase 2 **whether or not this
     project ever adopts the linter** — which is the right decoupling and retires the last
     reason this card had to be answered as a yes/no on adoption.
+
+- **2026-08-18 — UNPAUSED and APPROVED, PHASED (hub ruling, Phase-2 GO under TRDD-BRRJK57P).**
+  The USER-delegated hub ruled: adopt current ruff via per-rule enablement, fixing the 107
+  fail-fast findings incrementally — never a big-bang enable of +358 rules in one commit.
+  The BRRJK57P discovery-only pause is lifted; steps 2–4 of the NEXT ACTION resume as
+  written. The axis-4a split this card was waiting on landed in
+  `reports/plugin-self-audit/20260816_185558+0200-axis4a-107-split.md`: 10 real-defect
+  BLE001/S110 sites in 3 shapes (publish.py:237,449-494,621,678;
+  claude-plugin-install.py:582,1170) + 3 PLW1510 `run_search_script` clones
+  (amaa_design_export.py:43, amaa_design_lifecycle.py:70, amaa_design_version.py:34);
+  the other 48 of the 58 are verified STYLE (checked/propagated), annotate honestly.
 
 - **Durable artifacts:** the pin comments in `publish.py` (Step 4/5) and the two
   workflows are the load-bearing BUMP PROTOCOL; the CPV FP issue is the upstream
