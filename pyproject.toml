@@ -16,6 +16,11 @@ dev = ["pyyaml"]
 # (extend-select, never select — select REPLACES the defaults and guts the gate.)
 [tool.ruff.lint]
 extend-select = ["BLE001", "S110", "PLW1510", "TRY004"]
+# DTZ005: naive datetime.now() is DELIBERATE project-wide — the timestamp
+# policy (agent-reports-location rule) mandates LOCAL wall-clock time in
+# filenames and frontmatter; every use feeds a strftime where tz-awareness
+# changes nothing. A policy-wide decision belongs in config, not 27 noqas.
+ignore = ["DTZ005"]
 
 # E402 in these files is BY DESIGN: they must extend sys.path to reach the
 # repo-root lib/ helpers before importing them (TRDD-WDM195GD), so the import

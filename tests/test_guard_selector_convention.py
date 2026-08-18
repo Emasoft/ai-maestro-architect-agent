@@ -188,11 +188,14 @@ def _offenders_in(path: Path) -> list[str]:
     # the right direction for a net.
     consts: dict[str, str] = {}
     for node in ast.walk(tree):
-        if isinstance(node, ast.Assign) and isinstance(node.value, ast.Constant):
-            if isinstance(node.value.value, str):
-                for tgt in node.targets:
-                    if isinstance(tgt, ast.Name):
-                        consts[tgt.id] = node.value.value
+        if (
+            isinstance(node, ast.Assign)
+            and isinstance(node.value, ast.Constant)
+            and isinstance(node.value.value, str)
+        ):
+            for tgt in node.targets:
+                if isinstance(tgt, ast.Name):
+                    consts[tgt.id] = node.value.value
 
     out: list[str] = []
     for node in ast.walk(tree):

@@ -276,10 +276,10 @@ def modify_module(
         if module.get("id") == module_id:
             # Check if can be modified
             current_status = module.get("status", "pending")
-            if current_status in ("in-progress", "complete"):
-                if new_status != current_status:  # Allow same status updates
-                    print(f"ERROR: Cannot modify module with status '{current_status}'")
-                    return False
+            # Allow same status updates
+            if current_status in ("in-progress", "complete") and new_status != current_status:
+                print(f"ERROR: Cannot modify module with status '{current_status}'")
+                return False
 
             if new_name:
                 module["name"] = new_name

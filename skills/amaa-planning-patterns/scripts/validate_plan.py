@@ -185,11 +185,9 @@ def validate_task_dependencies(content: str) -> tuple[bool, list[str], list[str]
         return False
 
     visited: set[str] = set()
-    for task_id in tasks:
+    for task_id, task_name in tasks.items():
         if has_cycle(task_id, visited, set()):
-            errors.append(
-                f"Circular dependency detected involving task: {tasks[task_id]}"
-            )
+            errors.append(f"Circular dependency detected involving task: {task_name}")
             break
 
     return len(errors) == 0, errors, warnings

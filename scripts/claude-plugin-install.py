@@ -1377,9 +1377,7 @@ def _run_skill_audit(plugin_root: Path) -> tuple[list[str], list[str]]:
         return errors, warnings
     # Safeguard: skip directories that are too large or deeply nested
     # to avoid hanging on massive folder trees (e.g. ~/.claude/ or node_modules)
-    file_count = 0
-    for item in plugin_root.rglob("*"):
-        file_count += 1
+    for file_count, item in enumerate(plugin_root.rglob("*"), start=1):
         if file_count > _SKILL_AUDIT_MAX_FILES:
             warnings.append(
                 f"skill-audit: skipped — directory has >{_SKILL_AUDIT_MAX_FILES} files (too large for security scan)"

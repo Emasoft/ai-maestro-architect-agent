@@ -17,7 +17,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
-from typing import Any
+from typing import Any, ClassVar
 
 # WHY: the shared helpers live at repo-root lib/ — skills/shared never existed
 # (TRDD-WDM195GD); parents[3] of this file is the plugin root.
@@ -38,7 +38,7 @@ class ProjectDetector:
 
     # WHY: File patterns are the most reliable indicators of project type
     # These patterns are checked in the project directory to determine what kind of project it is
-    PROJECT_PATTERNS = {
+    PROJECT_PATTERNS: ClassVar[dict[str, list[str]]] = {
         "python": [
             "pyproject.toml",
             "setup.py",
@@ -84,7 +84,7 @@ class ProjectDetector:
 
     # WHY: Subtypes help distinguish between libraries, applications, and other variants
     # This affects what commands and workflows are available
-    SUBTYPE_PATTERNS = {
+    SUBTYPE_PATTERNS: ClassVar[dict[str, dict[str, list[str]]]] = {
         "python": {
             "library": ["src/", "pyproject.toml"],
             "application": ["main.py", "app.py", "__main__.py"],
@@ -201,21 +201,20 @@ class ProjectDetector:
             data = json.loads(package_json.read_text(encoding="utf-8"))
 
             # WHY: Check if it's a library (has "main" but no "bin")
-            if "main" in data and "bin" not in data:
-                if "library" not in subtypes:
-                    subtypes.append("library")
+            if "main" in data and "bin" not in data and "library" not in subtypes:
+                subtypes.append("library")
 
             # WHY: Check if it's an application (has "bin" or start script)
-            if "bin" in data or data.get("scripts", {}).get("start"):
-                if "application" not in subtypes:
-                    subtypes.append("application")
+            if (
+                "bin" in data or data.get("scripts", {}).get("start")
+            ) and "application" not in subtypes:
+                subtypes.append("application")
 
             # WHY: Check dependencies for framework indicators
             deps = {**data.get("dependencies", {}), **data.get("devDependencies", {})}
 
-            if "react" in deps or "react-dom" in deps:
-                if "react" not in subtypes:
-                    subtypes.append("react")
+            if ("react" in deps or "react-dom" in deps) and "react" not in subtypes:
+                subtypes.append("react")
 
             if "next" in deps and "nextjs" not in subtypes:
                 subtypes.append("nextjs")

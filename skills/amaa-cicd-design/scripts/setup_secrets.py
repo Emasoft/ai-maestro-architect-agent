@@ -19,6 +19,7 @@ import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
+from typing import ClassVar
 
 
 @dataclass
@@ -36,7 +37,7 @@ class SecretsManager:
     """Manage GitHub repository secrets."""
 
     # Platform-specific secrets
-    PLATFORM_SECRETS = {
+    PLATFORM_SECRETS: ClassVar[dict[str, list[SecretConfig]]] = {
         "apple": [
             SecretConfig(
                 "APPLE_CERTIFICATE",

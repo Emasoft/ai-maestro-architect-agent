@@ -212,9 +212,8 @@ def extract_frontmatter(content: str) -> tuple[dict[str, str] | None, str]:
             # Handle quoted strings
             if value.startswith('"') and value.endswith('"') or value.startswith("'") and value.endswith("'"):
                 value = value[1:-1]
-            # Handle arrays
-            elif value.startswith("[") and value.endswith("]"):
-                value = value  # Keep as string for simplicity
+            # Arrays ([...]) are deliberately kept in their raw string form —
+            # no branch needed; the value passes through unchanged.
             frontmatter[key] = value
 
     body = "\n".join(lines[end_idx + 1 :])

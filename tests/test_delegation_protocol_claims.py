@@ -49,30 +49,42 @@ CLAIMS: list[tuple[str, str, str]] = [
     (
         "agents/ai-maestro-architect-agent-main-agent.md",
         "you will not get it by default",
-        "spawn results must be requested explicitly (CC 2.1.232 made non-teammate "
-        "Agent-tool spawns background-by-default, so 'subagents return results to "
-        "you' is no longer what the platform does on its own)",
+        (
+            "spawn results must be requested explicitly (CC 2.1.232 made non-teammate "
+            "Agent-tool spawns background-by-default, so 'subagents return results to "
+            "you' is no longer what the platform does on its own)"
+        ),
     ),
     (
         "agents/ai-maestro-architect-agent-main-agent.md",
         "do not spawn your bundled sub-agents with",
-        "the fork stance: a fork inherits the full parent conversation, which would "
-        "copy unauthenticated inbound native-channel content into an agent that "
-        "never evaluated it",
+        (
+            "the fork stance: a fork inherits the full parent conversation, which would "
+            "copy unauthenticated inbound native-channel content into an agent that "
+            "never evaluated it"
+        ),
     ),
     (
-        "skills/amaa-design-communication-patterns/references/"
-        "native-cross-session-channel.md",
+        (
+            "skills/amaa-design-communication-patterns/references/"
+            "native-cross-session-channel.md"
+        ),
         "rather than reusing a name you learned",
-        "a session name is not a stable identity since CC 2.1.232 renames "
-        "collisions, so recipients are resolved at send time",
+        (
+            "a session name is not a stable identity since CC 2.1.232 renames "
+            "collisions, so recipients are resolved at send time"
+        ),
     ),
     (
-        "skills/amaa-design-communication-patterns/references/"
-        "native-cross-session-channel.md",
+        (
+            "skills/amaa-design-communication-patterns/references/"
+            "native-cross-session-channel.md"
+        ),
         "is the only gate",
-        "self-enforcement is load-bearing: this channel has no 403, and 2.1.232 "
-        "removed the ref-confirmation step that used to sit in front of a send",
+        (
+            "self-enforcement is load-bearing: this channel has no 403, and 2.1.232 "
+            "removed the ref-confirmation step that used to sit in front of a send"
+        ),
     ),
 ]
 

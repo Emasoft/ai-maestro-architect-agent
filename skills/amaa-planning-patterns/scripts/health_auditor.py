@@ -13,7 +13,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from enum import Enum
 from pathlib import Path
-from typing import Any
+from typing import Any, ClassVar
 
 # WHY: the shared helpers live at repo-root lib/ — skills/shared never existed
 # (TRDD-WDM195GD); parents[3] of this file is the plugin root.
@@ -446,7 +446,7 @@ class HealthAuditor:
     """
 
     # WHY: Registry enables dynamic check selection via CLI
-    AVAILABLE_CHECKS = {
+    AVAILABLE_CHECKS: ClassVar[dict[str, type[HealthCheck]]] = {
         "git": GitCheck,
         "deps": DepsCheck,
         "tests": TestsCheck,

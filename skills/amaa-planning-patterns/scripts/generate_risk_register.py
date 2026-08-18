@@ -138,8 +138,10 @@ Total Risks: {count}
 def generate_csv_register(num_risks: int, output_file: str) -> None:
     """Generate a CSV-formatted risk register."""
     lines = [
-        "Risk_ID,Risk_Name,Description,Impact,Probability,Risk_Score,"
-        "Mitigation_Strategy,Owner,Target_Date,Monitoring_Indicator,Status,Notes"
+        (
+            "Risk_ID,Risk_Name,Description,Impact,Probability,Risk_Score,"
+            "Mitigation_Strategy,Owner,Target_Date,Monitoring_Indicator,Status,Notes"
+        )
     ]
 
     for i in range(1, num_risks + 1):

@@ -455,13 +455,14 @@ def uninstall_language(lang: str, verbose: bool = True) -> bool:
     if shared_pkg:
         # Check if any other language using this package is still needed
         for other_lang, other_config in LSP_CONFIGS.items():
-            if other_lang != lang and other_config.get("shared_package") == shared_pkg:
-                if is_binary_installed(other_config["binary"]):
-                    if verbose:
-                        print(
-                            f"[SKIP] {lang}: Shared package still needed by {other_lang}"
-                        )
-                    return True
+            if (
+                other_lang != lang
+                and other_config.get("shared_package") == shared_pkg
+                and is_binary_installed(other_config["binary"])
+            ):
+                if verbose:
+                    print(f"[SKIP] {lang}: Shared package still needed by {other_lang}")
+                return True
 
     # Get uninstall command
     plat = get_platform()

@@ -10,6 +10,7 @@ import argparse
 import sys
 from pathlib import Path
 from textwrap import dedent
+from typing import ClassVar
 
 # WHY: the shared helpers live at repo-root lib/ — skills/shared never existed
 # (TRDD-WDM195GD); parents[3] of this file is the plugin root.
@@ -24,7 +25,7 @@ from cross_platform import (
 class AnalyzerScaffoldGenerator:
     """Generates analyzer tool scaffolds based on category templates."""
 
-    CATEGORIES = {
+    CATEGORIES: ClassVar[dict[str, str]] = {
         "dependency": "Dependency analysis (imports, packages, version conflicts)",
         "bundle": "Bundle analysis (size, composition, optimization)",
         "coverage": "Code coverage analysis (test coverage, gaps)",

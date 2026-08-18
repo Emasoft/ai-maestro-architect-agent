@@ -15,7 +15,7 @@ from __future__ import annotations
 import argparse
 import sys
 from pathlib import Path
-from typing import Any
+from typing import Any, ClassVar
 
 try:
     import yaml
@@ -27,7 +27,7 @@ except ImportError:
 class WorkflowValidator:
     """Validate GitHub Actions workflow files."""
 
-    VALID_TRIGGERS = {
+    VALID_TRIGGERS: ClassVar[set[str]] = {
         "push",
         "pull_request",
         "pull_request_target",
@@ -44,7 +44,7 @@ class WorkflowValidator:
         "repository_dispatch",
     }
 
-    VALID_RUNNERS = {
+    VALID_RUNNERS: ClassVar[set[str]] = {
         "ubuntu-latest",
         "ubuntu-22.04",
         "ubuntu-24.04",
@@ -202,9 +202,12 @@ class WorkflowValidator:
             self.errors.append(f"{prefix}: missing 'runs-on'")
         else:
             runner = job["runs-on"]
-            if isinstance(runner, str):
-                if runner not in self.VALID_RUNNERS and not runner.startswith("${{"):
-                    self.warnings.append(f"{prefix}: unknown runner '{runner}'")
+            if (
+                isinstance(runner, str)
+                and runner not in self.VALID_RUNNERS
+                and not runner.startswith("${{")
+            ):
+                self.warnings.append(f"{prefix}: unknown runner '{runner}'")
 
         # needs (dependencies)
         if "needs" in job:
