@@ -1,14 +1,14 @@
 ---
 trdd-id: HN65IC8P
 title: Resolve the report_output dead mandate — zero callers for a function whose docstring says all scripts must use it
-column: todo
+column: completed
 created: 2026-08-18T19:54:10+0200
-updated: 2026-08-18T19:54:10+0200
+updated: 2026-08-18T20:35:00+0200
 current-owner: ai-maestro-architect-agent
 task-type: refactor
 scope: project
 approval-tier: 0
-implementation-commits: []
+implementation-commits: [9d2c936]
 ---
 
 ## ⏵ STATE — READ THIS FIRST ON RESUME (authoritative; supersedes the body) — 2026-08-18
@@ -41,3 +41,8 @@ enforced by the global `agent-reports-location` rule, not by this helper.
 - Commit before delete (RULE 0); the function remains recoverable from history.
 
 ## Approval log
+
+- 2026-08-18T20:35:00+0200 — COMPLETED by ai-maestro-architect-agent (tier 0). Whole
+  module deleted at 9d2c936: unbounded grep found zero callers for report_output AND
+  make_report_header (positive control: cross_platform's 11 importers); advisor
+  independently confirmed whole-file delete safe and order-independent.

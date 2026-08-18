@@ -1,9 +1,9 @@
 ---
 trdd-id: ET0STPKK
 title: Archive-column hygiene for the 9 archived cards and record the two governance rulings
-column: todo
+column: completed
 created: 2026-08-18T19:54:10+0200
-updated: 2026-08-18T19:54:10+0200
+updated: 2026-08-18T20:05:00+0200
 current-owner: ai-maestro-architect-agent
 task-type: docs
 scope: project
@@ -42,3 +42,7 @@ implementation-commits: []
 
 - 2026-08-18 — Hub dispatch (ai-maestro session, under USER verbatim delegation) ruled:
   legacy-uuid = record-don't-migrate; baseline-tag-protect = ratified-baseline compliance.
+- 2026-08-18T20:05:00+0200 — COMPLETED by ai-maestro-architect-agent (tier 0). All three
+  items done: SGW7EITB + JKBVDN7G `complete` → `completed` (rule-12 narrow exception,
+  frontmatter falsely contradicted the terminal location); both rulings recorded in
+  PROJECT wikimem `governance-audit-rulings` (ATOM-HBS5-GSH0, lint clean).
