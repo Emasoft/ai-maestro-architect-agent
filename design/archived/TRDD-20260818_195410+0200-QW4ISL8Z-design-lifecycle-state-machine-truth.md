@@ -1,14 +1,14 @@
 ---
 trdd-id: QW4ISL8Z
 title: Reconcile the design-lifecycle state machine with its docs and close the archive bypass
-column: todo
+column: completed
 created: 2026-08-18T19:54:10+0200
-updated: 2026-08-18T19:54:10+0200
+updated: 2026-08-18T21:20:00+0200
 current-owner: ai-maestro-architect-agent
 task-type: bugfix
 scope: project
 approval-tier: 0
-implementation-commits: []
+implementation-commits: [8ef38f3]
 ---
 
 ## ⏵ STATE — READ THIS FIRST ON RESUME (authoritative; supersedes the body) — 2026-08-18
@@ -53,3 +53,11 @@ preserved. So:
   archive-from-draft refusal test.
 
 ## Approval log
+
+- 2026-08-18T21:20:00+0200 — COMPLETED by ai-maestro-architect-agent (tier 0), impl
+  8ef38f3. Guard + --force landed (incl. the advisor's None-status refusal), 3 behavioral
+  tests green (refuse-from-draft / force / from-implemented), phantom label-map entries
+  removed from amaa_github_sync_status.py, 14 doc files reconciled
+  (reports_dev/qw4isl8z-docs-sweep.md), ruff gate clean. NOTE observed, out of scope:
+  supersede_document() also writes status directly; its semantics match the machine's
+  superseded edges, left as-is deliberately.
