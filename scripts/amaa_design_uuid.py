@@ -55,7 +55,7 @@ class DesignConfig:
     memory_root: Path = field(default_factory=lambda: Path("design/memory"))
 
     @classmethod
-    def load(cls, project_root: Optional[Path] = None) -> "DesignConfig":
+    def load(cls, project_root: Path | None = None) -> "DesignConfig":
         """Load configuration from patterns.md file."""
         if project_root is None:
             project_root = Path.cwd()
@@ -94,7 +94,7 @@ class DocumentUUID:
     doc_type: str
     date: str
     uuid8: str
-    version: Optional[int] = None
+    version: int | None = None
 
     @property
     def base_uuid(self) -> str:
@@ -182,7 +182,7 @@ def generate_version_uuid(base_uuid: str, design_root: Path) -> str:
     return f"{base_uuid}_v{new_version:04d}"
 
 
-def extract_frontmatter(content: str) -> tuple[Optional[dict[str, str]], str]:
+def extract_frontmatter(content: str) -> tuple[dict[str, str] | None, str]:
     """Extract YAML frontmatter from markdown content.
 
     Returns (frontmatter_dict, body_content).
@@ -229,10 +229,10 @@ def create_frontmatter(
     doc_type: str,
     status: str = "draft",
     author: str = "Architect Agent",
-    tags: Optional[list[str]] = None,
-    related_issues: Optional[list[str]] = None,
-    related_docs: Optional[list[str]] = None,
-    previous_version: Optional[str] = None,
+    tags: list[str] | None = None,
+    related_issues: list[str] | None = None,
+    related_docs: list[str] | None = None,
+    previous_version: str | None = None,
 ) -> str:
     """Create YAML frontmatter string for a design document."""
     today = datetime.now().strftime("%Y-%m-%d")
@@ -266,7 +266,7 @@ def add_frontmatter_to_file(
     doc_type: str,
     config: DesignConfig,
     force: bool = False,
-) -> Optional[str]:
+) -> str | None:
     """Add UUID frontmatter to a markdown file.
 
     Returns the generated UUID if successful, None if skipped.

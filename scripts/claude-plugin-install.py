@@ -24,7 +24,7 @@ import tarfile
 import tempfile
 import zipfile
 from pathlib import Path
-from typing import Callable, Dict, List, Optional, Tuple
+from collections.abc import Callable
 
 IS_WINDOWS = platform.system() == "Windows"
 PYTHON_VERSION = sys.version_info
@@ -338,7 +338,7 @@ def _extract_tar(archive: Path, dest: Path, mode: str):
 # ── Gitignore handling ────────────────────────────────────
 
 
-def _parse_gitignore_patterns(gitignore_path: Path) -> List[str]:
+def _parse_gitignore_patterns(gitignore_path: Path) -> list[str]:
     """Parse a .gitignore file and return a list of patterns."""
     if not gitignore_path.exists():
         return []
@@ -352,7 +352,7 @@ def _parse_gitignore_patterns(gitignore_path: Path) -> List[str]:
     return patterns
 
 
-def _gitignore_pattern_to_re(pattern: str) -> Tuple[Optional[re.Pattern], bool]:
+def _gitignore_pattern_to_re(pattern: str) -> tuple[re.Pattern | None, bool]:
     """Convert a single gitignore pattern to a compiled regex.
     Returns (regex, is_negation). Returns (None, _) for unparseable patterns."""
     negation = False
@@ -535,7 +535,7 @@ def _build_gitignore_matcher(plugin_dir: Path) -> Callable[[Path], bool]:
     return _is_ignored_manual
 
 
-def _copy_plugin_from_dir(source_dir: Path, dest: Path, ignore_fn: Optional[Callable[[Path], bool]] = None):
+def _copy_plugin_from_dir(source_dir: Path, dest: Path, ignore_fn: Callable[[Path], bool] | None = None):
     """Copy a plugin directory to dest, skipping files matched by ignore_fn.
     The .git directory and git metadata files are always excluded.
     Empty directories (after filtering) are not created."""
@@ -564,7 +564,7 @@ def _copy_plugin_from_dir(source_dir: Path, dest: Path, ignore_fn: Optional[Call
             copied_any = True
 
 
-def find_plugin_root(search_dir: Path) -> Optional[Path]:
+def find_plugin_root(search_dir: Path) -> Path | None:
     """Find the plugin root directory (parent of .claude-plugin/plugin.json).
     Skips directories that also contain marketplace.json."""
     for pj in search_dir.rglob(".claude-plugin/plugin.json"):
@@ -599,13 +599,13 @@ def read_plugin_meta(plugin_root: Path) -> dict:
     }
 
 
-def _detect_plugin_origin_refs(plugin_root: Path) -> List[str]:
+def _detect_plugin_origin_refs(plugin_root: Path) -> list[str]:
     """Detect marketplace, repository, or GitHub references inside the plugin.
 
     Returns a list of human-readable strings describing each reference found,
     e.g. 'plugin.json "marketplace": "official-plugins"'
     """
-    refs: List[str] = []
+    refs: list[str] = []
 
     # Check plugin.json for origin-related fields
     pj = plugin_root / ".claude-plugin" / "plugin.json"
@@ -698,7 +698,7 @@ WINDOWS_SCRIPT_EXTENSIONS = {".cmd", ".bat", ".ps1"}
 ALL_SCRIPT_EXTENSIONS = SCRIPT_EXTENSIONS | WINDOWS_SCRIPT_EXTENSIONS
 
 
-def _find_all_scripts(plugin_dir: Path) -> List[Path]:
+def _find_all_scripts(plugin_dir: Path) -> list[Path]:
     """Find all script files in a plugin directory."""
     scripts = []
     for f in plugin_dir.rglob("*"):
@@ -810,7 +810,7 @@ def _check_type(value, expected_types):
     return f"expected {' or '.join(expected_types)}, got {type(value).__name__}"
 
 
-def _fuzzy_match_event(wrong_name: str) -> Optional[str]:
+def _fuzzy_match_event(wrong_name: str) -> str | None:
     lower = wrong_name.lower()
     for valid in VALID_HOOK_EVENTS:
         if valid.lower() == lower:
@@ -874,7 +874,7 @@ def _validate_matcher(matcher: str, event_name: str, path: str) -> list:
     return warnings
 
 
-def _validate_bash_command(cmd: str, path: str, plugin_root: Optional[Path] = None):
+def _validate_bash_command(cmd: str, path: str, plugin_root: Path | None = None):
     """Returns (errors, warnings)."""
     errors: list[str] = []
     warnings: list[str] = []
@@ -987,7 +987,7 @@ def _validate_bash_command(cmd: str, path: str, plugin_root: Optional[Path] = No
     return errors, warnings
 
 
-def _validate_hooks_structure(hooks_data: dict, source_file: str, plugin_root: Optional[Path] = None):
+def _validate_hooks_structure(hooks_data: dict, source_file: str, plugin_root: Path | None = None):
     errors = []
     warnings = []
 
@@ -1097,7 +1097,7 @@ def _validate_hooks_structure(hooks_data: dict, source_file: str, plugin_root: O
     return errors, warnings
 
 
-def _parse_simple_frontmatter(text: str) -> Optional[Tuple[Dict[str, str], str]]:
+def _parse_simple_frontmatter(text: str) -> tuple[dict[str, str], str] | None:
     """Parse YAML-like frontmatter from markdown. Returns (key_values, body) or None.
 
     This is a simple parser — no YAML library needed. Handles:
@@ -1173,7 +1173,7 @@ SKILL_MAX_CHARS = 5000
 
 def _validate_markdown_frontmatter(
     md_path: Path, component_type: str, rel_prefix: str = ""
-) -> Tuple[List[str], List[str]]:
+) -> tuple[list[str], list[str]]:
     """Validate YAML frontmatter in agent/command/skill markdown files.
     Returns (errors, warnings)."""
     errors: list[str] = []
@@ -1371,10 +1371,10 @@ _SKILL_AUDIT_MAX_FILES = 200
 _SKILL_AUDIT_MAX_DEPTH = 6
 
 
-def _run_skill_audit(plugin_root: Path) -> Tuple[List[str], List[str]]:
+def _run_skill_audit(plugin_root: Path) -> tuple[list[str], list[str]]:
     """Run skill-audit on a plugin directory if available. Returns (errors, warnings)."""
-    errors: List[str] = []
-    warnings: List[str] = []
+    errors: list[str] = []
+    warnings: list[str] = []
     # Check if skill-audit is on PATH
     skill_audit_bin = shutil.which("skill-audit")
     if not skill_audit_bin:
@@ -1440,7 +1440,7 @@ def _run_skill_audit(plugin_root: Path) -> Tuple[List[str], List[str]]:
 
 
 def validate_plugin(
-    plugin_root: Path, ignore_fn: Optional[Callable[[Path], bool]] = None, run_security_audit: bool = True
+    plugin_root: Path, ignore_fn: Callable[[Path], bool] | None = None, run_security_audit: bool = True
 ):
     """Validate a plugin directory. Returns (errors, warnings).
     If ignore_fn is provided, files/dirs matched by it are skipped during validation.
@@ -1750,7 +1750,7 @@ def print_validation_report(errors, warnings, _plugin_name):
 
 
 def do_install(
-    source_path: str, marketplace_name: Optional[str], force: bool = False, dry_run: bool = False, quiet: bool = False
+    source_path: str, marketplace_name: str | None, force: bool = False, dry_run: bool = False, quiet: bool = False
 ):
     if dry_run and not quiet:
         info("DRY RUN — no files will be modified")
@@ -2192,7 +2192,7 @@ def do_disable(plugin_key: str, quiet: bool = False, dry_run: bool = False):
 
 
 def do_update(
-    source_path: str, marketplace_name: Optional[str], force: bool = False, dry_run: bool = False, quiet: bool = False
+    source_path: str, marketplace_name: str | None, force: bool = False, dry_run: bool = False, quiet: bool = False
 ):  # noqa: ARG001 (force accepted from argparse but update always forces reinstall)
     """Update a plugin by uninstalling the old version and reinstalling from a new source."""
     # Resolve the source to find the plugin name

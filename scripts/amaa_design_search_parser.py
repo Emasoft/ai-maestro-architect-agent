@@ -15,7 +15,6 @@ Dependencies: Python 3.8+ (uses pathlib only)
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Optional
 
 __all__ = [
     "DesignConfig",
@@ -35,7 +34,7 @@ class DesignConfig:
     uuid_prefix: str = "PROJ"
 
     @classmethod
-    def load(cls, project_root: Optional[Path] = None) -> "DesignConfig":
+    def load(cls, project_root: Path | None = None) -> "DesignConfig":
         """Load configuration from patterns.md file."""
         if project_root is None:
             project_root = Path.cwd()
@@ -77,7 +76,7 @@ class DocumentMetadata:
     tags: list[str] = field(default_factory=list)
     related_issues: list[str] = field(default_factory=list)
     related_docs: list[str] = field(default_factory=list)
-    previous_version: Optional[str] = None
+    previous_version: str | None = None
 
     def to_dict(self) -> dict[str, str | int | list[str] | None]:
         """Convert to dictionary for JSON output."""
@@ -162,7 +161,7 @@ def parse_frontmatter(content: str) -> dict[str, str | int | list[str] | None]:
     return frontmatter
 
 
-def extract_metadata(file_path: Path) -> Optional[DocumentMetadata]:
+def extract_metadata(file_path: Path) -> DocumentMetadata | None:
     """Extract metadata from a design document file.
 
     Only reads the first 4KB for speed - frontmatter should be at the top.
@@ -175,7 +174,7 @@ def extract_metadata(file_path: Path) -> Optional[DocumentMetadata]:
     """
     try:
         # Read only the first 4KB - frontmatter should be at the top
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, encoding="utf-8") as f:
             content = f.read(4096)
 
         fm = parse_frontmatter(content)
@@ -208,7 +207,7 @@ def extract_metadata(file_path: Path) -> Optional[DocumentMetadata]:
         author_str = str(author_val) if author_val is not None else ""
 
         prev_val = fm.get("previous_version")
-        prev_str: Optional[str] = str(prev_val) if prev_val is not None else None
+        prev_str: str | None = str(prev_val) if prev_val is not None else None
 
         # Extract list fields
         tags_val = fm.get("tags", [])

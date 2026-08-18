@@ -45,10 +45,9 @@ import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Tuple
 
 
-def detect_config() -> Tuple[str, str, str]:
+def detect_config() -> tuple[str, str, str]:
     """Detect design configuration from patterns.md or auto-detect.
 
     Returns:

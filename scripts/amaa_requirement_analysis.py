@@ -27,7 +27,6 @@ import re
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
 
 
 def get_timestamp() -> str:
@@ -192,7 +191,7 @@ for user review.
 
 
 def parse_requirements(
-    input_text: str, output_file: Optional[Path] = None
+    input_text: str, output_file: Path | None = None
 ) -> list[dict[str, str]]:
     """
     Parse user statements to extract requirements.

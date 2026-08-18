@@ -15,7 +15,8 @@ import json
 import sys
 from collections import defaultdict, deque
 from pathlib import Path
-from typing import Any, Callable, Dict, List
+from typing import Any
+from collections.abc import Callable
 
 # WHY: the shared helpers live at repo-root lib/ — skills/shared never existed
 # (TRDD-WDM195GD); parents[3] of this file is the plugin root.
@@ -39,9 +40,9 @@ class DependencyResolver:
         WHY: Verbose mode helps debug complex dependency chains and circular dependencies.
         """
         self.verbose = verbose
-        self.nodes: Dict[str, Dict[str, Any]] = {}
-        self.graph: Dict[str, List[str]] = {}  # node -> list of dependencies
-        self.reverse_graph: Dict[str, List[str]] = {}  # node -> list of dependents
+        self.nodes: dict[str, dict[str, Any]] = {}
+        self.graph: dict[str, list[str]] = {}  # node -> list of dependencies
+        self.reverse_graph: dict[str, list[str]] = {}  # node -> list of dependents
 
     def load_graph(self, file_path: str) -> None:
         """
@@ -123,7 +124,7 @@ class DependencyResolver:
         if self.verbose:
             print(f"Loaded graph with {len(self.nodes)} nodes", file=sys.stderr)
 
-    def detect_cycles(self) -> List[List[str]]:
+    def detect_cycles(self) -> list[list[str]]:
         """
         Detect all cycles in the dependency graph.
 
@@ -174,7 +175,7 @@ class DependencyResolver:
 
         return cycles
 
-    def topological_sort(self) -> List[str]:
+    def topological_sort(self) -> list[str]:
         """
         Perform topological sort using Kahn's algorithm (in-degree BFS).
 
@@ -232,7 +233,7 @@ class DependencyResolver:
 
         return result
 
-    def get_subgraph(self, node: str) -> List[str]:
+    def get_subgraph(self, node: str) -> list[str]:
         """
         Get all dependencies of a node (transitive closure).
 
@@ -274,8 +275,8 @@ class DependencyResolver:
         return subgraph
 
     def filter_tasks(
-        self, predicate: Callable[[str, Dict[str, Any]], bool]
-    ) -> List[str]:
+        self, predicate: Callable[[str, dict[str, Any]], bool]
+    ) -> list[str]:
         """
         Filter nodes by custom predicate function.
 

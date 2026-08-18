@@ -10,7 +10,6 @@ import argparse
 import sys
 from pathlib import Path
 from textwrap import dedent
-from typing import Dict
 
 # WHY: the shared helpers live at repo-root lib/ — skills/shared never existed
 # (TRDD-WDM195GD); parents[3] of this file is the plugin root.
@@ -45,7 +44,7 @@ class AnalyzerScaffoldGenerator:
         # WHY: Class names should follow PEP 8 PascalCase convention
         return "".join(word.capitalize() for word in name.split("_"))
 
-    def _get_category_methods(self) -> Dict[str, str]:
+    def _get_category_methods(self) -> dict[str, str]:
         """Return category-specific method implementations."""
         # WHY: Different analysis types need different default implementations
 
@@ -60,7 +59,7 @@ class AnalyzerScaffoldGenerator:
 
         return templates.get(self.category, self._custom_template)()
 
-    def _dependency_template(self) -> Dict[str, str]:
+    def _dependency_template(self) -> dict[str, str]:
         """Template for dependency analysis tools."""
         return {
             "validate": '''        """Validate target is a valid dependency source."""
@@ -89,7 +88,7 @@ class AnalyzerScaffoldGenerator:
             "description": "Dependency analysis (imports, packages, version conflicts)",
         }
 
-    def _bundle_template(self) -> Dict[str, str]:
+    def _bundle_template(self) -> dict[str, str]:
         """Template for bundle analysis tools."""
         return {
             "validate": '''        """Validate target is a valid bundle."""
@@ -117,7 +116,7 @@ class AnalyzerScaffoldGenerator:
             "description": "Bundle analysis (size, composition, optimization)",
         }
 
-    def _coverage_template(self) -> Dict[str, str]:
+    def _coverage_template(self) -> dict[str, str]:
         """Template for coverage analysis tools."""
         return {
             "validate": '''        """Validate target has coverage data."""
@@ -146,7 +145,7 @@ class AnalyzerScaffoldGenerator:
             "description": "Code coverage analysis (test coverage, gaps)",
         }
 
-    def _performance_template(self) -> Dict[str, str]:
+    def _performance_template(self) -> dict[str, str]:
         """Template for performance analysis tools."""
         return {
             "validate": '''        """Validate target can be profiled."""
@@ -174,7 +173,7 @@ class AnalyzerScaffoldGenerator:
             "description": "Performance analysis (bottlenecks, profiling)",
         }
 
-    def _security_template(self) -> Dict[str, str]:
+    def _security_template(self) -> dict[str, str]:
         """Template for security analysis tools."""
         return {
             "validate": '''        """Validate target can be scanned for security issues."""
@@ -202,7 +201,7 @@ class AnalyzerScaffoldGenerator:
             "description": "Security analysis (vulnerabilities, best practices)",
         }
 
-    def _custom_template(self) -> Dict[str, str]:
+    def _custom_template(self) -> dict[str, str]:
         """Template for custom analysis tools."""
         return {
             "validate": '''        """Validate target is suitable for analysis."""

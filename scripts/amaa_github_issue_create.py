@@ -27,7 +27,6 @@ import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
 
 # PRRD G1 — imported, never redefined here. The line previously inlined at
 # this spot carried a bare `@owner`, which GitHub renders as a MENTION and pages
@@ -74,7 +73,7 @@ def load_config(project_root: Path) -> dict:
     return config
 
 
-def extract_frontmatter(content: str) -> tuple[Optional[dict], str]:
+def extract_frontmatter(content: str) -> tuple[dict | None, str]:
     """Extract YAML frontmatter from markdown content.
 
     Returns (frontmatter_dict, body_content).
@@ -114,7 +113,7 @@ def extract_frontmatter(content: str) -> tuple[Optional[dict], str]:
     return frontmatter, body
 
 
-def find_document_by_uuid(uuid_str: str, design_root: Path) -> Optional[Path]:
+def find_document_by_uuid(uuid_str: str, design_root: Path) -> Path | None:
     """Find document path by UUID."""
     if not design_root.exists():
         return None
@@ -203,7 +202,7 @@ def extract_issue_data(frontmatter: dict, body: str, doc_path: Path) -> dict:
     }
 
 
-def create_github_issue(issue_data: dict, dry_run: bool = False) -> Optional[int]:
+def create_github_issue(issue_data: dict, dry_run: bool = False) -> int | None:
     """Create GitHub issue using gh CLI.
 
     Returns issue number if successful, None otherwise.

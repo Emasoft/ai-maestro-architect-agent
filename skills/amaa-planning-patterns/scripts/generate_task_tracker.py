@@ -35,7 +35,7 @@ import sys
 from collections import deque
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 # WHY: the shared helpers live at repo-root lib/ — skills/shared never existed
 # (TRDD-WDM195GD); parents[3] of this file is the plugin root.
@@ -56,7 +56,7 @@ class Task:
         phase: int,
         name: str,
         status: str = "pending",
-        dependencies: Optional[List[str]] = None,
+        dependencies: list[str] | None = None,
         assignee: str = "",
         notes: str = "",
     ):
@@ -82,7 +82,7 @@ class Task:
         self.created = datetime.now().isoformat()
         self.updated = datetime.now().isoformat()
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert task to dictionary."""
         return {
             "id": self.task_id,
@@ -96,7 +96,7 @@ class Task:
             "updated": self.updated,
         }
 
-    def to_csv_row(self) -> List[str]:
+    def to_csv_row(self) -> list[str]:
         """Convert task to CSV row."""
         return [
             self.task_id,
@@ -116,8 +116,8 @@ class TaskTracker:
 
     def __init__(self) -> None:
         """Initialize task tracker."""
-        self.tasks: List[Task] = []
-        self.plan_file: Optional[str] = None
+        self.tasks: list[Task] = []
+        self.plan_file: str | None = None
 
     def add_task(self, task: Task) -> None:
         """Add a task to the tracker."""
@@ -131,7 +131,7 @@ class TaskTracker:
             SystemExit: If circular dependencies are detected
         """
         # Build adjacency list
-        graph: Dict[str, List[str]] = {}
+        graph: dict[str, list[str]] = {}
         task_ids = {task.task_id for task in self.tasks}
 
         for task in self.tasks:
@@ -148,9 +148,9 @@ class TaskTracker:
 
         # Detect cycles using DFS with color marking
         # WHITE (0): unvisited, GRAY (1): in current path, BLACK (2): fully processed
-        color: Dict[str, int] = {tid: 0 for tid in task_ids}
+        color: dict[str, int] = {tid: 0 for tid in task_ids}
 
-        def has_cycle_dfs(node: str, path: List[str]) -> bool:
+        def has_cycle_dfs(node: str, path: list[str]) -> bool:
             """DFS to detect cycles. Returns True if cycle found."""
             if color[node] == 1:  # GRAY - found back edge (cycle)
                 cycle_start = path.index(node)
@@ -181,7 +181,7 @@ class TaskTracker:
                 if has_cycle_dfs(task_id, []):
                     sys.exit(1)
 
-    def calculate_critical_path(self) -> List[str]:
+    def calculate_critical_path(self) -> list[str]:
         """
         Calculate critical path through task dependencies using topological sort.
 
@@ -189,8 +189,8 @@ class TaskTracker:
             List of task IDs representing the critical path
         """
         # Build adjacency list and in-degree count
-        graph: Dict[str, List[str]] = {task.task_id: [] for task in self.tasks}
-        in_degree: Dict[str, int] = {task.task_id: 0 for task in self.tasks}
+        graph: dict[str, list[str]] = {task.task_id: [] for task in self.tasks}
+        in_degree: dict[str, int] = {task.task_id: 0 for task in self.tasks}
 
         for task in self.tasks:
             for dep_id in task.dependencies:
@@ -201,8 +201,8 @@ class TaskTracker:
         queue = deque([tid for tid, degree in in_degree.items() if degree == 0])
 
         # Track longest path to each task
-        longest_path: Dict[str, int] = {tid: 0 for tid in graph}
-        predecessor: Dict[str, Optional[str]] = {tid: None for tid in graph}
+        longest_path: dict[str, int] = {tid: 0 for tid in graph}
+        predecessor: dict[str, str | None] = {tid: None for tid in graph}
 
         # Process tasks in topological order
         while queue:
@@ -222,8 +222,8 @@ class TaskTracker:
         critical_end = max(longest_path.items(), key=lambda x: x[1])[0]
 
         # Reconstruct critical path by walking backwards through predecessors
-        critical_path: List[str] = []
-        current_node: Optional[str] = critical_end
+        critical_path: list[str] = []
+        current_node: str | None = critical_end
         while current_node is not None:
             critical_path.append(current_node)
             current_node = predecessor[current_node]
@@ -290,7 +290,7 @@ class TaskTracker:
                 task_desc = task_match.group(2).strip()
 
                 # Extract dependencies from task description
-                dependencies: List[str] = []
+                dependencies: list[str] = []
                 dep_match = re.search(
                     r"Depends on:\s*([#\w\-,\s]+)", task_desc, re.IGNORECASE
                 )

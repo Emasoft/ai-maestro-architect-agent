@@ -51,9 +51,9 @@ def parse_frontmatter(filepath):
         frontmatter is found.
     """
     try:
-        with open(filepath, "r", encoding="utf-8") as f:
+        with open(filepath, encoding="utf-8") as f:
             lines = f.readlines()
-    except (OSError, IOError):
+    except OSError:
         return None
 
     if not lines or lines[0].strip() != "---":

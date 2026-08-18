@@ -35,7 +35,7 @@ def load_tracker_json(tracker_path: Path) -> dict[str, Any]:
     Returns:
         Parsed tracker data
     """
-    with open(tracker_path, "r", encoding="utf-8") as f:
+    with open(tracker_path, encoding="utf-8") as f:
         return cast(dict[str, Any], json.load(f))
 
 
@@ -49,7 +49,7 @@ def parse_plan_markdown(plan_path: Path) -> dict[str, Any]:
     Returns:
         Dictionary with parsed plan data
     """
-    with open(plan_path, "r", encoding="utf-8") as f:
+    with open(plan_path, encoding="utf-8") as f:
         content = f.read()
 
     tasks = []
@@ -290,7 +290,7 @@ def generate_executive_summary(
     blocked_tasks = len(identify_blocked_tasks(tasks))
 
     overall_progress = (
-        int((completed_tasks / total_tasks * 100)) if total_tasks > 0 else 0
+        int(completed_tasks / total_tasks * 100) if total_tasks > 0 else 0
     )
 
     return {

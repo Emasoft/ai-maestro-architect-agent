@@ -35,7 +35,6 @@ import json
 import re
 import sys
 from pathlib import Path
-from typing import Optional
 
 # Add scripts directory to path for imports
 _SCRIPT_DIR = Path(__file__).parent
@@ -194,9 +193,9 @@ def search_full_text(query: str, design_root: Path) -> list[DocumentMetadata]:
 
 def filter_results(
     results: list[DocumentMetadata],
-    doc_type: Optional[str] = None,
-    status: Optional[str] = None,
-    tag: Optional[str] = None,
+    doc_type: str | None = None,
+    status: str | None = None,
+    tag: str | None = None,
 ) -> list[DocumentMetadata]:
     """Filter results by additional criteria."""
     filtered = results

@@ -150,7 +150,7 @@ def generate_roadmap_template(phases: int, output_file: str) -> None:
     for p in range(2, phases + 1):
         content += f"- Phase {p} depends on: Phase {p - 1}\n"
 
-    content += """
+    content += f"""
 ### External Dependencies
 
 - [Service/Team]: [Dependency]
@@ -211,7 +211,7 @@ See Risk Register for complete list.
 **Roadmap approved by**: _________________
 
 **Roadmap review**: [As needed based on phase completion]
-""".format(phases=phases)
+"""
     # WHY: atomic_write_text ensures file is written completely or not at all,
     # preventing partial/corrupt files on disk full or interrupt scenarios
     output_path = Path(output_file)

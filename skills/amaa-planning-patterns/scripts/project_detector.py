@@ -17,7 +17,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Set
+from typing import Any
 
 # WHY: the shared helpers live at repo-root lib/ — skills/shared never existed
 # (TRDD-WDM195GD); parents[3] of this file is the plugin root.
@@ -109,16 +109,16 @@ class ProjectDetector:
         """
         self.project_path = project_path
         self.verbose = verbose
-        self.detected_types: Set[str] = set()
-        self.detected_subtypes: Dict[str, List[str]] = {}
-        self.capabilities: Dict[str, Any] = {}
+        self.detected_types: set[str] = set()
+        self.detected_subtypes: dict[str, list[str]] = {}
+        self.capabilities: dict[str, Any] = {}
 
     def log(self, message: str) -> None:
         """Print verbose logging messages."""
         if self.verbose:
             print(f"[DEBUG] {message}", file=sys.stderr)
 
-    def detect_project_types(self) -> Set[str]:
+    def detect_project_types(self) -> set[str]:
         """
         Detect all project types present in the directory.
 
@@ -148,13 +148,13 @@ class ProjectDetector:
         self.detected_types = detected
         return detected
 
-    def detect_subtypes(self, project_type: str) -> List[str]:
+    def detect_subtypes(self, project_type: str) -> list[str]:
         """
         Detect subtypes for a specific project type.
 
         WHY: Subtypes determine specific tooling and workflows (e.g., Django vs Flask).
         """
-        subtypes: List[str] = []
+        subtypes: list[str] = []
 
         if project_type not in self.SUBTYPE_PATTERNS:
             return subtypes
@@ -184,14 +184,14 @@ class ProjectDetector:
 
         return subtypes
 
-    def _detect_nodejs_subtypes(self) -> List[str]:
+    def _detect_nodejs_subtypes(self) -> list[str]:
         """
         Detect Node.js subtypes from package.json.
 
         WHY: Many Node.js project characteristics are defined in package.json,
         not in file structure alone.
         """
-        subtypes: List[str] = []
+        subtypes: list[str] = []
         package_json = self.project_path / "package.json"
 
         if not package_json.exists():
@@ -230,14 +230,14 @@ class ProjectDetector:
 
         return subtypes
 
-    def infer_python_capabilities(self) -> Dict[str, Any]:
+    def infer_python_capabilities(self) -> dict[str, Any]:
         """
         Infer Python project capabilities.
 
         WHY: Different Python projects have different tooling available.
         Knowing what's available helps orchestrators choose the right commands.
         """
-        caps: Dict[str, str | None] = {
+        caps: dict[str, str | None] = {
             "package_manager": None,
             "test_framework": None,
             "linter": None,
@@ -280,14 +280,14 @@ class ProjectDetector:
 
         return caps
 
-    def infer_nodejs_capabilities(self) -> Dict[str, Any]:
+    def infer_nodejs_capabilities(self) -> dict[str, Any]:
         """
         Infer Node.js project capabilities.
 
         WHY: Node.js ecosystem has many package managers and testing frameworks.
         Detecting the right one prevents command failures.
         """
-        caps: Dict[str, str | None] = {
+        caps: dict[str, str | None] = {
             "package_manager": None,
             "test_framework": None,
             "linter": None,
@@ -333,7 +333,7 @@ class ProjectDetector:
 
         return caps
 
-    def infer_rust_capabilities(self) -> Dict[str, Any]:
+    def infer_rust_capabilities(self) -> dict[str, Any]:
         """
         Infer Rust project capabilities.
 
@@ -347,13 +347,13 @@ class ProjectDetector:
             "formatter": "rustfmt",
         }
 
-    def infer_go_capabilities(self) -> Dict[str, Any]:
+    def infer_go_capabilities(self) -> dict[str, Any]:
         """
         Infer Go project capabilities.
 
         WHY: Go has standard tooling, but linters vary.
         """
-        caps: Dict[str, str | None] = {
+        caps: dict[str, str | None] = {
             "package_manager": "go",
             "test_framework": "go-test",
             "linter": None,
@@ -366,7 +366,7 @@ class ProjectDetector:
 
         return caps
 
-    def infer_capabilities(self) -> Dict[str, Dict[str, Any]]:
+    def infer_capabilities(self) -> dict[str, dict[str, Any]]:
         """
         Infer capabilities for all detected project types.
 
@@ -391,7 +391,7 @@ class ProjectDetector:
         self.capabilities = all_caps
         return all_caps
 
-    def analyze(self) -> Dict[str, Any]:
+    def analyze(self) -> dict[str, Any]:
         """
         Run full analysis: detect types, subtypes, and capabilities.
 

@@ -33,7 +33,7 @@ import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Optional, cast
+from typing import cast
 
 from amaa_self_id import with_self_id
 
@@ -133,7 +133,7 @@ def load_config(project_root: Path) -> dict:
     return config
 
 
-def extract_frontmatter(content: str) -> tuple[Optional[dict], str]:
+def extract_frontmatter(content: str) -> tuple[dict | None, str]:
     """Extract YAML frontmatter from markdown content."""
     if not content.startswith("---"):
         return None, content
@@ -169,7 +169,7 @@ def extract_frontmatter(content: str) -> tuple[Optional[dict], str]:
     return frontmatter, body
 
 
-def find_document_by_uuid(uuid_str: str, design_root: Path) -> Optional[Path]:
+def find_document_by_uuid(uuid_str: str, design_root: Path) -> Path | None:
     """Find document path by UUID."""
     if not design_root.exists():
         return None

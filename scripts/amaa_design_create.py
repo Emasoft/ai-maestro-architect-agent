@@ -32,7 +32,6 @@ import re
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
 
 # Valid document types as defined in the SKILL.md specification
 VALID_TYPES = ("pdr", "spec", "feature", "decision", "architecture", "template")
@@ -123,7 +122,7 @@ def generate_guuid(design_type_dir: Path) -> str:
     return f"GUUID-{today_str}-{seq:04d}"
 
 
-def load_template(doc_type: str, design_root: Path) -> Optional[str]:
+def load_template(doc_type: str, design_root: Path) -> str | None:
     """Load a document template from the templates directory if it exists.
 
     Looks for a file at design/templates/<type>-template.md and returns
@@ -222,8 +221,8 @@ def create_design_document(
     title: str,
     project_root: Path,
     author: str = "",
-    filename: Optional[str] = None,
-) -> Optional[tuple[Path, str]]:
+    filename: str | None = None,
+) -> tuple[Path, str] | None:
     """Create a new design document with frontmatter and template body.
 
     This is the main function that orchestrates document creation:
