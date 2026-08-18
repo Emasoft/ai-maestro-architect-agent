@@ -150,9 +150,8 @@ def search_by_tag(tag: str, design_root: Path) -> list[DocumentMetadata]:
 
     for md_file in design_root.rglob("*.md"):
         metadata = extract_metadata(md_file)
-        if metadata:
-            if any(t.lower() == tag_lower for t in metadata.tags):
-                results.append(metadata)
+        if metadata and any(t.lower() == tag_lower for t in metadata.tags):
+            results.append(metadata)
 
     return results
 

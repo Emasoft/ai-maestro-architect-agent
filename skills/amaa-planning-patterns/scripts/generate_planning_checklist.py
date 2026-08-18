@@ -45,9 +45,7 @@ def verify_output_file(output_path: Path) -> bool:
     """
     if not output_path.exists():
         return False
-    if output_path.stat().st_size == 0:
-        return False
-    return True
+    return output_path.stat().st_size != 0
 
 
 def generate_planning_checklist(

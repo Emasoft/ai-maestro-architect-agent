@@ -416,9 +416,8 @@ def main() -> int:
         else:  # module
             success = remove_module(data, args.name, args.force)
 
-    if success:
-        if not write_state_file(data, body):
-            return 1
+    if success and not write_state_file(data, body):
+        return 1
 
     return 0 if success else 1
 

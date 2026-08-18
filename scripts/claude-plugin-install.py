@@ -270,7 +270,7 @@ def extract_archive(archive_path: str, dest: Path):
 
     name = archive.name.lower()
 
-    if name.endswith(".tar.gz") or name.endswith(".tgz"):
+    if name.endswith((".tar.gz", ".tgz")):
         _extract_tar(archive, dest, "r:gz")
     elif name.endswith(".tar.bz2"):
         _extract_tar(archive, dest, "r:bz2")
@@ -437,9 +437,7 @@ def _is_git_metadata(rel_str: str) -> bool:
         return True
     # Also exclude .gitignore and .gitattributes from installed plugins
     basename = norm.rsplit("/", 1)[-1] if "/" in norm else norm
-    if basename in (".gitignore", ".gitattributes", ".gitmodules", ".gitkeep"):
-        return True
-    return False
+    return basename in (".gitignore", ".gitattributes", ".gitmodules", ".gitkeep")
 
 
 def _build_gitignore_matcher(plugin_dir: Path) -> Callable[[Path], bool]:

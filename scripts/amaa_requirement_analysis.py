@@ -384,7 +384,7 @@ def validate_implementation(
     # Check implementation for matching technologies
     # This is a simplified check - real implementation would be more thorough
     impl_files = list(implementation_path.rglob("*"))
-    impl_extensions = set(f.suffix.lower() for f in impl_files if f.is_file())
+    impl_extensions = {f.suffix.lower() for f in impl_files if f.is_file()}
 
     # Use typed local variables to avoid dict indexing type issues
     potential_issues: list[str] = []

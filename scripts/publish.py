@@ -401,9 +401,7 @@ def _has_bash(root: Path) -> bool:
     if (root / "install.sh").exists():
         return True
     scripts = root / "scripts"
-    if scripts.is_dir() and any(scripts.glob("*.sh")):
-        return True
-    return False
+    return bool(scripts.is_dir() and any(scripts.glob("*.sh")))
 
 
 def detect_project(root: Path) -> ProjectInfo:
@@ -1292,10 +1290,7 @@ Examples:
         # "do not", "forbidden", "bypass" etc.)
         stripped_lower = stripped.lower()
         is_prohibition_comment = (
-            stripped.startswith("#")
-            or stripped.startswith('"""')
-            or stripped.startswith("'''")
-            or '"""' in stripped
+            stripped.startswith(("#", '"""', "'''")) or '"""' in stripped
         ) and any(kw in stripped_lower for kw in (
             "no skip", "no bypass", "must not", "do not", "forbidden",
             "rejected", "forbids", "no-skip", "no-bypass", "no escape",

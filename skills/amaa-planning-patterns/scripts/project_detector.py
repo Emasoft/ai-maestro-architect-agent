@@ -217,13 +217,11 @@ class ProjectDetector:
                 if "react" not in subtypes:
                     subtypes.append("react")
 
-            if "next" in deps:
-                if "nextjs" not in subtypes:
-                    subtypes.append("nextjs")
+            if "next" in deps and "nextjs" not in subtypes:
+                subtypes.append("nextjs")
 
-            if "express" in deps:
-                if "express" not in subtypes:
-                    subtypes.append("express")
+            if "express" in deps and "express" not in subtypes:
+                subtypes.append("express")
 
         except (json.JSONDecodeError, OSError) as e:
             self.log(f"Error reading package.json: {e}")
@@ -421,7 +419,7 @@ class ProjectDetector:
         # WHY: Return comprehensive analysis in structured format
         return {
             "project_path": str(self.project_path),
-            "types": sorted(list(types)),
+            "types": sorted(types),
             "subtypes": self.detected_subtypes,
             "capabilities": capabilities,
         }

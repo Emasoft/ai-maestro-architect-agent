@@ -177,9 +177,8 @@ class TaskTracker:
 
         # Check each unvisited node
         for task_id in task_ids:
-            if color[task_id] == 0:
-                if has_cycle_dfs(task_id, []):
-                    sys.exit(1)
+            if color[task_id] == 0 and has_cycle_dfs(task_id, []):
+                sys.exit(1)
 
     def calculate_critical_path(self) -> list[str]:
         """
@@ -390,7 +389,7 @@ class TaskTracker:
             "tasks": [task.to_dict() for task in self.tasks],
             "metadata": {
                 "total_tasks": len(self.tasks),
-                "phases": len(set(task.phase for task in self.tasks)),
+                "phases": len({task.phase for task in self.tasks}),
                 "critical_path": critical_path,
                 "critical_path_length": len(critical_path),
             },
@@ -436,7 +435,7 @@ def validate_plan_structure(plan_path: str) -> None:
     tracker.parse_plan_file(plan_path)
 
     print(
-        f"✓ Found {len(tracker.tasks)} tasks across {len(set(t.phase for t in tracker.tasks))} phases"
+        f"✓ Found {len(tracker.tasks)} tasks across {len({t.phase for t in tracker.tasks})} phases"
     )
 
     print("Validating dependencies...")
