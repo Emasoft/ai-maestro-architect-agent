@@ -19,11 +19,11 @@ from typing import Any
 # (TRDD-WDM195GD); parents[3] of this file is the plugin root.
 LIB_DIR = Path(__file__).resolve().parents[3] / "lib"
 sys.path.insert(0, str(LIB_DIR))
-from cross_platform import (  # type: ignore[import-not-found]  # noqa: E402
+from cross_platform import (  # type: ignore[import-not-found]
     atomic_write_json,
     run_command,
 )
-from thresholds import TIMEOUTS  # type: ignore[import-not-found]  # noqa: E402
+from thresholds import TIMEOUTS  # type: ignore[import-not-found]
 
 
 class Severity(Enum):
@@ -99,7 +99,6 @@ class HealthCheck(ABC):
     @abstractmethod
     def name(self) -> str:
         """Unique identifier for this check."""
-        pass
 
     @abstractmethod
     def run(self) -> CheckResult:
@@ -107,7 +106,6 @@ class HealthCheck(ABC):
 
         WHY: Each check implements its own validation logic.
         """
-        pass
 
     def _run_command(
         self, cmd: list[str], cwd: Path | None = None

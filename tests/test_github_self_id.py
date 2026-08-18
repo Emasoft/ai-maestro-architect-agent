@@ -101,7 +101,7 @@ class TestEverySiteActuallyUsesIt:
         """A local copy is how the `@owner` bug survived: one site, one definition."""
         for name in POSTING_SCRIPTS:
             src = (SCRIPTS / name).read_text(encoding="utf-8")
-            assert not re.search(r"^SELF_ID_LINE\s*=", src, re.M), (
+            assert not re.search(r"^SELF_ID_LINE\s*=", src, re.MULTILINE), (
                 f"{name} redefines SELF_ID_LINE locally — import it from amaa_self_id instead"
             )
 

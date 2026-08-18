@@ -23,8 +23,8 @@ import sys
 import tarfile
 import tempfile
 import zipfile
-from pathlib import Path
 from collections.abc import Callable
+from pathlib import Path
 
 IS_WINDOWS = platform.system() == "Windows"
 PYTHON_VERSION = sys.version_info
@@ -704,9 +704,7 @@ def _find_all_scripts(plugin_dir: Path) -> list[Path]:
     for f in plugin_dir.rglob("*"):
         if not f.is_file():
             continue
-        if f.suffix in ALL_SCRIPT_EXTENSIONS:
-            scripts.append(f)
-        elif f.parent.name == "scripts" and "." not in f.name:
+        if f.suffix in ALL_SCRIPT_EXTENSIONS or f.parent.name == "scripts" and "." not in f.name:
             scripts.append(f)
     return scripts
 
@@ -2193,7 +2191,7 @@ def do_disable(plugin_key: str, quiet: bool = False, dry_run: bool = False):
 
 def do_update(
     source_path: str, marketplace_name: str | None, force: bool = False, dry_run: bool = False, quiet: bool = False
-):  # noqa: ARG001 (force accepted from argparse but update always forces reinstall)
+):
     """Update a plugin by uninstalling the old version and reinstalling from a new source."""
     # Resolve the source to find the plugin name
     source = Path(source_path)

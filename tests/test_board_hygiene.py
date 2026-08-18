@@ -47,7 +47,7 @@ RELEASE_TERMINALS = {"none": "complete", "publish": "published", "deploy": "live
 
 
 def _field(text: str, name: str) -> str | None:
-    match = re.search(rf"^{re.escape(name)}:[ \t]*(\S+)[ \t]*$", text, re.M)
+    match = re.search(rf"^{re.escape(name)}:[ \t]*(\S+)[ \t]*$", text, re.MULTILINE)
     return match.group(1) if match else None
 
 

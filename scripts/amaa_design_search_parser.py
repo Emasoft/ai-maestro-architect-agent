@@ -19,9 +19,9 @@ from pathlib import Path
 __all__ = [
     "DesignConfig",
     "DocumentMetadata",
-    "parse_frontmatter",
     "extract_metadata",
     "get_type_directory",
+    "parse_frontmatter",
 ]
 
 
@@ -131,9 +131,7 @@ def parse_frontmatter(content: str) -> dict[str, str | int | list[str] | None]:
             parsed_value: str | int | list[str] | None
 
             # Handle quoted strings
-            if raw_value.startswith('"') and raw_value.endswith('"'):
-                parsed_value = raw_value[1:-1]
-            elif raw_value.startswith("'") and raw_value.endswith("'"):
+            if raw_value.startswith('"') and raw_value.endswith('"') or raw_value.startswith("'") and raw_value.endswith("'"):
                 parsed_value = raw_value[1:-1]
             # Handle arrays
             elif raw_value.startswith("[") and raw_value.endswith("]"):

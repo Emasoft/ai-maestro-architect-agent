@@ -210,9 +210,7 @@ def extract_frontmatter(content: str) -> tuple[dict[str, str] | None, str]:
             key = key.strip()
             value = value.strip()
             # Handle quoted strings
-            if value.startswith('"') and value.endswith('"'):
-                value = value[1:-1]
-            elif value.startswith("'") and value.endswith("'"):
+            if value.startswith('"') and value.endswith('"') or value.startswith("'") and value.endswith("'"):
                 value = value[1:-1]
             # Handle arrays
             elif value.startswith("[") and value.endswith("]"):

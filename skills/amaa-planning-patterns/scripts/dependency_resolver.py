@@ -14,15 +14,15 @@ import argparse
 import json
 import sys
 from collections import defaultdict, deque
+from collections.abc import Callable
 from pathlib import Path
 from typing import Any
-from collections.abc import Callable
 
 # WHY: the shared helpers live at repo-root lib/ — skills/shared never existed
 # (TRDD-WDM195GD); parents[3] of this file is the plugin root.
 LIB_DIR = Path(__file__).resolve().parents[3] / "lib"
 sys.path.insert(0, str(LIB_DIR))
-from cross_platform import atomic_write_text  # type: ignore  # noqa: E402
+from cross_platform import atomic_write_text  # type: ignore
 
 
 class DependencyResolver:

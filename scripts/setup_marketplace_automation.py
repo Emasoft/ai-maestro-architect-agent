@@ -164,7 +164,7 @@ def check_plugin_notification_workflow(plugin_path: Path) -> PluginWorkflowStatu
 
 def setup_plugin_notifications(
     marketplace_dir: Path,
-    dry_run: bool = False,  # noqa: ARG001  # Kept for API compatibility
+    dry_run: bool = False,  # Kept for API compatibility
     verbose: bool = True,
 ) -> PluginNotificationResult:
     """

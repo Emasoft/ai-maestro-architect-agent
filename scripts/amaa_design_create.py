@@ -88,8 +88,7 @@ def find_next_sequence(design_type_dir: Path, today_str: str) -> int:
             match = GUUID_PATTERN.search(md_file.name)
             if match and match.group(1) == today_str:
                 seq = int(match.group(2))
-                if seq > max_seq:
-                    max_seq = seq
+                max_seq = max(max_seq, seq)
 
             # Also check frontmatter uuid field inside the file
             try:
@@ -97,8 +96,7 @@ def find_next_sequence(design_type_dir: Path, today_str: str) -> int:
                 for fm_match in GUUID_PATTERN.finditer(content):
                     if fm_match.group(1) == today_str:
                         seq = int(fm_match.group(2))
-                        if seq > max_seq:
-                            max_seq = seq
+                        max_seq = max(max_seq, seq)
             except (OSError, UnicodeDecodeError):
                 pass
 

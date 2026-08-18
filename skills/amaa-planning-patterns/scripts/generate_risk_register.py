@@ -26,7 +26,7 @@ from typing import Any
 # (TRDD-WDM195GD); parents[3] of this file is the plugin root.
 LIB_DIR = Path(__file__).resolve().parents[3] / "lib"
 sys.path.insert(0, str(LIB_DIR))
-from cross_platform import (  # type: ignore[import-not-found]  # noqa: E402
+from cross_platform import (  # type: ignore[import-not-found]
     atomic_write_json,
     atomic_write_text,
 )

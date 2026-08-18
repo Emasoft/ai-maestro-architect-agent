@@ -64,9 +64,7 @@ def parse_frontmatter(content: str) -> dict[str, Any]:
             raw_value = raw_value.strip()
 
             parsed_value: Any
-            if raw_value.startswith('"') and raw_value.endswith('"'):
-                parsed_value = raw_value[1:-1]
-            elif raw_value.startswith("'") and raw_value.endswith("'"):
+            if raw_value.startswith('"') and raw_value.endswith('"') or raw_value.startswith("'") and raw_value.endswith("'"):
                 parsed_value = raw_value[1:-1]
             elif raw_value.startswith("[") and raw_value.endswith("]"):
                 inner = raw_value[1:-1]

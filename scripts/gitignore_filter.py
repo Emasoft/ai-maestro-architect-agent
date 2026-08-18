@@ -62,8 +62,7 @@ def is_path_gitignored(rel_path: str, patterns: list[str]) -> bool:
             continue
 
         # Directory-only patterns end with /.
-        if pattern.endswith("/"):
-            pattern = pattern[:-1]
+        pattern = pattern.removesuffix("/")
 
         # Anchored patterns start with /.
         is_anchored = pattern.startswith("/")

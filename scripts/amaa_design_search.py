@@ -41,7 +41,7 @@ _SCRIPT_DIR = Path(__file__).parent
 if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
 
-from amaa_design_search_parser import (  # noqa: E402
+from amaa_design_search_parser import (
     DesignConfig,
     DocumentMetadata,
     extract_metadata,
@@ -49,15 +49,15 @@ from amaa_design_search_parser import (  # noqa: E402
 )
 
 __all__ = [
-    "search_by_uuid",
-    "search_by_type",
-    "search_by_status",
-    "search_by_tag",
-    "search_by_issue",
-    "search_full_text",
     "filter_results",
     "format_output",
     "main",
+    "search_by_issue",
+    "search_by_status",
+    "search_by_tag",
+    "search_by_type",
+    "search_by_uuid",
+    "search_full_text",
 ]
 
 

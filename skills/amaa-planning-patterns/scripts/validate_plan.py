@@ -22,10 +22,10 @@ from typing import Any
 # (TRDD-WDM195GD); parents[3] of this file is the plugin root.
 LIB_DIR = Path(__file__).resolve().parents[3] / "lib"
 sys.path.insert(0, str(LIB_DIR))
-from cross_platform import (  # noqa: E402
+from cross_platform import (
     atomic_write_json,  # type: ignore[import-not-found]
 )
-from thresholds import (  # type: ignore[import-not-found]  # noqa: E402
+from thresholds import (  # type: ignore[import-not-found]
     PLANNING,
     TASK_COMPLEXITY,
     is_architecture_too_complex,

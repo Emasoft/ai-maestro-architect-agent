@@ -89,9 +89,7 @@ def extract_frontmatter(content: str) -> tuple[dict | None, str]:
             key, _, value = line.partition(":")
             key = key.strip()
             value = value.strip()
-            if value.startswith('"') and value.endswith('"'):
-                value = value[1:-1]
-            elif value.startswith("'") and value.endswith("'"):
+            if value.startswith('"') and value.endswith('"') or value.startswith("'") and value.endswith("'"):
                 value = value[1:-1]
             elif value.startswith("[") and value.endswith("]"):
                 try:

@@ -178,9 +178,9 @@ def ensure_pre_push_hook(git_root: Path) -> None:
     print(f"{GREEN}ok pre-push hook installed + core.hooksPath activated{NC}")
 
 
-def _get_gi(root: Path):  # noqa: ANN202
+def _get_gi(root: Path):
     """Get or create GitignoreFilter for the given root."""
-    global _gi  # noqa: PLW0603
+    global _gi
     if _gi is None:
         try:
             from gitignore_filter import GitignoreFilter

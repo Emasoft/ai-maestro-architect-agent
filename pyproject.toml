@@ -16,3 +16,13 @@ dev = ["pyyaml"]
 # (extend-select, never select — select REPLACES the defaults and guts the gate.)
 [tool.ruff.lint]
 extend-select = ["BLE001", "S110", "PLW1510", "TRY004"]
+
+# E402 in these files is BY DESIGN: they must extend sys.path to reach the
+# repo-root lib/ helpers before importing them (TRDD-WDM195GD), so the import
+# cannot sit at top-of-file. Config-level ignore instead of per-line noqa
+# because E402 is a default rule at the pinned gate (0.15.20) but NOT at the
+# adoption target (0.16.3) — inline noqa comments are "used" at one version
+# and RUF100-stale at the other; the config form is stable across both.
+[tool.ruff.lint.per-file-ignores]
+"scripts/amaa_design_search.py" = ["E402"]
+"skills/amaa-planning-patterns/scripts/*.py" = ["E402"]
