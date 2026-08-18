@@ -1,13 +1,13 @@
 ---
 trdd-id: DMIRQOCD
 title: Adopt current ruff and CPV deliberately then bump the gate pins
-column: todo
+column: completed
 created: 2026-07-24T16:28:59+0200
-updated: 2026-08-18T22:10:00+0200
+updated: 2026-08-19T00:30:00+0200
 current-owner: ai-maestro-architect-agent
 task-type: infra
 scope: project
-implementation-commits: [aa118ea, 0cbcbe5, 9276e2e]
+implementation-commits: [aa118ea, 0cbcbe5, 9276e2e, 4eb3982, 3cd63c0, 3cf0b06, 6b43f8d, 1903f73]
 ---
 
 ## ⏵ STATE — READ THIS FIRST ON RESUME (authoritative; supersedes the body) — 2026-07-24
@@ -543,3 +543,16 @@ pinned both to the versions current at the last clean publish (v2.11.0,
 
 Reports (the drift histograms, the v2.153.1 verify) live in gitignored `reports/`
 and the session scratchpad; this TRDD is the decision record.
+
+## Approval log
+
+- 2026-08-18 — Hub dispatch (USER-delegated, TRDD-BRRJK57P Phase-2 GO) APPROVED phased
+  ruff adoption: per-rule enablement, the 107 fixed incrementally, no big-bang enable.
+- 2026-08-19T00:30:00+0200 — COMPLETED by ai-maestro-architect-agent. Both halves done:
+  CPV pins at v5.4.0 (lockstep, earlier); ruff fully adopted — fail-fast ratchet
+  (extend-select BLE001,S110,PLW1510,TRY004) + whole default-set burn-down (UP 119,
+  EXE001 17, SIM/C4/PIE/PLC/FURB/ISC/RUF012/RUF022/RUF100 tail) + native pin bumped
+  0.15.20 → 0.16.3 with the tree verified clean FIRST. Two documented policy ignores:
+  DTZ005 (local wall-clock timestamps are the project policy) and per-file E402 (the
+  sys.path-before-import scripts). Impl: aa118ea, 0cbcbe5, 9276e2e, 4eb3982, 3cd63c0,
+  3cf0b06, 6b43f8d, 1903f73. Gates: 0.16.3 live gate clean, 404 tests / 3 skipped.
