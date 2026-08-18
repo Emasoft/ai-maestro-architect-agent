@@ -3,11 +3,11 @@ trdd-id: DMIRQOCD
 title: Adopt current ruff and CPV deliberately then bump the gate pins
 column: todo
 created: 2026-07-24T16:28:59+0200
-updated: 2026-08-18T19:54:10+0200
+updated: 2026-08-18T22:10:00+0200
 current-owner: ai-maestro-architect-agent
 task-type: infra
 scope: project
-implementation-commits: []
+implementation-commits: [aa118ea, 0cbcbe5, 9276e2e]
 ---
 
 ## ⏵ STATE — READ THIS FIRST ON RESUME (authoritative; supersedes the body) — 2026-07-24
@@ -504,6 +504,19 @@ implementation-commits: []
   claude-plugin-install.py:582,1170) + 3 PLW1510 `run_search_script` clones
   (amaa_design_export.py:43, amaa_design_lifecycle.py:70, amaa_design_version.py:34);
   the other 48 of the 58 are verified STYLE (checked/propagated), annotate honestly.
+
+- **2026-08-18 — THE 107 BURN-DOWN IS COMPLETE AND RATCHETED (steps 2–4 all landed).**
+  Commits: `aa118ea` (step 1a), `0cbcbe5` (step 2 + real defects: run_search_script ×3,
+  publish.py manifest/NODEJS swallows, claude-plugin-install read_plugin_meta +
+  frontmatter-validator false-PASS), `9276e2e` (step 3b per-site noqa-with-reason ×45,
+  TRY004 fixed for real, step 4 ratchet: `[tool.ruff.lint] extend-select =
+  [BLE001, S110, PLW1510, TRY004]` in pyproject). Gates at 9276e2e: live 0.15.20 gate +
+  ratchet clean, 0.16.3 four-rule tree-wide zero, 404 tests passed / 3 skipped.
+- **REMAINING (the card's last increment): the native pin bump 0.15.20 → current.**
+  Blocked only by the OTHER 0.16.3-default populations (127 UP modernization
+  auto-fixables, 17 RUF100 stale suppressions, ~98 misc tail) — burn those per-rule,
+  then bump the pin in `publish.py` Step 3. The fail-fast half of this card is DONE
+  and can no longer regress unmeasured.
 
 - **Durable artifacts:** the pin comments in `publish.py` (Step 4/5) and the two
   workflows are the load-bearing BUMP PROTOCOL; the CPV FP issue is the upstream
