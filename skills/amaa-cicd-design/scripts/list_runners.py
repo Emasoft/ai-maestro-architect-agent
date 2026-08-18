@@ -125,6 +125,7 @@ def get_self_hosted_runners(repo: str) -> list[dict[str, Any]]:
         ["gh", "api", f"repos/{repo}/actions/runners"],
         capture_output=True,
         text=True,
+        check=False,
     )
 
     if result.returncode != 0:
@@ -241,6 +242,7 @@ def main() -> int:
                 ],
                 capture_output=True,
                 text=True,
+                check=False,
             )
             if result.returncode == 0:
                 repo = result.stdout.strip()

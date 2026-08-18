@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Tests for the redesign loop (issue #14, M7).
 
-The redesign loop is the IMPLEMENTING -> REVIEW re-entry edge that lets the
+The redesign loop is the IMPLEMENTED -> REVIEW re-entry edge that lets the
 ARCHITECT pull a design back into review when a flaw surfaces mid-dev. Before
 this edge existed the design state machine was a one-way street and a surfaced
 design problem had nowhere to go.
@@ -75,37 +75,42 @@ class TestDocsEncodeTheEdge:
     """The state-machine docs must document the same edge (no code/doc drift)."""
 
     def test_design_states_doc_has_re_entry(self):
-        """design-states.md must show IMPLEMENTING -> REVIEW."""
+        """design-states.md must show IMPLEMENTED -> REVIEW (ratified machine, TRDD-QW4ISL8Z)."""
         text = (SKILL_REFS / "design-states.md").read_text(encoding="utf-8")
         assert "REVIEW" in text and "redesign" in text.lower()
-        assert "IMPLEMENTING" in text
+        assert "IMPLEMENTED" in text
+        # The phantom 6-state vocabulary must never come back (TRDD-QW4ISL8Z):
+        assert "IMPLEMENTING" not in text
 
     def test_transitions_doc_has_re_entry_rule(self):
         """op-manage-state-transitions.md must carry the redesign-loop rule."""
         text = (SKILL_REFS / "op-manage-state-transitions.md").read_text(
             encoding="utf-8"
         )
-        assert "IMPLEMENTING to REVIEW" in text or "IMPLEMENTING → REVIEW" in text
+        assert "IMPLEMENTED to REVIEW" in text or "IMPLEMENTED → REVIEW" in text
         assert "redesign" in text.lower()
+        assert "IMPLEMENTING" not in text
 
-    def test_transitions_matrix_allows_implementing_to_review(self):
-        """The transition matrix row for IMPLEMENTING must mark To REVIEW = YES."""
+    def test_transitions_matrix_allows_implemented_to_review(self):
+        """The transition matrix row for IMPLEMENTED must mark To REVIEW = YES."""
         text = (SKILL_REFS / "op-manage-state-transitions.md").read_text(
             encoding="utf-8"
         )
-        # Two tables have a row starting "| IMPLEMENTING": the State Definitions
+        # Two tables have a row starting "| IMPLEMENTED": the State Definitions
         # table (3 cols) and the State Transition Matrix (6 YES/NO/- columns).
         # Select the matrix row: the one whose data cells are only YES/NO/-.
         matrix_row = None
         for line in text.splitlines():
-            if not line.strip().startswith("| IMPLEMENTING"):
+            if not line.strip().startswith("| IMPLEMENTED"):
                 continue
             cells = [c.strip() for c in line.split("|")][1:-1]  # drop edge empties
-            if len(cells) >= 6 and set(cells[1:]) <= {"YES", "NO", "-"}:
+            # "archive-only" marks the archive-subcommand-only route to ARCHIVED
+            # (the ratified machine has no direct edge) — accept it as a cell.
+            if len(cells) >= 6 and set(cells[1:]) <= {"YES", "NO", "-", "archive-only"}:
                 matrix_row = cells
                 break
-        assert matrix_row is not None, "IMPLEMENTING matrix row not found"
-        # cells: [From=IMPLEMENTING, To DRAFT, To REVIEW, To APPROVED, ...]
+        assert matrix_row is not None, "IMPLEMENTED matrix row not found"
+        # cells: [From=IMPLEMENTED, To DRAFT, To REVIEW, To APPROVED, ...]
         assert matrix_row[2] == "YES", (
             f"To REVIEW cell was {matrix_row[2]!r}, expected YES"
         )
@@ -138,4 +143,4 @@ class TestDialogLoopTemplates:
             encoding="utf-8"
         )
         assert "ARCH" in text
-        assert "redesign" in text.lower() or "IMPLEMENTING → REVIEW" in text
+        assert "redesign" in text.lower() or "IMPLEMENTED → REVIEW" in text

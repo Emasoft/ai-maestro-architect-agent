@@ -378,6 +378,7 @@ Enables implementers to access specification via issue tracker.
                 cwd=design_root,
                 capture_output=True,
                 text=True,
+                check=False,
             )
             if result.returncode != 0:
                 print("No changes to commit in design git")
@@ -390,7 +391,10 @@ Enables implementers to access specification via issue tracker.
                 stderr=subprocess.DEVNULL,
             )
             result = subprocess.run(
-                ["git", "commit", "-m", commit_msg], capture_output=True, text=True
+                ["git", "commit", "-m", commit_msg],
+                capture_output=True,
+                text=True,
+                check=False,
             )
             if result.returncode != 0:
                 print("No changes to commit")

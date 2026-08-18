@@ -200,6 +200,7 @@ class WorkflowDebugger:
                 env=full_env,
                 capture_output=not self.verbose,
                 text=True,
+                check=False,
             )
             return result.returncode == 0
         except Exception as e:

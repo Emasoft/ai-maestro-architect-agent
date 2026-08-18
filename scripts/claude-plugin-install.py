@@ -471,6 +471,7 @@ def _build_gitignore_matcher(plugin_dir: Path) -> Callable[[Path], bool]:
                     all_paths.append(rel)
             if all_paths:
                 # Batch check: pass all paths via stdin
+                # check=False: git check-ignore exits non-zero when NO path is ignored — a normal condition, not a failure.
                 result = subprocess.run(
                     ["git", "check-ignore", "--stdin"],
                     cwd=str(plugin_dir),
@@ -478,6 +479,7 @@ def _build_gitignore_matcher(plugin_dir: Path) -> Callable[[Path], bool]:
                     capture_output=True,
                     text=True,
                     timeout=30,
+                    check=False,
                 )
                 # Each line of stdout is a path that is ignored
                 for line in result.stdout.splitlines():
@@ -577,10 +579,18 @@ def find_plugin_root(search_dir: Path) -> Optional[Path]:
 def read_plugin_meta(plugin_root: Path) -> dict:
     """Read plugin.json and return metadata with defaults."""
     pj = plugin_root / ".claude-plugin" / "plugin.json"
-    try:
-        meta = json.loads(pj.read_text(encoding="utf-8"))
-    except Exception:
+    if not pj.exists():
         meta = {}
+    else:
+        try:
+            meta = json.loads(pj.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError, ValueError) as e:
+            # WHY: this function backs core install/update logic (name/version
+            # derivation at 6 call sites). Silently substituting {} made a plugin
+            # with a MALFORMED plugin.json install under a wrong derived identity
+            # with no diagnostic (TRDD-DMIRQOCD). Missing file stays a legitimate
+            # defaults case; malformed fails fast.
+            sys.exit(f"ERROR: {pj} is unreadable or invalid JSON: {e}")
     return {
         "name": meta.get("name") or plugin_root.name,
         "version": meta.get("version", "1.0.0"),
@@ -1167,7 +1177,11 @@ def _validate_markdown_frontmatter(
 
     try:
         text = md_path.read_text(encoding="utf-8")
-    except Exception:
+    except (OSError, UnicodeDecodeError) as e:
+        # WHY: returning empty (errors, warnings) here reported an UNREADABLE
+        # file as fully VALID — a corrupt component silently passed validation
+        # (TRDD-DMIRQOCD shape 3). Unreadable is an error, not a pass.
+        errors.append(f"{component_type}s/{md_path.name}: cannot read file: {e}")
         return errors, warnings
 
     name = md_path.name
@@ -1385,6 +1399,7 @@ def _run_skill_audit(plugin_root: Path) -> Tuple[List[str], List[str]]:
             capture_output=True,
             text=True,
             timeout=120,
+            check=False,
         )
     except (subprocess.TimeoutExpired, OSError):
         warnings.append("skill-audit: timed out or failed to run")

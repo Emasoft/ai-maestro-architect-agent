@@ -58,6 +58,7 @@ def run_stop_check(
         cwd=str(project_root),
         env=env,
         timeout=30,
+        check=False,
     )
 
 

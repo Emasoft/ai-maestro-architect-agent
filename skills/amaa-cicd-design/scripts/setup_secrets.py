@@ -94,6 +94,7 @@ class SecretsManager:
             ["gh", "repo", "view", "--json", "nameWithOwner", "-q", ".nameWithOwner"],
             capture_output=True,
             text=True,
+            check=False,
         )
         if result.returncode != 0:
             print("Error: Not in a git repository or gh CLI not configured")
@@ -106,7 +107,7 @@ class SecretsManager:
         if self.environment:
             cmd.extend(["--env", self.environment])
 
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        result = subprocess.run(cmd, capture_output=True, text=True, check=False)
         if result.returncode != 0:
             return []
 
@@ -122,7 +123,7 @@ class SecretsManager:
         if self.environment:
             cmd.extend(["--env", self.environment])
 
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        result = subprocess.run(cmd, capture_output=True, text=True, check=False)
         return result.returncode == 0
 
     def set_secret_from_file(self, name: str, path: Path) -> bool:

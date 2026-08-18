@@ -108,6 +108,7 @@ def check_gh_cli() -> bool:
         ["gh", "auth", "status"],
         capture_output=True,
         text=True,
+        check=False,
     )
     if result.returncode != 0:
         print("ERROR: gh CLI not authenticated. Run: gh auth login", file=sys.stderr)
@@ -238,6 +239,7 @@ def get_issue_labels(issue_number: int) -> list[str]:
         ["gh", "issue", "view", str(issue_number), "--json", "labels"],
         capture_output=True,
         text=True,
+        check=False,
     )
     if result.returncode != 0:
         return []
@@ -298,6 +300,7 @@ def sync_status_to_issue(
             ],
             capture_output=True,
             text=True,
+            check=False,
         )
         if result.returncode != 0:
             print(
@@ -318,6 +321,7 @@ def sync_status_to_issue(
             ],
             capture_output=True,
             text=True,
+            check=False,
         )
         if result.returncode != 0:
             print(
@@ -343,6 +347,7 @@ def sync_status_to_issue(
             ["gh", "issue", "comment", str(issue_number), "--body", comment],
             capture_output=True,
             text=True,
+            check=False,
         )
         if result.returncode != 0:
             print(

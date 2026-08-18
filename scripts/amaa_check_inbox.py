@@ -37,7 +37,7 @@ def get_session_name() -> str:
     try:
         result = subprocess.run(
             ["tmux", "display-message", "-p", "#S"],
-            capture_output=True, text=True, timeout=5,
+            capture_output=True, text=True, timeout=5, check=False,
         )
         if result.returncode == 0 and result.stdout.strip():
             return result.stdout.strip()
@@ -71,6 +71,7 @@ def check_inbox(
             capture_output=True,
             text=True,
             timeout=30,
+            check=False,
         )
     except FileNotFoundError:
         return {"error": "amp-inbox command not found. Is AMP CLI installed?"}

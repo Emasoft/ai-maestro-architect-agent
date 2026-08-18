@@ -59,7 +59,7 @@ def build(is_dev: bool) -> bool:
     env_define = f"{node_env_target}={node_env_value!r}"
     cmd += ["--define", env_define]
 
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, check=False)
 
     elapsed_ms = int((time.monotonic() - start_time) * 1000)
 

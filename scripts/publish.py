@@ -234,8 +234,12 @@ def detect_plugin_info(plugin_root: Path) -> dict:
             "author": data.get("author", {}).get("name", "") if isinstance(data.get("author"), dict) else data.get("author", ""),
             "repository": data.get("repository", ""),
         }
-    except Exception:
-        return {"name": "unknown", "version": "0.0.0"}
+    except (OSError, UnicodeDecodeError, ValueError) as e:
+        # WHY: a present-but-malformed plugin.json must STOP the pipeline, not
+        # let it proceed under a fake "unknown"/"0.0.0" identity — that inverted
+        # the no-skip policy (TRDD-DMIRQOCD shape 1). A MISSING file keeps the
+        # default return above; that case is legitimate.
+        sys.exit(f"ERROR: {plugin_json} is unreadable or invalid JSON: {e}")
 
 
 def detect_marketplace(git_root: Path) -> dict:
@@ -437,8 +441,14 @@ def detect_project(root: Path) -> ProjectInfo:
 def _read_project_metadata(root: Path, kind: ProjectKind) -> tuple[str, str, str]:
     """Return (name, version, description) for the given project kind.
     Unknown fields default to empty strings."""
+    # WHY (all branches): a MISSING manifest keeps the defaults — the kind was
+    # detected structurally and absence is a legitimate edge. A PRESENT but
+    # unreadable/malformed manifest FAILS the pipeline instead of feeding fake
+    # "unknown"/"0.0.0" identity into a no-skip publish (TRDD-DMIRQOCD shape 1).
     if kind == ProjectKind.CLAUDE_PLUGIN:
         pj = root / ".claude-plugin" / "plugin.json"
+        if not pj.exists():
+            return ("unknown", "0.0.0", "")
         try:
             d = json.loads(pj.read_text(encoding="utf-8"))
             return (
@@ -446,11 +456,13 @@ def _read_project_metadata(root: Path, kind: ProjectKind) -> tuple[str, str, str
                 str(d.get("version", "0.0.0")),
                 str(d.get("description", "")),
             )
-        except Exception:
-            return ("unknown", "0.0.0", "")
+        except (OSError, UnicodeDecodeError, ValueError) as e:
+            sys.exit(f"ERROR: {pj} is unreadable or invalid JSON: {e}")
 
     if kind == ProjectKind.NODEJS:
         pj = root / "package.json"
+        if not pj.exists():
+            return ("unknown", "0.0.0", "")
         try:
             d = json.loads(pj.read_text(encoding="utf-8"))
             return (
@@ -458,41 +470,47 @@ def _read_project_metadata(root: Path, kind: ProjectKind) -> tuple[str, str, str
                 str(d.get("version", "0.0.0")),
                 str(d.get("description", "")),
             )
-        except Exception:
-            return ("unknown", "0.0.0", "")
+        except (OSError, UnicodeDecodeError, ValueError) as e:
+            sys.exit(f"ERROR: {pj} is unreadable or invalid JSON: {e}")
 
     if kind == ProjectKind.PYTHON:
         pp = root / "pyproject.toml"
+        if not pp.exists():
+            return ("unknown", "0.0.0", "")
         try:
             content = pp.read_text(encoding="utf-8")
             name = _toml_str(content, "project", "name") or _toml_str(content, "tool.poetry", "name") or "unknown"
             ver = _toml_str(content, "project", "version") or _toml_str(content, "tool.poetry", "version") or "0.0.0"
             desc = _toml_str(content, "project", "description") or _toml_str(content, "tool.poetry", "description") or ""
             return (name, ver, desc)
-        except Exception:
-            return ("unknown", "0.0.0", "")
+        except (OSError, UnicodeDecodeError, ValueError) as e:
+            sys.exit(f"ERROR: {pp} is unreadable or invalid TOML: {e}")
 
     if kind == ProjectKind.RUST:
         cargo = root / "Cargo.toml"
+        if not cargo.exists():
+            return ("unknown", "0.0.0", "")
         try:
             content = cargo.read_text(encoding="utf-8")
             name = _toml_str(content, "package", "name") or "unknown"
             ver = _toml_str(content, "package", "version") or "0.0.0"
             desc = _toml_str(content, "package", "description") or ""
             return (name, ver, desc)
-        except Exception:
-            return ("unknown", "0.0.0", "")
+        except (OSError, UnicodeDecodeError, ValueError) as e:
+            sys.exit(f"ERROR: {cargo} is unreadable or invalid TOML: {e}")
 
     if kind == ProjectKind.GO:
         gomod = root / "go.mod"
+        if not gomod.exists():
+            return ("unknown", "0.0.0", "")
         try:
             content = gomod.read_text(encoding="utf-8")
             m = re.search(r"^module\s+(\S+)", content, re.MULTILINE)
             name = m.group(1).split("/")[-1] if m else "unknown"
             # Go modules version via git tags; read latest vX.Y.Z tag if present
             return (name, _git_latest_semver_tag(root), "")
-        except Exception:
-            return ("unknown", "0.0.0", "")
+        except (OSError, UnicodeDecodeError, ValueError) as e:
+            sys.exit(f"ERROR: {gomod} is unreadable: {e}")
 
     if kind == ProjectKind.BASH:
         # Fallback: use the git repo directory name and the latest semver tag
@@ -572,7 +590,7 @@ def _git_latest_semver_tag(root: Path) -> str:
     try:
         result = subprocess.run(
             ["git", "-C", str(root), "tag", "--list", "v[0-9]*.[0-9]*.[0-9]*", "--sort=-version:refname"],
-            capture_output=True, text=True, timeout=10,
+            capture_output=True, text=True, timeout=10, check=False,
         )
         for line in result.stdout.splitlines():
             line = line.strip().lstrip("v")
@@ -605,21 +623,27 @@ def language_test_step(info: ProjectInfo) -> None:
 
     if info.has_kind(ProjectKind.NODEJS):
         pj = info.root / "package.json"
+        # WHY: only the PARSE is guarded, and a malformed package.json now FAILS
+        # the pipeline. The old try also wrapped the run() calls, so a missing
+        # toolchain (FileNotFoundError) or a hung suite (TimeoutExpired) was
+        # swallowed and this "mandatory, no-skip" step silently skipped — the two
+        # failure modes most likely in CI (TRDD-DMIRQOCD shape 2). An honest test
+        # FAILURE always propagated: run() ends in sys.exit (a BaseException).
         try:
             data = json.loads(pj.read_text(encoding="utf-8"))
-            scripts = data.get("scripts", {}) if isinstance(data, dict) else {}
-            if "test" in scripts:
-                # Prefer pnpm → yarn → npm based on lockfile
-                if (info.root / "pnpm-lock.yaml").exists():
-                    run(["pnpm", "test"], cwd=info.root)
-                elif (info.root / "yarn.lock").exists():
-                    run(["yarn", "test"], cwd=info.root)
-                else:
-                    run(["npm", "test"], cwd=info.root)
-                ran_any = True
-                print(f"{GREEN}ok Node.js tests passed{NC}")
-        except Exception:
-            pass
+        except (OSError, UnicodeDecodeError, ValueError) as e:
+            sys.exit(f"ERROR: {pj} is unreadable or invalid JSON: {e}")
+        scripts = data.get("scripts", {}) if isinstance(data, dict) else {}
+        if "test" in scripts:
+            # Prefer pnpm → yarn → npm based on lockfile
+            if (info.root / "pnpm-lock.yaml").exists():
+                run(["pnpm", "test"], cwd=info.root)
+            elif (info.root / "yarn.lock").exists():
+                run(["yarn", "test"], cwd=info.root)
+            else:
+                run(["npm", "test"], cwd=info.root)
+            ran_any = True
+            print(f"{GREEN}ok Node.js tests passed{NC}")
 
     if info.has_kind(ProjectKind.RUST):
         run(["cargo", "test"], cwd=info.root)
@@ -664,19 +688,22 @@ def language_lint_step(info: ProjectInfo) -> None:
 
     if info.has_kind(ProjectKind.NODEJS):
         pj = info.root / "package.json"
+        # WHY: same shape as language_test_step's NODEJS block — parse guarded,
+        # run() calls NOT wrapped, malformed manifest fails fast (TRDD-DMIRQOCD
+        # shape 2; this block previously left no trace at all when skipped).
         try:
             data = json.loads(pj.read_text(encoding="utf-8"))
-            scripts = data.get("scripts", {}) if isinstance(data, dict) else {}
-            if "lint" in scripts:
-                if (info.root / "pnpm-lock.yaml").exists():
-                    run(["pnpm", "run", "lint"], cwd=info.root)
-                elif (info.root / "yarn.lock").exists():
-                    run(["yarn", "lint"], cwd=info.root)
-                else:
-                    run(["npm", "run", "lint"], cwd=info.root)
-                print(f"{GREEN}ok Node.js lint passed{NC}")
-        except Exception:
-            pass
+        except (OSError, UnicodeDecodeError, ValueError) as e:
+            sys.exit(f"ERROR: {pj} is unreadable or invalid JSON: {e}")
+        scripts = data.get("scripts", {}) if isinstance(data, dict) else {}
+        if "lint" in scripts:
+            if (info.root / "pnpm-lock.yaml").exists():
+                run(["pnpm", "run", "lint"], cwd=info.root)
+            elif (info.root / "yarn.lock").exists():
+                run(["yarn", "lint"], cwd=info.root)
+            else:
+                run(["npm", "run", "lint"], cwd=info.root)
+            print(f"{GREEN}ok Node.js lint passed{NC}")
 
     if info.has_kind(ProjectKind.RUST):
         run(["cargo", "clippy", "--", "-D", "warnings"], cwd=info.root)

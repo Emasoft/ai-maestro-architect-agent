@@ -179,7 +179,7 @@ def detect_executors() -> dict[str, bool]:
 
 def get_version(cmd: list[str]) -> str | None:
     try:
-        p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+        p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, check=False)
         if p.returncode != 0:
             return None
         out = (p.stdout or "").strip().splitlines()
@@ -575,7 +575,7 @@ def main(argv: list[str]) -> int:
     print(f"[executor] {chosen}", file=sys.stderr)
     print("[exec] " + " ".join(shlex.quote(a) for a in argv2), file=sys.stderr)
 
-    p = subprocess.run(argv2)
+    p = subprocess.run(argv2, check=False)
     return p.returncode
 
 

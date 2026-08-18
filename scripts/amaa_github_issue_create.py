@@ -49,6 +49,7 @@ def check_gh_cli() -> bool:
         ["gh", "auth", "status"],
         capture_output=True,
         text=True,
+        check=False,
     )
     if result.returncode != 0:
         print("ERROR: gh CLI not authenticated. Run: gh auth login", file=sys.stderr)
@@ -227,7 +228,7 @@ def create_github_issue(issue_data: dict, dry_run: bool = False) -> Optional[int
     for label in issue_data["labels"]:
         cmd.extend(["--label", label])
 
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, check=False)
 
     if result.returncode != 0:
         print(f"ERROR: Failed to create issue: {result.stderr}", file=sys.stderr)

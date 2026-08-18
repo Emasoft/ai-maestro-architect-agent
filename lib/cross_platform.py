@@ -67,7 +67,7 @@ def run_command(
     """
     try:
         result = subprocess.run(
-            cmd, cwd=cwd, capture_output=True, text=True, timeout=timeout
+            cmd, cwd=cwd, capture_output=True, text=True, timeout=timeout, check=False
         )
         return result.returncode, result.stdout, result.stderr
     except subprocess.TimeoutExpired as e:

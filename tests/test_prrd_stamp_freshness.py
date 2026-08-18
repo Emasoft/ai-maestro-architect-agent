@@ -101,7 +101,7 @@ def _git(*args: str) -> str | None:
     """Run a git query in the repo; None when git cannot answer at all."""
     try:
         done = subprocess.run(
-            ["git", *args], cwd=REPO_ROOT, capture_output=True, text=True, timeout=30
+            ["git", *args], cwd=REPO_ROOT, capture_output=True, text=True, timeout=30, check=False
         )
     except (OSError, subprocess.SubprocessError):
         return None

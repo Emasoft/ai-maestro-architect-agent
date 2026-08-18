@@ -40,7 +40,13 @@ def run_search_script(args: list[str], project_root: Path) -> str:
     """Run amaa_design_search.py with given arguments."""
     script_path = Path(__file__).parent / "amaa_design_search.py"
     cmd = [sys.executable, str(script_path)] + args + ["--project-root", str(project_root)]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, check=False)
+    # WHY: a crashed search must not read as "no results" — returning "" here made
+    # callers proceed as if the search legitimately found nothing (TRDD-DMIRQOCD,
+    # the run_search_script defect shape, 3 identical copies). Fail fast instead.
+    if result.returncode != 0:
+        sys.stderr.write(result.stderr)
+        sys.exit(result.returncode)
     return result.stdout.strip()
 
 

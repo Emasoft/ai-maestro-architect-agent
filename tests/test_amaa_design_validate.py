@@ -40,6 +40,7 @@ def run_script(*args, cwd=None):
         text=True,
         cwd=cwd,
         timeout=30,
+        check=False,
     )
     return result
 
