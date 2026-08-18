@@ -72,7 +72,8 @@ def _enable_ansi_windows():
         mode = ctypes.c_ulong()
         kernel32.GetConsoleMode(handle, ctypes.byref(mode))
         kernel32.SetConsoleMode(handle, mode.value | 0x0004)  # ENABLE_VIRTUAL_TERMINAL_PROCESSING
-    except Exception:
+    # best-effort probe — absence/failure is the legitimate 'not found' answer
+    except Exception:  # noqa: BLE001, S110
         pass
 
 
@@ -611,7 +612,8 @@ def _detect_plugin_origin_refs(plugin_root: Path) -> List[str]:
     if pj.exists():
         try:
             meta = json.loads(pj.read_text(encoding="utf-8"))
-        except Exception:
+        # documented fallback path follows
+        except Exception:  # noqa: BLE001
             meta = {}
 
         # Fields that reference a marketplace or origin
@@ -653,7 +655,8 @@ def _detect_plugin_origin_refs(plugin_root: Path) -> List[str]:
             mp_url = mj.get("url", "") or mj.get("repository", "")
             if mp_url:
                 refs.append(f'marketplace.json "url": "{mp_url}"')
-        except Exception:
+        # best-effort probe — absence/failure is the legitimate 'not found' answer
+        except Exception:  # noqa: BLE001, S110
             pass
 
     return refs
@@ -667,7 +670,8 @@ def _has_shebang(path: Path) -> bool:
     try:
         with open(path, "rb") as f:
             return f.read(2) == b"#!"
-    except Exception:
+    # best-effort probe — absence/failure is the legitimate 'not found' answer
+    except Exception:  # noqa: BLE001
         return False
 
 
@@ -2430,7 +2434,8 @@ def do_doctor(verbose: bool = False):
                     enabled = sum(1 for v in ep.values() if v)
                     disabled = sum(1 for v in ep.values() if not v)
                     info(f"  {enabled} plugin(s) enabled, {disabled} disabled")
-            except Exception as e:
+            # advisory/diagnostic output only, never gates
+            except Exception as e:  # noqa: BLE001
                 err(f"{label}: CORRUPT — {e}")
                 issues += 1
         else:

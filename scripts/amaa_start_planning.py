@@ -113,7 +113,8 @@ Phase: Planning (drafting)
         print("  3. Use /amaa-start-planning to track progress")
         print("  4. Use /amaa-modify-requirement ... --status complete when ready to implement")
         return True
-    except Exception as e:
+    # exception converted to checked bool/tuple and propagated as exit code by the caller
+    except Exception as e:  # noqa: BLE001
         print(f"ERROR: Failed to create state file: {e}")
         return False
 

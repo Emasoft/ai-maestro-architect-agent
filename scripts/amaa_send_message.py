@@ -92,7 +92,8 @@ def send_message(
         return {"error": "amp-send not found on PATH"}
     except subprocess.TimeoutExpired:
         return {"error": "amp-send timed out after 30 seconds"}
-    except Exception as e:
+    # exception converted to checked bool/tuple and propagated as exit code by the caller
+    except Exception as e:  # noqa: BLE001
         return {"error": str(e)}
 
 

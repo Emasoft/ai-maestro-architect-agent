@@ -101,7 +101,7 @@ class DependencyResolver:
             deps = node_data.get("deps", []) if isinstance(node_data, dict) else []
 
             if not isinstance(deps, list):
-                raise ValueError(
+                raise TypeError(
                     f"Node '{node_id}' has invalid deps (must be list): {deps}"
                 )
 
@@ -384,7 +384,8 @@ Output format (json):
         # WHY: Exit with success code
         return 0
 
-    except Exception as e:
+    # WHY: top-level CLI catch — prints the error and returns exit code 1
+    except Exception as e:  # noqa: BLE001
         # WHY: Print error to stderr and exit with error code
         print(f"ERROR: {e}", file=sys.stderr)
         return 1

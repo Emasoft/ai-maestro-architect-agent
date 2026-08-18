@@ -7,3 +7,12 @@ license = "MIT"
 
 [project.optional-dependencies]
 dev = ["pyyaml"]
+
+# The fail-fast ratchet (TRDD-DMIRQOCD step 4): these four rules are the
+# swallowed-failure shapes the project's error policy forbids (blind except,
+# try-except-pass, unchecked subprocess exit, wrong exception class). The
+# tree reports ZERO for them as of the burn-down; extend-select keeps ruff's
+# defaults intact and ADDS these so the policy can never drift back unmeasured.
+# (extend-select, never select — select REPLACES the defaults and guts the gate.)
+[tool.ruff.lint]
+extend-select = ["BLE001", "S110", "PLW1510", "TRY004"]

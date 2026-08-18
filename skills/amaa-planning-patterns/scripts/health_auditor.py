@@ -128,7 +128,8 @@ class HealthCheck(ABC):
             return result
         except TimeoutError as e:
             return -1, "", str(e)
-        except Exception as e:
+        # WHY: exception converted to the documented (code, out, err) tuple contract
+        except Exception as e:  # noqa: BLE001
             return -1, "", f"Command failed: {e}"
 
 

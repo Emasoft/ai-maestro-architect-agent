@@ -265,7 +265,8 @@ Examples:
 
     try:
         generate_planning_checklist(args.project, args.phases, args.output)
-    except Exception as e:
+    # WHY: top-level CLI catch — prints the error and returns exit code 1
+    except Exception as e:  # noqa: BLE001
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
 

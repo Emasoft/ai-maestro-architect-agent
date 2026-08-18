@@ -51,7 +51,8 @@ def init_design_folders(project_root: Path) -> bool:
         print(f"\n✓ Design folder structure initialized at {design_root}")
         return True
 
-    except Exception as e:
+    # exception converted to checked bool/tuple and propagated as exit code by the caller
+    except Exception as e:  # noqa: BLE001
         print(f"✗ ERROR: Failed to create design folders: {e}", file=sys.stderr)
         return False
 

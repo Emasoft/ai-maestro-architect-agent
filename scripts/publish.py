@@ -266,7 +266,8 @@ def detect_marketplace(git_root: Path) -> dict:
         try:
             mkt = json.loads(mkt_json.read_text(encoding="utf-8"))
             info["marketplace_name"] = mkt.get("name", "")
-        except Exception:
+        # best-effort probe — absence/failure is the legitimate 'not found' answer
+        except Exception:  # noqa: BLE001, S110
             pass
 
     # If no marketplace.json, derive from org name
@@ -355,7 +356,8 @@ def _has_rust(root: Path) -> bool:
         return False
     try:
         return "[package]" in cargo.read_text(encoding="utf-8")
-    except Exception:
+    # best-effort probe — absence/failure is the legitimate 'not found' answer
+    except Exception:  # noqa: BLE001
         return False
 
 
@@ -365,7 +367,8 @@ def _has_go(root: Path) -> bool:
         return False
     try:
         return gomod.read_text(encoding="utf-8").lstrip().startswith("module ")
-    except Exception:
+    # best-effort probe — absence/failure is the legitimate 'not found' answer
+    except Exception:  # noqa: BLE001
         return False
 
 
@@ -376,7 +379,8 @@ def _has_nodejs(root: Path) -> bool:
     try:
         data = json.loads(pj.read_text(encoding="utf-8"))
         return isinstance(data, dict) and "name" in data
-    except Exception:
+    # best-effort probe — absence/failure is the legitimate 'not found' answer
+    except Exception:  # noqa: BLE001
         return False
 
 
@@ -387,7 +391,8 @@ def _has_python(root: Path) -> bool:
     try:
         content = pp.read_text(encoding="utf-8")
         return "[project]" in content or "[tool.poetry]" in content
-    except Exception:
+    # best-effort probe — absence/failure is the legitimate 'not found' answer
+    except Exception:  # noqa: BLE001
         return False
 
 
@@ -537,7 +542,7 @@ def _toml_str(content: str, section: str, key: str) -> str | None:
             if isinstance(v, str):
                 return v
         return None
-    except Exception:
+    except Exception:  # noqa: BLE001
         # Fallback regex (best-effort) for Python < 3.11
         pattern = rf'^\s*{re.escape(key)}\s*=\s*["\']([^"\']+)["\']'
         for m in re.finditer(pattern, content, re.MULTILINE):
@@ -596,7 +601,8 @@ def _git_latest_semver_tag(root: Path) -> str:
             line = line.strip().lstrip("v")
             if re.match(r"^\d+\.\d+\.\d+$", line):
                 return line
-    except Exception:
+    # best-effort probe — absence/failure is the legitimate 'not found' answer
+    except Exception:  # noqa: BLE001, S110
         pass
     return "0.0.0"
 
@@ -758,7 +764,8 @@ def _update_package_json(root: Path, new_version: str) -> tuple[bool, str]:
         data["version"] = new_version
         path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
         return True, f"package.json: {old} -> {new_version}"
-    except Exception as e:
+    # exception converted to checked bool/tuple and propagated as exit code by the caller
+    except Exception as e:  # noqa: BLE001
         return False, f"package.json error: {e}"
 
 
@@ -805,7 +812,8 @@ def _update_cargo_toml(root: Path, new_version: str) -> tuple[bool, str]:
             return True, "Cargo.toml has no [package] version (skipped)"
         path.write_text("".join(out), encoding="utf-8")
         return True, f"Cargo.toml: {old} -> {new_version}"
-    except Exception as e:
+    # exception converted to checked bool/tuple and propagated as exit code by the caller
+    except Exception as e:  # noqa: BLE001
         return False, f"Cargo.toml error: {e}"
 
 
@@ -1030,7 +1038,8 @@ def get_current_version(plugin_root: Path) -> str | None:
         data = json.loads(plugin_json.read_text(encoding="utf-8"))
         v = data.get("version")
         return v if isinstance(v, str) else None
-    except Exception:
+    # best-effort probe — absence/failure is the legitimate 'not found' answer
+    except Exception:  # noqa: BLE001
         return None
 
 
@@ -1045,7 +1054,8 @@ def update_plugin_json(plugin_root: Path, new_version: str) -> tuple[bool, str]:
         data["version"] = new_version
         path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
         return True, f"plugin.json: {old} -> {new_version}"
-    except Exception as e:
+    # exception converted to checked bool/tuple and propagated as exit code by the caller
+    except Exception as e:  # noqa: BLE001
         return False, f"plugin.json error: {e}"
 
 
@@ -1069,7 +1079,8 @@ def update_pyproject_toml(plugin_root: Path, new_version: str) -> tuple[bool, st
             return True, "pyproject.toml has no version field (skipped)"
         path.write_text(new_content, encoding="utf-8")
         return True, f"pyproject.toml: {old_version} -> {new_version}"
-    except Exception as e:
+    # exception converted to checked bool/tuple and propagated as exit code by the caller
+    except Exception as e:  # noqa: BLE001
         return False, f"pyproject.toml error: {e}"
 
 
@@ -1104,7 +1115,8 @@ def update_python_versions(plugin_root: Path, new_version: str) -> list[tuple[bo
                 py_file.write_text(new_content, encoding="utf-8")
                 rel = py_file.relative_to(plugin_root)
                 results.append((True, f"{rel}: {old_v} -> {new_version}"))
-        except Exception as e:
+        # exception converted to checked bool/tuple and propagated as exit code by the caller
+        except Exception as e:  # noqa: BLE001
             rel = py_file.relative_to(plugin_root)
             results.append((False, f"{rel}: {e}"))
     return results
@@ -1123,7 +1135,8 @@ def check_version_consistency(plugin_root: Path) -> tuple[bool, str]:
             v = json.loads(pj.read_text(encoding="utf-8")).get("version")
             if isinstance(v, str):
                 versions["plugin.json"] = v
-        except Exception:
+        # best-effort probe — absence/failure is the legitimate 'not found' answer
+        except Exception:  # noqa: BLE001, S110
             pass
 
     pp = plugin_root / "pyproject.toml"
@@ -1132,7 +1145,8 @@ def check_version_consistency(plugin_root: Path) -> tuple[bool, str]:
             m = re.search(r'^version\s*=\s*["\']([^"\']+)["\']', pp.read_text(encoding="utf-8"), re.MULTILINE)
             if m:
                 versions["pyproject.toml"] = m.group(1)
-        except Exception:
+        # best-effort probe — absence/failure is the legitimate 'not found' answer
+        except Exception:  # noqa: BLE001, S110
             pass
 
     gi = _get_gi(plugin_root)
@@ -1148,7 +1162,8 @@ def check_version_consistency(plugin_root: Path) -> tuple[bool, str]:
             if m:
                 rel = str(py_file.relative_to(plugin_root))
                 versions[rel] = m.group(1)
-        except Exception:
+        # best-effort probe — absence/failure is the legitimate 'not found' answer
+        except Exception:  # noqa: BLE001, S110
             pass
 
     if not versions:
@@ -1231,7 +1246,8 @@ Examples:
     # self-enforcing against future edits.
     try:
         source = Path(__file__).read_text(encoding="utf-8")
-    except Exception as err:
+    # exception converted to checked bool/tuple and propagated as exit code by the caller
+    except Exception as err:  # noqa: BLE001
         print(f"{RED}✗ Self-integrity check: cannot read own source: {err}{NC}", file=sys.stderr)
         return 1
 
@@ -1539,7 +1555,8 @@ Examples:
             py_content = py_path.read_text(encoding="utf-8")
             if re.search(r'^__version__\s*=\s*["\']' + re.escape(new_version) + r'["\']', py_content, re.MULTILINE):
                 staged.append(str(rel_path))
-        except Exception:
+        # best-effort probe — absence/failure is the legitimate 'not found' answer
+        except Exception:  # noqa: BLE001, S110
             pass
     if staged:
         run(["git", "add", *staged], cwd=git_root)

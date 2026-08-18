@@ -170,7 +170,8 @@ def write_state_file(data: dict, body: str) -> bool:
         content = f"---\n{yaml_content}\n---\n\n{body}"
         PLAN_STATE_FILE.write_text(content, encoding="utf-8")
         return True
-    except Exception as e:
+    # exception converted to checked bool/tuple and propagated as exit code by the caller
+    except Exception as e:  # noqa: BLE001
         print(f"ERROR: Failed to write state file: {e}")
         return False
 

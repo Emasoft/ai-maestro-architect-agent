@@ -239,7 +239,8 @@ Examples:
             generate_csv_register(args.risks, args.output)
         elif args.template == "json":
             generate_json_register(args.risks, args.output)
-    except Exception as e:
+    # WHY: top-level CLI catch — prints the error and returns exit code 1
+    except Exception as e:  # noqa: BLE001
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
 

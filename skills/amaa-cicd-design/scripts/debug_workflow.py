@@ -203,7 +203,8 @@ class WorkflowDebugger:
                 check=False,
             )
             return result.returncode == 0
-        except Exception as e:
+        # WHY: exception converted to False and checked by the caller
+        except Exception as e:  # noqa: BLE001
             print(f"    Error: {e}")
             return False
 

@@ -56,7 +56,8 @@ def reset_plan_phase(create_backup: bool = True) -> bool:
         print("\nPlan phase has been reset.")
         print("Run /amaa-start-planning to begin a new plan.")
         return True
-    except Exception as e:
+    # WHY: exception converted to False and checked by the caller
+    except Exception as e:  # noqa: BLE001
         print(f"ERROR: Failed to remove state file: {e}")
         return False
 

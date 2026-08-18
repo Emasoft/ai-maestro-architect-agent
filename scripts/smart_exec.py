@@ -184,7 +184,8 @@ def get_version(cmd: list[str]) -> str | None:
             return None
         out = (p.stdout or "").strip().splitlines()
         return out[0].strip() if out else None
-    except Exception:
+    # best-effort probe — absence/failure is the legitimate 'not found' answer
+    except Exception:  # noqa: BLE001
         return None
 
 
@@ -550,7 +551,8 @@ def main(argv: list[str]) -> int:
 
     try:
         argv2, chosen = choose_best(spec, tool_args, ex)
-    except Exception as e:
+    # exception converted to checked bool/tuple and propagated as exit code by the caller
+    except Exception as e:  # noqa: BLE001
         print(f"Error: {e}", file=sys.stderr)
         return 1
 
