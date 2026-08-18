@@ -387,7 +387,7 @@ implementation-commits: [aa118ea, 0cbcbe5, 9276e2e]
 - **2026-08-16 — DECIDED AND UNBLOCKED. The policy question is answered: NO, do not
   adopt 0.16.3. The card's remaining value survives that refusal and is now costed.**
   Authority: the USER granted decide-for-yourself on condition of verified facts plus
-  consulting the hub. Hub consulted (the `/Users/emanuelesabetta/ai-maestro` repo's
+  consulting the hub. Hub consulted (the `ai-maestro` hub repo's
   Claude — **not** the MANAGER agent; it cannot grant Tier-2/3 and said so). Its
   ruling: ruff is **per-repo, mine**. It grepped `rules/`, `docs/GOVERNANCE-RULES.md`
   and `~/.claude/rules/` for a fleet lint policy — **none exists**; the 3 hits are the
@@ -480,7 +480,7 @@ implementation-commits: [aa118ea, 0cbcbe5, 9276e2e]
     raise before the child's stdout/stderr are printed and swallow the diagnostic output
     the wrapper exists to show. The param is honoured at the exit branch instead.
   - **PAUSED, and by an external instruction, not by a blocker:** the USER's fleet
-    programme **TRDD-BRRJK57P** (hub repo `/Users/emanuelesabetta/ai-maestro`, relayed
+    programme **TRDD-BRRJK57P** (the `ai-maestro` hub repo, relayed
     2026-08-16 ~16:55) put every plugin session into a **discovery-only** phase — *fix
     NOTHING; a fix during discovery destroys the evidence the remediation plan is built
     from.* Steps 2–4 of the NEXT ACTION are therefore not started. This is a pause, not a
