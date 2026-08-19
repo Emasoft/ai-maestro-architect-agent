@@ -246,7 +246,7 @@ These behaviors are asserted in `tests/scenarios/governance-scenarios.md` (SCEN-
 
 ## AI Maestro Communication
 
-Send messages to AMCOS using the `agent-messaging` skill with the appropriate Recipient, Subject, Priority, and Content fields. Always verify delivery by checking the `agent-messaging` skill send confirmation.
+Send messages to AMCOS using the `amp-send` CLI with the appropriate Recipient, Subject, Priority, and Content fields. Always verify delivery by checking `amp-send`'s printed delivery confirmation (message ID).
 
 **AMP discipline (always):**
 - **Inbox-first — STOP on a new message.** When you see an AMP inbox
@@ -306,7 +306,7 @@ Two transports now reach another agent, and only one is policed:
 
 | Transport | Enforcement |
 |---|---|
-| **AMP** (`agent-messaging`, the `amp-*` verbs) | ENFORCED at the API — a forbidden send returns **HTTP 403** with a routing suggestion, mirroring `lib/communication-graph.ts` (2026-04-22 v2: HUMAN node + reply-only edges). If the API rejects a message you believe should be allowed, re-read its routing suggestion — it is authoritative. |
+| **AMP** (`ai-maestro-plugin:agent-messaging`, the `amp-*` verbs) | ENFORCED at the API — a forbidden send returns **HTTP 403** with a routing suggestion, mirroring `lib/communication-graph.ts` (2026-04-22 v2: HUMAN node + reply-only edges). If the API rejects a message you believe should be allowed, re-read its routing suggestion — it is authoritative. |
 | **Native cross-session** (`SendMessage` / `ListAgents`, Claude Code 2.1.224) | **NOT enforced. There is no 403 here and no place for one** — the channel never traverses the AI Maestro server, so the title matrix has no evaluation point. Outbound sends auto-deliver. |
 
 **So on the native channel the graph is self-enforced: by you, at send time.**

@@ -20,7 +20,7 @@ The AI Maestro server REST routes (`/api/*`) are NOT a stable interface — they
 | Raw route (was) | Frozen CLI verb (now) |
 |---|---|
 | `GET /api/governance/teams/{teamId}/members?role=chief-of-staff` | `amp-team-members --team <teamId>` — lists members with governance title/role; pick the chief-of-staff |
-| `/api/messages` (send) | the `agent-messaging` skill / `amp-send` |
+| `/api/messages` (send) | the `ai-maestro-plugin:agent-messaging` skill / `amp-send` |
 | `/api/agents` (per MANAGER's example) | `aimaestro-agent.sh list` |
 | `/api/messages` (read inbox) | `amp-inbox` |
 Other live verbs from the #36 deploy: `aimaestro-teams.sh` (list/show/create/update teams), `aimaestro-governance.sh` (whoami / requests / approve / reject). A CLI verb owns the (changeable) HTTP call internally — that indirection IS the decoupling; referencing the verb is fully decoupled even though the verb itself still curls `/api/` inside.

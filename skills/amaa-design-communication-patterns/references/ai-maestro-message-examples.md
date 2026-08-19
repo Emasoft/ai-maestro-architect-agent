@@ -7,9 +7,9 @@
 - Example 2: Clarification Request (Blocking)
 - Example 3: Design Completion Report
 
-Concrete JSON examples showing the structure of messages sent through the `agent-messaging` skill.
+Concrete JSON examples showing the structure of messages sent through the `ai-maestro-plugin:agent-messaging` skill.
 
-> **Note**: These structures show conceptual message content. Use the `agent-messaging` skill to send messages — it handles the exact API format automatically.
+> **Note**: These structures show conceptual message content. Use the `amp-send` CLI to send messages — it handles the exact API format automatically.
 
 ## Example 1: Design Request Acknowledgment
 

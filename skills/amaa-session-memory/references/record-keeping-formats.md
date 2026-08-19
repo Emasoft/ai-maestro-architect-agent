@@ -327,19 +327,19 @@ echo "Handoff validation passed"
 
 ## AI Maestro Message Formats
 
-> **Note**: JSON structures shown below document the message format used by the `agent-messaging` skill. They are NOT curl commands to be executed manually. Use the `agent-messaging` skill to send messages - it handles the exact API format automatically.
+> **Note**: JSON structures shown below document the AMP message format. They are NOT curl commands to be executed manually. Send with `amp-send` — it handles the exact API format automatically.
 
 ### 1. Acknowledgment of Design Request
 
 **When:** AMCOS assigns you a design task
 
 **Format:**
-Send a message using the `agent-messaging` skill with:
+Send a message using the `amp-send` CLI with:
 - **Recipient**: `amcos`
 - **Subject**: `Design Request Acknowledged`
 - **Priority**: `normal`
 - **Content**: `{"type": "acknowledgment", "message": "Design request received for [PROJECT_NAME]. Starting requirements analysis. ETA: [ESTIMATED_COMPLETION_TIME]."}`
-- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
+- **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 **Example:**
 ```json
@@ -360,12 +360,12 @@ Send a message using the `agent-messaging` skill with:
 **When:** User requirements are ambiguous or conflicting
 
 **Format:**
-Send a message using the `agent-messaging` skill with:
+Send a message using the `amp-send` CLI with:
 - **Recipient**: `amcos`
 - **Subject**: `Clarification Needed - [PROJECT_NAME]`
 - **Priority**: `high`
 - **Content**: `{"type": "clarification_request", "message": "BLOCKING: Requirement ambiguity detected. Question: [SPECIFIC_QUESTION]. Context: [USER_REQUIREMENT_QUOTE]. Cannot proceed until clarified. Details: docs_dev/design/clarifications/[TIMESTAMP]-[ISSUE].md"}`
-- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
+- **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 **Example:**
 ```json
@@ -386,12 +386,12 @@ Send a message using the `agent-messaging` skill with:
 **When:** All design artifacts ready, handoff prepared
 
 **Format:**
-Send a message using the `agent-messaging` skill with:
+Send a message using the `amp-send` CLI with:
 - **Recipient**: `amcos`
 - **Subject**: `Design Complete - [PROJECT_NAME]`
 - **Priority**: `normal`
 - **Content**: `{"type": "design_complete", "aimaestro_task_id": "[EPIC_TASK_ID]", "message": "[DONE] Design for [PROJECT_NAME] complete. Architecture: [BRIEF_SUMMARY]. Modules: [MODULE_COUNT]. Risks: [HIGH_COUNT]/[MEDIUM_COUNT]/[LOW_COUNT]. Handoff doc: docs_dev/design/handoff-[UUID].md. Ready for AMOA assignment."}`
-- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
+- **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 **Example:**
 ```json
@@ -413,12 +413,12 @@ Send a message using the `agent-messaging` skill with:
 **When:** Design artifacts ready for implementation
 
 **Format:**
-Send a message using the `agent-messaging` skill with:
+Send a message using the `amp-send` CLI with:
 - **Recipient**: `amcos`
 - **Subject**: `Handoff Ready - [PROJECT_NAME]`
 - **Priority**: `normal`
 - **Content**: `{"type": "handoff", "aimaestro_task_id": "[EPIC_TASK_ID]", "message": "Design handoff ready for [PROJECT_NAME]. Implementation sequence: [PHASE_1] -> [PHASE_2] -> [PHASE_3]. Critical path: [TOP_3_ITEMS]. All artifacts in docs_dev/design/. Handoff doc: handoff-[UUID].md. Awaiting AMOA assignment from AMCOS."}`
-- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
+- **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 **Example:**
 ```json
@@ -440,12 +440,12 @@ Send a message using the `agent-messaging` skill with:
 **When:** Cannot proceed due to missing information, infeasible requirement, or external dependency
 
 **Format:**
-Send a message using the `agent-messaging` skill with:
+Send a message using the `amp-send` CLI with:
 - **Recipient**: `amcos`
 - **Subject**: `BLOCKED - [PROJECT_NAME]`
 - **Priority**: `urgent`
 - **Content**: `{"type": "blocker", "message": "[BLOCKED] Design for [PROJECT_NAME]. Blocker: [SPECIFIC_ISSUE]. Impact: [IMPACT_DESCRIPTION]. Next: [WHAT_IS_NEEDED]. Details: docs_dev/design/blockers/[TIMESTAMP]-[ISSUE].md. Awaiting user decision."}`
-- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
+- **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 **Example:**
 ```json
@@ -471,23 +471,23 @@ Send a message using the `agent-messaging` skill with:
 4. **Do NOT proceed** with dependent operations until ACK received
 
 **ACK Verification:**
-Check your inbox using the `agent-messaging` skill. Filter for messages with subjects containing "ACK".
+Check your inbox using the `amp-inbox` CLI. Filter for messages with subjects containing "ACK".
 
 **Retry Format:**
-Send a message using the `agent-messaging` skill with:
+Send a message using the `amp-send` CLI with:
 - **Recipient**: `[ORIGINAL_TARGET]`
 - **Subject**: `[RETRY] [ORIGINAL_SUBJECT]`
 - **Priority**: `high`
 - **Content**: `{"type": "retry", "message": "[ORIGINAL_MESSAGE] (Retry: No ACK received within 30s)"}`
-- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
+- **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 **Escalation Format:**
-Send a message using the `agent-messaging` skill with:
+Send a message using the `amp-send` CLI with:
 - **Recipient**: `amcos`
 - **Subject**: `ACK Timeout Escalation`
 - **Priority**: `urgent`
 - **Content**: `{"type": "escalation", "message": "ACK timeout from [TARGET]. Original message: [SUBJECT]. Sent: [TIMESTAMP]. Retry sent: [RETRY_TIMESTAMP]. Blocking operation: [BLOCKED_OPERATION]."}`
-- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
+- **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 ---
 

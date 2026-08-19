@@ -20,9 +20,9 @@ The Architect uses AI Maestro to receive requirements via AMCOS and deliver desi
 
 | Check | Method | Failure Indicator |
 |-------|--------|-------------------|
-| API Health | Check AI Maestro service health via the `agent-messaging` skill | Service unavailable or timeout |
-| Connection Test | Attempt to check inbox via the `agent-messaging` skill | Connection timeout |
-| Agent Registry | Query agent registry via the `agent-messaging` skill | Registry unreachable |
+| API Health | Check AI Maestro service health via the `amp-status` CLI | Service unavailable or timeout |
+| Connection Test | Attempt to check inbox via `amp-inbox` | Connection timeout |
+| Agent Registry | Query agent registry via `aimaestro-agent.sh list` | Registry unreachable |
 
 ### 1.2 Response Workflow
 
@@ -35,7 +35,7 @@ When AI Maestro is unavailable:
 
 2. **Queue outgoing messages**:
 
-   > **Note**: This offline fallback is ONLY for when AI Maestro is completely unreachable. Under normal conditions, always use the `agent-messaging` skill to send messages.
+   > **Note**: This offline fallback is ONLY for when AI Maestro is completely unreachable. Under normal conditions, always use the `amp-send` CLI to send messages.
 
    ```bash
    mkdir -p .claude/queue/outbox
@@ -181,12 +181,12 @@ AI agents collaborate asynchronously and may be hibernated for extended periods.
 When `amaa-api-researcher` is unresponsive:
 
 1. **First Reminder (when state = No ACK or No Progress)**:
-   Send a message using the `agent-messaging` skill with:
+   Send a message using the `amp-send` CLI with:
    - **Recipient**: `amaa-api-researcher`
    - **Subject**: `Research Check: ${API_NAME}`
    - **Priority**: `high`
    - **Content**: `{"type": "status_request", "message": "Please provide status update for ${API_NAME} research."}`
-   - **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
+   - **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 2. **Wait 5 minutes**
 

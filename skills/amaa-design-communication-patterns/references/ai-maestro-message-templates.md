@@ -19,12 +19,12 @@
 
 **Use Case:** AMCOS assigns you a design task via AI Maestro. You must acknowledge receipt and provide an ETA.
 
-Send a message using the `agent-messaging` skill with:
+Send a message using the `amp-send` CLI with:
 - **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `Design Request Acknowledged`
 - **Priority**: `normal`
 - **Content**: `{"type": "acknowledgment", "message": "Design request received for [PROJECT_NAME]. Starting requirements analysis. ETA: [ESTIMATED_COMPLETION_TIME]."}`
-- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
+- **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 **Example Content:**
 ```json
@@ -40,12 +40,12 @@ Send a message using the `agent-messaging` skill with:
 
 **Use Case:** User requirements are ambiguous, conflicting, or unclear. You cannot proceed until clarification is received.
 
-Send a message using the `agent-messaging` skill with:
+Send a message using the `amp-send` CLI with:
 - **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `Clarification Needed - [PROJECT_NAME]`
 - **Priority**: `high`
 - **Content**: `{"type": "clarification_request", "message": "BLOCKING: Requirement ambiguity detected. Question: [SPECIFIC_QUESTION]. Context: [USER_REQUIREMENT_QUOTE]. Cannot proceed until clarified. Details: docs_dev/design/clarifications/[TIMESTAMP]-[ISSUE].md"}`
-- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
+- **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 **Example Content:**
 ```json
@@ -61,13 +61,13 @@ Send a message using the `agent-messaging` skill with:
 
 **Use Case:** All design artifacts are complete, and handoff document is prepared. You are ready for AMCOS to assign the work to AMOA.
 
-Send a message using the `agent-messaging` skill with:
+Send a message using the `amp-send` CLI with:
 - **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `Design Complete - [PROJECT_NAME]`
 - **Priority**: `normal`
 - **Content**: `{"type": "design_complete", "aimaestro_task_id": "[EPIC_TASK_ID]", "message": "[DONE] Design for [PROJECT_NAME] complete. Architecture: [BRIEF_SUMMARY]. Modules: [MODULE_COUNT]. Risks: [HIGH_COUNT]/[MEDIUM_COUNT]/[LOW_COUNT]. Handoff doc: docs_dev/design/handoff-[UUID].md. AI-Maestro epic: [EPIC_TASK_ID]. Ready for AMOA assignment."}`
 - **`aimaestro_task_id`**: the UUID of the `epic` task this design created on the AI-Maestro kanban. The architect creates it on design completion via `amp-kanban-create-task --task-type epic` (full op + first-level child breakdown tracked in TRDD-364ccafc, pending Phase 0 persistence verification). It links design doc → AI-Maestro epic → the orchestrator's child tasks. Omit the key (and the "AI-Maestro epic:" clause) when AI-Maestro is not in use. Additive + optional — a recipient that doesn't read it is unaffected.
-- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
+- **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 **Example Content:**
 ```json
@@ -84,13 +84,13 @@ Send a message using the `agent-messaging` skill with:
 
 **Use Case:** Design artifacts are complete and packaged in a handoff document. You are notifying AMCOS that the handoff is ready for AMOA assignment.
 
-Send a message using the `agent-messaging` skill with:
+Send a message using the `amp-send` CLI with:
 - **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `Handoff Ready - [PROJECT_NAME]`
 - **Priority**: `normal`
 - **Content**: `{"type": "handoff", "aimaestro_task_id": "[EPIC_TASK_ID]", "message": "Design handoff ready for [PROJECT_NAME]. Implementation sequence: [PHASE_1] -> [PHASE_2] -> [PHASE_3]. Critical path: [TOP_3_ITEMS]. All artifacts in docs_dev/design/. Handoff doc: handoff-[UUID].md. AI-Maestro epic: [EPIC_TASK_ID]. Awaiting AMOA assignment from AMCOS."}`
 - **`aimaestro_task_id`**: same AI-Maestro epic UUID as §1.3 (optional/additive — the same epic created on design completion). Lets AMOA attach its child breakdown under the architect's epic.
-- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
+- **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 **Example Content:**
 ```json
@@ -107,12 +107,12 @@ Send a message using the `agent-messaging` skill with:
 
 **Use Case:** You cannot proceed due to missing information, infeasible requirement, or external dependency. You must escalate to AMCOS for user decision.
 
-Send a message using the `agent-messaging` skill with:
+Send a message using the `amp-send` CLI with:
 - **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `BLOCKED - [PROJECT_NAME]`
 - **Priority**: `urgent`
 - **Content**: `{"type": "blocker", "message": "[BLOCKED] Design for [PROJECT_NAME]. Blocker: [SPECIFIC_ISSUE]. Impact: [IMPACT_DESCRIPTION]. Next: [WHAT_IS_NEEDED]. Details: docs_dev/design/blockers/[TIMESTAMP]-[ISSUE].md. Awaiting user decision."}`
-- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
+- **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 **Example Content:**
 ```json
@@ -128,13 +128,13 @@ Send a message using the `agent-messaging` skill with:
 
 **Use Case:** After sending any AI Maestro message, you must verify that an ACK (acknowledgment) was received within 30 seconds.
 
-Check your inbox using the `agent-messaging` skill. Filter for messages with subjects containing "ACK".
+Check your inbox using the `amp-inbox` CLI. Filter for messages with subjects containing "ACK".
 
 **Workflow:**
-1. Send AI Maestro message using the `agent-messaging` skill
-2. **Verify**: Confirm message delivery via the `agent-messaging` skill's sent messages feature
+1. Send AI Maestro message using the `amp-send` CLI
+2. **Verify**: Confirm message delivery via `amp-send`'s printed delivery confirmation
 3. Wait 30 seconds
-4. Check your inbox using the `agent-messaging` skill for ACK messages
+4. Check your inbox using the `amp-inbox` CLI for ACK messages
 5. If ACK received: Proceed with next operation
 6. If NO ACK received: Proceed to **1.7 (Retry)**
 
@@ -144,16 +144,16 @@ Check your inbox using the `agent-messaging` skill. Filter for messages with sub
 
 **Use Case:** You sent a message but did not receive ACK within 30 seconds. You must retry ONCE before escalating.
 
-Send a message using the `agent-messaging` skill with:
+Send a message using the `amp-send` CLI with:
 - **Recipient**: `[ORIGINAL_TARGET]`
 - **Subject**: `[RETRY] [ORIGINAL_SUBJECT]`
 - **Priority**: `high`
 - **Content**: `{"type": "retry", "message": "[ORIGINAL_MESSAGE] (Retry: No ACK received within 30s)"}`
-- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
+- **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 **Workflow After Retry:**
-1. Send retry message using the `agent-messaging` skill
-2. **Verify**: Confirm message delivery via the `agent-messaging` skill's sent messages feature
+1. Send retry message using the `amp-send` CLI
+2. **Verify**: Confirm message delivery via `amp-send`'s printed delivery confirmation
 3. Wait another 30 seconds
 4. Check inbox for ACK (see **1.6**)
 5. If ACK received: Proceed with next operation
@@ -165,12 +165,12 @@ Send a message using the `agent-messaging` skill with:
 
 **Use Case:** You sent a message, retried after 30 seconds, and STILL received no ACK after another 30 seconds. You must escalate to AMCOS.
 
-Send a message using the `agent-messaging` skill with:
+Send a message using the `amp-send` CLI with:
 - **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `ACK Timeout Escalation`
 - **Priority**: `urgent`
 - **Content**: `{"type": "escalation", "message": "ACK timeout from [TARGET]. Original message: [SUBJECT]. Sent: [TIMESTAMP]. Retry sent: [RETRY_TIMESTAMP]. Blocking operation: [BLOCKED_OPERATION]."}`
-- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
+- **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 **Example Content:**
 ```json
@@ -186,7 +186,7 @@ Send a message using the `agent-messaging` skill with:
 
 **Complete workflow for reliable message delivery:**
 
-1. **Send message** using the `agent-messaging` skill (see sections 1.1-1.5)
+1. **Send message** using the `amp-send` CLI (see sections 1.1-1.5)
 2. **Wait 30 seconds**
 3. **Verify ACK** (see section 1.6)
 4. **If no ACK**: Retry ONCE (see section 1.7)
@@ -234,35 +234,35 @@ All AI Maestro messages use this JSON structure:
 
 ## Example: Complete Message Send and Verify Workflow
 
-**Step 1:** Send a design completion message using the `agent-messaging` skill with:
+**Step 1:** Send a design completion message using the `amp-send` CLI with:
 - **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `Design Complete - User Authentication System`
 - **Priority**: `normal`
 - **Content**: `{"type": "design_complete", "message": "[DONE] Design for User Authentication System complete. Architecture: FastAPI + PostgreSQL + JWT auth + bcrypt hashing. Modules: 3 (auth-service, user-service, session-service). Risks: 0/2/1. Handoff doc: docs_dev/design/handoff-f4e8a9b1.md. Ready for AMOA assignment."}`
-- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
+- **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 **Step 2:** Wait 30 seconds.
 
-**Step 3:** Check your inbox using the `agent-messaging` skill. Filter for messages with subjects containing "ACK".
+**Step 3:** Check your inbox using the `amp-inbox` CLI. Filter for messages with subjects containing "ACK".
 
 **Step 4:** If ACK received, proceed with next operation.
 
-**Step 5 (if no ACK):** Retry by sending a message using the `agent-messaging` skill with:
+**Step 5 (if no ACK):** Retry by sending a message using the `amp-send` CLI with:
 - **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `[RETRY] Design Complete - User Authentication System`
 - **Priority**: `high`
 - **Content**: `{"type": "retry", "message": "[DONE] Design for User Authentication System complete. Architecture: FastAPI + PostgreSQL + JWT auth + bcrypt hashing. Modules: 3 (auth-service, user-service, session-service). Risks: 0/2/1. Handoff doc: docs_dev/design/handoff-f4e8a9b1.md. Ready for AMOA assignment. (Retry: No ACK received within 30s)"}`
-- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
+- **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 **Step 6:** Wait 30 seconds again.
 
-**Step 7:** Check your inbox using the `agent-messaging` skill for ACK messages again.
+**Step 7:** Check your inbox using the `amp-inbox` CLI for ACK messages again.
 
-**Step 8 (if still no ACK):** Escalate by sending a message using the `agent-messaging` skill with:
+**Step 8 (if still no ACK):** Escalate by sending a message using the `amp-send` CLI with:
 - **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `ACK Timeout Escalation`
 - **Priority**: `urgent`
 - **Content**: `{"type": "escalation", "message": "ACK timeout from <AMCOS_SESSION_NAME>. Original message: Design Complete - User Authentication System. Sent: 2026-02-05 15:00:00. Retry sent: 2026-02-05 15:00:30. Blocking operation: Cannot proceed to next design task without confirmation that handoff was received."}`
-- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
+- **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 Then wait for manual intervention from AMCOS.

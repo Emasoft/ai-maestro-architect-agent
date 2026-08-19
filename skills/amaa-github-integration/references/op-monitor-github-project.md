@@ -55,12 +55,12 @@ gh project item-list --owner Emasoft --format json | jq --arg cutoff "$(date -v-
 
 ### Step 4: On External Change Detection
 
-When changes are detected, notify AMOA (AI Maestro Orchestrator Agent). Send a message using the `agent-messaging` skill with:
+When changes are detected, notify AMOA (AI Maestro Orchestrator Agent). Send a message using the `amp-send` CLI with:
 - **Recipient**: `amcos`
 - **Subject**: `GitHub Project Change Detected`
 - **Priority**: `normal`
 - **Content**: `{"type": "project_sync", "message": "Card [CARD_TITLE] moved from [OLD_STATUS] to [NEW_STATUS]. Updating local design state."}`
-- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
+- **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 ### Step 5: Update Local Design State
 
@@ -110,12 +110,12 @@ gh project item-list --owner Emasoft --format json | jq '.items[] | {title, stat
 # }
 
 # Previous status was "Draft" - movement detected!
-# Notify AMOA using the `agent-messaging` skill with:
+# Notify AMOA using the `amp-send` CLI with:
 # - Recipient: `amcos`
 # - Subject: `GitHub Project Change Detected`
 # - Priority: `normal`
 # - Content: `{"type": "project_sync", "message": "Card Auth Service Design moved from Draft to AI Review. Updating local design state."}`
-# - Verify: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
+# - Verify: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 ```
 
 ### Example: Automated Polling Script
