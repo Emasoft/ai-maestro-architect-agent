@@ -96,9 +96,10 @@ touch, never in a mass rewrite. A file carries exactly one of the two.
   impacts, npt/eht, relevant-rules, **min-approval-requirement +
   mandate/mandated-by**) plus the prose body and an `## Approval log`
   line recording the mandate (or the filed request).
-- On a split/group: N child TRDDs (fresh UUID + timestamp,
-  `parent-trdd:`/`supersedes:`, own requirements) and the superseded
-  parent/inputs.
+- On a split/group: N child TRDDs (each minted by `aimaestro-trdd.sh
+  create`, which owns the id8 + timestamps + zone routing —
+  never hand-roll them), `parent-trdd:`/`supersedes:`, own
+  requirements, and the superseded parent/inputs.
 - An AMP message to ORCH **via COS**: "TRDD-<id> designed; ready for
   dispatch" (or "split into <N>: <refs>" / "grouped into <ref>").
 - New/edited TRDD files staged and committed.
@@ -119,8 +120,8 @@ touch, never in a mass rewrite. A file carries exactly one of the two.
 ## Examples
 
 **1→N split.** Proto-TRDD "add OAuth + audit logging" holds two
-independent jobs. ARCH authors two children (each with fresh UUID,
-`supersedes: [<parent>]`, own test/audit requirements), sets the
+independent jobs. ARCH mints two children with `aimaestro-trdd.sh
+create` (each `supersedes: [<parent>]`, own test/audit requirements), sets the
 parent `column: superseded`, `superseded-by: [<both>]`, commits, and
 AMPs ORCH via COS: "TRDD-7a1 split into 2: <c1>, <c2>".
 
