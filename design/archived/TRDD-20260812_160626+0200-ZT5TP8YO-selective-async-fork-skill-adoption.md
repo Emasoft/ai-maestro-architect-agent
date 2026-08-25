@@ -131,7 +131,10 @@ directs spawning agents, running a full test/build suite, or a long network swee
 loop. Adversarial spot-check by the orchestrator on the three most-suspect skills
 (amaa-api-research, amaa-hypothesis-verification, amaa-cicd-design-ops): every grep hit
 for suite/spawn/wait/WebSearch patterns was the `background: false` declaration itself
-or a reference-table row naming a tool — zero operative long-running steps. Full
+or a reference-table row naming a tool — zero operative steps FOUND BY THAT NET; the
+CORRECTION above shows the net, not the skills, is what failed for
+amaa-hypothesis-verification, whose cost lives in what its steps do, not in wait
+vocabulary. Full
 per-skill table: `reports/architect/20260825_183117+0200-fork-skill-async-candidacy.md`
 (gitignored; regenerate by re-running the classification if needed).
 
