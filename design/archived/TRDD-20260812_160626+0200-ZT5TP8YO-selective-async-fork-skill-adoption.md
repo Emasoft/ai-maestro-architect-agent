@@ -100,11 +100,26 @@ must be populated before the ban is relaxed, never after.**
 
 ## Resolution — 2026-08-25: the allow-list is EMPTY by measurement
 
+> **CORRECTION (2026-08-25, post-publication, same session):** the count below was
+> published as ~~`BOUNDED: 26  EXTERNAL-WAIT: 0`~~ and is WRONG by one. A third, wider
+> sweep (adding script-mediated forms: `uv run *.py`, test runners, `gh … --watch`)
+> surfaced **`amaa-hypothesis-verification`**, whose own Instructions direct *setting up
+> a Docker container, executing 3+ experimental approaches and collecting measurements*
+> — long-running by its own text. Corrected count: **BOUNDED: 25, candidate: 1**.
+> **The DECISION is unchanged**: the candidate is RECORDED, not flipped — flipping
+> requires the completion protocol (item 2) and call-site rewrites (item 3) that do not
+> exist, and the trap rule forbids relaxing the test before a reviewed, protocol-backed
+> entry populates the list. The allow-list remains EMPTY; the test remains untouched.
+> A future TRDD that wants async hypothesis-verification starts from this named
+> candidate. (Why the first two passes missed it: the worker's class summary and the
+> orchestrator's grep nets both keyed on explicit wait/spawn verbs; this skill's cost
+> lives in what its steps DO — "execute experiments" — not in any waiting keyword.)
+
 All 26 `context: fork` skills were classified by reading each SKILL.md IN FULL and
 recording what its Instructions/Checklist actually direct (never the name):
 
 ```
-BOUNDED: 26   EXTERNAL-WAIT: 0   MIXED: 0
+BOUNDED: 26   EXTERNAL-WAIT: 0   MIXED: 0      <- superseded; see CORRECTION above
 ```
 
 Every skill is a guidance/reference-lookup + small script-invocation procedure; none
