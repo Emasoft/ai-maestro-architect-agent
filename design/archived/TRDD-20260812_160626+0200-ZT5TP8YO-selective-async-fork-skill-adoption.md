@@ -105,7 +105,10 @@ must be populated before the ban is relaxed, never after.**
 > sweep (adding script-mediated forms: `uv run *.py`, test runners, `gh … --watch`)
 > surfaced **`amaa-hypothesis-verification`**, whose own Instructions direct *setting up
 > a Docker container, executing 3+ experimental approaches and collecting measurements*
-> — long-running by its own text. Corrected count: **BOUNDED: 25, candidate: 1**.
+> — **plausibly long-running (MIXED)**: Docker setup can take minutes, but the skill's
+> own worked example is a seconds-scale micro-benchmark and its references list a
+> "Quick Verification" case; references unread. Corrected count: **BOUNDED: 25,
+> MIXED candidate: 1**.
 > **The DECISION is unchanged**: the candidate is RECORDED, not flipped — flipping
 > requires the completion protocol (item 2) and call-site rewrites (item 3) that do not
 > exist, and the trap rule forbids relaxing the test before a reviewed, protocol-backed
@@ -133,7 +136,8 @@ per-skill table: `reports/architect/20260825_183117+0200-fork-skill-async-candid
 
 Wall-clock runtime data does not exist for these skills (they execute in fleet agents'
 sessions, not this machine's) — workload-class analysis of the operative instructions
-is the measurement available, and at 26/26 BOUNDED it is decisive.
+is the measurement available: 25 BOUNDED plus one MIXED candidate (see CORRECTION
+above), which still yields an empty allow-list.
 
 **Consequences, per the card's own trap rule (allow-list before relaxation):**
 - No skill flips to async. The completion protocol (item 2) and call-site rewrites
@@ -146,7 +150,7 @@ is the measurement available, and at 26/26 BOUNDED it is decisive.
 ## Acceptance criteria
 
 - [x] Long-running candidates identified by measurement, with the numbers recorded here
-      (26/26 BOUNDED, 0 candidates — see Resolution)
+      (25 BOUNDED + 1 MIXED candidate recorded, none flipped — see CORRECTION in Resolution)
 - [x] Completion protocol specified, including the never-arrives case — MOOT: zero
       skills flip; protocol deferred to the future TRDD that first populates the list
 - [x] Every call site of each flipped skill updated — MOOT: zero flipped skills
@@ -164,3 +168,8 @@ is the measurement available, and at 26/26 BOUNDED it is decisive.
 - 2026-08-25T18:38:00+0200 — COMPLETED by ARCHITECT (Tier 0, own-repo skill audit;
   USER directive of 2026-08-25 "complete all pending tasks and TRDDs"). Measurement
   found zero async candidates; allow-list empty; test unchanged by design.
+- 2026-08-25T19:05:00+0200 — DATED CORRECTION ANNOTATION by ARCHITECT (this is the
+  license for editing an archived card: a dated, non-destructive annotation with the
+  superseded text kept visible — not a rewrite): count corrected to 25 BOUNDED +
+  1 MIXED candidate; decision (empty allow-list, untouched test) unchanged; the two
+  downstream lines still quoting the old count were aligned in the same annotation.
