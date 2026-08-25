@@ -143,3 +143,41 @@ def test_guard_would_notice_a_deletion() -> None:
     """
     for _rel, collocation, _protects in CLAIMS:
         assert _prose(collocation) not in _prose("a document with the rule deleted")
+
+
+# Claude Code 2.1.233 removed the todo tools on Opus 4.8, Sonnet 5, Fable 5, Mythos 5
+# and newer. Guidance we EMIT that calls one names a tool the executing agent does not
+# have — and unlike a wrong default, nothing errors: the agent just silently skips the
+# tracking step. The removal is upstream, so a well-meaning re-add here looks correct.
+TODO_TOOLS = ("TaskCreate", "TaskUpdate", "TaskList", "TaskGet", "TodoWrite", "TodoRead")
+EMITTERS = ("skills/amaa-planning-patterns/scripts/executor.py",)
+
+
+@pytest.mark.parametrize("rel_path", EMITTERS)
+def test_emitted_guidance_names_no_removed_todo_tool(rel_path: str) -> None:
+    """Guidance we hand an agent must not instruct a tool removed at 2.1.233."""
+    text = (REPO / rel_path).read_text(encoding="utf-8")
+    found = _todo_tools_in_emitted_body(text)
+    assert not found, (
+        f"{rel_path} emits guidance naming {found}, removed from current models at "
+        "2.1.233. Track in the plan file instead, or gate it on "
+        "CLAUDE_CODE_ENABLE_TODO_TOOLS=1."
+    )
+
+
+def _todo_tools_in_emitted_body(text: str) -> list[str]:
+    body = "\n".join(ln for ln in text.splitlines() if not ln.lstrip().startswith("#"))
+    return sorted({t for t in TODO_TOOLS if t in body})
+
+
+def test_todo_guard_would_notice_a_reintroduction() -> None:
+    """Falsification: the SAME predicate must fire on a re-added instruction.
+
+    Asserting only that the needle list is non-empty would pass without the
+    comment-stripping ever running — the part most likely to be wrong.
+    """
+    assert _todo_tools_in_emitted_body('"  1. Use TaskCreate to track phases",') == [
+        "TaskCreate"
+    ]
+    # ...and must NOT fire on the explanatory comment that legitimately names them.
+    assert _todo_tools_in_emitted_body("# TaskCreate was removed at 2.1.233") == []

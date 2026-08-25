@@ -50,7 +50,7 @@ def get_step_1_guidance(plan_file: str, thoughts: str) -> dict[str, list[str] | 
         "  1. Count milestones and their dependencies",
         "  2. Identify file targets per milestone",
         "  3. Determine parallelization opportunities",
-        "  4. Set up TaskCreate tracking for all milestones",
+        "  4. Set up milestone tracking in the plan file itself",
         "",
         "<execution_rules>",
         "",
@@ -71,7 +71,12 @@ def get_step_1_guidance(plan_file: str, thoughts: str) -> dict[str, list[str] | 
         "RULE 1: Execution Protocol",
         "",
         "Before ANY phase:",
-        "  1. Use TaskCreate to track all plan phases",
+        # Claude Code 2.1.233 removed the todo tools (TaskCreate/TodoWrite/...) on
+        # Opus 4.8, Sonnet 5, Fable 5, Mythos 5 and newer, so an instruction to call
+        # them names a tool the executing agent does not have. The plan file is the
+        # tracking artifact that exists on every model.
+        "  1. Track all plan phases in the plan file (todo tools are unavailable on",
+        "     current models unless CLAUDE_CODE_ENABLE_TODO_TOOLS=1)",
         "  2. Analyze dependencies to identify parallelizable work",
         "  3. Delegate implementation to specialized agents",
         "  4. Validate each increment before proceeding",

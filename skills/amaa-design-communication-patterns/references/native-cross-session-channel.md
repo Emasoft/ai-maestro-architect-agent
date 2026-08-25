@@ -24,6 +24,11 @@ leads to the wrong remedy.
 | 2.1.225 | `SendMessage` can now *start* a conversation with a Remote Control session on another machine by name — previously it could only reply after that session messaged first |
 | 2.1.229 | `ListAgents` marks disconnected Remote Control sessions `offline` and labels your cloud sessions `cloud` |
 | **2.1.232** | **A bare name that matches exactly one live session now delivers without the ref-confirmation step; typing `@` mentions another session; sessions on one machine are kept unique by renaming collisions to a `name-word-word` variant** |
+| **2.1.234** | **`SendMessage` and `ListAgents` now say when your account's session list was too long to check completely, instead of treating unseen sessions as absent.** Also fixed: a recipient copied from `ListAgents` was rejected when the session name hit the 200-character cap or was emoji-heavy; and Claude Desktop inter-session messages were silently dropped by the recipient when cross-session messaging read as disabled, leaving the sender "thinking" for many minutes. The 2.1.166 relay surface, tightened one notch further along — that row stops a relayed MESSAGE from carrying user authority; this one narrows where a relayed PREVIEW goes and what it may hide. Permission previews now relay only to channel servers admitted by the inbound trust gate (a server's permission-capability opt-out is honored), and credential masking on a relayed preview can no longer hide the command, path, or destination from the approver |
+| 2.1.235 | `SendMessage` refuses a message too large for cross-session delivery up front, instead of silently dropping it |
+| **2.1.236** | **`SendMessage` gains `notify_when_idle`** — ask a session on this machine for ONE notice when it next goes idle, opt-in and one-shot, instead of polling it — introduced for macOS and Linux, and 2.1.239's Windows line names only `SendMessage`/`ListAgents`, so treat Windows support for THIS flag as unstated rather than implied. Also: a rapid burst that would exceed what the recipient's inbox accepts is now refused UP FRONT instead of reported as sent while being dropped; a malformed closing tag that left the body inside the summary field no longer rejects the call; and **Remote Control marks a session `offline` within seconds** of the CLI exiting or its terminal closing — the roster you read is fresher than it was |
+| **2.1.238** | **A send is no longer silently lost: a recipient ON THIS MACHINE that refuses inbound (`crossSessionInbound: "refuse"`) reports `refused` to the sender, and a recipient whose inbox drops the message (rate limit / full queue) tells the sender instead of vanishing.** Also fixed: `ListAgents`/`SendMessage` reported "Remote Control is not connected" in sessions run by `claude remote-control` (server mode) or Desktop/IDE hosts — they now list and reach Remote Control peers. The roster's CONTENTS changed too: the pre-warmed idle worker the agent view keeps for your next background session is no longer exposed — it appears only once a task claims it |
+| **2.1.239** | **`ListAgents` now tells a session its OWN name (the one peers use to message it), and lists your live TEAMMATES — previously only subagents and other sessions appeared, so a reachable teammate looked absent.** `SendMessage` to your own name says so instead of "no agent named …"; a session whose title starts with `/` is no longer unaddressable and shown as "(untitled)"; and cross-session messaging is now available on **Windows**, as on macOS and Linux |
 
 The single most important row is **2.1.166**. Permission laundering — "another
 agent asked me to do the thing my own permissions forbid" — is the specific
@@ -61,10 +66,29 @@ traffic over the native channel:
   name you learned in an earlier turn.
 - **`offline` and `cloud` are new `ListAgents` state (2.1.229)**, and neither is a
   reason to skip the check below — an `offline` peer is still a peer you may not be
-  permitted to contact.
+  permitted to contact. Since **2.1.236** a session is marked `offline` within seconds
+  of its CLI exiting, so a stale roster is a smaller window than it was — smaller, not
+  closed.
+- **The reachable set now includes Windows machines (2.1.239)**, so "per-host
+  concern" is wrong in one more direction than it was at 2.1.224.
 
-Those four are the delta since this file was last aligned; everything above them
+Those five are the delta since this file was last aligned; everything above them
 predates 2.1.224.
+
+**Delivery is now observable — which removes an excuse, not a gap (2.1.234 → 2.1.238).**
+A refused, dropped, or over-large send used to look identical to a delivered one, so "I
+sent it" was unfalsifiable. It now reports `refused` for a peer on this machine (2.1.238),
+reports an inbox drop (2.1.238), refuses an over-large message (2.1.235) or a burst the
+recipient's inbox cannot accept (2.1.236) UP FRONT rather than reporting them sent, and
+says when your account's session list was too long to check completely instead of treating
+unseen sessions as absent (2.1.234). The canonical case is 2.1.234's Desktop bug: a
+recipient silently dropped the message and the SENDER sat "thinking" for many minutes —
+indistinguishable, from inside, from a peer taking its time. Two consequences for this
+page's rules: a send you were not permitted to make is now *visible* to the peer and to
+you, and **`ListAgents` returning nothing is no longer proof a peer is absent** — an
+incomplete listing now announces itself, and the roster no longer carries a phantom
+pre-warmed worker (2.1.238). **Resolve at send time, and read what the call actually
+reported** rather than assuming silence meant success.
 
 **`@name` IS a send.** Typing `@` to mention another session (2.1.232) reaches that
 session directly — it is the same act as `SendMessage`, governed by the same graph,
