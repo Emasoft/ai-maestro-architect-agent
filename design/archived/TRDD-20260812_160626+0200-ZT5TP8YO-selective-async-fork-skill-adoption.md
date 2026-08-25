@@ -125,7 +125,8 @@ recording what its Instructions/Checklist actually direct (never the name):
 BOUNDED: 26   EXTERNAL-WAIT: 0   MIXED: 0      <- superseded; see CORRECTION above
 ```
 
-Every skill is a guidance/reference-lookup + small script-invocation procedure; none
+Every skill — true of the 25; see the CORRECTION above for the one MIXED exception —
+is a guidance/reference-lookup + small script-invocation procedure; none
 directs spawning agents, running a full test/build suite, or a long network sweep/poll
 loop. Adversarial spot-check by the orchestrator on the three most-suspect skills
 (amaa-api-research, amaa-hypothesis-verification, amaa-cicd-design-ops): every grep hit
