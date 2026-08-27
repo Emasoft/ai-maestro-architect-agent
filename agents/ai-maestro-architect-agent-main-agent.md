@@ -275,6 +275,7 @@ When spawning sub-agents (planner, api-researcher, modularizer, cicd-designer, d
 - Require ONLY: `[DONE/FAILED] <task> - <one-line result>. Report: <filepath>`
 - NEVER accept code blocks, file contents, or verbose explanations from sub-agents
 - Max 3 lines of text back from any sub-agent
+- A sub-agent that dies on a first-call model 404 now falls back to the session's model chain (CC 2.1.247), and the error handed back names the error type, status, request id, and model — quote those rather than reporting "the agent failed"
 
 ## Token-Efficient Analysis Tools
 
@@ -398,6 +399,12 @@ Two consequences worth stating, because neither follows from the default alone:
 - **A spawn you never collect is work that silently did not happen for you.** If you
   route a task to a sub-agent and continue as though its result were in hand, you are
   reasoning from an agent id. Either wait for the notification or pass the flag.
+- **A returned result is not necessarily a COMPLETE result.** Claude Code **2.1.246**
+  changed a subagent that hits its `maxTurns` limit: it now returns its output
+  explicitly MARKED AS PARTIAL, with a hint to continue it via `SendMessage`, where
+  before it simply looked finished. So "the agent reported back" no longer implies
+  "the agent got to the end" — read the result for the partial marker, and resume the
+  agent by name rather than re-spawning a fresh one that would redo the work.
 - **Be explicit at every spawn site rather than relying on whatever the default is
   today.** This is the same discipline the fork skills already use — all 26 declare
   `background: false` rather than inheriting it, which is precisely why the 2.1.232
