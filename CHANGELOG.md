@@ -1,11 +1,14 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-    ## [2.17.5] - 2026-08-25
+    ## [2.17.6] - 2026-08-27
 
-### Documentation
+### Features
 
-- Qualify the surviving universal in TRDD-ZT5TP8YO prose    
-- Qualify the spot-check conclusion in TRDD-ZT5TP8YO    
+- Align to Claude Code 2.1.241-2.1.247    
+
+### Miscellaneous
+
+- Record memgrep's publish-globally normalization    
 
 
