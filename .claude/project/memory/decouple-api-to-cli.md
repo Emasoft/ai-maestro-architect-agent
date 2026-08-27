@@ -8,6 +8,7 @@ metadata:
   type: project
   tier: component
   functionality: architecture
+publish-globally: false
 ---
 The AI Maestro server REST routes (`/api/*`) are NOT a stable interface — they get renamed. The fleet froze a CLI layer in front of them (`~/.local/bin/aimaestro-*.sh`, `amp-*`), and **every agent-facing skill must call the CLI verb, not a raw `/api/` route**, so a route rename can never break a skill. This was the fleet-wide "repoint /api/* to the immutable CLI layer" sweep — architect side tracked as #16, keystone deploy ai-maestro#36 (deploy signal: the presence of the `~/.local/bin/aimaestro-teams.sh` file). Shipped in **v2.8.1**.
 

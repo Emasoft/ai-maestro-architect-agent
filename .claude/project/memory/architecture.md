@@ -9,6 +9,7 @@ metadata:
   tier: hub
   functionality: architecture
   globs: ["agents/**", "skills/**", "scripts/**", "commands/**", "hooks/**", "lib/**"]
+publish-globally: false
 ---
 ai-maestro-architect-agent (AMAA) is the **ARCHITECT** role plugin of the AI Maestro fleet: one architect per project, owning technical architecture design, requirements analysis, API research, the design-document lifecycle, and complete implementation handoffs to the orchestrator. It does not write production code — it produces specifications and design artifacts.
 
