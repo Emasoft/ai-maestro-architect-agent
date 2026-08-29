@@ -1,14 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-    ## [2.17.6] - 2026-08-27
+    ## [2.17.7] - 2026-08-29
 
-### Features
+### Documentation
 
-- Align to Claude Code 2.1.241-2.1.247    
-
-### Miscellaneous
-
-- Record memgrep's publish-globally normalization    
+- Align cross-session channel doc to Claude Code 2.1.248    
 
 
