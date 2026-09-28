@@ -2,7 +2,7 @@
 name: skill-frontmatter-runtime-defaults
 description: "a skill runs but the caller never gets its result / my fork skill went fire-and-forget with no error / a plugin kept validating clean after a Claude Code upgrade but changed behavior / who decides whether a context:fork skill is synchronous"
 ocd: 2026-08-07
-lmd: 2026-08-29
+lmd: 2026-09-28
 metadata:
   node_type: memory
   type: project
@@ -29,8 +29,7 @@ without it, and **nothing errored**. The plugin kept passing validation the whol
 time. A silent semantic change is the expensive kind, because the usual signals —
 a failing test, a red gate, an exception — all stay green.
 
-^ATOM-7KWW-K57Q [desc: "How to apply: write background: false on every fork skill unless deliberately async, and if async, update the caller's DONE/ACK protocol in amaa-design-communication-patterns in the same change; tests/test_amaa_skills.py enforces this.", keywords: how_do_i_pin_a_fork_skill_to_synchronous adopting_async_fork_skill_checklist test_amaa_skills_py_enforces_background_key done_ack_completion_protocol_for_background_skills, ocd: 2026-08-07, lmd: 2026-08-29]
-
+^ATOM-7KWW-K57Q [desc: "How to apply: write background: false on every fork skill unless deliberately async; if async, update the caller's DONE/ACK protocol in amaa-design-communication-patterns in the same change.", keywords: how_do_i_pin_a_fork_skill_to_synchronous adopting_async_fork_skill_checklist test_amaa_skills_py_enforces_background_key done_ack_completion_protocol_for_background_skills, ocd: 2026-08-07, lmd: 2026-09-28]
 **How to apply:** when adding a fork skill, write `background: false` unless the
 skill is deliberately async — and if it is, rewrite the caller's `[DONE]`/ACK
 completion protocol in `amaa-design-communication-patterns` in the same change,
