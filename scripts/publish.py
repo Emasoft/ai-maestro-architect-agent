@@ -921,14 +921,18 @@ def run_git_cliff(root: Path, new_version: str) -> str:
     Any git-cliff error exits the pipeline.
     """
     # 1. Generate / regenerate CHANGELOG.md with the new version at the top.
-    # WHY NO --unreleased WITH -o: that pair replaces the WHOLE file with
-    # latest-only content, discarding every tagged version's history
-    # (measured: v2.17.13's changelog shipped 10 lines because 2.17.12's
-    # commits were already tagged at generation time). `--latest` keeps the
-    # same single-version scope for the bump flow but pairs with `--prepend`
-    # so existing history in the file is preserved instead of overwritten.
-    # The commit-message data cliff sees is unchanged; only file handling
-    # differs. (TRDD-G4OVFAJI close-out: hand-added ledger was clobbered.)
+    # WHY --prepend, NOT -o: `-o` with a version selector REPLACES the whole
+    # file with that version's content only, discarding every tagged
+    # version's history (measured: v2.17.13's changelog shipped 10 lines
+    # because 2.17.12's commits were already tagged at generation time).
+    # `--prepend` generates the same single new-version section
+    # (--bump --unreleased --tag select it) and writes it ABOVE the
+    # existing file, preserving prior history. Caveat: on an ABSENT
+    # CHANGELOG.md, --prepend can place sections above cliff's header
+    # template (version sections before the `# Changelog` title) — this
+    # repo's CHANGELOG.md is tracked and always present, so the case never
+    # fires here; revisit if the file is ever untracked. (TRDD-G4OVFAJI
+    # close-out: hand-added ledger was clobbered.)
     run(
         [
             "git-cliff",
