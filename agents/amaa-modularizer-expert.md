@@ -15,7 +15,8 @@ Before proposing boundaries, read the board and search for an existing card:
 `ama-kanban-render` and `ama-trdd-find`.
 
 - **A TRDD is the unit of work.** Its `column:` field is the state machine; the
-  board has exactly **17 columns**. On resume, a TRDD's `## STATE` block is
+  board has exactly **22 columns (19 lifecycle + 3 exception)** per 3-pillars
+  spec 4.0.0. On resume, a TRDD's `## STATE` block is
   authoritative and **supersedes the body**.
 - **Self-classify the approval floor.** Every card carries
   `min-approval-requirement:` (`none` / `orchestrator` / `chief-of-staff` /

@@ -41,7 +41,7 @@ touch, never in a mass rewrite. A file carries exactly one of the two.
 ## Prerequisites
 
 - The core `ama-*` skills from `ai-maestro-plugin` are available — they carry
-  the mechanics, the 17-column transition rules, and the approval vocabulary.
+  the mechanics, the 22-column transition rules (3-pillars 4.0.0), and the approval vocabulary.
 - The project PRRD exists and `design/tasks/` is present.
 - A proto-TRDD sits in the `design` column awaiting ARCH.
 
@@ -79,8 +79,8 @@ touch, never in a mass rewrite. A file carries exactly one of the two.
     `pre-block-column:` recording where it was. "Complete pending EHTs"
     is not a state — the parent's own tests going green is not
     completion.
-9. Decide topology: **pass-through** (#4 `design → dispatch`), **1→N
-   split** (#5 parent → `superseded`, N children to `dispatch`), or
+9. Decide topology: **pass-through** (move the designed card to `dispatch` per the current transition table), **1→N
+   split** (parent → `superseded` — ARCHITECT's board authority — N children to `dispatch`), or
    **N→1 group** (one combined TRDD supersedes the inputs).
 10. Write the body: `## STATE` (if multi-session), `## Acceptance
     criteria` (testable bullets), `## Design notes`, `## Out of scope`;
@@ -133,7 +133,7 @@ AMPs ORCH via COS: "TRDD-7a1 split into 2: <c1>, <c2>".
 
 ## Resources
 
-For the full kanban mechanics, the 17-column transition rules, and the
+For the full kanban mechanics, the 22-column transition rules (3-pillars 4.0.0), and the
 approval vocabulary, use the core `ama-*` skills in `ai-maestro-plugin`
 (`ama-kanban-render`, `ama-trdd-write`/`-update`/`-transition`/`-find`,
 `ama-prrd-get`/`-find`/`-propose`, `ama-proposal-approvals`).

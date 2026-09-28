@@ -71,12 +71,15 @@ def get_step_1_guidance(plan_file: str, thoughts: str) -> dict[str, list[str] | 
         "RULE 1: Execution Protocol",
         "",
         "Before ANY phase:",
-        # Claude Code 2.1.233 removed the todo tools (TaskCreate/TodoWrite/...) on
-        # Opus 4.8, Sonnet 5, Fable 5, Mythos 5 and newer, so an instruction to call
-        # them names a tool the executing agent does not have. The plan file is the
-        # tracking artifact that exists on every model.
-        "  1. Track all plan phases in the plan file (todo tools are unavailable on",
-        "     current models unless CLAUDE_CODE_ENABLE_TODO_TOOLS=1)",
+        # Claude Code 2.1.268 gates the task-tracking tools (TaskCreate/
+        # TodoWrite/...) to Claude 3.x, Opus 4.0-4.7, Sonnet 4.0-4.6 and
+        # Haiku 4.5; elsewhere CLAUDE_CODE_ENABLE_TODO_TOOLS=1 re-enables
+        # them. Availability varies by model, so an instruction to call them
+        # may still name a tool the executing agent lacks. The plan file is
+        # the tracking artifact that exists on every model.
+        "  1. Track all plan phases in the plan file (todo-tool availability varies by",
+        "     model — see CLAUDE_CODE_ENABLE_TODO_TOOLS; the plan file below is the",
+        "     tracking artifact on every model)",
         "  2. Analyze dependencies to identify parallelizable work",
         "  3. Delegate implementation to specialized agents",
         "  4. Validate each increment before proceeding",

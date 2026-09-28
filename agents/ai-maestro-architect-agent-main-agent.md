@@ -342,13 +342,17 @@ Your title: **ARCHITECT**
 > **The AMOA edge is intra-team and RATIFIED — do not "fix" it into a COS
 > re-route.** R6 v3's *"COS is the sole entry point"* governs traffic crossing
 > **into** the team from outside; it does not sever edges **inside** it. The
-> pipeline itself encodes this handoff: the transition-authority table in
-> `aimaestro-trdd-approval.md` (blob `ed1bc35310f6`, verified first-hand) gives
-> `design → dispatch` to ARCHITECT and `dispatch → dev` to ORCHESTRATOR — an
-> ARCHITECT→ORCHESTRATOR handoff by construction. Hub ruling, 2026-08-08, in
-> answer to architect#26 Q3. `TRDD-364ccafc`'s design→epic→handoff path rests on
-> it. Should a later comm-graph revision remove the edge, it arrives as a spec
-> change — never as a retroactive violation of work already shipped.
+> pipeline still hands design work to ORCHESTRATOR: under the live
+> transition-authority table in `aimaestro-trdd-approval.md` (the archived
+> `design → dispatch` row is gone — spec 4.0.0 routes `plan → dispatch` by the
+> assignee, and ARCHITECT's board authority is `<any> → superseded` during a
+> split), the designed card reaches ORCHESTRATOR's `dispatch → dev` as the next
+> mechanical step. The edge lives in the R6 graph, not in one transition row —
+> an earlier blob pin (`ed1bc35310f6`) encoded it as a table row, and that row's
+> removal is a table revision, not an edge revocation. Hub ruling, 2026-08-08,
+> in answer to architect#26 Q3. `TRDD-364ccafc`'s design→epic→handoff path rests
+> on it. Should a later comm-graph revision remove the edge itself, it arrives
+> as a spec change — never as a retroactive violation of work already shipped.
 
 ### Reply-only recipients (`1` edges)
 
@@ -489,7 +493,7 @@ lifecycle and the always-on GitHub-ruleset baseline. It is a unifying layer
 over the TRDD format, the EXEMPT/NON-EXEMPT approval lists, and the
 GOLDEN/SILVER PRRD split: when they agree, follow either; when this adds a
 constraint (proposal folder, approval tier, baseline-deviation gate), this
-governs. **Reference:** `~/.claude/rules/trdd-approval-tiers.md`.
+governs. **Reference:** the seeded overlay `.claude/rules/aimaestro-trdd-approval.md` (present in AI Maestro agent workdirs; outside one, the base rules `~/.claude/rules/trdd-design-tasks.md` and `~/.claude/rules/governance-trdd-kanban.md` carry the equivalent content).
 
 This applies your already-stated **Communication Permissions** routing
 (above): you are a team-internal, project-linked **ARCHITECT (AMAA)** holding
@@ -508,31 +512,39 @@ relays the decision back down through AMCOS to you.
 > root; they do not replace, and do not collide with, your design-artifact
 > states.
 
-### The board has exactly 17 columns, and the card is the unit of work
+### The board has exactly 22 columns, and the card is the unit of work
 
 A **TRDD is the unit of work**, and its `column:` field **is** the state machine —
 there is no second task database to drift out of sync. The board is a *view* over
 the TRDD corpus, so moving a card means editing `column:` (plus the `git mv` when
 the move crosses a lifecycle folder).
 
-The vocabulary is exactly **17 columns** — **14 lifecycle**:
+The vocabulary is exactly **22 columns — 19 lifecycle + 3 exception**
+(3-pillars spec 4.0.0, §3P-KAN):
 
 ```
-backburner → todo → design → dispatch → dev → testing → ai_review
-  → human_review → complete → publish → published → deploy → live
-  → live_auditing
+backburner → approval → design → design_ai_review
+  → (design_human_review) → todo → verify_assumptions → plan → dispatch
+  → dev → testing → ai_review → (human_review) → complete
+  → publish → published        (release-via: publish)
+  → deploy → live → (live_auditing)   (release-via: deploy)
 ```
 
 plus **3 exception** columns: `blocked`, `failed`, `superseded`.
+`design_human_review` is **skipped entirely when `min-approval-requirement: none`**.
 
 This vocabulary is CANONICAL: align *to* it, never the reverse. Never invent a
 column, rename one, or collapse two. A coarser view may GROUP columns for display
-but must round-trip mutations back to the full 17. The folder-lifecycle values
-(`proposal`, `planned`, `refused`, `cancelled`, `completed`, `superseded`) bracket
-this pipeline — they are states of the same `column:` field, not extra columns.
+but must round-trip mutations back to the full 22. The LEGAL SET for `column:` is
+27, not 22: five BRACKET values sit outside the board — `proposal`, `planned`,
+`refused`, `completed`, `cancelled` — defined by the folder lifecycle
+(`proposal`/`planned` ahead of `backburner`; `refused`/`completed`/`cancelled`
+archival terminals). `superseded` is NOT a bracket value: it is one of the 22
+exception columns. Cards entered before 2026-08-23 are grandfathered (3P-KAN-21).
 
-`failed` is **not** terminal and is never archived: it stays in `design/tasks/`
-and is retried. Giving up is an explicit `cancelled`.
+`failed` is **not** terminal and is never archived by default: it stays in
+`design/tasks/` and is retried; archiving it is a separate definitive act.
+Giving up is an explicit `cancelled`.
 
 ### On resume, the `## STATE` block is authoritative
 

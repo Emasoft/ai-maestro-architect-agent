@@ -31,6 +31,12 @@ leads to the wrong remedy.
 | **2.1.239** | **`ListAgents` now tells a session its OWN name (the one peers use to message it), and lists your live TEAMMATES — previously only subagents and other sessions appeared, so a reachable teammate looked absent.** `SendMessage` to your own name says so instead of "no agent named …"; a session whose title starts with `/` is no longer unaddressable and shown as "(untitled)"; and cross-session messaging is now available on **Windows**, as on macOS and Linux |
 | **2.1.247** | **A peer message now COLLAPSES BY DEFAULT to a one-line `Message from @<sender>: <first line>` preview; Ctrl+O expands the full body.** Consequence for senders: the FIRST LINE is the only part guaranteed to be read at a glance, so put the ask there — a message whose point arrives in paragraph three now reads as a one-line preview that says nothing |
 | **2.1.248** | **A subagent's `SendMessage` to another session now delivers any reply to the PARENT session's conversation, not back to the subagent** — so a subagent that ignored AMAA's ban on the channel could not even read the answer it asked for; the prohibition now costs it nothing. Also: the channel became available on Bedrock, Vertex and Foundry and with telemetry disabled (it simply did not exist there before); an invalid `crossSessionInbound:` value no longer fails open silently — it warns and HOLDS inbound messages (user settings) or refuses them (managed settings) until corrected; and the socket directory now falls back to a private per-user `/tmp` when the default is unusable, with the notice and `/status` naming the directory to fix |
+| 2.1.251 | Fixed replying to a message Claude Desktop delivered from another session — `SendMessage` to that session id now delivers through Claude Desktop instead of failing with "not reachable". A "not reachable" refusal on a Desktop-relayed thread was a platform bug, not a governance signal |
+| **2.1.260** | **Fixed a subagent that resumed another agent via `SendMessage` never being woken by that agent's completion (the notification went to the main conversation instead), and a session that moved to the background appearing twice in `ListAgents` as a phantom "interactive" twin with the same name and receiving `SendMessage` deliveries in the viewer** — a resumed cross-session thread could silently never hear back, and the roster could list one session as two. One more reason the recipient is resolved through `ListAgents` at send time and its answer re-read, never cached |
+| **2.1.261** | **A send to an offline Remote Control session on another machine now reports delivery as queued until that machine reconnects, instead of reading as delivered** — across machines, "the call succeeded" still is not "the message arrived" |
+| **2.1.271** | **A cross-session message HELD by the receiving session's permission-mode policy now leaves a trace: headless senders get a delivery notice, and `SendMessage` results no longer imply the message was read.** Consequence for AMAA's rules: a SendMessage result is not a read receipt — do not treat "no refusal" as "was read and acted on" |
+| 2.1.277 | Fixed messages from other agents (such as a subagent's `SendMessage`) that arrived mid-turn showing up below the "Ran N shell commands" row instead of where they arrived — an inbound message's transcript position is now where it arrived; read the whole turn, not just its tail, before acting on the conversation |
+| 2.1.284 | Fixed sessions launched without the `SendMessage` tool (such as by Claude Desktop) still being told to message other sessions with it — a session can genuinely lack the tool; its absence there is not evidence the channel itself is gone |
 
 The single most important row is **2.1.166**. Permission laundering — "another
 agent asked me to do the thing my own permissions forbid" — is the specific
@@ -74,10 +80,10 @@ traffic over the native channel:
 - **The reachable set now includes Windows machines (2.1.239)**, so "per-host
   concern" is wrong in one more direction than it was at 2.1.224.
 
-Those five are the delta since this file was last aligned; everything above them
-predates 2.1.224.
+Those five are the delta as of the last full alignment (2.1.248); the version table
+above carries everything since.
 
-**Delivery is now observable — which removes an excuse, not a gap (2.1.234 → 2.1.238).**
+**Delivery is now observable — which removes an excuse, not a gap (2.1.234 → 2.1.271).**
 A refused, dropped, or over-large send used to look identical to a delivered one, so "I
 sent it" was unfalsifiable. It now reports `refused` for a peer on this machine (2.1.238),
 reports an inbox drop (2.1.238), refuses an over-large message (2.1.235) or a burst the
@@ -90,7 +96,10 @@ page's rules: a send you were not permitted to make is now *visible* to the peer
 you, and **`ListAgents` returning nothing is no longer proof a peer is absent** — an
 incomplete listing now announces itself, and the roster no longer carries a phantom
 pre-warmed worker (2.1.238). **Resolve at send time, and read what the call actually
-reported** rather than assuming silence meant success.
+reported** rather than assuming silence meant success. The chain continued: a send
+to an offline Remote Control peer reports queued-until-reconnect, not delivered
+(2.1.261); a message HELD by the recipient's permission-mode policy now leaves a
+trace, and a result no longer implies the message was read (2.1.271).
 
 **`@name` IS a send.** Typing `@` to mention another session (2.1.232) reaches that
 session directly — it is the same act as `SendMessage`, governed by the same graph,
