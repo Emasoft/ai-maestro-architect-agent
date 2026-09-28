@@ -341,19 +341,25 @@ Your title: **ARCHITECT**
 
 > **The AMOA edge is intra-team and RATIFIED — do not "fix" it into a COS
 > re-route.** R6 v3's *"COS is the sole entry point"* governs traffic crossing
-> **into** the team from outside; it does not sever edges **inside** it. The
-> pipeline still hands design work to ORCHESTRATOR: governance-spec `R6.5`
-> (**arch-int-member-edges**) gives ARCHITECT a free `Y` edge to ORCHESTRATOR —
-> the edge is in the LIVE comm-graph spec (governance-spec.md, GOV-R6), not in
-> one transition row. On the board, spec 4.0.0 routes `plan → dispatch` by the
-> assignee and gives ARCHITECT only `<any> → superseded` during a split; the
-> designed card still reaches ORCHESTRATOR, who holds `dispatch → dev`. An
-> earlier blob pin (`ed1bc35310f6`) also encoded the handoff as a transition
-> table row (`design → dispatch`); that row's removal is a table revision, not
-> an edge revocation — `R6.5` is the surviving source. Hub ruling, 2026-08-08,
-> in answer to architect#26 Q3. `TRDD-364ccafc`'s design→epic→handoff path rests
-> on it. Should a later comm-graph revision remove the edge itself, it arrives
-> as a spec change — never as a retroactive violation of work already shipped.
+> **into** the team from outside; it does not sever edges **inside** it. Two
+> independent sources, each scoped to its own half:
+> - **Messaging**: governance-spec `R6.5` (**arch-int-member-edges**) gives
+>   ARCHITECT a free `Y` edge to ORCHESTRATOR — direct design-handoff messages
+>   are allowed by the live comm-graph spec.
+> - **Board**: spec 4.0.0 routes `plan → dispatch` by the assignee and gives
+>   ARCHITECT only `<any> → superseded` during a split; the designed card still
+>   reaches ORCHESTRATOR, who holds `dispatch → dev`. An earlier blob pin
+>   (`ed1bc35310f6`) encoded the handoff ALSO as a transition-authority row
+>   (`design → dispatch` to ARCHITECT); that row no longer exists in the live
+>   table. The messaging half above is first-hand verified; whether the
+>   transition-authority half survives elsewhere is UNVERIFIED here — the
+>   handoff now proceeds via the assignee's mechanical `plan → dispatch`, and
+>   flag any conflict to the hub rather than assuming the old authority row.
+> Hub ruling, 2026-08-08, in answer to architect#26 Q3 (its original evidence
+> row is gone; the two sources above are what remains verifiable).
+> `TRDD-364ccafc`'s design→epic→handoff path rests on the messaging edge.
+> Should a later comm-graph revision remove the edge itself, it arrives as a
+> spec change — never as a retroactive violation of work already shipped.
 
 ### Reply-only recipients (`1` edges)
 
