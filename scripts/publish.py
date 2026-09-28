@@ -927,11 +927,12 @@ def run_git_cliff(root: Path, new_version: str) -> str:
     # because 2.17.12's commits were already tagged at generation time).
     # `--prepend` generates the same single new-version section
     # (--bump --unreleased --tag select it) and writes it ABOVE the
-    # existing file, preserving prior history. Caveat: on an ABSENT
-    # CHANGELOG.md, --prepend can place sections above cliff's header
-    # template (version sections before the `# Changelog` title) — this
-    # repo's CHANGELOG.md is tracked and always present, so the case never
-    # fires here; revisit if the file is ever untracked. (TRDD-G4OVFAJI
+    # existing file, preserving prior history. Measured (git-cliff 2.14.2,
+    # 2026-09-28): with CHANGELOG.md ABSENT, --prepend exits non-zero (IO
+    # error) and writes no file — the pipeline aborts fail-fast, it does
+    # not produce a misordered file. Unreachable here (the file is
+    # tracked); re-measure on any git-cliff upgrade before relying on
+    # fresh-file behavior. (TRDD-G4OVFAJI
     # close-out: hand-added ledger was clobbered.)
     run(
         [
