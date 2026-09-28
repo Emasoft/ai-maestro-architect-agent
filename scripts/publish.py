@@ -907,12 +907,12 @@ sort_commits = "oldest"
 def run_git_cliff(root: Path, new_version: str) -> str:
     """Run git-cliff to (re)generate CHANGELOG.md and extract release notes.
 
-    Uses the `--bump --unreleased --tag vX.Y.Z -o CHANGELOG.md` pattern to
-    regenerate the full changelog file in one call. This matches the
-    upstream git-cliff recommended pipeline and handles both fresh-generation
-    and update cases uniformly — git-cliff walks the full tag history from
-    the start of the repo and produces the complete CHANGELOG.md with the
-    new version section at the top.
+    Uses the `--bump --unreleased --tag vX.Y.Z --prepend CHANGELOG.md`
+    pattern: the new version's section is generated latest-only and
+    prepended above the existing content, so prior tagged versions'
+    history in the file is preserved (an earlier `-o` invocation REPLACED
+    the whole file with latest-only content and discarded tagged history —
+    see the comment at the call site below).
 
     Release notes (latest-only, header stripped) are extracted in a second
     call and written to .git-cliff-release-notes.md so a subsequent
