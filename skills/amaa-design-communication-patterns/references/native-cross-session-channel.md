@@ -80,8 +80,11 @@ traffic over the native channel:
 - **The reachable set now includes Windows machines (2.1.239)**, so "per-host
   concern" is wrong in one more direction than it was at 2.1.224.
 
-Those five are the delta as of the last full alignment (2.1.248); the version table
-above carries everything since.
+Those five are the structural gaps the platform still does not close (each bullet
+carries its own version cite; everything above them predates 2.1.224). Post-alignment
+channel changes — delivery traces, queued-not-delivered, held-message visibility — live
+in the version table above and the delivery-observable paragraph below; this list is
+about what is still MISSING, not what recently changed.
 
 **Delivery is now observable — which removes an excuse, not a gap (2.1.234 → 2.1.271).**
 A refused, dropped, or over-large send used to look identical to a delivered one, so "I

@@ -4,7 +4,7 @@ title: Align plugin to Claude Code 2.1.249-2.1.284 and 3-pillars spec vocabulary
 column: ai_review
 status: tasked
 created: 2026-09-28T21:56:15+0200
-updated: 2026-09-28T22:06:57+0200
+updated: 2026-09-28T22:08:59+0200
 current-owner: main-agent@autonomous
 created-by: main-agent@autonomous
 task-type: docs
@@ -18,6 +18,7 @@ approved: true
 approval-judge: main-agent@autonomous
 approval-datetime: 2026-09-28T21:56:15+0200
 relevant-rules: [2.1]
+implementation-commits: [4641396, aab7138]
 ---
 
 # Align plugin to Claude Code 2.1.249-2.1.284 and 3-pillars spec vocabulary
