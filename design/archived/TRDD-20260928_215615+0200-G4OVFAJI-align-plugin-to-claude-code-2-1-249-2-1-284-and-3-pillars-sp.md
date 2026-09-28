@@ -1,10 +1,10 @@
 ---
 trdd-id: G4OVFAJI
 title: Align plugin to Claude Code 2.1.249-2.1.284 and 3-pillars spec vocabulary
-column: ai_review
-status: tasked
+column: complete
+status: archived
 created: 2026-09-28T21:56:15+0200
-updated: 2026-09-28T22:08:59+0200
+updated: 2026-09-28T22:09:29+0200
 current-owner: main-agent@autonomous
 created-by: main-agent@autonomous
 task-type: docs
@@ -32,3 +32,12 @@ Align published guidance to current canon: 22-column kanban vocabulary (19 lifec
 - 2026-09-28T22:00:40+0200 — column → dev. Canary passed; five workers dispatched on verified plan
 - 2026-09-28T22:06:45+0200 — column → testing. All five worker reports verified first-hand; review fixes applied; committed 4641396
 - 2026-09-28T22:06:57+0200 — column → ai_review. Acceptance checklist all green (A1-A6); awaiting review verdict on final state
+- 2026-09-28T22:09:29+0200 — COMPLETE by main-agent@autonomous. All five acceptance criteria verified first-hand this session; ai_review findings fixed at 762f451.
+
+## Acceptance criteria
+
+- [x] Zero hits for 17-column vocabulary across agents/, skills/, commands/ (verified 2026-09-28)
+- [x] Persona carries the 22-column canon (19 lifecycle + 3 exception) matching spec 4.0.0 §3P-KAN in substance
+- [x] Channel reference carries rows 2.1.251/260/261/271/277/284, each attributed against the fetched changelog
+- [x] executor.py cites 2.1.268 allowlist; py_compile clean
+- [x] AMOA handoff blockquote sourced to governance-spec R6.5 (arch-int-member-edges), not to the removed transition row
