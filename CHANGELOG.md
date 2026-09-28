@@ -1,6 +1,12 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+    ## [2.17.14] - 2026-09-28
+
+### Bug Fixes
+
+- Cliff --prepend not -o — regeneration was discarding tagged history    
+
     ## [2.17.13] - 2026-09-28
 
 ### Documentation
