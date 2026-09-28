@@ -354,7 +354,9 @@ Your title: **ARCHITECT**
 >   table. **Verified against the live table 2026-09-28, independently
 >   cross-checked by the ai-maestro session**: no transition authority rides
 >   the ARCHITECT→ORCHESTRATOR design handoff — `plan → dispatch` (assignee,
->   mechanical) is the only dispatch-adjacent path (live table lines 670–671).
+>   mechanical) is the only dispatch-adjacent path (the Part B2 transition
+>   table in `aimaestro-trdd-approval.md`; verified 2026-09-28, where the rows
+>   `plan → dispatch` and `dispatch → dev` were adjacent).
 >   The 2026-08-08 hub ruling (architect#26 Q3) was recorded against the
 >   removed row; its original text is not located in the hub's TRDD corpus as
 >   of 2026-09-28. The messaging half above stands separately.
