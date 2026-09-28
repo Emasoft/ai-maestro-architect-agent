@@ -351,11 +351,13 @@ Your title: **ARCHITECT**
 >   reaches ORCHESTRATOR, who holds `dispatch → dev`. An earlier blob pin
 >   (`ed1bc35310f6`) encoded the handoff ALSO as a transition-authority row
 >   (`design → dispatch` to ARCHITECT); that row no longer exists in the live
->   table. **HUB-CONFIRMED 2026-09-28**: no transition authority rides the
->   ARCHITECT→ORCHESTRATOR design handoff — `plan → dispatch` (assignee,
->   mechanical) is the only dispatch-adjacent path, and the 2026-08-08 ruling
->   was recorded against the removed row. The messaging half above stands
->   separately.
+>   table. **Verified against the live table 2026-09-28, independently
+>   cross-checked by the ai-maestro session**: no transition authority rides
+>   the ARCHITECT→ORCHESTRATOR design handoff — `plan → dispatch` (assignee,
+>   mechanical) is the only dispatch-adjacent path (live table lines 670–671).
+>   The 2026-08-08 hub ruling (architect#26 Q3) was recorded against the
+>   removed row; its original text is not located in the hub's TRDD corpus as
+>   of 2026-09-28. The messaging half above stands separately.
 > `TRDD-364ccafc`'s design→epic→handoff path rests on the messaging edge.
 > Should a later comm-graph revision remove the edge itself, it arrives as a
 > spec change — never as a retroactive violation of work already shipped.
