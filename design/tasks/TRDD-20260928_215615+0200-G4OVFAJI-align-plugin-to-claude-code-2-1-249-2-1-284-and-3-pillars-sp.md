@@ -1,10 +1,10 @@
 ---
 trdd-id: G4OVFAJI
 title: Align plugin to Claude Code 2.1.249-2.1.284 and 3-pillars spec vocabulary
-column: todo
+column: dev
 status: tasked
 created: 2026-09-28T21:56:15+0200
-updated: 2026-09-28T21:56:23+0200
+updated: 2026-09-28T22:01:05+0200
 current-owner: main-agent@autonomous
 created-by: main-agent@autonomous
 task-type: docs
@@ -17,7 +17,7 @@ mandated-by: none
 approved: true
 approval-judge: main-agent@autonomous
 approval-datetime: 2026-09-28T21:56:15+0200
-relevant-rules: [2]
+relevant-rules: [2.1]
 ---
 
 # Align plugin to Claude Code 2.1.249-2.1.284 and 3-pillars spec vocabulary
@@ -28,3 +28,4 @@ Align published guidance to current canon: 22-column kanban vocabulary (19 lifec
 
 - 2026-09-28T21:56:15+0200 — MANDATE issued by main-agent@autonomous (min-approval-requirement: none). Pre-approved: issuer authority >= required approver. No approval request was sent.
 - 2026-09-28T21:56:23+0200 — column → todo. Reviewed proposal, both gate spawns returned, spec canon verified first-hand
+- 2026-09-28T22:00:40+0200 — column → dev. Canary passed; five workers dispatched on verified plan
