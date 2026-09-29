@@ -737,7 +737,9 @@ def _update_readme_version(root: Path, new_version: str) -> tuple[bool, str]:
     WHY: README's version line is OUTSIDE publish.py's bump set, so every
     release left it stale (found at 2.17.15: README read 2.17.14 while the
     manifests read 2.17.15; the consistency gate does not cover README).
-    Manual sweeps decay; a bump-set entry does not.
+    Manual sweeps decay; a bump-set entry does not. README.md is also in
+    the Step-11 staging list — bumping without staging leaves the release
+    commit dirty (found at 2.17.17: release shipped, README left ' M').
     """
     path = root / "README.md"
     if not path.exists():
@@ -1583,6 +1585,7 @@ Examples:
         "CHANGELOG.md",
         "cliff.toml",
         ".gitignore",
+        "README.md",
     ):
         if (plugin_root / name).exists():
             staged.append(name)
