@@ -4,7 +4,7 @@ title: Adopt GOV-R41 + PRRD golden-silver citation + G1.2 template bylines (issu
 column: dev
 status: tasked
 created: 2026-09-29T13:14:49+0200
-updated: 2026-09-29T13:23:17+0200
+updated: 2026-09-29T13:26:04+0200
 current-owner: main-agent@autonomous
 created-by: user
 task-type: feature
@@ -17,7 +17,7 @@ mandated-by: none
 approved: true
 approval-judge: user
 approval-datetime: 2026-09-29T13:14:49+0200
-unblock-when: [decision: 4.0.0 spec push lands on Emasoft/ai-maestro governance-rules - re-adopt the 3P-ZON-06 express give-up archive ruling]
+unblock-when: [decision: when the 4.0.0 spec push lands on Emasoft/ai-maestro governance-rules, THEN re-adopt the 3P-ZON-06 express give-up archive ruling]
 ---
 
 # Adopt GOV-R41 + PRRD golden-silver citation + G1.2 template bylines (issue 27)
@@ -31,3 +31,4 @@ Fleet issue 27 adoption wave. Cite R41 by number (governance-spec.md 2.6.1, gove
 ## Close-out requirements
 
 Acceptance report on issue 27: opens with the PRRD G1.2 self-ID line, cites R41/R41.6/R41.5 by number without restating content, states Pattern B verified-clean (contract form), and declares the pending-4.0.0 disposition explicitly.
+Note: this corpus's PRRD project-id is the flagged placeholder 'autonomous'; the main-agent@autonomous owner id on this card is machine-valid but anchored to that pending owner decision.
