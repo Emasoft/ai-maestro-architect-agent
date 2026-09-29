@@ -4,7 +4,7 @@ title: Adopt GOV-R41 + PRRD golden-silver citation + G1.2 template bylines (issu
 column: ai_review
 status: tasked
 created: 2026-09-29T13:14:49+0200
-updated: 2026-09-29T13:44:13+0200
+updated: 2026-09-29T13:48:40+0200
 current-owner: main-agent@autonomous
 created-by: user
 task-type: feature
@@ -18,6 +18,7 @@ approved: true
 approval-judge: user
 approval-datetime: 2026-09-29T13:14:49+0200
 unblock-when: [decision: when the 4.0.0 spec push lands on Emasoft/ai-maestro governance-rules, THEN re-adopt the 3P-ZON-06 express give-up archive ruling]
+implementation-commits: [8c7b49d, 12f4f4d, b5aa52b, fb3aaff, 712d294, e57456c]
 ---
 
 # Adopt GOV-R41 + PRRD golden-silver citation + G1.2 template bylines (issue 27)
