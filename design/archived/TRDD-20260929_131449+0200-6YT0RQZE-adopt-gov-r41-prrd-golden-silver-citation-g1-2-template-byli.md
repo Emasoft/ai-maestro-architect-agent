@@ -1,10 +1,10 @@
 ---
 trdd-id: 6YT0RQZE
 title: Adopt GOV-R41 + PRRD golden-silver citation + G1.2 template bylines (issue 27)
-column: ai_review
-status: tasked
+column: complete
+status: archived
 created: 2026-09-29T13:14:49+0200
-updated: 2026-09-29T13:48:40+0200
+updated: 2026-09-29T14:05:47+0200
 current-owner: main-agent@autonomous
 created-by: user
 task-type: feature
@@ -18,7 +18,7 @@ approved: true
 approval-judge: user
 approval-datetime: 2026-09-29T13:14:49+0200
 unblock-when: [decision: when the 4.0.0 spec push lands on Emasoft/ai-maestro governance-rules, THEN re-adopt the 3P-ZON-06 express give-up archive ruling]
-implementation-commits: [8c7b49d, 12f4f4d, b5aa52b, fb3aaff, 712d294, e57456c]
+implementation-commits: [8c7b49d, 12f4f4d, b5aa52b, fb3aaff, 712d294, e57456c, 3323167]
 ---
 
 # Adopt GOV-R41 + PRRD golden-silver citation + G1.2 template bylines (issue 27)
@@ -28,8 +28,15 @@ Fleet issue 27 adoption wave. Cite R41 by number (governance-spec.md 2.6.1, gove
 ## Approval log
 
 - 2026-09-29T13:14:49+0200 — MANDATE issued by user (min-approval-requirement: none). Pre-approved: issuer authority >= required approver. No approval request was sent.
+- 2026-09-29T14:05:47+0200 — COMPLETE by main-agent@autonomous. archived → complete.
 
 ## Close-out requirements
 
 Acceptance report on issue 27: opens with the PRRD G1.2 self-ID line, cites R41/R41.6/R41.5 by number without restating content, states Pattern B verified-clean (contract form), and declares the pending-4.0.0 disposition explicitly.
 Note: this corpus's PRRD project-id is the flagged placeholder 'autonomous'; the main-agent@autonomous owner id on this card is machine-valid but anchored to that pending owner decision.
+
+## Acceptance checklist
+
+- [x] Issue 27 acceptance: R41 cited by number; G1.2 byline in GitHub-posting templates; 3.0.0 citation; test pinning bylines
+- [x] Issue 27 report posted in-issue with self-ID first line (verified first-hand)
+- [x] All wave commits landed; v2.17.15 published (tags + GitHub release verified 2026-09-29)

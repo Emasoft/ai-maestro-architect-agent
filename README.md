@@ -5,7 +5,7 @@ Claude Code role-plugin for the AI Maestro multi-agent ecosystem: the
 implementable design documents — requirements analysis, API research,
 architecture decisions, module breakdowns, and handoff packages.
 
-**Version**: 2.17.14
+**Version**: 2.17.15
 
 ## Overview
 
