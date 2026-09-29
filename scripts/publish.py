@@ -731,6 +731,32 @@ def language_lint_step(info: ProjectInfo) -> None:
                 print(f"{GREEN}ok shellcheck passed{NC}")
 
 
+def _update_readme_version(root: Path, new_version: str) -> tuple[bool, str]:
+    """Sync the `**Version**: X.Y.Z` line in README.md, if present.
+
+    WHY: README's version line is OUTSIDE publish.py's bump set, so every
+    release left it stale (found at 2.17.15: README read 2.17.14 while the
+    manifests read 2.17.15; the consistency gate does not cover README).
+    Manual sweeps decay; a bump-set entry does not.
+    """
+    path = root / "README.md"
+    if not path.exists():
+        return True, "README.md not found (skipped)"
+    try:
+        content = path.read_text(encoding="utf-8")
+        pattern = r"^(\*\*Version\*\*: )(\d+\.\d+\.\d+)$"
+        m = re.search(pattern, content, flags=re.MULTILINE)
+        if not m:
+            return True, "README.md: no **Version** line (skipped)"
+        if m.group(2) == new_version:
+            return True, f"README.md: already {new_version}"
+        updated = content[: m.start(2)] + new_version + content[m.end(2) :]
+        path.write_text(updated, encoding="utf-8")
+        return True, f"README.md: {m.group(2)} -> {new_version}"
+    except Exception as e:  # noqa: BLE001
+        return False, f"README.md error: {e}"
+
+
 def language_bump_version(info: ProjectInfo, new_version: str) -> list[tuple[bool, str]]:
     """Bump version in every applicable config file for the detected kinds.
     Returns a list of (ok, message) tuples."""
@@ -738,6 +764,7 @@ def language_bump_version(info: ProjectInfo, new_version: str) -> list[tuple[boo
 
     if info.has_kind(ProjectKind.CLAUDE_PLUGIN):
         results.append(update_plugin_json(info.root, new_version))
+        results.append(_update_readme_version(info.root, new_version))
 
     if info.has_kind(ProjectKind.PYTHON):
         results.append(update_pyproject_toml(info.root, new_version))
@@ -859,15 +886,13 @@ header = """
 All notable changes to this project will be documented in this file.
 """
 body = """
-{% if version %}\
-    ## [{{ version | trim_start_matches(pat=\"v\") }}] - {{ timestamp | date(format=\"%Y-%m-%d\") }}
-{% else %}\
-    ## [Unreleased]
+{% if version %}## [{{ version | trim_start_matches(pat=\"v\") }}] - {{ timestamp | date(format=\"%Y-%m-%d\") }}
+{% else %}## [Unreleased]
 {% endif %}\
 {% for group, commits in commits | group_by(attribute=\"group\") %}
-    ### {{ group | upper_first }}
-    {% for commit in commits %}
-        - {% if commit.breaking %}[**breaking**] {% endif %}{{ commit.message | upper_first }}\
+### {{ group | upper_first }}
+{% for commit in commits %}
+- {% if commit.breaking %}[**breaking**] {% endif %}{{ commit.message | upper_first }}\
     {% endfor %}
 {% endfor %}\n
 """
@@ -934,6 +959,10 @@ def run_git_cliff(root: Path, new_version: str) -> str:
     # tracked); re-measure on any git-cliff upgrade before relying on
     # fresh-file behavior. (TRDD-G4OVFAJI
     # close-out: hand-added ledger was clobbered.)
+    # WHY no 4-space indent in the template headings: under CommonMark an
+    # indented heading renders as a CODE BLOCK, so the shipped changelog's
+    # version sections were unstyled — found in the 2.17.16 close-out
+    # review; dedent cliff.toml AND this template together.
     run(
         [
             "git-cliff",

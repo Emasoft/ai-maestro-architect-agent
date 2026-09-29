@@ -1,13 +1,13 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-    ## [2.17.16] - 2026-09-29
+## [2.17.16] - 2026-09-29
 
 ### Miscellaneous
 
 - TRDD-6YT0RQZE complete — v2.17.15 published, close-out done    
 
-    ## [2.17.15] - 2026-09-29
+## [2.17.15] - 2026-09-29
 
 ### Bug Fixes
 
@@ -41,13 +41,13 @@ All notable changes to this project will be documented in this file.
 - Trim ATOM-7KWW-K57Q desc to the 200-char cap    
 - Split oversized ATOM-S4SF-VMIJ into two facts (janitor split pass)    
 
-    ## [2.17.14] - 2026-09-28
+## [2.17.14] - 2026-09-28
 
 ### Bug Fixes
 
 - Cliff --prepend not -o — regeneration was discarding tagged history    
 
-    ## [2.17.13] - 2026-09-28
+## [2.17.13] - 2026-09-28
 
 ### Documentation
 
