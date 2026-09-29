@@ -1,6 +1,12 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [2.17.19] - 2026-09-29
+
+### Bug Fixes
+
+- README drift-fail tightened and made tree-clean (review round 3)    
+
 ## [2.17.18] - 2026-09-29
 
 ### Bug Fixes
