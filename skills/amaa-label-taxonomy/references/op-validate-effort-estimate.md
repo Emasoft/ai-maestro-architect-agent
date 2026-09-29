@@ -70,7 +70,9 @@ fi
 ### Step 4: Document Recommendation in Comment
 
 ```bash
-gh issue comment $ISSUE_NUMBER --body "## Effort Validation
+gh issue comment $ISSUE_NUMBER --body "_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
+## Effort Validation
 
 **Current:** \`$CURRENT_EFFORT\`
 **Recommended:** \`$RECOMMENDED_EFFORT\`
@@ -106,7 +108,9 @@ echo "Current: $CURRENT"
 # Output: effort:s
 
 # Step 2: Comment with recommendation
-gh issue comment 123 --body "## Effort Validation
+gh issue comment 123 --body "_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
+## Effort Validation
 
 **Current:** \`effort:s\`
 **Recommended:** \`effort:m\`

@@ -62,7 +62,9 @@ For each distinct component/task:
 ```bash
 gh issue create \
   --title "[$PARENT_ISSUE] $SUB_TASK_TITLE" \
-  --body "Part of #$PARENT_ISSUE
+  --body "_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
+Part of #$PARENT_ISSUE
 
 ## Description
 $SUB_TASK_DESCRIPTION
@@ -84,7 +86,9 @@ Closes part of #$PARENT_ISSUE" \
 Update parent issue with links:
 
 ```bash
-gh issue comment $PARENT_ISSUE --body "## Sub-Issues Created
+gh issue comment $PARENT_ISSUE --body "_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
+## Sub-Issues Created
 
 This epic has been decomposed into:
 - #$SUB_ISSUE_1 - API endpoints
@@ -118,7 +122,9 @@ PARENT=123
 # Create API sub-issue
 gh issue create \
   --title "[#123] API endpoints for user authentication" \
-  --body "Part of #123
+  --body "_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
+Part of #123
 
 ## Description
 Implement REST API endpoints for authentication flow:
@@ -141,7 +147,9 @@ Closes part of #123" \
 # Create Database sub-issue
 gh issue create \
   --title "[#123] Database schema for user storage" \
-  --body "Part of #123
+  --body "_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
+Part of #123
 
 ## Description
 Add database tables/columns for user authentication:
@@ -161,7 +169,9 @@ Closes part of #123" \
   --label "effort:s"
 
 # Update parent with links
-gh issue comment 123 --body "## Sub-Issues Created
+gh issue comment 123 --body "_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
+## Sub-Issues Created
 
 This epic has been decomposed into:
 - #124 - API endpoints for user authentication

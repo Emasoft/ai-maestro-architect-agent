@@ -112,6 +112,8 @@ For each module, the command creates a GitHub Issue:
 
 **Issue body format:**
 ```markdown
+_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
 ## Module: {module_name}
 
 ### Description
@@ -298,5 +300,7 @@ python3 scripts/check_plan_prerequisites.py --verbose
 # Skip the GitHub Issue creation step
 
 # Issues can be created manually later via gh CLI
-gh issue create --title "[Module] Auth Core" --body "..." --label "module"
+gh issue create --title "[Module] Auth Core" --body "_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
+[Module issue body]" --label "module"
 ```

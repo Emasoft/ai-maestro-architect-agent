@@ -15,6 +15,8 @@
 
 > **Recipient Resolution**: All recipient names below (e.g., `<AMCOS_SESSION_NAME>`) must be resolved dynamically at runtime. AMAA discovers its AMCOS via the `AMCOS_SESSION_NAME` environment variable (set by AMCOS at spawn time) or via the frozen AI Maestro CLI `amp-team-members --team <teamId>` (lists each member with its governance title/role — pick the chief-of-staff).
 
+> **Self-Identification (PRRD G1.2 / persona)**: every message body below begins with the self-id line — `This is the Claude responsible for the ai-maestro-architect-agent project.` — before any content.
+
 ## 1.1 Sending Acknowledgment When Receiving Design Request from AMCOS
 
 **Use Case:** AMCOS assigns you a design task via AI Maestro. You must acknowledge receipt and provide an ETA.
@@ -23,14 +25,14 @@ Send a message using the `amp-send` CLI with:
 - **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `Design Request Acknowledged`
 - **Priority**: `normal`
-- **Content**: `{"type": "acknowledgment", "message": "Design request received for [PROJECT_NAME]. Starting requirements analysis. ETA: [ESTIMATED_COMPLETION_TIME]."}`
+- **Content**: `{"type": "acknowledgment", "message": "This is the Claude responsible for the ai-maestro-architect-agent project. Design request received for [PROJECT_NAME]. Starting requirements analysis. ETA: [ESTIMATED_COMPLETION_TIME]."}`
 - **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 **Example Content:**
 ```json
 {
   "type": "acknowledgment",
-  "message": "Design request received for E-Commerce Product Catalog. Starting requirements analysis. ETA: 2 hours."
+  "message": "This is the Claude responsible for the ai-maestro-architect-agent project. Design request received for E-Commerce Product Catalog. Starting requirements analysis. ETA: 2 hours."
 }
 ```
 
@@ -44,14 +46,14 @@ Send a message using the `amp-send` CLI with:
 - **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `Clarification Needed - [PROJECT_NAME]`
 - **Priority**: `high`
-- **Content**: `{"type": "clarification_request", "message": "BLOCKING: Requirement ambiguity detected. Question: [SPECIFIC_QUESTION]. Context: [USER_REQUIREMENT_QUOTE]. Cannot proceed until clarified. Details: docs_dev/design/clarifications/[TIMESTAMP]-[ISSUE].md"}`
+- **Content**: `{"type": "clarification_request", "message": "This is the Claude responsible for the ai-maestro-architect-agent project. BLOCKING: Requirement ambiguity detected. Question: [SPECIFIC_QUESTION]. Context: [USER_REQUIREMENT_QUOTE]. Cannot proceed until clarified. Details: docs_dev/design/clarifications/[TIMESTAMP]-[ISSUE].md"}`
 - **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 **Example Content:**
 ```json
 {
   "type": "clarification_request",
-  "message": "BLOCKING: Requirement ambiguity detected. Question: Should payment processing be synchronous or asynchronous? Context: User said 'fast payment processing' but also 'reliable with retries'. Synchronous = fast but no retries. Asynchronous = reliable retries but slower user feedback. Cannot proceed until clarified. Details: docs_dev/design/clarifications/20260204-payment-flow.md"
+  "message": "This is the Claude responsible for the ai-maestro-architect-agent project. BLOCKING: Requirement ambiguity detected. Question: Should payment processing be synchronous or asynchronous? Context: User said 'fast payment processing' but also 'reliable with retries'. Synchronous = fast but no retries. Asynchronous = reliable retries but slower user feedback. Cannot proceed until clarified. Details: docs_dev/design/clarifications/20260204-payment-flow.md"
 }
 ```
 
@@ -65,7 +67,7 @@ Send a message using the `amp-send` CLI with:
 - **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `Design Complete - [PROJECT_NAME]`
 - **Priority**: `normal`
-- **Content**: `{"type": "design_complete", "aimaestro_task_id": "[EPIC_TASK_ID]", "message": "[DONE] Design for [PROJECT_NAME] complete. Architecture: [BRIEF_SUMMARY]. Modules: [MODULE_COUNT]. Risks: [HIGH_COUNT]/[MEDIUM_COUNT]/[LOW_COUNT]. Handoff doc: docs_dev/design/handoff-[UUID].md. AI-Maestro epic: [EPIC_TASK_ID]. Ready for AMOA assignment."}`
+- **Content**: `{"type": "design_complete", "aimaestro_task_id": "[EPIC_TASK_ID]", "message": "This is the Claude responsible for the ai-maestro-architect-agent project. [DONE] Design for [PROJECT_NAME] complete. Architecture: [BRIEF_SUMMARY]. Modules: [MODULE_COUNT]. Risks: [HIGH_COUNT]/[MEDIUM_COUNT]/[LOW_COUNT]. Handoff doc: docs_dev/design/handoff-[UUID].md. AI-Maestro epic: [EPIC_TASK_ID]. Ready for AMOA assignment."}`
 - **`aimaestro_task_id`**: the UUID of the `epic` task this design created on the AI-Maestro kanban. The architect creates it on design completion via `amp-kanban-create-task --task-type epic` (full op + first-level child breakdown tracked in TRDD-364ccafc, pending Phase 0 persistence verification). It links design doc → AI-Maestro epic → the orchestrator's child tasks. Omit the key (and the "AI-Maestro epic:" clause) when AI-Maestro is not in use. Additive + optional — a recipient that doesn't read it is unaffected.
 - **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
@@ -74,7 +76,7 @@ Send a message using the `amp-send` CLI with:
 {
   "type": "design_complete",
   "aimaestro_task_id": "PVTI_laDOABcd1234",
-  "message": "[DONE] Design for E-Commerce Product Catalog complete. Architecture: REST API + PostgreSQL + Redis cache + React frontend. Modules: 5 (product-service, inventory-service, search-service, cart-service, frontend). Risks: 1/3/2. Handoff doc: docs_dev/design/handoff-a7f8b2d4.md. AI-Maestro epic: PVTI_laDOABcd1234. Ready for AMOA assignment."
+  "message": "This is the Claude responsible for the ai-maestro-architect-agent project. [DONE] Design for E-Commerce Product Catalog complete. Architecture: REST API + PostgreSQL + Redis cache + React frontend. Modules: 5 (product-service, inventory-service, search-service, cart-service, frontend). Risks: 1/3/2. Handoff doc: docs_dev/design/handoff-a7f8b2d4.md. AI-Maestro epic: PVTI_laDOABcd1234. Ready for AMOA assignment."
 }
 ```
 
@@ -88,7 +90,7 @@ Send a message using the `amp-send` CLI with:
 - **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `Handoff Ready - [PROJECT_NAME]`
 - **Priority**: `normal`
-- **Content**: `{"type": "handoff", "aimaestro_task_id": "[EPIC_TASK_ID]", "message": "Design handoff ready for [PROJECT_NAME]. Implementation sequence: [PHASE_1] -> [PHASE_2] -> [PHASE_3]. Critical path: [TOP_3_ITEMS]. All artifacts in docs_dev/design/. Handoff doc: handoff-[UUID].md. AI-Maestro epic: [EPIC_TASK_ID]. Awaiting AMOA assignment from AMCOS."}`
+- **Content**: `{"type": "handoff", "aimaestro_task_id": "[EPIC_TASK_ID]", "message": "This is the Claude responsible for the ai-maestro-architect-agent project. Design handoff ready for [PROJECT_NAME]. Implementation sequence: [PHASE_1] -> [PHASE_2] -> [PHASE_3]. Critical path: [TOP_3_ITEMS]. All artifacts in docs_dev/design/. Handoff doc: handoff-[UUID].md. AI-Maestro epic: [EPIC_TASK_ID]. Awaiting AMOA assignment from AMCOS."}`
 - **`aimaestro_task_id`**: same AI-Maestro epic UUID as §1.3 (optional/additive — the same epic created on design completion). Lets AMOA attach its child breakdown under the architect's epic.
 - **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
@@ -97,7 +99,7 @@ Send a message using the `amp-send` CLI with:
 {
   "type": "handoff",
   "aimaestro_task_id": "PVTI_laDOABcd1234",
-  "message": "Design handoff ready for Payment Gateway Integration. Implementation sequence: Phase 1 (Database schema + Payment model) -> Phase 2 (Stripe API integration) -> Phase 3 (Webhook handlers + retry logic) -> Phase 4 (Frontend payment form). Critical path: Stripe API credentials, webhook endpoint setup, PCI compliance review. All artifacts in docs_dev/design/. AI-Maestro epic: PVTI_laDOABcd1234. Awaiting AMOA assignment from AMCOS."
+  "message": "This is the Claude responsible for the ai-maestro-architect-agent project. Design handoff ready for Payment Gateway Integration. Implementation sequence: Phase 1 (Database schema + Payment model) -> Phase 2 (Stripe API integration) -> Phase 3 (Webhook handlers + retry logic) -> Phase 4 (Frontend payment form). Critical path: Stripe API credentials, webhook endpoint setup, PCI compliance review. All artifacts in docs_dev/design/. AI-Maestro epic: PVTI_laDOABcd1234. Awaiting AMOA assignment from AMCOS."
 }
 ```
 
@@ -111,14 +113,14 @@ Send a message using the `amp-send` CLI with:
 - **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `BLOCKED - [PROJECT_NAME]`
 - **Priority**: `urgent`
-- **Content**: `{"type": "blocker", "message": "[BLOCKED] Design for [PROJECT_NAME]. Blocker: [SPECIFIC_ISSUE]. Impact: [IMPACT_DESCRIPTION]. Next: [WHAT_IS_NEEDED]. Details: docs_dev/design/blockers/[TIMESTAMP]-[ISSUE].md. Awaiting user decision."}`
+- **Content**: `{"type": "blocker", "message": "This is the Claude responsible for the ai-maestro-architect-agent project. [BLOCKED] Design for [PROJECT_NAME]. Blocker: [SPECIFIC_ISSUE]. Impact: [IMPACT_DESCRIPTION]. Next: [WHAT_IS_NEEDED]. Details: docs_dev/design/blockers/[TIMESTAMP]-[ISSUE].md. Awaiting user decision."}`
 - **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 **Example Content:**
 ```json
 {
   "type": "blocker",
-  "message": "[BLOCKED] Design for Real-Time Analytics Dashboard. Blocker: User requires <100ms query latency for 1M+ records, but available database (PostgreSQL) cannot meet this requirement without significant infrastructure changes (distributed architecture, caching layer, query optimization). Impact: Cannot design system without clarifying performance vs. cost trade-off. Next: User must choose: (A) Relax latency requirement to <1s, (B) Increase budget for distributed architecture (Elasticsearch + Redis), or (C) Reduce dataset size via data retention policy. Details: docs_dev/design/blockers/20260204-latency-requirement.md. Awaiting user decision."
+  "message": "This is the Claude responsible for the ai-maestro-architect-agent project. [BLOCKED] Design for Real-Time Analytics Dashboard. Blocker: User requires <100ms query latency for 1M+ records, but available database (PostgreSQL) cannot meet this requirement without significant infrastructure changes (distributed architecture, caching layer, query optimization). Impact: Cannot design system without clarifying performance vs. cost trade-off. Next: User must choose: (A) Relax latency requirement to <1s, (B) Increase budget for distributed architecture (Elasticsearch + Redis), or (C) Reduce dataset size via data retention policy. Details: docs_dev/design/blockers/20260204-latency-requirement.md. Awaiting user decision."
 }
 ```
 
@@ -169,14 +171,14 @@ Send a message using the `amp-send` CLI with:
 - **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `ACK Timeout Escalation`
 - **Priority**: `urgent`
-- **Content**: `{"type": "escalation", "message": "ACK timeout from [TARGET]. Original message: [SUBJECT]. Sent: [TIMESTAMP]. Retry sent: [RETRY_TIMESTAMP]. Blocking operation: [BLOCKED_OPERATION]."}`
+- **Content**: `{"type": "escalation", "message": "This is the Claude responsible for the ai-maestro-architect-agent project. ACK timeout from [TARGET]. Original message: [SUBJECT]. Sent: [TIMESTAMP]. Retry sent: [RETRY_TIMESTAMP]. Blocking operation: [BLOCKED_OPERATION]."}`
 - **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 **Example Content:**
 ```json
 {
   "type": "escalation",
-  "message": "ACK timeout from amaa-api-researcher. Original message: API Research Request - Stripe Integration. Sent: 2026-02-05 14:30:00. Retry sent: 2026-02-05 14:30:30. Blocking operation: Cannot finalize architecture without Stripe API research results."
+  "message": "This is the Claude responsible for the ai-maestro-architect-agent project. ACK timeout from amaa-api-researcher. Original message: API Research Request - Stripe Integration. Sent: 2026-02-05 14:30:00. Retry sent: 2026-02-05 14:30:30. Blocking operation: Cannot finalize architecture without Stripe API research results."
 }
 ```
 
@@ -238,7 +240,7 @@ All AI Maestro messages use this JSON structure:
 - **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `Design Complete - User Authentication System`
 - **Priority**: `normal`
-- **Content**: `{"type": "design_complete", "message": "[DONE] Design for User Authentication System complete. Architecture: FastAPI + PostgreSQL + JWT auth + bcrypt hashing. Modules: 3 (auth-service, user-service, session-service). Risks: 0/2/1. Handoff doc: docs_dev/design/handoff-f4e8a9b1.md. Ready for AMOA assignment."}`
+- **Content**: `{"type": "design_complete", "message": "This is the Claude responsible for the ai-maestro-architect-agent project. [DONE] Design for User Authentication System complete. Architecture: FastAPI + PostgreSQL + JWT auth + bcrypt hashing. Modules: 3 (auth-service, user-service, session-service). Risks: 0/2/1. Handoff doc: docs_dev/design/handoff-f4e8a9b1.md. Ready for AMOA assignment."}`
 - **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 **Step 2:** Wait 30 seconds.
@@ -251,7 +253,7 @@ All AI Maestro messages use this JSON structure:
 - **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `[RETRY] Design Complete - User Authentication System`
 - **Priority**: `high`
-- **Content**: `{"type": "retry", "message": "[DONE] Design for User Authentication System complete. Architecture: FastAPI + PostgreSQL + JWT auth + bcrypt hashing. Modules: 3 (auth-service, user-service, session-service). Risks: 0/2/1. Handoff doc: docs_dev/design/handoff-f4e8a9b1.md. Ready for AMOA assignment. (Retry: No ACK received within 30s)"}`
+- **Content**: `{"type": "retry", "message": "This is the Claude responsible for the ai-maestro-architect-agent project. [DONE] Design for User Authentication System complete. Architecture: FastAPI + PostgreSQL + JWT auth + bcrypt hashing. Modules: 3 (auth-service, user-service, session-service). Risks: 0/2/1. Handoff doc: docs_dev/design/handoff-f4e8a9b1.md. Ready for AMOA assignment. (Retry: No ACK received within 30s)"}`
 - **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 **Step 6:** Wait 30 seconds again.
@@ -262,7 +264,7 @@ All AI Maestro messages use this JSON structure:
 - **Recipient**: `<AMCOS_SESSION_NAME>`
 - **Subject**: `ACK Timeout Escalation`
 - **Priority**: `urgent`
-- **Content**: `{"type": "escalation", "message": "ACK timeout from <AMCOS_SESSION_NAME>. Original message: Design Complete - User Authentication System. Sent: 2026-02-05 15:00:00. Retry sent: 2026-02-05 15:00:30. Blocking operation: Cannot proceed to next design task without confirmation that handoff was received."}`
+- **Content**: `{"type": "escalation", "message": "This is the Claude responsible for the ai-maestro-architect-agent project. ACK timeout from <AMCOS_SESSION_NAME>. Original message: Design Complete - User Authentication System. Sent: 2026-02-05 15:00:00. Retry sent: 2026-02-05 15:00:30. Blocking operation: Cannot proceed to next design task without confirmation that handoff was received."}`
 - **Verify**: Confirm the message was delivered by checking `amp-send`'s printed delivery confirmation (message ID).
 
 Then wait for manual intervention from AMCOS.

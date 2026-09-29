@@ -11,6 +11,8 @@ Concrete JSON examples showing the structure of messages sent through the `ai-ma
 
 > **Note**: These structures show conceptual message content. Use the `amp-send` CLI to send messages — it handles the exact API format automatically.
 
+> **Self-Identification (PRRD G1.2 / persona)**: every message body below begins with the self-id line — `This is the Claude responsible for the ai-maestro-architect-agent project.` — before any content.
+
 ## Example 1: Design Request Acknowledgment
 
 When AMCOS assigns a design task:
@@ -23,7 +25,7 @@ When AMCOS assigns a design task:
   "priority": "normal",
   "content": {
     "type": "acknowledgment",
-    "message": "Design request received for E-Commerce Product Catalog. Starting requirements analysis. ETA: 2 hours."
+    "message": "This is the Claude responsible for the ai-maestro-architect-agent project. Design request received for E-Commerce Product Catalog. Starting requirements analysis. ETA: 2 hours."
   }
 }
 ```
@@ -40,7 +42,7 @@ When requirements are ambiguous or conflicting:
   "priority": "high",
   "content": {
     "type": "clarification_request",
-    "message": "BLOCKING: Requirement ambiguity detected. Question: Should payment processing be synchronous or asynchronous? Context: User said 'fast payment processing' but also 'reliable with retries'. Synchronous = fast but no retries. Asynchronous = reliable retries but slower user feedback. Cannot proceed until clarified. Details: docs_dev/design/clarifications/20260204-payment-flow.md"
+    "message": "This is the Claude responsible for the ai-maestro-architect-agent project. BLOCKING: Requirement ambiguity detected. Question: Should payment processing be synchronous or asynchronous? Context: User said 'fast payment processing' but also 'reliable with retries'. Synchronous = fast but no retries. Asynchronous = reliable retries but slower user feedback. Cannot proceed until clarified. Details: docs_dev/design/clarifications/20260204-payment-flow.md"
   }
 }
 ```
@@ -58,7 +60,7 @@ When all design artifacts are ready:
   "content": {
     "type": "design_complete",
     "aimaestro_task_id": "PVTI_laDOABcd1234",
-    "message": "[DONE] Design for E-Commerce Product Catalog complete. Architecture: REST API + PostgreSQL + Redis cache + React frontend. Modules: 5 (product-service, inventory-service, search-service, cart-service, frontend). Risks: 1/3/2. Handoff doc: docs_dev/design/handoff-a7f8b2d4.md. Ready for AMOA assignment."
+    "message": "This is the Claude responsible for the ai-maestro-architect-agent project. [DONE] Design for E-Commerce Product Catalog complete. Architecture: REST API + PostgreSQL + Redis cache + React frontend. Modules: 5 (product-service, inventory-service, search-service, cart-service, frontend). Risks: 1/3/2. Handoff doc: docs_dev/design/handoff-a7f8b2d4.md. Ready for AMOA assignment."
   }
 }
 ```

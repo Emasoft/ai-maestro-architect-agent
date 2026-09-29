@@ -121,7 +121,9 @@ gh issue edit $ISSUE_NUMBER --remove-label "effort:s" --add-label "effort:m"
 ```bash
 gh issue create \
   --title "[$PARENT_ID] API changes for $FEATURE" \
-  --body "Part of #$PARENT_ISSUE" \
+  --body "_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
+Part of #$PARENT_ISSUE" \
   --label "type:feature" \
   --label "component:api" \
   --label "status:backlog"
@@ -166,7 +168,9 @@ When creating Architecture Decision Records:
 ```bash
 gh issue create \
   --title "[ADR-001] Database choice for user storage" \
-  --body "Architecture decision record..." \
+  --body "_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
+Architecture decision record..." \
   --label "type:docs" \
   --label "component:database" \
   --label "priority:high"

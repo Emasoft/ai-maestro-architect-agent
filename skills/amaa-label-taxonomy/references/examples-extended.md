@@ -22,7 +22,9 @@ gh issue edit 123 --add-label "component:api" --add-label "component:database"
 ```bash
 # Scenario: Issue #123 labeled effort:s but architecture reveals 3 components
 # Action: Recommend effort upgrade
-gh issue comment 123 --body "Architecture analysis suggests effort:m (3 components: API, DB, Auth)"
+gh issue comment 123 --body "_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
+Architecture analysis suggests effort:m (3 components: API, DB, Auth)"
 gh issue edit 123 --remove-label "effort:s" --add-label "effort:m"
 # Result: Effort estimate now matches architecture complexity
 ```
@@ -34,7 +36,9 @@ gh issue edit 123 --remove-label "effort:s" --add-label "effort:m"
 # Action: Create sub-issues for each component
 gh issue create \
   --title "[#123] API endpoints for user authentication" \
-  --body "Part of #123 - Implements REST API for auth flow" \
+  --body "_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
+Part of #123 - Implements REST API for auth flow" \
   --label "type:feature" \
   --label "component:api" \
   --label "status:backlog" \
@@ -50,7 +54,9 @@ gh issue create \
 # Action: Create ADR issue with appropriate labels
 gh issue create \
   --title "[ADR-005] PostgreSQL vs MongoDB for user storage" \
-  --body "Evaluating database options..." \
+  --body "_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
+Evaluating database options..." \
   --label "type:docs" \
   --label "component:database" \
   --label "priority:high"

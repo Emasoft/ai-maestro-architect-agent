@@ -78,7 +78,9 @@ gh issue edit $ISSUE_NUMBER \
 ### Step 4: Document Component Breakdown in Comment
 
 ```bash
-gh issue comment $ISSUE_NUMBER --body "## Architecture Analysis
+gh issue comment $ISSUE_NUMBER --body "_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
+## Architecture Analysis
 
 **Components Affected:**
 - \`component:api\` - New REST endpoints for user authentication
@@ -102,7 +104,9 @@ gh issue view $ISSUE_NUMBER --json labels --jq '.labels[].name | select(startswi
 gh issue edit 123 --add-label "component:api" --add-label "component:database"
 
 # Step 2: Document in comment
-gh issue comment 123 --body "## Architecture Analysis
+gh issue comment 123 --body "_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
+## Architecture Analysis
 
 **Components Affected:**
 - \`component:api\` - New REST endpoints for authentication flow

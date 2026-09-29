@@ -80,7 +80,9 @@ When creating a plan, automatically:
 1. Add plan reference to GitHub issue comment:
 
 ```bash
-gh issue comment 42 --body "Implementation plan created: docs/plans/GH-42-user-auth.md"
+gh issue comment 42 --body "_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
+Implementation plan created: docs/plans/GH-42-user-auth.md"
 ```
 
 2. Add issue reference to plan header
@@ -109,7 +111,9 @@ When plan step completes:
 gh issue edit 42 --body "$(sed 's/- \[ \] Step 1/- [x] Step 1/' current_body.md)"
 
 # Add progress comment
-gh issue comment 42 --body "Completed: Step 1 - Tests written"
+gh issue comment 42 --body "_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
+Completed: Step 1 - Tests written"
 ```
 
 ### GitHub → Plan

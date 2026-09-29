@@ -62,7 +62,9 @@ ADR_NUMBER=$(printf '%03d' $NEXT_ADR)
 
 gh issue create \
   --title "[ADR-$ADR_NUMBER] $DECISION_TITLE" \
-  --body "# ADR-$ADR_NUMBER: $DECISION_TITLE
+  --body "_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
+# ADR-$ADR_NUMBER: $DECISION_TITLE
 
 ## Status
 PROPOSED
@@ -112,7 +114,9 @@ $DECISION_STATEMENT
 
 ```bash
 # Comment on related implementation issue
-gh issue comment $RELATED_ISSUE --body "Related ADR: #$ADR_ISSUE_NUMBER
+gh issue comment $RELATED_ISSUE --body "_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
+Related ADR: #$ADR_ISSUE_NUMBER
 
 This implementation depends on the decision documented in [ADR-$ADR_NUMBER]."
 ```
@@ -136,7 +140,9 @@ ADR_NUMBER=$(printf '%03d' $NEXT_ADR)
 # Step 2: Create ADR issue
 gh issue create \
   --title "[ADR-$ADR_NUMBER] PostgreSQL vs MongoDB for user storage" \
-  --body "# ADR-$ADR_NUMBER: PostgreSQL vs MongoDB for user storage
+  --body "_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
+# ADR-$ADR_NUMBER: PostgreSQL vs MongoDB for user storage
 
 ## Status
 PROPOSED
@@ -194,7 +200,9 @@ Use PostgreSQL for user storage.
   --label "priority:high"
 
 # Link to epic
-gh issue comment 123 --body "Related ADR: #$NEW_ADR_ISSUE
+gh issue comment 123 --body "_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
+Related ADR: #$NEW_ADR_ISSUE
 
 Database choice documented in ADR-$ADR_NUMBER."
 ```

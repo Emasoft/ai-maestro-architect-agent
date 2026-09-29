@@ -143,7 +143,9 @@ python3 ${CLAUDE_PLUGIN_ROOT}/scripts/check_plan_prerequisites.py
 # ...
 
 # Create issues manually later
-gh issue create --title "[Module] Auth Core" --body "..." --label "module,priority-high"
+gh issue create --title "[Module] Auth Core" --body "_Posted by the Claude developing the **ai-maestro-architect-agent** (the ARCHITECT role; via the shared owner gh auth)._
+
+[Module issue body]" --label "module,priority-high"
 ```
 
 ### Example: Failed Approval
