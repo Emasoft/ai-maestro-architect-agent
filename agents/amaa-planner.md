@@ -18,7 +18,7 @@ places and neither is trustworthy afterwards.
 
 - **A TRDD is the unit of work.** Its `column:` field is the state machine; the
   board has exactly **22 columns (19 lifecycle + 3 exception)** per 3-pillars
-  spec 4.0.0. On resume, a TRDD's `## STATE` block is
+  spec 3.0.0. On resume, a TRDD's `## STATE` block is
   authoritative and **supersedes the body**.
 - **Self-classify the approval floor.** Every card carries
   `min-approval-requirement:` (`none` / `orchestrator` / `chief-of-staff` /

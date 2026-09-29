@@ -41,7 +41,7 @@ touch, never in a mass rewrite. A file carries exactly one of the two.
 ## Prerequisites
 
 - The core `ama-*` skills from `ai-maestro-plugin` are available — they carry
-  the mechanics, the 22-column transition rules (3-pillars 4.0.0), and the approval vocabulary.
+  the mechanics, the 22-column transition rules (3-pillars 3.0.0), and the approval vocabulary.
 - The project PRRD exists and `design/tasks/` is present.
 - A proto-TRDD sits in the `design` column awaiting ARCH.
 
@@ -133,7 +133,7 @@ AMPs ORCH via COS: "TRDD-7a1 split into 2: <c1>, <c2>".
 
 ## Resources
 
-For the full kanban mechanics, the 22-column transition rules (3-pillars 4.0.0), and the
+For the full kanban mechanics, the 22-column transition rules (3-pillars 3.0.0), and the
 approval vocabulary, use the core `ama-*` skills in `ai-maestro-plugin`
 (`ama-kanban-render`, `ama-trdd-write`/`-update`/`-transition`/`-find`,
 `ama-prrd-get`/`-find`/`-propose`, `ama-proposal-approvals`).
