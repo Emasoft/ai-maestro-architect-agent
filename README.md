@@ -5,7 +5,7 @@ Claude Code role-plugin for the AI Maestro multi-agent ecosystem: the
 implementable design documents — requirements analysis, API research,
 architecture decisions, module breakdowns, and handoff packages.
 
-**Version**: 2.7.0
+**Version**: 2.17.14
 
 ## Overview
 
@@ -45,6 +45,10 @@ The Architect Agent handles **design documents, requirements analysis, and archi
 
 ### Skills
 
+AMAA ships 27 skills: 14 judgment skills (the `amaa-*` surfaces below) plus
+their 13 `-ops` operational twins (the same skill with the step-by-step
+operational reference procedures). The judgment skills:
+
 | Skill | Description |
 |-------|-------------|
 | `amaa-design-lifecycle` | Design document management |
@@ -60,6 +64,7 @@ The Architect Agent handles **design documents, requirements analysis, and archi
 | `amaa-label-taxonomy` | Label and tagging patterns |
 | `amaa-modularization` | Module decomposition patterns |
 | `amaa-session-memory` | Session context persistence |
+| `amaa-prrd-trdd-kanban` | PRRD/TRDD kanban board governance |
 
 > **Durable memory** is provided by the **global janitor-hosted memory system**
 > (the user-level `ai-maestro-janitor` plugin) — the `/janitor-memory-recall`,
