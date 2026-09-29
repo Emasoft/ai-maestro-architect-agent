@@ -749,6 +749,11 @@ def _update_readme_version(root: Path, new_version: str) -> tuple[bool, str]:
         pattern = r"^(\*\*Version\*\*: )(\d+\.\d+\.\d+)$"
         m = re.search(pattern, content, flags=re.MULTILINE)
         if not m:
+            # Fail on format drift: the string "Version" is present but the
+            # strict pattern missed it (reformat, dropped bold, date suffix).
+            # Returning success here would silently resume version drift.
+            if re.search(r"\*\*Version\*\*", content):
+                return False, f"README.md: has a **Version** line but not the expected `**Version**: {new_version}` shape — update the README regex"
             return True, "README.md: no **Version** line (skipped)"
         if m.group(2) == new_version:
             return True, f"README.md: already {new_version}"
@@ -915,6 +920,7 @@ commit_parsers = [
   { message = "^style", group = "Styling" },
   { message = "^test", group = "Tests" },
   { message = "^chore\\\\(release\\\\): prepare for", skip = true },
+  { message = "^chore\\\\(release\\\\): v", skip = true },
   { message = "^chore", group = "Miscellaneous" },
   { message = "^security", group = "Security" },
   { body = ".*security", group = "Security" },
