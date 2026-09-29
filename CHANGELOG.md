@@ -1,6 +1,12 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [2.17.20] - 2026-09-29
+
+### Refactor
+
+- Delete dead do_bump() — stale twin of the fixed path    
+
 ## [2.17.19] - 2026-09-29
 
 ### Bug Fixes
