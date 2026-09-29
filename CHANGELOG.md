@@ -1,6 +1,12 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [2.17.17] - 2026-09-29
+
+### Bug Fixes
+
+- Changelog headings render as headings, not code blocks    
+
 ## [2.17.16] - 2026-09-29
 
 ### Miscellaneous
