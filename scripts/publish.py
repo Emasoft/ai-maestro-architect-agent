@@ -755,7 +755,8 @@ def _update_readme_version(root: Path, new_version: str) -> tuple[bool, str]:
             # prose mention ("update the **Version** field") a benign skip.
             # Returning success here would silently resume version drift;
             # returning failure AFTER the manifest writes leaves a dirty tree,
-            # so language_bump_version aborts on this result before any write.
+            # so the caller's bump loop (main Step 9) breaks on this result
+            # before any later write.
             if re.search(r"\*\*Version\*\*[^.\n]*\d+\.\d+", content):
                 return False, f"README.md: has a version line but not the expected `**Version**: {new_version}` shape — update the README regex"
             return True, "README.md: no **Version** line (skipped)"
@@ -1238,27 +1239,6 @@ def check_version_consistency(plugin_root: Path) -> tuple[bool, str]:
 
 
 # ── Bump all files ───────────────────────────────────────────────────────────
-
-
-def do_bump(plugin_root: Path, new_version: str, dry_run: bool = False) -> bool:
-    """Bump version across all files. Returns True on success."""
-    if dry_run:
-        print(f"  [DRY-RUN] Would bump to {new_version}")
-        return True
-
-    all_results: list[tuple[bool, str]] = []
-    all_results.append(update_plugin_json(plugin_root, new_version))
-    all_results.append(update_pyproject_toml(plugin_root, new_version))
-    all_results.extend(update_python_versions(plugin_root, new_version))
-
-    errors = 0
-    for ok, msg in all_results:
-        status = f"{GREEN}[OK]{NC}" if ok else f"{RED}[ERROR]{NC}"
-        print(f"  {status} {msg}")
-        if not ok:
-            errors += 1
-
-    return errors == 0
 
 
 # ── Main pipeline ────────────────────────────────────────────────────────────
