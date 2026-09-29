@@ -1,6 +1,13 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [2.17.18] - 2026-09-29
+
+### Bug Fixes
+
+- Stage README.md with the release commit    
+- Review round-2 findings on the changelog/README wave    
+
 ## [2.17.17] - 2026-09-29
 
 ### Bug Fixes
