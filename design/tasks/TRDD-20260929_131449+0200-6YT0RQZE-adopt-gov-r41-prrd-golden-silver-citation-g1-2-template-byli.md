@@ -1,10 +1,10 @@
 ---
 trdd-id: 6YT0RQZE
 title: Adopt GOV-R41 + PRRD golden-silver citation + G1.2 template bylines (issue 27)
-column: backburner
+column: todo
 status: tasked
 created: 2026-09-29T13:14:49+0200
-updated: 2026-09-29T13:14:49+0200
+updated: 2026-09-29T13:15:11+0200
 current-owner: user
 created-by: user
 task-type: feature
