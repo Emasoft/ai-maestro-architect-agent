@@ -749,11 +749,15 @@ def _update_readme_version(root: Path, new_version: str) -> tuple[bool, str]:
         pattern = r"^(\*\*Version\*\*: )(\d+\.\d+\.\d+)$"
         m = re.search(pattern, content, flags=re.MULTILINE)
         if not m:
-            # Fail on format drift: the string "Version" is present but the
-            # strict pattern missed it (reformat, dropped bold, date suffix).
-            # Returning success here would silently resume version drift.
-            if re.search(r"\*\*Version\*\*", content):
-                return False, f"README.md: has a **Version** line but not the expected `**Version**: {new_version}` shape — update the README regex"
+            # Fail on format drift: a **Version** marker WITH a version-shaped
+            # number is present but the strict pattern missed it (badge form,
+            # date suffix, dropped bold). Requiring the number nearby keeps a
+            # prose mention ("update the **Version** field") a benign skip.
+            # Returning success here would silently resume version drift;
+            # returning failure AFTER the manifest writes leaves a dirty tree,
+            # so language_bump_version aborts on this result before any write.
+            if re.search(r"\*\*Version\*\*[^.\n]*\d+\.\d+", content):
+                return False, f"README.md: has a version line but not the expected `**Version**: {new_version}` shape — update the README regex"
             return True, "README.md: no **Version** line (skipped)"
         if m.group(2) == new_version:
             return True, f"README.md: already {new_version}"
@@ -770,8 +774,10 @@ def language_bump_version(info: ProjectInfo, new_version: str) -> list[tuple[boo
     results: list[tuple[bool, str]] = []
 
     if info.has_kind(ProjectKind.CLAUDE_PLUGIN):
-        results.append(update_plugin_json(info.root, new_version))
+        # README first: a drift failure here aborts before the manifest
+        # writes below, keeping the tree clean for the next publish attempt.
         results.append(_update_readme_version(info.root, new_version))
+        results.append(update_plugin_json(info.root, new_version))
 
     if info.has_kind(ProjectKind.PYTHON):
         results.append(update_pyproject_toml(info.root, new_version))
@@ -1547,6 +1553,9 @@ Examples:
             print(f"  {marker} {row_msg}")
             if not ok_row:
                 errors += 1
+                # Fail before later bump entries write: a README drift error
+                # must not leave half-bumped manifests behind (dirty tree).
+                break
         if errors > 0:
             print(f"{RED}x Version bump failed ({errors} error(s)){NC}", file=sys.stderr)
             return 1
