@@ -19,6 +19,8 @@ Reference scripts for repository configuration and management using GitHub CLI.
 
 ### 1.1 Branch Protection Configuration
 
+> The ratified ai-maestro baseline sets `required_approving_review_count` to 0 (GitHub forbids self-approval) — deviate only with MANAGER approval.
+
 ```bash
 #!/bin/bash
 # setup_repo.sh - Configure repository settings via GH CLI
@@ -36,7 +38,7 @@ echo "Configuring repository: $REPO"
 gh api repos/$REPO/branches/main/protection -X PUT \
   -f required_status_checks='{"strict":true,"contexts":["ci"]}' \
   -f enforce_admins=true \
-  -f required_pull_request_reviews='{"required_approving_review_count":1}' \
+  -f required_pull_request_reviews='{"required_approving_review_count":0}' \
   -f restrictions=null
 
 echo "✓ Branch protection enabled"

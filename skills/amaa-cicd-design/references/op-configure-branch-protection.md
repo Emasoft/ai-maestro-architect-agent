@@ -47,14 +47,15 @@ Common requirements:
 
 ### Step 2: Configure via GitHub CLI
 
+> The ratified ai-maestro baseline omits `required_linear_history` and sets `required_approving_review_count` to 0 (GitHub forbids self-approval) — deviate only with MANAGER approval.
+
 ```bash
 # Enable branch protection with all common settings
 gh api -X PUT repos/{owner}/{repo}/branches/main/protection \
   -f required_status_checks='{"strict":true,"checks":[{"context":"test"},{"context":"lint"}]}' \
   -f enforce_admins=true \
-  -f required_pull_request_reviews='{"dismiss_stale_reviews":true,"require_code_owner_reviews":false,"required_approving_review_count":1}' \
+  -f required_pull_request_reviews='{"dismiss_stale_reviews":true,"require_code_owner_reviews":false,"required_approving_review_count":0}' \
   -f restrictions=null \
-  -f required_linear_history=true \
   -f allow_force_pushes=false \
   -f allow_deletions=false
 ```
@@ -69,12 +70,12 @@ gh api -X PUT repos/{owner}/{repo}/branches/main/protection \
 | Setting | Recommended |
 |---------|-------------|
 | Require a pull request before merging | Yes |
-| Require approvals | 1 (small team) or 2 (larger team) |
+| Require approvals | 0 (solo owner; GitHub forbids self-approval) or 1+ (team) |
 | Dismiss stale reviews | Yes |
 | Require status checks to pass | Yes |
 | Require branches to be up to date | Yes |
 | Require signed commits | Optional |
-| Require linear history | Recommended |
+| Require linear history | NOT part of the ratified baseline — enable only on a team's own decision |
 | Include administrators | Yes (for strict enforcement) |
 | Allow force pushes | No |
 | Allow deletions | No |
@@ -178,10 +179,9 @@ gh api -X PUT "repos/${REPO}/branches/${BRANCH}/protection" \
   "required_pull_request_reviews": {
     "dismiss_stale_reviews": true,
     "require_code_owner_reviews": true,
-    "required_approving_review_count": 1
+    "required_approving_review_count": 0
   },
   "restrictions": null,
-  "required_linear_history": true,
   "allow_force_pushes": false,
   "allow_deletions": false
 }

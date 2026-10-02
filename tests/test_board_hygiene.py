@@ -18,7 +18,7 @@ The predicate is not "terminal column ⇒ wrong folder", which would be wrong:
                                           (complete -> publish -> published)
     complete   + release-via: none     -> TERMINAL, belongs in archived/
     completed / cancelled / superseded -> TERMINAL, always
-    refused                            -> belongs in refused/, never tasks/
+    refused                            -> LIVE column (bracket value), stays in tasks/; archiving it is a separate act (v4.0.0 ruling a)
 
 `complete` is a lifecycle column AND a release terminal depending on a field
 one line away, and conflating the two is how the stale card looked normal. The
@@ -37,8 +37,8 @@ ARCHIVED = REPO_ROOT / "design" / "archived"
 # edit that sets them.
 ALWAYS_TERMINAL = {"completed", "cancelled", "superseded"}
 
-# Belongs in design/refused/ (a proposal never approved), never in tasks/.
-REFUSED = "refused"
+# Live column under v4.0.0 (2026-09-24 ruling a): a refused card sits in tasks/
+# — archiving it is a separate act, never implied by setting the column.
 
 # Terminal only when the card's release branch ends there. `release-via` absent
 # defaults to `none`, so an unstated release branch makes these terminal — which
@@ -57,7 +57,7 @@ def card_is_terminal(column: str, release_via: str | None) -> bool:
     Pure, so the controls below can drive it with values that do not exist on
     disk. A guard only fed real repo state cannot be shown to fail.
     """
-    if column in ALWAYS_TERMINAL or column == REFUSED:
+    if column in ALWAYS_TERMINAL:
         return True
     branch = release_via or "none"
     return RELEASE_TERMINALS.get(branch) == column
@@ -134,9 +134,15 @@ class TestThePredicateSeparatesTheTwoMeaningsOfComplete:
         assert card_is_terminal("live", "publish") is False
 
     def test_always_terminal_states_ignore_the_release_branch(self):
-        for column in ("completed", "cancelled", "superseded", "refused"):
+        for column in ("completed", "cancelled", "superseded"):
             assert card_is_terminal(column, "publish") is True, column
             assert card_is_terminal(column, None) is True, column
+
+    def test_refused_is_a_live_column_under_v400(self):
+        # v4.0.0 ruling (a): refused is a column, not a folder-only state —
+        # it does NOT leave the open zone merely by being set.
+        assert card_is_terminal("refused", "publish") is False
+        assert card_is_terminal("refused", None) is False
 
     def test_ordinary_open_columns_stay_open(self):
         for column in (

@@ -117,12 +117,14 @@ In repository settings:
 3. Enable "Require status checks to pass"
 4. Select the test job as required
 
+> The ratified ai-maestro baseline sets `required_approving_review_count` to 0 (GitHub forbids self-approval) — deviate only with MANAGER approval.
+
 ```bash
 # Using gh CLI
 gh api -X PUT repos/{owner}/{repo}/branches/main/protection \
   -f required_status_checks='{"strict":true,"checks":[{"context":"test"}]}' \
   -f enforce_admins=true \
-  -f required_pull_request_reviews='{"required_approving_review_count":1}'
+  -f required_pull_request_reviews='{"required_approving_review_count":0}'
 ```
 
 ### Step 5: Add Coverage Comments to PRs
