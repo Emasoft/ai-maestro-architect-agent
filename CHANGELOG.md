@@ -1,6 +1,12 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [2.17.21] - 2026-10-02
+
+### Bug Fixes
+
+- V4.0.0 refused-is-a-column + ratified baseline payloads    
+
 ## [2.17.20] - 2026-09-29
 
 ### Refactor
